@@ -75,19 +75,19 @@
       margin-top: 5%;
     }
 
-    .fa-twitter.icon {
+    .bx-twitter.icon {
     /*  background: #55ACEE;*/
       color: #55ACEE;
     }
-    .fa-linkedin.icon {
+    .bx-linkedin.icon {
       /*background: #007bb5;*/
       color: #007bb5;
     }
-    .fa-instagram.icon {
+    .bx-instagram.icon {
       /*background: #e6005c;*/
       color: #e6005c;
     }
-    .fa-facebook.icon {
+    .bx-facebook.icon {
    /*   background: #3333ff;*/
       color: #3333ff;
     }
@@ -168,11 +168,6 @@
       color: #000;
       position: relative;
       padding: 20px;
-      margin-top: 10px;
-    }
-
-    #message h6 {
-      padding: 35px;
     }
 
     /* Add a green text color and a checkmark when the requirements are right */
@@ -401,7 +396,7 @@
                             <div class="card card-primary" style="background-color: #F7F7F7;">
                               <div class="card-header">
                                 <h6 class="card-title">NPWP File</h6>
-                                <button type="button" class="btn btn-sm btn-sm btnRotateNpwp" style="color:black;float: right;background-color: transparent;" onclick="rotateImage('npwp','showgambarnpwp')" name=""><i class="fa  fa-rotate-right"></i></button>
+                                <button type="button" class="btn btn-sm btn-sm btnRotateNpwp" style="color:black;float: right;background-color: transparent;" onclick="rotateImage('npwp','showgambarnpwp')" name=""><i class="fa  bx-rotate-right"></i></button>
                               </div>
                               <div class="card-body">
                                 @if($user_profile->npwp_file == "-" || $user_profile->npwp_file == "" || $user_profile->npwp_file == null)
@@ -420,7 +415,7 @@
                             <div class="card card-primary" style="background-color: #F7F7F7;">
                               <div class="card-header">
                                 <h6 class="card-title">KTP File</h6>
-                                <button type="button" class="btn btn-sm btn-sm btnRotateKtp" style="color:black;float: right;background-color: transparent;" onclick="rotateImage('npwp','showgambarktp')" name=""><i class="fa  fa-rotate-right"></i></button>
+                                <button type="button" class="btn btn-sm btn-sm btnRotateKtp" style="color:black;float: right;background-color: transparent;" onclick="rotateImage('npwp','showgambarktp')" name=""><i class="fa  bx-rotate-right"></i></button>
                               </div>
                               <div class="card-body">
                                 @if($user_profile->ktp_file == "-" || $user_profile->ktp_file == null || $user_profile->ktp_file == "")
@@ -681,7 +676,7 @@
                 <div class="input-group">
                   <input class="form-control" id="current-password" name="current-password" type="Password" required  placeholder="Enter Your Current Password">
                   <div class="input-group-text">
-                    <i onclick="eyeEnableOrDisable('current-password','toggle1')" toggle="#password-field" class="bx bx-fw fa-eye field-icon" id="toggle1"></i>
+                    <i onclick="eyeEnableOrDisable('current-password','toggle1')" toggle="#password-field" class="bx bx-fw bx-show field-icon" id="toggle1"></i>
                   </div>
                 </div>
               </div>
@@ -691,7 +686,7 @@
                 <div class="input-group">
                   <input class="form-control" id="new-password" name="password" type="Password" placeholder="Enter New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required onkeypress="psw()">
                   <div class="input-group-text">
-                    <i onclick="eyeEnableOrDisable('new-password','toggle2')" toggle="#password-field" class="bx bx-fw fa-eye field-icon" id="toggle2"></i>
+                    <i onclick="eyeEnableOrDisable('new-password','toggle2')" toggle="#password-field" class="bx bx-fw bx-show field-icon" id="toggle2"></i>
                   </div>
                 </div>
               </div>
@@ -701,7 +696,7 @@
                 <div class="input-group">
                   <input class="form-control" id="new-password-confirm" name="password_confirmation" required type="Password" placeholder="Enter Confirm Password">
                   <div class="input-group-text">
-                    <i onclick="eyeEnableOrDisable('new-password-confirm','toggle3')" toggle="#password-field" class="bx bx-fw fa-eye field-icon" id="toggle3"></i>
+                    <i onclick="eyeEnableOrDisable('new-password-confirm','toggle3')" toggle="#password-field" class="bx bx-fw bx-show field-icon" id="toggle3"></i>
                   </div>
                 </div>
               </div> 
@@ -714,12 +709,11 @@
                 <p id="length" class="invalid">Minimum <b>8 characters</b></p>
                 <!-- <p id="char" class="invalid">Minimum <b>1 special character</b></p> -->
               </div>
-
-              <div class="modal-footer">
-                <button class="btn btn-sm btn-default" type="button" data-bs-dismiss="modal"><i class=" bx bx-times"></i>&nbspClose</button>
-                <button type="submit" class="btn btn-sm btn-primary" id="change_password"><i class="bx bx-check"> </i>&nbspSubmit</button>
-              </div>
           <!-- </form> -->
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-sm btn-secondary" type="button" data-bs-dismiss="modal"><i class=" bx bx-times"></i>&nbspClose</button>
+            <button type="submit" class="btn btn-sm btn-primary" id="change_password"><i class="bx bx-check"> </i>&nbspSubmit</button>
           </div>
         </div>
       </div>
@@ -812,27 +806,27 @@
     if (x.type === "password") 
     {
       x.type = "text";
-      y.classList.remove("fa-eye");
-      y.classList.add("fa-eye-slash");
+      y.classList.remove("bx-show");
+      y.classList.add("bx-low-vision");
     } 
     else 
     {
       x.type = "password";
-      y.classList.remove("fa-eye-slash");
-      y.classList.add("fa-eye");
+      y.classList.remove("bx-low-vision");
+      y.classList.add("bx-show");
     }
   }
 
-  $("#toggle3").click(function() {
-      $(this).toggleClass("fa-eye fa-eye-slash");
-      var z = document.getElementById("new-password-confirm");
+  // $("#toggle3").click(function() {
+  //     $(this).toggleClass("bx-show bx-low-vision");
+  //     var z = document.getElementById("new-password-confirm");
 
-      if (z.type === "password") {
-          z.type = "text";
-      } else {
-          z.type = "password";
-      }
-  });
+  //     if (z.type === "password") {
+  //         z.type = "text";
+  //     } else {
+  //         z.type = "password";
+  //     }
+  // });
 
   $(".btn-edit").click(function(){
   	$("#modalEdit").modal("show");
