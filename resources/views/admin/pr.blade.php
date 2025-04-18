@@ -598,13 +598,13 @@
               var x = '"' + data.no + '","' + data.to + '","' + data.attention+ '","' +data.title+ '","' +data.amount+ '","' +data.project_id+ '","' +data.status+ '","' + data.type_of_letter+ '","' + data.date + '","' + data.isRupiah + '","' + data.invoice_customer + '","' + data.notes_invoice_customer + '","' + data.invoice_vendor + '","' + data.notes_invoice_vendor + '","' + data.request_method + '"'
               if (data.status == 'Done') {
                 if (data.id_draft_pr != null) {
-                  data.btn_edit = "<button class='btn btn-sm btn-primary' onclick='edit_pr(" + x + ")'>Edit</button><a style='margin-left:5px' class='btn btn-sm btn-success' target='_blank' href='{{url('/admin/detail/draftPR')}}/"+ data.id_draft_pr +"?hide'>Show Detail PR</a>";
+                  data.btn_edit = "<button class='btn btn-sm btn-primary' onclick='edit_pr(" + x + ")'>Edit</button><a style='margin-left:5px' class='btn btn-sm btn-success' target='_blank' href='{{url('/admin/detailDraftPR')}}/"+ data.id_draft_pr +"?hide'>Show Detail PR</a>";
                 }else{
                   data.btn_edit = "<button class='btn btn-sm btn-primary' onclick='edit_pr(" + x + ")'>Edit</button><a style='margin-left:5px' class='btn btn-sm btn-success' disabled'>Show Detail PR</a>";
                 }
               } else {
                 if (data.id_draft_pr != null) {
-                  data.btn_edit = "<button class='btn btn-sm btn-primary' onclick='edit_pr(" + x + ")'>Edit</button><a style='margin-left:5px' class='btn btn-sm btn-success' target='_blank' href='{{url('/admin/detail/draftPR')}}/"+ data.id_draft_pr +"?hide'>Show Detail PR</a>";
+                  data.btn_edit = "<button class='btn btn-sm btn-primary' onclick='edit_pr(" + x + ")'>Edit</button><a style='margin-left:5px' class='btn btn-sm btn-success' target='_blank' href='{{url('/admin/detailDraftPR')}}/"+ data.id_draft_pr +"?hide'>Show Detail PR</a>";
                 }else{
                   data.btn_edit = "<button class='btn btn-sm btn-primary' onclick='edit_pr(" + x + ")'>&nbspEdit</button><a style='margin-left:5px' class='btn btn-sm btn-success' disabled'>Show Detail PR</a>";
                 }
@@ -619,7 +619,7 @@
               if (data.id_draft_pr == null) {
                 data.btn_edit = "<button class='btn btn-sm btn-primary disabled'>Edit</button><button style='margin-left:5px' class='btn btn-sm btn-success' disabled>Show Detail PR</button>"
               }else{
-                data.btn_edit = "<button class='btn btn-sm btn-primary disabled'>Edit</button><a style='margin-left:5px' class='btn btn-sm btn-success' target='_blank' href='{{url('/admin/detail/draftPR')}}/"+ data.id_draft_pr +"?hide'>Show Detail PR</a>"
+                data.btn_edit = "<button class='btn btn-sm btn-primary disabled'>Edit</button><a style='margin-left:5px' class='btn btn-sm btn-success' target='_blank' href='{{url('/admin/detailDraftPR')}}/"+ data.id_draft_pr +"?hide'>Show Detail PR</a>"
               }
             }
               
