@@ -292,7 +292,7 @@ Detail Project
 		                		<button class="btn btn-sm text-bg-success" id="btnAddWeekly" style="display:none"><i class="bx bx-plus"></i>&nbspWeekly Report</button>
 		            		</div>
 		            		<div class="col-md-6 col-xs-12" style="text-align:right;">
-		            			<!-- <button class="btn btn-sm btn-vk" onclick="btnShowProjectCharter()"><i class="bx bx-eye"></i>&nbspShow Project Charter</button> -->
+		            			<!-- <button class="btn btn-sm btn-vk" onclick="btnShowProjectCharter()"><i class="bx bx-show"></i>&nbspShow Project Charter</button> -->
 			                	<!-- <button class="btn btn-sm btn-warning"><i class="bx bx-forward"></i>&nbspNext Phase</button> -->
 			                	<button class="btn btn-sm btn-primary" style="display:none" disabled id="btnSendCSS" onclick="showEmail()"><i class="bx bx-paper-plane"></i>&nbspSend CSS</button>
 			                	<button class="btn btn-sm text-bg-success" disabled id="btnFinalProject" style="display:none"><i class="bx bx-plus"></i>&nbspFinal Project</button>		                	
@@ -529,8 +529,8 @@ Detail Project
 	          </div> 
 	      </div>                           
           <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-danger" id="saveReasonReject" >Reject</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-sm btn-danger" id="saveReasonReject" >Reject</button>
           </div>
         </form>
 	    </div>
@@ -660,7 +660,7 @@ Detail Project
                     </div>
                     <div class="form-group">
                       <label>Rank*</label>
-                      <input class="form-control" type="text" placeholder="Rank" id="inputRank" name="inputRank" readonly />
+                      <input class="form-control" type="text" placeholder="Rank" id="inputRank" name="inputRank" disabled />
                     </div>
                     <div class="form-group">
                       <label>Impact Description*</label>
@@ -849,7 +849,7 @@ Detail Project
 		          		<div class="col-md-6">
 		          			<div class="form-group">
 		                      <label>Overall Progress*</label>
-		                      <input type="text" id="overall_progress" name="overall_progress" class="form-control" placeholder="Describe what percentage the project progress" name="" onkeyup="validationCheck(this)" readonly>
+		                      <input type="text" id="overall_progress" name="overall_progress" class="form-control" placeholder="Describe what percentage the project progress" name="" onkeyup="validationCheck(this)" disabled>
 		                      <span class="invalid-feedback" style="display:none;">Please fill Risk Description!</span>
 		                    </div>
 		          		</div>
@@ -1052,43 +1052,43 @@ Detail Project
 		          		<div class="tabGroup">
 		          		<div class="form-group">
 				        	<label>Customer</label>
-				          	<input type="text" class="form-control" placeholder="Name of The Customer's Company" name="customer_name_final_project" id="customer_name_final_project" readonly>
+				          	<input type="text" class="form-control" placeholder="Name of The Customer's Company" name="customer_name_final_project" id="customer_name_final_project" disabled>
 				        </div>
 			          	<div class="row">
 			          		<div class="col-md-6">
 			          			<div class="form-group">
 			          				<label>Project ID Number</label>
-			          				<input name="PID_final_project" id="PID_final_project" class="form-control" readonly />
+			          				<input name="PID_final_project" id="PID_final_project" class="form-control" disabled />
 			          			</div>
 			          		</div>
 				          	<div class="col-md-6">
 				          		<div class="form-group">
 				          			<label>Project Value</label>
-				          			<input type="text" class="form-control" placeholder="Project Value"  name="projectValueFinal" id="projectValueFinal" readonly>
+				          			<input type="text" class="form-control" placeholder="Project Value"  name="projectValueFinal" id="projectValueFinal" disabled>
 				          		</div>
 				          	</div>
 			          	</div>
 			          	<div class="form-group">
 			          		<label>Project Name</label>
-			          		<input type="text" class="form-control" placeholder="Name of The Project" name="projectNameFinal" id="projectNameFinal" readonly>
+			          		<input type="text" class="form-control" placeholder="Name of The Project" name="projectNameFinal" id="projectNameFinal" disabled>
 			          	</div>
 			          	<div class="row">
 				          	<div class="col-md-6">
 				          		<div class="form-group">
 				          			<label>Project Manager</label>
-				          			<input type="text" class="form-control" id="projectManagerFinal" name="projectManagerFinal" readonly/>
+				          			<input type="text" class="form-control" id="projectManagerFinal" name="projectManagerFinal" disabled/>
 				          		</div>
 				          	</div>
 				          	<div class="col-md-6">
 				          		<div class="form-group">
 				          			<label>Project Coordinator</label>
-				          			<input type="text" class="form-control" id="projectCoordinatorFinal" name="projectCoordinatorFinal" readonly/>
+				          			<input type="text" class="form-control" id="projectCoordinatorFinal" name="projectCoordinatorFinal" disabled/>
 				          		</div>
 				          	</div>
 			          	</div>
 			          	<div class="form-group">
 			          		<label>Project Description</label>
-			          		<textarea class="form-control" placeholder="Description of The Project" name="textareaProjectDescFinal" id="textareaProjectDescFinal" readonly></textarea>
+			          		<textarea class="form-control" placeholder="Description of The Project" name="textareaProjectDescFinal" id="textareaProjectDescFinal" disabled></textarea>
 			          	</div>
 		          		</div>
 			          	
@@ -1300,7 +1300,7 @@ Detail Project
 				            			"<div class='input-group'>" +
 
 				            				"<span class='input-group-text'><i class='bx bx-calendar'></i></span>" +
-				            				"<input type='text' name='start' class='form-control'>"+
+				            				"<input type='text' name='start' class='form-control' style='height:35px'>"+
 				            			"</div>" +
 			            			"</div>" +
 	            				"</div>" +
@@ -1310,7 +1310,7 @@ Detail Project
 				            			"<div class='input-group'>" +
 
 				            				"<span class='input-group-text'><i class='bx bx-calendar'></i></span>" +
-				            				"<input type='text' name='end' class='form-control'>"+
+				            				"<input type='text' name='end' class='form-control' style='height:35px'>"+
 				            			"</div>" +
 			            			"</div>" +
 	            				"</div>"+
@@ -1394,8 +1394,8 @@ Detail Project
     		$(".content").show()
 
     		if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Project Management Office Manager')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Program & Project Management')->exists()}}") {
-    			$("#btnAddMilestone").find("i").removeClass('fa-plus').addClass('fa-eye')
-    			$("#btnFinalProject").find("i").removeClass('fa-plus').addClass('fa-eye')
+    			$("#btnAddMilestone").find("i").removeClass('bx-plus').addClass('bx-show')
+    			$("#btnFinalProject").find("i").removeClass('bx-plus').addClass('bx-show')
     		}else{
     			$("#btnAddMilestone").attr("onclick","btnAddMilestone()")
     		}
@@ -1668,7 +1668,7 @@ Detail Project
             	$("#progressbar").text(result.progress.bobot + '% complete')
             	
             	if (result.progress.bobot == 100) {
-            		gantt.config.readonly = true;
+            		gantt.config.disabled = true;
             	}
             }
         })
@@ -1697,7 +1697,7 @@ Detail Project
     				if (window.location.search.split("=")[1].split("&")[0] == "supply_only") {
             			$("#btnAddMilestone").hide()
             		}else{
-            			$("#btnAddMilestone").find("i").removeClass('fa-plus').addClass('fa-eye')
+            			$("#btnAddMilestone").find("i").removeClass('bx-plus').addClass('bx-show')
             			if (result.data.ganttStatus == "custom") {
     						$("#btnAddMilestone").attr("onclick","btnshowMilestone('show','custom')")
             			}else{
@@ -1715,8 +1715,8 @@ Detail Project
             	}else{
             		if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Project Management Office Manager')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Program & Project Management')->exists()}}") {
 
-		    			$("#btnAddMilestone").find("i").removeClass('fa-plus').addClass('fa-eye')
-		    			$("#btnFinalProject").find("i").removeClass('fa-plus').addClass('fa-eye')
+		    			$("#btnAddMilestone").find("i").removeClass('bx-plus').addClass('bx-show')
+		    			$("#btnFinalProject").find("i").removeClass('bx-plus').addClass('bx-show')
 		    			if (result.data.ganttStatus == "custom") {
     						$("#btnAddMilestone").attr("onclick","btnshowMilestone('show','custom')")
             			}else{
@@ -2002,22 +2002,22 @@ Detail Project
     		}
 
     		if (ganttstatus == "custom") {
-    			width = "900px"
+    			width = "1100px"
 	    		marginRight = "margin-right: 152px;"
 
     		}else{
-	    		width = "800px"
+	    		width = "900px"
     			marginRight = ""
 	    		
     		}
     	}else{
     		if (status == "Defined") {
     			url = "/PMO/getDefaultTask"
-    			width = "800px"
+    			width = "900px"
     			marginRight = ""
     		}else{
     			url = "/PMO/getPhase"
-	    		width = "900px"
+	    		width = "1100px"
 	    		marginRight = "margin-right: 152px;"
     		}
     		data = {
@@ -2102,7 +2102,7 @@ Detail Project
 							append = append +'  <div class="card-header">'
 							append = append +'   <h6 class="card-title">'+ index +'</h6>'
 							append = append + '	  <div class="card-tools">'
-							append = append + '	    <div class="pull-right"><label style="margin-right:10px;display:inline">Weight</label><input class="form-control" id="inputWeight" name="inputWeight" value="'+ resultAddingWeight[inc++] +'" type="text" minlength="1" maxlength="2" placeholder="75%" style="display:inline;width:60px;" readonly></div>		'
+							append = append + '	    <div class="pull-right"><label style="margin-right:10px;display:inline">Weight</label><input class="form-control" id="inputWeight" name="inputWeight" value="'+ resultAddingWeight[inc++] +'" type="text" minlength="1" maxlength="2" placeholder="75%" style="display:inline;width:60px;" disabled></div>		'
 							append = append + '		</div>'
 							append = append +'   </div>'
 							append = append +'<div class="card-body">'
@@ -2162,7 +2162,7 @@ Detail Project
 													append = append +' 			</div>'
 														append = append + '		<div class="col-sm-1">				'
 														if (idx != 0) {
-															append = append + '			<button class="btn btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
+															append = append + '			<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
 														}
 														append = append + '		</div>'
 													append = append + '</div>'
@@ -2234,7 +2234,7 @@ Detail Project
 																	append = append +' 			</div>'
 																	append = append + '			<div class="col-md-1">				'
 
-																		append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
+																		append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
 																	append = append + '			</div>'
 																append = append +' 	</div>'
 																append = append +' <span class="invalid-feedback" style="display:none;color:red"></span>'
@@ -2289,7 +2289,7 @@ Detail Project
 																append = append + '<div class="col-md-1">				'
 																	if (incIdx != 0) {
 
-																	append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
+																	append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
 																	}
 																append = append + '</div>'												
 															append = append +' 	</div>'
@@ -2343,7 +2343,7 @@ Detail Project
 														append = append +' 			</div>'
 														append = append + '<div class="col-md-1">				'
 
-															append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
+															append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
 														append = append +' </div>'	
 													append = append +' 	</div>'
 													append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'					
@@ -2382,7 +2382,7 @@ Detail Project
 													append = append +' 			</div>'
 													append = append + '<div class="col-md-1">				'
 
-														append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
+														append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
 													append = append +'</div>'
 												append = append +' 	</div>'
 												append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'
@@ -2420,7 +2420,7 @@ Detail Project
 												append = append +' 			</div>'
 												append = append + '<div class="col-sm-1">				'
 
-													append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskDefined(this)" disabled><i class="bx bx-trash"></i></button>'
+													append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)" disabled><i class="bx bx-trash"></i></button>'
 												append = append +' </div>'
 											append = append +' 	</div>'
 											append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'
@@ -2492,7 +2492,7 @@ Detail Project
 														append = append + '		<div class="col-sm-1">				'
 														if (idx != 0) {
 
-															append = append + '			<button class="btn btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
+															append = append + '			<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
 														}
 														append = append + '		</div>'
 													append = append + '</div>'
@@ -2553,7 +2553,7 @@ Detail Project
 														append = append +' 			</div>'
 														append = append + '<div class="col-md-1">				'
 
-															append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
+															append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
 														append = append + '	</div>'
 														append = append +' 		</div>'
 														append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'					
@@ -2591,7 +2591,7 @@ Detail Project
 														append = append +' 			</div>'
 														append = append + '<div class="col-md-1">				'
 
-															append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
+															append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
 
 														append = append +' </div>'
 													append = append +' 	</div>'
@@ -2632,7 +2632,7 @@ Detail Project
 												append = append +' 			</div>'
 												append = append + '<div class="col-sm-1">'
 
-													append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskDefined(this)" disabled><i class="bx bx-trash"></i></button>'
+													append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)" disabled><i class="bx bx-trash"></i></button>'
 
 												append = append +'</div>'
 											append = append +' 	</div>'
@@ -2664,7 +2664,7 @@ Detail Project
 
 										if (isExecutingWithSolution == true) {
 
-											append = append +'			<button style="" class="btn btn-sm btn-primary" id="btnAddSolution" name="btnAddSolution"><i class="bx bx-plus"></i> '+ text + ' </button><button style="margin-left:5px" id="removeCloneExecuting" value="'+ text +'" class="btn btn-sm btn-danger"><i class="bx bx-trash-o"></i></button>'
+											append = append +'			<button style="" class="btn btn-sm btn-primary" id="btnAddSolution" name="btnAddSolution"><i class="bx bx-plus"></i> '+ text + ' </button><button style="margin-left:5px" id="removeCloneExecuting" value="'+ text +'" class="btn btn-sm btn-danger"><i class="bx bx-trash"></i></button>'
 											append = append +'		</div>'
 										}else{
 											append = append +'			<button style="" class="btn btn-sm btn-primary" id="btnAddSolution" name="btnAddSolution"><i class="bx bx-plus"></i> '+ text + ' </button>'
@@ -2689,7 +2689,7 @@ Detail Project
 
     			$("#milestone-container").append(append)
 
-    			$("input[name='startDateMilestone'],input[name='finishDateMilestone']").fla({
+    			$("input[name='startDateMilestone'],input[name='finishDateMilestone']").flatpickr({
 					autoclose: true,
 					orientation: "bottom"
 				});
@@ -2969,7 +2969,7 @@ Detail Project
 											append = append + '</div>'
 											append = append + '<div class="col-sm-1">'
 
-												append = append + '<button class="btn btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
+												append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
 											append = append + '</div>'	
 										append = append + '</div>'
 										append = append +'<span class="invalid-feedback" style="display:none;color:red"></span>'
@@ -3068,7 +3068,7 @@ Detail Project
 						  //       $(".form_Executing").closest(".card-body").find(".form_Executing:last").before("<hr>")
 					}
 
-					$("#btnAddSolution").after("<button style='margin-left:5px' id='removeCloneExecuting' value='"+ $(this)[0].innerText.replace(" ","") +"' class='btn btn-sm btn-danger'><i class='bx bx-trash-o'></></button>")
+					$("#btnAddSolution").after("<button style='margin-left:5px' id='removeCloneExecuting' value='"+ $(this)[0].innerText.replace(" ","") +"' class='btn btn-sm btn-danger'><i class='bx bx-trash'></></button>")
 				})
 
 				$(document).on("click","#removeCloneExecuting",function() {
@@ -4198,13 +4198,13 @@ Detail Project
 				append = append + '                    <div class="col-md-6">'
 				append = append + '                      <div class="form-group">'
 				append = append + '                        <label>Project Manager*</label>'
-				append = append + '                        <select readonly class="form-control" id=""><option selected>'+ result[0].project_pm +'</option></select>'
+				append = append + '                        <select disabled class="form-control" id=""><option selected>'+ result[0].project_pm +'</option></select>'
 				append = append + '                      </div> '
 				append = append + '                    </div>'
 				append = append + '                    <div class="col-md-6">'
 				append = append + '                      <div class="form-group">'
 				append = append + '                        <label>Project Coordinator*</label>'
-				append = append + '                        <select readonly class="form-control" id=""><option selected>'+ result[0].project_pc +'</option></select>'
+				append = append + '                        <select disabled class="form-control" id=""><option selected>'+ result[0].project_pc +'</option></select>'
 				append = append + '                      </div> '
 				append = append + '                    </div>'
 				append = append + '                </div>'
@@ -4234,18 +4234,18 @@ Detail Project
 				// append = append + '                          </div>'
 				append = append + '<div class="col-md-12 col-xs-12" style="border:solid 1px #cccc;padding-left:5px!important;padding: 10px;margin-bottom: 15px;background-color: #eee;">'
 				append = append + '  <div class="col-md-3 col-xs-12" style="padding-left:5px!important;">'
-				append = append + '    <label><input autocomplete="off" readonly type="checkbox" name="cbShowProjectCharterTechUse" value="Data Center" class="minimal form-control" id=""> Data Center</label><br>'
-				append = append + '    <label><input autocomplete="off" readonly type="checkbox" name="cbShowProjectCharterTechUse" value="Security" class="minimal form-control" id=""> Security</label><br>'
-				append = append + '    <label><input autocomplete="off" readonly type="checkbox" name="cbShowProjectCharterTechUse" value="IoT" class="minimal form-control" id=""> IoT</label>'
+				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Data Center" class="minimal form-control" id=""> Data Center</label><br>'
+				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Security" class="minimal form-control" id=""> Security</label><br>'
+				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="IoT" class="minimal form-control" id=""> IoT</label>'
 				append = append + '  </div>'
 				append = append + '  <div class="col-md-5 col-xs-12" style="padding-left:5px!important">   '
-				append = append + '    <label><input autocomplete="off" readonly type="checkbox" name="cbShowProjectCharterTechUse" value="ATM/CRM" class="minimal form-control" id=""> ATM/CRM</label><br>'
-				append = append + '    <label><input autocomplete="off" readonly type="checkbox" name="cbShowProjectCharterTechUse" value="Application Development" class="minimal form-control" id=""> Application Development</label><br>'
-				append = append + '    <label><input autocomplete="off" readonly type="checkbox" name="cbShowProjectCharterTechUse" value="Cloud Computing" class="minimal form-control"id=""> Cloud Computing</label>'
+				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="ATM/CRM" class="minimal form-control" id=""> ATM/CRM</label><br>'
+				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Application Development" class="minimal form-control" id=""> Application Development</label><br>'
+				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Cloud Computing" class="minimal form-control"id=""> Cloud Computing</label>'
 				append = append + '  </div>'
 				append = append + '  <div class="col-md-4 col-xs-12" style="padding-left:5px!important;">'
-				append = append + '    <label><input autocomplete="off" readonly type="checkbox" name="cbShowProjectCharterTechUse" value="Borderless Network" class="minimal form-control" id=""> Borderless Network</label><br>'
-				append = append + '    <label><input autocomplete="off" readonly type="checkbox" name="cbShowProjectCharterTechUse" value="Collaboration" class="minimal form-control" id=""> Collaboration</label>'
+				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Borderless Network" class="minimal form-control" id=""> Borderless Network</label><br>'
+				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Collaboration" class="minimal form-control" id=""> Collaboration</label>'
 				append = append + '  </div>'
 				append = append + '</div>'
 				append = append + '                        </div>'
@@ -4275,29 +4275,29 @@ Detail Project
 				append = append + '                    <div class="col-md-4">'
 				append = append + '                      <div class="form-group">'
 				append = append + '                        <label>Flexibility*</label>'
-				append = append + '                        <input type="text" readonly name="flexibility" id="flexibility" class="form-control" value="'+ result[0].flexibility +'">'
+				append = append + '                        <input type="text" disabled name="flexibility" id="flexibility" class="form-control" value="'+ result[0].flexibility +'">'
 				append = append + '                      </div>'
 				append = append + '                    </div>'
 				append = append + '                 	</div>'
 				append = append + '                 	<div class="form-group">'
 				append = append + '                    <label>Market Segment*</label>'
-				append = append + '                    <input type="text" readonly name="market_segment" id="market_segment" class="form-control" value="'+ result[0].market_segment +'">'
+				append = append + '                    <input type="text" disabled name="market_segment" id="market_segment" class="form-control" value="'+ result[0].market_segment +'">'
 				append = append + '                </div>'
 				append = append + '                 	<div class="form-group">'
 				append = append + '                    <label>Scope of Work*</label>'
-				append = append + '                    <textarea readonly class="form-control" id="" name="" placeholder="Scope of Work">'+ result[0].scope_of_work +'</textarea>'
+				append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Scope of Work">'+ result[0].scope_of_work +'</textarea>'
 				append = append + '                </div>'
 				append = append + '                <div class="form-group">'
 				append = append + '                    <label>Out Of Scope*</label> '
-				append = append + '                    <textarea readonly class="form-control" id="" name="" placeholder="Out of Work">'+ result[0].out_of_scope +'</textarea>'
+				append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Out of Work">'+ result[0].out_of_scope +'</textarea>'
 				append = append + '                </div>'
 				append = append + '                <div class="form-group">'
 				append = append + '                    <label>Customer Requirement*</label> '
-				append = append + '                    <textarea readonly class="form-control" id="" name="" placeholder="Customer Requirement">'+ result[0].customer_requirement +'</textarea>'
+				append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Customer Requirement">'+ result[0].customer_requirement +'</textarea>'
 				append = append + '                </div>'
 				append = append + '                <div class="form-group">'
 				append = append + '                    <label>Term of Payment*</label>'
-				append = append + '                    <textarea readonly class="form-control" id="" name="" placeholder="Customer Requirement">'+ result[0].terms_of_payment +'</textarea>'
+				append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Customer Requirement">'+ result[0].terms_of_payment +'</textarea>'
 				append = append + '                </div>'
 				append = append + '                <div class="form-group">'
 				append = append + '                    <label>Internal Stakeholder Register*</label>'
@@ -4389,11 +4389,11 @@ Detail Project
 							: slaRsolutionMinor + " Jam";
 
 					appendSla = appendSla + '<tr>'
-					appendSla = appendSla + '<td><input readonly type="text" name="" class="form-control" value="'+formattedSlaResponse+'"></td>'
-					appendSla = appendSla + '<td><input readonly type="text" name="" class="form-control" value="'+formattedSlaResolutionCritical+'"></td>'
-					appendSla = appendSla + '<td><input readonly type="text" name="" class="form-control" value="'+ formattedSlaResolutionMajor+'"></td>'
-					appendSla = appendSla + '<td><input readonly type="text" name="" class="form-control" value="'+formattedSlaResolutionModerate+'"></td>'
-					appendSla = appendSla + '<td><input readonly type="text" name="" class="form-control" value="'+formattedSlaResolutionMinor+'"></td>'
+					appendSla = appendSla + '<td><input disabled type="text" name="" class="form-control" value="'+formattedSlaResponse+'"></td>'
+					appendSla = appendSla + '<td><input disabled type="text" name="" class="form-control" value="'+formattedSlaResolutionCritical+'"></td>'
+					appendSla = appendSla + '<td><input disabled type="text" name="" class="form-control" value="'+ formattedSlaResolutionMajor+'"></td>'
+					appendSla = appendSla + '<td><input disabled type="text" name="" class="form-control" value="'+formattedSlaResolutionModerate+'"></td>'
+					appendSla = appendSla + '<td><input disabled type="text" name="" class="form-control" value="'+formattedSlaResolutionMinor+'"></td>'
 					appendSla = appendSla + '</tr>'
 
 					$('#tbodySLAProjectCharter').append(appendSla)
@@ -4481,10 +4481,10 @@ Detail Project
 
 				$.each(result[0].internal_stakeholder.data,function(idx,item){
 					appendTbody = appendTbody + ' <tr>'
-					appendTbody = appendTbody + '  <td><input readonly type="text" name="" class="form-control" value="'+ item.name +'"></td>'
-					appendTbody = appendTbody + '  <td><input readonly type="text" name="" class="form-control" value="'+ item.role +'"></td>'
-					appendTbody = appendTbody + '  <td><input readonly type="text" name="" class="form-control" value="'+ item.email +'"></td>'
-					appendTbody = appendTbody + '  <td><input readonly type="text" name="" class="form-control" value="'+ item.phone +'"></td>'
+					appendTbody = appendTbody + '  <td><input disabled type="text" name="" class="form-control" value="'+ item.name +'"></td>'
+					appendTbody = appendTbody + '  <td><input disabled type="text" name="" class="form-control" value="'+ item.role +'"></td>'
+					appendTbody = appendTbody + '  <td><input disabled type="text" name="" class="form-control" value="'+ item.email +'"></td>'
+					appendTbody = appendTbody + '  <td><input disabled type="text" name="" class="form-control" value="'+ item.phone +'"></td>'
 					appendTbody = appendTbody + ' </tr>'
 
 				})
@@ -4734,7 +4734,7 @@ Detail Project
 	        if (accesable.includes("btnAddIssue")) {
 	          $("button[name='btnUpdateStatusIssue']").prop("disabled",false)	
 	        }else{
-            	gantt.config.readonly = true;
+            	gantt.config.disabled = true;
 	        }
       	},
       	"columnDefs": [{
@@ -6151,13 +6151,13 @@ Detail Project
 
 							append4 = append4 + '<tr>'
 							append4 = append4 + '<td>'
-							append4 = append4 + '<input class="form-control" value="'+ item.termPayment +'" id="inputTermsPayment" readonly />'
+							append4 = append4 + '<input class="form-control" value="'+ item.termPayment +'" id="inputTermsPayment" disabled />'
 							append4 = append4 + '</td>'
 							append4 = append4 + '<td>'
 							if (item.payDate == '-') {
-								append4 = append4 + '<input type="text" readonly class="form-control" id="inputDatePayment" value="' + item.payDate +'"/>'
+								append4 = append4 + '<input type="text" disabled class="form-control" id="inputDatePayment" value="' + item.payDate +'"/>'
 							}else{
-								append4 = append4 + '<input type="text" readonly class="form-control" id="inputDatePayment" value="'+ moment(item.payDate).format("YYYY-MM-DD") +'"/>'
+								append4 = append4 + '<input type="text" disabled class="form-control" id="inputDatePayment" value="'+ moment(item.payDate).format("YYYY-MM-DD") +'"/>'
 							}
 							
 							append4 = append4 + '</td>'
@@ -6169,7 +6169,7 @@ Detail Project
 		        		})
 						$("#link_css").remove()
 						// if (result.length > 0) {
-	        			$("#link_feedback").val(result[0].css).prop("readonly",true).after("<a target='_blank' id='link_css' href="+ result[0].css +"><i class='bx bx-link'></i> Link Feedback Css</a>")
+	        			$("#link_feedback").val(result[0].css).prop("disabled",true).after("<a target='_blank' id='link_css' href="+ result[0].css +"><i class='bx bx-link'></i> Link Feedback Css</a>")
 						$("#textareaAdditionalNote").val(result[0].additional_notes).prop("disabled",true)
 						$("#textareaRecommendation").val(result[0].recommendation_future).prop("disabled",true)
 						$("#textareaLessonLearn").val(result[0].lesson_learn).prop("disabled",true)
@@ -6198,13 +6198,13 @@ Detail Project
 
 							append4 = append4 + '<tr>'
 							append4 = append4 + '<td>'
-							append4 = append4 + '<input class="form-control" value="'+ item.termPayment +'" id="inputTermsPayment" readonly />'
+							append4 = append4 + '<input class="form-control" value="'+ item.termPayment +'" id="inputTermsPayment" disabled />'
 							append4 = append4 + '</td>'
 							append4 = append4 + '<td>'
 							if (item.payDate == '-') {
-								append4 = append4 + '<input readonly class="form-control" id="inputDatePayment" value="' + item.payDate +'"/>'
+								append4 = append4 + '<input disabled class="form-control" id="inputDatePayment" value="' + item.payDate +'"/>'
 							}else{
-								append4 = append4 + '<input readonly class="form-control" id="inputDatePayment" value="'+ moment(item.payDate).format("YYYY-MM-DD") +'"/>'
+								append4 = append4 + '<input disabled class="form-control" id="inputDatePayment" value="'+ moment(item.payDate).format("YYYY-MM-DD") +'"/>'
 							}
 							
 							append4 = append4 + '</td>'
@@ -6319,7 +6319,7 @@ Detail Project
 											append = append + ' 	<div class="input-group-text">'
 											append = append + ' 		<i class="bx bx-calendar"></i>'
 											append = append + ' 	</div>'
-											append = append + ' 	<input style="font-size:12px" class="form-control" value="'+ moment(values.baseline_end).format('YYYY-MM-DD') +'" id="planned_date" name="planned_date" readonly/>'
+											append = append + ' 	<input style="font-size:12px" class="form-control" value="'+ moment(values.baseline_end).format('YYYY-MM-DD') +'" id="planned_date" name="planned_date" disabled/>'
 											append = append + ' </div>'
 									    	append = append + '	</td>'
 									    	append = append + '	<td>'
@@ -6328,7 +6328,7 @@ Detail Project
 											append = append + ' 	<div class="input-group-text">'
 											append = append + ' 		<i class="bx bx-calendar"></i>'
 											append = append + ' 	</div>'
-											append = append + ' 	<input style="font-size:12px" class="form-control" id="actual_date" name="actual_date" value="'+ moment(values.end_date).format('YYYY-MM-DD')+ '" readonly/>'
+											append = append + ' 	<input style="font-size:12px" class="form-control" id="actual_date" name="actual_date" value="'+ moment(values.end_date).format('YYYY-MM-DD')+ '" disabled/>'
 											append = append + ' </div>'
 									    	append = append + '	</td>'
 									    	append = append + '</tr>'

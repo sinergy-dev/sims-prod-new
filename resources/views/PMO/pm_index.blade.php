@@ -2022,11 +2022,11 @@
     }
 
     function btnShowProjectCharter(id_pmo,privilege){
-      window.open("{{url('PMO/project/detail')}}/"+id_pmo + "?showProject", "_blank");
+      window.open("{{url('PMO/projectDetail')}}/"+id_pmo + "?showProject", "_blank");
       // if (privilege == 'pm') {
-      //   window.open("{{url('PMO/project/detail')}}/"+id_pmo + "?showProject", "_blank");
+      //   window.open("{{url('PMO/projectDetail')}}/"+id_pmo + "?showProject", "_blank");
       // }else{
-      //   window.location.href = "{{url('PMO/project/detail')}}/"+id_pmo + "?showProject";
+      //   window.location.href = "{{url('PMO/projectDetail')}}/"+id_pmo + "?showProject";
       // }
     }
 
@@ -3023,7 +3023,7 @@
     }
 
     function detailProject(id_pmo,type){
-      window.open("{{url('/PMO/project/detail')}}/"+id_pmo+"?project_type="+type,"_blank")
+      window.open("{{url('/PMO/projectDetail')}}/"+id_pmo+"?project_type="+type,"_blank")
     }
 
     function deleteAssign(id){
