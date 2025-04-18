@@ -36,7 +36,7 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
     }
 
     #table-win-project-territory tr td{
-      color: RGBA(var(--bs-primary-rgb), var(--bs-bg-opacity, 1)) !important;
+      color: white!important;
     }
 
     .outer-reset {
@@ -186,7 +186,7 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
           </div>
           <div class="card-body">
             <?php $no_sip = 1; $territory= ""?>
-            <table class="table table-bordered table-striped table-sip-all-ter" width="100%" cellspacing="0">
+            <table class="table table-bordered table-sip-all-ter" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th width="5%"><center>No.</center></th>

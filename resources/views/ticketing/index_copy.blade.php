@@ -25,7 +25,7 @@ Ticketing
 		width: 100%;
 		pointer-events:none;
 	}
-	.vertical-align-center {
+	 {
 		display: table-cell;
 		vertical-align: middle;
 		pointer-events:none;
@@ -257,6 +257,14 @@ Ticketing
 
 	.form-group{
 		margin-bottom: 15px;
+	}
+
+	.swal2-container {
+	  z-index: 99999 !important;
+	}
+
+	.swal2-deny{
+		display: none!important;
 	}
 </style>
 @endsection
@@ -914,7 +922,7 @@ Ticketing
 						</div>
 
 						<div class="col-md-4" id="tableTicket" style="display: none;">
-							<h1>Preview Ticket : </h1>
+							<h5>Preview Ticket : </h5>
 							<hr>
 							<table class="table table2">
 								<tr>
@@ -1833,11 +1841,11 @@ Ticketing
 
 	<div class="modal fade" id="modal-next-on-progress">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center modal-lg">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						
 						</button>
 						<h6 class="modal-title" id="modal-ticket-title">Send On Progress Ticket</h6>
 					</div>
@@ -1888,11 +1896,11 @@ Ticketing
 
 	<div class="modal fade" id="modal-cancel">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						
 						</button>
 						<h6 class="modal-title" id="modal-ticket-title">Cancel Ticket</h6>
 					</div>
@@ -1914,11 +1922,11 @@ Ticketing
 
 	<div class="modal fade" id="modal-close-pending">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						
 						</button>
 						<h6 class="modal-title" id="modal-ticket-title">Update Progress before Close</h6>
 					</div>
@@ -1990,11 +1998,11 @@ Ticketing
 
 	<div class="modal fade" id="modal-next-cancel">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center modal-lg">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						
 						</button>
 						<h6 class="modal-title" id="modal-ticket-title">Send Cancel Ticket </h6>
 					</div>
@@ -2045,11 +2053,10 @@ Ticketing
 
 	<div class="modal fade" id="modal-pending">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 						</button>
 						<h6 class="modal-title" id="modal-ticket-title">Pending Ticket</h6>
 					</div>
@@ -2112,11 +2119,10 @@ Ticketing
 
 	<div class="modal fade" id="modal-next-pending">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center modal-lg">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 						</button>
 						<h6 class="modal-title" id="modal-ticket-title">Send Pending Ticket </h6>
 					</div>
@@ -2173,11 +2179,10 @@ Ticketing
 
 	<div class="modal fade" id="modal-close">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						
 						<h6 class="modal-title" id="modal-ticket-title">Close Ticket </h6>
 					</div>
@@ -2232,11 +2237,11 @@ Ticketing
 
 	<div class="modal fade" id="modal-next-close">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center modal-lg">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						</button>
 						<h6 class="modal-title" id="modal-ticket-title">Send Close Ticket</h6>
 					</div>
 					<div class="modal-body">
@@ -2292,11 +2297,11 @@ Ticketing
 
 	<div class="modal fade" id="modal-escalate">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						</button>
 						
 						<h6 class="modal-title" id="modal-ticket-title">Escalate Ticket </h6>
 					</div>
@@ -2337,11 +2342,11 @@ Ticketing
 
 	<div class="modal fade" id="modal-next-escalate">
 		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+						</button>
 						
 						<h6 class="modal-title" id="modal-ticket-title">Mail Escalate Ticket</h6>
 					</div>
@@ -2400,8 +2405,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					</button>
 					<h6 class="modal-title"> Add Email </h6>
 				</div>
 				<div class="modal-body">
@@ -2471,7 +2476,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-primary" onclick="saveClient('AddClient')">Save changes</button>
 				</div>
 			</div>
@@ -2530,8 +2535,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span></button>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					</button>
 					<h6 class="modal-title" id="modal-setting-title">Change Setting for </h6>
 				</div>
 				<div class="modal-body">
@@ -2608,7 +2613,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-primary" onclick="saveClient('EditClient')">Save changes</button>
 				</div>
 			</div>
@@ -2759,8 +2764,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					
 					</button>
 					<h6 class="modal-title modal-setting-title">ATM Add</h6>
 				</div>
@@ -2926,7 +2931,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-flat btn-success" onclick="newPeripheral()" id="peripheralAddFormButton" style="display: none;">Add Peripheral</button>
 					<button type="button" class="btn btn-sm btn-flat btn-primary" onclick="newAtm()" id="atmAddFormButton">Add</button>
 				</div>
@@ -2938,8 +2943,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					
 					</button>
 					<h6 class="modal-title modal-setting-title">Change ATM Detail</h6>
 				</div>
@@ -3046,7 +3051,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-flat btn-danger pull-left" onclick="deleteAtm()">Delete</button>
 					<button type="button" class="btn btn-sm btn-flat btn-primary" onclick="saveAtm()">Save changes</button>
 				</div>
@@ -3058,8 +3063,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					
 					</button>
 					<h6 class="modal-title">Assign Engineer ATM</h6>
 				</div>
@@ -3091,7 +3096,7 @@ Ticketing
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-flat btn-primary" onclick="submitAssignEngineerAtm()" id="atmAddFormButton">Save</button>
 				</div>
 			</div>
@@ -3102,8 +3107,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					
 					</button>
 					<h6 class="modal-title modal-setting-title">Absen Add</h6>
 				</div>
@@ -3146,7 +3151,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-flat btn-primary" onclick="newAbsen()" id="atmAddFormButton">Add</button>
 				</div>
 			</div>
@@ -3157,8 +3162,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					
 					</button>
 					<h6 class="modal-title modal-setting-title">Change Absen Detail</h6>
 				</div>
@@ -3202,7 +3207,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-flat btn-danger pull-left" onclick="deleteAbsen()">Delete</button>
 					<button type="button" class="btn btn-sm btn-flat btn-primary" onclick="saveAbsen()">Save changes</button>
 				</div>
@@ -3214,8 +3219,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					
 					</button>
 					<h6 class="modal-title modal-setting-title">Switch Add</h6>
 				</div>
@@ -3274,7 +3279,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-flat btn-primary" onclick="newSwitch()" id="switchAddFormButton">Add</button>
 				</div>
 			</div>
@@ -3285,8 +3290,8 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					
 					</button>
 					<h6 class="modal-title modal-setting-title">Change Switch Detail</h6>
 				</div>
@@ -3346,7 +3351,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-sm btn-flat btn-danger pull-left" onclick="deleteSwitch()">Delete</button>
 					<button type="button" class="btn btn-sm btn-flat btn-primary" onclick="saveSwitch()">Save changes</button>
 				</div>
@@ -3359,7 +3364,7 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true" style="margin-left: 5px;">×</span>
 					</button>
 					<div class="modal-tools pull-right" style="text-align: right";>
@@ -3421,7 +3426,7 @@ Ticketing
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Exit</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Exit</button>
 					<button type="button" class="btn btn-sm btn-flat btn-danger" id="rejectButton">Reject</button>
 					<button type="button" class="btn btn-sm btn-flat btn-success" id="approveButton">Approve</button>
 				</div>
@@ -3433,7 +3438,7 @@ Ticketing
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true" style="margin-left: 5px;">×</span>
 					</button>
 					<div>
@@ -3525,7 +3530,7 @@ Ticketing
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-dismiss="modal">Exit</button>
+					<button type="button" class="btn btn-sm btn-flat btn-secondary pull-left" data-bs-dismiss="modal">Exit</button>
 					<button type="button" class="btn btn-sm btn-flat btn-danger" id="tripRequestRejectButton">Reject</button>
 					<button type="button" class="btn btn-sm btn-flat btn-success" id="tripRequestApproveButton">Approve</button>
 				</div>
@@ -3613,11 +3618,17 @@ Ticketing
 		// 	format: 'dd/mm/yyyy'
 		// })
 
-		$('#inputReportingDate').flatpickr({
-      monthSelectorType: 'static',
-      // defaultDate: date,
-      dateFormat: 'd/m/Y'
-    });
+		// $('#inputReportingDate').flatpickr({
+    //   monthSelectorType: 'static',
+    //   // defaultDate: date,
+    //   dateFormat: 'd/m/Y'
+    // });
+
+    flatpickr("#inputReportingDate", {
+		  dateFormat: "d/m/Y",           // Show date as DD/MM/YYYY
+		  monthSelectorType: "static",   // Static month dropdown (no scroll)
+		  // defaultDate: "01/04/2025"   // Optional: uncomment and provide if needed
+		});
 
 		// $('#bodyOpenMail').slimScroll({
 		// 	height: '600px'
@@ -6995,26 +7006,62 @@ Ticketing
 					$("#pendingButton").prop('disabled',false);
 					$("#closeButton").prop('disabled',false);
 					$("#updatePendingBtn").prop('disabled',false);
-					$('#datePending').flatpickr({
-						autoclose: true,
-						startDate: moment().format("MM/DD/YYYY")
-					}).on('hide',function(result){
-						$('#datePending').val(moment(result.date).format("DD/MM/YYYY"))
-					});
-					$('#dateClose').flatpickr({
-						autoclose: true,
-						// startDate: moment(result.first_activity_ticket.date).format("MM/DD/YYYY"),
-						endDate: moment().format("MM/DD/YYYY")
-					}).on('hide',function(result){
-						$('#dateClose').val(moment(result.date).format("DD/MM/YYYY"))
+					// $('#datePending').flatpickr({
+					// 	autoclose: true,
+					// 	startDate: moment().format("MM/DD/YYYY")
+					// }).on('hide',function(result){
+					// 	$('#datePending').val(moment(result.date).format("DD/MM/YYYY"))
+					// });
+					// $('#dateClose').flatpickr({
+					// 	autoclose: true,
+					// 	// startDate: moment(result.first_activity_ticket.date).format("MM/DD/YYYY"),
+					// 	endDate: moment().format("MM/DD/YYYY")
+					// }).on('hide',function(result){
+					// 	$('#dateClose').val(moment(result.date).format("DD/MM/YYYY"))
+					// });
+
+					// $('#datePendingClose').flatpickr({
+					// 	autoclose: true,
+					// 	// startDate: moment(result.first_activity_ticket.date).format("MM/DD/YYYY"),
+					// 	endDate: moment().format("MM/DD/YYYY")
+					// }).on('hide',function(result){
+					// 	$('#datePendingClose').val(moment(result.date).format("DD/MM/YYYY"))
+					// });
+					// Date format: DD/MM/YYYY for display
+					const displayFormat = "d/m/Y"; // Flatpickr format for 01/04/2025
+					const momentFormat = "DD/MM/YYYY"; // Moment.js format
+
+					// #datePending
+					flatpickr("#datePending", {
+					  dateFormat: "m/d/Y", // internal format to start from today (MM/DD/YYYY)
+					  defaultDate: moment().format("MM/DD/YYYY"),
+					  onClose: function(selectedDates, dateStr, instance) {
+					    if (selectedDates[0]) {
+					      $('#datePending').val(moment(selectedDates[0]).format(momentFormat));
+					    }
+					  }
 					});
 
-					$('#datePendingClose').flatpickr({
-						autoclose: true,
-						// startDate: moment(result.first_activity_ticket.date).format("MM/DD/YYYY"),
-						endDate: moment().format("MM/DD/YYYY")
-					}).on('hide',function(result){
-						$('#datePendingClose').val(moment(result.date).format("DD/MM/YYYY"))
+					// #dateClose
+					flatpickr("#dateClose", {
+					  dateFormat: "m/d/Y",
+					  maxDate: moment().format("MM/DD/YYYY"),
+					  onClose: function(selectedDates, dateStr, instance) {
+					    if (selectedDates[0]) {
+					      $('#dateClose').val(moment(selectedDates[0]).format(momentFormat));
+					    }
+					  }
+					});
+
+					// #datePendingClose
+					flatpickr("#datePendingClose", {
+					  dateFormat: "m/d/Y",
+					  maxDate: moment().format("MM/DD/YYYY"),
+					  onClose: function(selectedDates, dateStr, instance) {
+					    if (selectedDates[0]) {
+					      $('#datePendingClose').val(moment(selectedDates[0]).format(momentFormat));
+					    }
+					  }
 					});
 				} else if(result.lastest_activity_ticket.activity == "CLOSE"){
 					$("#ticketStatus").attr('class','badge text-bg-success');
@@ -7039,18 +7086,42 @@ Ticketing
 					$("#cancelButton").prop('disabled',false);
 					$("#pendingButton").prop('disabled',false);
 
-					$('#datePending').flatpickr({
-						autoclose: true,
-						startDate: moment().format("MM/DD/YYYY")
-					}).on('hide',function(result){
-						$('#datePending').val(moment(result.date).format("DD/MM/YYYY"))
+					// $('#datePending').flatpickr({
+					// 	autoclose: true,
+					// 	startDate: moment().format("MM/DD/YYYY")
+					// }).on('hide',function(result){
+					// 	$('#datePending').val(moment(result.date).format("DD/MM/YYYY"))
+					// });
+					// $('#dateClose').flatpickr({
+					// 	autoclose: true,
+					// 	// startDate: moment(result.first_activity_ticket.date).format("MM/DD/YYYY"),
+					// 	endDate: moment().format("MM/DD/YYYY")
+					// }).on('hide',function(result){
+					// 	$('#dateClose').val(moment(result.date).format("DD/MM/YYYY"))
+					// });
+
+					const momentFormat = "DD/MM/YYYY";
+
+					// #datePending: set default date as today
+					flatpickr("#datePending", {
+					  dateFormat: "m/d/Y", // format Flatpickr understands
+					  defaultDate: moment().format("MM/DD/YYYY"),
+					  onClose: function(selectedDates) {
+					    if (selectedDates[0]) {
+					      $('#datePending').val(moment(selectedDates[0]).format(momentFormat));
+					    }
+					  }
 					});
-					$('#dateClose').flatpickr({
-						autoclose: true,
-						// startDate: moment(result.first_activity_ticket.date).format("MM/DD/YYYY"),
-						endDate: moment().format("MM/DD/YYYY")
-					}).on('hide',function(result){
-						$('#dateClose').val(moment(result.date).format("DD/MM/YYYY"))
+
+					// #dateClose: set max date as today
+					flatpickr("#dateClose", {
+					  dateFormat: "m/d/Y",
+					  maxDate: moment().format("MM/DD/YYYY"),
+					  onClose: function(selectedDates) {
+					    if (selectedDates[0]) {
+					      $('#dateClose').val(moment(selectedDates[0]).format(momentFormat));
+					    }
+					  }
 					});
 				} else if(result.lastest_activity_ticket.activity == "CANCEL"){
 					$("#ticketStatus").attr('class','badge text-bg-primary');
@@ -7130,11 +7201,12 @@ Ticketing
 
 	function updateTicket(id){
 		if($("#ticketNote").val() == ""){
-			swalWithCustomClass.fire(
-				'Error',
-				'Please give you note before Update!',
-				'error'
-			)
+			swalWithCustomClass.fire({
+				title: 'Error',
+				text: "Please give you note before Update!",
+				icon: 'error',
+				showCancelButton: true,
+			})
 		} else {
 			if($("#ticketStatus").text() == "PENDING"){
 				swalWithCustomClass.fire({
@@ -7766,15 +7838,21 @@ Ticketing
 
 			$('#timeClose').timepicker('setTime',moment(date).add(1, 'minutes').format('HH:mm'))
 
-			$('#dateClose').flatpickr({
-				autoclose: true,
-				// startDate: moment(result.first_activity_ticket.date).format("MM/DD/YYYY"),
-				minDate: moment().format("YYYY-MM-DD"),
-				startDate: moment().format("YYYY-MM-DD"),
-				locale: {
-		      format: 'YYYY-MM-DD'
-		    }
-			})
+			// $('#dateClose').flatpickr({
+			// 	autoclose: true,
+			// 	// startDate: moment(result.first_activity_ticket.date).format("MM/DD/YYYY"),
+			// 	minDate: moment().format("YYYY-MM-DD"),
+			// 	startDate: moment().format("YYYY-MM-DD"),
+			// 	locale: {
+		  //     format: 'YYYY-MM-DD'
+		  //   }
+			// })
+
+			flatpickr("#dateClose", {
+			  dateFormat: "Y-m-d", // equivalent to 'YYYY-MM-DD'
+			  minDate: moment().format("YYYY-MM-DD"), // today's date
+			  defaultDate: moment().format("YYYY-MM-DD") // start from today
+			});
 
 			$("#saveCloseRoute").val('')
 			$("#saveCloseCouter").val('')
