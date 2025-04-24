@@ -899,7 +899,7 @@ class TimesheetController extends Controller
         }else{
             $cekPid = TimesheetPid::select('pid')->where('nik',$request->nik)->distinct()->pluck('pid');
 
-            // return $cekPid;
+            return $cekPid;
 
             $getAllPid = SalesProject::join('sales_lead_register', 'sales_lead_register.lead_id', '=', 'tb_id_project.lead_id')->join('users', 'users.nik', '=', 'sales_lead_register.nik')->select('id_project as id',DB::raw("CONCAT(`id_project`,' - ',`name_project`) AS text"))->where('id_company', '1');
             
@@ -919,9 +919,9 @@ class TimesheetController extends Controller
     public function getPidByPic(Request $request)
     {        
         $nik = Auth::User()->nik;
-        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group','role_user.role_id')->where('user_id', $nik)->first(); 
+        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group','role_user.role_id','mini_group')->where('user_id', $nik)->first(); 
 
-        $cekPidStatus = TimesheetConfig::where('division',Auth::User()->id_division)->first();
+        $cekPidStatus = TimesheetConfig::where('division',$cek_role->mini_group)->first();
 
         if (isset($cekPidStatus)) {
             if ($cekPidStatus->status_assign_pid == 'All') {
@@ -951,7 +951,7 @@ class TimesheetController extends Controller
             }
         }else{
 
-            $getPidByPic = DB::table('tb_timesheet_pid')->join('tb_id_project','tb_timesheet_pid.pid','tb_id_project.id_project')->join('sales_lead_register','sales_lead_register.lead_id','tb_id_project.lead_id')->select('tb_timesheet_pid.pid as id',DB::raw("CONCAT(`tb_timesheet_pid`.`pid`,' - ',`name`) AS text"))->where('tb_timesheet_pid.nik',Auth::User()->nik)->orderby('id','desc')->get();
+            $getPidByPic = DB::table('tb_timesheet_pid')->join('tb_id_project','tb_timesheet_pid.pid','tb_id_project.id_project')->join('sales_lead_register','sales_lead_register.lead_id','tb_id_project.lead_id')->select('tb_timesheet_pid.pid as id',DB::raw("CONCAT(`tb_id_project`.`id_project`,' - ',`name_project`) AS text"))->where('tb_timesheet_pid.nik',Auth::User()->nik)->orderby('id','desc')->get();
 
             if (count($getPidByPic) == 0) {
                 $getPidByPic = ['Alert','Please Ask your Manager/Spv to assign pid!'];
@@ -1100,9 +1100,17 @@ class TimesheetController extends Controller
 
     public function getAllUser()
     {
-        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group')->where('user_id', Auth::User()->nik)->first()->group; 
+        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group','mini_group')->where('user_id', Auth::User()->nik)->first(); 
 
-        return $getUser = User::select('users.nik as id', 'users.name as text')->join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')->where('roles.group',$cek_role)->where('roles.name',"not like","%Manager%")->where('roles.name','not like','%MSM Helpdesk%')->where('status_karyawan','!=','dummy')->get();
+        $getUser = User::select('users.nik as id', 'users.name as text')->join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')->where('roles.name',"not like","%Manager%")->where('status_karyawan','!=','dummy');
+
+        if (str_contains($cek_role->name, 'VP')) {
+            $getUser = $getUser->where('group',$cek_role->group);
+        } else {
+            $getUser = $getUser->where('mini_group',$cek_role->mini_group);
+        }
+
+        return $getUser->get();
 
         // return $getUser = User::select('nik as id', 'name as text')->where('id_division',Auth::User()->id_division)->get();
     }
@@ -7689,7 +7697,7 @@ class TimesheetController extends Controller
     public function exportExcel(Request $request)
     {
         $nik = Auth::User()->nik;
-        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group')->where('user_id', $nik)->first(); 
+        $cek_role = Auth::user()->roles()->first();
 
         $appendedAttributesToHide = ['planned','threshold'];
 
@@ -7722,10 +7730,19 @@ class TimesheetController extends Controller
             ->where('roles.name','not like','%Manager')
             ->where('users.status_delete','-');
 
-        $listGroup = User::join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')->where('roles.group',$cek_role->group)->pluck('nik');
+        $listGroup = DB::table('users')->join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')->where('roles.group',$cek_role->group)->pluck('nik');
+        $listMiniGroup = DB::table('users')->join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')->where('roles.mini_group',$cek_role->mini_group)->pluck('nik');
+
 
         if ($request->pic[0] === null) {
-            $dataTimesheet = $dataTimesheet->whereIn('tb_timesheet.nik',$listGroup);
+
+            if (Str::endsWith(strtolower($cek_role->name), 'manager') && !Str::contains(strtolower($cek_role->name), 'delivery project manager')){
+                $dataTimesheet = $dataTimesheet->whereIn('tb_timesheet.nik',$listMiniGroup);
+            }else if(Str::startsWith(strtolower($cek_role->name), 'vp')){
+                $dataTimesheet = $dataTimesheet->whereIn('tb_timesheet.nik',$listGroup);
+            }else{
+                $dataTimesheet = $dataTimesheet->where('tb_timesheet.nik',$nik);
+            }
 
             $getUserByGroup = $getUserByGroup->get();
 
@@ -7762,7 +7779,6 @@ class TimesheetController extends Controller
         }
 
         $dataTimesheet = $dataTimesheet->get();
-
         // return $dataTimesheet;
 
         $collectByName = collect();

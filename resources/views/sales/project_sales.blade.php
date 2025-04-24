@@ -10,6 +10,8 @@ Lead Register
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}"/>
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.css" integrity="sha512-OWGg8FcHstyYFwtjfkiCoYHW2hG3PDWwdtczPAPUcETobBJOVCouKig8rqED0NMLcT9GtE4jw6IT1CSrwY87uw==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 <style type="text/css">
 	.bg-orange-custom {
 	  background-color: #f2562b!important;
@@ -51,10 +53,10 @@ Lead Register
 	}
 
 	.dataTables_filter {
-		display: none;
+		display: none!important;
 	}
 
-	.has-error .select2-selection {
+	.needs-validation .select2-selection {
 	    border-color: rgb(185, 74, 72) !important;
 	}
 
@@ -171,17 +173,21 @@ Lead Register
 	.form-group{
 		margin-bottom: 15px;
 	}
+
+	.swal2-container {
+	    z-index: 999999!important;
+	}
 </style>
 @endsection
 @section('content')
 	<div class="container-xxl flex-grow-1 container-p-y">
 		<section class="content">
-			<div class="row mb-4" id="BoxId" style="display:none;">
+			<div class="row mb-4" id="BoxId" style="display:none!important;">
 	        <!--card id-->
 	  		</div>
 
 		  	<div class="row">
-		  		<div class="col-lg-3 col-xs-12">
+		  		<div class="col-lg-2 col-xs-12">
 		  			<section class="sidebar">
 		  				<div class="card card-primary">
 			  				<div class="card-header with-border">
@@ -190,7 +196,7 @@ Lead Register
 			  				<div class="card-body" id="filter-body">
 		  						<div class="form-group">
 									<label>Tahun</label>
-									<div id="filter_year_for_dir" style="display:none">
+									<div id="filter_year_for_dir" style="display:none!important">
 										<div class="row">
 											<div style="display: inline;" class="col-md-6">	
 												<select class="select2 form-control" style="width:100%;display: inline;float: left;" id="year_dif_dir" multiple>
@@ -219,7 +225,7 @@ Lead Register
 											</div>
 										</div>
 									</div>
-									<div id="filter_year_for_oth" style="display:none">
+									<div id="filter_year_for_oth" style="display:none!important">
 										<select class="select2 form-control" style="width:100%;display: inline;float: left;" id="year_dif" multiple>
 											@foreach($year as $years)
 							              @if($years->year < $year_now-1)
@@ -232,26 +238,26 @@ Lead Register
 										</select>
 									</div>
 								</div>
-								<div class="form-group" id="filter-com" style="display:none;">								
+								<div class="form-group" id="filter-com" style="display:none!important;">								
 								</div>
-								<div class="form-group" id="filter-territory" style="display:none;">								
+								<div class="form-group" id="filter-territory" style="display:none!important;">								
 								</div>
-								<div class="form-group" id="filter-sales" style="display:none;">
+								<div class="form-group" id="filter-sales" style="display:none!important;">
 										<label>Sales</label>
 								  		<select class="form-control select2" style="width: 100%;" id="filter_sales"  name="filter_sales">
 		              					</select>
 								</div>
-								<div class="form-group" id="filter-sales-manager" style="display:none;">
+								<div class="form-group" id="filter-sales-manager" style="display:none!important;">
 									<label>Sales</label>
 								  	<select class="form-control select2" style="width: 100%;" id="filter_sales_manager"  name="filter_sales_manager">
 		              				</select>
 								</div>
-								<div class="form-group" id="filter-ta" style="display:none;">
+								<div class="form-group" id="filter-ta" style="display:none!important;">
 									<label>Technology Alliance</label>
 								  	<select class="form-control select2" style="width: 100%;" id="filter_ta"  name="filter_ta">
 		              				</select>
 								</div>
-								<div class="form-group" id="filter-presales" style="display:none;">
+								<div class="form-group" id="filter-presales" style="display:none!important;">
 									<label>Presales</label>
 								  	<select class="form-control select2" style="width: 100%;" id="filter_presales"  name="filter_presales">
 		              				</select>
@@ -271,33 +277,48 @@ Lead Register
 			  			</div>	
 		  			</section>
 		  		</div>
-		  		<div class="col-lg-9 col-xs-12">
+		  		<div class="col-lg-10 col-xs-12">
 		  			<div class="card card-primary">
 							<div class="card-header with-border">
 								<h6 class="card-title"><i class="bx bx-table"></i> Lead Register</h6>
 					    </div>
 					    <div class="card-body">
 					    	<div class="row">
-					    		<dir class="col-md-5" style="margin-bottom: 0px; margin-top: 0px;">	
+					    		<dir class="col-md-6" style="margin-bottom: 0px; margin-top: 0px;">	
 					    			<button type="button" class="btn btn-sm btn-primary" style="height:30px;display: none;" id="btn_add_sales" onclick="add_lead()"><i class="bx bx-plus"> </i>&nbsp Lead Register</button>		    		
 						    	</dir>
-									<dir class="col-md-7 text-right" style="margin-bottom: 0px; margin-top: 0px;">
-										<div class="input-group">
-											<input id="searchLead" type="text" class="form-control" onkeyup="searchCustom('tableLead','searchLead')" placeholder="Search Anything">			
-											<button type="button" id="btnShowEntryLead" class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-												Show 10 entries
-											</button>
-											<ul class="dropdown-menu">
-												<li><a class="dropdown-item" href="#" onclick="$('#tableLead').DataTable().page.len(10).draw();$('#btnShowEntryLead').html('Show 10 entries')">10</a></li>
-												<li><a class="dropdown-item" href="#" onclick="$('#tableLead').DataTable().page.len(25).draw();$('#btnShowEntryLead').html('Show 25 entries')">25</a></li>
-												<li><a class="dropdown-item" href="#" onclick="$('#tableLead').DataTable().page.len(50).draw();$('#btnShowEntryLead').html('Show 50 entries')">50</a></li>
-												<li><a class="dropdown-item" href="#" onclick="$('#tableLead').DataTable().page.len(100).draw();$('#btnShowEntryLead').html('Show 100 entries')">100</a></li>
-											</ul>
-											<button onclick="searchCustom('tableLead','searchLead')" type="button" class="btn btn-outline-primary">
-												<i class="bx bx-fw bx-search"></i>
-											</button>
-										</div>
-									</dir>			    		
+								<dir class="col-md-6 text-right" style="margin-bottom: 0px; margin-top: 0px;">
+									<div class="input-group">
+										<input id="searchLead" type="text" class="form-control" onkeyup="searchCustom('tableLead','searchLead')" placeholder="Search Anything">			
+										<button type="button" id="btnShowEntryLead" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+											Show 10 entries
+										</button>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" href="#" onclick="$('#tableLead').DataTable().page.len(10).draw();$('#btnShowEntryLead').html('Show 10 entries')">10</a></li>
+											<li><a class="dropdown-item" href="#" onclick="$('#tableLead').DataTable().page.len(25).draw();$('#btnShowEntryLead').html('Show 25 entries')">25</a></li>
+											<li><a class="dropdown-item" href="#" onclick="$('#tableLead').DataTable().page.len(50).draw();$('#btnShowEntryLead').html('Show 50 entries')">50</a></li>
+											<li><a class="dropdown-item" href="#" onclick="$('#tableLead').DataTable().page.len(100).draw();$('#btnShowEntryLead').html('Show 100 entries')">100</a></li>
+										</ul>
+										<!--<button onclick="searchCustom('tableLead','searchLead')" type="button" class="btn btn-outline-primary">
+											<i class="bx bx-fw bx-search"></i>
+										</button> -->
+										<button type="button" id="btnShowColumnTicket" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+												Displayed Column
+										</button>
+										<ul class="dropdown-menu dropdown-menu-end" style="padding-left:5px;padding-right: 5px;" id="selectShowColumnTicket">
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="0"><span class="text">Lead ID</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="1"><span class="text">Customer</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="2"><span class="text">Opty Name</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="3"><span class="text">Create Date</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="4"><span class="text">Closing Date</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="5"><span class="text">Owner</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="6"><span class="text">Technology Alliance</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="7"><span class="text">Presales</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="8"><span class="text">Amount</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" checked type="checkbox" onclick="changeColumnTable(this)" data-column="9"><span class="text">Status</span></li>
+										</ul>
+									</div>
+								</dir>			    		
 					    	</div>			    	
 					    	<div class="table-responsive mt-4">
 					    		<table id="tableLead" class="table table-bordered table-striped display dataTables_wrapper" width="100%" role="grid" aria-describedby="example1_info">
@@ -346,12 +367,12 @@ Lead Register
 	          <!-- <form method="POST" action="{{url('store')}}" id="modalSalesLead" name="modalSalesLead"> -->
 	            @csrf
 				  @if(Auth::user()->roles->first()->name != 'VP Solutions & Partnership Management')
-					<div class="form-group" style="display:none" id="ownerSales">
+					<div class="form-group" style="display:none!important" id="ownerSales">
 					  <label for="">Owner</label>
 					  <select class="form-control select2" style="width: 100%;" id="owner_sales"  name="owner_sales">
 						<option value=""></option>
 					  </select>
-					  <span class="help-block" style="display:none">Please Choose Owner Sales!</span>
+					  <span class="invalid-feedback" style="display:none!important">Please Choose Owner Sales!</span>
 					</div>
 				  @endif
 	          <div class="form-group">
@@ -359,13 +380,13 @@ Lead Register
 	             <select class="form-control select2" style="width: 100%;" id="contact" onkeyup="copytextbox();" name="contact" required>
 	              <option value=""></option>
 	            </select>
-	            <span class="help-block" style="display:none">Please Choose Customer!</span>
+	            <span class="invalid-feedback" style="display:none!important">Please Choose Customer!</span>
 	          </div>
 
 	          <div class="form-group">
 	            <label for="">Opportunity Name</label>
 	            <input type="text" class="form-control" placeholder="Enter Opportunity Name" name="opp_name" id="opp_name">
-	            <span class="help-block" style="display:none">Please Fill Opportunity Name!</span>
+	            <span class="invalid-feedback" style="display:none!important">Please Fill Opportunity Name!</span>
 	          </div>
 
 	          <div class="form-group">
@@ -376,7 +397,7 @@ Lead Register
 	              </span>
 	              <input type="text" class="form-control money" placeholder="Enter Amount" name="amount" id="amount" pattern= "[0-9]">
 	            </div>
-	            <span class="help-block" style="display:none">Please Fill Amount!</span>
+	            <span class="invalid-feedback" style="display:none!important">Please Fill Amount!</span>
 	          </div>
 
 	          <div class="form-group">
@@ -387,7 +408,7 @@ Lead Register
 	              </div>
 	              <input type="text" class="form-control date" name="closing_date" id="closing_date">
 	            </div>
-	            <span class="help-block" style="display:none">Please Select Date!</span>
+	            <span class="invalid-feedback" style="display:none!important">Please Select Date!</span>
 
 	          </div>
 
@@ -396,8 +417,8 @@ Lead Register
 	            <input type="text" class="form-control" placeholder="Enter Note" name="note" id="note">
 	          </div>
 	            <div class="modal-footer">
-	              <button type="button" class="btn btn-default" data-dismiss="modal"><i class=" bx bx-times"></i>&nbspClose</button>
-	              <button type="button" onclick="submitLead()" class="btn btn-primary"><i class="bx bx-check"> </i>&nbspSubmit</button>
+	              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
+	              <button type="button" onclick="submitLead()" class="btn btn-sm btn-primary"><i class="bx bx-check"> </i>&nbspSubmit</button>
 	            </div>
 	        </form>
 	        </div>
@@ -432,7 +453,7 @@ Lead Register
 				              </span>
 				              <input type="text" class="form-control money" placeholder="Enter Amount" name="amount_edit" id="amount_edit" pattern= "[0-9]">
 				            </div>
-				            <span class="help-block" style="display:none">Please Fill Amount!</span>
+				            <span class="invalid-feedback" style="display:none!important">Please Fill Amount!</span>
 				        </div>
 
 	                    <div class="form-group">
@@ -460,7 +481,7 @@ Lead Register
 				                        <th>Technology Tag</th>
 				                        <th>Price</th>
 				                        <td class="text-center">
-				                          <button class="btn btn-primary" id="btn-addTagging" type="button" style="width: 25px;">
+				                          <button class="btn btn-sm btn-primary" id="btn-addTagging" type="button" style="width: 30px;height: 30px;">
 							              	<i class="bx bx-plus"></i>
 							              </button> 
 				                        </td>
@@ -487,8 +508,8 @@ Lead Register
 	                    </div> -->
 
 	                    <div class="modal-footer">
-	                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
-	                        <button type="submit" class="btn btn-primary" onclick="editLeadRegister()"><i class="bx bx-check"> </i>&nbspSubmit</button>
+	                        <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
+	                        <button type="submit" class="btn btn-sm btn-primary" onclick="editLeadRegister()"><i class="bx bx-check"> </i>&nbspSubmit</button>
 	                    </div>
 	                <!-- </form> -->
 	            </div>
@@ -514,8 +535,8 @@ Lead Register
 	          </select>
 	        </div>
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="bx bx-times"></i>&nbsp Close</button>
-	          <button type="button" class="btn btn-primary" id="btnSubmitTechAlliance" onclick="submitAssignTechAlliance()"><i class="bx bx-plus"> </i>&nbspSubmit</button>
+	          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbsp Close</button>
+	          <button type="button" class="btn btn-sm btn-primary" id="btnSubmitTechAlliance" onclick="submitAssignTechAlliance()"><i class="bx bx-plus"> </i>&nbspSubmit</button>
 	        </div>
 	      </div>
 	    </div>
@@ -540,8 +561,8 @@ Lead Register
 	          </select>
 	        </div>
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="bx bx-times"></i>&nbsp Close</button>
-	          <button type="button" class="btn btn-primary" id="btnSubmitAssignPresales" onclick="submitAssignPresales()"><i class="bx bx-plus"> </i>&nbspSubmit</button>
+	          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbsp Close</button>
+	          <button type="button" class="btn btn-sm btn-primary" id="btnSubmitAssignPresales" onclick="submitAssignPresales()"><i class="bx bx-plus"> </i>&nbspSubmit</button>
 	        </div>
 	      </div>
 	    </div>
@@ -576,7 +597,7 @@ Lead Register
 	              </div>
 	            	<input type="text" class="form-control money" placeholder="Enter Amount" name="amount_req_pid" id="amount_req_pid" pattern= "[0-9]" required>
 	            </div>
-	            <span class="help-block" style="display:none">Please Fill Amount!</span>
+	            <span class="invalid-feedback" style="display:none!important">Please Fill Amount!</span>
 	          </div>
 
 	          <div class="form-group">
@@ -585,8 +606,8 @@ Lead Register
 	          </div>
 	   
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal"><i class=" bx bx-times"></i>&nbspClose</button>
-              <button type="button" class="btn btn-primary" id="submitRequestID"><i class="bx bx-check">&nbsp</i>Submit</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
+              <button type="button" class="btn btn-sm btn-primary" id="submitRequestID"><i class="bx bx-check">&nbsp</i>Submit</button>
             </div>
 	        <!-- </form> -->
 	        </div>
@@ -596,9 +617,9 @@ Lead Register
 @endsection
 @section('scriptImport')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> 
+<script src="{{asset('assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha512-2cbsQGdowNDPcKuoBd2bCcsJky87Mv0LEtD/nunJUgk6MOYTgVMGihS/xCEghNf04DPhNiJ4DZw5BxDd1uyOdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.js" integrity="sha512-FbWDiO6LEOsPMMxeEvwrJPNzc0cinzzC0cB/+I2NFlfBPFlZJ3JHSYJBtdK7PhMn0VQlCY1qxflEG+rplMwGUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/jquery.mask.js')}}"></script>
@@ -609,15 +630,15 @@ Lead Register
 <script type="text/javascript">
 	var accesable = @json($feature_item);
 	accesable.forEach(function(item,index){
-  	$("#" + item).show()
+  		$("#" + item).show()
 	})
 
-	$(".date").datepicker({
-  	todayHighlight: true,
-  	autoclose:true
-  })
+	$(".date").flatpickr({
+	  	todayHighlight: true,
+	  	autoclose:true
+	})
 
-  $('.money').mask('000.000.000.000', {reverse: true});
+	$('.money').mask('000.000.000.000', {reverse: true});
 
 	var table = $('#tableLead').DataTable({
 		"ajax":{
@@ -673,11 +694,18 @@ Lead Register
         },   
         {
         	render: function (data, type, row){
-        		btnEdit = '<button class="btn btn-xs btn-warning btnEdit" id="btnEdit" style="display:none;"><i class="bx bx-edit"></i> Edit</button>'
-        		btnDelete = '<button class="btn btn-xs btn-danger btnDelete" id="btnDelete" style="display:none;" ><i class="bx bx-trash"></i> Delete</button>'
-        		btnIdProject = '<button class="btn btn-xs btn-primary btnReqIdProject" id="btnReqIdProject" style="display:none;"><i class="bx bx-plus-square"></i> ID Project</button>'
+        		btnEdit = '<button class="btn btn-xs btn-warning btnEdit" id="btnEdit" style="display:none!important;"><i class="bx bx-edit"></i> Edit</button>'
+        		btnDelete = '<button class="btn btn-xs btn-danger btnDelete" id="btnDelete" style="display:none!important;" ><i class="bx bx-trash"></i> Delete</button>'
+        		btnIdProject = '<button class="btn btn-xs btn-primary btnReqIdProject" id="btnReqIdProject" style="display:none!important;"><i class="bx bx-plus-square"></i> ID Project</button>'
 
-        		let loadBtn = btnEdit + btnDelete
+
+        			let loadBtn = ''
+
+        			if (row.result_modif == 'INITIAL') {
+        				loadBtn = btnEdit + btnDelete
+        			}else{
+        				loadBtn = btnEdit
+        			}
 
     				if (row.result_modif == 'WIN' || row.result_modif == 'LOSE' || row.result_modif == 'CANCEL' || row.result_modif == 'TP' || row.result_modif == 'SD') {
     					if (row.status == 'pending') {
@@ -688,47 +716,47 @@ Lead Register
     				}else{
     					if (("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Solutions & Partnership Management')->exists() || App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Product Development Specialist Manager')->exists()}}")){
     						if (row.name_ta == '-') {
-      						title_assign = 'Assign'
+      						title_assign = '<i class="bx bx-user-plus"></i>Tech Alliance'
 		      				onclickAssign = "onclick=btnAssignTechAlliance('assign','"+row.lead_id+"')"
 		      				status = 'assign'
 		      				if (row.name_presales == '-') {
-		      					title_assign_presales = 'Assign Presales'
+		      					title_assign_presales = '<i class="bx bx-user-plus"></i>Presales'
 			      				onclickAssign_presales = "onclick=btnAssignPresales('assign','"+row.lead_id+"')"
 			      				status_presales = 'assign'
 		      				}
       					}else{
-      						title_assign = 'Re-Assign'
+      						title_assign = '<i class="bx bx-user-minus"></i>Re-Assign'
 		      				onclickAssign = "onclick=btnAssignTechAlliance('reassign','"+row.lead_id+"')"
 		      				status = 'reassign'
 
 		      				if (row.name_presales == '-') {
-		      					title_assign_presales = 'Assign Presales'
+		      					title_assign_presales = '<i class="bx bx-user-plus"></i>Presales'
 			      				onclickAssign_presales = "onclick=btnAssignPresales('assign','"+row.lead_id+"')"
 			      				status_presales = 'assign'
 		      				} else {
-		      					title_assign_presales = 'Re-Assign Presales'
+		      					title_assign_presales = '<i class="bx bx-user-minus"></i>Re-Assign'
 			      				onclickAssign_presales = "onclick=btnAssignPresales('reassign','"+row.lead_id+"')"
 			      				status_presales = 'reassign'
 		      				}
       					}
       					if (("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Product Development Specialist Manager')->exists()}}")){
-      						loadBtn = '<button class="btn xs btn-primary"'+ onclickAssign +'>'+ title_assign +'</button>'+btnEdit + btnDelete + '<button class="btn  btn-primary"'+ onclickAssign_presales +'>'+ title_assign_presales +'</button>'
+      						loadBtn = '<button class="btn btn-xs btn-primary"'+ onclickAssign +'>'+ title_assign +'</button>'+btnEdit + btnDelete + '<button class="btn btn-xs btn-primary"'+ onclickAssign_presales +'>'+ title_assign_presales +'</button>'
       					} else {
-      						loadBtn = '<button class="btn xs btn-primary"'+ onclickAssign +'>'+ title_assign +'</button>'+btnEdit + btnDelete
+      						loadBtn = '<button class="btn btn-xs btn-primary"'+ onclickAssign +'>'+ title_assign +'</button>'+btnEdit + btnDelete
       					}
       				}
 
       				if (("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Technology Alliance Solutions')->exists()}}")){
       					if (row.name_presales == '-') {
-      						title_assign = 'Assign'
+      						title_assign = '<i class="bx bx-user-plus"></i>Tech Alliance'
 		      				onclickAssign = "onclick=btnAssignPresales('assign','"+row.lead_id+"')"
 		      				status = 'assign'
       					}else{
-      						title_assign = 'Re-Assign'
+      						title_assign = '<i class="bx bx-user-minus"></i>Re-Assign'
 		      				onclickAssign = "onclick=btnAssignPresales('reassign','"+row.lead_id+"')"
 		      				status = 'reassign'
       					}
-      					loadBtn = '<button class="btn xs btn-primary"'+ onclickAssign +'>'+ title_assign +'</button>'+btnEdit + btnDelete
+      					loadBtn = '<button class="btn btn-xs btn-primary"'+ onclickAssign +'>'+ title_assign +'</button>'+btnEdit + btnDelete
       				}
 
     				} 
@@ -779,6 +807,13 @@ Lead Register
       lengthChange:false,
       pageLength:50,
 	})
+
+	function changeColumnTable(data){
+		var column = $("#tableLead").DataTable().column($(data).attr("data-column"))
+		column.visible( ! column.visible() );
+		// $(data).prop('checked', column.visible())
+		// column.visible() ? $(data).addClass('active') : $(data).removeClass('active')
+	}
 
 	$(document).on('click','.paginate_button', function() {
 	 	accesable.forEach(function(item,index){
@@ -854,25 +889,25 @@ Lead Register
 			var owner_sales = 'bukan presales'
 		}
 		if (owner_sales == '') {
-			$("#owner_sales").closest('.form-group').addClass('has-error .select2-selection')
+			$("#owner_sales").closest('.form-group').addClass('needs-validation .select2-selection')
 			$("#owner_sales").nextAll("span").eq(1).show()
 
 		}else if ($("#contact").val() == '') {
-			$("#contact").closest('.form-group').addClass('has-error .select2-selection')
+			$("#contact").closest('.form-group').addClass('needs-validation .select2-selection')
 			$("#contact").nextAll("span").eq(1).show()
 
 		}else if ($("#opp_name").val() == '') {
-			$("#opp_name").closest('.form-group').addClass('has-error')
+			$("#opp_name").closest('.form-group').addClass('needs-validation')
 			$("#opp_name").next('span').show()
 
 
 		}else if ($("#amount").val() == '') {
-			$("#amount").closest('.form-group').addClass('has-error')
+			$("#amount").closest('.form-group').addClass('needs-validation')
 			$("#amount").closest('div div').next('span').show();
 
 
 		}else if ($("#closing_date").val() == '') {
-			$("#closing_date").closest('.form-group').addClass('has-error')
+			$("#closing_date").closest('.form-group').addClass('needs-validation')
 			$("#closing_date").closest('div div').next('span').show();
 
 		}else{
@@ -968,7 +1003,9 @@ Lead Register
 					lead_id:id
 				},
 				success:function(result){
-					$("#select2-presales").select2().val("")
+					$("#select2-presales").select2({
+						dropdownParent:$("#assignModalPresales")
+					}).val("")
 					$("#select2-presales").val(result.data.id).trigger("change")
 				}
 			})
@@ -989,7 +1026,9 @@ Lead Register
 					lead_id:id
 				},
 				success:function(result){
-					$("#select2-tech-alliance").select2().val("")
+					$("#select2-tech-alliance").select2({
+						dropdownParent:$("#assignModalTechAlliance")
+					}).val("")
 					$("#select2-tech-alliance").val(result.data.id).trigger("change")
 				}
 			})
@@ -1138,10 +1177,10 @@ Lead Register
 
 				$("#lead_id_edit").val(result.data[0].lead_id)
 				$("#opp_name_edit").val(result.data[0].opp_name)
-				$("#closing_date_edit").datepicker({
-					format: 'yyyy-mm-dd',
-					// autoclose:true,
-				}).datepicker('setDate', result.data[0].closing_date)
+				flatpickr("#closing_date_edit", {
+				    dateFormat: "Y-m-d",
+				    defaultDate: result.data[0].closing_date
+				});
 				$("#amount_edit").mask('000.000.000.000', {reverse: true})
 				$("#amount_edit").val(result.data[0].amount.toString()).trigger("input")
 				$("#note_edit").val(result.data[0].keterangan)
@@ -1780,7 +1819,8 @@ Lead Register
 	    type: "GET",
 	    success: function(result) {
         $("#select2-presales").select2({
-        	data:result.data
+        	data:result.data,
+        	dropdownParent:$("#assignModalPresales")
         })
 
         $("#filter_presales").select2({
@@ -1797,7 +1837,8 @@ Lead Register
 	    success: function(result) {
 
         $("#select2-tech-alliance").select2({
-        	data:result.data
+        	data:result.data,
+        	dropdownParent:$("#assignModalTechAlliance")
         })
 
         $("#filter_ta").select2({
@@ -2239,118 +2280,138 @@ Lead Register
 	}
 
 	function dashboardCount(year){	
-		Pace.restart();
-		Pace.track(function() {
-			var resultComplete
-			$.ajax({
-				type:"GET",
-				url:"{{url('project/getCountLead')}}?"+ year,
-				success:function(result){
-						// Buat Mas ganjar total lead di ganti jadi Lead - Unassigned
-						if(result.presales){
-							$("#"+countLead[0]).prev().html("<b>Lead - Unassigned </b>")
-							$("#"+countLead[0]).text(result.initial)
-						} else {
-							$("#"+countLead[0]).text(result.lead)
-						}
-						$("#"+countLead[1]).text(result.open)
-						$("#"+countLead[2]).text(result.sd)
-						$("#"+countLead[3]).text(result.tp)
-						$("#"+countLead[4]).text(result.win)
-						$("#"+countLead[5]).text(result.lose)
-						$("#"+sumAmount[0]).text(result.amount_lead)
-						$("#"+sumAmount[1]).text(result.amount_open)
-						$("#"+sumAmount[2]).text(result.amount_sd)
-						$("#"+sumAmount[3]).text(result.amount_tp)
-						$("#"+sumAmount[4]).text(result.amount_win)
-						$("#"+sumAmount[5]).text(result.amount_lose)
+		var resultComplete
+		$.ajax({
+			type:"GET",
+			url:"{{url('project/getCountLead')}}?"+ year,
+			beforeSend:function(argument) {
+	          $('.layout-container').block({
+	            message: '<div class="spinner-border text-white" role="status"></div>',
+	            timeout: 1000,
+	            css: {
+	              backgroundColor: 'transparent',
+	              border: '0'
+	            },
+	            overlayCSS: {
+	              opacity: 0.5
+	            }
+	          });
+	        },
+			success:function(result){
+					// Buat Mas ganjar total lead di ganti jadi Lead - Unassigned
+					if(result.presales){
+						$("#"+countLead[0]).prev().html("<b>Lead - Unassigned </b>")
+						$("#"+countLead[0]).text(result.initial)
+					} else {
+						$("#"+countLead[0]).text(result.lead)
+					}
+					$("#"+countLead[1]).text(result.open)
+					$("#"+countLead[2]).text(result.sd)
+					$("#"+countLead[3]).text(result.tp)
+					$("#"+countLead[4]).text(result.win)
+					$("#"+countLead[5]).text(result.lose)
+					$("#"+sumAmount[0]).text(result.amount_lead)
+					$("#"+sumAmount[1]).text(result.amount_open)
+					$("#"+sumAmount[2]).text(result.amount_sd)
+					$("#"+sumAmount[3]).text(result.amount_tp)
+					$("#"+sumAmount[4]).text(result.amount_win)
+					$("#"+sumAmount[5]).text(result.amount_lose)
 
-						resultComplete = result		
+					resultComplete = result		
 
-						$("#filter_lead_INITIAL").next().text("INITIAL (" + result.initial + ")")
-						$("#filter_lead_OPEN").next().text("OPEN (" + result.open + ")")
-						$("#filter_lead_SD").next().text("SD (" + result.sd + ")")
-						$("#filter_lead_TP").next().text("TP (" + result.tp + ")")
-						$("#filter_lead_WIN").next().text("WIN (" + result.win + ")")
-						$("#filter_lead_LOSE").next().text("LOSE (" + result.lose + ")")
-						$("#filter_lead_CANCEL").next().text("CANCEL (" + result.cancel + ")")	
+					$("#filter_lead_INITIAL").next().text("INITIAL (" + result.initial + ")")
+					$("#filter_lead_OPEN").next().text("OPEN (" + result.open + ")")
+					$("#filter_lead_SD").next().text("SD (" + result.sd + ")")
+					$("#filter_lead_TP").next().text("TP (" + result.tp + ")")
+					$("#filter_lead_WIN").next().text("WIN (" + result.win + ")")
+					$("#filter_lead_LOSE").next().text("LOSE (" + result.lose + ")")
+					$("#filter_lead_CANCEL").next().text("CANCEL (" + result.cancel + ")")	
 
-					initMoneyHeader()
+				initMoneyHeader()
 
-					$('.counter').each(function () {
-					    var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
-					    $(this).prop('Counter', 0).animate({
-					      Counter: $(this).text()
-					    }, {
-					      duration: 5000,
-					      step: function (func) {
-					         $(this).text(parseFloat(func).toFixed(size));
-					      }
-					    });
-					});
-				},
-				complete:function(){
-					$("#filter_lead_INITIAL").next().text("INITIAL (" + resultComplete.initial + ")")
-					$("#filter_lead_OPEN").next().text("OPEN (" + resultComplete.open + ")")
-					$("#filter_lead_SD").next().text("SD (" + resultComplete.sd + ")")
-					$("#filter_lead_TP").next().text("TP (" + resultComplete.tp + ")")
-					$("#filter_lead_WIN").next().text("WIN (" + resultComplete.win + ")")
-					$("#filter_lead_LOSE").next().text("LOSE (" + resultComplete.lose + ")")
-					$("#filter_lead_CANCEL").next().text("CANCEL (" + resultComplete.cancel + ")")
-				}
-			})
+				$('.counter').each(function () {
+				    var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
+				    $(this).prop('Counter', 0).animate({
+				      Counter: $(this).text()
+				    }, {
+				      duration: 5000,
+				      step: function (func) {
+				         $(this).text(parseFloat(func).toFixed(size));
+				      }
+				    });
+				});
+			},
+			complete:function(){
+				$("#filter_lead_INITIAL").next().text("INITIAL (" + resultComplete.initial + ")")
+				$("#filter_lead_OPEN").next().text("OPEN (" + resultComplete.open + ")")
+				$("#filter_lead_SD").next().text("SD (" + resultComplete.sd + ")")
+				$("#filter_lead_TP").next().text("TP (" + resultComplete.tp + ")")
+				$("#filter_lead_WIN").next().text("WIN (" + resultComplete.win + ")")
+				$("#filter_lead_LOSE").next().text("LOSE (" + resultComplete.lose + ")")
+				$("#filter_lead_CANCEL").next().text("CANCEL (" + resultComplete.cancel + ")")
+			}
 		})
 	}
 
-	function dashboardCountFilter(temp){	
-		Pace.restart();
-		Pace.track(function() {
-			$.ajax({
-				type:"GET",
-				url:"{{url('/project/filterCountLead')}}" + temp,
-				success:function(result){
-					$.each(result,function(){	
-						if(result.presales){
-							$("#"+countLead[0]).prev().html("<b>Lead - Unassigned </b>")
-							$("#"+countLead[0]).text(result.initial)
-						} else {
-							$("#"+countLead[0]).text(result.lead)
-						}
-						$("#"+countLead[1]).text(result.open)
-						$("#"+countLead[2]).text(result.sd)
-						$("#"+countLead[3]).text(result.tp)
-						$("#"+countLead[4]).text(result.win)
-						$("#"+countLead[5]).text(result.lose)
-						$("#"+sumAmount[0]).text(result.amount_lead)
-						$("#"+sumAmount[1]).text(result.amount_open)
-						$("#"+sumAmount[2]).text(result.amount_sd)
-						$("#"+sumAmount[3]).text(result.amount_tp)
-						$("#"+sumAmount[4]).text(result.amount_win)
-						$("#"+sumAmount[5]).text(result.amount_lose)
+	function dashboardCountFilter(temp){
+		$.ajax({
+			type:"GET",
+			url:"{{url('/project/filterCountLead')}}" + temp,
+			beforeSend:function(argument) {
+	          $('.layout-container').block({
+	            message: '<div class="spinner-border text-white" role="status"></div>',
+	            timeout: 1000,
+	            css: {
+	              backgroundColor: 'transparent',
+	              border: '0'
+	            },
+	            overlayCSS: {
+	              opacity: 0.5
+	            }
+	          });
+	        },
+			success:function(result){
+				$.each(result,function(){	
+					if(result.presales){
+						$("#"+countLead[0]).prev().html("<b>Lead - Unassigned </b>")
+						$("#"+countLead[0]).text(result.initial)
+					} else {
+						$("#"+countLead[0]).text(result.lead)
+					}
+					$("#"+countLead[1]).text(result.open)
+					$("#"+countLead[2]).text(result.sd)
+					$("#"+countLead[3]).text(result.tp)
+					$("#"+countLead[4]).text(result.win)
+					$("#"+countLead[5]).text(result.lose)
+					$("#"+sumAmount[0]).text(result.amount_lead)
+					$("#"+sumAmount[1]).text(result.amount_open)
+					$("#"+sumAmount[2]).text(result.amount_sd)
+					$("#"+sumAmount[3]).text(result.amount_tp)
+					$("#"+sumAmount[4]).text(result.amount_win)
+					$("#"+sumAmount[5]).text(result.amount_lose)
 
-						$("#filter_lead_INITIAL").next().text("INITIAL (" + result.initial_unfiltered + ")")
-						$("#filter_lead_OPEN").next().text("OPEN (" + result.open_unfiltered + ")")
-						$("#filter_lead_SD").next().text("SD (" + result.sd_unfiltered + ")")
-						$("#filter_lead_TP").next().text("TP (" + result.tp_unfiltered + ")")
-						$("#filter_lead_WIN").next().text("WIN (" + result.win_unfiltered + ")")
-						$("#filter_lead_LOSE").next().text("LOSE (" + result.lose_unfiltered + ")")
-						$("#filter_lead_CANCEL").next().text("CANCEL (" + result.cancel_unfiltered + ")")	
-					})
-					initRemoveMask()
+					$("#filter_lead_INITIAL").next().text("INITIAL (" + result.initial_unfiltered + ")")
+					$("#filter_lead_OPEN").next().text("OPEN (" + result.open_unfiltered + ")")
+					$("#filter_lead_SD").next().text("SD (" + result.sd_unfiltered + ")")
+					$("#filter_lead_TP").next().text("TP (" + result.tp_unfiltered + ")")
+					$("#filter_lead_WIN").next().text("WIN (" + result.win_unfiltered + ")")
+					$("#filter_lead_LOSE").next().text("LOSE (" + result.lose_unfiltered + ")")
+					$("#filter_lead_CANCEL").next().text("CANCEL (" + result.cancel_unfiltered + ")")	
+				})
+				initRemoveMask()
 
-					$('.counter').each(function () {
-					    var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
-					    $(this).prop('Counter', 0).animate({
-					      Counter: $(this).text()
-					    }, {
-					      duration: 500,
-					      step: function (func) {
-					         $(this).text(parseFloat(func).toFixed(size));
-					      }
-					    });
-					});
-				}
-			})
+				$('.counter').each(function () {
+				    var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
+				    $(this).prop('Counter', 0).animate({
+				      Counter: $(this).text()
+				    }, {
+				      duration: 500,
+				      step: function (func) {
+				         $(this).text(parseFloat(func).toFixed(size));
+				      }
+				    });
+				});
+			}
 		})
 	}
 

@@ -519,7 +519,7 @@ Customer
 
           })
           $("#btnReject").show()
-          $("#btnClose").hide()
+          $("#btnClose").attr('style','display:none!important')
 
           $("#btnReject").click(function(){
             var url = "{{url('/customer/rejectRequest')}}"
@@ -552,7 +552,7 @@ Customer
                 
             $("#btnAccept").attr("onclick",Update(fd,url,status))
           })
-          $("#btnReject").hide()
+          $("#btnReject").attr('style','display:none!important')
           $("#btnClose").show()
         }
 

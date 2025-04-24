@@ -1103,7 +1103,8 @@ Permission Configuration
 				url: "{{url('permission/getParameterFeature')}}?roles_id=" + roles_id,
 				success:function(result){
 					$("#selectFeature").select2({
-						data:result.features
+						data:result.features,
+						dropdownParent:$("#modal-add-feature")
 					})
 				}
 			})

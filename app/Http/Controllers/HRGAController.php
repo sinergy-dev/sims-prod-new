@@ -3342,8 +3342,11 @@ class HRGAController extends Controller
                     if ($cek_role->name_role == 'Organizational & People Development Manager') {
                         $data = $data
                         ->where('mini_group','Organizational & People Development');
-                    } elseif($cek_role->name_role == 'People Operations & Services Manager' || $cek_role->name_role == 'VP Human Capital Management'){
+                    } elseif($cek_role->name_role == 'People Operations & Services Manager'){
                         $data = $data;
+                    }  elseif($cek_role->name_role == 'VP Human Capital Management'){
+                        $data = $data
+                        ->where('group','Human Capital Management');
                     } else {
                         $data = $data->where('users.nik',$nik);
                     }
@@ -4050,8 +4053,10 @@ class HRGAController extends Controller
         } elseif ($cek_role->group == 'Human Capital Management') {
             if ($cek_role->name_role == 'Organizational & People Development Manager') {
                 $data = $data->where('mini_group','Organizational & People Development');
-            } elseif($cek_role->name_role == 'People Operations & Services Manager' || $cek_role->name_role == 'VP Human Capital Management'){
+            } elseif($cek_role->name_role == 'People Operations & Services Manager'){
                 $data = $data;
+            } elseif($cek_role->name_role == 'VP Human Capital Management'){
+                $data = $data->where('group','Human Capital Management');
             }else {
                 $data = $data->where('users.nik',$nik);
             }

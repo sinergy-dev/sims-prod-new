@@ -254,7 +254,7 @@
 				$("#cover").show();
 			},
 			 complete: function() {
-				$("#cover").hide();
+				$("#cover").attr('style','display:none!important');
 				console.log("complete");
 			},
 			success: function(result){

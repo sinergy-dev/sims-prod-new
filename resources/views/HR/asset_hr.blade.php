@@ -1388,9 +1388,9 @@ General Affair - Asset Request
         //     $('#request_asset').addClass('active')
         //     // $('#asset_listset').removeClass('active')        
         //     activeTab('request_asset')  
-        //     $('#btnAdd').hide()
-        //     $('#btnExport').hide() 
-        //     $('#btnImport').hide()
+        //     $('#btnAdd').attr('style','display:none!important')
+        //     $('#btnExport').attr('style','display:none!important') 
+        //     $('#btnImport').attr('style','display:none!important')
         //   }else{
         //     // activeTab('asset_list') 
         //     // $('#asset_list').addClass('active')
@@ -1409,7 +1409,7 @@ General Affair - Asset Request
         //     //   $("#nama_barang").val("")
         //     //   $("#asset_sn").val("")
         //     //   $("#keterangan").val("")
-        //     //   $("#peminjams").hide()
+        //     //   $("#peminjams").attr('style','display:none!important')
         //     //   $("#category_asset").val("")
         //     //   $("#merk_barang").val("")
         //     //   $("#asset_date").val("")
@@ -1424,12 +1424,12 @@ General Affair - Asset Request
         //     //   // $("#btnAdd").attr('data-target','#add_kategori');
         //     //   $("#btnAdd").attr('onclick','addKategori()');
         //     //   $("#btnAdd").removeAttr('data-bs-toggle');
-        //     //   $('#btnImport').hide();
+        //     //   $('#btnImport').attr('style','display:none!important');
         //     // }
         //     if ($(e.target).attr("id") == "request_list") {
-        //       $("#btnAdd").hide();
-        //       $("#btnExport").hide();
-        //       $('#btnImport').hide();
+        //       $("#btnAdd").attr('style','display:none!important');
+        //       $("#btnExport").attr('style','display:none!important');
+        //       $('#btnImport').attr('style','display:none!important');
         //     }
         //   })
         // }else{
@@ -1438,9 +1438,9 @@ General Affair - Asset Request
         //   // activeTab('asset_list')
         //   // $('#asset_list').addClass('active')
         //   $('#request_asset').removeClass('active')
-        //   $('#btnAdd').hide()
-        //   $('#btnExport').hide() 
-        //   $('#btnImport').hide();
+        //   $('#btnAdd').attr('style','display:none!important')
+        //   $('#btnExport').attr('style','display:none!important') 
+        //   $('#btnImport').attr('style','display:none!important');
         // }
     })
 
@@ -1622,7 +1622,7 @@ General Affair - Asset Request
       }).change(function(){
         if ($(this).val() == "Internal") {
           // $(".divDuration[data-rowid='"+ i +"']").show()
-          $(".divDurationDate[data-rowid='"+ i +"']").hide()
+          $(".divDurationDate[data-rowid='"+ i +"']").attr('style','display:none!important')
           $("#duration_barang_request[data-rowid='"+ i +"']").select2({
             placeholder:"Select keperluan",
             data:[
@@ -1654,7 +1654,7 @@ General Affair - Asset Request
                 endDate: moment().endOf('year')
               })
             }else{
-              $(".divDurationDate[data-rowid='"+ i +"']").hide()
+              $(".divDurationDate[data-rowid='"+ i +"']").attr('style','display:none!important')
             }
           })
 
@@ -1692,7 +1692,7 @@ General Affair - Asset Request
                 endDate: moment().endOf('year')
               })
             }else{
-              $(".divDurationDate[data-rowid='"+ i +"']").hide()
+              $(".divDurationDate[data-rowid='"+ i +"']").attr('style','display:none!important')
             }
           })
           $("#duration_barang_request[data-rowid='"+ i +"']").val("Select Date").trigger("change")
@@ -2009,7 +2009,7 @@ General Affair - Asset Request
 
           $("#tbody_requestEdit").append(append)
           if (result[0].status == 'PENDING') {
-            $("#btnBatalReq").hide()
+            $("#btnBatalReq").attr('style','display:none!important')
           }else{
             $("#btnBatalReq").show()
           }
@@ -2156,22 +2156,22 @@ General Affair - Asset Request
             $("#usedForModal").text(result[0].used_for)
 
             if (result[0].notes.length > 0) {
-              $("#btnAcceptRequest").hide()
+              $("#btnAcceptRequest").attr('style','display:none!important')
               if (status == "ACCEPT" || status == "REJECT") {
                 if (accesable.includes('request_list')) {
                   $("#btnResolveRequest").show();
                 }else{
-                  $("#btnResolveRequest").hide();
+                  $("#btnResolveRequest").attr('style','display:none!important');
                 }
 
                 $("#notes_accept").closest(".form-group").next(".card-container").next(".card-footer").show()
                 $("#notes_accept").closest(".form-group").next(".card-container").next(".card-footer").find('img').attr('src','{{Auth::User()->avatar_original}}')
               }else{
-                  $("#btnResolveRequest").hide();
-                  $("#btnAcceptRequest").hide();
+                  $("#btnResolveRequest").attr('style','display:none!important');
+                  $("#btnAcceptRequest").attr('style','display:none!important');
               }
 
-              $("#notes_accept").closest(".form-group").hide()
+              $("#notes_accept").closest(".form-group").attr('style','display:none!important')
               $("#notes_accept").closest(".form-group").next(".card-container").show()
 
               $.each(result[0].notes,function(key,value) {
@@ -2206,15 +2206,15 @@ General Affair - Asset Request
               if (status == "ACCEPT" || status == "REJECT") {
                 $("#notes_accept").closest(".form-group").show()
                 $("#btnAcceptRequest").show()
-                $("#btnResolveRequest").hide()
+                $("#btnResolveRequest").attr('style','display:none!important')
               }else{
-                $("#notes_accept").closest(".form-group").hide()
-                $("#btnAcceptRequest").hide()
-                $("#btnResolveRequest").hide()
+                $("#notes_accept").closest(".form-group").attr('style','display:none!important')
+                $("#btnAcceptRequest").attr('style','display:none!important')
+                $("#btnResolveRequest").attr('style','display:none!important')
               }
 
-              $("#notes_accept").closest(".form-group").next(".card-container").hide()
-              $("#notes_accept").closest(".form-group").next(".card-container").next(".card-footer").hide()
+              $("#notes_accept").closest(".form-group").next(".card-container").attr('style','display:none!important')
+              $("#notes_accept").closest(".form-group").next(".card-container").next(".card-footer").attr('style','display:none!important')
             }
 
             if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Internal Operation Support Manager')->exists() || App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Supply Chain & IT Support Manager')->exists()}}") {
@@ -2222,7 +2222,7 @@ General Affair - Asset Request
                 $("#btnRejectRequest").show()
                 $("#btnRejectRequest").attr("onclick","requestAssetAccept('"+ id_request +"','REJECT')")
               }else{
-                $("#btnRejectRequest").hide()
+                $("#btnRejectRequest").attr('style','display:none!important')
               }
             }
           }

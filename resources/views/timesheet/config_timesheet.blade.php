@@ -703,17 +703,17 @@
       var data = e.params.data;
       if (data.id == 'All') {
         $("#selectPICAssign").prop("disabled",true)
-        $("#selectPICAssign").next().next().hide()
+        $("#selectPICAssign").next().next().attr('style','display:none!important')
         $("#selectPICAssign").closest("div").removeClass("has-error")
         $("#selectPICAssign").val("").trigger("change")
 
         $("#selectPIDAssign").prop("disabled",true)
-        $("#selectPIDAssign").next().next().hide()
+        $("#selectPIDAssign").next().next().attr('style','display:none!important')
         $("#selectPIDAssign").closest("div").removeClass("has-error")
         $("#selectPIDAssign").val("").trigger("change")
 
         $("#selectRoleAssign").prop("disabled",true)
-        $("#selectRoleAssign").next().next().hide()
+        $("#selectRoleAssign").next().next().attr('style','display:none!important')
         $("#selectRoleAssign").closest("div").removeClass("has-error")
         $("#selectRoleAssign").val("").trigger("change")
 
@@ -731,11 +731,11 @@
     function validateInput(val){
       if ($(val).is("select")) {
           if (val.value != "") {
-              $(val).next().next().hide()
+              $(val).next().next().attr('style','display:none!important')
               $(val).closest("div").removeClass("has-error")
           }
       }else{
-        $("#"+val.id).next().hide()
+        $("#"+val.id).next().attr('style','display:none!important')
         $("#"+val.id).closest("div").removeClass("has-error")
       }
     }

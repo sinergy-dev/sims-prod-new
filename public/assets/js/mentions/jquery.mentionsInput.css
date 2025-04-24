@@ -1,7 +1,6 @@
 
 .mentions-input-box {
   position: relative;
-  background: #fff;
 }
 
 .mentions-input-box textarea {
@@ -106,7 +105,7 @@
 }
 
 .mentions-input-box .mentions > div {
-  color: #fff;
+/*  color: #fff;*/
   white-space: pre-wrap;
   width: 100%;
 }

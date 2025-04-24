@@ -93,6 +93,10 @@
     .form-group{
       margin-bottom: 15px;
     }
+
+    .swal2-container{
+      z-index: 99999!important;
+    }
   </style>
 @endsection
 @section('content')
@@ -197,7 +201,7 @@
           <div class="card card-primary">
             <div class="card-header">
               <div class="row mb-2">
-                <div class="col-md-8">
+                <div class="col-md-12">
                   <button class="btn btn-sm btn-primary" onclick="btnAddAsset(0)" style="display:none" id="btnAddAsset"><i class="bx bx-plus"></i> Asset</button>
                   <button class="btn btn-sm btn-linkedin" onclick="btnAddServicePoint()" id="btnAddServicePoint" style="display:none!important"><i class="bx bx-plus"></i> Service Point</button>
                   <button class="btn btn-sm btn-danger" onclick="btnAddCategory()" id="btnAddCategory" style="display:none!important"><i class="bx bx-plus"></i> Category</button>
@@ -1136,7 +1140,8 @@
             success: function(response) {
               $("#service_point").select2({
                 placeholder:"Select Service Point",
-                data:response
+                data:response,
+                dropdownParent:$("#modal-add-asset")
               })
             },
           });
@@ -1150,7 +1155,8 @@
           $("#service_point").remove()
           $("textarea[id=txtAddressLocation]").remove()
           $("select[id=txtAddressLocation]").select2({
-            placeholder:"Select Location"
+            placeholder:"Select Location",
+            dropdownParent:$("#modal-add-asset")
           })
         }
 

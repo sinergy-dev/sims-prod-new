@@ -503,7 +503,7 @@
           "pageLength": 50,
           initComplete: function () {
             isTbSummary = true
-            $('#loadingIndicator').hide();
+            $('#loadingIndicator').attr('style','display:none!important');
             $.each($("#selectShowColumnTicket li input"),function(index,item){
               var column = $("#tablePerformance").DataTable().column(index)
               // column.visible() ? $(item).addClass('active') : $(item).removeClass('active')
@@ -1437,7 +1437,7 @@
     var startIndex = (page - 1) * itemsPerPage;
     var endIndex = startIndex + itemsPerPage;
     
-    items.hide() // Hide all items
+    items.attr('style','display:none!important') // Hide all items
          .slice(startIndex, endIndex) // Show only items for the current page
          .show();
   }
@@ -1891,7 +1891,7 @@
     // AJAX reload is complete
     $("#filterSumPoint").find("i").css("color","#80ff80")
     $("#filterSumPoint").find("span").text("ready to filter")
-    $("#loadingIndicator").hide()
+    $("#loadingIndicator").attr('style','display:none!important')
   });
 
   function resetFilter(){
@@ -1940,7 +1940,7 @@
  
           if (row.child.isShown()) {
               // This row is already open - close it
-              row.child.hide();
+              row.child.attr('style','display:none!important');
               tr.removeClass('shown');
           } else {
               // Open this row

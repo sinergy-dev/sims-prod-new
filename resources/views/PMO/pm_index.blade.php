@@ -114,7 +114,7 @@
           <div class="card-body">
             <div class="row mb-4">
               <div class="col-md-8 mx-auto">
-                <button class="btn btn-sm btn-primary" id="btnAssign" style="display:none" onclick="AssignMember()"><i class="bx bx-plus"></i>&nbspAssign</button>
+                <button class="btn btn-sm btn-primary" id="btnAssign" style="display:none!important" onclick="AssignMember()"><i class="bx bx-plus"></i>&nbspAssign</button>
               </div>
               <div class="col-md-4 ms-auto pull-right" id="search-table">
                 <div class="form-group">
@@ -1131,7 +1131,7 @@
 
         if ($(data).val() == '-') {
          $(data).closest('.form-group').removeClass('has-error')
-         $(data).closest('input').next('span').hide()
+         $(data).closest('input').next('span').attr('style','display:none!important')
          $(data).prev('.input-group-addon').css("background-color","red")
         }else{
           switch(emails){
@@ -1143,15 +1143,15 @@
             break;
             default:
               $(data).closest('.form-group').removeClass('has-error')
-              $(data).closest('input').next('span').hide()
+              $(data).closest('input').next('span').attr('style','display:none!important')
               $(data).prev('.input-group-addon').css("background-color","red")
           }
         }
       }else if ($(data).attr('type') == "phone") {
         $(data).inputmask({"mask": "999-999-999-999"})
-        $(data).next('span').hide();
+        $(data).next('span').attr('style','display:none!important');
       }else if($(data).attr('name') == "inputNameIStakeholder"){
-        $(data).next("span").hide()
+        $(data).next("span").attr('style','display:none!important')
       }else{
         if (data.className.split(" ")[1] == "document" || data.className == "document") {
           var f=data.files[0]
@@ -1253,60 +1253,60 @@
 
         if($(data).val() != ""){
           $(data).closest(".form-group").removeClass("has-error")
-          $(data).next("span.help-block").hide()
+          $(data).next("span.help-block").attr('style','display:none!important')
 
           $(data).closest(".form-group").removeClass("has-error")
-          $(data).closest(".form-group").find("span.help-block").hide()
+          $(data).closest(".form-group").find("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#textAreaRisk[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#textAreaRisk[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#textAreaRisk[data-value='"+ $(data).data("value") +"']").next("span.help-block").hide()
+          $("#textAreaRisk[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
         }
 
         if($("#inputOwner[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#inputOwner[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#inputOwner[data-value='"+ $(data).data("value") +"']").next("span.help-block").hide()
+          $("#inputOwner[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#inputImpact[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#inputImpact[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#inputImpact[data-value='"+ $(data).data("value") +"']").next("span.help-block").hide()
+          $("#inputImpact[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#inputLikelihood[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#inputLikelihood[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#inputLikelihood[data-value='"+ $(data).data("value") +"']").next("span.help-block").hide()
+          $("#inputLikelihood[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#inputRank[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#inputRank[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#inputRank[data-value='"+ $(data).data("value") +"']").next("span.help-block").hide()
+          $("#inputRank[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").next("span.help-block").hide()
+          $("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#textareaResponse[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#textareaResponse[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#textareaResponse[data-value='"+ $(data).data("value") +"']").next("span.help-block").hide()
+          $("#textareaResponse[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#due_date[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#due_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").removeClass("has-error")
-          $("#due_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").find("span.help-block").hide()
+          $("#due_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").find("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#review_date[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#review_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").removeClass("has-error")
-          $("#review_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").find("span.help-block").hide()
+          $("#review_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").find("span.help-block").attr('style','display:none!important')
         }
 
         if ($("#selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").val() != "") {
           $("#selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").next("span.help-block").hide()
+          $("#selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
         }
         
       }   
@@ -1824,12 +1824,12 @@
 
               // $('#tbodyInternalStakeholderRegister').empty("")
               // $("#tbodyIdentifiedRisk").find("tr:not(:first-child)").empty("")
-              // $("#link_input_sbe").hide()
-              // $("#link_input_sbe").closest(".form-group").find("i").hide()
-              // $("#link_input_po").hide()
-              // $("#link_input_po").closest(".form-group").find("i").hide()
-              // $("#link_input_tor").hide()
-              // $("#link_input_tor").closest(".form-group").find("i").hide()
+              // $("#link_input_sbe").attr('style','display:none!important')
+              // $("#link_input_sbe").closest(".form-group").find("i").attr('style','display:none!important')
+              // $("#link_input_po").attr('style','display:none!important')
+              // $("#link_input_po").closest(".form-group").find("i").attr('style','display:none!important')
+              // $("#link_input_tor").attr('style','display:none!important')
+              // $("#link_input_tor").closest(".form-group").find("i").attr('style','display:none!important')
 
               // $("input[name='cbTechUse']").iCheck('uncheck')
               $("input[name='cbTechUse']").prop("checked",false)
@@ -1916,7 +1916,7 @@
               $("input[name='cbTechUse']").on('change', function() {
                 if ($(this).prop('checked')) {
                   $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").removeClass("has-error")
-                  $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").find("span").hide()
+                  $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").find("span").attr('style','display:none!important')
                 }
               })
 
@@ -3055,7 +3055,7 @@
     let incIstakeholder = 0
     function btnPlusIStakeholder(){
       $("#tbInternalStakeholderRegister").closest(".form-group").removeClass("has-error")
-      $("#tbInternalStakeholderRegister").closest(".form-group").find("span").hide()
+      $("#tbInternalStakeholderRegister").closest(".form-group").find("span").attr('style','display:none!important')
 
       append = ""
       append = 
@@ -3294,11 +3294,11 @@
 
 
             if ($(this).attr('value') == 'impact') {
-              $("#divInfoRisk").hide()
+              $("#divInfoRisk").attr('style','display:none!important')
             }
 
             if ($(this).attr('value') == 'likelihood') {
-              $("#divInfoImpact").hide()
+              $("#divInfoImpact").attr('style','display:none!important')
             }
             
           
@@ -3308,16 +3308,16 @@
           if ($(this).attr('value') == 'impact') {
             if ($('#divInfoImpact').is(':hidden')) {
               $("#divInfoImpact").show()
-              $("#divInfoRisk").hide()
+              $("#divInfoRisk").attr('style','display:none!important')
             }else{
-              $("#divInfoImpact").hide()
+              $("#divInfoImpact").attr('style','display:none!important')
             }
           }else if($(this).attr('value') == 'likelihood'){
             if ($('#divInfoRisk').is(':hidden')) {
               $("#divInfoRisk").show()
-              $("#divInfoImpact").hide()
+              $("#divInfoImpact").attr('style','display:none!important')
             }else{
-              $("#divInfoRisk").hide()
+              $("#divInfoRisk").attr('style','display:none!important')
             }
           }
         }
@@ -3398,11 +3398,11 @@
 
 
           if ($(this).attr('value') == 'impact') {
-            $("#divInfoRisk").hide()
+            $("#divInfoRisk").attr('style','display:none!important')
           }
 
           if ($(this).attr('value') == 'likelihood') {
-            $("#divInfoImpact").hide()
+            $("#divInfoImpact").attr('style','display:none!important')
           }
           
         
@@ -3412,16 +3412,16 @@
         if ($(this).attr('value') == 'impact') {
           if ($('#divInfoImpact').is(':hidden')) {
             $("#divInfoImpact").show()
-            $("#divInfoRisk").hide()
+            $("#divInfoRisk").attr('style','display:none!important')
           }else{
-            $("#divInfoImpact").hide()
+            $("#divInfoImpact").attr('style','display:none!important')
           }
         }else if($(this).attr('value') == 'likelihood'){
           if ($('#divInfoRisk').is(':hidden')) {
             $("#divInfoRisk").show()
-            $("#divInfoImpact").hide()
+            $("#divInfoImpact").attr('style','display:none!important')
           }else{
-            $("#divInfoRisk").hide()
+            $("#divInfoRisk").attr('style','display:none!important')
           }
         }
       }
@@ -3454,7 +3454,7 @@
       if ($(this).val() == 'Yes') {
         $(".divSLA").show()
       }else if($(this).val() == 'No'){
-        $(".divSLA").hide()
+        $(".divSLA").attr('style','display:none!important')
         $("input[name='cbSLA']").next("div").find("input").val("").attr("disabled",true)
         $("input[name='cbSLA']").prop("checked", false)
       }
@@ -3469,7 +3469,7 @@
       //   return false;
       // return ;
       $(".divSLA").find("label").first().removeClass("text-red")
-      $(".divSLA").find('span.text-red').hide()
+      $(".divSLA").find('span.text-red').attr('style','display:none!important')
     }
 </script>
 @endsection

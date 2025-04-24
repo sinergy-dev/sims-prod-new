@@ -8,12 +8,12 @@
 @section('head_css')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}" />
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.css" integrity="sha512-OWGg8FcHstyYFwtjfkiCoYHW2hG3PDWwdtczPAPUcETobBJOVCouKig8rqED0NMLcT9GtE4jw6IT1CSrwY87uw==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.css" integrity="sha512-rBi1cGvEdd3NmSAQhPWId5Nd6QxE8To4ADjM2a6n0BrqQdisZ/RPUlm0YycDzvNL1HHAh1nKZqI0kSbif+5upQ==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.min.css" integrity="sha512-Bhi4560umtRBUEJCTIJoNDS6ssVIls7oiYyT3PbhxZV+9uBbLVO/mWo56hrBNNbIfMXKvtIPJi/Jg+vpBpA7sg==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/katex.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/editor.css')}}" />
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
 <style type="text/css">
   .modal { overflow: auto !important; }
   .textarea-scrollbar {
@@ -89,6 +89,10 @@
 
   .input-group{
     margin-bottom: 15px;
+  }
+
+  .swal2-deny{
+    display: none!important;
   }
 </style>
 @endsection
@@ -186,450 +190,450 @@
       </div>
       <div class="modal-body">
         <form method="POST" action="" id="modal_pr" name="modal_pr">
-        @csrf
-        <!--lagi ngedit-->
+          @csrf
+          <!--lagi ngedit-->
 
-        <div class="tab-add" style="display:none!important;">
-          <div class="tabGroup">
-            <div class="form-group">
-              <label for="">To*</label>
-              <select id="selectTo" name="selectTo" class="form-control select2" style="width:100%!important" onchange="fillInput('selectTo')"><option></option></select>
-              <a id="otherTo" style="cursor:pointer;">Other</a>
-              <div id="divInputTo" class="divInputTo" style="display: none;">
-                <button type="button" class="close" aria-hidden="true" style="color:red">×</button>
-                <input autocomplete="off" type="" class="form-control" placeholder="ex. PT Multi Solusindo Perkasa" id="inputTo" name="inputTo" onkeyup="fillInput('to')">
-                <small>
-                  *Sertakan bentuk usaha/badan hukum dari supplier apabila ada (PT/CV)<br>
-                  *PT/CV ditulis capital<br>
-                  *Nama perusahaan ditulis dengan Capital diawal suku kata(Multi Solusindo Perkasa)
-                </small>
-              </div>
-              <span class="invalid-feedback" style="display:none!important;">Please fill To!</span>
-            </div>      
+          <div class="tab-add" style="display:none!important;">
+            <div class="tabGroup">
+              <div class="form-group">
+                <label for="">To*</label>
+                <select id="selectTo" name="selectTo" class="form-control select2" style="width:100%!important" onchange="fillInput('selectTo')"><option></option></select>
+                <a id="otherTo" style="cursor:pointer;">Other</a>
+                <div id="divInputTo" class="divInputTo" style="display: none;">
+                  <button type="button" class="close" aria-hidden="true" style="color:red">×</button>
+                  <input autocomplete="off" type="" class="form-control" placeholder="ex. PT Multi Solusindo Perkasa" id="inputTo" name="inputTo" onkeyup="fillInput('to')">
+                  <small>
+                    *Sertakan bentuk usaha/badan hukum dari supplier apabila ada (PT/CV)<br>
+                    *PT/CV ditulis capital<br>
+                    *Nama perusahaan ditulis dengan Capital diawal suku kata(Multi Solusindo Perkasa)
+                  </small>
+                </div>
+                <span class="invalid-feedback" style="display:none!important;">Please fill To!</span>
+              </div>      
 
-            <div class="row mb-4">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Type*</label>
-                  <select autofocus type="text" class="form-control" name="type" onchange="fillInput('selectType')" placeholder="ex. Internal Purchase Request" id="selectType" required>
-                      <option value="">Select Type</option>
-                      <option value="IPR">IPR (Internal Purchase Request)</option>
-                      <option value="EPR">EPR (Eksternal Purchase Request)</option>
-                  </select>
-                  <span class="invalid-feedback" style="display:none!important;">Please fill Type!</span>
+              <div class="row mb-4">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Type*</label>
+                    <select autofocus type="text" class="form-control" name="type" onchange="fillInput('selectType')" placeholder="ex. Internal Purchase Request" id="selectType" required>
+                        <option value="">Select Type</option>
+                        <option value="IPR">IPR (Internal Purchase Request)</option>
+                        <option value="EPR">EPR (Eksternal Purchase Request)</option>
+                    </select>
+                    <span class="invalid-feedback" style="display:none!important;">Please fill Type!</span>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Email*</label>
+                    <input autocomplete="off" type="" class="form-control" placeholder="ex. absolut588@gmail.com" id="inputEmail" name="inputEmail" onkeyup="fillInput('email')">
+                    <span class="invalid-feedback" style="display:none!important;">Please fill Email!</span>
+                  </div>
                 </div>
               </div>
 
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Email*</label>
-                  <input autocomplete="off" type="" class="form-control" placeholder="ex. absolut588@gmail.com" id="inputEmail" name="inputEmail" onkeyup="fillInput('email')">
-                  <span class="invalid-feedback" style="display:none!important;">Please fill Email!</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="">Category</label>
-              <select autofocus type="text" class="form-control select2" onchange="fillInput('selectCategory')" name="selectCategory" id="selectCategory" style="width: 100%">
-                  <option value="">Select Category</option>
-                      <option value="Barang dan Jasa">Barang dan Jasa</option>
-                      <option value="Barang">Barang</option>
-                      <option value="Jasa">Jasa</option>
-                      <option value="Bank Garansi">Bank Garansi</option>
-                      <option value="Service">Service</option>
-                      <option value="Pajak Kendaraan">Pajak Kendaraan</option>
-                      <option value="ATK">ATK</option>
-                      <option value="Aset">Aset</option>
-                      <option value="Tinta">Tinta</option>
-                      <option value="Konsultasi dan Pelatihan">Konsultasi dan Pelatihan</option>
-                      <option value="Ujian">Ujian</option>
-                      <!-- <option value="Tiket">Tiket</option>
-                      <option value="Akomodasi">Akomodasi</option> -->
-                      <option value="Perjalanan Dinas">Perjalanan Dinas</option>
-                      <option value="Sponsor">Sponsor</option>
-                      <option value="Logistic">Logistic</option>
-                      <option value="Legal">Legal</option>
-                      <option value="License">License</option>
-                      <option value="Reference Fee Member">Reference Fee Member</option>
-                      <option value="Parkir">Parkir</option>
-                      <option value="Kesehatan">Kesehatan</option>
-                      <option value="Olahraga">Olahraga</option>
-                      <option value="Karangan Bunga">Karangan Bunga</option>
-                      <option value="Other">Other</option>
-              </select>
-              <span class="invalid-feedback" style="display:none!important;">Please fill Category!</span>
-            </div>
-
-            <div class="row mb-4">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Phone*</label>
-                  <input autocomplete="off" class="form-control" id="inputPhone" type="" name="" placeholder="ex. 999-999-999-999" onkeyup="fillInput('phone')">
-                  <span class="invalid-feedback" style="display:none!important;">Please fill Phone!</span>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Attention*</label>
-                  <input autocomplete="off" type="text" class="form-control" placeholder="ex. Marsono" name="inputAttention" id="inputAttention" onkeyup="fillInput('attention')">
-                  <span class="invalid-feedback" style="display:none!important;">Please fill Attention!</span>
-                </div>
-              </div>
-            </div>           
-
-            <div class="form-group">
-              <label for="">Subject*</label>
-              <input autocomplete="off" type="text" class="form-control" placeholder="ex. Pembelian laptop MSI Modern 14 (Sdri. Faiqoh, Sdr. Oktavian, Sdr. Subchana)" name="inputSubject" id="inputSubject" onkeyup="fillInput('subject')">
-              <span class="invalid-feedback" style="display:none!important;">Please fill Subject!</span>
-            </div>
-
-            <div class="form-group">
-              <label for="">Address*</label>
-              <textarea autocomplete="off" class="form-control" id="inputAddress" name="inputAddress" placeholder="ex. Plaza Pinangsia Lt. 1 No. 7-8 Jl. Pinangsia Raya no.1" onkeyup="fillInput('address')" style="resize: vertical;"></textarea>
-              <span class="invalid-feedback" style="display:none!important;">Please fill Address!</span>
-            </div>
-
-            <div class="form-group">
-              <label for="">Request Methode*</label>
-              <select autofocus type="text" class="form-control" placeholder="ex. Purchase Order" name="type" id="selectMethode" required >
-                  <option value="">Select Methode</option>
-                  <option value="purchase_order">Purchase Order</option>
-                  <option value="payment">Payment</option>
-                  <option value="reimbursement">Reimbursement</option>
-              </select>
-              <span class="invalid-feedback" style="display:none!important;">Please fill Type!</span>
-            </div>
-
-            <div class="form-group">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" id="cbCommit" class="">
-                  This supplier has been committed with us to supply this product
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group" id="divNotePembanding" style="display:none!important;">
-              <label for="">Note Pembanding*</label>
-              <textarea autocomplete="off" class="form-control" id="note_pembanding" name="note_pembanding"></textarea>
-              <span class="invalid-feedback" style="display:none!important;">Please fill Note Pembanding!</span>
-            </div>
-          </div>
-        </div>
-        <div class="tab-add" style="display:none!important">
-          <div class="tabGroupInitiateAdd">
-            <div class="form-group" style="display:flex">
-              <button class="btn btn-sm btn-primary" id="btnInitiateAddProduct" type="button" style="margin:0 auto;"><i class="bx bx-plus"></i>&nbspAdd Product</button>
-            </div>
-            <div class="form-group" style="display:flex;">
-              <span style="margin:0 auto;">OR</span>
-            </div>
-            <div class="form-group" style="display: flex;">
-              <div style="padding: 7px;
-                border: 1px solid #787bff !important;
-                color: #337ab7;
-                height: 35px;
-                background-color: #eee;
-                display: inline;
-                margin: 0 auto;">
-                <i class="bx bx-cloud-upload" style="margin-left:5px">
-                <input id="uploadCsv" hidden type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: inline;"></i>
-                <label for="uploadCsv">Upload CSV</label>
-                <i class="bx bx-times" hidden onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
-                <!-- <span class="invalid-feedback" style="display:none!important;">Please Upload File or Add Product!</span> -->
-              </div>
-            </div>         
-            <div style="display: flex;">
-            <!--<span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1IDI8NVdVskSl__qQVfsrugEamr01W4IA')}}" style="cursor:pointer;">link</a></span> -->
-            <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=13ywzNFAJFEDGA8HUIy1GBT7B6OBG4L2W')}}" style="cursor:pointer;">link</a></span>
-            </div>
-            <div style="display: flex;" class="mb-4">
-              <span style="margin: 0 auto;">And make sure, the change of template only at row 2, any change on row 1 (header) will be reject</span>
-            </div>
-          </div>
-          <div class="tabGroup" style="display:none!important">
-            <div class="form-group">
-              <label>Product*</label>
-              <input autocomplete="off" type="text" name="" class="form-control" id="inputNameProduct" placeholder="ex. Laptop MSI Modern 14" onkeyup="fillInput('name_product')">
-              <span class="invalid-feedback" style="display:none!important;">Please fill Name Product!</span>
-            </div>
-            <div class="form-group">
-              <label>Description*</label> 
-              <textarea onkeyup="fillInput('desc_product')" style="resize:vertical;height:150px" id="inputDescProduct" placeholder='ex. Laptop mSI Modern 14, Processor AMD Rayzen 7 5700, Memory 16GB, SSD 512 Gb, Screen 14", VGA vega 8, Windows 11 Home' name="inputDescProduct" class="form-control"></textarea>
-              <span class="invalid-feedback" style="display:none!important;">Please fill Description!</span>
-            </div>
-            <div class="row mb-4">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Serial Number</label>
-                  <input autocomplete="off" type="text" name="" class="form-control" id="inputSerialNumber">
-                </div> 
-              </div>
-              <div class="col-md-6"> 
-                <div class="form-group">
-                  <label>Part Number</label>
-                  <input autocomplete="off" type="text" name="" class="form-control" id="inputPartNumber">
-                </div>
-              </div>
-            </div>
-            <div class="row mb-4">
-              <div class="col-md-2">
-                <div class="form-group">
-                  <label>Qty*</label>
-                  <input autocomplete="off" type="number" name="" class="form-control" id="inputQtyProduct" placeholder="ex. 5" onkeyup="fillInput('qty_product')">
-                  <span class="invalid-feedback" style="display:none!important;">Please fill Qty!</span>
-                </div> 
-              </div>
-              <div class="col-md-4" style="margin-bottom:10px"> 
-                <label>Type*</label>
-                <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>
-                <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
-                  <option>                  
+              <div class="form-group">
+                <label for="">Category</label>
+                <select autofocus type="text" class="form-control select2" onchange="fillInput('selectCategory')" name="selectCategory" id="selectCategory" style="width: 100%">
+                    <option value="">Select Category</option>
+                        <option value="Barang dan Jasa">Barang dan Jasa</option>
+                        <option value="Barang">Barang</option>
+                        <option value="Jasa">Jasa</option>
+                        <option value="Bank Garansi">Bank Garansi</option>
+                        <option value="Service">Service</option>
+                        <option value="Pajak Kendaraan">Pajak Kendaraan</option>
+                        <option value="ATK">ATK</option>
+                        <option value="Aset">Aset</option>
+                        <option value="Tinta">Tinta</option>
+                        <option value="Konsultasi dan Pelatihan">Konsultasi dan Pelatihan</option>
+                        <option value="Ujian">Ujian</option>
+                        <!-- <option value="Tiket">Tiket</option>
+                        <option value="Akomodasi">Akomodasi</option> -->
+                        <option value="Perjalanan Dinas">Perjalanan Dinas</option>
+                        <option value="Sponsor">Sponsor</option>
+                        <option value="Logistic">Logistic</option>
+                        <option value="Legal">Legal</option>
+                        <option value="License">License</option>
+                        <option value="Reference Fee Member">Reference Fee Member</option>
+                        <option value="Parkir">Parkir</option>
+                        <option value="Kesehatan">Kesehatan</option>
+                        <option value="Olahraga">Olahraga</option>
+                        <option value="Karangan Bunga">Karangan Bunga</option>
+                        <option value="Other">Other</option>
                 </select>
-                <span class="invalid-feedback" style="display:none!important;">Please fill Unit!</span>
+                <span class="invalid-feedback" style="display:none!important;">Please fill Category!</span>
               </div>
-              <div class="col-md-6" style="margin-bottom:10px"> 
-                <label>Price*</label>
+
+              <div class="row mb-4">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Phone*</label>
+                    <input autocomplete="off" class="form-control" id="inputPhone" type="" name="" placeholder="ex. 999-999-999-999" onkeyup="fillInput('phone')">
+                    <span class="invalid-feedback" style="display:none!important;">Please fill Phone!</span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Attention*</label>
+                    <input autocomplete="off" type="text" class="form-control" placeholder="ex. Marsono" name="inputAttention" id="inputAttention" onkeyup="fillInput('attention')">
+                    <span class="invalid-feedback" style="display:none!important;">Please fill Attention!</span>
+                  </div>
+                </div>
+              </div>           
+
+              <div class="form-group">
+                <label for="">Subject*</label>
+                <input autocomplete="off" type="text" class="form-control" placeholder="ex. Pembelian laptop MSI Modern 14 (Sdri. Faiqoh, Sdr. Oktavian, Sdr. Subchana)" name="inputSubject" id="inputSubject" onkeyup="fillInput('subject')">
+                <span class="invalid-feedback" style="display:none!important;">Please fill Subject!</span>
+              </div>
+
+              <div class="form-group">
+                <label for="">Address*</label>
+                <textarea autocomplete="off" class="form-control" id="inputAddress" name="inputAddress" placeholder="ex. Plaza Pinangsia Lt. 1 No. 7-8 Jl. Pinangsia Raya no.1" onkeyup="fillInput('address')" style="resize: vertical;"></textarea>
+                <span class="invalid-feedback" style="display:none!important;">Please fill Address!</span>
+              </div>
+
+              <div class="form-group">
+                <label for="">Request Methode*</label>
+                <select autofocus type="text" class="form-control" placeholder="ex. Purchase Order" name="type" id="selectMethode" required >
+                    <option value="">Select Methode</option>
+                    <option value="purchase_order">Purchase Order</option>
+                    <option value="payment">Payment</option>
+                    <option value="reimbursement">Reimbursement</option>
+                </select>
+                <span class="invalid-feedback" style="display:none!important;">Please fill Type!</span>
+              </div>
+
+              <div class="form-group">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="cbCommit" class="">
+                    This supplier has been committed with us to supply this product
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group" id="divNotePembanding" style="display:none!important;">
+                <label for="">Note Pembanding*</label>
+                <textarea autocomplete="off" class="form-control" id="note_pembanding" name="note_pembanding"></textarea>
+                <span class="invalid-feedback" style="display:none!important;">Please fill Note Pembanding!</span>
+              </div>
+            </div>
+          </div>
+          <div class="tab-add" style="display:none!important">
+            <div class="tabGroupInitiateAdd">
+              <div class="form-group" style="display:flex">
+                <button class="btn btn-sm btn-primary" id="btnInitiateAddProduct" type="button" style="margin:0 auto;"><i class="bx bx-plus"></i>&nbspAdd Product</button>
+              </div>
+              <div class="form-group" style="display:flex;">
+                <span style="margin:0 auto;">OR</span>
+              </div>
+              <div class="form-group" style="display: flex;">
+                <div style="padding: 7px;
+                  border: 1px solid #787bff !important;
+                  color: #337ab7;
+                  height: 35px;
+                  background-color: #eee;
+                  display: inline;
+                  margin: 0 auto;">
+                  <i class="bx bx-cloud-upload" style="margin-left:5px">
+                  <input id="uploadCsv" hidden type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: inline;"></i>
+                  <label for="uploadCsv">Upload CSV</label>
+                  <i class="bx bx-x" hidden onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
+                  <!-- <span class="invalid-feedback" style="display:none!important;">Please Upload File or Add Product!</span> -->
+                </div>
+              </div>         
+              <div style="display: flex;">
+              <!--<span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1IDI8NVdVskSl__qQVfsrugEamr01W4IA')}}" style="cursor:pointer;">link</a></span> -->
+              <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=13ywzNFAJFEDGA8HUIy1GBT7B6OBG4L2W')}}" style="cursor:pointer;">link</a></span>
+              </div>
+              <div style="display: flex;" class="mb-4">
+                <span style="margin: 0 auto;">And make sure, the change of template only at row 2, any change on row 1 (header) will be reject</span>
+              </div>
+            </div>
+            <div class="tabGroup" style="display:none!important">
+              <div class="form-group">
+                <label>Product*</label>
+                <input autocomplete="off" type="text" name="" class="form-control" id="inputNameProduct" placeholder="ex. Laptop MSI Modern 14" onkeyup="fillInput('name_product')">
+                <span class="invalid-feedback" style="display:none!important;">Please fill Name Product!</span>
+              </div>
+              <div class="form-group">
+                <label>Description*</label> 
+                <textarea onkeyup="fillInput('desc_product')" style="resize:vertical;height:150px" id="inputDescProduct" placeholder='ex. Laptop mSI Modern 14, Processor AMD Rayzen 7 5700, Memory 16GB, SSD 512 Gb, Screen 14", VGA vega 8, Windows 11 Home' name="inputDescProduct" class="form-control"></textarea>
+                <span class="invalid-feedback" style="display:none!important;">Please fill Description!</span>
+              </div>
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Serial Number</label>
+                    <input autocomplete="off" type="text" name="" class="form-control" id="inputSerialNumber">
+                  </div> 
+                </div>
+                <div class="col-md-6"> 
+                  <div class="form-group">
+                    <label>Part Number</label>
+                    <input autocomplete="off" type="text" name="" class="form-control" id="inputPartNumber">
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>Qty*</label>
+                    <input autocomplete="off" type="number" name="" class="form-control" id="inputQtyProduct" placeholder="ex. 5" onkeyup="fillInput('qty_product')">
+                    <span class="invalid-feedback" style="display:none!important;">Please fill Qty!</span>
+                  </div> 
+                </div>
+                <div class="col-md-4" style="margin-bottom:10px"> 
+                  <label>Type*</label>
+                  <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>
+                  <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
+                    <option>                  
+                  </select>
+                  <span class="invalid-feedback" style="display:none!important;">Please fill Unit!</span>
+                </div>
+                <div class="col-md-6" style="margin-bottom:10px"> 
+                  <label>Price*</label>
+                  <div class="input-group">
+                    <div class="input-group-text">
+                    Rp.
+                    </div>
+                    <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceProduct" placeholder="ex. 500,000.00" onkeyup="fillInput('price_product')">
+                    <button type="button" class="btn btn-sm btn-outline-primary  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">  
+                    </button>       
+                    <ul class="dropdown-menu dropdown-menu-end">       
+                      <li><a class="dropdown-item"  onclick="changeCurreny('usd')">USD($)</a></li>
+                      <li><a class="dropdown-item"  onclick="changeCurreny('dollar')">IDR(RP)</a></li>
+                    </ul>
+                  </div>
+                  <span class="invalid-feedback" style="display:none!important;">Please fill Price!</span>
+                </div>
+              </div>            
+              <div class="form-group">
+                <label>Total Price</label>
                 <div class="input-group">
                   <div class="input-group-text">
                   Rp.
                   </div>
-                  <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceProduct" placeholder="ex. 500,000.00" onkeyup="fillInput('price_product')">
-                  <button type="button" class="btn btn-sm btn-outline-primary  dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">  
-                  </button>       
-                  <ul class="dropdown-menu dropdown-menu-end">       
-                    <li><a class="dropdown-item"  onclick="changeCurreny('usd')">USD($)</a></li>
-                    <li><a class="dropdown-item"  onclick="changeCurreny('dollar')">IDR(RP)</a></li>
-                  </ul>
+                    <input autocomplete="off" disabled type="text" name="" class="form-control" id="inputTotalPrice" placeholder="75.000.000,00">
                 </div>
-                <span class="invalid-feedback" style="display:none!important;">Please fill Price!</span>
-              </div>
-            </div>            
-            <div class="form-group">
-              <label>Total Price</label>
-              <div class="input-group">
-                <div class="input-group-text">
-                Rp.
-                </div>
-                  <input autocomplete="off" disabled type="text" name="" class="form-control" id="inputTotalPrice" placeholder="75.000.000,00">
               </div>
             </div>
-          </div>
-        </div> 
-        <div class="tab-add" style="display:none!important">
-          <div class="tabGroup table-responsive">
-            <table class="table no-wrap">
-              <thead>
-                <th>No</th>
-                <th>Product</th>
-                <th>Description</th>
-                <th>Qty</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Total Price</th>
-                <th><a class="pull-right" onclick="refreshTable()"><i class="bx bx-refresh"></i>&nbsp</a></th>
-              </thead>
-              <tbody id="tbodyProducts">
-              </tbody>
-            </table>
-          </div>
-          <div class="row mb-4">
-            <div class="col-md-12" id="bottomProducts">
+          </div> 
+          <div class="tab-add" style="display:none!important">
+            <div class="tabGroup table-responsive">
+              <table class="table no-wrap">
+                <thead>
+                  <th>No</th>
+                  <th>Product</th>
+                  <th>Description</th>
+                  <th>Qty</th>
+                  <th>Type</th>
+                  <th>Price</th>
+                  <th>Total Price</th>
+                  <th><a class="pull-right" onclick="refreshTable()"><i class="bx bx-refresh"></i>&nbsp</a></th>
+                </thead>
+                <tbody id="tbodyProducts">
+                </tbody>
+              </table>
             </div>
-          </div>
-          <div class="form-group" style="display:flex;margin-top: 10px;">
-            <button class="btn btn-sm btn-sm btn-primary" style="margin: 0 auto;" type="button" id="addProduct"><i class="bx bx-plus"></i>&nbsp Add product</button>
-          </div>
-        </div>
-        <!---upload dokumen-->
-        <div class="tab-add" style="display:none">
-          <div class="tabGroup">
-            <div id="formForPrExternal" style="display:none">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>PID*</label>
-                    <select id="selectPid" style="width: 100%;" class="select2 form-control" onchange="fillInput('selectPID')">
-                      <option>
-                    </select>
-                    <span class="invalid-feedback" style="display:none;">Please fill PID!</span>
-                    <!-- <span id="makeId" style="cursor: pointer;">other?</span>
-                    <div class="form-group" id="project_idNew" style="display: none;">
-                      <div class="input-group">
-                        <input autocomplete="off" type="text" class="form-control pull-left col-md-8" placeholder="input Project ID" name="project_idInputNew" id="projectIdInputNew">
-                        <span class="input-group-addon" style="cursor: pointer;" id="removeNewId"><i class="glyphicon glyphicon-remove"></i></span>
-                      </div>
-                    </div>  -->
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Lead Register*</label>
-                    <select id="selectLeadId" style="width:100%" class="select2 form-control" onchange="fillInput('selectLeadId')">
-                      <option></option>
-                    </select>
-                    <span class="invalid-feedback" style="display:none;">Please fill Lead Register!</span>
-                  </div>
-                </div>
-              </div> 
-
-              <div class="form-group">
-                <label>Quote Number*</label>
-                <select name="selectQuoteNumber" class="select2 form-control" id="selectQuoteNumber" >
-                  <option>
-                </select>
-                <!-- <input type="file" class="files" name="inputQuoteNumber" id="inputQuoteNumber" class="form-control" onkeyup="fillInput('quoteNumber')"> -->
-                <span class="invalid-feedback" style="display:none;">Please fill Quote Number!</span>
-              </div> 
-
-              <div class="form-group">
-                <label>Quote Supplier*</label>
-                <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
-                  <label for="inputQuoteSupplier" style="margin-bottom: 0px;">
-                    <span class="bx bx-cloud-upload" style="display:inline;"></span>
-                    <input autocomplete="off" style="display: inline;font-family: inherit;" type="file" class="files" name="inputQuoteSupplier" id="inputQuoteSupplier" onchange="fillInput('quoteSupplier')" >
-                  </label>
-                </div>
-                <span class="invalid-feedback" style="display:none;">Please fill Quote Supplier!</span>
-                <span style="display:none;" id="span_link_drive_quoteSup"><a id="link_quoteSup" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
-              </div>             
-              
-              <div class="form-group">
-                <label>SPK/Kontrak*</label>
-                <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
-                  <label for="inputSPK" style="margin-bottom: 0px;">
-                    <span class="bx bx-cloud-upload" style="display:inline;"></span>
-                    <input autocomplete="off" style="display: inline;font-family: inherit;" type="file" class="files" name="inputSPK" id="inputSPK" onchange="fillInput('spk')" >
-                  </label>
-                </div>
-                <span class="invalid-feedback" style="display:none;">Please fill SPK/Kontrak!</span>
-                <span style="display:none;" id="span_link_drive_spk"><a id="link_spk" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
-              </div>
-
-              <div class="form-group">
-                <label>SBE*</label>
-                <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
-                  <label for="inputSBE" style="margin-bottom: 0px;">
-                    <span class="bx bx-cloud-upload" style="display:inline;"></span>
-                    <input autocomplete="off" style="display: inline;font-family: inherit;" type="file" class="files" name="inputSBE" id="inputSBE" onchange="fillInput('sbe')" >
-                  </label>
-                </div>
-                <span class="invalid-feedback" style="display:none;">Please fill SBE!</span>
-                <span style="display:none;" id="span_link_drive_sbe"><a id="link_sbe" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
-              </div>
-
-              <div id="docPendukungContainer" class="table-responsive">
-                <label id="titleDoc_epr" style="display:none;">Lampiran Dokumen Lainnya</label>
-                <table id="tableDocPendukung_epr" class="border-collapse:collapse" style="border-collapse: separate;border-spacing: 0 15px;">
-                  
-                </table>
-              </div>
-              <div class="form-group" style="display: flex;margin-top: 10px;">
-                <button type="button" id="btnAddDocPendukung_epr" style="margin:0 auto" class="btn btn-sm btn-sm btn-primary" onclick="addDocPendukung('epr')"><i class="bx bx-plus"></i>&nbsp Dokumen Lainnya</button>
-              </div>  
-            </div>
-              
-            <div id="formForPrInternal" style="display:none;">
-              <div class="form-group">
-                <label>Lampiran Penawaran Harga*</label>
-                <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
-                  <label for="inputPenawaranHarga" style="margin-bottom:0px">
-                    <i class="bx bx-cloud-upload" style="display:inline"></i>
-                    <input autocomplete="off" style="display: inline;" type="file" class="files" name="inputPenawaranHarga" id="inputPenawaranHarga" onchange="fillInput('penawaranHarga')">
-                  </label>                  
-                </div>
-                <span class="invalid-feedback" style="display:none;">Please fill Penawaran Harga!</span>
-                <span style="display:none;" id="span_link_drive_penawaranHarga"><a id="link_penawaran_harga" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
-              </div>
-
-              <div id="docPendukungContainer" class="table-responsive">
-                <label id="titleDoc_ipr" style="display:none;">Lampiran Dokumen Pendukung</label>
-                <table id="tableDocPendukung_ipr" class="border-collapse:collapse" style="border-collapse: separate;border-spacing: 0 15px;">
-                  
-                </table>
-              </div>
-              <div class="form-group" style="display: flex;margin-top: 10px;">
-                <button type="button" id="btnAddDocPendukung_ipr" style="margin:0 auto" class="btn btn-sm btn-primary" onclick="addDocPendukung('ipr')"><i class="bx bx-plus"></i>&nbsp Dokumen Pendukung</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!---->  
-        <div class="tab-add" style="display:none!important">
-          <div class="tabGroup">
-            <div class="card-body mb-4">
-              <div id="snow-toolbar">
-                <span class="ql-formats">
-                  <select class="ql-font"></select>
-                  <select class="ql-size"></select>
-                </span>
-                <span class="ql-formats">
-                  <button class="ql-bold"></button>
-                  <button class="ql-italic"></button>
-                  <button class="ql-underline"></button>
-                  <button class="ql-strike"></button>
-                </span>
-                <span class="ql-formats">
-                  <select class="ql-color"></select>
-                  <select class="ql-background"></select>
-                </span>
-                <span class="ql-formats">
-                  <button class="ql-script" value="sub"></button>
-                  <button class="ql-script" value="super"></button>
-                </span>
-                <span class="ql-formats">
-                  <button class="ql-header" value="1"></button>
-                  <button class="ql-header" value="2"></button>
-                  <button class="ql-blockquote"></button>
-                  <button class="ql-code-block"></button>
-                </span>
-              </div>
-              <div tabindex="0" id="snow-editor" onkeydown="fillInput('textArea_TOP')">
-              </div>
-              <span class="invalid-feedback" style="display:none!important;">Please fill Top of Payment!</span>
-            </div>
-          </div>
-        </div>  
-        <div class="tab-add" style="display:none!important">
-          <div class="tabGroup">
             <div class="row mb-4">
-              <div class="col-md-12" id="headerPreviewFinal">
+              <div class="col-md-12" id="bottomProducts">
+              </div>
+            </div>
+            <div class="form-group" style="display:flex;margin-top: 10px;">
+              <button class="btn btn-sm btn-sm btn-primary" style="margin: 0 auto;" type="button" id="addProduct"><i class="bx bx-plus"></i>&nbsp Add product</button>
+            </div>
+          </div>
+          <!---upload dokumen-->
+          <div class="tab-add" style="display:none">
+            <div class="tabGroup">
+              <div id="formForPrExternal" style="display:none">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>PID*</label>
+                      <select id="selectPid" style="width: 100%;" class="select2 form-control" onchange="fillInput('selectPID')">
+                        <option>
+                      </select>
+                      <span class="invalid-feedback" style="display:none;">Please fill PID!</span>
+                      <!-- <span id="makeId" style="cursor: pointer;">other?</span>
+                      <div class="form-group" id="project_idNew" style="display: none;">
+                        <div class="input-group">
+                          <input autocomplete="off" type="text" class="form-control pull-left col-md-8" placeholder="input Project ID" name="project_idInputNew" id="projectIdInputNew">
+                          <span class="input-group-addon" style="cursor: pointer;" id="removeNewId"><i class="glyphicon glyphicon-remove"></i></span>
+                        </div>
+                      </div>  -->
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Lead Register*</label>
+                      <select id="selectLeadId" style="width:100%" class="select2 form-control" onchange="fillInput('selectLeadId')">
+                        <option></option>
+                      </select>
+                      <span class="invalid-feedback" style="display:none;">Please fill Lead Register!</span>
+                    </div>
+                  </div>
+                </div> 
+
+                <div class="form-group">
+                  <label>Quote Number*</label>
+                  <select name="selectQuoteNumber" class="select2 form-control" id="selectQuoteNumber" >
+                    <option>
+                  </select>
+                  <!-- <input type="file" class="files" name="inputQuoteNumber" id="inputQuoteNumber" class="form-control" onkeyup="fillInput('quoteNumber')"> -->
+                  <span class="invalid-feedback" style="display:none;">Please fill Quote Number!</span>
+                </div> 
+
+                <div class="form-group">
+                  <label>Quote Supplier*</label>
+                  <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
+                    <label for="inputQuoteSupplier" style="margin-bottom: 0px;">
+                      <span class="bx bx-cloud-upload" style="display:inline;"></span>
+                      <input autocomplete="off" style="display: inline;font-family: inherit;" type="file" class="files" name="inputQuoteSupplier" id="inputQuoteSupplier" onchange="fillInput('quoteSupplier')" >
+                    </label>
+                  </div>
+                  <span class="invalid-feedback" style="display:none;">Please fill Quote Supplier!</span>
+                  <span style="display:none;" id="span_link_drive_quoteSup"><a id="link_quoteSup" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
+                </div>             
                 
-              </div>
-            </div><br>
-            <div class="row mb-4">
-              <div class="col-md-12 table-responsive">
-                <table class="table" style="white-space: nowrap;">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Product</th>
-                      <th>Description</th>
-                      <th>Qty</th>
-                      <th>Type</th>
-                      <th>Price</th>
-                      <th>Total Price</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tbodyFinalPageProducts">
+                <div class="form-group">
+                  <label>SPK/Kontrak*</label>
+                  <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
+                    <label for="inputSPK" style="margin-bottom: 0px;">
+                      <span class="bx bx-cloud-upload" style="display:inline;"></span>
+                      <input autocomplete="off" style="display: inline;font-family: inherit;" type="file" class="files" name="inputSPK" id="inputSPK" onchange="fillInput('spk')" >
+                    </label>
+                  </div>
+                  <span class="invalid-feedback" style="display:none;">Please fill SPK/Kontrak!</span>
+                  <span style="display:none;" id="span_link_drive_spk"><a id="link_spk" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
+                </div>
+
+                <div class="form-group">
+                  <label>SBE*</label>
+                  <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
+                    <label for="inputSBE" style="margin-bottom: 0px;">
+                      <span class="bx bx-cloud-upload" style="display:inline;"></span>
+                      <input autocomplete="off" style="display: inline;font-family: inherit;" type="file" class="files" name="inputSBE" id="inputSBE" onchange="fillInput('sbe')" >
+                    </label>
+                  </div>
+                  <span class="invalid-feedback" style="display:none;">Please fill SBE!</span>
+                  <span style="display:none;" id="span_link_drive_sbe"><a id="link_sbe" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
+                </div>
+
+                <div id="docPendukungContainer" class="table-responsive">
+                  <label id="titleDoc_epr" style="display:none;">Lampiran Dokumen Lainnya</label>
+                  <table id="tableDocPendukung_epr" class="border-collapse:collapse" style="border-collapse: separate;border-spacing: 0 15px;">
                     
-                  </tbody>
-                </table>
+                  </table>
+                </div>
+                <div class="form-group" style="display: flex;margin-top: 10px;">
+                  <button type="button" id="btnAddDocPendukung_epr" style="margin:0 auto" class="btn btn-sm btn-sm btn-primary" onclick="addDocPendukung('epr')"><i class="bx bx-plus"></i>&nbsp Dokumen Lainnya</button>
+                </div>  
+              </div>
+                
+              <div id="formForPrInternal" style="display:none;">
+                <div class="form-group">
+                  <label>Lampiran Penawaran Harga*</label>
+                  <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
+                    <label for="inputPenawaranHarga" style="margin-bottom:0px">
+                      <i class="bx bx-cloud-upload" style="display:inline"></i>
+                      <input autocomplete="off" style="display: inline;" type="file" class="files" name="inputPenawaranHarga" id="inputPenawaranHarga" onchange="fillInput('penawaranHarga')">
+                    </label>                  
+                  </div>
+                  <span class="invalid-feedback" style="display:none;">Please fill Penawaran Harga!</span>
+                  <span style="display:none;" id="span_link_drive_penawaranHarga"><a id="link_penawaran_harga" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
+                </div>
+
+                <div id="docPendukungContainer" class="table-responsive">
+                  <label id="titleDoc_ipr" style="display:none;">Lampiran Dokumen Pendukung</label>
+                  <table id="tableDocPendukung_ipr" class="border-collapse:collapse" style="border-collapse: separate;border-spacing: 0 15px;">
+                    
+                  </table>
+                </div>
+                <div class="form-group" style="display: flex;margin-top: 10px;">
+                  <button type="button" id="btnAddDocPendukung_ipr" style="margin:0 auto" class="btn btn-sm btn-primary" onclick="addDocPendukung('ipr')"><i class="bx bx-plus"></i>&nbsp Dokumen Pendukung</button>
+                </div>
               </div>
             </div>
-            <div class="row mb-4">
-              <div class="col-md-12" id="bottomPreviewFinal">
-                
+          </div>
+          <!---->  
+          <div class="tab-add" style="display:none!important">
+            <div class="tabGroup">
+              <div class="card-body mb-4">
+                <div id="snow-toolbar">
+                  <span class="ql-formats">
+                    <select class="ql-font"></select>
+                    <select class="ql-size"></select>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-bold"></button>
+                    <button class="ql-italic"></button>
+                    <button class="ql-underline"></button>
+                    <button class="ql-strike"></button>
+                  </span>
+                  <span class="ql-formats">
+                    <select class="ql-color"></select>
+                    <select class="ql-background"></select>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-script" value="sub"></button>
+                    <button class="ql-script" value="super"></button>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-header" value="1"></button>
+                    <button class="ql-header" value="2"></button>
+                    <button class="ql-blockquote"></button>
+                    <button class="ql-code-block"></button>
+                  </span>
+                </div>
+                <div tabindex="0" id="snow-editor" onkeydown="fillInput('textArea_TOP')">
+                </div>
+                <span class="invalid-feedback" style="display:none!important;">Please fill Top of Payment!</span>
               </div>
-            </div> 
-          </div>        
-        </div>     
-        <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-secondary" id="prevBtnAdd" style="display:none!important;">Back</button>
-            <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
-        </div>
-      </form>
+            </div>
+          </div>  
+          <div class="tab-add" style="display:none!important">
+            <div class="tabGroup">
+              <div class="row mb-4">
+                <div class="col-md-12" id="headerPreviewFinal">
+                  
+                </div>
+              </div><br>
+              <div class="row mb-4">
+                <div class="col-md-12 table-responsive">
+                  <table class="table" style="white-space: nowrap;">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyFinalPageProducts">
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-md-12" id="bottomPreviewFinal">
+                  
+                </div>
+              </div> 
+            </div>        
+          </div>     
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" id="prevBtnAdd" style="display:none!important;">Back</button>
+        <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
       </div>
     </div>
   </div>
@@ -688,7 +692,7 @@
             <div class="form-group">
                 <label for="">Category</label>
                 <div class="input-group">
-                  <select disabled type="text" class="form-control select2" name="selectCategoryCek" id="selectCategoryCek"  style="width: 100%">
+                  <select disabled type="text" class="form-control select2" name="selectCategoryCek" id="selectCategoryCek">
                       <option value="">Select Category</option>
                       <option value="Barang dan Jasa">Barang dan Jasa</option>
                       <option value="Barang">Barang</option>
@@ -980,10 +984,10 @@
 @section('scriptImport')
   <script src="{{asset('assets/vendor/libs/quill/katex.js')}}"></script>
   <script src="{{asset('assets/vendor/libs/quill/quill.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.js" integrity="sha512-FbWDiO6LEOsPMMxeEvwrJPNzc0cinzzC0cB/+I2NFlfBPFlZJ3JHSYJBtdK7PhMn0VQlCY1qxflEG+rplMwGUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
   <script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('assets/js/jquery.mask.js')}}"></script>
+  <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
   <!--datatables-->
   <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
   <!--fixed column-->
@@ -1051,9 +1055,9 @@
             this.value = ''
           })
         }else{
-          $("#uploadCsv").next('label').hide()
+          $("#uploadCsv").next('label').attr('style','display:none!important')
           $("input[type='file'][name='uploadCsv']").removeClass('hidden')
-          $("input[type='file'][name='uploadCsv']").prev('i').hide()
+          $("input[type='file'][name='uploadCsv']").prev('i').attr('style','display:none!important')
           $("#uploadCsv").next('label').next('i').removeClass('hidden') 
           $("#btnInitiateAddProduct").prop("disabled",true)
         }
@@ -1395,7 +1399,7 @@
                 return '<span class="badge text-bg-primary">'+row.status+'</span>'
               }else if (row.status == 'CIRCULAR') {
                 if (row.circularby == "-") {
-                  return '<span class="badge text-bg-warning">'+row.status+'</span><br><small>On Procurement<small>'
+                  return '<span class="badge text-bg-warning">'+row.status+'</span><br><small>On Procurement & Vendor Management<small>'
                 }else{
                   return '<span class="badge text-bg-warning">'+row.status+'</span><br><small>On '+ row.circularby +'<small>'
                 }
@@ -1461,7 +1465,7 @@
               else if(row.status == 'UNAPPROVED'){
                 title = "Revision"
                 btnClass = "text-bg-warning"
-                if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Procurement')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Supply Chain, CPS & Asset Management')->exists()}}") {
+                if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Procurement & Vendor Management')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Supply Chain, CPS & Asset Management')->exists()}}") {
                   status = '"revision"'
                   value = status
                   onclick = "unfinishedDraft(0,"+ row.id +","+ status +")"
@@ -1484,7 +1488,7 @@
                   isDisabledCancel = ''
                 }
               }else{
-                if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Procurement')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Supply Chain, CPS & Asset Management')->exists()}}") {
+                if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Procurement & Vendor Management')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Supply Chain, CPS & Asset Management')->exists()}}") {
                   isDisabledCancel = ''
                 }else{
                   isDisabledCancel = 'disabled'
@@ -1845,8 +1849,8 @@
       
       var append = ""
 
-      append = append + '<div class="callout callout-danger divReasonRejectRevision" style="display:none!important">'
-        append = append + '<h6><i class="icon bx bx-cross"></i>'+ textTitle +'</h6>'
+      append = append + '<div class="alert alert-danger divReasonRejectRevision" style="display:none!important">'
+        append = append + '<h6><i class="icon bx bx-alert"></i>'+ textTitle +'</h6>'
         append = append + '<p class="reason_reject_revision">'+item.replaceAll("\n","<br>")+'</p>'
       append = append + '</div>'
 
@@ -2016,10 +2020,10 @@
             appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
               appendBottom = appendBottom + ' <div class="col-md-12 col-xs-12">'
               appendBottom = appendBottom + ' <div class="pull-right" style="display:flex">'
-                appendBottom = appendBottom + '  <span style="margin-right: 15px;margin-top:8px">Vat <span class="title_tax"></span>'
+                appendBottom = appendBottom + '  <span style="margin-right: 15px;margin-top:8px;display:inline-flex">Vat <span class="title_tax"></span>'
               appendBottom = appendBottom + '  </span>'
               appendBottom = appendBottom + '  <div class="input-group" style="display: inline-flex;">'
-              appendBottom = appendBottom + '   <input disabled type="text" class="form-control vat_tax" id="vat_tax_unfinishPreview" name=""vat_tax_unfinishPreview" style="width:190px;display:inline;text-align:right">'
+              appendBottom = appendBottom + '   <input disabled type="text" class="form-control vat_tax" id="vat_tax_unfinishPreview" name=""vat_tax_unfinishPreview" style="width:250px;display:inline;text-align:right">'
               appendBottom = appendBottom + '    </div>'
               appendBottom = appendBottom + '  </div>'
               appendBottom = appendBottom + ' </div>'
@@ -2423,12 +2427,12 @@
                       var option = new Option('', '', true, true);
                       from.append(option).trigger('change');
 
-                      $("#fromBudgetType").closest(".form-group").hide()
+                      $("#fromBudgetType").closest(".form-group").attr('style','display:none!important')
                     }
                   })
                 }
 
-                $(".tabGroupInitiateAdd").hide()
+                $(".tabGroupInitiateAdd").attr('style','display:none!important')
                 x[n].children[1].style.display = 'inline'
                 $("#inputNameProduct").val('')
                 $("#inputDescProduct").val('')
@@ -2477,7 +2481,7 @@
               if ($("#selectType").val() == 'EPR') {
                 $(".modal-title").text('External Purchase Request')
                 $("#formForPrExternal").show()
-                $("#formForPrInternal").hide()
+                $("#formForPrInternal").attr('style','display:none!important')
 
                 fillInput('spk')
                 fillInput('sbe')
@@ -2664,7 +2668,7 @@
                         if (value != 0 &&  value != 1 && value != 2) {
                           appendDocPendukung = appendDocPendukung + '<tr style="height:10px" class="trDocPendukung">'
                             appendDocPendukung = appendDocPendukung + "<td>"
-                              appendDocPendukung = appendDocPendukung + '<button type="button" value="'+ item.id_dokumen +'" class="bx bx-times btnRemoveDocPendukung" data-value="remove_'+ value +'" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
+                              appendDocPendukung = appendDocPendukung + '<button type="button" value="'+ item.id_dokumen +'" class="bx bx-x btnRemoveDocPendukung" data-value="remove_'+ value +'" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
                                   appendDocPendukung = appendDocPendukung + '<div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;display: inline-block;width:200px;background-color:darkgrey;cursor:not-allowed">'
                                     appendDocPendukung = appendDocPendukung + "<input style='font-family: inherit;width: 90px;color:grey' type='file' name='inputDocPendukung' id='inputDocPendukung' data-value='"+ item.id_dokumen +"' class='inputDocPendukung_"+value+"' disabled>"
                                    appendDocPendukung = appendDocPendukung + '</div>'
@@ -2756,7 +2760,7 @@
                               }
                           })
                           if($('#tableDocPendukung_epr tr').length == 0){
-                            $("#titleDoc_epr").hide()
+                            $("#titleDoc_epr").attr('style','display:none!important')
                           }
                         })
                       })
@@ -2767,7 +2771,7 @@
               }else{
                 $(".modal-title").text('Internal Purchase Request')
                 $("#formForPrInternal").show()
-                $("#formForPrExternal").hide()  
+                $("#formForPrExternal").attr('style','display:none!important')  
 
                 fillInput('penawaranHarga')
 
@@ -2821,7 +2825,7 @@
                       if (value != 0) {
                         appendDocPendukung = appendDocPendukung + '<tr style="height:10px" class="trDocPendukung">'
                           appendDocPendukung = appendDocPendukung + "<td>"
-                            appendDocPendukung = appendDocPendukung + '<button type="button" value="'+ item.id_dokumen +'" class="bx bx-times btnRemoveDocPendukung" data-value="remove_'+ value +'" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
+                            appendDocPendukung = appendDocPendukung + '<button type="button" value="'+ item.id_dokumen +'" class="bx bx-x btnRemoveDocPendukung" data-value="remove_'+ value +'" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
                                 appendDocPendukung = appendDocPendukung + '<div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;display: inline-block;width:200px;background-color:darkgrey;cursor:not-allowed">'
                                   appendDocPendukung = appendDocPendukung + "<input style='font-family: inherit;width: 90px;color:grey' type='file' name='inputDocPendukung' id='inputDocPendukung' data-value='"+ item.id_dokumen +"' class='inputDocPendukung_"+value+"' disabled>"
                                  appendDocPendukung = appendDocPendukung + '</div>'
@@ -2902,7 +2906,7 @@
                             }
                         })
                         if($('#tableDocPendukung_ipr tr').length == 0){
-                          $("#titleDoc").hide()
+                          $("#titleDoc").attr('style','display:none!important')
                         }
                       })
                     })
@@ -3457,11 +3461,11 @@
                   var option = new Option('', '', true, true);
                   from.append(option).trigger('change');
 
-                  $("#fromBudgetType").closest(".form-group").hide()
+                  $("#fromBudgetType").closest(".form-group").attr('style','display:none!important')
                 }
               })
             }
-            $(".tabGroupInitiateAdd").hide()
+            $(".tabGroupInitiateAdd").attr('style','display:none!important')
             x[n].children[1].style.display = "inline"
             x[n].children[1].classList.remove('d-none')
 
@@ -3488,14 +3492,14 @@
           if ($("#selectType").val() == 'EPR') {
             $(".modal-title").text('External Purchase Request')
             $("#formForPrExternal").show()
-            $("#formForPrInternal").hide()  
+            $("#formForPrInternal").attr('style','display:none!important')  
             fillInput('spk')
             fillInput('sbe')
             fillInput('quoteSupplier')      
           }else{
             $(".modal-title").text('Internal Purchase Request')
             $("#formForPrInternal").show()
-            $("#formForPrExternal").hide()      
+            $("#formForPrExternal").attr('style','display:none!important')      
 
             fillInput('penawaranHarga')
           }         
@@ -3554,7 +3558,7 @@
                     }else{
                       $("#inputSBE").attr("disabled",false).css("cursor","")
                       $("#inputSBE").val("")
-                      $("#inputSBE").closest(".form-group").find("#span_link_drive_sbe").hide()
+                      $("#inputSBE").closest(".form-group").find("#span_link_drive_sbe").attr('style','display:none!important')
                     }
                   }
                 }) 
@@ -3642,7 +3646,7 @@
       $(".tab-add").css('display','none')
       currentTab = 0
       n = 0
-      $(".divReasonRejectRevision").hide()
+      $(".divReasonRejectRevision").attr('style','display:none!important')
       $(this)
       .find("input,textarea,select")
          .val('')
@@ -3653,10 +3657,10 @@
          .end();
       localStorage.setItem('firstLaunch', true);
       localStorage.setItem('isStoreSupplier',false);
-      $("#span_link_drive_spk").hide()
-      $("#span_link_drive_sbe").hide()
-      $("#span_link_drive_quoteSup").hide()
-      $("#span_link_drive_penawaranHarga").hide()
+      $("#span_link_drive_spk").attr('style','display:none!important')
+      $("#span_link_drive_sbe").attr('style','display:none!important')
+      $("#span_link_drive_quoteSup").attr('style','display:none!important')
+      $("#span_link_drive_penawaranHarga").attr('style','display:none!important')
       // $("#tableDocPendukung").remove()
       localStorage.setItem('isEditProduct',false)
       localStorage.setItem('status_pr','') 
@@ -3701,15 +3705,15 @@
                   $("#divReasonReject").show()
                   $("#nextBtnAddAdmin").attr('onclick','ConfirmDraftPr(' +no_pr+', "reject")')
                 }else{
-                  $("#divReasonReject").hide()
+                  $("#divReasonReject").attr('style','display:none!important')
                   $("#nextBtnAddAdmin").attr('onclick','ConfirmDraftPr(' +no_pr+',"approve")')
                 }
               })
 
               $("#notAllChecked").show()
-              $("#AllChecked").hide()
+              $("#AllChecked").attr('style','display:none!important')
             }else{
-              $("#notAllChecked").hide()
+              $("#notAllChecked").attr('style','display:none!important')
               $("#AllChecked").show()
 
               $("#nextBtnAddAdmin").attr('onclick','ConfirmDraftPr(' +no_pr+',"approve")')
@@ -3833,7 +3837,7 @@
                 $("#ModalDraftPrAdmin").modal('hide')
                 currentTab = 1
                 unfinishedDraft(currentTab,no_pr,"admin")
-                $(".tabGroupInitiateAdd").hide()
+                $(".tabGroupInitiateAdd").attr('style','display:none!important')
                 $(".tab-add")[1].children[1].style.display = "inline"
                 $(".tab-add")[1].children[1].classList.remove('d-none')
                 localStorage.setItem('isEditProduct',true)
@@ -3901,7 +3905,7 @@
               if ($("#selectTypeCek").val() == 'EPR') {
                 $(".modal-title").text('External Purchase Request')
                 $("#formForPrExternalCek").show()
-                $("#formForPrInternalCek").hide()   
+                $("#formForPrInternalCek").attr('style','display:none!important')   
 
                 $("#formForPrExternalCek").find($("input[type=checkbox]")).attr('name','chk[]')
                 $("#selectPidCek").val(result.pr.pid)
@@ -3983,7 +3987,7 @@
               }else{
                 $(".modal-title").text('Internal Purchase Request')
                 $("#formForPrInternalCek").show()
-                $("#formForPrExternalCek").hide()       
+                $("#formForPrExternalCek").attr('style','display:none!important')       
 
                 $("#formForPrInternalCek").find($("input[type=checkbox]")).attr('name','chk[]')     
 
@@ -4619,11 +4623,11 @@
     function fillInput(val){
       if (val == "selectTo") {
         $("#selectTo").closest('.form-group').removeClass('needs-validation ')
-        $("#selectTo").closest('.form-group').find('.invalid-feedback').hide();
+        $("#selectTo").closest('.form-group').find('.invalid-feedback').attr('style','display:none!important');
         $("#selectTo").prev('.input-group-text').css("background-color","red");
       }else if (val == "to") {
         $("#inputTo").closest('.divInputTo').closest('.form-group').removeClass('needs-validation ')
-        $("#inputTo").closest('.divInputTo').find('.invalid-feedback').hide();
+        $("#inputTo").closest('.divInputTo').find('.invalid-feedback').attr('style','display:none!important');
         $("#inputTo").prev('.input-group-text').css("background-color","red");
       }else if (val == "email") {
         const validateEmail = (email) => {
@@ -4636,7 +4640,7 @@
 
         if ($("#inputEmail").val() == '-') {
           $("#inputEmail").closest('.form-group').removeClass('needs-validation ')
-          $("#inputEmail").closest('input').next('span').hide()
+          $("#inputEmail").closest('input').next('span').attr('style','display:none!important')
           $("#inputEmail").prev('.input-group-text').css("background-color","red")
         }else{
           switch(emails){
@@ -4648,65 +4652,65 @@
             break;
             default:
               $("#inputEmail").closest('.form-group').removeClass('needs-validation ')
-              $("#inputEmail").closest('input').next('span').hide()
+              $("#inputEmail").closest('input').next('span').attr('style','display:none!important')
               $("#inputEmail").prev('.input-group-text').css("background-color","red")
           }
         }
       }else if (val == "phone") {
         $("#inputPhone").inputmask({"mask": "999-999-999-999"})
         $("#inputPhone").closest('.form-group').removeClass('needs-validation ')
-        $("#inputPhone").closest('input').next('span').hide();
+        $("#inputPhone").closest('input').next('span').attr('style','display:none!important');
         $("#inputPhone").prev('.input-group-text').css("background-color","red");
       }else if(val == "subject") {
         $("#inputSubject").closest('.form-group').removeClass('needs-validation ')
-        $("#inputSubject").closest('input').next('span').hide();
+        $("#inputSubject").closest('input').next('span').attr('style','display:none!important');
         $("#inputSubject").prev('.input-group-text').css("background-color","red");
       }else if(val == "attention") {
         $("#inputAttention").closest('.form-group').removeClass('needs-validation ')
-        $("#inputAttention").closest('input').next('span').hide();
+        $("#inputAttention").closest('input').next('span').attr('style','display:none!important');
         $("#inputAttention").prev('.input-group-text').css("background-color","red");
       }else if(val == "from") {
         $("#inputFrom").closest('.form-group').removeClass('needs-validation ')
-        $("#inputFrom").closest('input').next('span').hide();
+        $("#inputFrom").closest('input').next('span').attr('style','display:none!important');
         $("#inputFrom").prev('.input-group-text').css("background-color","red");
       }else if(val == "address") {
         $("#inputAddress").closest('.form-group').removeClass('needs-validation ')
-        $("#inputAddress").closest('input').next('span').hide();
+        $("#inputAddress").closest('input').next('span').attr('style','display:none!important');
         $("#inputAddress").prev('.input-group-text').css("background-color","red");  
       }
 
       if (val == "selectLeadId") {
         $("#selectLeadId").closest('.form-group').removeClass('needs-validation ')
-        $("#selectLeadId").closest('select').next('span').next("span").hide(); 
+        $("#selectLeadId").closest('select').next('span').next("span").attr('style','display:none!important'); 
         $("#selectLeadId").prev('.col-md-6').css("background-color","red");
       }
 
       if (val == "selectPID") {
         $("#selectPid").closest('.form-group').removeClass('needs-validation ')
-        $("#selectPid").closest('select').next('span').next("span").hide(); 
+        $("#selectPid").closest('select').next('span').next("span").attr('style','display:none!important'); 
         $("#selectPid").prev('.col-md-6').css("background-color","red");
       }
 
       if (val == "selectType") {
         $("#selectType").closest('.form-group').removeClass('needs-validation ')
-        $("#selectType").closest('select').next('span').hide();
+        $("#selectType").closest('select').next('span').attr('style','display:none!important');
         $("#selectType").prev('.input-group-text').css("background-color","red");
       }
 
       if (val == "selectCategory") {
         $("#selectCategory").closest('.form-group').removeClass('needs-validation ')
-        $("#selectCategory").closest('select').next('span').hide();
+        $("#selectCategory").closest('select').next('span').attr('style','display:none!important');
         $("#selectCategory").prev('.input-group-text').css("background-color","red");
       }
 
       if (val == "name_product") {
         $("#inputNameProduct").closest('.form-group').removeClass('needs-validation ')
-        $("#inputNameProduct").closest('input').next('span').hide();
+        $("#inputNameProduct").closest('input').next('span').attr('style','display:none!important');
         $("#inputNameProduct").prev('.input-group-text').css("background-color","red");
       }
       if (val == "desc_product") {
         $("#inputDescProduct").closest('.form-group').removeClass('needs-validation ')
-        $("#inputDescProduct").closest('textarea').next('span').hide();
+        $("#inputDescProduct").closest('textarea').next('span').attr('style','display:none!important');
         $("#inputDescProduct").prev('.input-group-text').css("background-color","red");
       }
       if (val == "qty_product") {
@@ -4716,13 +4720,13 @@
           $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
         }
         $("#inputQtyProduct").closest('.col-md-4').removeClass('needs-validation ')
-        $("#inputQtyProduct").closest('input').next('span').hide();
+        $("#inputQtyProduct").closest('input').next('span').attr('style','display:none!important');
         $("#inputQtyProduct").prev('.input-group-text').css("background-color","red");
       }
 
       if (val == "type_product") {
         $("#selectTypeProduct").closest('.col-md-4').removeClass('needs-validation ')
-        $("#selectTypeProduct").closest('select').next('span').next('span').hide();
+        $("#selectTypeProduct").closest('select').next('span').next('span').attr('style','display:none!important');
         $("#selectTypeProduct").prev('.input-group-text').css("background-color","red");
       }
 
@@ -4734,46 +4738,46 @@
           $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
         }
         $("#inputPriceProduct").closest('.col-md-4').removeClass('needs-validation ')
-        $("#inputPriceProduct").closest('input').closest('.input-group').next('span').hide();
+        $("#inputPriceProduct").closest('input').closest('.input-group').next('span').attr('style','display:none!important');
         $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
       }
       if (val == "spk") {
         $("#inputSPK").closest('.form-group').removeClass('needs-validation ')
-        $("#inputSPK").closest('div').next('span').hide();
+        $("#inputSPK").closest('div').next('span').attr('style','display:none!important');
         $("#inputSPK").prev('.input-group-text').css("background-color","red");
       }
 
       if (val == "sbe") {
         $("#inputSBE").closest('.form-group').removeClass('needs-validation ')
-        $("#inputSBE").closest('div').next('span').hide();
+        $("#inputSBE").closest('div').next('span').attr('style','display:none!important');
         $("#inputSBE").prev('.input-group-text').css("background-color","red");
       }
 
       if (val == "quoteSupplier") {
         $("#inputQuoteSupplier").closest('.form-group').removeClass('needs-validation ')
-        $("#inputQuoteSupplier").closest('div').next('span').hide();
+        $("#inputQuoteSupplier").closest('div').next('span').attr('style','display:none!important');
         $("#inputQuoteSupplier").prev('.input-group-text').css("background-color","red");  
       }
 
       if (val == "quoteNumber") {
         $("#inputQuoteNumber").closest('.form-group').removeClass('needs-validation ')
-        $("#inputQuoteNumber").closest('select').next('span').next("span").hide(); 
+        $("#inputQuoteNumber").closest('select').next('span').next("span").attr('style','display:none!important'); 
         $("#inputQuoteNumber").prev('.input-group-text').css("background-color","red");  
       }
 
       if (val == "penawaranHarga") {
         $("#inputPenawaranHarga").closest('.form-group').removeClass('needs-validation ')
-        $("#inputPenawaranHarga").closest('div').next('span').hide();
+        $("#inputPenawaranHarga").closest('div').next('span').attr('style','display:none!important');
         $("#inputPenawaranHarga").prev('.input-group-text').css("background-color","red");  
       }
 
       if (val == "textArea_TOP") {
-        $("#snow-editor").next('span').hide()  
+        $("#snow-editor").next('span').attr('style','display:none!important')  
       }
 
       if (val == "reason_reject") {
         $("#textAreaReasonReject").closest('.form-group').removeClass('needs-validation ')
-        $("#textAreaReasonReject").closest('textarea').next('span').hide();
+        $("#textAreaReasonReject").closest('textarea').next('span').attr('style','display:none!important');
         $("#textAreaReasonReject").prev('.input-group-text').css("background-color","red"); 
       }
     }
@@ -4942,7 +4946,7 @@
 
       if (valueEdit == undefined) {
         if (valueEdit == 0) {
-          $(".tabGroupInitiateAdd").hide()
+          $(".tabGroupInitiateAdd").attr('style','display:none!important')
           $(".tab-add")[1].children[1].style.display = "inline"
           $(".tab-add")[1].children[1].classList.remove('d-none')
 
@@ -4959,7 +4963,7 @@
 
         //ini false kalau nilainya angka
         if (!isNaN(valueEdit)) {
-          $(".tabGroupInitiateAdd").hide()
+          $(".tabGroupInitiateAdd").attr('style','display:none!important')
           $(".tab-add")[1].children[1].style.display = "inline"
           $(".tab-add")[1].children[1].classList.remove('d-none')
 
@@ -5773,7 +5777,7 @@
           if (snowEditor.getText().trim() == "") {
             $("#snow-editor").next('span').show()
           }else{
-            $("#snow-editor").next('span').hide()
+            $("#snow-editor").next('span').attr('style','display:none!important')
 
             $.ajax({
               url: "{{'/admin/storeTermPayment'}}",
@@ -5959,7 +5963,7 @@
               appendBottom = appendBottom + '  <span style="margin-right: 15px;margin-top: 8px;display:block ruby">Vat <span class="title_tax"></span>'
               appendBottom = appendBottom + '  </span>'
               appendBottom = appendBottom + '  <div class="input-group" style="display: inline-flex;">'
-              appendBottom = appendBottom + '   <input disabled type="text" class="form-control vat_tax" id="vat_tax" name="vat_tax" style="width:190px;display:inline">'
+              appendBottom = appendBottom + '   <input disabled type="text" class="form-control vat_tax" id="vat_tax" name="vat_tax" style="width:208px;display:inline">'
               appendBottom = appendBottom + '       <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'
               appendBottom = appendBottom + '       </button>'
               appendBottom = appendBottom + '       <ul class="dropdown-menu">'
@@ -6217,7 +6221,7 @@
       valueEdit = value
       if (valueEdit == undefined) {
         if (valueEdit == 0) {
-          $(".tabGroupInitiateAdd").hide()
+          $(".tabGroupInitiateAdd").attr('style','display:none!important')
           $(".tab-add")[1].children[1].style.display = "inline"
           $(".tab-add")[1].children[1].classList.remove('d-none')
 
@@ -6296,11 +6300,11 @@
                 var option = new Option('', '', true, true);
                 from.append(option).trigger('change');
 
-                $("#fromBudgetType").closest(".form-group").hide()
+                $("#fromBudgetType").closest(".form-group").attr('style','display:none!important')
               }
             })
           }
-          $(".tabGroupInitiateAdd").hide()
+          $(".tabGroupInitiateAdd").attr('style','display:none!important')
           $(".tab-add")[1].children[1].style.display = "inline"
           $(".tab-add")[1].children[1].classList.remove('d-none')
 
@@ -6946,12 +6950,10 @@
         
       }else if (currentTab == 4) {
         if (n == 1) {
-          if ($("#textAreaTOP").val() == "") {
-            $("#textAreaTOP").closest('textarea').closest('div').closest('form').addClass('needs-validation ')
-            $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').show()
+          if (snowEditor.getText().trim() == "") {
+            $("#snow-editor").next('span').show()
           }else{
-            $("#textAreaTOP").closest('textarea').closest('div').closest('form').removeClass('needs-validation ')
-            $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').hide()
+            $("#snow-editor").next('span').attr('style','display:none!important')
 
             $.ajax({
               url: "{{'/admin/storeTermPayment'}}",
@@ -6959,7 +6961,7 @@
               data:{
                 no_pr:localStorage.getItem('no_pr'),
                 _token:"{{csrf_token()}}",
-                textAreaTOP:$("#textAreaTOP").val(),
+                textAreaTOP:snowEditor.root.innerHTML,
               },
               success: function(data)
               {
@@ -7135,7 +7137,7 @@
     $(document).on('click', '.btnRemoveAddDocPendukung', function() {
       $(this).closest("tr").remove();
       if($('#tableDocPendukung tr').length == 0){
-        $("#titleDoc").hide()
+        $("#titleDoc").attr('style','display:none!important')
       }
     });
 
@@ -7188,7 +7190,7 @@
                   success: function(result){
                     Swal.fire({
                       title: 'Drafting PR Successs',
-                      html: "<p style='text-align:center;'>Your PR draft will be verified by Admin/Procurement soon, please wait for further progress</p>",
+                      html: "<p style='text-align:center;'>Your PR draft will be verified by Admin/Procurement & Vendor Management soon, please wait for further progress</p>",
                       type: 'success',
                       confirmButtonText: 'Reload',
                     }).then((result) => {
@@ -7220,7 +7222,7 @@
       }).trigger("change")
 
       $("#selectPid").closest('.form-group').removeClass('needs-validation ')
-      $("#selectPid").closest('select').next('span').next("span").hide(); 
+      $("#selectPid").closest('select').next('span').next("span").attr('style','display:none!important'); 
       $("#selectPid").prev('.col-md-6').css("background-color","red");
     })
 

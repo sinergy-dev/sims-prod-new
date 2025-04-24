@@ -109,6 +109,14 @@ General Affair - ATK
     .pull-right{
       float: right;
     }
+
+    .form-group{
+      margin-bottom: 15px;
+    }
+
+    .swal2-container{
+      z-index: 99999!important;
+    }
 </style>
 @endsection
 @section('content')
@@ -167,9 +175,8 @@ General Affair - ATK
               <button class="btn btn-sm btn-success tambah_asset_atk" data-bs-toggle="modal" id="tambah_asset_atk" data-bs-target="#add_asset" style="display: none!important"><i class="bx bx-plus"> </i>&nbsp Asset</button>
               <button class="btn btn-sm btn-warning btnExport" id="btnExport" style="display: none!important;" onclick="exportExcel('{{action('AssetAtkController@reportExcel')}}')"><i class="bx bx-download"> </i>&nbsp Excel</button>
               <div class="dropdown dropdownBln" style="display: none;">
-                <button type="button" id="btnShowMonth" class="btn btn-sm btn-outline-secondary dropdown-toggle" style="width:120px" data-bs-toggle="dropdown" aria-expanded="false">
+                <button type="button" id="btnShowMonth" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                   Select Month
-                  <span class="bx bx-caret-down"></span>
                 </button>
                 <ul class="dropdown-menu" id="selectShowMonth">
                   @foreach($month_formatted as $value)
@@ -214,7 +221,7 @@ General Affair - ATK
                       <td id="col_action_2" class="col_action" style="display: none;">
                         <a href="{{url('/asset_atk/detail_asset_atk', $data->id_barang) }}"><button class="btn btn-sm btn-primary" style="width:35px;height:30px;border-radius: 25px!important;outline: none;"><i class="bx bx-history" aria-hidden="true" data-bs-toggle="tooltip" title="History" data-placement="bottom"></i></button></a>
                         <button class="btn btn-sm btn-warning" style="width:35px;height:30px;border-radius: 25px!important;outline: none;" data-bs-toggle="modal" data-bs-target="#modaledit" onclick="edit_asset('{{$data->id_barang}}', '{{$data->nama_barang}}', '{{$data->description}}')"><i class="bx bx-edit" data-bs-toggle="tooltip" title="Edit Asset" data-placement="bottom"></i></button>
-                        <button class="btn btn-sm btn-outline-secondary btn-peminjaman" data-bs-toggle="modal" data-bs-target="#modalrestock" onclick="update_stok('{{$data->id_barang}}', '{{$data->nama_barang}}', '{{$data->qty}}', '{{$data->description}}')" data-bs-toggle="tooltip" style="width:35px;height:30px;border-radius: 25px!important;outline: none;" title="Restock" data-placement="bottom"><i class="bx bx-hourglass-start"></i></button>
+                        <button class="btn btn-sm btn-outline-secondary btn-peminjaman" data-bs-toggle="modal" data-bs-target="#modalrestock" onclick="update_stok('{{$data->id_barang}}', '{{$data->nama_barang}}', '{{$data->qty}}', '{{$data->description}}')" data-bs-toggle="tooltip" style="width:35px;height:30px;border-radius: 25px!important;outline: none;" title="Restock" data-placement="bottom"><i class="bx bx-hourglass"></i></button>
                       </td>
                     </tr>
                     @endforeach
@@ -250,7 +257,7 @@ General Affair - ATK
                         @if($data->qty_request != null)
                         {{$data->qty_request}}
                         @else 
-                        0
+                        {{$data->qty_akhir}}
                         @endif
                       </td>
                       <td>{{$data->keterangan}}</td>
@@ -525,8 +532,8 @@ General Affair - ATK
             <textarea name="keterangan" id="ket" class="form-control" required placeholder="Enter Description"></textarea>
           </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
-              <button type="submit" class="btn btn-sm btn-success" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp Submit</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
+              <button type="submit" class="btn btn-sm btn-success"><i class="bx bx-check"></i>&nbsp Submit</button>
             </div>
         </form>
         </div>
@@ -554,8 +561,8 @@ General Affair - ATK
             <textarea name="deskripsi_edit" id="deskripsi_edit" class="form-control" required></textarea>
           </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
-              <button type="submit" class="btn btn-sm btn-warning" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp Update</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
+              <button type="submit" class="btn btn-sm btn-warning"><i class="bx bx-check"></i>&nbsp Update</button>
             </div>
         </form>
         </div>
@@ -575,11 +582,11 @@ General Affair - ATK
           <input type="" name="id_barang_restok" id="id_barang_restok" hidden>
           <div class="form-group">
             <label>Nama Barang</label>
-            <input type="text" name="nama_barang_restok" id="nama_barang_restok" class="form-control" readonly>
+            <input type="text" name="nama_barang_restok" id="nama_barang_restok" class="form-control" disabled>
           </div>
           <div class="form-group">
            <label>Qty Awal</label>
-            <input type="text" name="qty_awal_restok" id="qty_awal_restok" class="form-control" readonly>
+            <input type="text" name="qty_awal_restok" id="qty_awal_restok" class="form-control" disabled>
           </div>
           <div class="form-group">
            <label>Qty Masuk</label>
@@ -587,11 +594,11 @@ General Affair - ATK
           </div>
           <div class="form-group">
             <label for="sow">Deskripsi</label>
-            <textarea name="deskripsi_restok" id="deskripsi_restok" class="form-control" readonly></textarea>
+            <textarea name="deskripsi_restok" id="deskripsi_restok" class="form-control" disabled></textarea>
           </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
-              <button type="submit" class="btn btn-sm btn-warning" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp Update</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
+              <button type="submit" class="btn btn-sm btn-warning"><i class="bx bx-check"></i>&nbsp Update</button>
             </div>
         </form>
         </div>
@@ -627,14 +634,14 @@ General Affair - ATK
                 </td>
                 <td style="margin-bottom: 50px;">
                   <br>
-                 <input class="form-control stock" placeholder="stock" data-rowid="0" name="stock[]" id="stock" style="width: 70px;font-size: 14px" readonly>
+                 <input class="form-control stock" placeholder="stock" data-rowid="0" name="stock[]" id="stock" style="width: 70px;font-size: 14px" disabled>
                 </td>
                 <td style="margin-bottom: 50px;">
                   <br>
                  <input type="number" class="form-control" placeholder="qty" name="qty[]" id="qty_butuh" style="width: 70px;font-size: 14px" >
                 </td>
                 <td style="margin-bottom: 50px">
-                  <br><input type="text" class="form-control units" data-rowid="0" name="unit[]" style="width: 100px" id="unit_produk" readonly >
+                  <br><input type="text" class="form-control units" data-rowid="0" name="unit[]" style="width: 100px" id="unit_produk" disabled >
                 </td>
                 <td style="margin-bottom: 50px;">
                   <br>
@@ -717,24 +724,24 @@ General Affair - ATK
         <div class="modal-body">
           <div class="form-group">
             <label>Nama Barang</label>
-            <input type="text" name="nama_barang_accept" id="nama_barang_accept" class="form-control" readonly>
+            <input type="text" name="nama_barang_accept" id="nama_barang_accept" class="form-control" disabled>
           </div>
           <div class="form-group">
             <label>Quantity</label>
-            <input type="number" name="qty_accept" id="qty_accept" readonly class="form-control" required>
+            <input type="number" name="qty_accept" id="qty_accept" disabled class="form-control" required>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="text" name="description_accept" id="description_accept" class="form-control" readonly>
+            <input type="text" name="description_accept" id="description_accept" class="form-control" disabled>
           </div>
           <div class="form-group">
             <label>Tgl Request</label>
-            <input type="text" name="tgl_request_accept" id="tgl_request_accept" class="form-control" readonly>
+            <input type="text" name="tgl_request_accept" id="tgl_request_accept" class="form-control" disabled>
           </div>
           
           <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
-            <button type="submit" id="btn_accept_atk" class="btn btn-sm btn-success" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp Accept</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
+            <button type="submit" id="btn_accept_atk" class="btn btn-sm btn-success"><i class="bx bx-check"></i>&nbsp Accept</button>
           </div>
         </div>
       </div>
@@ -751,28 +758,28 @@ General Affair - ATK
           <input name="id_trans" id="id_trans" hidden>
           <div class="form-group">
             <label>Nama Barang</label>
-            <input type="text" name="nama_barang_accept" id="nama_barang_accept2" class="form-control" readonly>
+            <input type="text" name="nama_barang_accept" id="nama_barang_accept2" class="form-control" disabled>
           </div>
           <div class="form-group">
             <label>Quantity</label>
-            <input type="number" name="qty_accept" id="qty_accept2" readonly class="form-control">
+            <input type="number" name="qty_accept" id="qty_accept2" disabled class="form-control">
           </div>
           <div class="form-group">
             <label>Description</label>
-            <input type="text" name="description_accept" id="description_accept2" class="form-control" readonly>
+            <input type="text" name="description_accept" id="description_accept2" class="form-control" disabled>
           </div>
           <div class="form-group">
             <label>Link Product</label>
-            <textarea class="form-control" id="link_product_accept2" readonly></textarea>
+            <textarea class="form-control" id="link_product_accept2" disabled></textarea>
           </div>
           <div class="form-group">
             <label>Tgl Request</label>
-            <input type="text" name="tgl_request_accept" id="tgl_request_accept2" class="form-control" readonly>
+            <input type="text" name="tgl_request_accept" id="tgl_request_accept2" class="form-control" disabled>
           </div>
           
           <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
-            <button type="submit" id="btn_accept_request" class="btn btn-sm btn-success" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp Accept</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
+            <button type="submit" id="btn_accept_request" class="btn btn-sm btn-success"><i class="bx bx-check"></i>&nbsp Accept</button>
           </div>
         </div>
       </div>
@@ -791,15 +798,15 @@ General Affair - ATK
           <input type="" name="qty_awal_reject" id="qty_awal_reject" hidden>
           <input type="" name="qty_akhir_reject" id="qty_akhir_reject" hidden>
           <div class="form-group">
-          	<h6 style="text-align: center;"><b>Are you sure to reject?</b></h6>
+            <h6 style="text-align: center;"><b>Are you sure to reject?</b></h6>
           </div>
           <div class="form-group">
-          	<label>Note</label>
-          	<textarea class="form-control" name="note_reject" id="note_reject" required></textarea>
+            <label>Note</label>
+            <textarea class="form-control" name="note_reject" id="note_reject" required></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
-            <button type="submit" id="btn_reject_atk" class="btn btn-sm btn-danger" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp Reject</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
+            <button type="submit" id="btn_reject_atk" class="btn btn-sm btn-danger"><i class="bx bx-check"></i>&nbsp Reject</button>
           </div>
         </form>
         </div>
@@ -822,8 +829,8 @@ General Affair - ATK
             <textarea class="form-control" name="note_reject" id="note_reject" required></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
-            <button type="submit" class="btn btn-sm btn-danger" id="btn_reject_request" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp Reject</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
+            <button type="submit" class="btn btn-sm btn-danger" id="btn_reject_request"><i class="bx bx-check"></i>&nbsp Reject</button>
           </div>
         </form>
         </div>
@@ -839,11 +846,11 @@ General Affair - ATK
             @csrf
           <input type="text" name="id_transaction_reject2" id="id_transaction_reject2" hidden>
           <div class="form-group">
-          	<label>Note</label>
-          	<textarea class="form-control" name="note_reject" id="note_reject2" readonly></textarea>
+            <label>Note</label>
+            <textarea class="form-control" name="note_reject" id="note_reject2" disabled></textarea>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
           </div>
         </form>
         </div>
@@ -866,23 +873,23 @@ General Affair - ATK
         </div>
         <div class="form-group"> 
           <label>Nama Barang</label>
-          <input name="nama_barang_done" id="nama_barang_done" class="form-control" readonly> 
+          <input name="nama_barang_done" id="nama_barang_done" class="form-control" disabled> 
         </div>
         <div class="form-group"> 
           <label>Qty Request</label>
-          <input name="qty_request_done_field" class="form-control" id="qty_request_done_field" readonly>
+          <input name="qty_request_done_field" class="form-control" id="qty_request_done_field" disabled>
         </div>
         <div class="form-group">
           <label>Qty Now</label>
-          <input name="qty_now_pr" id="qty_now_pr" class="form-control" readonly>
+          <input name="qty_now_pr" id="qty_now_pr" class="form-control" disabled>
         </div>
         <div class="form-group">
           <label>Qty Restock</label>
           <input type="number" name="qty_restock_pr" id="qty_restock_pr" class="form-control">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
-          <button type="submit" class="btn btn-sm btn-success" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp YES</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
+          <button type="submit" class="btn btn-sm btn-success"><i class="bx bx-check"></i>&nbsp YES</button>
         </div>
       </form>
       </div>
@@ -908,7 +915,7 @@ General Affair - ATK
         </div>
         <div class="form-group"> 
           <label>Qty Request</label>
-          <input name="qty_request_done2" class="form-control" id="qty_request_done2" readonly>
+          <input name="qty_request_done2" class="form-control" id="qty_request_done2" disabled>
         </div>
         <div class="form-group">
           <label>Qty Restock</label>
@@ -933,8 +940,8 @@ General Affair - ATK
             <textarea name="keterangan_request" id="ket2" class="form-control" required placeholder="Enter Description"></textarea>
           </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-outline-secondary" style="width: 70px; height: 25px;" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
-          <button type="submit" id="btn_done_request" class="btn btn-sm btn-success" style="width: 70px; height: 25px;"><i class="bx bx-check"></i>&nbsp YES</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspCANCEL</button>
+          <button type="submit" id="btn_done_request" class="btn btn-sm btn-success"><i class="bx bx-check"></i>&nbsp YES</button>
         </div>
       </form>
       </div>
@@ -1010,7 +1017,7 @@ General Affair - ATK
     var i = 1;
     $('#addMore').click(function(){  
          i++;  
-         $('#product-add').append('<tr id="row'+i+'"><td><br><select class="form-control produk" name="atk[]" data-rowid="'+i+'" id="atk2"></select></td><td hidden><input type="" name="id_barangs[]" id="id_barangs" class="id_barangs" value="" data-rowid="'+i+'" ></td><td style="margin-bottom: 50px;"><br><input class="form-control stock" placeholder="stock" data-rowid="'+i+'" name="stock[]" id="stock" style="width: 70px;font-size: 14px" readonly></td><td style="margin-bottom: 50px;"><br><input type="number" class="form-control" placeholder="qty" name="qty[]" id="quantity" style="width: 70px;font-size: 14px" required></td><td style="margin-bottom: 50px"><br><input type="text" class="form-control units" data-rowid="'+i+'" style="width: 100px" name="unit[]" id="unit_produk" readonly ></td><td style="margin-bottom: 50px;"><br><textarea type="text" class="form-control" placeholder="Enter keterangan" name="keterangan[]" id="keterangan" style="width: 300px;font-size: 14px" required></textarea></td><td><a href="javascript:void(0);" id="'+i+'"class="remove"><span class="bx bx-x" style="font-size: 18px;color:red;margin-top: 25px"></span></a></td></tr>');
+         $('#product-add').append('<tr id="row'+i+'"><td><br><select class="form-control produk" name="atk[]" data-rowid="'+i+'" id="atk2"></select></td><td hidden><input type="" name="id_barangs[]" id="id_barangs" class="id_barangs" value="" data-rowid="'+i+'" ></td><td style="margin-bottom: 50px;"><br><input class="form-control stock" placeholder="stock" data-rowid="'+i+'" name="stock[]" id="stock" style="width: 70px;font-size: 14px" disabled></td><td style="margin-bottom: 50px;"><br><input type="number" class="form-control" placeholder="qty" name="qty[]" id="quantity" style="width: 70px;font-size: 14px" required></td><td style="margin-bottom: 50px"><br><input type="text" class="form-control units" data-rowid="'+i+'" style="width: 100px" name="unit[]" id="unit_produk" disabled ></td><td style="margin-bottom: 50px;"><br><textarea type="text" class="form-control" placeholder="Enter keterangan" name="keterangan[]" id="keterangan" style="width: 300px;font-size: 14px" required></textarea></td><td><a href="javascript:void(0);" id="'+i+'"class="remove"><span class="bx bx-x" style="font-size: 18px;color:red;margin-top: 25px"></span></a></td></tr>');
 
       initatk();
 
@@ -1031,12 +1038,14 @@ General Affair - ATK
       }
     });
 
-  	$('.unit_atk').select2();
+    $('.unit_atk').select2({
+      dropdownParent:$("#add_asset")
+    });
 
-  	function reject_note(id_transaction,note) {
-  		$('#id_transaction_reject2').val(id_transaction);
-  		$('#note_reject2').val(note);
-  	}
+    function reject_note(id_transaction,note) {
+      $('#id_transaction_reject2').val(id_transaction);
+      $('#note_reject2').val(note);
+    }
 
     function id_accept_update(id_transaction,id_barang,qty,qty_akhir,nama_barang,keterangan,nik_peminjam,created_at){
       var swalAccept;
@@ -1530,7 +1539,8 @@ General Affair - ATK
 
     if (!requestTable.rows().count()) {
     }else{
-        $('#home-tab').append('<span class="badge">'+ requestTable.rows().count() +'</span>')
+        //add badge
+        // $('#home-tab').append('<span class="badge">'+ requestTable.rows().count() +'</span>')
     }
     
 

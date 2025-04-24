@@ -305,7 +305,7 @@ SBE Setting
     function validateInput(val){
     	console.log(val)
     	if ($("#"+val).val() != "") {
-    		$("#"+val).next().hide()
+    		$("#"+val).next().attr('style','display:none!important')
     		$("#"+val).closest("div").removeClass("has-error")
     	}
     }

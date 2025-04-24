@@ -467,8 +467,8 @@ Claim
 						$("#btnRejectClaim").prop("disabled",true)
 					}
 				}else{
-					$("#btnApproveClaim").hide()
-					$("#btnRejectClaim").hide()
+					$("#btnApproveClaim").attr('style','display:none!important')
+					$("#btnRejectClaim").attr('style','display:none!important')
 				}
 			}
 		})

@@ -1283,7 +1283,7 @@ class HRController extends Controller
         $update = User::where('nik',$nik)->first();
         // $update->nik            = $nik;
         $update->name           = $req['name'];
-        $update->email          = $req['email'];
+        // $update->email          = $req['email'];
         $update->date_of_birth  = date("Y-m-d",strtotime(str_replace('/','-',$req['date_of_birth'])));
         $update->date_of_entry  = date("Y-m-d",strtotime(str_replace('/','-',$req['date_of_entry'])));
         $update->phone          = substr(str_replace('.','',$req['phone']),1);
@@ -1349,30 +1349,31 @@ class HRController extends Controller
         // }
 
         // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
-        // $this->validate($request, [
-        //   'image'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:'
-        // ]);
+        $this->validate($req, [
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048' // max:2048 means 2MB
+        ]);
 
-        // if($req->file('gambar') === null) {
-        //     $update->gambar = $update->gambar;
-        // } else {
-        //     $allowedfileExtension   = ['jpg','png', 'jpeg', 'JPG', 'PNG'];
-        //     $file                   = $req->file('gambar');
-        //     $fileName               = $file->getClientOriginalName();
-        //     $extension              = $file->getClientOriginalExtension();
-        //     $check                  = in_array($extension,$allowedfileExtension);
+        if ($req->hasFile('gambar')) {
+            $file = $req->file('gambar');
+            $extension = $file->getClientOriginalExtension();
 
-        //     if ($check) {
-        //         Image::make($file->getRealPath())->resize(1024, 1024)->save('image/'.$fileName);
+            // Optional: double-check extension if needed
+            $allowedfileExtension = ['jpg', 'jpeg', 'png'];
+            if (!in_array(strtolower($extension), $allowedfileExtension)) {
+                return redirect()->back()->with('alert', 'Oops! Only jpg, jpeg, png files are allowed.');
+            }
 
-        //         $update->gambar = $fileName;
-        //     } else {
-        //         return redirect()->back()->with('alert','Oops! Only jpg, png');
-        //     }
+            $fileName = time() . '_' . $file->getClientOriginalName(); // to avoid file name conflicts
 
-            
-        // }
-        
+            // Resize and save image
+            \Image::make($file->getRealPath())->resize(1024, 1024)->save(public_path('image/' . $fileName));
+
+            // Update the model's gambar field
+            $update->gambar = $fileName;
+        } else {
+            return redirect()->back()->with('alert', 'No image uploaded!');
+        }
+                
         $update->update();
 
         return redirect()->back()->with('success','Successfully Updated Profile!');

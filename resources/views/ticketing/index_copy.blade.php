@@ -1118,14 +1118,14 @@ Ticketing
 											<li><a class="dropdown-item" href="#" onclick="changeNumberEntries(50)">50</a></li>
 											<li><a class="dropdown-item" href="#" onclick="changeNumberEntries(100)">100</a></li>
 										</ul>
-										<button style="margin-left: 10px;" title="Clear Filter" id="clearFilterTable" type="button" class="btn btn-sm btn-secondary btn-flat">
+										<button title="Clear Filter" id="clearFilterTable" type="button" class="btn btn-sm btn-secondary btn-flat">
 											<i class="bx bx-x"></i>
 										</button>
 									</div>
 								</div>
 								<div class="col-md-7 col-xs-12">
-									<div class="mt-5">
-										<button style="margin-left: 10px;" type="button" id="btnShowColumnTicket" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+									<div class="mt-4">
+										<button type="button" id="btnShowColumnTicket" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 											Displayed Column
 										</button>
 										<ul class="dropdown-menu dropdown-menu-end" style="padding-left:5px;padding-right: 5px;" id="selectShowColumnTicket">
@@ -1138,7 +1138,11 @@ Ticketing
 											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="6"><span class="text">PIC</span></li>
 											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="7"><span class="text">Severity</span></li>
 											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="8"><span class="text">Status</span></li>
-											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="9"><span class="text">Operator</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="13"><span class="text">Operator</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="9"><span class="text">Response Time</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="11"><span class="text">Resolution Time</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="10"><span class="text">Status Response Time</span></li>
+											<li style="cursor: pointer;"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="12"><span class="text">Status Resolution Time</span></li>
 										</ul>
 										<button style="margin-left: 10px;" title="Refresh Table" id="reloadTable" type="button" class="btn btn-sm btn-secondary ">
 											<i class="bx bx-refresh"></i>
@@ -2247,30 +2251,36 @@ Ticketing
 					<div class="modal-body">
 						<div class="form-horizontal">
 							<div class="form-group">
-								<label class="col-sm-2 control-label">
-									Email To : 
-								</label>
-								<div class="col-sm-10">
-									<input class="form-control" name="emailTo" id="emailCloseTo">
+								<div class="row">
+									<label class="col-sm-2 control-label">
+										Email To : 
+									</label>
+									<div class="col-sm-10">
+										<input class="form-control" name="emailTo" id="emailCloseTo">
+									</div>
 								</div>
 								<div class="col-sm-10 col-sm-offset-2 invalid-feedback" style="margin-bottom: 0px;">
 									Enter the recipient of this close email!
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">
-									Email Cc :
-								</label>
-								<div class="col-sm-10">
-									<input class="form-control" name="emailCc" id="emailCloseCc">
+								<div class="row">
+									<label class="col-sm-2 control-label">
+										Email Cc :
+									</label>
+									<div class="col-sm-10">
+										<input class="form-control" name="emailCc" id="emailCloseCc">
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label">
-									Subject :
-								</label>
-								<div class="col-sm-10">
-									<input class="form-control" name="emailSubject" id="emailCloseSubject">
+								<div class="row">
+									<label class="col-sm-2 control-label">
+										Subject :
+									</label>
+									<div class="col-sm-10">
+										<input class="form-control" name="emailSubject" id="emailCloseSubject">
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -3584,7 +3594,7 @@ Ticketing
 			SlmEmailSetting()
 		}
 
-		//$('#tableTripRequest').hide();
+		//$('#tableTripRequest').attr('style','display:none!important');
 
 		// $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 		// 	var target = $(e.target).attr("href"); // Dapatkan target tab yang diklik
@@ -3593,7 +3603,7 @@ Ticketing
 		// 	if (target === "#tripRequest") {
 		// 		$('#tableTripRequest').fadeIn();  // Tampilkan tabel dengan efek fade
 		// 	} else {
-		// 		$('#tableTripRequest').hide();    // Sembunyikan tabel jika tab lain aktif
+		// 		$('#tableTripRequest').attr('style','display:none!important');    // Sembunyikan tabel jika tab lain aktif
 		// 	}
 		// });
 
@@ -4534,7 +4544,7 @@ Ticketing
 	    $('#selectCatAsset').val("");
 
 	    $("div").removeClass('needs-validation')
-			$(".invalid-feedback").hide()
+			$(".invalid-feedback").attr('style','display:none!important')
 
 			if ($("#inputATM").next().next(".invalid-feedback").next("a")) {
 	    	$("#inputATM").next().next(".invalid-feedback").next("a").remove()
@@ -4575,7 +4585,7 @@ Ticketing
 					$("#inputSerial").val("");
 					$("#inputType").val("");
 					$("#inputSlm").val("");
-					$("#slmDiv").hide();
+					$("#slmDiv").attr('style','display:none!important');
 					$("#selectPID").attr("disabled",false)
 					$("#selectCatAsset").attr("disabled",true)
 					$("#inputLocation").attr("disabled",false)
@@ -4584,7 +4594,7 @@ Ticketing
 					if ($("#inputATM").next().next(".invalid-feedback").next("a")) {
           	$("#inputATM").next().next(".invalid-feedback").next("a").remove()
           	$("div").removeClass('needs-validation')
-						$(".invalid-feedback").hide()
+						$(".invalid-feedback").attr('style','display:none!important')
           }
 				} else {
 					$.ajax({
@@ -4661,7 +4671,7 @@ Ticketing
 							$("#inputLocation").val("");
 							$("#inputType").val("");
 							$("#inputSerial").val("");
-							$("#slmDiv").hide();
+							$("#slmDiv").attr('style','display:none!important');
 							$("#inputSlm").val("");
 							$("#inputEngineerOpen").val("");
 		        }
@@ -4740,11 +4750,11 @@ Ticketing
 										      $('#selectPID').empty();
 										      $('#selectPID').append('<option></option>');
 				                	$("#inputClient").val("").trigger("change")
-													// $("#inputATMid").hide();
+													// $("#inputATMid").attr('style','display:none!important');
 				         					// $('#hrLine').nextUntil('#createTicket').each(function() {
-													//   $(this).hide()
+													//   $(this).attr('style','display:none!important')
 													// });
-													// $("#createTicket").hide()
+													// $("#createTicket").attr('style','display:none!important')
 				                }
 				              })
 										}
@@ -4819,11 +4829,11 @@ Ticketing
 											      $('#selectPID').empty();
 											      $('#selectPID').append('<option></option>');
 					                  $("#inputClient").val("").trigger("change")
-														// $("#inputATMid").hide();
+														// $("#inputATMid").attr('style','display:none!important');
 					         					// $('#hrLine').nextUntil('#createTicket').each(function() {
-														//     $(this).hide()
+														//     $(this).attr('style','display:none!important')
 														// });
-														// $("#createTicket").hide()
+														// $("#createTicket").attr('style','display:none!important')
 					                }
 					              })
 											}
@@ -4913,7 +4923,7 @@ Ticketing
 			if (acronym_client == "INTERNAL" || acronym_client == "ADMF") {
 				$("#selectCatAsset").closest("div").prev("label").text("Asset Category")
 			}else{
-				$("#categoryDiv").hide();
+				$("#categoryDiv").attr('style','display:none!important');
 			}
 
 	    // $('#selectCatAsset').on('select2:data-loaded', function(e, data) {
@@ -4921,7 +4931,7 @@ Ticketing
 					// $("#selectCatAsset").closest("div").prev("label").text("Asset Category*")
 	    //   } else {
 	    //   	$("div").removeClass('needs-validation')
-					// $(".invalid-feedback").hide()
+					// $(".invalid-feedback").attr('style','display:none!important')
 					// $("#selectCatAsset").closest("div").prev("label").text("Asset Category")
 	    //   }
 	    // });
@@ -4943,7 +4953,7 @@ Ticketing
 		$("#inputSeverity").attr("disabled",false)
 		$("#problemDiv label").text("Problem*")
 		$("#reportDiv label").text("Report Time*")
-		$("#engineerDiv").hide();
+		$("#engineerDiv").attr('style','display:none!important');
 		if($(this).val() == "Preventive Maintenance"){
 			$("#inputSeverity").attr("enabled",true)
 			prepareNewParameter()
@@ -5005,7 +5015,7 @@ Ticketing
 		$("#noteDiv").show();
 		$("#serialDiv").show();
 		$("#reportDiv").show();
-		// $("#slmDiv").hide();
+		// $("#slmDiv").attr('style','display:none!important');
 		$("#inputRefrence").val("");
 		$("#inputPIC").val("");
 		$("#inputContact").val("");
@@ -5025,12 +5035,12 @@ Ticketing
 		if($("#inputTypeTicket").val() != "none"){
 			//ngga kepake harusnyaa
 			// if($("#inputClient option:selected").text().includes("Absensi")){
-			// 	$("#serialDiv").hide();
-			// 	$("#slmDiv").hide();
+			// 	$("#serialDiv").attr('style','display:none!important');
+			// 	$("#slmDiv").attr('style','display:none!important');
 			// 	$("#inputSlm").val("");
 			// 	$("#typeDiv").show();
 			// 	$("#inputAbsenLocation").show();
-			// 	$("#inputSwitchLocation").hide();
+			// 	$("#inputSwitchLocation").attr('style','display:none!important');
 			// 	$("#inputLocation").remove();
 			// 	$("#ipMechineDiv").show();
 			// 	$("#ipServerDiv").show();
@@ -5038,7 +5048,7 @@ Ticketing
 
 			//ngga kepake harusnya
 			// if($("#inputClient option:selected").text().includes("Switch")){
-				// $("#serialDiv").hide();
+				// $("#serialDiv").attr('style','display:none!important');
 				// $("#inputLocation").remove();
 				// $("#typeDiv").show();
 				// $("#inputAbsenLocation").show();
@@ -5048,9 +5058,9 @@ Ticketing
 				// $("#inputLocation").remove();
 				// $("#typeDiv").show();
 				// $("#inputSwitchLocation").show();
-				// $("#inputAbsenLocation").hide();
+				// $("#inputAbsenLocation").attr('style','display:none!important');
 				// $("#ipMechineDiv").show();
-				// $("#slmDiv").hide()
+				// $("#slmDiv").attr('style','display:none!important')
 				// $("#inputSlm").val("");
 				// $("#ipServerDiv").show();
 			// } 
@@ -5066,7 +5076,7 @@ Ticketing
 
 	function createTicket(clientBanking){
 		$("div").removeClass('needs-validation')
-		$(".invalid-feedback").hide()
+		$(".invalid-feedback").attr('style','display:none!important')
 
 		if ($("#inputATM").next().next(".invalid-feedback").next("a")) {
     	$("#inputATM").next().next(".invalid-feedback").next("a").remove()
@@ -5145,7 +5155,7 @@ Ticketing
 			$("#reportDiv .col-sm-5.firstReport .input-group .input-group-addon i").css("color",'#555')
 		} else {
 			$("div").removeClass('needs-validation')
-		  $(".invalid-feedback").hide()
+		  $(".invalid-feedback").attr('style','display:none!important')
 
 			$(".needs-validation").removeClass('needs-validation')
 			var waktu = moment(($("#inputDate").val()), "DD-MMM-YY HH:mm").format("D MMMM YYYY");
@@ -5154,7 +5164,7 @@ Ticketing
 			var schedule_time = moment(($("#inputReportingTime").val() + " " + $("#inputReportingDate").val()), "HH:mm:ss DD/MM/YYYY ").format("HH:mm");
 
 			if ($("div").hasClass('needs-validation')) {
-				$("#tableTicket").hide();
+				$("#tableTicket").attr('style','display:none!important');
 			}else{
 				$("#tableTicket").show();
 			}
@@ -5173,7 +5183,7 @@ Ticketing
 			$("#holderNote").text($("#inputNote").val());
 			$("#holderProblem").prev().text("Problem")
 			$("#holderDate").parent().show()
-			$("#holderEngineer").hide();
+			$("#holderEngineer").attr('style','display:none!important');
 			$("#holderSeverity").parent().show()
 			$("#holderStatus").prev().text("Status")
 			$("#holderWaktu").prev().text("Time")
@@ -5188,8 +5198,8 @@ Ticketing
 				$("#holderProblem").prev().text("Activity")
 				$("#holderStatus").prev().text("Date")
 				$("#holderWaktu").prev().text("Time")
-				$("#holderDate").parent().hide()
-				$("#holderSeverity").parent().hide()
+				$("#holderDate").parent().attr('style','display:none!important')
+				$("#holderSeverity").parent().attr('style','display:none!important')
 			} else if($("#inputTypeTicket").val() == "Permintaan Penawaran"){
 				$("#holderStatus").html("<b>" + schedule_date + "</b>");
 				$("#holderWaktu").html("<b>" + schedule_time + "</b>");
@@ -5200,8 +5210,8 @@ Ticketing
 				$("#holderProblem").prev().text("Activity")
 				$("#holderStatus").prev().text("Date")
 				$("#holderWaktu").prev().text("Time")
-				$("#holderDate").parent().hide()
-				$("#holderSeverity").parent().hide()
+				$("#holderDate").parent().attr('style','display:none!important')
+				$("#holderSeverity").parent().attr('style','display:none!important')
 			} else {
 				if($("#inputTypeTicket").val() == "Permintaan Layanan"){
 					$("#holderProblem").prev().text("Activity")
@@ -5247,8 +5257,8 @@ Ticketing
 			} else {
 
 				if($("#inputClient option:selected").text().includes("Absensi")){
-					$("#holderIDATM2").hide();
-					$("#holderSerial1").hide();
+					$("#holderIDATM2").attr('style','display:none!important');
+					$("#holderSerial1").attr('style','display:none!important');
 					$("#holderIDATM3").show();
 					$("#holderIPMechine").show();
 					$("#holderIPMechine2").text($("#inputIpMechine").val());
@@ -5256,7 +5266,7 @@ Ticketing
 					$("#holderIPServer2").text($("#inputIpServer").val());
 					$("#holderLocation").text($("#inputAbsenLocation").select2('data')[0].text);
 				} else if($("#inputClient option:selected").text().includes("Switch")){
-					$("#holderIDATM2").hide();
+					$("#holderIDATM2").attr('style','display:none!important');
 					$("#holderSerial1").show();
 					$("#holderIDATM3").show();
 					$("#holderIPMechine").show();
@@ -5265,15 +5275,15 @@ Ticketing
 					// $("#holderIPServer2").text($("#inputIpServer").val());
 					$("#holderLocation").text($("#inputSwitchLocation").select2('data')[0].text);
 				} else {
-					$("#holderIDATM2").hide();
-					$("#holderIDATM3").hide();
+					$("#holderIDATM2").attr('style','display:none!important');
+					$("#holderIDATM3").attr('style','display:none!important');
 				}
 			}
 			// if(clientWincor == 1){
 			// 	$("#createEmailBodyWincor").show()
-			// 	$("#createEmailBodyNormal").hide()
+			// 	$("#createEmailBodyNormal").attr('style','display:none!important')
 			// } else {
-			// 	$("#createEmailBodyWincor").hide()
+			// 	$("#createEmailBodyWincor").attr('style','display:none!important')
 			// 	$("#createEmailBodyNormal").show()
 			// }
 		}
@@ -5297,27 +5307,27 @@ Ticketing
 		$("#inputReportingDate").val('');
 		$("#inputDate").val('');
 		$("#inputNote").val('');
-		$("#typeDiv").hide()
+		$("#typeDiv").attr('style','display:none!important')
 		$("#hrLine").show();
 		$("#hrLine2").show();
 
-		$("#nomorDiv").hide()
-		$("#clientDiv").hide()
-		$("#pidDiv").hide()
-		$("#refrenceDiv").hide()
-		$("#picDiv").hide()
-		$("#contactDiv").hide()
-		$("#categoryDiv").hide()
-		$("#problemDiv").hide()
-		$("#inputATMid").hide()
-		$("#locationDiv").hide()
-		$("#serialDiv").hide()
-		$("#engineerDiv").hide()
-		$("#typeDiv").hide()
-		$("#reportDiv").hide()
-		$("#dateDiv").hide()
-		$("#noteDiv").hide()
-		$("#createTicket").hide()
+		$("#nomorDiv").attr('style','display:none!important')
+		$("#clientDiv").attr('style','display:none!important')
+		$("#pidDiv").attr('style','display:none!important')
+		$("#refrenceDiv").attr('style','display:none!important')
+		$("#picDiv").attr('style','display:none!important')
+		$("#contactDiv").attr('style','display:none!important')
+		$("#categoryDiv").attr('style','display:none!important')
+		$("#problemDiv").attr('style','display:none!important')
+		$("#inputATMid").attr('style','display:none!important')
+		$("#locationDiv").attr('style','display:none!important')
+		$("#serialDiv").attr('style','display:none!important')
+		$("#engineerDiv").attr('style','display:none!important')
+		$("#typeDiv").attr('style','display:none!important')
+		$("#reportDiv").attr('style','display:none!important')
+		$("#dateDiv").attr('style','display:none!important')
+		$("#noteDiv").attr('style','display:none!important')
+		$("#createTicket").attr('style','display:none!important')
 
 		$("#holderID").text('');
 		$("#holderRefrence").text('');
@@ -5339,22 +5349,22 @@ Ticketing
 		$("#holderStatus").html('');
 		$("#holderWaktu").html('');
 
-		$("#holderIDATM2").hide();
-		$("#holderIDATM3").hide();
-		$("#holderIPMechine").hide();
-		$("#holderIPServer").hide();
+		$("#holderIDATM2").attr('style','display:none!important');
+		$("#holderIDATM3").attr('style','display:none!important');
+		$("#holderIPMechine").attr('style','display:none!important');
+		$("#holderIPServer").attr('style','display:none!important');
 		$("#holderIDATM").text('');
 		
-		$("#tableTicket").hide();
+		$("#tableTicket").attr('style','display:none!important');
 
 		$('.emailMultiSelector').remove()
 		$("#emailOpenTo").val('')
 		$("#emailOpenCc").val('')
 		$("#emailOpenSubject").val('')
 		$("#bodyOpenMail").empty()
-		$("#sendTicket").hide()
+		$("#sendTicket").attr('style','display:none!important')
 
-		$("#formNewTicket").hide();
+		$("#formNewTicket").attr('style','display:none!important');
 		$("#createIdTicket").show();
 	}
 
@@ -5436,15 +5446,15 @@ Ticketing
 		if ($("#inputATM").next().next(".invalid-feedback").next("a")) {
     	$("#inputATM").next().next(".invalid-feedback").next("a").remove()
     	// $("div").removeClass('needs-validation')
-			// $(".invalid-feedback").hide()
+			// $(".invalid-feedback").attr('style','display:none!important')
     }
 
 		if ($("#inputTypeTicket").val() != "") {
 			// $("div").removeClass('needs-validation')
-			// $(".invalid-feedback").hide()
+			// $(".invalid-feedback").attr('style','display:none!important')
 			if ($("#selectCatAsset").closest("div").prev("label").text().includes("*")) {
 				if ($("#inputClient").val() == "INTERNAL" || $("#inputClient").val() == "ADMF") {
-						$("#inputATMid").hide();
+						$("#inputATMid").attr('style','display:none!important');
 				}else{
 					if ($("#hrLine").next().is(":visible")) {
 						$("#inputATMid").show();
@@ -5456,7 +5466,7 @@ Ticketing
 				if ($("#selectCatAsset").val() == "ATM" || $("#selectCatAsset").val() == "CRM") {
 					$("#categoryDiv").show();
 				}else{
-					$("#categoryDiv").hide();
+					$("#categoryDiv").attr('style','display:none!important');
 				}
 			}
 		}
@@ -5503,9 +5513,9 @@ Ticketing
 		// 				pid:$("#selectPID").val(),
 		// 			},
 		// 			success: function(result){
-		// 				$("#inputATMid").hide();
+		// 				$("#inputATMid").attr('style','display:none!important');
 
-		// 				$('#inputSwitchLocation').hide()
+		// 				$('#inputSwitchLocation').attr('style','display:none!important')
 		// 				if ($('#inputSwitchLocation').select2()) {
 		// 					$('#inputSwitchLocation').select2('destroy')
 		// 				}
@@ -5546,9 +5556,9 @@ Ticketing
 		// 				pid:$("#selectPID").val(),
 		// 			},
 		// 			success: function(result){
-		// 				$("#inputATMid").hide();
+		// 				$("#inputATMid").attr('style','display:none!important');
 
-		// 				$('#inputAbsenLocation').hide()
+		// 				$('#inputAbsenLocation').attr('style','display:none!important')
 		// 				if ($('#inputAbsenLocation').select2()) {
 		// 					$('#inputAbsenLocation').select2('destroy')
 		// 				}
@@ -5586,7 +5596,7 @@ Ticketing
 		// 		$("#inputATM").val("");
 		// 		$("#inputSerial").val("");
 		// 		$("#inputLocation").val("");
-		// 		$("#inputATMid").hide();
+		// 		$("#inputATMid").attr('style','display:none!important');
 		// 	}
 		// }
 	}
@@ -5670,7 +5680,7 @@ Ticketing
 	function createEmailBody(){
 		if($("#inputTemplateEmail").val() != "none"){
 			$("#sendTicket").show();
-			$("#formNewTicket").hide();
+			$("#formNewTicket").attr('style','display:none!important');
 
 			$("#createEmailBody").removeAttr("disabled")
 
@@ -5866,7 +5876,7 @@ Ticketing
 	}
 
 	function backOpenEmail(){
-		$("#sendTicket").hide();
+		$("#sendTicket").attr('style','display:none!important');
 		$("#formNewTicket").show();
 
 		$("#createEmailBody").attr("disabled","true")
@@ -5879,7 +5889,7 @@ Ticketing
 			swalWithCustomClass.fire('Error',"You have to fill in the email to to open a ticket!",'error');
 		} else {
 			$("#emailOpenTo").parent().parent().removeClass("needs-validation")
-			$("#emailOpenTo").parent().siblings().last().hide()
+			$("#emailOpenTo").parent().siblings().last().attr('style','display:none!important')
 			var customerAcronym = $("#inputticket").val().split('/')[1];
 			// if(
 			// 	customerAcronym == "BJBR" 
@@ -5960,6 +5970,7 @@ Ticketing
 				type_ticket:type_ticket,
 				pid:pid
 			}
+			console.log(dataAjax.report)
 			var textSwal = ""
 			if($("#emailOpenCc").val() == ""){
 				textSwal = "This ticket does not have a CC on the email recipient for this " + typeActivity + " ticket!"
@@ -6397,8 +6408,8 @@ Ticketing
 				}
 			} else {
 				if(match){
-					$(".columnIdAtm").hide()
-					$(".columnTicketNum").hide()
+					$(".columnIdAtm").attr('style','display:none!important')
+					$(".columnTicketNum").attr('style','display:none!important')
 				} else {
 					$(".columnIdAtm").show()
 					$(".columnTicketNum").show()
@@ -6561,7 +6572,7 @@ Ticketing
 				if(result.pending.type === "Request Part"){
 					$('#requestPart').show()
 				}else{
-					$('#requestPart').hide()
+					$('#requestPart').attr('style','display:none!important')
 				}
 				$('#modal-approval-pending').modal('toggle');
 			}
@@ -6856,17 +6867,17 @@ Ticketing
 				var regex = /<br\s*[\/]?>/gi;
 				// $("#mydiv").html(str.replace(regex, "\n"));
 				$("#rowGeneral").show()
-				$("#rowAbsen").hide()
+				$("#rowAbsen").attr('style','display:none!important')
 				$("#ticketLocation").val(result.location);
 
 				if($("#inputClient option:selected").text().includes("CCTV")){
 					$("#ticketSerialArea").show()
-					$("#ticketSerial").hide()
+					$("#ticketSerial").attr('style','display:none!important')
 					$("#ticketSerialArea").val(result.serial_device.substring(0, result.serial_device.length - 4).replace(regex, "\n"));
 				} else if (result.id_ticket.split("/")[1] == "BTNI" && result.id_detail.id_client == 29) {
 					// $("#ticketSerialArea").show()
 					$("#rowAbsen").show()
-					$("#rowGeneral").hide()
+					$("#rowGeneral").attr('style','display:none!important')
 					if(result.machine_absen == null){
 						swalWithCustomClass.fire(
 							'Absen Machine is not found!',
@@ -6888,7 +6899,7 @@ Ticketing
 					// $("#ticketSerialArea").val(result.serial_device.substring(0, result.serial_device.length - 4).replace(regex, "\n"));
 				} else {
 					$("#ticketSerial").show()
-					$("#ticketSerialArea").hide()
+					$("#ticketSerialArea").attr('style','display:none!important')
 					$("#ticketSerial").val(result.serial_device);
 				}
 				$("#ticketProblem").val(result.problem);
@@ -6990,8 +7001,8 @@ Ticketing
 
 				$("#ticketNoteUpdate").show();
 
-				$("#ticketCouter").hide();
-				$("#ticketRoute").hide();
+				$("#ticketCouter").attr('style','display:none!important');
+				$("#ticketRoute").attr('style','display:none!important');
 
 				$("#updatePendingBtn").prop('disabled',true);
 				if(result.lastest_activity_ticket.activity == "OPEN"){
@@ -7029,7 +7040,7 @@ Ticketing
 					// });
 					// Date format: DD/MM/YYYY for display
 					const displayFormat = "d/m/Y"; // Flatpickr format for 01/04/2025
-					const momentFormat = "DD/MM/YYYY"; // Moment.js format
+					const momentFormat = "YYYY-MM-DD"; // Moment.js format
 
 					// #datePending
 					flatpickr("#datePending", {
@@ -7073,7 +7084,7 @@ Ticketing
 					$("#reOpenButton").prop('disabled',false);
 					$("#reOpenButton").attr("onclick","reOpenTicket('" + result.id_ticket + "','CLOSE')");
 					
-					$("#ticketNoteUpdate").hide();
+					$("#ticketNoteUpdate").attr('style','display:none!important');
 					$("#ticketCouter").show();
 					$("#ticketRoute").show();
 					$("#ticketCouterTxt").val(result.resolve.counter_measure);
@@ -7100,12 +7111,12 @@ Ticketing
 					// 	$('#dateClose').val(moment(result.date).format("DD/MM/YYYY"))
 					// });
 
-					const momentFormat = "DD/MM/YYYY";
+					const momentFormat = "YYYY-MM-DD";
 
 					// #datePending: set default date as today
 					flatpickr("#datePending", {
 					  dateFormat: "m/d/Y", // format Flatpickr understands
-					  defaultDate: moment().format("MM/DD/YYYY"),
+					  defaultDate: moment().format("YYYY-MM-DD"),
 					  onClose: function(selectedDates) {
 					    if (selectedDates[0]) {
 					      $('#datePending').val(moment(selectedDates[0]).format(momentFormat));
@@ -7126,7 +7137,7 @@ Ticketing
 				} else if(result.lastest_activity_ticket.activity == "CANCEL"){
 					$("#ticketStatus").attr('class','badge text-bg-primary');
 					$("#ticketStatus").attr('style','background-color: #555299 !important;');
-					$("#ticketNoteUpdate").hide();
+					$("#ticketNoteUpdate").attr('style','display:none!important');
 					
 					$("#pendingButton").prop('disabled',true);
 					$("#closeButton").prop('disabled',true);
@@ -7283,7 +7294,7 @@ Ticketing
 	}
 
 	function onProgressTicket(){
-		$(".invalid-feedback").hide()
+		$(".invalid-feedback").attr('style','display:none!important')
 		$.ajax({
 			url:"{{url('/ticketing/mail/getOnProgressMailTemplate')}}",
 			type:"GET",
@@ -7367,8 +7378,8 @@ Ticketing
 						$(".holderOnProgressIDATM2").show();
 						$(".holderNumberTicket2").show();
 					} else {
-						$(".holderOnProgressIDATM2").hide();
-						$(".holderNumberTicket2").hide();
+						$(".holderOnProgressIDATM2").attr('style','display:none!important');
+						$(".holderNumberTicket2").attr('style','display:none!important');
 					}
 					$(".holderOnProgressNote").text($("#ticketNote").val());
 					$("#sendOnProgressEmail").attr('onclick','sendOnProgressEmail("' + timeOnProgress.format("YYYY-MM-DD HH:mm:ss") + '")')
@@ -7384,7 +7395,7 @@ Ticketing
 			swalWithCustomClass.fire('Error',"You have to fill in the email to to on progress a ticket!",'error');
 		} else {
 			$("#emailOnProgressTo").parent().parent().removeClass("needs-validation")
-			$("#emailOnProgressTo").parent().siblings().last().hide()
+			$("#emailOnProgressTo").parent().siblings().last().attr('style','display:none!important')
 			var typeAlert = 'warning'
 			var typeActivity = 'On Progress'
 			var typeAjax = "GET"
@@ -7435,7 +7446,7 @@ Ticketing
 				showCancelButton: true,
 			}).then((result) => {
 				if (result.value) {
-					$(".invalid-feedback").hide()
+					$(".invalid-feedback").attr('style','display:none!important')
 					$.ajax({
 						url:"{{url('/ticketing/mail/getCancelMailTemplate')}}",
 						type:"GET",
@@ -7513,8 +7524,8 @@ Ticketing
 										$(".holderCancelIDATM2").show();
 										$(".holderNumberTicket2").show();
 									} else {
-										$(".holderCancelIDATM2").hide();
-										$(".holderNumberTicket2").hide();
+										$(".holderCancelIDATM2").attr('style','display:none!important');
+										$(".holderNumberTicket2").attr('style','display:none!important');
 									}
 									$(".holderCancelNote").text($("#saveReasonCancel").val());
 								},
@@ -7538,7 +7549,7 @@ Ticketing
 			swalWithCustomClass.fire('Error',"You have to fill in the email to to cancel a ticket!",'error');
 		} else {
 			$("#emailCancelTo").parent().parent().removeClass("needs-validation")
-			$("#emailCancelTo").parent().siblings().last().hide()
+			$("#emailCancelTo").parent().siblings().last().attr('style','display:none!important')
 
 			var typeAlert = 'warning'
 			var typeActivity = 'Cancel'
@@ -7568,7 +7579,7 @@ Ticketing
 
 	function pendingTicket(id){
 		$("#saveReasonPending").val('')
-		$(".invalid-feedback").hide()
+		$(".invalid-feedback").attr('style','display:none!important')
 		if($("#ticketStatus").text() == "PENDING"){
 			$.ajax({
 				url:"{{'/ticketing/getPendingTicketData'}}",
@@ -7578,7 +7589,7 @@ Ticketing
 				success:function(result){
 					$("#estimationPendingHolder").show()
 					// $("#timePending").val(moment(result.remind_time).format("hh:mm"))
-					$("#datePending").val(moment(result.remind_time).format("DD/MM/YYYY"))
+					$("#datePending").val(moment(result.remind_time).format("YYYY-MM-DD"))
 					$("#estimationPendingText").text(moment(result.remind_time).format("D MMMM YYYY") + " at " + moment(result.remind_time).format("HH:mm"))
 					$('#modal-pending').modal('toggle');
 				}
@@ -7710,8 +7721,8 @@ Ticketing
 										$(".holderPendingIDATM2").show();
 										$(".holderNumberTicket2").show();
 									} else {
-										$(".holderPendingIDATM2").hide();
-										$(".holderNumberTicket2").hide();
+										$(".holderPendingIDATM2").attr('style','display:none!important');
+										$(".holderNumberTicket2").attr('style','display:none!important');
 									}
 									$(".holderCancelNote").text($("#saveReasonCancel").val());
 									$(".holderPendingNote").text($("#saveReasonPending").val());
@@ -7748,7 +7759,7 @@ Ticketing
 					data:{
 						updatePending:$("#saveReasonPending").val(),
 						id_ticket:$('#ticketID').val(),
-						estimationPending:moment($("#datePending").val(),"DD/MM/YYYY").format("DD-MM-YYYY") + " " + $("#timePending").val() + ":00"
+						estimationPending:moment($("#datePending").val(),"YYYY-MM-DD").format("DD-MM-YYYY") + " " + $("#timePending").val() + ":00"
 					},
 					success:function(resultAjax){
 						// swalWithCustomClass.fire(
@@ -7780,7 +7791,7 @@ Ticketing
 			swalWithCustomClass.fire('Error',"You have to fill in the email to to pending a ticket!",'error');
 		} else {
 			$("#emailPendingTo").parent().parent().removeClass("needs-validation")
-			$("#emailPendingTo").parent().siblings().last().hide()
+			$("#emailPendingTo").parent().siblings().last().attr('style','display:none!important')
 			var typeAlert = 'warning'
 			var typeActivity = 'Pending'
 			var typeAjax = "GET"
@@ -7792,7 +7803,7 @@ Ticketing
 				cc: $("#emailPendingCc").val(),
 				note_pending: $("#saveReasonPending").val(),
 				body:$("#bodyPendingMail").html(),
-				estimationPending:moment($("#datePending").val(),"DD/MM/YYYY").format("DD-MM-YYYY") + " " + $("#timePending").val() + ":00",
+				estimationPending:moment($("#datePending").val(),"YYYY-MM-DD").format("DD-MM-YYYY") + " " + $("#timePending").val() + ":00",
 			}
 
 			var textSwal = ""
@@ -7850,7 +7861,7 @@ Ticketing
 
 			flatpickr("#dateClose", {
 			  dateFormat: "Y-m-d", // equivalent to 'YYYY-MM-DD'
-			  minDate: moment().format("YYYY-MM-DD"), // today's date
+			  // minDate: moment().format("YYYY-MM-DD"), // today's date
 			  defaultDate: moment().format("YYYY-MM-DD") // start from today
 			});
 
@@ -7967,7 +7978,7 @@ Ticketing
 			}).then((result) => {
 				$('#modal-close').modal('toggle');
 				if (result.value) {
-					$(".invalid-feedback").hide()
+					$(".invalid-feedback").attr('style','display:none!important')
 					$.ajax({
 						url:"{{url('/ticketing/mail/getCloseMailTemplate')}}",
 						type:"GET",
@@ -8045,8 +8056,8 @@ Ticketing
 									// 	$(".holderCloseIDATM2").show();
 									// 	$(".holderNumberTicket2").show();
 									// } else {
-									// 	$(".holderCloseIDATM2").hide();
-									// 	$(".holderNumberTicket2").hide();
+									// 	$(".holderCloseIDATM2").attr('style','display:none!important');
+									// 	$(".holderNumberTicket2").attr('style','display:none!important');
 									// }
 
 									// if(result.ticket_reciver.client_name.includes("UPS")) {
@@ -8058,13 +8069,13 @@ Ticketing
 									// 		$(".holderCloseUPSType").text(result.ticket_data.atm_detail.type_device)
 									// 	}
 									// 	$(".holderCloseUPSType2").show()
-									// 	$(".holderCloseSerial").parent().hide()	
+									// 	$(".holderCloseSerial").parent().attr('style','display:none!important')	
 									// } else if (result.ticket_reciver.client_name.includes("CCTV")) {
 									// }
 
 									$(".holderCloseCounter").text($("#saveCloseCouter").val());
 									$(".holderCloseRoot").text($("#saveCloseRoute").val());
-									$(".holderCloseWaktu").html("<b>" + moment($("#dateClose").val(),'DD/MM/YYYY').format("DD MMMM YYYY") + " " + moment($("#timeClose").val(),'HH:mm:ss').format("(HH:mm)") + "</b>");
+									$(".holderCloseWaktu").html("<b>" + moment($("#dateClose").val(),'YYYY-MM-DD').format("DD MMMM YYYY") + " " + moment($("#timeClose").val(),'HH:mm:ss').format("(HH:mm)") + "</b>");
 								},
 								complete: function(){
 									$("#modal-next-close").modal('toggle');
@@ -8086,7 +8097,7 @@ Ticketing
 			swalWithCustomClass.fire('Error',"You have to fill in the email to to close a ticket!",'error');
 		} else {
 			$("#emailCloseTo").parent().parent().removeClass("needs-validation")
-			$("#emailCloseTo").parent().siblings().last().hide()
+			$("#emailCloseTo").parent().siblings().last().attr('style','display:none!important')
 			var typeAlert = 'warning'
 			var typeActivity = 'Close'
 			var typeAjax = "GET"
@@ -8095,7 +8106,7 @@ Ticketing
 				id_ticket:$('#ticketID').val(),
 				root_cause:$("#saveCloseRoute").val(),
 				couter_measure:$("#saveCloseCouter").val(),
-				finish:moment($("#dateClose").val(),'DD/MM/YYYY').format("YYYY-MM-DD") + " " + moment($("#timeClose").val(),'HH:mm:ss').format("HH:mm:ss.000000"),
+				finish:moment($("#dateClose").val(),'YYYY-MM-DD').format("YYYY-MM-DD") + " " + moment($("#timeClose").val(),'HH:mm:ss').format("HH:mm:ss.000000"),
 				body:$("#bodyCloseMail").html(),
 				subject: $("#emailCloseSubject").val(),
 				to: $("#emailCloseTo").val(),
@@ -8157,7 +8168,7 @@ Ticketing
 				confirmButtonText: 'Yes',
 			}).then((result) => {
 				if (result.isConfirmed) {
-					$(".invalid-feedback").hide()
+					$(".invalid-feedback").attr('style','display:none!important')
 					$.ajax({
 						url:"{{url('/ticketing/mail/getEscalateMailTemplate')}}",
 						type:"GET",
@@ -8236,8 +8247,8 @@ Ticketing
 										$(".holderEscalateIDATM2").show();
 										$(".holderNumberTicket2").show();
 									} else {
-										$(".holderEscalateIDATM2").hide();
-										$(".holderNumberTicket2").hide();
+										$(".holderEscalateIDATM2").attr('style','display:none!important');
+										$(".holderNumberTicket2").attr('style','display:none!important');
 									}
 
 									$(".holderEscalateWaktu").html("<b>" + moment().format("DD MMMM YYYY (HH:mm)") + "</b>");
@@ -8283,7 +8294,7 @@ Ticketing
 			swalWithCustomClass.fire('Error',"You have to fill in the 'email to' for escalating a ticket!",'error');
 		} else {
 			$("#emailEscalateTo").parent().parent().removeClass("needs-validation")
-			$("#emailEscalateTo").parent().siblings().last().hide()
+			$("#emailEscalateTo").parent().siblings().last().attr('style','display:none!important')
 
 			var typeAlert = 'warning'
 			var typeActivity = 'Escalate'
@@ -8317,7 +8328,7 @@ Ticketing
 
 	function emailSetting(){
 		$("#searchBarEmail").attr("placeholder","Search Client")
-		$(".settingComponent").hide()
+		$(".settingComponent").attr('style','display:none!important')
 		$("#emailSetting").show()
 		$("#addEmail2").removeClass('d-none')
 		$("#addEmail2").show()
@@ -8452,7 +8463,7 @@ Ticketing
 
 	function SlmEmailSetting(){
 		$("#searchBarEmail").attr("placeholder","Search Client")
-		$(".settingComponent").hide()
+		$(".settingComponent").attr('style','display:none!important')
 		$("#SlmEmailSetting").show()
 		$("#addEmail2").removeClass('d-none')
 		$("#addEmail").removeClass('d-none')
@@ -8680,7 +8691,7 @@ Ticketing
 	}
 
 	function atmSetting(){
-		$(".settingComponent").hide()
+		$(".settingComponent").attr('style','display:none!important')
 		$("#atmSetting").show()
 		$("#addAtm").show()
 		$("#addAtm2").show()
@@ -8772,7 +8783,7 @@ Ticketing
 		$('.emailMultiSelector').remove()
 
 		$("#selectPidforEmail").empty()
-		$("#selectPidforEmail").next("span").next("span.invalid-feedback").hide()
+		$("#selectPidforEmail").next("span").next("span.invalid-feedback").attr('style','display:none!important')
 		$("#inputClientforEmail").val("")
 		$("#dearAdd").val("")
 		$("#toAdd").val("")
@@ -8803,7 +8814,7 @@ Ticketing
 		$('.emailMultiSelector').remove()
 
 		$("#selectLevelSupport").empty()
-		$("#selectLevelSupport").next("span").next("span.invalid-feedback").hide()
+		$("#selectLevelSupport").next("span").next("span.invalid-feedback").attr('style','display:none!important')
 		$("#dearAddSlm").val("")
 		$("#toAddSlm").val("")
 		$("#ccAddSlm").val("")
@@ -8848,24 +8859,24 @@ Ticketing
 						data:result
 					});
 					
-					$("#atmAddID").hide()
+					$("#atmAddID").attr('style','display:none!important')
 				}
 			});
 			if(this.value == 26) {
 				$("#peripheralAddFormCCTV, #peripheralAddFormButton").show()
-				$("#peripheralAddForm").hide()
+				$("#peripheralAddForm").attr('style','display:none!important')
 			} else {
 				$("#peripheralAddForm, #peripheralAddFormButton").show()
-				$("#peripheralAddFormCCTV").hide()
+				$("#peripheralAddFormCCTV").attr('style','display:none!important')
 			}
-			$("#atmAddForm, #atmAddFormButton").hide()
+			$("#atmAddForm, #atmAddFormButton").attr('style','display:none!important')
 		} else {
-			$("#peripheralAddForm, #peripheralAddFormCCTV, #peripheralAddFormButton").hide()
+			$("#peripheralAddForm, #peripheralAddFormCCTV, #peripheralAddFormButton").attr('style','display:none!important')
 			$("#atmAddForm, #atmAddFormButton").show()
 			if($('#ATMadd').hasClass("select2-hidden-accessible")){
 				$("#ATMadd").select2('destroy')
 			}
-			$("#ATMadd").hide()
+			$("#ATMadd").attr('style','display:none!important')
 			$("#atmAddID").show()
 		}
 	})
@@ -9035,7 +9046,7 @@ Ticketing
 					$("#atmEditPeripheralField").append(append)
 					$("#atmEditPeripheral").show()
 				} else {
-					$("#atmEditPeripheral").hide()
+					$("#atmEditPeripheral").attr('style','display:none!important')
 				}
 
 				$("#modal-setting-atm").modal('toggle');
@@ -9157,7 +9168,7 @@ Ticketing
 		append = append + '	Serial Number : <input type="text" class="from-control editPeripheralSerial" value="' + $(selector + "-sn").text() + '">'
 		append = append + '</span>'
 		append = append + '</li>'
-		$(selector).hide()
+		$(selector).attr('style','display:none!important')
 		$(append).insertAfter(selector)
 	}
 
@@ -9266,7 +9277,7 @@ Ticketing
 	}
 
 	function absenSetting(){
-		$(".settingComponent").hide()
+		$(".settingComponent").attr('style','display:none!important')
 		$("#absenSetting").show()
 		$("#addAbsen").show()
 		$("#addAbsen2").show()
@@ -9508,7 +9519,7 @@ Ticketing
 	);
 
 	function switchSetting(){
-		$(".settingComponent").hide()
+		$(".settingComponent").attr('style','display:none!important')
 		$("#switchSetting").show()
 		$("#addSwitch").show()
 		$("#addSwitch2").show()
@@ -9775,21 +9786,21 @@ Ticketing
 
 	$("#selectReportingType").change(function(){
 		$("#selectReportingClient").val("").trigger("change")
-		$("#ReportingButtonGo, #ReportingButtonGoNew, #ReportingButtonGoNew2").hide()
+		$("#ReportingButtonGo, #ReportingButtonGoNew, #ReportingButtonGoNew2").attr('style','display:none!important')
 		if($(this).val() == 'finishReport'){
 			$(".divReportingClient").show()
 			$(".divTypeTicket").show()
 			$(".divReportingYear").show()
 			$(".divReportingMonth").show()
-			$(".divPID").hide()
-			$(".divDateRange").hide()
+			$(".divPID").attr('style','display:none!important')
+			$(".divDateRange").attr('style','display:none!important')
 		} else if($(this).val() == 'helpdeskReport'){
 			$(".divTypeTicket").show()
 			$(".divDateRange").show()
-			$(".divReportingClient").hide()
-			$(".divReportingYear").hide()
-			$(".divReportingMonth").hide()
-			$(".divPID").hide()
+			$(".divReportingClient").attr('style','display:none!important')
+			$(".divReportingYear").attr('style','display:none!important')
+			$(".divReportingMonth").attr('style','display:none!important')
+			$(".divPID").attr('style','display:none!important')
 		} else if ($(this).val() == 'finishReportPid') {
 			$("#selectPIDReport").empty("")
 
@@ -9798,14 +9809,14 @@ Ticketing
 			$(".divTypeTicket").show()
 			$(".divReportingYear").show()
 			$(".divReportingMonth").show()
-			$(".divDateRange").hide()
+			$(".divDateRange").attr('style','display:none!important')
 		} else {
-			$(".divReportingClient").hide()
-			$(".divPID").hide()
-			$(".divTypeTicket").hide()
-			$(".divReportingYear").hide()
-			$(".divReportingMonth").hide()
-			$(".divDateRange").hide()
+			$(".divReportingClient").attr('style','display:none!important')
+			$(".divPID").attr('style','display:none!important')
+			$(".divTypeTicket").attr('style','display:none!important')
+			$(".divReportingYear").attr('style','display:none!important')
+			$(".divReportingMonth").attr('style','display:none!important')
+			$(".divDateRange").attr('style','display:none!important')
 		}
 	})
 
@@ -10034,9 +10045,9 @@ Ticketing
 
 	function userSetting() {
 		///////
-		$("#emailSetting").hide()
-		$("#SlmEmailSetting").hide()
-		$("#SlaSetting").hide()
+		$("#emailSetting").attr('style','display:none!important')
+		$("#SlmEmailSetting").attr('style','display:none!important')
+		$("#SlaSetting").attr('style','display:none!important')
 		$("#addEmail2").addClass('d-none')
 		$("#addEmail").addClass('d-none')
 		$("#userSetting").show()
@@ -10114,7 +10125,7 @@ Ticketing
 
 				if (result.length == 0) {
 					$("#container_pid").html("<span style='display:flex;flex-direction:row-reverse'>Empty Data!</span>")
-					$("#pagination").hide()
+					$("#pagination").attr('style','display:none!important')
 				}else{
 					$("#pagination").show()
 				}
@@ -10123,7 +10134,7 @@ Ticketing
 				var numItems = items.length;
 				var perPage = 6;
 
-				items.slice(perPage).hide();
+				items.slice(perPage).attr('style','display:none!important');
 
 				$('#pagination').pagination({
 					items: numItems,
@@ -10133,7 +10144,7 @@ Ticketing
 					onPageClick: function (pageNumber) {
 						var showFrom = perPage * (pageNumber - 1);
 						var showTo = showFrom + perPage;
-						items.hide().slice(showFrom, showTo).show();
+						items.attr('style','display:none!important').slice(showFrom, showTo).show();
 					}
 				});
 
@@ -10367,9 +10378,9 @@ Ticketing
         createPost(swalFireCustom,formData,swalSuccess,url="/ticketing/setting/storeAssign")
 			})
 		}else{
-			$(".divPID[data-value='"+ item +"']").hide()
-			$(".searchTablePID[data-value='"+ item +"']").hide()
-			$(".btnSavePID[data-value='"+ item +"']").hide()
+			$(".divPID[data-value='"+ item +"']").attr('style','display:none!important')
+			$(".searchTablePID[data-value='"+ item +"']").attr('style','display:none!important')
+			$(".btnSavePID[data-value='"+ item +"']").attr('style','display:none!important')
 			$(".showPID[data-value='"+ item +"'] i").removeClass("fa-angle-down").addClass("fa-angle-right")
 			$(".boxPID[data-value='"+ item +"']").empty("")
 			$(".boxPID[data-value='"+ item +"']").closest(".divPID").css('background-color', '');
@@ -10465,7 +10476,7 @@ Ticketing
 
   function assignFilter(val){
   	if (val == "site") {
-  		$("#userFilter").closest(".form-group").hide()
+  		$("#userFilter").closest(".form-group").attr('style','display:none!important')
   		$('#userFilter').val(null).trigger('change');
   	}else{
   		$("#userFilter").closest(".form-group").show()
@@ -10601,7 +10612,7 @@ Ticketing
 
 				if (result.length == 0) {
 					$("#container_pid").html("<span style='display:flex;flex-direction:row-reverse'>Empty Data!</span>")
-					$("#pagination").hide()
+					$("#pagination").attr('style','display:none!important')
 				}else{
 					$("#pagination").show()
 				}
@@ -10610,7 +10621,7 @@ Ticketing
 				var numItems = items.length;
 				var perPage = 6;
 
-				items.slice(perPage).hide();
+				items.slice(perPage).attr('style','display:none!important');
 
 				$('#pagination').pagination({
 					items: numItems,
@@ -10620,7 +10631,7 @@ Ticketing
 					onPageClick: function (pageNumber) {
 						var showFrom = perPage * (pageNumber - 1);
 						var showTo = showFrom + perPage;
-						items.hide().slice(showFrom, showTo).show();
+						items.attr('style','display:none!important').slice(showFrom, showTo).show();
 					}
 				});
 
@@ -10855,9 +10866,9 @@ Ticketing
         createPost(swalFireCustom,formData,swalSuccess,url="/ticketing/setting/storeAssign")
 			})
 		}else{
-			$(".divPID[data-value='"+ item +"']").hide()
-			$(".searchTablePID[data-value='"+ item +"']").hide()
-			$(".btnSavePID[data-value='"+ item +"']").hide()
+			$(".divPID[data-value='"+ item +"']").attr('style','display:none!important')
+			$(".searchTablePID[data-value='"+ item +"']").attr('style','display:none!important')
+			$(".btnSavePID[data-value='"+ item +"']").attr('style','display:none!important')
 			$(".showPID[data-value='"+ item +"'] i").removeClass("fa-angle-down").addClass("fa-angle-right")
 			$(".boxPID[data-value='"+ item +"']").empty("")
 			$(".boxPID[data-value='"+ item +"']").closest(".divPID").css('background-color', '');
@@ -10954,7 +10965,7 @@ Ticketing
 
   function assignFilter(val){
   	if (val == "site") {
-  		$("#userFilter").closest(".form-group").hide()
+  		$("#userFilter").closest(".form-group").attr('style','display:none!important')
   		$('#userFilter').val(null).trigger('change');
   	}else{
   		$("#userFilter").closest(".form-group").show()
@@ -11532,12 +11543,12 @@ Ticketing
 
 	function SlaSetting(){
 		$("#searchBarEmail").attr("placeholder","Search SLA")
-		$(".settingComponent").hide()
+		$(".settingComponent").attr('style','display:none!important')
 		$("#SlaSetting").show()
 		$("#addEmail2").removeClass('d-none')
 		$("#addEmail").addClass('d-none')
 		$("#addEmailSlm").addClass('d-none')
-		$("#addEmail").hide()
+		$("#addEmail").attr('style','display:none!important')
 
 
 		if ($.fn.dataTable.isDataTable("#tableSlaSetting")) {

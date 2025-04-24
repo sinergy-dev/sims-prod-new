@@ -110,11 +110,11 @@
         <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
           <div class="w-px-400 mx-auto mt-12 pt-5">
             <div class="logo text-center"><img src="{{asset('/img/siplogin.webp')}}" width="123" height="60" alt="Klorofil Logo"></div>
-            <p class="text-center">Sinergy Integrated Management System</p>
+              <p class="text-center">Sinergy Integrated Management System</p>
               @if ($errors->has('email') || $errors->has('password'))
-              <form id="formAuthentication" class="mb-6 needs-validation was-validated" method="POST" action="{{ route('login') }}" novalidate>
+              <form id="formAuthentication" class="mb-6 needs-validation was-validated" method="POST" action="{{ route('login') }}" novalidate autocomplete="off">
               @else
-              <form id="formAuthentication" class="mb-6 needs-validation" method="POST" action="{{ route('login') }}" novalidate>
+              <form id="formAuthentication" class="mb-6 needs-validation" method="POST" action="{{ route('login') }}" novalidate autocomplete="off">
               @endif
                   @csrf
                   @if(session()->has('message'))
@@ -122,7 +122,7 @@
                           {{ session()->get('message') }}
                       </div>
                   @endif
-                  <div class="mb-6">
+                  <div class="mb-6 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="email" class="form-label">Email</label>
                     <input
                       type="text"
@@ -136,10 +136,11 @@
                         <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                       @endif
                   </div>
-                  <div class="mb-6 form-password-toggle">
+                  <div class="mb-6 form-password-toggle{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label class="form-label" for="password">Password</label>
                     <div class="input-group input-group-merge rounded-pill">
                       <input
+                        aucom
                         type="password"
                         id="password"
                         class="form-control"
@@ -149,13 +150,10 @@
                         required
                         style="border-bottom-left-radius: 50rem !important;border-top-left-radius: 50rem !important;"
                       />
+                        <span class="input-group-text cursor-pointer" style="border-bottom-right-radius: 50rem !important;border-top-right-radius: 50rem !important;"><i class="icon-base bx bx-hide"></i></span>
                         @if ($errors->has('password'))
                           <div class="invalid-feedback">{{ $errors->first('password') }}</div>
                         @endif
-                        <span class="input-group-text cursor-pointer" style="border-bottom-right-radius: 50rem !important;border-top-right-radius: 50rem !important;"><i class="icon-base bx bx-hide"></i></span>
-                     <!--    <span class="position-absolute end-0 me-3 top-50 translate-middle-y cursor-pointer" id="togglePassword">
-                            <i class="bx bx-hide"></i>
-                        </span> -->
                     </div>
                   </div>
                   <div class="mb-8">

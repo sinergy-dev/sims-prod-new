@@ -1293,7 +1293,7 @@ Partnership
     function checkType(val){
       if (val != "") {
         $("#type").closest('.form-group').removeClass('has-error')
-        $("#type").closest('select').next('span').hide();
+        $("#type").closest('select').next('span').attr('style','display:none!important');
         $("#type").prev('.input-group-addon').css("background-color","red");
       }
     }
@@ -1301,19 +1301,19 @@ Partnership
     function fillInput(val){
       if (val == "levelling") {
         $("#levelling").closest('.form-group').removeClass('has-error')
-        $("#levelling").closest('input').next('span').hide();
+        $("#levelling").closest('input').next('span').attr('style','display:none!important');
         $("#levelling").prev('.input-group-addon').css("background-color","red");
       } else if (val == "partner") {
         $("#partner").closest('.form-group').removeClass('has-error')
-        $("#partner").closest('input').next('span').hide();
+        $("#partner").closest('input').next('span').attr('style','display:none!important');
         $("#partner").prev('.input-group-addon').css("background-color","red");
       } else if (val == "level") {
         $("#level").closest('.form-group').removeClass('has-error')
-        $("#level").closest('input').next('span').hide();
+        $("#level").closest('input').next('span').attr('style','display:none!important');
         $("#level").prev('.input-group-addon').css("background-color","red");
       } else if (val == "renewal") {
         $("#renewal_date").closest('.form-group').removeClass('has-error')
-        $("#renewal_date").closest('input').next('span').hide();
+        $("#renewal_date").closest('input').next('span').attr('style','display:none!important');
         $("#renewal_date").prev('.input-group-addon').css("background-color","red");
       }
     }

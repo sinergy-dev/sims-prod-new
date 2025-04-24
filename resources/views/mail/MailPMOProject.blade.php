@@ -130,11 +130,11 @@
 							<tr>
 								<td style="border-radius: 2px;">
 									@if($data["status"] == "updateProjectCharter")
-									<a href="{{url('/PMO/project/detail',$data['id'])}}?showProject" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
+									<a href="{{url('/PMO/projectDetail',$data['id'])}}?showProject" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
 										Project
 									</a>
 									@elseif($data["status"] == "approveProjectCharter")
-									<a href="{{url('/PMO/project/detail',$data['id'])}}?showProject" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
+									<a href="{{url('/PMO/projectDetail',$data['id'])}}?showProject" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
 										Project
 									</a>
 									@elseif($data["status"] == "rejectProjectCharter")
@@ -142,15 +142,15 @@
 										Project
 									</a>
 									@elseif($data["status"] == "rejectFinalReport")
-									<a href="{{url('/PMO/project/detail',$data['id'])}}?project_type={{$data['type_project']}}&status=update" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
+									<a href="{{url('/PMO/projectDetail',$data['id'])}}?project_type={{$data['type_project']}}&status=update" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
 										Project
 									</a>
 									@elseif($data["status"] == "storeFinalReport")
-									<a href="{{url('/PMO/project/detail',$data['id'])}}?project_type={{$data['type_project']}}&status=verify" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
+									<a href="{{url('/PMO/projectDetail',$data['id'])}}?project_type={{$data['type_project']}}&status=verify" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
 										Project
 									</a>
 									@elseif($data["status"] == "storeApproveFinalReport")
-									<a href="{{url('/PMO/project/detail',$data['id'])}}?project_type={{$data['type_project']}}" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
+									<a href="{{url('/PMO/projectDetail',$data['id'])}}?project_type={{$data['type_project']}}" target="_blank" style="background-color: #ED2939;padding:8px 8px; border: 1px solid #ED2939;border-radius: 2px; font-family: 'Montserrat','Helvetica Neue',Helvetica,Arial,sans-serif; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block; align-items: center;">
 										Project
 									</a>
 									@else

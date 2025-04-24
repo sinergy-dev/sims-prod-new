@@ -15,11 +15,12 @@
       .DTFC_LeftBodyLiner {
         overflow: hidden;
       }
+
       .dataTables_length{
-        display: none
+        display: none!important
       }
       .dataTables_filter {
-        display: none;
+        display: none!important;
       }
 
       th, td { white-space: nowrap; }
@@ -92,9 +93,9 @@
       <div class="card-body">
         <div class="nav-tabs-custom" id="project_tab" role="tabpanel" aria-labelledby="project-tab">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" id="tabs_sip" style="display: none;"><a class="nav-link" href="#sip" id="sip" data-bs-toggle="tab" onclick="changeTabs('SIP')">SIP</a></li>
-            <li class="nav-item" id="tabs_msp" style="display: none;"><a class="nav-link" href="#msp" id="msp" data-bs-toggle="tab" onclick="changeTabs('MSP')">MSP</a></li>
-            <li class="nav-item" id="tabs_request" style="display: none;">
+            <li class="nav-item" id="tabs_sip" style="display: none!important;"><a class="nav-link" href="#sip" id="sip" data-bs-toggle="tab" onclick="changeTabs('SIP')">SIP</a></li>
+            <li class="nav-item" id="tabs_msp" style="display: none!important;"><a class="nav-link" href="#msp" id="msp" data-bs-toggle="tab" onclick="changeTabs('MSP')">MSP</a></li>
+            <li class="nav-item" id="tabs_request" style="display: none!important;">
               <a class="nav-link" href="#request" id="request" data-bs-toggle="tab" onclick="changeTabs('request')">
                 <span class="d-none d-sm-inline-flex align-items-center">
                   ID Request
@@ -102,7 +103,7 @@
                 </span>
               </a>
             </li>
-            <li class="nav-item" id="tabs_history" style="display: none;"><a class="nav-link" href="#history" id="history" data-bs-toggle="tab" onclick="changeTabs('history')">History Request</a></li>
+            <li class="nav-item" id="tabs_history" style="display: none!important;"><a class="nav-link" href="#history" id="history" data-bs-toggle="tab" onclick="changeTabs('history')">History Request</a></li>
           </ul>
 
           <div class="tab-content">
@@ -110,8 +111,8 @@
                 <div class="row">
                   <div class="col-md-8 col-xs-12" id="export-table">
                     <div class="form-group" style="display: flex;">
-                      <button id="btnExportSip" onclick="exportPID('{{action('SalesController@export')}}')" class="btn btn-xs btn-warning btn-flat pull-left export" style="margin-right: 10px;width: 100px;font-size: 15px;display: none!important;"><i class="bx bx-cloud-download"></i>&nbsp&nbspExport</button>
-                      <button id="btnExportMsp" onclick="exportPID('{{action('SalesController@export_msp')}}')" class="btn btn-xs btn-warning btn-flat pull-left export-msp" style="margin-right: 10px;display: none;;width: 100px;display: none!important;"><i class="bx bx-cloud-download"></i>&nbsp&nbspExport</button>
+                      <button id="btnExportSip" onclick="exportPID('{{action('SalesController@export')}}')" class="btn btn-xs btn-warning btn-flat pull-left export" style="margin-right: 10px;width: 100px;font-size: 15px;display: none!important!important;"><i class="bx bx-cloud-download"></i>&nbsp&nbspExport</button>
+                      <button id="btnExportMsp" onclick="exportPID('{{action('SalesController@export_msp')}}')" class="btn btn-xs btn-warning btn-flat pull-left export-msp" style="margin-right: 10px;display: none!important;;width: 100px;display: none!important!important;"><i class="bx bx-cloud-download"></i>&nbsp&nbspExport</button>
                       <select style="margin-right: 5px;width: 100px" class="form-control btn-primary btn-flat" id="year_filter">
                           <option value="{{$year_now}}" selected> &nbsp{{$year_now}}</option>
                           @foreach($year_before as $years)
@@ -144,12 +145,12 @@
                   </div>
                 </div>
 
-  	            <div id="pid-table" style="display:none">
-  	           	  <table class="table table-bordered table-striped display" id="table-pid" width="100%" cellspacing="0">
+  	            <div id="pid-table" style="display:none!important">
+  	           	  <table class="table table-bordered dt-fixedcolumns" id="table-pid" width="100%" cellspacing="0">
   	              </table>
   	            </div>
                 
-  	            <div id="request-table" style="display:none">
+  	            <div id="request-table" style="display:none!important">
   	              <table class="table table-bordered table-striped display"  id="request_id" width="100%" cellspacing="0">
   	                  <thead>
   	                    <tr>
@@ -393,7 +394,7 @@
           <form method="POST" action="{{url('update_sp')}}">
             @csrf
           <input type="" name="id_project_edit" id="id_project_edit" hidden>
-          <div style="display:none;" id="divFinanceVP">
+          <div style="display:none!important;" id="divFinanceVP">
             <div class="form-group">
               <label for="">No. PO Customer</label>
               <input type="text" name="po_customer_edit" id="po_customer_edit" class="form-control">
@@ -679,13 +680,40 @@
   function initiateTablePID(id,year){
     var accesable = @json($feature_item);
     if (id == "SIP") {
+      console.log(id)
       if ($.fn.DataTable.isDataTable('#table-pid')) {
         $('#table-pid').DataTable().clear().destroy();
         $('#table-pid').empty();
       }
 
       if ((accesable.includes('amount_pid'))) {
-        $("#table-pid").append('<tfoot><tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></tfoot>')
+        let append = ""
+
+        append += '<tfoot>'
+          append += '<tr>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+          append += '</tr>'
+        append += '</tfoot>'
+
+        $("#table-pid").append(append)
       }
       
       $.extend($.fn.dataTable.defaults, {
@@ -903,8 +931,7 @@
         }, 
         "scrollCollapse":true,
         fixedColumns:   {
-          leftColumns: 2,
-          rightColumns: 1
+          leftColumns: 1
         },
         columnDefs: [
           {
@@ -928,7 +955,7 @@
             searchable: false
           }
         ]
-      });
+      })
 
       if (!(accesable.includes('amount_pid'))) {
         // Column Amount IDR
@@ -950,7 +977,28 @@
         $('#table-pid').empty();
       }
 
-      $("#table-pid").append('<tfoot><tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr></tfoot>')
+      let append = ""
+
+      append += '<tfoot>'
+          append += '<tr>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+            append += '<th></th>'
+          append += '</tr>'
+        append += '</tfoot>'
+
+      $("#table-pid").append(append)
 
       $.extend($.fn.dataTable.defaults, {
           sDom: '<"top"i>rCt<"footer"><"bottom"flp><"clear">'
@@ -1131,8 +1179,7 @@
         }, 
         "scrollCollapse":true,
         fixedColumns:   {
-          leftColumns: 2,
-          rightColumns: 1
+          leftColumns: 1
         },
         columnDefs: [
           {
@@ -1572,40 +1619,18 @@
  	$("#modal_status").modal("show");
  })
 
- $("#year_filter").change(function(){ 
-    var companyString = $('.tabs_item.active').text()
-    var year = this.value
+ $("#year_filter").change(function(){     
+    if ("{{Auth::User()->id_division == 'FINANCE'}}") {
+      let companyString = $('.tabs_item.active').text()
+      var year = this.value
 
-    initiateTablePID(companyString,year)
-    // @if(Auth::User()->id_division == 'FINANCE')
-      
-    //   var companyString = $('.tabs_item.active').text()
-    //   // console.log(companyString)
-    //   var com_id
-    //   if (companyString == "SIP") {
-    //     com_id = 1
-    //   }else{
-    //     com_id = 2
-    //   }
-    //   if(companyString == "SIP" || companyString == "MSP"){
-    //     $('#table-pid').DataTable().ajax.url("{{url('getPIDIndex')}}?id="+companyString+"&year_filter=" + this.value).load();
-    //   } 
+      initiateTablePID(companyString,year)
+    }else{
+      let companyString = "SIP"
+      var year = this.value
 
-    // @else
-    //   // console.log(companyString)
-    //   var com_id
-    //   if (companyString == "SIP") {
-    //     com_id = 1
-    //   }else{
-    //     com_id = 2
-    //   }
-    //   if(companyString == "SIP" || companyString == "MSP"){
-    //     $('#table-pid').DataTable().ajax.url("{{url('getPIDIndex')}}?id="+companyString+"&year_filter=" + this.value).load();
-
-    //     // $('#table-pid').DataTable().ajax.url("{{url('getFilterYearPID')}}?filterYear="+filterYear+"&id=" + com_id).load();
-    //   } 
-    //   // $('#table-pid').DataTable().ajax.url("{{url('getFilterYearPID')}}?filterYear="+filterYear).load();
-    // @endif 
+      initiateTablePID(companyString,year)
+    }
  })
 
 </script>

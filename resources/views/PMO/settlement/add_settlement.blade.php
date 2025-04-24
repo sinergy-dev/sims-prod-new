@@ -219,8 +219,8 @@ Settlement
 				if (id_monreq != "") {
 					$(".input_pid[data-rowid="+ i +"]").prop("disabled",false)		
 					$(".divCheckbox[data-rowid="+ i +"]").empty("")		
-					$(".divTabPane[data-rowid="+ i +"]").hide()	
-					$(".divTabPane:nth-child(2)").hide() 	
+					$(".divTabPane[data-rowid="+ i +"]").attr('style','display:none!important')	
+					$(".divTabPane:nth-child(2)").attr('style','display:none!important') 	
 				}
 			})
 
@@ -248,8 +248,8 @@ Settlement
         }
 			}).on('select2:select', function (e) {
 				$(".divCheckbox[data-rowid="+ i +"]").empty("")		
-				$(".divTabPane[data-rowid="+ i +"]").hide()	
-				$(".divTabPane:nth-child(2)").hide() 	
+				$(".divTabPane[data-rowid="+ i +"]").attr('style','display:none!important')	
+				$(".divTabPane:nth-child(2)").attr('style','display:none!important') 	
 				initCheckboxCategory(i,e.params.data.id,$(".input_money_request[data-rowid='"+ i +"']").val())
 			})
 		}
@@ -405,7 +405,7 @@ Settlement
 					$(".cbCategory[data-rowid='"+ n +"']").click(function(value){
 						//show or hide tab pane
 						// if ($(".cbCategory[data-rowid='"+ n +"']:checked").length <= 0) {
-						// 	$(".divTabPane[data-rowid='"+ n +"']").hide()
+						// 	$(".divTabPane[data-rowid='"+ n +"']").attr('style','display:none!important')
 						// }else{
 						// 	$(".divTabPane[data-rowid='"+ n +"']").show()
 						// }
@@ -607,7 +607,7 @@ Settlement
 					$(".divTabPane[data-rowid='"+ i +"']").find('.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').closest('li').remove()
 					$(".divTabPane[data-rowid='"+ i +"']").find('div.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').remove()
 				}else{
-					$(".divTabPane[data-rowid='"+ i +"']").find('.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').closest('li').hide()
+					$(".divTabPane[data-rowid='"+ i +"']").find('.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').closest('li').attr('style','display:none!important')
 					$(".divTabPane[data-rowid='"+ i +"']").find('.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').closest('li').removeClass('active')
 					$(".divTabPane[data-rowid='"+ i +"']").find('div.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').removeClass('active')
 					if ($(".divTabPane[data-rowid='"+ i +"']").find('a[data-rowid='+ i +']:visible').length == 1) {
@@ -1595,12 +1595,12 @@ Settlement
 
 		function validationCheck(data,i){
 			if ($(data).val() != '') {
-				$(data).next('.invalid-feedback').hide()
-				$(data).next().next('.invalid-feedback').hide()
+				$(data).next('.invalid-feedback').attr('style','display:none!important')
+				$(data).next().next('.invalid-feedback').attr('style','display:none!important')
 				$(data).closest(".form-group").removeClass('needs-validation')
 
 				if (data.id == "idNominal") {
-					$(data).closest("div").next("div").next('.invalid-feedback').hide()
+					$(data).closest("div").next("div").next('.invalid-feedback').attr('style','display:none!important')
 					$(data).closest("div").closest("div").closest(".form-group").removeClass('needs-validation')
 
 					let dataRowId = $(data).attr("data-rowid")
@@ -1663,7 +1663,7 @@ Settlement
 		        })
 		      }
 				}else if (data.id == "idStartDate" || data.id == "idEndDate") {
-					$(data).closest("div").next("div").next('.invalid-feedback').hide()
+					$(data).closest("div").next("div").next('.invalid-feedback').attr('style','display:none!important')
 					$(data).closest("div").closest("div").closest(".form-group").removeClass('needs-validation')
 
 					let dataRowId = $(data).attr("data-rowid")

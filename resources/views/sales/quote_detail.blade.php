@@ -551,20 +551,20 @@
                     })
                 }else{
                     localStorage.setItem('isProductInline',false)
-                    $("#uploadCsv").next('label').hide()
+                    $("#uploadCsv").next('label').attr('style','display:none!important')
                     $("input[type='file'][name='uploadCsv']").removeClass('hidden')
-                    $("input[type='file'][name='uploadCsv']").prev('i').hide()
+                    $("input[type='file'][name='uploadCsv']").prev('i').attr('style','display:none!important')
                     $("#uploadCsv").next('label').next('i').removeClass('hidden')
                     $("#btnInitiateAddProduct").prop("disabled",true)
                 }
             })
 
             if (window.location.href.split("?")[1] == "hide") {
-                $("#btnSirkulasi").hide()
-                $("#btnFinalize").hide()
-                $("#btnRevision").hide()
-                $("#btnAddNotes").hide()
-                $("#BtnBack").hide()
+                $("#btnSirkulasi").attr('style','display:none!important')
+                $("#btnFinalize").attr('style','display:none!important')
+                $("#btnRevision").attr('style','display:none!important')
+                $("#btnAddNotes").attr('style','display:none!important')
+                $("#BtnBack").attr('style','display:none!important')
             }
         })
 
@@ -1206,7 +1206,7 @@
                     $("#inputFinalPageTotalPriceData").val(formatter.format(parseFloat(sum).toFixed(2)));
 
                     if (result.config.discount == 'false') {
-                        $("#discount_previewData").closest(".form-group").hide();
+                        $("#discount_previewData").closest(".form-group").attr('style','display:none!important');
                     } else {
                         $("#discount_previewData").closest(".form-group").show();
                     }
@@ -1475,7 +1475,7 @@
 
 
                     if (result.config.discount == 0) {
-                        $("#inputDiscount_preview").closest(".form-group").hide()
+                        $("#inputDiscount_preview").closest(".form-group").attr('style','display:none!important')
                     }else{
                         $("#inputDiscount_preview").closest(".form-group").show()
                     }
@@ -1781,11 +1781,11 @@
         function fillInput(val){
             if (val == "selectTo") {
                 $("#selectTo").closest('.form-group').removeClass('has-error')
-                $("#selectTo").closest('.form-group').find('.help-block').hide();
+                $("#selectTo").closest('.form-group').find('.help-block').attr('style','display:none!important');
                 $("#selectTo").prev('.input-group-addon').css("background-color","red");
             }else if (val == "to") {
                 $("#inputTo").closest('.divInputTo').closest('.form-group').removeClass('has-error')
-                $("#inputTo").closest('.divInputTo').find('.help-block').hide();
+                $("#inputTo").closest('.divInputTo').find('.help-block').attr('style','display:none!important');
                 $("#inputTo").prev('.input-group-addon').css("background-color","red");
             }else if (val == "email") {
                 const validateEmail = (email) => {
@@ -1798,7 +1798,7 @@
 
                 if ($("#inputEmail").val() == '-') {
                     $("#inputEmail").closest('.form-group').removeClass('has-error')
-                    $("#inputEmail").closest('input').next('span').hide()
+                    $("#inputEmail").closest('input').next('span').attr('style','display:none!important')
                     $("#inputEmail").prev('.input-group-addon').css("background-color","red")
                 }else{
                     switch(emails){
@@ -1810,64 +1810,64 @@
                             break;
                         default:
                             $("#inputEmail").closest('.form-group').removeClass('has-error')
-                            $("#inputEmail").closest('input').next('span').hide()
+                            $("#inputEmail").closest('input').next('span').attr('style','display:none!important')
                     }
                 }
             }else if (val == "phone") {
                 $("#inputPhone").inputmask({"mask": "999-999-999-999"})
                 $("#inputPhone").closest('.form-group').removeClass('has-error')
-                $("#inputPhone").closest('input').next('span').hide();
+                $("#inputPhone").closest('input').next('span').attr('style','display:none!important');
                 $("#inputPhone").prev('.input-group-addon').css("background-color","red");
             }else if(val == "subject") {
                 $("#inputSubject").closest('.form-group').removeClass('has-error')
-                $("#inputSubject").closest('input').next('span').hide();
+                $("#inputSubject").closest('input').next('span').attr('style','display:none!important');
                 $("#inputSubject").prev('.input-group-addon').css("background-color","red");
             }else if(val == "attention") {
                 $("#inputAttention").closest('.form-group').removeClass('has-error')
-                $("#inputAttention").closest('input').next('span').hide();
+                $("#inputAttention").closest('input').next('span').attr('style','display:none!important');
                 $("#inputAttention").prev('.input-group-addon').css("background-color","red");
             }else if(val == "from") {
                 $("#inputFrom").closest('.form-group').removeClass('has-error')
-                $("#inputFrom").closest('input').next('span').hide();
+                $("#inputFrom").closest('input').next('span').attr('style','display:none!important');
                 $("#inputFrom").prev('.input-group-addon').css("background-color","red");
             }else if(val == "address") {
                 $("#inputAddress").closest('.form-group').removeClass('has-error')
-                $("#inputAddress").closest('input').next('span').hide();
+                $("#inputAddress").closest('input').next('span').attr('style','display:none!important');
                 $("#inputAddress").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "selectLeadId") {
                 $("#selectLeadId").closest('.form-group').removeClass('has-error')
-                $("#selectLeadId").closest('select').next('span').next('span').hide();
+                $("#selectLeadId").closest('select').next('span').next('span').attr('style','display:none!important');
                 $("#selectLeadId").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "selectPID") {
                 $("#selectPID").closest('.form-group').removeClass('has-error')
-                $("#selectPID").closest('select').next('span').next('span').hide();
+                $("#selectPID").closest('select').next('span').next('span').attr('style','display:none!important');
                 $("#selectPID").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "selectType") {
                 $("#selectType").closest('.form-group').removeClass('has-error')
-                $("#selectType").closest('select').next('span').hide();
+                $("#selectType").closest('select').next('span').attr('style','display:none!important');
                 $("#selectType").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "selectCategory") {
                 $("#selectCategory").closest('.form-group').removeClass('has-error')
-                $("#selectCategory").closest('select').next('span').hide();
+                $("#selectCategory").closest('select').next('span').attr('style','display:none!important');
                 $("#selectCategory").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "name_product") {
                 $("#inputNameProduct").closest('.form-group').removeClass('has-error')
-                $("#inputNameProduct").closest('input').next('span').hide();
+                $("#inputNameProduct").closest('input').next('span').attr('style','display:none!important');
                 $("#inputNameProduct").prev('.input-group-addon').css("background-color","red");
             }
             if (val == "desc_product") {
                 $("#inputDescProduct").closest('.form-group').removeClass('has-error')
-                $("#inputDescProduct").closest('textarea').next('span').hide();
+                $("#inputDescProduct").closest('textarea').next('span').attr('style','display:none!important');
                 $("#inputDescProduct").prev('.input-group-addon').css("background-color","red");
             }
             if (val == "qty_product") {
@@ -1885,7 +1885,7 @@
 
                 }
                 $("#inputQtyProduct").closest('.col-md-4').removeClass('has-error')
-                $("#inputQtyProduct").closest('input').next('span').hide();
+                $("#inputQtyProduct").closest('input').next('span').attr('style','display:none!important');
                 $("#inputQtyProduct").prev('.input-group-addon').css("background-color","red");
             }
             if (val == "price_product") {
@@ -1896,7 +1896,7 @@
                     $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }
                 $("#inputPriceProduct").closest('.col-md-4').removeClass('has-error')
-                $("#inputPriceProduct").closest('input').closest('.input-group').next('span').hide();
+                $("#inputPriceProduct").closest('input').closest('.input-group').next('span').attr('style','display:none!important');
                 $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
             }
             if (val == "price_list"){
@@ -1904,38 +1904,38 @@
             }
             if (val == "spk") {
                 $("#inputSPK").closest('.form-group').removeClass('has-error')
-                $("#inputSPK").closest('input').next('span').hide();
+                $("#inputSPK").closest('input').next('span').attr('style','display:none!important');
                 $("#inputSPK").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "sbe") {
                 $("#inputSBE").closest('.form-group').removeClass('has-error')
-                $("#inputSBE").closest('input').next('span').hide();
+                $("#inputSBE").closest('input').next('span').attr('style','display:none!important');
                 $("#inputSBE").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "quoteSupplier") {
                 $("#inputQuoteSupplier").closest('.form-group').removeClass('has-error')
-                $("#inputQuoteSupplier").closest('input').next('span').hide();
+                $("#inputQuoteSupplier").closest('input').next('span').attr('style','display:none!important');
                 $("#inputQuoteSupplier").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "quoteNumber") {
                 $("#inputQuoteNumber").closest('.form-group').removeClass('has-error')
-                $("#inputQuoteNumber").closest('input').next('span').hide();
+                $("#inputQuoteNumber").closest('input').next('span').attr('style','display:none!important');
                 $("#inputQuoteNumber").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "textArea_TOP") {
                 $("#textAreaTOP").closest('.form-group').removeClass('has-error')
-                $("#textAreaTOP").closest('textarea').next('span').hide();
+                $("#textAreaTOP").closest('textarea').next('span').attr('style','display:none!important');
                 $("#textAreaTOP").prev('.input-group-addon').css("background-color","red");
             }
 
             if (val == "reason_reject") {
                 if (val == "reason_reject") {
                     $("#reasonRejectSirkular").closest('.form-group').removeClass('has-error')
-                    $("#reasonRejectSirkular").closest('textarea').next('span').hide();
+                    $("#reasonRejectSirkular").closest('textarea').next('span').attr('style','display:none!important');
                     $("#reasonRejectSirkular").prev('.input-group-addon').css("background-color","red");
                 }
             }
@@ -2017,7 +2017,7 @@
                 document.getElementById("prevBtnAdd").style.display = "inline";
                 $('.money').mask('#.##0,00', {reverse: true})
                 $("#btnInitiateAddProduct").click(function(){
-                    $(".tabGroupInitiateAdd").hide()
+                    $(".tabGroupInitiateAdd").attr('style','display:none!important')
                     x[n].children[1].style.display = 'inline'
                 })
             }else if (n == 2){
@@ -2238,7 +2238,7 @@
                         document.getElementById("prevBtnAdd").style.display = "inline";
                         $('.money').mask('#.##0,00', {reverse: true})
                         $("#btnInitiateAddProduct").click(function(){
-                            $(".tabGroupInitiateAdd").hide()
+                            $(".tabGroupInitiateAdd").attr('style','display:none!important')
                             x[n].children[1].style.display = 'inline'
                         })
                     }else if (n == 2){
@@ -2496,7 +2496,7 @@
             $(".tab-add").css('display','none')
             currentTab = 0
             n = 0
-            $(".divReasonRejectRevision").hide()
+            $(".divReasonRejectRevision").attr('style','display:none!important')
             $(this)
                 .find("input,textarea,select")
                 .val('')
@@ -2517,7 +2517,7 @@
             valueEdit = value
             if (valueEdit == undefined) {
                 if (valueEdit == 0) {
-                    $(".tabGroupInitiateAdd").hide()
+                    $(".tabGroupInitiateAdd").attr('style','display:none!important')
                     $(".tab-add")[1].children[1].style.display = 'inline'
                 }
             }else{
@@ -2530,7 +2530,7 @@
                     valueEdit = parseFloat(valueEdit)
                 }
                 if (!isNaN(valueEdit)) {
-                    $(".tabGroupInitiateAdd").hide()
+                    $(".tabGroupInitiateAdd").attr('style','display:none!important')
                     $(".tab-add")[1].children[1].style.display = 'inline'
                     $.ajax({
                         type: "GET",
@@ -3031,7 +3031,7 @@
                         $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').show()
                     }else{
                         $("#textAreaTOP").closest('textarea').closest('div').closest('form').removeClass('has-error')
-                        $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').hide()
+                        $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').attr('style','display:none!important')
 
                         $.ajax({
                             url: "{{'/sales/quote/storeTermPayment'}}",

@@ -4417,6 +4417,7 @@ class TicketingController extends Controller
 
 		$activityTicketUpdate = new TicketingActivity();
 		$activityTicketUpdate->id_ticket = $request->id_ticket;
+//		$activityTicketUpdate->date = Carbon::now();
 		$activityTicketUpdate->date = $request->finish;
 		$activityTicketUpdate->activity = "CLOSE";
 		$activityTicketUpdate->operator = Auth::user()->name;

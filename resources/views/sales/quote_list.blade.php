@@ -12,7 +12,10 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.css" integrity="sha512-OWGg8FcHstyYFwtjfkiCoYHW2hG3PDWwdtczPAPUcETobBJOVCouKig8rqED0NMLcT9GtE4jw6IT1CSrwY87uw==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="preload" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.css" integrity="sha512-rBi1cGvEdd3NmSAQhPWId5Nd6QxE8To4ADjM2a6n0BrqQdisZ/RPUlm0YycDzvNL1HHAh1nKZqI0kSbif+5upQ==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.min.css" integrity="sha512-Bhi4560umtRBUEJCTIJoNDS6ssVIls7oiYyT3PbhxZV+9uBbLVO/mWo56hrBNNbIfMXKvtIPJi/Jg+vpBpA7sg==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+    <!-- <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.min.css" integrity="sha512-Bhi4560umtRBUEJCTIJoNDS6ssVIls7oiYyT3PbhxZV+9uBbLVO/mWo56hrBNNbIfMXKvtIPJi/Jg+vpBpA7sg==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/> -->
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/katex.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/editor.css')}}" />
     <style type="text/css">
         .DTFC_LeftBodyLiner {
             overflow: hidden;
@@ -37,7 +40,11 @@
         }
 
         .swal2-container {
-          z-index: 9999 !important;
+            z-index: 9999 !important;
+        }
+
+        .pull-right{
+            float: right;
         }
     </style>
 @endsection
@@ -68,23 +75,23 @@
             @endif
 
             <div class="card">
-                    {{--            <div class="card-header with-border">--}}
-                    {{--                <h6 class="card-title"><i class="bx bx-table"></i> Quote Number</h6>--}}
-                    {{--            </div>--}}
-                                <div class="card-body">
-                                    <div class="row">
-                    {{--                    <div class="col-md-2 col-xs-12">--}}
-                    {{--                        <div class="form-group">--}}
-                    {{--                            <select style="margin-right: 5px;width: 100px" class="form-control btn-primary btn-flat" id="year_filter">--}}
-                    {{--                                <option value="{{$tahun}}"> &nbsp{{$tahun}}</option>--}}
-                    {{--                                @foreach($year_before as $years)--}}
-                    {{--                                    @if($years->year != $tahun)--}}
-                    {{--                                        <option value="{{$years->year}}"> &nbsp{{$years->year}}</option>--}}
-                    {{--                                    @endif--}}
-                    {{--                                @endforeach--}}
-                    {{--                            </select>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
+                {{--            <div class="card-header with-border">--}}
+                {{--                <h6 class="card-title"><i class="bx bx-table"></i> Quote Number</h6>--}}
+                {{--            </div>--}}
+                <div class="card-body">
+                    <div class="row">
+                        {{--                    <div class="col-md-2 col-xs-12">--}}
+                        {{--                        <div class="form-group">--}}
+                        {{--                            <select style="margin-right: 5px;width: 100px" class="form-control btn-primary btn-flat" id="year_filter">--}}
+                        {{--                                <option value="{{$tahun}}"> &nbsp{{$tahun}}</option>--}}
+                        {{--                                @foreach($year_before as $years)--}}
+                        {{--                                    @if($years->year != $tahun)--}}
+                        {{--                                        <option value="{{$years->year}}"> &nbsp{{$years->year}}</option>--}}
+                        {{--                                    @endif--}}
+                        {{--                                @endforeach--}}
+                        {{--                            </select>--}}
+                        {{--                        </div>--}}
+                        {{--                    </div>--}}
                     </div>
                     <div class="row" style="margin-bottom:10px" id="filterBox">
                         <div class="col-md-4 col-xs-12">
@@ -118,19 +125,19 @@
                         </div>
                     </div>
                     <div class="nav-tabs-custom">
-                    {{--                    <ul class="nav nav-tabs" id="myTab">--}}
-                    {{--                        @foreach($status_quote as $data)--}}
-                    {{--                            @if($data->status_backdate == 'A')--}}
-                    {{--                                <li class="nav-item active">--}}
-                    {{--                                    <a class="nav-link active" id="{{ $data }}-tab" data-bs-toggle="tab" href="#{{ $data->status_backdate }}" role="tab" aria-controls="{{ $data }}" aria-selected="true" onclick="changetabPane('{{$data->status_backdate}}')">All</a>--}}
-                    {{--                            @elseif($data->status_backdate == 'F')--}}
-                    {{--                                <li class="nav-item">--}}
-                    {{--                                    <a class="nav-link" id="{{ $data }}-tab" data-bs-toggle="tab" href="#{{ $data->status_backdate }}" role="tab" aria-controls="{{ $data }}" aria-selected="true" onclick="changetabPane('{{$data->status_backdate}}')"> Backdate--}}
-                    {{--                            @endif--}}
-                    {{--                                    </a>--}}
-                    {{--                                </li>--}}
-                    {{--                        @endforeach--}}
-                    {{--                    </ul>--}}
+                        {{--                    <ul class="nav nav-tabs" id="myTab">--}}
+                        {{--                        @foreach($status_quote as $data)--}}
+                        {{--                            @if($data->status_backdate == 'A')--}}
+                        {{--                                <li class="nav-item active">--}}
+                        {{--                                    <a class="nav-link active" id="{{ $data }}-tab" data-bs-toggle="tab" href="#{{ $data->status_backdate }}" role="tab" aria-controls="{{ $data }}" aria-selected="true" onclick="changetabPane('{{$data->status_backdate}}')">All</a>--}}
+                        {{--                            @elseif($data->status_backdate == 'F')--}}
+                        {{--                                <li class="nav-item">--}}
+                        {{--                                    <a class="nav-link" id="{{ $data }}-tab" data-bs-toggle="tab" href="#{{ $data->status_backdate }}" role="tab" aria-controls="{{ $data }}" aria-selected="true" onclick="changetabPane('{{$data->status_backdate}}')"> Backdate--}}
+                        {{--                            @endif--}}
+                        {{--                                    </a>--}}
+                        {{--                                </li>--}}
+                        {{--                        @endforeach--}}
+                        {{--                    </ul>--}}
 
                         <div class="tab-content">
 
@@ -171,8 +178,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload()"></button>
                     <h6 class="modal-title">Add Quote</h6>
                 </div>
-                <div class="modal-body">
-                    <form method="POST" action="" id="modalAddQuote" name="modalAddQuote">
+                <form method="POST" action="" id="modalAddQuote" name="modalAddQuote">
+                    <div class="modal-body">
                         @csrf
                         <div class="tab-add" style="display: none!important;">
                             <div class="tabGroup">
@@ -270,14 +277,14 @@
                                 </div>
                                 <div class="form-group" style="display: flex;">
                                     <div style="padding: 7px;
-                      border: 1px solid #dee2e6 !important;
-                      color: #337ab7;
-                      height: 35px;
-                      background-color: #eee;
-                      display: inline;
-                      margin: 0 auto;">
+                                      border: 1px solid #dee2e6 !important;
+                                      color: #337ab7;
+                                      height: 35px;
+                                      background-color: #eee;
+                                      display: inline;
+                                      margin: 0 auto;">
                                         <i class="bx bx-cloud-upload" style="margin-left:5px">
-                                            <input id="uploadCsv" class="hidden" type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: inline;"></i>
+                                            <input id="uploadCsv" type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: none;"></i>
                                         <label for="uploadCsv">Upload CSV</label>
                                         <i class="bx bx-times hidden" onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
                                     </div>
@@ -311,7 +318,7 @@
                                     </div>
                                     <div class="col-md-2" style="margin-bottom:10px">
                                         <label>Type*</label>
-                                    {{--                                            <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>--}}
+                                        {{--                                            <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>--}}
                                         <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
                                             <option>
                                         </select>
@@ -320,25 +327,17 @@
                                     <div class="col-md-4" style="margin-bottom:10px">
                                         <label>Price*</label>
                                         <div class="input-group">
-                                            <div class="input-group-addon">
+                                            <div class="input-group-text">
                                                 Rp.
                                             </div>
                                             <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceProduct" placeholder="ex. 500,000.00" onkeyup="fillInput('price_product')">
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <span class="bx bx-caret-down"></span>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a onclick="changeCurreny('dollar')">IDR(RP)</a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                         <span class="invalid-feedback" style="display:none!important;">Please fill Price!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="">Price List</label>
                                         <div class="input-group">
-                                            <div class="input-group-addon">
+                                            <div class="input-group-text">
                                                 Rp.
                                             </div>
                                             <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceList" placeholder="ex. 500,000.00" onkeyup="fillInput('price_list')">
@@ -350,7 +349,7 @@
                                         <div class="form-group">
                                             <label>Total Price</label>
                                             <div class="input-group">
-                                                <div class="input-group-addon">
+                                                <div class="input-group-text">
                                                     Rp.
                                                 </div>
                                                 <input autocomplete="off" readonly type="text" name="" class="form-control" id="inputTotalPrice" placeholder="75.000.000,00">
@@ -361,7 +360,7 @@
                                         <div class="form-group">
                                             <label>Total Price List</label>
                                             <div class="input-group">
-                                                <div class="input-group-addon">
+                                                <div class="input-group-text">
                                                     Rp.
                                                 </div>
                                                 <input autocomplete="off" readonly type="text" name="" class="form-control" id="inputTotalPriceList" placeholder="75.000.000,00">
@@ -400,8 +399,35 @@
                         </div>
                         <div class="tab-add" style="display:none!important">
                             <div class="tabGroup">
-                                <div class="box-body pad">
-                                    <textarea onkeydown="fillInput('textArea_TOP')" class="textarea" id="textAreaTOP" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221);" placeholder="ex. Terms & Condition"></textarea>
+                                <div class="card-body">
+                                    <div id="snow-toolbar">
+                                        <span class="ql-formats">
+                                          <select class="ql-font"></select>
+                                          <select class="ql-size"></select>
+                                        </span>
+                                        <span class="ql-formats">
+                                          <button class="ql-bold"></button>
+                                          <button class="ql-italic"></button>
+                                          <button class="ql-underline"></button>
+                                          <button class="ql-strike"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                          <select class="ql-color"></select>
+                                          <select class="ql-background"></select>
+                                        </span>
+                                        <span class="ql-formats">
+                                          <button class="ql-script" value="sub"></button>
+                                          <button class="ql-script" value="super"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                          <button class="ql-header" value="1"></button>
+                                          <button class="ql-header" value="2"></button>
+                                          <button class="ql-blockquote"></button>
+                                          <button class="ql-code-block"></button>
+                                        </span>
+                                    </div>
+                                    <div tabindex="0" id="snow-editor" onkeydown="fillInput('textArea_TOP')">
+                                    </div>
                                     <span class="invalid-feedback" style="display:none!important;">Please fill Top of Payment!</span>
                                 </div>
                             </div>
@@ -442,24 +468,26 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" id="prevBtnAdd">Back</button>
-                            <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="prevBtnAdd">Back</button>
+                        <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 @endsection
 @section('scriptImport')
+    <script src="{{asset('assets/vendor/libs/quill/katex.js')}}"></script>
+    <script src="{{asset('assets/vendor/libs/quill/quill.js')}}"></script>
     <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
     <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.js" integrity="sha512-FbWDiO6LEOsPMMxeEvwrJPNzc0cinzzC0cB/+I2NFlfBPFlZJ3JHSYJBtdK7PhMn0VQlCY1qxflEG+rplMwGUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/jquery.mask.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.all.min.js" integrity="sha512-ng0ComxRUMJeeN1JS62sxZ+eSjoavxBVv3l7SG4W/gBVbQj+AfmVRdkFT4BNNlxdDCISRrDBkNDxC7omF0MBLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.all.min.js" integrity="sha512-ng0ComxRUMJeeN1JS62sxZ+eSjoavxBVv3l7SG4W/gBVbQj+AfmVRdkFT4BNNlxdDCISRrDBkNDxC7omF0MBLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.5/jquery.inputmask.js" integrity="sha512-SSQo56LrrC0adA0IJk1GONb6LLfKM6+gqBTAGgWNO8DIxHiy0ARRIztRWVK6hGnrlYWOFKEbSLQuONZDtJFK0Q==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js" integrity="sha512-mh+AjlD3nxImTUGisMpHXW03gE6F4WdQyvuFRkjecwuWLwD2yCijw4tKA3NsEFpA1C3neiKhGXPSIGSfCYPMlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -468,6 +496,8 @@
 @section('script')
     <script type="text/javascript">
         var accesable = @json($feature_item);
+        let snowEditor ;
+
         accesable.forEach(function(item,index){
             $("#" + item).show()
         })
@@ -492,9 +522,9 @@
                         this.value = ''
                     })
                 }else{
-                    $("#uploadCsv").next('label').hide()
+                    $("#uploadCsv").next('label').attr('style','display:none!important')
                     $("input[type='file'][name='uploadCsv']").removeClass('hidden')
-                    $("input[type='file'][name='uploadCsv']").prev('i').hide()
+                    $("input[type='file'][name='uploadCsv']").prev('i').attr('style','display:none!important')
                     $("#uploadCsv").next('label').next('i').removeClass('hidden')
                     $("#btnInitiateAddProduct").prop("disabled",true)
                 }
@@ -508,7 +538,7 @@
             dropdownParent:$("#letter_backdate")
         });
         $('#leadId').select2({
-           dropdownParent:$("#modalAdd")
+            dropdownParent:$("#modalAdd")
         });
         $('#date_backdate').datepicker({
             autoclose: true,
@@ -696,8 +726,7 @@
         function addQuote(n){
             let x = document.getElementsByClassName("tab-add");
             x[n].style.display = "inline"
-
-            console.log(n)
+            x[n].classList.remove("d-none")
             if(n == 0){
                 document.getElementById("prevBtnAdd").classList.add("d-none");
                 $("#nextBtnAdd").attr('onclick','nextPrevAdd(1)')
@@ -706,10 +735,10 @@
                 $("nextBtnAdd").attr('onclick', 'nextPrevAdd(1)')
                 $("#prevBtnAdd").attr('onclick','nextPrevAdd(-1)')
                 document.getElementById('prevBtnAdd').innerText = "Back";
-                document.getElementById("prevBtnAdd").style.display = "inline"
+                document.getElementById("prevBtnAdd").classList.remove("d-none");
                 $('.money').mask('#.##0,00', {reverse: true})
                 $("#btnInitiateAddProduct").click(function(){
-                    $(".tabGroupInitiateAdd").hide()
+                    $(".tabGroupInitiateAdd").attr('style','display:none!important')
                     x[n].children[1].style.display = "inline"
                 })
             }else if (n == 2){
@@ -718,36 +747,44 @@
 
                 $("#prevBtnAdd").attr('onclick','nextPrevAdd(-1)')
                 $("#nextBtnAdd").attr('onclick','nextPrevAdd(1)')
-                document.getElementById("prevBtnAdd").style.display = "inline"
+                document.getElementById("prevBtnAdd").classList.remove("d-none");
 
             }else if (n == 3) {
-                if ($('.wysihtml5-toolbar').length == 0) {
-                    $("#textAreaTOP").wysihtml5({
-                        toolbar: {
-                            "font-styles": true, // Font styling, e.g. h1, h2, etc.
-                            "emphasis": true, // Italics, bold, etc.
-                            "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
-                            "html": false, // Button which allows you to edit the generated HTML.
-                            "link": false, // Button to insert a link.
-                            "image": false, // Button to insert an image.
-                            "color": false, // Button to change color of font
-                            "blockquote": false, // Blockquote
-                            "size": true // options are xs, sm, lg
-                        }
-                    });
-                }
+                snowEditor = new Quill('#snow-editor', {
+                    bounds: '#snow-editor',
+                    modules: {
+                        formula: true,
+                        toolbar: '#snow-toolbar'
+                    },
+                    theme: 'snow'
+                });
+                // if ($('.wysihtml5-toolbar').length == 0) {
+                //     $("#textAreaTOP").wysihtml5({
+                //         toolbar: {
+                //             "font-styles": true, // Font styling, e.g. h1, h2, etc.
+                //             "emphasis": true, // Italics, bold, etc.
+                //             "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
+                //             "html": false, // Button which allows you to edit the generated HTML.
+                //             "link": false, // Button to insert a link.
+                //             "image": false, // Button to insert an image.
+                //             "color": false, // Button to change color of font
+                //             "blockquote": false, // Blockquote
+                //             "size": true // options are xs, sm, lg
+                //         }
+                //     });
+                // }
 
                 $(".modal-title").text('Terms & Condition')
                 $(".modal-dialog").removeClass('modal-lg')
                 $("#prevBtnAdd").attr('onclick','nextPrevAdd(-1)')
                 $("#nextBtnAdd").attr('onclick','nextPrevAdd(1)')
-                document.getElementById("prevBtnAdd").style.display = "inline"
+                document.getElementById("prevBtnAdd").classList.remove("d-none");
                 document.getElementById("nextBtnAdd").innerText = "Next";
             } else {
                 $(".modal-dialog").addClass('modal-lg')
                 $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                 $(".modal-title").text('')
-                document.getElementById("prevBtnAdd").style.display = "inline"
+                document.getElementById("prevBtnAdd").classList.remove("d-none");
                 $("#headerPreviewFinal").empty()
                 document.getElementById("nextBtnAdd").innerText = "Create";
                 $("#nextBtnAdd").attr('onclick','createQuote("saved")');
@@ -786,7 +823,7 @@
 
                         $("#headerPreviewFinal").append(appendHeader)
 
-                            $("#tbodyFinalPageProducts").empty()
+                        $("#tbodyFinalPageProducts").empty()
                         var append = ""
                         var i = 0
                         var valueGrandTotal = 0;
@@ -961,8 +998,9 @@
                 success: function (data) {
                     let x = document.getElementsByClassName("tab-add");
                     x[n].style.display = "inline"
+                    x[n].classList.remove("d-none")
                     if(n == 0){
-                        document.getElementById("prevBtnAdd").classList.add("d-none");;
+                        document.getElementById("prevBtnAdd").classList.add("d-none");
                         if(data.product.length > 0){
                             $("#nextBtnAdd").attr('onclick','nextPrevUnfinished(2)')
                         }else{
@@ -970,7 +1008,7 @@
                         }
                         $('#leadId').val(data.quote.lead_id).trigger('change')
                         @if($role->name == 'Account Executive')
-                            $('#position').val(data.quote.position)
+                        $('#position').val(data.quote.position)
                         @endif
                         $('#subject').val(data.quote.title)
                         $('#date').val(data.quote.date)
@@ -985,10 +1023,10 @@
                         $("nextBtnAdd").attr('onclick', 'nextPrevUnfinished(1)')
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         document.getElementById('prevBtnAdd').innerText = "Back";
-                        document.getElementById("prevBtnAdd").style.display = "inline"
+                        document.getElementById("prevBtnAdd").classList.remove("d-none");
                         $('.money').mask('#.##0,00', {reverse: true})
                         $("#btnInitiateAddProduct").click(function(){
-                            $(".tabGroupInitiateAdd").hide()
+                            $(".tabGroupInitiateAdd").attr('style','display:none!important')
                             x[n].children[1].style.display = "inline"
                         })
                     }else if (n == 2){
@@ -1007,39 +1045,47 @@
 
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         $("#nextBtnAdd").attr('onclick','nextPrevUnfinished(1)')
-                        document.getElementById("prevBtnAdd").style.display = "inline"
+                        document.getElementById("prevBtnAdd").classList.remove("d-none");
 
                     }else if (n == 3) {
-                        if ($('.wysihtml5-toolbar').length == 0) {
-                            $("#textAreaTOP").wysihtml5({
-                                toolbar: {
-                                    "font-styles": true, // Font styling, e.g. h1, h2, etc.
-                                    "emphasis": true, // Italics, bold, etc.
-                                    "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
-                                    "html": false, // Button which allows you to edit the generated HTML.
-                                    "link": false, // Button to insert a link.
-                                    "image": false, // Button to insert an image.
-                                    "color": false, // Button to change color of font
-                                    "blockquote": false, // Blockquote
-                                    "size": true // options are xs, sm, lg
-                                }
-                            });
-                        }
+                        snowEditor = new Quill('#snow-editor', {
+                            bounds: '#snow-editor',
+                            modules: {
+                                formula: true,
+                                toolbar: '#snow-toolbar'
+                            },
+                            theme: 'snow'
+                        });
+                        // if ($('.wysihtml5-toolbar').length == 0) {
+                        //     $("#textAreaTOP").wysihtml5({
+                        //         toolbar: {
+                        //             "font-styles": true, // Font styling, e.g. h1, h2, etc.
+                        //             "emphasis": true, // Italics, bold, etc.
+                        //             "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
+                        //             "html": false, // Button which allows you to edit the generated HTML.
+                        //             "link": false, // Button to insert a link.
+                        //             "image": false, // Button to insert an image.
+                        //             "color": false, // Button to change color of font
+                        //             "blockquote": false, // Blockquote
+                        //             "size": true // options are xs, sm, lg
+                        //         }
+                        //     });
+                        // }
 
                         if(data.quote.term_payment != null ){
-                            $("#textAreaTOP").val(data.quote.term_payment)
+                            snowEditor.clipboard.dangerouslyPasteHTML(data.quote.term_payment)
                         }
                         $(".modal-title").text('Terms & Condition')
                         $(".modal-dialog").removeClass('modal-lg')
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         $("#nextBtnAdd").attr('onclick','nextPrevUnfinished(1)')
-                        document.getElementById("prevBtnAdd").style.display = "inline"
+                        document.getElementById("prevBtnAdd").classList.remove("d-none");
                         document.getElementById("nextBtnAdd").innerText = "Next";
                     } else {
                         $(".modal-dialog").addClass('modal-lg')
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         $(".modal-title").text('')
-                        document.getElementById("prevBtnAdd").style.display = "inline"
+                        document.getElementById("prevBtnAdd").classList.remove("d-none");
                         $("#headerPreviewFinal").empty()
                         document.getElementById("nextBtnAdd").innerText = "Create";
                         $("#nextBtnAdd").attr('onclick','createQuote("saved")');
@@ -1238,7 +1284,7 @@
             $(".tab-add").css('display','none')
             currentTab = 0
             n = 0
-            $(".divReasonRejectRevision").hide()
+            $(".divReasonRejectRevision").attr('style','display:none!important')
             $(this)
                 .find("input,textarea,select")
                 .val('')
@@ -1259,7 +1305,7 @@
             valueEdit = value
             if (valueEdit == undefined) {
                 if (valueEdit == 0) {
-                    $(".tabGroupInitiateAdd").hide()
+                    $(".tabGroupInitiateAdd").attr('style','display:none!important')
                     $(".tab-add")[1].children[1].style.display = "inline"
                 }
             }else{
@@ -1272,7 +1318,7 @@
                     valueEdit = parseFloat(valueEdit)
                 }
                 if (!isNaN(valueEdit)) {
-                    $(".tabGroupInitiateAdd").hide()
+                    $(".tabGroupInitiateAdd").attr('style','display:none!important')
                     $(".tab-add")[1].children[1].style.display = "inline"
                     $.ajax({
                         type: "GET",
@@ -1295,7 +1341,7 @@
                                 $("#inputPriceList").val(formatter.format(item.price_list))
                                 $("#inputTotalPriceList").val(formatter.format(item.total_price_list))
                                 $("#inputTotalPrice").val(formatter.format(item.grand_total))
-                                $("#inputPriceProduct").closest("div").find(".input-group-addon").text("Rp.")
+                                $("#inputPriceProduct").closest("div").find(".input-group-text").text("Rp.")
                             })
                         }
                     })
@@ -1306,51 +1352,51 @@
                 if($('#leadId').val() === ""){
                     $('#leadId').closest('.form-group').addClass('needs-validation')
                     $('#leadId').closest('.form-group').find('span').show();
-                    $('#leadId').prev('.input-group-addon').css("background-color","red");
+                    $('#leadId').prev('.input-group-text').css("background-color","red");
                 }
-                @if($role->name == 'Account Executive')
-                    else if($('#position').val() === ""){
-                        $('#position').closest('.form-group').addClass('needs-validation')
-                        $('#position').closest('.form-group').find('span').show();
-                        $('#position').prev('.input-group-addon').css("background-color","red");
-                    }
-                @endif
+                        @if($role->name == 'Account Executive')
+                else if($('#position').val() === ""){
+                    $('#position').closest('.form-group').addClass('needs-validation')
+                    $('#position').closest('.form-group').find('span').show();
+                    $('#position').prev('.input-group-text').css("background-color","red");
+                }
+                        @endif
                 else if($('#customer').val() === ""){
                     $('#customer').closest('.form-group').addClass('needs-validation')
                     $('#customer').closest('.form-group').find('span').show();
-                    $('#customer').prev('.input-group-addon').css("background-color","red");
+                    $('#customer').prev('.input-group-text').css("background-color","red");
                 }else if($('#no_telp').val() === ""){
                     $('#no_telp').closest('.form-group').addClass('needs-validation')
                     $('#no_telp').closest('.form-group').find('span').show();
-                    $('#no_telp').prev('.input-group-addon').css("background-color","red");
+                    $('#no_telp').prev('.input-group-text').css("background-color","red");
                 }else if($('#email').val() === ""){
                     $('#email').closest('.form-group').addClass('needs-validation')
                     $('#email').closest('.form-group').find('span').show();
-                    $('#email').prev('.input-group-addon').css("background-color","red");
+                    $('#email').prev('.input-group-text').css("background-color","red");
                 }else if($('#subject').val() === ""){
                     $('#subject').closest('.form-group').addClass('needs-validation')
                     $('#subject').closest('.form-group').find('span').show();
-                    $('#subject').prev('.input-group-addon').css("background-color","red");
+                    $('#subject').prev('.input-group-text').css("background-color","red");
                 }else if($('#street').val() === ""){
                     $('#street').closest('.form-group').addClass('needs-validation')
                     $('#street').closest('.form-group').find('span').show();
-                    $('#street').prev('.input-group-addon').css("background-color","red");
+                    $('#street').prev('.input-group-text').css("background-color","red");
                 }else if($('#city').val() === ""){
                     $('#city').closest('.form-group').addClass('needs-validation')
                     $('#city').closest('.form-group').find('span').show();
-                    $('#city').prev('.input-group-addon').css("background-color","red");
+                    $('#city').prev('.input-group-text').css("background-color","red");
                 }else if($('#attention').val() === ""){
                     $('#attention').closest('.form-group').addClass('needs-validation')
                     $('#attention').closest('.form-group').find('span').show();
-                    $('#attention').prev('.input-group-addon').css("background-color","red");
+                    $('#attention').prev('.input-group-text').css("background-color","red");
                 }else if($('#quote_type').val() === ""){
                     $('#quote_type').closest('.form-group').addClass('needs-validation')
                     $('#quote_type').closest('.form-group').find('span').show();
-                    $('#quote_type').prev('.input-group-addon').css("background-color","red");
+                    $('#quote_type').prev('.input-group-text').css("background-color","red");
                 }else if($('#date').val() === ""){
                     $('#date').closest('.form-group').addClass('needs-validation')
                     $('#date').closest('.form-group').find('span').show();
-                    $('#date').prev('.input-group-addon').css("background-color","red");
+                    $('#date').prev('.input-group-text').css("background-color","red");
                 }else{
                     isStoreCustomer = localStorage.getItem('isStoreCustomer')
                     if (isStoreCustomer == 'false' || isStoreCustomer == null) {
@@ -1376,7 +1422,7 @@
                                         email: $('#email').val(),
                                         building: $('#building').val(),
                                         @if($role->name =='Account Executive')
-                                            position: $('#position').val(),
+                                        position: $('#position').val(),
                                         @endif
                                         street: $('#street').val(),
                                         city: $('#city').val(),
@@ -1407,7 +1453,7 @@
                                         localStorage.setItem('isEditProduct', false);
                                         localStorage.setItem('isStoreCustomer', true);
                                         var x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");;
+                                        x[currentTab].classList.add("d-none");
                                         currentTab = currentTab + n;
                                         addQuote(currentTab);
                                     }, error: function () {
@@ -1423,34 +1469,34 @@
                         })
                     } else {
                         var x = document.getElementsByClassName("tab-add");
-                        x[currentTab].classList.add("d-none");;
+                        x[currentTab].classList.add("d-none");
                         currentTab = currentTab + n;
                         if (currentTab >= x.length) {
-                            x[n].classList.add("d-none");;
+                            x[n].classList.add("d-none");
                             currentTab = 0;
                         }
                         addQuote(currentTab);
                     }
                 }
             }else if(currentTab == 1){
-                if (($(".tab-add")[1].children[1].classList.remove("d-none") ) == true) {
+                if (($(".tab-add")[1].children[1].style.display = "inline") == true) {
                     if (n == 1) {
                         if ($("#inputNameProduct").val() == "") {
                             $("#inputNameProduct").closest('.form-group').addClass('needs-validation')
                             $("#inputNameProduct").closest('input').next('span').show();
-                            $("#inputNameProduct").prev('.input-group-addon').css("background-color","red");
+                            $("#inputNameProduct").prev('.input-group-text').css("background-color","red");
                         } else if ($("#inputDescProduct").val() == "") {
                             $("#inputDescProduct").closest('.form-group').addClass('needs-validation')
                             $("#inputDescProduct").closest('textarea').next('span').show();
-                            $("#inputDescProduct").prev('.input-group-addon').css("background-color","red");
+                            $("#inputDescProduct").prev('.input-group-text').css("background-color","red");
                         } else if ($("#inputQtyProduct").val() == "") {
                             $("#inputQtyProduct").closest('.col-md-4').addClass('needs-validation')
                             $("#inputQtyProduct").closest('input').next('span').show();
-                            $("#inputQtyProduct").prev('.input-group-addon').css("background-color","red");
+                            $("#inputQtyProduct").prev('.input-group-text').css("background-color","red");
                         } else if ($("#selectTypeProduct").val() == "" || $("#selectTypeProduct").val() == null) {
                             $("#selectTypeProduct").closest('.col-md-4').addClass('needs-validation')
                             $("#selectTypeProduct").closest('select').next('span').next('span').show();
-                            $("#selectTypeProduct").prev('.input-group-addon').css("background-color","red");
+                            $("#selectTypeProduct").prev('.input-group-text').css("background-color","red");
                         } else if ($("#inputPriceProduct").val() == "") {
                             $("#inputPriceProduct").closest('.col-md-4').addClass('needs-validation')
                             $("#inputPriceProduct").closest('input').closest('.input-group').next('span').show();
@@ -1489,10 +1535,10 @@
                                     },success:function(){
                                         Swal.close()
                                         var x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");;
+                                        x[currentTab].classList.add("d-none");
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
-                                            x[n].classList.add("d-none");;
+                                            x[n].classList.add("d-none");
                                             currentTab = 0;
                                         }
                                         addQuote(currentTab);
@@ -1551,10 +1597,10 @@
                                     }, success: function () {
                                         Swal.close()
                                         let x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");;
+                                        x[currentTab].classList.add("d-none");
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
-                                            x[n].classList.add("d-none");;
+                                            x[n].classList.add("d-none");
                                             currentTab = 0;
                                         }
                                         addQuote(currentTab);
@@ -1591,10 +1637,10 @@
                 }else{
                     if ($('#uploadCsv').val() == "") {
                         var x = document.getElementsByClassName("tab-add");
-                        x[currentTab].classList.add("d-none");;
+                        x[currentTab].classList.add("d-none");
                         currentTab = currentTab + n;
                         if (currentTab >= x.length) {
-                            x[n].classList.add("d-none");;
+                            x[n].classList.add("d-none");
                             currentTab = 0;
                         }
                         addQuote(currentTab);
@@ -1632,10 +1678,10 @@
                                     reasonReject(result.text,"block","tabGroupInitiateAdd")
                                 }else{
                                     var x = document.getElementsByClassName("tab-add");
-                                    x[currentTab].classList.add("d-none");;
+                                    x[currentTab].classList.add("d-none");
                                     currentTab = currentTab + n;
                                     if (currentTab >= x.length) {
-                                        x[n].classList.add("d-none");;
+                                        x[n].classList.add("d-none");
                                         currentTab = 0;
                                     }
                                     addQuote(currentTab);
@@ -1687,10 +1733,10 @@
                                 $(".divReasonRejectRevision").remove()
                                 localStorage.setItem('store_tax', result);
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");;
+                                x[currentTab].classList.add("d-none");
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");;
+                                    x[n].classList.add("d-none");
                                     currentTab = 0;
                                 }
                                 addQuote(currentTab);
@@ -1736,10 +1782,10 @@
                                 $(".divReasonRejectRevision").remove()
                                 localStorage.setItem('store_tax', result);
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");;
+                                x[currentTab].classList.add("d-none");
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");;
+                                    x[n].classList.add("d-none");
                                     currentTab = 0;
                                 }
                                 addQuote(currentTab);
@@ -1756,10 +1802,10 @@
                     }
                 }else{
                     var x = document.getElementsByClassName("tab-add");
-                    x[currentTab].classList.add("d-none");;
+                    x[currentTab].classList.add("d-none");
                     currentTab = currentTab + n;
                     if (currentTab >= x.length) {
-                        x[n].classList.add("d-none");;
+                        x[n].classList.add("d-none");
                         currentTab = 0;
                     }
                     addQuote(currentTab);
@@ -1767,12 +1813,10 @@
 
             } else if(currentTab == 3){
                 if (n == 1) {
-                    if ($("#textAreaTOP").val() == "") {
-                        $("#textAreaTOP").closest('textarea').closest('div').closest('form').addClass('needs-validation')
-                        $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').show()
+                    if (snowEditor.getText().trim() == "") {
+                        $("#snow-editor").next('span').show()
                     }else{
-                        $("#textAreaTOP").closest('textarea').closest('div').closest('form').removeClass('needs-validation')
-                        $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').hide()
+                        $("#snow-editor").next('span').attr('style','display:none!important')
 
                         $.ajax({
                             url: "{{'/sales/quote/storeTermPayment'}}",
@@ -1780,15 +1824,15 @@
                             data:{
                                 id_quote:localStorage.getItem('id_quote'),
                                 _token:"{{csrf_token()}}",
-                                term_payment:$("#textAreaTOP").val(),
+                                term_payment:snowEditor.root.innerHTML,
                             },
                             success: function(data)
                             {
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");;
+                                x[currentTab].classList.add("d-none");
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");;
+                                    x[n].classList.add("d-none");
                                     currentTab = 0;
                                 }
                                 addQuote(currentTab);
@@ -1805,20 +1849,20 @@
                     }
                 }else{
                     var x = document.getElementsByClassName("tab-add");
-                    x[currentTab].classList.add("d-none");;
+                    x[currentTab].classList.add("d-none");
                     currentTab = currentTab + n;
                     if (currentTab >= x.length) {
-                        x[n].classList.add("d-none");;
+                        x[n].classList.add("d-none");
                         currentTab = 0;
                     }
                     addQuote(currentTab);
                 }
             }else{
                 var x = document.getElementsByClassName("tab-add");
-                x[currentTab].classList.add("d-none");;
+                x[currentTab].classList.add("d-none");
                 currentTab = currentTab + n;
                 if (currentTab >= x.length) {
-                    x[n].classList.add("d-none");;
+                    x[n].classList.add("d-none");
                     currentTab = 0;
                 }
                 addQuote(currentTab);
@@ -1831,7 +1875,7 @@
             valueEdit = value
             if (valueEdit == undefined) {
                 if (valueEdit == 0) {
-                    $(".tabGroupInitiateAdd").hide()
+                    $(".tabGroupInitiateAdd").attr('style','display:none!important')
                     $(".tab-add")[1].children[1].style.display = "inline"
                 }
             }else{
@@ -1844,7 +1888,7 @@
                     valueEdit = parseFloat(valueEdit)
                 }
                 if (!isNaN(valueEdit)) {
-                    $(".tabGroupInitiateAdd").hide()
+                    $(".tabGroupInitiateAdd").attr('style','display:none!important')
                     $(".tab-add")[1].children[1].style.display = "inline"
                     $.ajax({
                         type: "GET",
@@ -1869,7 +1913,7 @@
                                 $("#inputTotalPrice").val(formatter.format(item.grand_total))
                                 $("#inputPriceList").val(formatter.format(item.price_list))
                                 $("#inputTotalPriceList").val(formatter.format(item.total_price_list))
-                                $("#inputPriceProduct").closest("div").find(".input-group-addon").text("Rp.")
+                                $("#inputPriceProduct").closest("div").find(".input-group-text").text("Rp.")
                             })
                         }
                     })
@@ -1881,51 +1925,51 @@
                 if($('#leadId').val() === ""){
                     $('#leadId').closest('.form-group').addClass('needs-validation')
                     $('#leadId').closest('.form-group').find('span').show();
-                    $('#leadId').prev('.input-group-addon').css("background-color","red");
+                    $('#leadId').prev('.input-group-text').css("background-color","red");
                 }
-                @if($role->name == 'Account Executive')
-                    else if($('#position').val() === ""){
-                        $('#position').closest('.form-group').addClass('needs-validation')
-                        $('#position').closest('.form-group').find('span').show();
-                        $('#position').prev('.input-group-addon').css("background-color","red");
-                    }
-                @endif
+                        @if($role->name == 'Account Executive')
+                else if($('#position').val() === ""){
+                    $('#position').closest('.form-group').addClass('needs-validation')
+                    $('#position').closest('.form-group').find('span').show();
+                    $('#position').prev('.input-group-text').css("background-color","red");
+                }
+                        @endif
                 else if($('#customer').val() === ""){
                     $('#customer').closest('.form-group').addClass('needs-validation')
                     $('#customer').closest('.form-group').find('span').show();
-                    $('#customer').prev('.input-group-addon').css("background-color","red");
+                    $('#customer').prev('.input-group-text').css("background-color","red");
                 }else if($('#no_telp').val() === ""){
                     $('#no_telp').closest('.form-group').addClass('needs-validation')
                     $('#no_telp').closest('.form-group').find('span').show();
-                    $('#no_telp').prev('.input-group-addon').css("background-color","red");
+                    $('#no_telp').prev('.input-group-text').css("background-color","red");
                 }else if($('#email').val() === ""){
                     $('#email').closest('.form-group').addClass('needs-validation')
                     $('#email').closest('.form-group').find('span').show();
-                    $('#email').prev('.input-group-addon').css("background-color","red");
+                    $('#email').prev('.input-group-text').css("background-color","red");
                 }else if($('#subject').val() === ""){
                     $('#subject').closest('.form-group').addClass('needs-validation')
                     $('#subject').closest('.form-group').find('span').show();
-                    $('#subject').prev('.input-group-addon').css("background-color","red");
+                    $('#subject').prev('.input-group-text').css("background-color","red");
                 }else if($('#street').val() === "") {
                     $('#street').closest('.form-group').addClass('needs-validation')
                     $('#street').closest('.form-group').find('span').show();
-                    $('#street').prev('.input-group-addon').css("background-color", "red");
+                    $('#street').prev('.input-group-text').css("background-color", "red");
                 }else if($('#city').val() === ""){
                     $('#city').closest('.form-group').addClass('needs-validation')
                     $('#city').closest('.form-group').find('span').show();
-                    $('#city').prev('.input-group-addon').css("background-color","red");
+                    $('#city').prev('.input-group-text').css("background-color","red");
                 }else if($('#attention').val() === ""){
                     $('#attention').closest('.form-group').addClass('needs-validation')
                     $('#attention').closest('.form-group').find('span').show();
-                    $('#attention').prev('.input-group-addon').css("background-color","red");
+                    $('#attention').prev('.input-group-text').css("background-color","red");
                 }else if($('#quote_type').val() === ""){
                     $('#quote_type').closest('.form-group').addClass('needs-validation')
                     $('#quote_type').closest('.form-group').find('span').show();
-                    $('#quote_type').prev('.input-group-addon').css("background-color","red");
+                    $('#quote_type').prev('.input-group-text').css("background-color","red");
                 }else if($('#date').val() === ""){
                     $('#date').closest('.form-group').addClass('needs-validation')
                     $('#date').closest('.form-group').find('span').show();
-                    $('#date').prev('.input-group-addon').css("background-color","red");
+                    $('#date').prev('.input-group-text').css("background-color","red");
                 }else{
                     Swal.fire({
                         title: 'Are you sure?',
@@ -1949,7 +1993,7 @@
                                     email: $('#email').val(),
                                     building: $('#building').val(),
                                     @if($role->name =='Account Executive')
-                                        position: $('#position').val(),
+                                    position: $('#position').val(),
                                     @endif
                                     street: $('#street').val(),
                                     city: $('#city').val(),
@@ -1980,7 +2024,7 @@
                                     localStorage.setItem('id_quote', result);
                                     localStorage.setItem('isEditProduct', false);
                                     var x = document.getElementsByClassName("tab-add");
-                                    x[currentTab].classList.add("d-none");;
+                                    x[currentTab].classList.add("d-none");
                                     currentTab = currentTab + n;
                                     unfinishedDraft(currentTab, result);
                                 }, error: function () {
@@ -1998,24 +2042,24 @@
                 }
             }else if(currentTab == 1){
                 isStartScroll = true
-                if (($(".tab-add")[1].children[1].classList.remove("d-none") ) == true) {
+                if (($(".tab-add")[1].children[1].style.display == "inline") == true) {
                     if (n == 1) {
                         if ($("#inputNameProduct").val() == "") {
                             $("#inputNameProduct").closest('.form-group').addClass('needs-validation')
                             $("#inputNameProduct").closest('input').next('span').show();
-                            $("#inputNameProduct").prev('.input-group-addon').css("background-color","red");
+                            $("#inputNameProduct").prev('.input-group-text').css("background-color","red");
                         } else if ($("#inputDescProduct").val() == "") {
                             $("#inputDescProduct").closest('.form-group').addClass('needs-validation')
                             $("#inputDescProduct").closest('textarea').next('span').show();
-                            $("#inputDescProduct").prev('.input-group-addon').css("background-color","red");
+                            $("#inputDescProduct").prev('.input-group-text').css("background-color","red");
                         } else if ($("#inputQtyProduct").val() == "") {
                             $("#inputQtyProduct").closest('.col-md-4').addClass('needs-validation')
                             $("#inputQtyProduct").closest('input').next('span').show();
-                            $("#inputQtyProduct").prev('.input-group-addon').css("background-color","red");
+                            $("#inputQtyProduct").prev('.input-group-text').css("background-color","red");
                         } else if ($("#selectTypeProduct").val() == "" || $("#selectTypeProduct").val() == null) {
                             $("#selectTypeProduct").closest('.col-md-4').addClass('needs-validation')
                             $("#selectTypeProduct").closest('select').next('span').next('span').show();
-                            $("#selectTypeProduct").prev('.input-group-addon').css("background-color","red");
+                            $("#selectTypeProduct").prev('.input-group-text').css("background-color","red");
                         } else if ($("#inputPriceProduct").val() == "") {
                             $("#inputPriceProduct").closest('.col-md-4').addClass('needs-validation')
                             $("#inputPriceProduct").closest('input').closest('.input-group').next('span').show();
@@ -2054,12 +2098,13 @@
                                     },success:function(){
                                         Swal.close()
                                         var x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");;
+                                        x[currentTab].classList.add("d-none");
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
-                                            x[n].classList.add("d-none");;
+                                            x[n].classList.add("d-none");
                                             currentTab = 0;
                                         }
+                                        x[currentTab].classList.remove("d-none");
                                         unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
                                         addTable(0,localStorage.getItem('status_tax'))
                                         localStorage.setItem('isEditProduct',false)
@@ -2117,15 +2162,17 @@
                                     }, success: function () {
                                         Swal.close()
                                         let x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");;
+                                        x[currentTab].classList.add("d-none");
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
-                                            x[n].classList.add("d-none");;
+                                            x[n].classList.add("d-none");
                                             currentTab = 0;
                                         }
-                                        unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
+                                        x[currentTab].classList.remove("d-none");
+                                        unfinishedDraft(currentTab,localStorage.getItem('id_quote'));
                                         localStorage.setItem('status_quote', 'draft')
-                                        addTable(0, localStorage.getItem('status_tax'))
+                                        localStorage.setItem('store_tax', '')
+                                        // addTable(0, localStorage.getItem('status_tax'))
                                         $("#inputNameProduct").val('')
                                         $("#inputDescProduct").val('')
                                         $("#inputPriceProduct").val('')
@@ -2136,7 +2183,8 @@
                                         $(".tabGroupInitiateAdd").show()
                                         x[n].children[1].style.display = 'none'
                                         document.getElementsByClassName('tabGroupInitiateAdd')[0].childNodes[1].style.display = 'flex'
-                                    }, error: function () {
+                                    },
+                                    error: function () {
                                         Swal.close()
                                         Swal.fire({
                                             title: 'Error!',
@@ -2156,10 +2204,10 @@
                 }else{
                     if ($('#uploadCsv').val() == "") {
                         var x = document.getElementsByClassName("tab-add");
-                        x[currentTab].classList.add("d-none");;
+                        x[currentTab].classList.add("d-none");
                         currentTab = currentTab + n;
                         if (currentTab >= x.length) {
-                            x[n].classList.add("d-none");;
+                            x[n].classList.add("d-none");
                             currentTab = 0;
                         }
                         unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2197,10 +2245,10 @@
                                     reasonReject(result.text,"block","tabGroupInitiateAdd")
                                 }else{
                                     var x = document.getElementsByClassName("tab-add");
-                                    x[currentTab].classList.add("d-none");;
+                                    x[currentTab].classList.add("d-none");
                                     currentTab = currentTab + n;
                                     if (currentTab >= x.length) {
-                                        x[n].classList.add("d-none");;
+                                        x[n].classList.add("d-none");
                                         currentTab = 0;
                                     }
                                     unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2253,10 +2301,10 @@
                                 $(".divReasonRejectRevision").remove()
                                 localStorage.setItem('store_tax', result);
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");;
+                                x[currentTab].classList.add("d-none");
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");;
+                                    x[n].classList.add("d-none");
                                     currentTab = 0;
                                 }
                                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2303,10 +2351,10 @@
                                 $(".divReasonRejectRevision").remove()
                                 localStorage.setItem('store_tax', result);
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");;
+                                x[currentTab].classList.add("d-none");
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");;
+                                    x[n].classList.add("d-none");
                                     currentTab = 0;
                                 }
                                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2324,10 +2372,10 @@
                     }
                 }else{
                     var x = document.getElementsByClassName("tab-add");
-                    x[currentTab].classList.add("d-none");;
+                    x[currentTab].classList.add("d-none");
                     currentTab = currentTab + n;
                     if (currentTab >= x.length) {
-                        x[n].classList.add("d-none");;
+                        x[n].classList.add("d-none");
                         currentTab = 0;
                     }
                     unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2335,12 +2383,10 @@
 
             } else if(currentTab == 3){
                 if (n == 1) {
-                    if ($("#textAreaTOP").val() == "") {
-                        $("#textAreaTOP").closest('textarea').closest('div').closest('form').addClass('needs-validation')
-                        $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').show()
+                    if (snowEditor.getText().trim() == "") {
+                        $("#snow-editor").next('span').show()
                     }else{
-                        $("#textAreaTOP").closest('textarea').closest('div').closest('form').removeClass('needs-validation')
-                        $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').hide()
+                        $("#snow-editor").next('span').attr('style','display:none!important')
 
                         $.ajax({
                             url: "{{'/sales/quote/storeTermPayment'}}",
@@ -2348,15 +2394,15 @@
                             data:{
                                 id_quote:localStorage.getItem('id_quote'),
                                 _token:"{{csrf_token()}}",
-                                term_payment:$("#textAreaTOP").val(),
+                                term_payment:snowEditor.root.innerHTML,
                             },
                             success: function(data)
                             {
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");;
+                                x[currentTab].classList.add("d-none");
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");;
+                                    x[n].classList.add("d-none");
                                     currentTab = 0;
                                 }
                                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2373,20 +2419,20 @@
                     }
                 }else{
                     var x = document.getElementsByClassName("tab-add");
-                    x[currentTab].classList.add("d-none");;
+                    x[currentTab].classList.add("d-none");
                     currentTab = currentTab + n;
                     if (currentTab >= x.length) {
-                        x[n].classList.add("d-none");;
+                        x[n].classList.add("d-none");
                         currentTab = 0;
                     }
                     unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
                 }
             }else{
                 var x = document.getElementsByClassName("tab-add");
-                x[currentTab].classList.add("d-none");;
+                x[currentTab].classList.add("d-none");
                 currentTab = currentTab + n;
                 if (currentTab >= x.length) {
-                    x[n].classList.add("d-none");;
+                    x[n].classList.add("d-none");
                     currentTab = 0;
                 }
                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2467,6 +2513,7 @@
         }
 
         function addTable(n,status,results=""){
+            console.log('masuk add table')
             $.ajax({
                 type: "GET",
                 url: '{{url('/sales/quote/getProductQuote')}}',
@@ -2489,7 +2536,7 @@
                         append = append + "<input id='inputNameProductEdit' data-value='' readonly style='font-size: 12px; important' class='form-control' type='' name='' value='"+ item.name + "'>"
                         append = append + '</td>'
                         append = append + '<td width="30%">'
-                        append = append + '<textarea id="textAreaDescProductEdit" readonly data-value="" style="font-size: 12px; important;resize:none;height:150px;" class="form-control">'+ item.description.replaceAll("<br>","\n") + '&#10;'
+                        append = append + '<textarea id="textAreaDescProductEdit" readonly data-value="" style="font-size: 12px; important;resize:none;height:150px;width:200px" class="form-control">'+ item.description.replaceAll("<br>","\n") + '&#10;'
                         append = append + '</textarea>'
                         append = append + '</td>'
                         append = append + '<td width="7%">'
@@ -2569,7 +2616,7 @@
                     // appendBottom = appendBottom + '</div>'
                     // appendBottom = appendBottom + '</div>'
 
-                    appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
+                    appendBottom = appendBottom + '<div class="row ms-auto" style="margin-top: 10px;">'
                     appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
                     appendBottom = appendBottom + '    <div class="pull-right">'
                     appendBottom = appendBottom + '      <span style="display: inline;margin-right: 10px;">DPP Nilai Lainnya</span>'
@@ -2843,14 +2890,14 @@
                     //     "data":"customer_legal_name","defaultContent":"-"
                     // },
                     { data: "customer_legal_name", render: function (data, type, row) {
-                        return `<div class="truncate">${data || '-'}</div>`; // Handle null values
-                    },width: "150px"},
+                            return `<div class="truncate">${data || '-'}</div>`; // Handle null values
+                        },width: "150px"},
                     { data: "attention", render: function (data, type, row) {
-                        return `<div class="truncate">${data || '-'}</div>`; // Handle null values
-                    },width: "70px"},
+                            return `<div class="truncate">${data || '-'}</div>`; // Handle null values
+                        },width: "70px"},
                     { data: "title", render: function (data, type, row) {
-                        return `<div class="truncate">${data || '-'}</div>`; // Handle null values
-                    },width: "250px"},
+                            return `<div class="truncate">${data || '-'}</div>`; // Handle null values
+                        },width: "250px"},
                     { "data": "name","width": "20%","defaultContent":"-"  },
                     {   data: "status",
                         render: function (data, type, row) {
@@ -2866,37 +2913,37 @@
                         },
                         className: "text-center",
                         width: "100px",
-                        "defaultContent":"-" 
-                       },
+                        "defaultContent":"-"
+                    },
                     { data: "project_type","width": "20%","defaultContent":"-",
-                    render: function (data, type, row) {
-                        return data || '-'; // Handle null values
-                    }},
+                        render: function (data, type, row) {
+                            return data || '-'; // Handle null values
+                        }},
                     {
                         data: "nominal",
-                            render: function (data, type, row) {
-                                if (type === 'display') {
-                                    if (!data || data === "") {
-                                        return '<span class="text-muted">-</span>'; // Show "-" if null or empty
-                                    }
-
-                                    let numericValue = parseFloat(data.toString().replace(/\./g, '').replace(',', '.'));
-
-                                    if (isNaN(numericValue)) {
-                                        return '<span class="text-danger">Invalid</span>'; // Show error message for NaN
-                                    }
-
-                                    return `<span class="fw-bold text-success">${new Intl.NumberFormat('id-ID', {
-                                        style: 'currency',
-                                        currency: 'IDR',
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2
-                                    }).format(numericValue)}</span>`; // Format as currency
+                        render: function (data, type, row) {
+                            if (type === 'display') {
+                                if (!data || data === "") {
+                                    return '<span class="text-muted">-</span>'; // Show "-" if null or empty
                                 }
-                                return data;
-                            },
+
+                                let numericValue = parseFloat(data.toString().replace(/\./g, '').replace(',', '.'));
+
+                                if (isNaN(numericValue)) {
+                                    return '<span class="text-danger">Invalid</span>'; // Show error message for NaN
+                                }
+
+                                return `<span class="fw-bold text-success">${new Intl.NumberFormat('id-ID', {
+                                    style: 'currency',
+                                    currency: 'IDR',
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2
+                                }).format(numericValue)}</span>`; // Format as currency
+                            }
+                            return data;
+                        },
                         width: "20%",
-                        "defaultContent":"-" 
+                        "defaultContent":"-"
                     },
                     {
                         "render": function (data, type, row) {
@@ -2921,7 +2968,7 @@
                                 }
                             }
                         },
-                        "defaultContent":"-" 
+                        "defaultContent":"-"
                     },
                 ],
                 "searching": true,
@@ -2986,8 +3033,8 @@
             var i = 0
             var append = ""
             var colors = []
-            @if($role->name == 'Chief Executive Officer' || $role->name == 'Chief Operating Officer' )
-                var ArrColors = [
+                    @if($role->name == 'Chief Executive Officer' || $role->name == 'Chief Operating Officer' )
+            var ArrColors = [
                     {
                         name: 'Ongoing',style: 'color:white', color: 'btn-linkedin', icon: 'bx bx-edit',status:"OG",index: 1
                     },
@@ -2998,8 +3045,8 @@
                         name: 'All',style: 'color:white', color: 'text-bg-primary', icon: 'bx bx-list-ul',status:"ALL",index: 3
                     },
                 ]
-            @else
-                var ArrColors = [
+                    @else
+            var ArrColors = [
                     {
                         name: 'Need Attention',style: 'color:white', color: 'text-bg-warning', icon: 'bx bx-traffic-cone',status:"NA",index: 0
                     },
@@ -3017,33 +3064,33 @@
             @endif
             colors.push(ArrColors)
             @if($role->name == 'Chief Executive Officer' || $role->name == 'Chief Operating Officer' )
-                $.each(colors[0], function(key, value){
-                    var status = "'"+ value.status +"'"
-                    append = append + '<div class="col-lg-4 col-xs-12">'
-                        append = append + '<div class="card">'
-                        append = append + '<div class="card-header d-flex align-items-center justify-content-between">'              
-                        append = append + '</div>'
-                        append = append + '<div class="card-body">'
-                            append = append + '<div class="d-flex justify-content-between">'
-                                append = append + '<div class="card-info">'
-                                  append = append + '<div class="d-flex align-items-center mb-1">'
-                                    append = append + '<h4 class="card-title mb-0 me-2 counter" id="count_quot_'+value.index+'">0</h4>'
-                                  append = append + '</div>'
-                                  append = append + '<span><b>'+ value.name +'</b></span>'
-                                append = append + '</div>'
-                                append = append + '<div class="card-icon">'
-                                  append = append + '<span class="badge '+ value.color +' rounded p-2">'
-                                    append = append + '<i class="'+ value.icon +'"></i>'
-                                  append = append + '</span>'
-                                append = append + '</div>'
-                              append = append + '</div>'
-                            append = append + '</div>'
-                        append = append + '</div>'
-                    append = append + '</div>'
+            $.each(colors[0], function(key, value){
+                var status = "'"+ value.status +"'"
+                append = append + '<div class="col-lg-4 col-xs-12">'
+                append = append + '<div class="card">'
+                append = append + '<div class="card-header d-flex align-items-center justify-content-between">'
+                append = append + '</div>'
+                append = append + '<div class="card-body">'
+                append = append + '<div class="d-flex justify-content-between">'
+                append = append + '<div class="card-info">'
+                append = append + '<div class="d-flex align-items-center mb-1">'
+                append = append + '<h4 class="card-title mb-0 me-2 counter" id="count_quot_'+value.index+'">0</h4>'
+                append = append + '</div>'
+                append = append + '<span><b>'+ value.name +'</b></span>'
+                append = append + '</div>'
+                append = append + '<div class="card-icon">'
+                append = append + '<span class="badge '+ value.color +' rounded p-2">'
+                append = append + '<i class="'+ value.icon +'"></i>'
+                append = append + '</span>'
+                append = append + '</div>'
+                append = append + '</div>'
+                append = append + '</div>'
+                append = append + '</div>'
+                append = append + '</div>'
 
-                    id = "count_quot_"+value.index
-                    countQuot.push(id)
-                })
+                id = "count_quot_"+value.index
+                countQuot.push(id)
+            })
 
             $("#BoxId").append(append)
 
@@ -3070,32 +3117,32 @@
                 },
             })
             @else
-                $.each(colors[0], function(key, value){
-                    var status = "'"+ value.status +"'"
-                    append = append + '<div class="col-lg-3 col-xs-12">'
-                        append = append + '<div class="card">'
-                            append = append + '<div class="card-header d-flex align-items-center justify-content-between">'              
-                            append = append + '</div>'
-                            append = append + '<div class="card-body">'
-                              append = append + '<div class="d-flex justify-content-between">'
-                                append = append + '<div class="card-info">'
-                                  append = append + '<div class="d-flex align-items-center mb-1">'
-                                    append = append + '<h6 class="card-title mb-0 me-2 counter" id="count_quot_'+value.index+'">0</h6>'
-                                  append = append + '</div>'
-                                  append = append + '<span><b>'+ value.name +'</b></span>'
-                                append = append + '</div>'
-                                append = append + '<div class="card-icon">'
-                                  append = append + '<span class="badge '+ value.color +' rounded p-2">'
-                                    append = append + '<i class="'+ value.icon +'"></i>'
-                                  append = append + '</span>'
-                                append = append + '</div>'
-                              append = append + '</div>'
-                            append = append + '</div>'
-                        append = append + '</div>'
-                    append = append + '</div>'
-                    id = "count_quot_"+value.index
-                    countQuot.push(id)
-                })
+            $.each(colors[0], function(key, value){
+                var status = "'"+ value.status +"'"
+                append = append + '<div class="col-lg-3 col-xs-12">'
+                append = append + '<div class="card">'
+                append = append + '<div class="card-header d-flex align-items-center justify-content-between">'
+                append = append + '</div>'
+                append = append + '<div class="card-body">'
+                append = append + '<div class="d-flex justify-content-between">'
+                append = append + '<div class="card-info">'
+                append = append + '<div class="d-flex align-items-center mb-1">'
+                append = append + '<h4 class="card-title mb-0 me-2 counter" id="count_quot_'+value.index+'">0</h4>'
+                append = append + '</div>'
+                append = append + '<span><b>'+ value.name +'</b></span>'
+                append = append + '</div>'
+                append = append + '<div class="card-icon">'
+                append = append + '<span class="badge '+ value.color +' rounded p-2">'
+                append = append + '<i class="'+ value.icon +'"></i>'
+                append = append + '</span>'
+                append = append + '</div>'
+                append = append + '</div>'
+                append = append + '</div>'
+                append = append + '</div>'
+                append = append + '</div>'
+                id = "count_quot_"+value.index
+                countQuot.push(id)
+            })
 
             $("#BoxId").append(append)
 
@@ -3128,12 +3175,12 @@
         function fillInput(val){
             if (val == "selectTo") {
                 $("#selectTo").closest('.form-group').removeClass('needs-validation')
-                $("#selectTo").closest('.form-group').find('.invalid-feedback').hide();
-                $("#selectTo").prev('.input-group-addon').css("background-color","red");
+                $("#selectTo").closest('.form-group').find('.invalid-feedback').attr('style','display:none!important');
+                $("#selectTo").prev('.input-group-text').css("background-color","red");
             }else if (val == "to") {
                 $("#inputTo").closest('.divInputTo').closest('.form-group').removeClass('needs-validation')
-                $("#inputTo").closest('.divInputTo').find('.invalid-feedback').hide();
-                $("#inputTo").prev('.input-group-addon').css("background-color","red");
+                $("#inputTo").closest('.divInputTo').find('.invalid-feedback').attr('style','display:none!important');
+                $("#inputTo").prev('.input-group-text').css("background-color","red");
             }else if (val == "email") {
                 const validateEmail = (email) => {
                     return email.match(
@@ -3145,96 +3192,96 @@
 
                 if ($("#email").val() == '-') {
                     $("#email").closest('.form-group').removeClass('needs-validation')
-                    $("#email").closest('input').next('span').hide()
-                    $("#email").prev('.input-group-addon').css("background-color","red")
+                    $("#email").closest('input').next('span').attr('style','display:none!important')
+                    $("#email").prev('.input-group-text').css("background-color","red")
                 }else{
                     switch(emails){
                         case null:
                             $("#email").closest('.form-group').addClass('needs-validation')
                             $("#email").closest('input').next('span').show();
-                            $("#email").prev('.input-group-addon').css("background-color","red");
+                            $("#email").prev('.input-group-text').css("background-color","red");
                             $("#email").closest('input').next('span').text("Enter a Valid Email Address!")
                             break;
                         default:
                             $("#email").closest('.form-group').removeClass('needs-validation')
-                            $("#email").closest('input').next('span').hide()
-                            $("#email").prev('.input-group-addon').css("background-color","red")
+                            $("#email").closest('input').next('span').attr('style','display:none!important')
+                            $("#email").prev('.input-group-text').css("background-color","red")
                     }
                 }
             }else if (val == "phone") {
                 $("#no_telp").inputmask({"mask": "999-999-999-999"})
                 $("#no_telp").closest('.form-group').removeClass('needs-validation')
-                $("#no_telp").closest('input').next('span').hide();
-                $("#no_telp").prev('.input-group-addon').css("background-color","red");
+                $("#no_telp").closest('input').next('span').attr('style','display:none!important');
+                $("#no_telp").prev('.input-group-text').css("background-color","red");
             }else if(val == "subject") {
                 $("#inputSubject").closest('.form-group').removeClass('needs-validation')
-                $("#inputSubject").closest('input').next('span').hide();
-                $("#inputSubject").prev('.input-group-addon').css("background-color","red");
+                $("#inputSubject").closest('input').next('span').attr('style','display:none!important');
+                $("#inputSubject").prev('.input-group-text').css("background-color","red");
             }else if(val == "attention") {
                 $("#inputAttention").closest('.form-group').removeClass('needs-validation')
-                $("#inputAttention").closest('input').next('span').hide();
-                $("#inputAttention").prev('.input-group-addon').css("background-color","red");
+                $("#inputAttention").closest('input').next('span').attr('style','display:none!important');
+                $("#inputAttention").prev('.input-group-text').css("background-color","red");
             }else if(val == "from") {
                 $("#inputFrom").closest('.form-group').removeClass('needs-validation')
-                $("#inputFrom").closest('input').next('span').hide();
-                $("#inputFrom").prev('.input-group-addon').css("background-color","red");
+                $("#inputFrom").closest('input').next('span').attr('style','display:none!important');
+                $("#inputFrom").prev('.input-group-text').css("background-color","red");
             }else if(val == "address") {
                 $("#inputAddress").closest('.form-group').removeClass('needs-validation')
-                $("#inputAddress").closest('input').next('span').hide();
-                $("#inputAddress").prev('.input-group-addon').css("background-color","red");
+                $("#inputAddress").closest('input').next('span').attr('style','display:none!important');
+                $("#inputAddress").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "selectLeadId") {
                 $("#selectLeadId").closest('.form-group').removeClass('needs-validation')
-                $("#selectLeadId").closest('select').next('span').next("span").hide();
+                $("#selectLeadId").closest('select').next('span').next("span").attr('style','display:none!important');
                 $("#selectLeadId").prev('.col-md-6').css("background-color","red");
             }
 
             if (val == "selectPID") {
                 $("#selectPid").closest('.form-group').removeClass('needs-validation')
-                $("#selectPid").closest('select').next('span').next("span").hide();
+                $("#selectPid").closest('select').next('span').next("span").attr('style','display:none!important');
                 $("#selectPid").prev('.col-md-6').css("background-color","red");
             }
 
             if (val == "selectType") {
                 $("#selectType").closest('.form-group').removeClass('needs-validation')
-                $("#selectType").closest('select').next('span').hide();
-                $("#selectType").prev('.input-group-addon').css("background-color","red");
+                $("#selectType").closest('select').next('span').attr('style','display:none!important');
+                $("#selectType").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "selectCategory") {
                 $("#selectCategory").closest('.form-group').removeClass('needs-validation')
-                $("#selectCategory").closest('select').next('span').hide();
-                $("#selectCategory").prev('.input-group-addon').css("background-color","red");
+                $("#selectCategory").closest('select').next('span').attr('style','display:none!important');
+                $("#selectCategory").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "name_product") {
                 $("#inputNameProduct").closest('.form-group').removeClass('needs-validation')
-                $("#inputNameProduct").closest('input').next('span').hide();
-                $("#inputNameProduct").prev('.input-group-addon').css("background-color","red");
+                $("#inputNameProduct").closest('input').next('span').attr('style','display:none!important');
+                $("#inputNameProduct").prev('.input-group-text').css("background-color","red");
             }
             if (val == "desc_product") {
                 $("#inputDescProduct").closest('.form-group').removeClass('needs-validation')
-                $("#inputDescProduct").closest('textarea').next('span').hide();
-                $("#inputDescProduct").prev('.input-group-addon').css("background-color","red");
+                $("#inputDescProduct").closest('textarea').next('span').attr('style','display:none!important');
+                $("#inputDescProduct").prev('.input-group-text').css("background-color","red");
             }
             if (val == "qty_product") {
                 if (localStorage.getItem('isRupiah') == 'true') {
-                    $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
-                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPrice").val($("#inputPriceProduct").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPriceList").val($("#inputPriceList").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }else{
-                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
-                    $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPriceList").val($("#inputPriceList").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPrice").val($("#inputPriceProduct").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }
                 $("#inputQtyProduct").closest('.col-md-4').removeClass('needs-validation')
-                $("#inputQtyProduct").closest('input').next('span').hide();
-                $("#inputQtyProduct").prev('.input-group-addon').css("background-color","red");
+                $("#inputQtyProduct").closest('input').next('span').attr('style','display:none!important');
+                $("#inputQtyProduct").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "type_product") {
                 $("#selectTypeProduct").closest('.col-md-4').removeClass('needs-validation')
-                $("#selectTypeProduct").closest('select').next('span').next('span').hide();
-                $("#selectTypeProduct").prev('.input-group-addon').css("background-color","red");
+                $("#selectTypeProduct").closest('select').next('span').next('span').attr('style','display:none!important');
+                $("#selectTypeProduct").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "price_product") {
@@ -3244,65 +3291,64 @@
                     $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }
                 $("#inputPriceProduct").closest('.col-md-4').removeClass('needs-validation')
-                $("#inputPriceProduct").closest('input').closest('.input-group').next('span').hide();
+                $("#inputPriceProduct").closest('input').closest('.input-group').next('span').attr('style','display:none!important');
                 $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
             }
             if (val == "price_list"){
-                $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                $("#inputTotalPriceList").val($("#inputPriceList").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
             }
             if (val == "spk") {
                 $("#inputSPK").closest('.form-group').removeClass('needs-validation')
-                $("#inputSPK").closest('div').next('span').hide();
-                $("#inputSPK").prev('.input-group-addon').css("background-color","red");
+                $("#inputSPK").closest('div').next('span').attr('style','display:none!important');
+                $("#inputSPK").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "sbe") {
                 $("#inputSBE").closest('.form-group').removeClass('needs-validation')
-                $("#inputSBE").closest('div').next('span').hide();
-                $("#inputSBE").prev('.input-group-addon').css("background-color","red");
+                $("#inputSBE").closest('div').next('span').attr('style','display:none!important');
+                $("#inputSBE").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "quoteSupplier") {
                 $("#inputQuoteSupplier").closest('.form-group').removeClass('needs-validation')
-                $("#inputQuoteSupplier").closest('div').next('span').hide();
-                $("#inputQuoteSupplier").prev('.input-group-addon').css("background-color","red");
+                $("#inputQuoteSupplier").closest('div').next('span').attr('style','display:none!important');
+                $("#inputQuoteSupplier").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "quoteNumber") {
                 $("#inputQuoteNumber").closest('.form-group').removeClass('needs-validation')
-                $("#inputQuoteNumber").closest('select').next('span').next("span").hide();
-                $("#inputQuoteNumber").prev('.input-group-addon').css("background-color","red");
+                $("#inputQuoteNumber").closest('select').next('span').next("span").attr('style','display:none!important');
+                $("#inputQuoteNumber").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "penawaranHarga") {
                 $("#inputPenawaranHarga").closest('.form-group').removeClass('needs-validation')
-                $("#inputPenawaranHarga").closest('div').next('span').hide();
-                $("#inputPenawaranHarga").prev('.input-group-addon').css("background-color","red");
+                $("#inputPenawaranHarga").closest('div').next('span').attr('style','display:none!important');
+                $("#inputPenawaranHarga").prev('.input-group-text').css("background-color","red");
             }
 
             if (val == "textArea_TOP") {
-                $("#textAreaTOP").closest('textarea').closest('div').closest('form').removeClass('needs-validation')
-                $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').hide()
+                $("#snow-editor").next('span').attr('style','display:none!important')
             }
 
             if (val == "reason_reject") {
                 $("#textAreaReasonReject").closest('.form-group').removeClass('needs-validation')
-                $("#textAreaReasonReject").closest('textarea').next('span').hide();
-                $("#textAreaReasonReject").prev('.input-group-addon').css("background-color","red");
+                $("#textAreaReasonReject").closest('textarea').next('span').attr('style','display:none!important');
+                $("#textAreaReasonReject").prev('.input-group-text').css("background-color","red");
             }
         }
         var formatter = new Intl.NumberFormat(['ban', 'id']);
         localStorage.setItem("isRupiah",true)
         function changeCurreny(value){
             if (value == "usd") {
-                $("#inputPriceProduct").closest("div").find(".input-group-addon").text("$")
+                $("#inputPriceProduct").closest("div").find(".input-group-text").text("$")
                 $("#inputTotalPrice").closest("div").find("div").text("$")
                 localStorage.setItem("isRupiah",false)
                 $('.money').mask('#0,00,00', {reverse: true})
 
                 // $(".money").mask('000.000.000.000.000', {reverse: true})
             }else{
-                $("#inputPriceProduct").closest("div").find(".input-group-addon").text("Rp.")
+                $("#inputPriceProduct").closest("div").find(".input-group-text").text("Rp.")
                 $("#inputTotalPrice").closest("div").find("div").text("Rp.")
 
                 localStorage.setItem("isRupiah",true)

@@ -520,7 +520,7 @@ Claim
 					$(".divTabPane[data-rowid='"+ i +"']").find('.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').closest('li').remove()
 					$(".divTabPane[data-rowid='"+ i +"']").find('div.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').remove()
 				}else{
-					$(".divTabPane[data-rowid='"+ i +"']").find('.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').closest('li').hide()
+					$(".divTabPane[data-rowid='"+ i +"']").find('.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').closest('li').attr('style','display:none!important')
 					$(".divTabPane[data-rowid='"+ i +"']").find('.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').closest('li').removeClass('active')
 					$(".divTabPane[data-rowid='"+ i +"']").find('div.'+ values.replaceAll(" ","") +'[data-rowid='+ i +']').removeClass('active')
 					if ($(".divTabPane[data-rowid='"+ i +"']").find('a[data-rowid='+ i +']:visible').length == 1) {
@@ -1265,12 +1265,12 @@ Claim
 
 		function validationCheck(data,i){
 			if ($(data).val() != '') {
-				$(data).next('.invalid-feedback').hide()
-				$(data).next().next('.invalid-feedback').hide()
+				$(data).next('.invalid-feedback').attr('style','display:none!important')
+				$(data).next().next('.invalid-feedback').attr('style','display:none!important')
 				$(data).closest(".form-group").removeClass('needs-validation')
 
 				if (data.id == "idNominal") {
-					$(data).closest("div").next("div").next('.invalid-feedback').hide()
+					$(data).closest("div").next("div").next('.invalid-feedback').attr('style','display:none!important')
 					$(data).closest("div").closest("div").closest(".form-group").removeClass('needs-validation')
 
 					let dataRowId = $(data).attr("data-rowid")
@@ -1333,7 +1333,7 @@ Claim
 		        })
 		      }
 				}else if (data.id == "idStartDate" || data.id == "idEndDate") {
-					$(data).closest("div").next("div").next('.invalid-feedback').hide()
+					$(data).closest("div").next("div").next('.invalid-feedback').attr('style','display:none!important')
 					$(data).closest("div").closest("div").closest(".form-group").removeClass('needs-validation')
 
 					let dataRowId = $(data).attr("data-rowid")

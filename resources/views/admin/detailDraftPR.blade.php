@@ -19,10 +19,6 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/katex.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/editor.css')}}" />
 <style type="text/css">
-  html,body,buttons,input,textarea,etc {
-/*    font-family: inherit;*/
-  }
-
   p > strong::before{
     content: "@";
   }
@@ -72,7 +68,7 @@
     float: right;
   }
 
-  #inputDiscountProduct,#inputPb1Product,#inputServiceChargeProduct{
+  #inputDiscountProduct,#inputPb1Product,#inputServiceChargeProduct,#inputDiscountFinal,#inputPb1Final,#inputServiceChargeFinal{
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
   }
@@ -82,8 +78,12 @@
     border-bottom-right-radius: 0px;
   }
 
-  .swal2-popup {
+  .swal2-container {
     z-index: 9999 !important; /* Set a higher z-index */
+  }
+
+  .form-group{
+    margin-bottom: 15px;
   }
 </style>
 @endsection
@@ -107,7 +107,7 @@
               <div class="form-group">
                 <label>There is no comparison, are you sure? Give a reason</label>
                 <textarea style="resize: vertical;" class="form-control" id="reasonNoPembanding"></textarea>
-                <span class="help-block" style="display:none;">Please fill the reason!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill the reason!</span>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -136,7 +136,7 @@
               </div>  
               <div class="modal-footer">
                 <a target="_blank" class="btn btn-sm bg-orange pull-left" id="showPdf">Show PDF</a>
-                <button type="button" data-toggle="modal" data-target="#ModalAddNote" class="btn btn-sm btn-primary pull-left"><i class="fa fa-plus"></i>&nbspNotes</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddNote" class="btn btn-sm text-bg-primary pull-left">Notes</button>
                 <button type="button" id="btnReject" class="btn btn-sm btn-danger">Reject</button>
                 <button type="button" id="btnAccept" class="btn btn-sm btn-success">Accept</button>
               </div>            
@@ -158,10 +158,10 @@
                 <div class="form-group">
                   <label>Reason</label>
                   <textarea class="form-control" style="resize: vertical;" onkeyup="fillInput('reason_reject')"  id="reasonRejectSirkular" name="reasonRejectSirkular"></textarea>
-                  <span class="help-block" style="display:none;">Please fill Reason!</span>
+                  <span class="invalid-feedback" style="display:none;">Please fill Reason!</span>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-sm text-bg-primary" data-bs-dismiss="modal">Cancel</button>
                   <button type="button" onclick="rejectSirkulasi()" class="btn btn-sm btn-danger">Reject</button>
                 </div>           
             </form>
@@ -186,7 +186,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" id="btnUploadNewTTD" class="btn btn-sm btn-success">Upload New</button>
-                  <button type="button" class="btn btn-sm btn-primary" onclick="submitTTD('ready')">Submit</button>
+                  <button type="button" class="btn btn-sm text-bg-primary" onclick="submitTTD('ready')">Submit</button>
                 </div>          
             </form>
           </div>
@@ -225,7 +225,7 @@
           <div class="modal-body">
             <form method="POST" action="" id="notes" name="notes">
                 <div class="form-group">
-                  <textarea class="form-control" id="inputNotes" style="resize:none;height: 200px;" placeholder="@ mention member"></textarea>
+                  <textarea id="inputNotes" style="resize:none;height: 200px;" placeholder="@ mention member"></textarea>
                 </div>          
             </form>
           </div>
@@ -242,428 +242,426 @@
       <div class="modal-content">
         <div class="modal-header">
           <h6 class="modal-title">Information Supplier</h6>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <form method="POST" action="" id="modal_pr" name="modal_pr">
-          @csrf
-          <div class="tab-add" style="display:none;">
-            <div class="form-group">
-              <label for="">To*</label>
-              <select id="selectTo" name="selectTo" class="form-control select2" style="width:100%!important" onchange="fillInput('selectTo')"><option></option></select>
-              <a id="otherTo" style="cursor:pointer;">Other</a>
-              <div id="divInputTo" class="divInputTo" style="display: none;">
-                <button type="button" class="close" aria-hidden="true" style="color:red">×</button>
-                <input autocomplete="off" type="" class="form-control" placeholder="ex. PT Multi Solusindo Perkasa" id="inputTo" name="inputTo" onkeyup="fillInput('to')">
-                <small>
-                  *Sertakan bentuk usaha/badan hukum dari supplier apabila ada (PT/CV)<br>
-                  *PT/CV ditulis capital<br>
-                  *Nama perusahaan ditulis dengan Capital diawal suku kata(Multi Solusindo Perkasa)
-                </small>
-              </div>
-              <span class="help-block" style="display:none;">Please fill To!</span>
-            </div>      
-
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Type*</label>
-                  <select type="text" class="form-control" name="type" placeholder="ex. Internal Purchase Request" onchange="fillInput('selectType')" id="selectType" required >
-                      <option selected value="">Select Type</option>
-                      <option value="IPR">IPR (Internal Purchase Request)</option>
-                      <option value="EPR">EPR (Eksternal Purchase Request)</option>
-                  </select>
-                  <span class="help-block" style="display:none;">Please fill Type!</span>
-                </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Email*</label>
-                  <input autocomplete="off" type="" class="form-control" placeholder="ex. absolut588@gmail.com" id="inputEmail" name="inputEmail" onkeyup="fillInput('email')">
-                  <span class="help-block" style="display:none;">Please fill Email!</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="">Category</label>
-              <select type="text" class="form-control select2" name="selectCategory" id="selectCategory" style="width: 100%" onchange="fillInput('selectCategory')">
-                  <option value="">Select Category</option>
-                  <option value="Barang dan Jasa">Barang dan Jasa</option>
-                  <option value="Barang">Barang</option>
-                  <option value="Jasa">Jasa</option>
-                  <option value="Bank Garansi">Bank Garansi</option>
-                  <option value="Service">Service</option>
-                  <option value="Pajak Kendaraan">Pajak Kendaraan</option>
-                  <option value="ATK">ATK</option>
-                  <option value="Aset">Aset</option>
-                  <option value="Tinta">Tinta</option>
-                  <option value="Training">Training</option>
-                  <option value="Ujian">Ujian</option>
-                  <option value="Tiket">Tiket</option>
-                  <option value="Akomodasi">Akomodasi</option>
-                  <option value="Swab Test">Swab Test</option>
-                  <option value="Iklan">Iklan</option>
-                  <option value="Ekspedisi">Ekspedisi</option>
-                  <option value="Legal">Legal</option>
-                  <option value="Other">Other</option>
-              </select>
-              <span class="help-block" style="display:none;">Please fill Category!</span>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Phone*</label>
-                  <input autocomplete="off" class="form-control" id="inputPhone" type="" name="" placeholder="ex. 999-999-999-999" onkeyup="fillInput('phone')">
-                  <span class="help-block" style="display:none;">Please fill Phone!</span>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Attention*</label>
-                  <input autocomplete="off" type="text" class="form-control" placeholder="ex. Marsono" name="inputAttention" id="inputAttention" onkeyup="fillInput('attention')">
-                  <span class="help-block" style="display:none;">Please fill Attention!</span>
-                </div> 
-                <!-- <div class="form-group">
-                  <label for="">Fax</label>
-                  <input type="" id="inputFax" class="form-control" name="inputFax">
-                </div> -->
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="">Subject*</label>
-              <input autocomplete="off" type="text" class="form-control" placeholder="ex. Pembelian laptop MSI Modern 14 (Sdri. Faiqoh, Sdr. Oktavian, Sdr. Subchana)" name="inputSubject" id="inputSubject" onkeyup="fillInput('subject')">
-              <span class="help-block" style="display:none;">Please fill Subject!</span>
-            </div>
-
-            <div class="form-group">
-              <label for="">Address*</label>
-              <textarea autocomplete="off" class="form-control" id="inputAddress" name="inputAddress" placeholder="ex. Plaza Pinangsia Lt. 1 No. 7-8 Jl. Pinangsia Raya no.1" onkeyup="fillInput('address')" style="resize: vertical;"></textarea>
-              <span class="help-block" style="display:none;">Please fill Address!</span>
-            </div>
-
-            <div class="form-group">
-              <label for="">Request Methode*</label>
-              <select type="text" class="form-control" placeholder="ex. Purchase Order" name="type" id="selectMethode" required >
-                  <option selected value="">Select Methode</option>
-                  <option value="purchase_order">Purchase Order</option>
-                  <option value="payment">Payment</option>
-                  <option value="reimbursement">Reimbursement</option>
-              </select>
-              <span class="help-block" style="display:none;">Please fill Type!</span>
-            </div>
-
-            <div class="form-group" id="divNotePembanding">
-              <label for="">Comparison Note*</label>
-              <textarea autocomplete="off" class="form-control" id="note_pembanding" name="note_pembanding"></textarea>
-              <span class="help-block" style="display:none;">Please fill Comparison Note!</span>
-            </div>
-          </div>
-          <div class="tab-add" style="display:none">
-            <div class="tabGroupInitiateAdd">
-              <div class="form-group" style="display:flex">
-                <button class="btn btn-sm btn-primary" id="btnInitiateAddProduct" type="button" style="margin:0 auto;"><i class="bx bx-plus"></i>&nbspAdd Product</button>
-              </div>
-              <div class="form-group" style="display:flex;">
-                <span style="margin:0 auto;">OR</span>
-              </div>
-              <div class="form-group" style="display: flex;">
-                <div style="padding: 7px;
-                            border: 1px solid #dee2e6 !important;
-                            color: #337ab7;
-                            height: 35px;
-                            background-color: #eee;
-                            display: inline;
-                            margin: 0 auto;">
-                  <i class="bx bx-cloud-upload" style="margin-left:5px"></i>
-                  <input autocomplete="off" id="uploadCsv" class="hidden" type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: inline;">
-                  <label for="uploadCsv">Upload CSV</label>
-                  <i class="bx bx-times hidden" onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
-                  <!-- <span class="help-block" style="display:none;">Please Upload File or Add Product!</span> -->
-                </div>
-              </div>         
-              <div style="display: flex;">
-                <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('draft_pr/Import_product_sample.csv')}}" style="cursor:pointer;">link</a></span>
-              </div>
-              <div style="display: flex;">
-                <span style="margin: 0 auto;">And make sure, the change of template only at row 2, any change on row 1 (header) will be reject</span>
-              </div>
-            </div>
-            <div class="tabGroupModal" style="display:none">
+            @csrf
+            <div class="tab-add" style="display:none;">
               <div class="form-group">
-                <label>Product*</label>
-                <input autocomplete="off" type="text" name="" class="form-control" id="inputNameProduct" placeholder="ex. Laptop MSI Modern 14" onkeyup="fillInput('name_product')">
-                <span class="help-block" style="display:none;">Please fill Name Product!</span>
-              </div>
-              <div class="form-group">
-                <label>Description*</label> 
-                <textarea autocomplete="off" onkeyup="fillInput('desc_product')" style="resize:vertical;height:150px" id="inputDescProduct" placeholder='ex. Laptop mSI Modern 14, Processor AMD Rayzen 7 5700, Memory 16GB, SSD 512 Gb, Screen 14", VGA vega 8, Windows 11 Home' name="inputDescProduct" class="form-control"></textarea>
-                <span class="help-block" style="display:none;">Please fill Description!</span>
-              </div>
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-md-6"> 
-                    <label>Serial Number</label>
-                    <input autocomplete="off" type="text" name="" class="form-control" id="inputSerialNumber">
-                  </div>
-                  <div class="col-md-6"> 
-                    <label>Part Number</label>
-                    <input autocomplete="off" type="text" name="" class="form-control" id="inputPartNumber">
-                  </div>
+                <label for="">To*</label>
+                <select id="selectTo" name="selectTo" class="form-control select2" style="width:100%!important" onchange="fillInput('selectTo')"><option></option></select>
+                <a id="otherTo" style="cursor:pointer;">Other</a>
+                <div id="divInputTo" class="divInputTo" style="display: none;">
+                  <button type="button" class="close" aria-hidden="true" style="color:red">×</button>
+                  <input autocomplete="off" type="" class="form-control" placeholder="ex. PT Multi Solusindo Perkasa" id="inputTo" name="inputTo" onkeyup="fillInput('to')">
+                  <small>
+                    *Sertakan bentuk usaha/badan hukum dari supplier apabila ada (PT/CV)<br>
+                    *PT/CV ditulis capital<br>
+                    *Nama perusahaan ditulis dengan Capital diawal suku kata(Multi Solusindo Perkasa)
+                  </small>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-md-2"> 
-                    <label>Qty*</label>
-                    <input autocomplete="off" type="number" name="" class="form-control" id="inputQtyProduct" placeholder="ex. 5" onkeyup="fillInput('qty_product')">
-                    <span class="help-block" style="display:none;">Please fill Qty!</span>
-                  </div>
-                  <div class="col-md-4"> 
-                    <label>Type*</label>
-                    <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>
-                    <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
-                      <option>                  
+                <span class="invalid-feedback" style="display:none;">Please fill To!</span>
+              </div>      
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Type*</label>
+                    <select type="text" class="form-control" name="type" placeholder="ex. Internal Purchase Request" onchange="fillInput('selectType')" id="selectType" required >
+                        <option selected value="">Select Type</option>
+                        <option value="IPR">IPR (Internal Purchase Request)</option>
+                        <option value="EPR">EPR (Eksternal Purchase Request)</option>
                     </select>
-                    <span class="help-block" style="display:none;">Please fill Unit!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Type!</span>
                   </div>
-                  <div class="col-md-6"> 
-                    <label>Price*</label>
-                    <div class="input-group">
-                      <div class="input-group-text">
-                      Rp.
-                      </div>
-                      <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceProduct" placeholder="ex. 500,00.00" onkeyup="fillInput('price_product')">
-                      <div class="input-group-btn">       
-                        <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">         
-                          <span class="bx bx-caret-down"></span>       
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Email*</label>
+                    <input autocomplete="off" type="" class="form-control" placeholder="ex. absolut588@gmail.com" id="inputEmail" name="inputEmail" onkeyup="fillInput('email')">
+                    <span class="invalid-feedback" style="display:none;">Please fill Email!</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="">Category</label>
+                <select type="text" class="form-control select2" name="selectCategory" id="selectCategory" style="width: 100%" onchange="fillInput('selectCategory')">
+                    <option value="">Select Category</option>
+                    <option value="Barang dan Jasa">Barang dan Jasa</option>
+                    <option value="Barang">Barang</option>
+                    <option value="Jasa">Jasa</option>
+                    <option value="Bank Garansi">Bank Garansi</option>
+                    <option value="Service">Service</option>
+                    <option value="Pajak Kendaraan">Pajak Kendaraan</option>
+                    <option value="ATK">ATK</option>
+                    <option value="Aset">Aset</option>
+                    <option value="Tinta">Tinta</option>
+                    <option value="Training">Training</option>
+                    <option value="Ujian">Ujian</option>
+                    <option value="Tiket">Tiket</option>
+                    <option value="Akomodasi">Akomodasi</option>
+                    <option value="Swab Test">Swab Test</option>
+                    <option value="Iklan">Iklan</option>
+                    <option value="Ekspedisi">Ekspedisi</option>
+                    <option value="Legal">Legal</option>
+                    <option value="Other">Other</option>
+                </select>
+                <span class="invalid-feedback" style="display:none;">Please fill Category!</span>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Phone*</label>
+                    <input autocomplete="off" class="form-control" id="inputPhone" type="" name="" placeholder="ex. 999-999-999-999" onkeyup="fillInput('phone')">
+                    <span class="invalid-feedback" style="display:none;">Please fill Phone!</span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Attention*</label>
+                    <input autocomplete="off" type="text" class="form-control" placeholder="ex. Marsono" name="inputAttention" id="inputAttention" onkeyup="fillInput('attention')">
+                    <span class="invalid-feedback" style="display:none;">Please fill Attention!</span>
+                  </div> 
+                  <!-- <div class="form-group">
+                    <label for="">Fax</label>
+                    <input type="" id="inputFax" class="form-control" name="inputFax">
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="">Subject*</label>
+                <input autocomplete="off" type="text" class="form-control" placeholder="ex. Pembelian laptop MSI Modern 14 (Sdri. Faiqoh, Sdr. Oktavian, Sdr. Subchana)" name="inputSubject" id="inputSubject" onkeyup="fillInput('subject')">
+                <span class="invalid-feedback" style="display:none;">Please fill Subject!</span>
+              </div>
+
+              <div class="form-group">
+                <label for="">Address*</label>
+                <textarea autocomplete="off" class="form-control" id="inputAddress" name="inputAddress" placeholder="ex. Plaza Pinangsia Lt. 1 No. 7-8 Jl. Pinangsia Raya no.1" onkeyup="fillInput('address')" style="resize: vertical;"></textarea>
+                <span class="invalid-feedback" style="display:none;">Please fill Address!</span>
+              </div>
+
+              <div class="form-group">
+                <label for="">Request Methode*</label>
+                <select type="text" class="form-control" placeholder="ex. Purchase Order" name="type" id="selectMethode" required >
+                    <option selected value="">Select Methode</option>
+                    <option value="purchase_order">Purchase Order</option>
+                    <option value="payment">Payment</option>
+                    <option value="reimbursement">Reimbursement</option>
+                </select>
+                <span class="invalid-feedback" style="display:none;">Please fill Type!</span>
+              </div>
+
+              <div class="form-group" id="divNotePembanding">
+                <label for="">Comparison Note*</label>
+                <textarea autocomplete="off" class="form-control" id="note_pembanding" name="note_pembanding"></textarea>
+                <span class="invalid-feedback" style="display:none;">Please fill Comparison Note!</span>
+              </div>
+            </div>
+            <div class="tab-add" style="display:none">
+              <div class="tabGroupInitiateAdd">
+                <div class="form-group" style="display:flex">
+                  <button class="btn btn-sm text-bg-primary" id="btnInitiateAddProduct" type="button" style="margin:0 auto;"><i class="bx bx-plus"></i>&nbspAdd Product</button>
+                </div>
+                <div class="form-group" style="display:flex;">
+                  <span style="margin:0 auto;">OR</span>
+                </div>
+                <div class="form-group" style="display: flex;">
+                  <div style="padding: 7px;
+                              border: 1px solid #dee2e6 !important;
+                              color: #337ab7;
+                              height: 35px;
+                              background-color: #eee;
+                              display: inline;
+                              margin: 0 auto;">
+                    <i class="bx bx-cloud-upload" style="margin-left:5px"></i>
+                    <input autocomplete="off" id="uploadCsv" class="hidden" type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: inline;">
+                    <label for="uploadCsv">Upload CSV</label>
+                    <i class="bx bx-x hidden" onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
+                    <!-- <span class="invalid-feedback" style="display:none;">Please Upload File or Add Product!</span> -->
+                  </div>
+                </div>         
+                <div style="display: flex;">
+                  <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('draft_pr/Import_product_sample.csv')}}" style="cursor:pointer;">link</a></span>
+                </div>
+                <div style="display: flex;">
+                  <span style="margin: 0 auto;">And make sure, the change of template only at row 2, any change on row 1 (header) will be reject</span>
+                </div>
+              </div>
+              <div class="tabGroupModal" style="display:none">
+                <div class="form-group">
+                  <label>Product*</label>
+                  <input autocomplete="off" type="text" name="" class="form-control" id="inputNameProduct" placeholder="ex. Laptop MSI Modern 14" onkeyup="fillInput('name_product')">
+                  <span class="invalid-feedback" style="display:none;">Please fill Name Product!</span>
+                </div>
+                <div class="form-group">
+                  <label>Description*</label> 
+                  <textarea autocomplete="off" onkeyup="fillInput('desc_product')" style="resize:vertical;height:150px" id="inputDescProduct" placeholder='ex. Laptop mSI Modern 14, Processor AMD Rayzen 7 5700, Memory 16GB, SSD 512 Gb, Screen 14", VGA vega 8, Windows 11 Home' name="inputDescProduct" class="form-control"></textarea>
+                  <span class="invalid-feedback" style="display:none;">Please fill Description!</span>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6"> 
+                      <label>Serial Number</label>
+                      <input autocomplete="off" type="text" name="" class="form-control" id="inputSerialNumber">
+                    </div>
+                    <div class="col-md-6"> 
+                      <label>Part Number</label>
+                      <input autocomplete="off" type="text" name="" class="form-control" id="inputPartNumber">
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-2"> 
+                      <label>Qty*</label>
+                      <input autocomplete="off" type="number" name="" class="form-control" id="inputQtyProduct" placeholder="ex. 5" onkeyup="fillInput('qty_product')">
+                      <span class="invalid-feedback" style="display:none;">Please fill Qty!</span>
+                    </div>
+                    <div class="col-md-4"> 
+                      <label>Type*</label>
+                      <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>
+                      <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
+                        <option>                  
+                      </select>
+                      <span class="invalid-feedback" style="display:none;">Please fill Unit!</span>
+                    </div>
+                    <div class="col-md-6"> 
+                      <label>Price*</label>
+                      <div class="input-group">
+                        <div class="input-group-text">
+                        Rp.
+                        </div>
+                        <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceProduct" placeholder="ex. 500,00.00" onkeyup="fillInput('price_product')">     
+                        <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         </button>       
                         <ul class="dropdown-menu">       
-                          <li><a onclick="changeCurreny('usd')">USD($)</a></li>
-                          <li><a onclick="changeCurreny('dollar')">IDR(RP)</a></li>
+                          <li><a class="dropdown-item" onclick="changeCurreny('usd')">USD($)</a></li>
+                          <li><a class="dropdown-item" onclick="changeCurreny('dollar')">IDR(RP)</a></li>
                         </ul>
                       </div>
+                      <span class="invalid-feedback" style="display:none;">Please fill Price!</span>
                     </div>
-                    <span class="help-block" style="display:none;">Please fill Price!</span>
                   </div>
-                </div>
-              </div>              
-              <div class="form-group">
-                <label>Total Price</label>
-                <div class="input-group">
-                  <div class="input-group-text">
-                  Rp.
-                  </div>
-                    <input autocomplete="off" disabled type="text" name="" class="form-control" id="inputTotalPrice" placeholder="75.000.000,00">
-                </div>
-              </div>
-            </div>
-          </div> 
-          <div class="tab-add" style="display:none">
-            <div class="table-responsive">
-              <table class="table no-wrap">
-                <thead>
-                  <th>No</th>
-                  <th>Product</th>
-                  <th>Description</th>
-                  <th>Qty</th>
-                  <th>Type</th>
-                  <th>Price</th>
-                  <th>Total Price</th>
-                  <th><a class="pull-right" onclick="refreshTable()"><i class="bx bx-refresh"></i>&nbsp</a></th>
-                </thead>
-                <tbody id="tbodyProducts">
-                  
-                </tbody>
-              </table>
-            </div>
-            <div class="row">
-              <div class="col-md-12" id="bottomProducts">
-                
-              </div>
-            </div>
-            <div class="form-group" style="margin-top:10px">
-              <button class="btn btn-sm btn-primary" style="display:flex;margin: 0 auto;" type="button" id="addProduct"><i class="bx bx-plus"></i>&nbsp Add product</button>
-            </div>
-          </div>
-          <div class="tab-add" style="display:none">
-            <div id="formForPrExternal" style="display:none">
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-md-6">
-                    <label>Lead Register*</label>
-                    <select id="selectLeadId" style="width:100%" class="select2 form-control" onchange="fillInput('selectLeadId')">
-                      <option>
-                    </select>
-                    <span class="help-block" style="display:none;">Please fill Lead Register!</span>
-                  </div>
-                  <div class="col-md-6">
-                    <label>PID*</label>
-                    <select id="selectPid" style="width: 100%;" class="select2 form-control" onchange="fillInput('selectPID')">
-                      <option>
-                    </select>
-                    <span class="help-block" style="display:none;">Please fill PID!</span>
-                    <span id="makeId" style="cursor: pointer;">other?</span>
-                    <div class="form-group" id="project_idNew" style="display: none;">
-                      <div class="input-group">
-                        <input autocomplete="off" type="text" class="form-control pull-left col-md-8" placeholder="input Project ID" name="project_idInputNew" id="projectIdInputNew">
-                        <span class="input-group-text" style="cursor: pointer;" id="removeNewId"><i class="glyphicon glyphicon-remove"></i></span>
-                      </div>
-                    </div> 
-                  </div>
-                </div>
-              </div>                
-              
-              <div class="form-group">
-                <label>SPK/Kontrak*</label>
-                <div style="border: 1px solid #dee2e6 !important;color: #337ab7;height: 34px;padding: 6px 12px;background-color: #eee;">
-                  <input autocomplete="off" type="file" name="inputSPK" id="inputSPK" class="bx bx-cloud-upload files" disabled onkeyup="fillInput('spk')" style="margin-top: 4px;font-family: inherit;">
-                </div>
-                <span class="help-block" style="display:none;">Please fill SPK/Kontrak!</span>
-                <span style="display:none;" id="span_link_drive_spk"><a id="link_spk" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
-              </div>
-
-              <div class="form-group">
-                <label>SBE*</label>
-                <div style="border: 1px solid #dee2e6 !important;color: #337ab7;height: 34px;padding: 6px 12px;background-color: #eee;">
-                  <input autocomplete="off" type="file" name="inputSBE" id="inputSBE" class="bx bx-cloud-upload files" disabled onkeyup="fillInput('sbe')" style="margin-top: 4px;font-family: inherit;">
-                </div>
-                <span class="help-block" style="display:none;">Please fill SBE!</span>
-                <span style="display:none;" id="span_link_drive_sbe"><a id="link_sbe" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
-              </div>
-              
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-md-6">
-                    <label>Quote Supplier*</label>
-                    <div style="border: 1px solid #dee2e6 !important;color: #337ab7;height: 34px;padding-bottom: 5px;padding-top: 3px;padding-left: 10px;">
-                      <span class="bx bx-cloud-upload" style="display:inline;"></span>
-                      <input autocomplete="off" type="file" name="inputQuoteSupplier" id="inputQuoteSupplier" onkeyup="fillInput('quoteSupplier')" style="margin-top: 4px;font-family: inherit;display:inline;">
+                </div>              
+                <div class="form-group">
+                  <label>Total Price</label>
+                  <div class="input-group">
+                    <div class="input-group-text">
+                    Rp.
                     </div>
-                    <span class="help-block" style="display:none;">Please fill Quote Supplier!</span>
-                    <span style="display:none;" id="span_link_drive_quoteSup"><a id="link_quoteSup" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
-                  </div>
-                  <div class="col-md-6">
-                    <label>Quote Number*</label>
-                    <select name="selectQuoteNumber" class="select2 form-control" id="selectQuoteNumber" >
-                      <option>
-                    </select>
-                    <span class="help-block" style="display:none;">Please fill Quote Number!</span>
+                      <input autocomplete="off" disabled type="text" name="" class="form-control" id="inputTotalPrice" placeholder="75.000.000,00">
                   </div>
                 </div>
-              </div> 
-
-              <div class="form-group">
-                <div id="docPendukungContainer" class="table-responsive">
-                  <label id="titleDoc_epr" style="display:none;">Lampiran Dokumen Lainnya</label>
-                  <table id="tableDocPendukung_epr" class="border-collapse:collapse" style="border-collapse: separate;border-spacing: 0 15px;">
-                    
-                  </table>
-                </div>
-                <div class="form-group" style="display:flex;margin-top: 10px;">
-                  <a type="button" style="margin:0 auto" id="btnAddDocPendukung" class="btn btn-sm btn-primary" onclick="addDocPendukung('epr')"><i class="bx bx-plus"></i>&nbsp Dokumen Pendukung</a>
-                </div>
-              </div>   
-            </div>
-              
-            <div id="formForPrInternal" style="display:none;">
-              <div class="form-group">
-                <label>Lampiran Penawaran Harga*</label>
-                <div style="border: 1px solid #dee2e6 !important;padding: 5px;color: #337ab7;">
-                  <label for="inputPenawaranHarga" style="margin-bottom:0px">
-                    <span class="bx bx-cloud-upload" style="display:inline"></span>
-                    <input autocomplete="off" style="display: inline;" type="file" name="inputPenawaranHarga" class="files" id="inputPenawaranHarga">
-                  </label>
-                </div>
-                <span class="help-block" style="display:none;">Please fill Penawaran Harga!</span>
-                <span style="display:none;" id="span_link_drive"><a id="link_penawaran_harga" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
               </div>
-              <div id="docPendukungContainer" class="table-responsive">
-                <label id="titleDoc_ipr" style="display:none;">Lampiran Dokumen Pendukung</label>
-                <table id="tableDocPendukung_ipr" class="border-collapse:collapse" style="border-collapse: separate;border-spacing: 0 15px;">
-                  
-                </table>
-              </div>
-              <div class="form-group" style="display:flex;margin-top: 10px;">
-                <a type="button" style="margin:0 auto" id="btnAddDocPendukung" class="btn btn-sm btn-primary" onclick="addDocPendukung('ipr')"><i class="bx bx-plus"></i>&nbsp Dokumen Pendukung</a>
-              </div>
-            </div>
-          </div>   
-          <div class="tab-add" style="display:none">
-            <div class="card-body mb-4">
-              <div id="snow-toolbar">
-                <span class="ql-formats">
-                  <select class="ql-font"></select>
-                  <select class="ql-size"></select>
-                </span>
-                <span class="ql-formats">
-                  <button class="ql-bold"></button>
-                  <button class="ql-italic"></button>
-                  <button class="ql-underline"></button>
-                  <button class="ql-strike"></button>
-                </span>
-                <span class="ql-formats">
-                  <select class="ql-color"></select>
-                  <select class="ql-background"></select>
-                </span>
-                <span class="ql-formats">
-                  <button class="ql-script" value="sub"></button>
-                  <button class="ql-script" value="super"></button>
-                </span>
-                <span class="ql-formats">
-                  <button class="ql-header" value="1"></button>
-                  <button class="ql-header" value="2"></button>
-                  <button class="ql-blockquote"></button>
-                  <button class="ql-code-block"></button>
-                </span>
-              </div>
-              <div tabindex="0" id="snow-editor" onkeydown="fillInput('textArea_TOP')">
-              </div>
-              <span class="help-block" style="display:none;">Please fill Top of Payment!</span>
-             <!--  <form> 
-                <textarea onkeyup="fillInput('textArea_TOP')" class="textarea" id="textAreaTOP" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221);" placeholder="ex. terms & Condition"></textarea>
-              </form> -->
-            </div>
-          </div>  
-          <div class="tab-add" style="display:none">
-            <div class="row">
-              <div class="col-md-12" id="headerPreviewFinal">
-                
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 table-responsive">
-                <table class="table" style="white-space: nowrap;">
+            </div> 
+            <div class="tab-add" style="display:none">
+              <div class="table-responsive">
+                <table class="table no-wrap">
                   <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Product</th>
-                      <th>Description</th>
-                      <th>Qty</th>
-                      <th>Type</th>
-                      <th>Price</th>
-                      <th>Total Price</th>
-                    </tr>
+                    <th>No</th>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                    <th><a class="pull-right" onclick="refreshTable()"><i class="bx bx-refresh"></i>&nbsp</a></th>
                   </thead>
-                  <tbody id="tbodyFinalPageProducts">
+                  <tbody id="tbodyProducts">
                     
                   </tbody>
                 </table>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12" id="bottomPreviewFinal">
-                
+              <div class="row">
+                <div class="col-md-12" id="bottomProducts">
+                  
+                </div>
               </div>
-            </div>              
-          </div>     
-          <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-secondary" id="prevBtnAdd">Back</button>
-              <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
-          </div>
-        </form>
+              <div class="form-group" style="margin-top:10px;display: flex;">
+                <button class="btn btn-sm text-bg-primary" style="margin: 0 auto;" type="button" id="addProduct"><i class="bx bx-plus"></i>&nbsp Add product</button>
+              </div>
+            </div>
+            <div class="tab-add" style="display:none">
+              <div id="formForPrExternal" style="display:none">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Lead Register*</label>
+                      <select id="selectLeadId" style="width:100%" class="select2 form-control" onchange="fillInput('selectLeadId')">
+                        <option>
+                      </select>
+                      <span class="invalid-feedback" style="display:none;">Please fill Lead Register!</span>
+                    </div>
+                    <div class="col-md-6">
+                      <label>PID*</label>
+                      <select id="selectPid" style="width: 100%;" class="select2 form-control" onchange="fillInput('selectPID')">
+                        <option>
+                      </select>
+                      <span class="invalid-feedback" style="display:none;">Please fill PID!</span>
+                      <span id="makeId" style="cursor: pointer;">other?</span>
+                      <div class="form-group" id="project_idNew" style="display: none;">
+                        <div class="input-group">
+                          <input autocomplete="off" type="text" class="form-control pull-left col-md-8" placeholder="input Project ID" name="project_idInputNew" id="projectIdInputNew">
+                          <span class="input-group-text" style="cursor: pointer;" id="removeNewId"><i class="glyphicon glyphicon-remove"></i></span>
+                        </div>
+                      </div> 
+                    </div>
+                  </div>
+                </div>                
+                
+                <div class="form-group">
+                  <label>SPK/Kontrak*</label>
+                  <div style="border: 1px solid #dee2e6 !important;color: #337ab7;height: 34px;padding: 6px 12px;background-color: #eee;">
+                    <input autocomplete="off" type="file" name="inputSPK" id="inputSPK" disabled onkeyup="fillInput('spk')" style="margin-top: 4px;">
+                  </div>
+                  <span class="invalid-feedback" style="display:none;">Please fill SPK/Kontrak!</span>
+                  <span style="display:none;" id="span_link_drive_spk"><a id="link_spk" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
+                </div>
+
+                <div class="form-group">
+                  <label>SBE*</label>
+                  <div style="border: 1px solid #dee2e6 !important;color: #337ab7;height: 34px;padding: 6px 12px;background-color: #eee;">
+                    <input autocomplete="off" type="file" name="inputSBE" id="inputSBE" disabled onkeyup="fillInput('sbe')" style="margin-top: 4px;">
+                  </div>
+                  <span class="invalid-feedback" style="display:none;">Please fill SBE!</span>
+                  <span style="display:none;" id="span_link_drive_sbe"><a id="link_sbe" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
+                </div>
+                
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Quote Supplier*</label>
+                      <div style="border: 1px solid #dee2e6 !important;color: #337ab7;height: 34px;padding-bottom: 5px;padding-top: 3px;padding-left: 10px;">
+                        <span class="bx bx-cloud-upload" style="display:inline;"></span>
+                        <input autocomplete="off" type="file" name="inputQuoteSupplier" id="inputQuoteSupplier" onkeyup="fillInput('quoteSupplier')" style="margin-top: 4px;display:inline;">
+                      </div>
+                      <span class="invalid-feedback" style="display:none;">Please fill Quote Supplier!</span>
+                      <span style="display:none;" id="span_link_drive_quoteSup"><a id="link_quoteSup" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Quote Number*</label>
+                      <select name="selectQuoteNumber" class="select2 form-control" id="selectQuoteNumber" >
+                        <option>
+                      </select>
+                      <span class="invalid-feedback" style="display:none;">Please fill Quote Number!</span>
+                    </div>
+                  </div>
+                </div> 
+
+                <div class="form-group">
+                  <div id="docPendukungContainer" class="table-responsive">
+                    <label id="titleDoc_epr" style="display:none;">Lampiran Dokumen Lainnya</label>
+                    <table id="tableDocPendukung_epr" class="border-collapse:collapse" style="border-collapse: separate;border-spacing: 0 15px;">
+                      
+                    </table>
+                  </div>
+                  <div class="form-group" style="display:flex;margin-top: 10px;">
+                    <a type="button" style="margin:0 auto" id="btnAddDocPendukung" class="btn btn-sm text-bg-primary" onclick="addDocPendukung('epr')"><i class="bx bx-plus"></i>&nbsp Dokumen Pendukung</a>
+                  </div>
+                </div>   
+              </div>
+                
+              <div id="formForPrInternal" style="display:none;">
+                <div class="form-group">
+                  <label>Lampiran Penawaran Harga*</label>
+                  <div style="border: 1px solid #dee2e6 !important;padding: 5px;color: #337ab7;">
+                    <label for="inputPenawaranHarga" style="margin-bottom:0px">
+                      <span class="bx bx-cloud-upload" style="display:inline"></span>
+                      <input autocomplete="off" style="display: inline;" type="file" name="inputPenawaranHarga" class="files" id="inputPenawaranHarga">
+                    </label>
+                  </div>
+                  <span class="invalid-feedback" style="display:none;">Please fill Penawaran Harga!</span>
+                  <span style="display:none;" id="span_link_drive"><a id="link_penawaran_harga" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
+                </div>
+                <div id="docPendukungContainer" class="table-responsive">
+                  <label id="titleDoc_ipr" style="display:none;">Lampiran Dokumen Pendukung</label>
+                  <table id="tableDocPendukung_ipr" class="border-collapse:collapse" style="border-collapse: separate;border-spacing: 0 15px;">
+                    
+                  </table>
+                </div>
+                <div class="form-group" style="display:flex;margin-top: 10px;">
+                  <a type="button" style="margin:0 auto" id="btnAddDocPendukung" class="btn btn-sm text-bg-primary" onclick="addDocPendukung('ipr')"><i class="bx bx-plus"></i>&nbsp Dokumen Pendukung</a>
+                </div>
+              </div>
+            </div>   
+            <div class="tab-add" style="display:none">
+              <div class="card-body mb-4">
+                <div id="snow-toolbar">
+                  <span class="ql-formats">
+                    <select class="ql-font"></select>
+                    <select class="ql-size"></select>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-bold"></button>
+                    <button class="ql-italic"></button>
+                    <button class="ql-underline"></button>
+                    <button class="ql-strike"></button>
+                  </span>
+                  <span class="ql-formats">
+                    <select class="ql-color"></select>
+                    <select class="ql-background"></select>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-script" value="sub"></button>
+                    <button class="ql-script" value="super"></button>
+                  </span>
+                  <span class="ql-formats">
+                    <button class="ql-header" value="1"></button>
+                    <button class="ql-header" value="2"></button>
+                    <button class="ql-blockquote"></button>
+                    <button class="ql-code-block"></button>
+                  </span>
+                </div>
+                <div tabindex="0" id="snow-editor" onkeydown="fillInput('textArea_TOP')">
+                </div>
+                <span class="invalid-feedback" style="display:none;">Please fill Top of Payment!</span>
+               <!--  <form> 
+                  <textarea onkeyup="fillInput('textArea_TOP')" class="textarea" id="textAreaTOP" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221);" placeholder="ex. terms & Condition"></textarea>
+                </form> -->
+              </div>
+            </div>  
+            <div class="tab-add" style="display:none">
+              <div class="row">
+                <div class="col-md-12" id="headerPreviewFinal">
+                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 table-responsive">
+                  <table class="table" style="white-space: nowrap;">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyFinalPageProducts">
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12" id="bottomPreviewFinal">
+                  
+                </div>
+              </div>              
+            </div>     
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-secondary" id="prevBtnAdd">Back</button>
+          <button type="button" class="btn btn-sm text-bg-primary" id="nextBtnAdd">Next</button>
         </div>
       </div>
     </div>
@@ -806,20 +804,20 @@
         })
       }else{
         localStorage.setItem('isProductInline',false)
-        $("#uploadCsv").next('label').hide()
+        $("#uploadCsv").next('label').attr('style','display:none!important')
         $("input[type='file'][name='uploadCsv']").removeClass('hidden')
-        $("input[type='file'][name='uploadCsv']").prev('i').hide()
+        $("input[type='file'][name='uploadCsv']").prev('i').attr('style','display:none!important')
         $("#uploadCsv").next('label').next('i').removeClass('hidden') 
         $("#btnInitiateAddProduct").prop("disabled",true)
       }
     })
 
     if (window.location.href.split("?")[1] == "hide") {
-      $("#btnSirkulasi").hide()
-      $("#btnFinalize").hide()
-      $("#btnRevision").hide()
-      $("#btnAddNotes").hide()
-      $("#BtnBack").hide()
+      $("#btnSirkulasi").attr('style','display:none!important')
+      $("#btnFinalize").attr('style','display:none!important')
+      $("#btnRevision").attr('style','display:none!important')
+      $("#btnAddNotes").attr('style','display:none!important')
+      $("#BtnBack").attr('style','display:none!important')
     }
   })
 
@@ -895,12 +893,12 @@
               append = append + '<div class="row">'
                 append = append + '<div class="col-md-12">'
                   append = append + '<span><b>Action</b></span><br>'
-                   append = append + '<button onclick="pembanding()" class="btn btn-sm btn-primary" id="btnPembanding" style="margin-right:5px">Comparison</button>'
+                   append = append + '<button onclick="pembanding()" class="btn btn-sm text-bg-primary" id="btnPembanding" style="margin-right:5px">Comparison</button>'
                       append = append + '<button disabled class="btn btn-sm btn-warning" id="btnSirkulasi" style="margin-right:5px" onclick="sirkulasi(0)">Circular</button>'
                   append = append + '<button class="btn btn-sm btn-success" style="margin-right:5px" id="btnFinalize" disabled>Finalize</button>'
                   append = append + '<button class="btn btn-sm btn-danger" id="btnRevision" style="display:none" disabled>Revision</button>'
                   append = append + '<a id="btnShowPdf" target="_blank" href="{{url("/admin/getPdfPRFromLink")}}/?no_pr='+ window.location.href.split("/")[5] +'" class="btn btn-sm btn-warning pull-right">Show PDF</a>'
-                  append = append + '<button id="btnAddNotes" class="btn btn-sm btn-primary pull-right" style="margin-right:5px">Notes</button>'
+                  append = append + '<button id="btnAddNotes" class="btn btn-sm text-bg-primary pull-right" style="margin-right:5px">Notes</button>'
                 append = append + '</div>'
               append = append + '</div>'
               append = append + '<hr>'
@@ -966,7 +964,15 @@
                   })
                 }
               }
-            }    
+            }else{
+              $.each(result[0],function(key,value){
+                $.each(value,function(keys,values){
+                  if (values.status == 'CANCEL') {
+                    $("#btnPembanding").attr("disabled",true)
+                  }
+                })
+              })
+            } 
             
             $.each(result[0],function(value,item){
               loadActivity(value,item)
@@ -1158,7 +1164,7 @@
         $("#showResolve").append(appendResolve)
 
         if (window.location.href.split("?")[1] == "hide") {
-          $(".btnResolve").hide()
+          $(".btnResolve").attr('style','display:none!important')
         }
       }
     })
@@ -1172,7 +1178,7 @@
 
     document.getElementById("btnPembanding").onmousedown = function(event) {
       if (event.which == 3) {
-        window.open("{{url('/admin/detail/draftPR')}}/"+window.location.href.split("/")[5],"_blank")
+        window.open("{{url('/admin/detailDraftPR')}}/"+window.location.href.split("/")[5],"_blank")
         localStorage.setItem('isLastStorePembanding',true)
         // pembanding()
       }
@@ -1281,7 +1287,7 @@
     $("#btnCloseReplyBottom[data-value='"+ id +"']").hide("slow")
     $("#btnReply[data-value='"+ id +"']").prop('disabled',false)
     $("#btnReplyBottom[data-value='"+ id +"']").prop('disabled',false)
-    $("#showFooter[data-value='"+ id +"']").hide()
+    $("#showFooter[data-value='"+ id +"']").attr('style','display:none!important')
   }
 
   function mentionInput(){
@@ -1599,7 +1605,7 @@
           append = append + '<div class="card-body">'
               append = append + '<div id="headerPreview">'
               append = append + '</div>'
-              append = append + '<div class="card-header" style="display:block ruby"><h6 class="card-title" style="margin-top:15px">Products</h6><div class="card-tools pull-right"><button type="button" class="btn btn-sm btn-card-tool btnProductCollapsePembanding mt-1"><span class="bx bx-lg bx-chevron-down"></span></button></div></div>'
+              append = append + '<div class="card-header" style="display:block ruby"><h6 class="card-title" style="margin-top:15px">Products</h6><div class="card-tools pull-right"><button type="button" class="btn btn-sm btn-card-tool btnProductCollapsePembanding"><span class="bx bx-lg bx-chevron-down"></span></button></div></div>'
                 append = append + '<div class="card-body" id="bodyCollapseProductPembanding">'
                   append = append + '<hr>'
                   append = append + '<div id="table-produk" class="table-responsive">'
@@ -1625,7 +1631,7 @@
         append = append + '</div>'
     append = append + '<div class="col-md-6" >'
     append = append + '<div id="divPembanding"></div>'
-    append = append + '<div style="display:table;margin:0 auto"><button style="display:none" id="btnAddPembanding" class="btn btn-sm btn-primary" onclick="addPembanding()"><i class="bx bx-plus"></i>&nbspComparison</button</div>'        
+    append = append + '<div style="display:table;margin:0 auto"><button style="display:none" id="btnAddPembanding" class="btn btn-sm text-bg-primary" onclick="addPembanding()"><i class="bx bx-plus"></i>&nbspComparison</button</div>'        
     append = append + '</div>'
     $("#showDetail").append(append)
 
@@ -1642,11 +1648,11 @@
 
         if (window.location.href.split("?")[1] == "hide") {
           console.log("buak sial")
-          $("#btnSirkulasi").hide()
-          $("#btnFinalize").hide()
-          $("#btnRevision").hide()
-          $("#btnAddNotes").hide()
-          $("#BtnBack").hide()
+          $("#btnSirkulasi").attr('style','display:none!important')
+          $("#btnFinalize").attr('style','display:none!important')
+          $("#btnRevision").attr('style','display:none!important')
+          $("#btnAddNotes").attr('style','display:none!important')
+          $("#BtnBack").attr('style','display:none!important')
         }
       }else if (localStorage.getItem('isEmail') == 'true') {
         $("#showDetail").empty()
@@ -1977,19 +1983,19 @@
         $("#inputFinalPageTotalPriceData").val(formatter.format(result.grand_total))
 
         if (result.pr.tax_pb == 'false') {
-          $("#pb1_previewData").closest(".form-group").hide()
+          $("#pb1_previewData").closest(".form-group").attr('style','display:none!important')
         }else{
           $("#pb1_previewData").closest(".form-group").show()
         }
 
         if (result.pr.service_charge == 'false') {
-          $("#service_previewData").closest(".form-group").hide()
+          $("#service_previewData").closest(".form-group").attr('style','display:none!important')
         }else{
           $("#service_previewData").closest(".form-group").show()
         }
 
         if (result.pr.discount == 'false') {
-          $("#discount_previewData").closest(".form-group").hide()
+          $("#discount_previewData").closest(".form-group").attr('style','display:none!important')
         }else{
           $("#discount_previewData").closest(".form-group").show()
         }
@@ -2392,19 +2398,19 @@
 
         if (result.pr.tax_pb == 'false') {
           console.log("testttt")
-          $("#inputPb1_preview").closest(".form-group").hide()
+          $("#inputPb1_preview").closest(".form-group").attr('style','display:none!important')
         }else{
           $("#inputPb1_preview").closest(".form-group").show()
         }
 
         if (result.pr.service_charge == 'false') {
-          $("#inputServiceCharge_preview").closest(".form-group").hide()
+          $("#inputServiceCharge_preview").closest(".form-group").attr('style','display:none!important')
         }else{
           $("#inputServiceCharge_preview").closest(".form-group").show()
         }
 
         if (result.pr.discount == 'false') {
-          $("#inputDiscount_preview").closest(".form-group").hide()
+          $("#inputDiscount_preview").closest(".form-group").attr('style','display:none!important')
         }else{
           $("#inputDiscount_preview").closest(".form-group").show()
         }
@@ -2443,7 +2449,7 @@
     append = append + '<label style="display:table;margin:0 auto">Comparisson #'+ no +'</label>'
     append = append + '<div class="card-tools pull-right">'
       append = append + '<input value="'+ item.id +',pembanding,'+ item.id_draft_pr +'" type="checkbox" data-value="'+ no +'" name="chk" id="cbPriority" style="display:none" class="cbPriority"/><label>&nbspPriority <span class="bg-blue statusComparison" data-value="'+ no +'"></span></label>'
-        append = append + '<button type="button" class="btn btn-sm btn-card-tool btnMinus mt-1" onclick="btnMinus('+no+')" data-value="pembanding_'+ no +'"><span class="bx bx-lg bx-chevron-right"></span>'
+        append = append + '<button type="button" class="btn btn-sm btn-card-tool btnMinus" onclick="btnMinus('+no+')" data-value="pembanding_'+ no +'"><span class="bx bx-lg bx-chevron-right"></span>'
         append = append + '</button>'
       append = append + '</div>'
     append = append + '</div>'
@@ -2532,62 +2538,77 @@
     append = append + '<hr>'
     append = append + '  <div class="row">'
     append = append + '    <div class="col-md-12 col-xs-12">'
-    append = append + '      <div class="col-md-6">'
+    append = append + '      <div class="col-md-6 ms-auto">'
     append = append + '        <div class="form-group">'
     append = append + '          <label>Note Pembanding</label>'
     append = append + '           <textarea disabled class="form-control" style="resize:none;overflow-y:scroll" id="note_pembandingView" rows="4" data-value="'+i+'"></textarea>'
     append = append + '        </div>'
     append = append + '      </div>'
-    append = append + '      <div class="col-md-6 col-xs-12">'
-    append = append + '        <form class="form-horizontal">'
-    append = append + '          <div class="form-group">'
+    append = append + '      <div class="col-md-6 ms-auto col-xs-12">'
+    append = append + '    <form class="form-horizontal">'
+    append = append + '      <div class="form-group">'
+    append = append + '         <div class="row">'
     append = append + '            <label for="inputEmail3" class="col-sm-4 control-label">Total</label>'
     append = append + '            <div class="col-sm-8">'
     append = append + '              <input disabled type="text" class="form-control inputGrandTotalProductPembanding" id="inputGrandTotalProductPembanding" data-value="'+i+'" style="text-align:right">'
     append = append + '            </div>'
-    append = append + '          </div>'
+    append = append + '         </div>'
+    append = append + '      </div>'
 
     append = append + '          <div class="form-group">'
+    append = append + '           <div class="row">'
       append = append + '            <label for="inputDiscountPembanding" class="col-sm-4 control-label">Discount <span class="title_discount_pembanding" data-value="'+i+'"></span></label>'
       append = append + '            <div class="col-sm-8">'
       append = append + '              <input disabled type="text" class="form-control inputDiscountPembanding" style="text-align:right" id="inputDiscountPembanding" data-value="'+i+'">'
       append = append + '            </div>'
     append = append + '            </div>'
+    append = append + '           </div>'
 
     append = append + '          <div class="form-group">'
-
+    append = append + '           <div class="row">'
     append = append + '            <label for="inputEmail4" class="col-sm-4 control-label"> Tax Base Other</label>'
     append = append + '            <div class="col-sm-8">'
     append = append + '              <input disabled type="text" class="form-control tax_base_other_pembanding_preview_detail" style="text-align:right" id="tax_base_other_pembanding_preview_detail" data-value="'+i+'">'
     append = append + '            </div>'
     append = append + '          </div>'
+    append = append + '          </div>'
 
     append = append + '          <div class="form-group">'
+    append = append + '           <div class="row">'
     append = append + '            <label for="inputEmail4" class="col-sm-4 control-label">Vat <span class="title_tax_pembanding"></span></label>'
     append = append + '            <div class="col-sm-8">'
     append = append + '              <input disabled type="text" class="form-control vat_tax" style="text-align:right" id="vat_tax_pembanding" data-value="'+i+'">'
     append = append + '            </div>'
+    append = append + '           </div>'
     append = append + '          </div>'
 
     append = append + '          <div class="form-group">'
+    append = append + '           <div class="row">' 
       append = append + '            <label for="inputPb1Pembanding" class="col-sm-4 control-label">PB1 <span class="title_pb1_pembanding" data-value="'+i+'"></span></label>'
       append = append + '            <div class="col-sm-8">'
       append = append + '              <input disabled type="text" class="form-control inputPb1Pembanding" style="text-align:right" id="inputPb1Pembanding" data-value="'+i+'">'
       append = append + '            </div>'
     append = append + '            </div>'
+    append = append + '          </div>'
+
     append = append + '          <div class="form-group">'
+      append = append + '           <div class="row">' 
       append = append + '            <label for="inputServiceChargePembanding" class="col-sm-4 control-label">Service Charge <span class="title_service_pembanding" data-value="'+i+'"></span></label>'
       append = append + '            <div class="col-sm-8">'
       append = append + '              <input disabled type="text" class="form-control inputServiceChargePembanding" style="text-align:right" id="inputServiceChargePembanding" data-value="'+i+'">'
       append = append + '            </div>'
-    append = append + '            </div>'
+      append = append + '            </div>'
+    append = append + '          </div>'
 
     append = append + '          <div class="form-group">'
+    append = append + '           <div class="row">' 
     append = append + '            <label for="inputEmail5" class="col-sm-4 control-label">Grand Total</label>'
     append = append + '            <div class="col-sm-8">'
     append = append + '              <input disabled type="text" class="form-control inputFinalPageTotalPricePembanding" id="inputFinalPageTotalPricePembanding" data-value="'+i+'" style="text-align:right">'
     append = append + '            </div>'
+    append = append + '           </div>'
     append = append + '          </div>'
+
     append = append + '        </form>'
     append = append + '      </div>'
     append = append + '    </div>'
@@ -2602,7 +2623,7 @@
           append = append + '</div>'
         append = append + '</div>'
         append = append + '<div class="card-body collapse" id="bodyCollapse" data-value="'+i+'">'
-         append = append + '<div class="form-control" id="termPreviewPembanding" data-value="'+i+'" style="width: 100%; height: 100%; font-size: 12px; line-height: 18px; border: 1px solid rgb(221, 221)"></div>'
+         append = append + '<div class="form-control" disabled id="termPreviewPembanding" data-value="'+i+'" style="width: 100%; height: 100%; font-size: 12px; line-height: 18px; border: 1px solid rgb(221, 221)"></div>'
       append = append + '</div>'
     append = append + '</div>'
     append = append + '<hr>'
@@ -2690,16 +2711,16 @@
       // $("#cbPriority[data-value='" + i + "']").prop('disabled',true)
       $("#cbPriority[data-value='" + i + "']").click(function() { return false; });
     }else{
-      $(".statusComparison[data-value='" + i + "']").hide()
-      $(".statusComparisonSubmit").hide()
+      $(".statusComparison[data-value='" + i + "']").attr('style','display:none!important')
+      $(".statusComparisonSubmit").attr('style','display:none!important')
     }
 
-    $("input#cbPriority").on('ifChanged', function() {
+    $("input#cbPriority").on('change', function() {
       if (this.checked) {
         localStorage.setItem(isLastStorePembanding,false)
         Swal.fire({
           title: 'Are you sure?',  
-          text: "Selecting '"+ $(this).closest('div').parents('div.card-tools').prev('label').text()  +"'" ,
+          text: "Selecting '"+ $(this).closest('div.card-header').find("label").first().text() +"'" ,
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -2798,6 +2819,14 @@
 
       tempTotal = sum
 
+      if (valueVat == 11) {
+        valueVat = 12
+      }else if (valueVat == 1.1) {
+        valueVat = 1.2
+      }else{
+        valueVat = valueVat
+      }
+
       $('.title_tax_pembanding').text(valueVat + '%')
     }else{
       tempVat = 0
@@ -2826,19 +2855,19 @@
     $("#tax_base_other_pembanding_preview_detail[data-value='" + i + "']").val(formatter.format(customRound(formatter.format((sum - tempDiscount)*11/12))))
 
     if (item.tax_pb == 'false') {
-      $("#inputPb1Pembanding[data-value='"+ i +"']").closest('.form-group').hide()
+      $("#inputPb1Pembanding[data-value='"+ i +"']").closest('.form-group').attr('style','display:none!important')
     }else{
       $("#inputPb1Pembanding[data-value='"+ i +"']").closest('.form-group').show()
     }
 
     if (item.service_charge == 'false') {
-      $("#inputServiceChargePembanding[data-value='"+ i +"']").closest('.form-group').hide()
+      $("#inputServiceChargePembanding[data-value='"+ i +"']").closest('.form-group').attr('style','display:none!important')
     }else{
       $("#inputServiceChargePembanding[data-value='"+ i +"']").closest('.form-group').show()
     }
 
     if (item.discount == 'false') {
-      $("#inputDiscountPembanding[data-value='"+ i +"']").closest('.form-group').hide()
+      $("#inputDiscountPembanding[data-value='"+ i +"']").closest('.form-group').attr('style','display:none!important')
     }else{
       $("#inputDiscountPembanding[data-value='"+ i +"']").closest('.form-group').show()
     }
@@ -2993,7 +3022,7 @@
             if (n == 0) {
               $("#nextBtnSirkulasi").click(function(){
                 if ($("#reasonNoPembanding").val() == "") {
-                  $("#reasonNoPembanding").closest('.form-group').addClass('has-error')
+                  $("#reasonNoPembanding").closest('.form-group').addClass('needs-validation')
                   $("#reasonNoPembanding").closest('textarea').next('span').show();
                   $("#reasonNoPembanding").prev('.input-group-text').css("background-color","red");
                 }else{
@@ -3147,7 +3176,7 @@
               append = append + '<div class="col-sm-11">'
                 append = append + '<input class="form-control" name="emailTo" id="emailOpenTo">'
               append = append + '</div>'
-              append = append + '<div class="col-sm-11 col-sm-offset-1 help-block" style="margin-bottom: 0px;">'
+              append = append + '<div class="col-sm-11 col-sm-offset-1 invalid-feedback" style="margin-bottom: 0px;">'
               append = append + '</div>'
             append = append + '</div>'
             append = append + '<div class="form-group">'
@@ -3174,7 +3203,7 @@
             append = append + '</div>'
             append = append + '<div class="form-group">'
               append = append + '<div class="col-sm-12">'
-                  append = append + '<button class="btn btn-sm btn-flat btn-primary pull-right" style="display:inline" onclick="sendOpenEmail()"><i class="bx bx-envelope"></i> Send</button>'
+                  append = append + '<button class="btn btn-sm btn-flat text-bg-primary pull-right" style="display:inline" onclick="sendOpenEmail()"><i class="bx bx-envelope"></i> Send</button>'
                 append = append + '</div>'
               append = append + '</div>'
             append = append + '</div>'
@@ -3641,7 +3670,7 @@
             appendBottom = appendBottom + '  </div>'
           appendBottom = appendBottom + '</div>'
 
-          appendBottom = appendBottom + '<div class="row">'
+          appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
           appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
           appendBottom = appendBottom + '    <div class="pull-right">'
           appendBottom = appendBottom + '      <span style="display: inline;margin-right: 10px;">Tax Base Other</span>'
@@ -3776,7 +3805,7 @@
           finalGrand = tempGrand
           localStorage.setItem('status_tax',valueVat)
           if (!isNaN(valueVat)) {
-            tempVat = Math.round((parseFloat(sum) - parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * (valueVat == false?0:parseFloat(valueVat) / 100))
+            tempVat = $("#inputDiscountNominal").val() == '' ? Math.round((parseFloat(sum)) * (valueVat == false?0:parseFloat(valueVat) / 100)) : Math.round((parseFloat(sum) - parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * (valueVat == false?0:parseFloat(valueVat) / 100)) 
             // tempVat = Math.round((parseFloat(sum) * parseFloat(valueVat)) / 100)
 
             finalVat = tempVat
@@ -3808,7 +3837,12 @@
           tempPb1 = Math.round(((parseFloat(sum) - tempDiscNominal)* (result.pr.tax_pb == 'false'?tempPb1:parseFloat(result.pr.tax_pb)) / 100))
           tempService = Math.round(((parseFloat(sum) - tempDiscNominal) * (result.pr.service_charge == 'false'?tempService:parseFloat(result.pr.service_charge)) / 100))
 
-          finalGrand = tempGrand + tempPb1 + tempService - tempDiscNominal
+          console.log(tempGrand + 'tempgrand')
+          console.log(tempPb1 + 'tempPb1')
+          console.log(tempService + 'tempService')
+          console.log(tempDiscNominal + 'tempDiscNominal')
+
+          finalGrand = tempTotal + tempPb1 + tempService + tempVat - tempDiscNominal
 
           $('.title_pb1').text(result.pr.tax_pb == 'false' ?"":result.pr.tax_pb+"%")
           $('.title_service').text(result.pr.service_charge == 'false'?"":result.pr.service_charge+"%")
@@ -3893,7 +3927,7 @@
         $("#prevBtnAdd").attr('onclick','nextPrevAddPembanding(-1)')        
         document.getElementById("prevBtnAdd").style.display = "inline";
         $("#btnInitiateAddProduct").click(function(){
-          $(".tabGroupInitiateAdd").hide()
+          $(".tabGroupInitiateAdd").attr('style','display:none!important')
           x[n].children[1].style.display = 'inline'
 
           localStorage.setItem('isProductInline',true)
@@ -3935,7 +3969,7 @@
             if (result.pr.type_of_letter == 'EPR') {
               $(".modal-title").text('External Purchase Request')
               $("#formForPrExternal").show()
-              $("#formForPrInternal").hide()    
+              $("#formForPrInternal").attr('style','display:none!important')    
               $.ajax({
                 type:"GET",
                 url:"{{url('/admin/getPreviewPr')}}",
@@ -4055,9 +4089,9 @@
                         if (value != 0 &&  value != 1 && value != 2) {
                           appendDocPendukung = appendDocPendukung + '<tr style="height:10px" class="trDocPendukung">'
                             appendDocPendukung = appendDocPendukung + "<td>"
-                              appendDocPendukung = appendDocPendukung + '<button type="button" value="'+ item.id_dokumen +'" class="bx bx-times btnRemoveDocPendukung" data-value="remove_'+ value +'" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
+                              appendDocPendukung = appendDocPendukung + '<button type="button" value="'+ item.id_dokumen +'" class="bx bx-x btnRemoveDocPendukung" data-value="remove_'+ value +'" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
                                   appendDocPendukung = appendDocPendukung + '<div style="border: 1px solid #dee2e6 !important;padding: 5px;color: #337ab7;display: inline-block;width:200px;background-color:darkgrey;cursor:not-allowed">'
-                                    appendDocPendukung = appendDocPendukung + "<input style='font-family: inherit;width: 90px;color:grey' type='file' name='inputDocPendukung' id='inputDocPendukung' data-value='"+ item.id_dokumen +"' class='inputDocPendukung_"+value+"' disabled>"
+                                    appendDocPendukung = appendDocPendukung + "<input style='width: 90px;color:grey' type='file' name='inputDocPendukung' id='inputDocPendukung' data-value='"+ item.id_dokumen +"' class='inputDocPendukung_"+value+"' disabled>"
                                    appendDocPendukung = appendDocPendukung + '</div>'
                                    appendDocPendukung = appendDocPendukung + "<br><a style='margin-left: 26px;font-family:Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif' href='"+ item.link_drive +"' target='_blank'><i class='bx bx-link'></i>&nbspLink drive</a>"
                             appendDocPendukung = appendDocPendukung + "</td>"
@@ -4072,11 +4106,11 @@
                   }
                 }
               })              
-              $("#makeId").hide()                 
+              $("#makeId").attr('style','display:none!important')                 
             }else{
               $(".modal-title").text('Internal Purchase Request')
               $("#formForPrInternal").show()
-              $("#formForPrExternal").hide() 
+              $("#formForPrExternal").attr('style','display:none!important') 
 
               $("#tableDocPendukung_ipr").empty()
 
@@ -4085,9 +4119,9 @@
                 if (value != 0) {
                   appendDocPendukung = appendDocPendukung + '<tr style="height:10px" class="trDocPendukung">'
                     appendDocPendukung = appendDocPendukung + "<td>"
-                      appendDocPendukung = appendDocPendukung + '<button type="button" value="'+ item.id_dokumen +'" class="bx bx-times btnRemoveDocPendukung" data-value="remove_'+ value +'" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
+                      appendDocPendukung = appendDocPendukung + '<button type="button" value="'+ item.id_dokumen +'" class="bx bx-x btnRemoveDocPendukung" data-value="remove_'+ value +'" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
                           appendDocPendukung = appendDocPendukung + '<div style="border: 1px solid #dee2e6 !important;padding: 5px;color: #337ab7;display: inline-block;width:200px;background-color:darkgrey;cursor:not-allowed">'
-                            appendDocPendukung = appendDocPendukung + "<input style='font-family: inherit;width: 90px;color:grey' type='file' name='inputDocPendukung' id='inputDocPendukung' data-value='"+ item.id_dokumen +"' class='inputDocPendukung_"+value+"' disabled>"
+                            appendDocPendukung = appendDocPendukung + "<input style='width: 90px;color:grey' type='file' name='inputDocPendukung' id='inputDocPendukung' data-value='"+ item.id_dokumen +"' class='inputDocPendukung_"+value+"' disabled>"
                            appendDocPendukung = appendDocPendukung + '</div>'
                            appendDocPendukung = appendDocPendukung + "<br><a style='margin-left: 26px;font-family:Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif' href='"+ item.link_drive +"' target='_blank'><i class='bx bx-link'></i>&nbspLink drive</a>"
                     appendDocPendukung = appendDocPendukung + "</td>"
@@ -4166,7 +4200,7 @@
                       }
                   })
                   if($('#tableDocPendukung_ipr tr').length == 0){
-                    $("#titleDoc").hide()
+                    $("#titleDoc").attr('style','display:none!important')
                   }
                 })
               })       
@@ -4193,12 +4227,12 @@
 
   function fillInput(val){
     if (val == "selectTo") {
-        $("#selectTo").closest('.form-group').removeClass('has-error')
-        $("#selectTo").closest('.form-group').find('.help-block').hide();
+        $("#selectTo").closest('.form-group').removeClass('needs-validation')
+        $("#selectTo").closest('.form-group').find('.invalid-feedback').attr('style','display:none!important');
         $("#selectTo").prev('.input-group-text').css("background-color","red");
     }else if (val == "to") {
-      $("#inputTo").closest('.divInputTo').closest('.form-group').removeClass('has-error')
-      $("#inputTo").closest('.divInputTo').find('.help-block').hide();
+      $("#inputTo").closest('.divInputTo').closest('.form-group').removeClass('needs-validation')
+      $("#inputTo").closest('.divInputTo').find('.invalid-feedback').attr('style','display:none!important');
       $("#inputTo").prev('.input-group-text').css("background-color","red");
     }else if (val == "email") {
       const validateEmail = (email) => {
@@ -4210,77 +4244,77 @@
       emails = validateEmail($("#inputEmail").val())
 
       if ($("#inputEmail").val() == '-') {
-        $("#inputEmail").closest('.form-group').removeClass('has-error')
-        $("#inputEmail").closest('input').next('span').hide()
+        $("#inputEmail").closest('.form-group').removeClass('needs-validation')
+        $("#inputEmail").closest('input').next('span').attr('style','display:none!important')
         $("#inputEmail").prev('.input-group-text').css("background-color","red")
       }else{
         switch(emails){
           case null:
-            $("#inputEmail").closest('.form-group').addClass('has-error')
+            $("#inputEmail").closest('.form-group').addClass('needs-validation')
             $("#inputEmail").closest('input').next('span').show();
             $("#inputEmail").prev('.input-group-text').css("background-color","red");
             $("#inputEmail").closest('input').next('span').text("Enter a Valid Email Address!")
           break;
           default:
-            $("#inputEmail").closest('.form-group').removeClass('has-error')
-            $("#inputEmail").closest('input').next('span').hide()
+            $("#inputEmail").closest('.form-group').removeClass('needs-validation')
+            $("#inputEmail").closest('input').next('span').attr('style','display:none!important')
         }
       }
     }else if (val == "phone") {
       $("#inputPhone").inputmask({"mask": "999-999-999-999"})
-      $("#inputPhone").closest('.form-group').removeClass('has-error')
-      $("#inputPhone").closest('input').next('span').hide();
+      $("#inputPhone").closest('.form-group').removeClass('needs-validation')
+      $("#inputPhone").closest('input').next('span').attr('style','display:none!important');
       $("#inputPhone").prev('.input-group-text').css("background-color","red");
     }else if(val == "subject") {
-      $("#inputSubject").closest('.form-group').removeClass('has-error')
-      $("#inputSubject").closest('input').next('span').hide();
+      $("#inputSubject").closest('.form-group').removeClass('needs-validation')
+      $("#inputSubject").closest('input').next('span').attr('style','display:none!important');
       $("#inputSubject").prev('.input-group-text').css("background-color","red");
     }else if(val == "attention") {
-      $("#inputAttention").closest('.form-group').removeClass('has-error')
-      $("#inputAttention").closest('input').next('span').hide();
+      $("#inputAttention").closest('.form-group').removeClass('needs-validation')
+      $("#inputAttention").closest('input').next('span').attr('style','display:none!important');
       $("#inputAttention").prev('.input-group-text').css("background-color","red");
     }else if(val == "from") {
-      $("#inputFrom").closest('.form-group').removeClass('has-error')
-      $("#inputFrom").closest('input').next('span').hide();
+      $("#inputFrom").closest('.form-group').removeClass('needs-validation')
+      $("#inputFrom").closest('input').next('span').attr('style','display:none!important');
       $("#inputFrom").prev('.input-group-text').css("background-color","red");
     }else if(val == "address") {
-      $("#inputAddress").closest('.form-group').removeClass('has-error')
-      $("#inputAddress").closest('input').next('span').hide();
+      $("#inputAddress").closest('.form-group').removeClass('needs-validation')
+      $("#inputAddress").closest('input').next('span').attr('style','display:none!important');
       $("#inputAddress").prev('.input-group-text').css("background-color","red");  
     }
 
     if (val == "selectLeadId") {
-      $("#selectLeadId").closest('.form-group').removeClass('has-error')
-      $("#selectLeadId").closest('select').next('span').next('span').hide();
+      $("#selectLeadId").closest('.form-group').removeClass('needs-validation')
+      $("#selectLeadId").closest('select').next('span').next('span').attr('style','display:none!important');
       $("#selectLeadId").prev('.input-group-text').css("background-color","red");
     }
 
     if (val == "selectPID") {
-      $("#selectPID").closest('.form-group').removeClass('has-error')
-      $("#selectPID").closest('select').next('span').next('span').hide();
+      $("#selectPID").closest('.form-group').removeClass('needs-validation')
+      $("#selectPID").closest('select').next('span').next('span').attr('style','display:none!important');
       $("#selectPID").prev('.input-group-text').css("background-color","red");
     }
 
     if (val == "selectType") {
-      $("#selectType").closest('.form-group').removeClass('has-error')
-      $("#selectType").closest('select').next('span').hide();
+      $("#selectType").closest('.form-group').removeClass('needs-validation')
+      $("#selectType").closest('select').next('span').attr('style','display:none!important');
       $("#selectType").prev('.input-group-text').css("background-color","red");
     }
 
     if (val == "selectCategory") {
-      $("#selectCategory").closest('.form-group').removeClass('has-error')
-      $("#selectCategory").closest('select').next('span').hide();
+      $("#selectCategory").closest('.form-group').removeClass('needs-validation')
+      $("#selectCategory").closest('select').next('span').attr('style','display:none!important');
       $("#selectCategory").prev('.input-group-text').css("background-color","red");
     }
 
     if (val == "name_product") {
-      $("#inputNameProduct").closest('.form-group').removeClass('has-error')
-      $("#inputNameProduct").closest('input').next('span').hide();
+      $("#inputNameProduct").closest('.form-group').removeClass('needs-validation')
+      $("#inputNameProduct").closest('input').next('span').attr('style','display:none!important');
       $("#inputNameProduct").prev('.input-group-text').css("background-color","red");
     }
     if (val == "desc_product") {
-      $("#inputDescProduct").closest('.form-group').removeClass('has-error')
-      $("#inputDescProduct").closest('textarea').next('span').hide();
+      $("#inputDescProduct").closest('.form-group').removeClass('needs-validation')
+      $("#inputDescProduct").closest('textarea').next('span').attr('style','display:none!important');
       $("#inputDescProduct").prev('.input-group-text').css("background-color","red");
     }
     if (val == "qty_product") {
@@ -4289,8 +4323,8 @@
       }else{
         $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
       }
-      $("#inputQtyProduct").closest('.col-md-4').removeClass('has-error')
-      $("#inputQtyProduct").closest('input').next('span').hide();
+      $("#inputQtyProduct").closest('.col-md-4').removeClass('needs-validation')
+      $("#inputQtyProduct").closest('input').next('span').attr('style','display:none!important');
       $("#inputQtyProduct").prev('.input-group-text').css("background-color","red");
     }
     if (val == "price_product") {
@@ -4300,42 +4334,42 @@
       }else{
         $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
       }
-      $("#inputPriceProduct").closest('.col-md-4').removeClass('has-error')
-      $("#inputPriceProduct").closest('input').closest('.input-group').next('span').hide();
+      $("#inputPriceProduct").closest('.col-md-4').removeClass('needs-validation')
+      $("#inputPriceProduct").closest('input').closest('.input-group').next('span').attr('style','display:none!important');
       $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
     }
     if (val == "spk") {
-      $("#inputSPK").closest('.form-group').removeClass('has-error')
-      $("#inputSPK").closest('input').next('span').hide();
+      $("#inputSPK").closest('.form-group').removeClass('needs-validation')
+      $("#inputSPK").closest('input').next('span').attr('style','display:none!important');
       $("#inputSPK").prev('.input-group-text').css("background-color","red");
     }
 
     if (val == "sbe") {
-      $("#inputSBE").closest('.form-group').removeClass('has-error')
-      $("#inputSBE").closest('input').next('span').hide();
+      $("#inputSBE").closest('.form-group').removeClass('needs-validation')
+      $("#inputSBE").closest('input').next('span').attr('style','display:none!important');
       $("#inputSBE").prev('.input-group-text').css("background-color","red");
     }
 
     if (val == "quoteSupplier") {
-      $("#inputQuoteSupplier").closest('.form-group').removeClass('has-error')
-      $("#inputQuoteSupplier").closest('input').next('span').hide();
+      $("#inputQuoteSupplier").closest('.form-group').removeClass('needs-validation')
+      $("#inputQuoteSupplier").closest('input').next('span').attr('style','display:none!important');
       $("#inputQuoteSupplier").prev('.input-group-text').css("background-color","red");  
     }
 
     if (val == "quoteNumber") {
-      $("#inputQuoteNumber").closest('.form-group').removeClass('has-error')
-      $("#inputQuoteNumber").closest('input').next('span').hide();
+      $("#inputQuoteNumber").closest('.form-group').removeClass('needs-validation')
+      $("#inputQuoteNumber").closest('input').next('span').attr('style','display:none!important');
       $("#inputQuoteNumber").prev('.input-group-text').css("background-color","red");  
     }
 
     if (val == "textArea_TOP") {
-      $("#snow-editor").next('span').hide();
+      $("#snow-editor").next('span').attr('style','display:none!important');
     }
 
     if (val == "reason_reject") {
       if (val == "reason_reject") {
-        $("#reasonRejectSirkular").closest('.form-group').removeClass('has-error')
-        $("#reasonRejectSirkular").closest('textarea').next('span').hide();
+        $("#reasonRejectSirkular").closest('.form-group').removeClass('needs-validation')
+        $("#reasonRejectSirkular").closest('textarea').next('span').attr('style','display:none!important');
         $("#reasonRejectSirkular").prev('.input-group-text').css("background-color","red"); 
       }
     }
@@ -4345,7 +4379,7 @@
   function nextPrevAddPembanding(n,value) {
     if (value == undefined) {
       if (value == 0) {
-        $(".tabGroupInitiateAdd").hide()
+        $(".tabGroupInitiateAdd").attr('style','display:none!important')
         $(".tab-add")[1].children[1].style.display = 'inline'
       }
     }else{
@@ -4359,7 +4393,7 @@
       }
 
       if (!isNaN(value)) {
-        $(".tabGroupInitiateAdd").hide()
+        $(".tabGroupInitiateAdd").attr('style','display:none!important')
         $(".tab-add")[1].children[1].style.display = 'inline'
         $.ajax({
           type: "GET",
@@ -4394,47 +4428,47 @@
     }
     if (currentTab == 0) {
       // if ($("#selectTo").val() == "") {
-      //     $("#selectTo").closest('.form-group').addClass('has-error')
-      //     $("#selectTo").closest('.form-group').find('.help-block').show()
+      //     $("#selectTo").closest('.form-group').addClass('needs-validation')
+      //     $("#selectTo").closest('.form-group').find('.invalid-feedback').show()
       //     $("#selectTo").css("background-color","red");
       //   if ($("#inputTo").val() == "") {
-      //     $("#inputTo").closest('.form-group').addClass('has-error')
+      //     $("#inputTo").closest('.form-group').addClass('needs-validation')
       //     $("#inputTo").closest('input').next('span').show();
       //     $("#inputTo").prev('.input-group-text').css("background-color","red");
       //   }
       // }else 
       if ($("#inputEmail").val() == "") {
-        $("#inputEmail").closest('.form-group').addClass('has-error')
+        $("#inputEmail").closest('.form-group').addClass('needs-validation')
         $("#inputEmail").closest('input').next('span').show();
         $("#inputEmail").prev('.input-group-text').css("background-color","red");
         $("#inputEmail").closest('input').next('span').text("Please fill an Email!")
       }
       else if ($("#selectPosition").val() == "") {
-        $("#selectPosition").closest('.form-group').addClass('has-error')
+        $("#selectPosition").closest('.form-group').addClass('needs-validation')
         $("#selectPosition").closest('select').next('span').show();
         $("#selectPosition").prev('.input-group-text').css("background-color","red");
       }else if ($("#inputPhone").val() == "") {
-        $("#inputPhone").closest('.form-group').addClass('has-error')
+        $("#inputPhone").closest('.form-group').addClass('needs-validation')
         $("#inputPhone").closest('input').next('span').show();
         $("#inputPhone").prev('.input-group-text').css("background-color","red");
       }else if($("#inputAttention").val() == "") {
-        $("#inputAttention").closest('.form-group').addClass('has-error')
+        $("#inputAttention").closest('.form-group').addClass('needs-validation')
         $("#inputAttention").closest('input').next('span').show();
         $("#inputAttention").prev('.input-group-text').css("background-color","red");
       }else if($("#inputFrom").val() == "") {
-        $("#inputFrom").closest('.form-group').addClass('has-error')
+        $("#inputFrom").closest('.form-group').addClass('needs-validation')
         $("#inputFrom").closest('input').next('span').show();
         $("#inputFrom").prev('.input-group-text').css("background-color","red");
       }else if($("#inputSubject").val() == "") {
-        $("#inputSubject").closest('.form-group').addClass('has-error')
+        $("#inputSubject").closest('.form-group').addClass('needs-validation')
         $("#inputSubject").closest('input').next('span').show();
         $("#inputSubject").prev('.input-group-text').css("background-color","red");
       }else if($("#inputAddress").val() == "") {
-        $("#inputAddress").closest('.form-group').addClass('has-error')
+        $("#inputAddress").closest('.form-group').addClass('needs-validation')
         $("#inputAddress").closest('textarea').next('span').show();
         $("#inputAddress").prev('.input-group-text').css("background-color","red");
       }else if($("#note_pembanding").val() == "") {
-        $("#note_pembanding").closest('.form-group').addClass('has-error')
+        $("#note_pembanding").closest('.form-group').addClass('needs-validation')
         $("#note_pembanding").closest('textarea').next('span').show();
         $("#note_pembanding").prev('.input-group-text').css("background-color","red");
       }else{
@@ -4538,23 +4572,23 @@
       if (($(".tab-add")[1].children[1].style.display == 'inline') == true) {
         if (n == 1) {
           if ($("#inputNameProduct").val() == "") {
-            $("#inputNameProduct").closest('.form-group').addClass('has-error')
+            $("#inputNameProduct").closest('.form-group').addClass('needs-validation')
             $("#inputNameProduct").closest('input').next('span').show();
             $("#inputNameProduct").prev('.input-group-text').css("background-color","red");
           }else if ($("#inputDescProduct").val() == "") {
-            $("#inputDescProduct").closest('.form-group').addClass('has-error')
+            $("#inputDescProduct").closest('.form-group').addClass('needs-validation')
             $("#inputDescProduct").closest('textarea').next('span').show();
             $("#inputDescProduct").prev('.input-group-text').css("background-color","red");
           }else if ($("#inputQtyProduct").val() == "") {
-            $("#inputQtyProduct").closest('.col-md-4').addClass('has-error')
+            $("#inputQtyProduct").closest('.col-md-4').addClass('needs-validation')
             $("#inputQtyProduct").closest('input').next('span').show();
             $("#inputQtyProduct").prev('.input-group-text').css("background-color","red");
           }else if ($("#selectTypeProduct").val() == "") {
-            $("#selectTypeProduct").closest('.col-md-4').addClass('has-error')
+            $("#selectTypeProduct").closest('.col-md-4').addClass('needs-validation')
             $("#selectTypeProduct").closest('select').next('span').show();
             $("#selectTypeProduct").prev('.input-group-text').css("background-color","red");
           }else if ($("#inputPriceProduct").val() == "") {
-            $("#inputPriceProduct").closest('.col-md-4').addClass('has-error')
+            $("#inputPriceProduct").closest('.col-md-4').addClass('needs-validation')
             $("#inputPriceProduct").closest('input').closest('.input-group').next('span').show();
             $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
           }else{
@@ -4783,7 +4817,7 @@
           },success:function(result){
             if (result.pr.type_of_letter == 'IPR') {
               if ($("#inputPenawaranHarga").val() == "") {
-                $("#inputPenawaranHarga").closest('.form-group').addClass('has-error')
+                $("#inputPenawaranHarga").closest('.form-group').addClass('needs-validation')
                 $("#inputPenawaranHarga").closest('div').next('span').show();
                 $("#inputPenawaranHarga").prev('.input-group-text').css("background-color","red");
               }else{
@@ -4858,19 +4892,19 @@
               }
             }else{
               if ($("#selectLeadId").val() == "") {
-                $("#selectLeadId").closest('.col-md-6').addClass('has-error')
-                $("#selectLeadId").closest('select').next('span help-block').show();
+                $("#selectLeadId").closest('.col-md-6').addClass('needs-validation')
+                $("#selectLeadId").closest('select').next('span invalid-feedback').show();
                 $("#selectLeadId").prev('.col-md-6').css("background-color","red");
               }else if ($("#selectPid").val() == "") {
-                $("#selectPid").closest('.col-md-6').addClass('has-error')
-                $("#selectPid").closest('select').next('span help-block').show();
+                $("#selectPid").closest('.col-md-6').addClass('needs-validation')
+                $("#selectPid").closest('select').next('span invalid-feedback').show();
                 $("#selectPid").prev('.col-md-6').css("background-color","red");
               }else if ($("#inputQuoteSupplier").val() == "") {
-                $("#inputQuoteSupplier").closest('.col-md-6').addClass('has-error')
+                $("#inputQuoteSupplier").closest('.col-md-6').addClass('needs-validation')
                 $("#inputQuoteSupplier").closest('div').next('span').show();
                 $("#inputQuoteSupplier").prev('.col-md-6').css("background-color","red");
               }else if ($("#inputQuoteNumber").val() == "") {
-                $("#inputQuoteNumber").closest('.col-md-6').addClass('has-error')
+                $("#inputQuoteNumber").closest('.col-md-6').addClass('needs-validation')
                 $("#inputQuoteNumber").closest('input').next('span').show();
                 $("#inputQuoteNumber").prev('.col-md-6').css("background-color","red");
               }else{
@@ -4987,7 +5021,7 @@
         if (snowEditor.getText().trim() == "") {
           $("#snow-editor").next('span').show()
         }else{
-          $("#snow-editor").next('span').hide()
+          $("#snow-editor").next('span').attr('style','display:none!important')
           
           $.ajax({
             url: "{{'/admin/storePembandingTermPayment'}}",
@@ -5079,7 +5113,7 @@
                   'success'
               ).then((result) => {
                   if (result.value) {
-                    location.replace("{{url('/admin/detail/draftPR')}}/"+ window.location.href.split("/")[5])
+                    location.replace("{{url('/admin/detailDraftPR')}}/"+ window.location.href.split("/")[5])
                     localStorage.setItem('isLastStorePembanding',true)
                   }
               })
@@ -5153,7 +5187,7 @@
     if (!isNaN(valueVat)) {
       console.log("hoooo")
       console.log(valueVat)
-      tempVat = Math.round((parseFloat(sum) - parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * (valueVat == false?0:parseFloat(valueVat) / 100))
+      tempVat = Math.round((parseFloat(sum) - isNaN(parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ','')))?0:parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * (valueVat == false?0:parseFloat(valueVat) / 100))
       if (!isNaN(value)) {
         if (valueVat == 11) {
           valueVat = 12
@@ -5313,32 +5347,24 @@
 
           appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
             appendBottom = appendBottom + ' <div class="col-md-12 col-xs-12">'
-            appendBottom = appendBottom + ' <div class="pull-right">'
-            appendBottom = appendBottom + '  <span style="margin-right: 15px;">Vat <span class="title_tax_add_pembanding"></span>'
+            appendBottom = appendBottom + ' <div class="pull-right d-flex">'
+            appendBottom = appendBottom + '  <span style="margin-right: 15px;margin-top:8px;display:inline-flex">Vat <span class="title_tax_add_pembanding"></span>'
             appendBottom = appendBottom + '  </span>'
             appendBottom = appendBottom + '  <div class="input-group" style="display: inline-flex;">'
-            appendBottom = appendBottom + '   <input disabled type="text" class="form-control vat_tax" id="vat_tax" name="vat_tax" style="width:217px;display:inline">'
-            appendBottom = appendBottom + '  <div class="input-group-btn">'
-            appendBottom = appendBottom + '       <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'
+            appendBottom = appendBottom + '   <input disabled type="text" class="form-control vat_tax" id="vat_tax" name="vat_tax" style="width:208px;display:inline">'
+            appendBottom = appendBottom + '       <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">'
             appendBottom = appendBottom + '       </button>'
             appendBottom = appendBottom + '       <ul class="dropdown-menu">'
             appendBottom = appendBottom + '       <li>'
             appendBottom = appendBottom + '        <a class="dropdown-item" onclick="changeVatValue(false)">Without Vat</a>'
             appendBottom = appendBottom + '       </li>'
-            // appendBottom = appendBottom + '       <li>'
-            // appendBottom = appendBottom + '        <a class="dropdown-item" onclick="changeVatValue(12)">Vat 12%</a>'
-            // appendBottom = appendBottom + '       </li>'
             appendBottom = appendBottom + '       <li>'
             appendBottom = appendBottom + '        <a class="dropdown-item" onclick="changeVatValue(11)">Vat 12%</a>'
             appendBottom = appendBottom + '       </li>'
-            // appendBottom = appendBottom + '       <li>'
-            // appendBottom = appendBottom + '        <a class="dropdown-item" onclick="changeVatValue('+ parseFloat(1.2) +')">Vat 1,2%</a>'
-            // appendBottom = appendBottom + '       </li>'
             appendBottom = appendBottom + '       <li>'
             appendBottom = appendBottom + '        <a class="dropdown-item" onclick="changeVatValue('+ parseFloat(1.1) +')">Vat 1,2%</a>'
             appendBottom = appendBottom + '       </li>'
             appendBottom = appendBottom + '      </ul>'
-            appendBottom = appendBottom + '  </div>'
             appendBottom = appendBottom + '</div>'
             appendBottom = appendBottom + '</div>'
             appendBottom = appendBottom + '</div>'
@@ -5472,42 +5498,53 @@
   }
 
   function toggleIcheckPajak(value){
-    console.log(value)
-    $('#cbInputPb1Final').on('ifChecked', function(event){
-      $("#inputPb1Final").prop("disabled",false)
+    $('#cbInputPb1Final').on('change', function(event){
+        if ($('#cbInputPb1Product').is(":checked")) {
+          $("#inputPb1Final").prop("disabled",false)
+        }
     });
 
-    $('#cbInputPb1Final').on('ifUnchecked', function(event){
-      $("#inputPb1Final").prop("disabled",true)
-      if (value == false) {
-        $("#inputPb1Final").val("")
-        $("#inputPb1Nominal").val("")
-        changeVatValue("pb1")
+    $('#cbInputPb1Final').on('change', function(event){
+      if (!$('#cbInputPb1Final').is(":checked")) {
+        $("#inputPb1Final").prop("disabled",true)
+        if (value == false) {
+          $("#inputPb1Final").val("")
+          $("#inputPb1Nominal").val("")
+          changeVatValue("pb1")
+        }
       }
     });
 
-    $('#cbInputServiceChargeFinal').on('ifChecked', function(event){
-      $("#inputServiceChargeFinal").prop("disabled",false)
-    });
-
-    $('#cbInputServiceChargeFinal').on('ifUnchecked', function(event){
-      $("#inputServiceChargeFinal").prop("disabled",true)
-      if (value == false) {
-        $("#inputServiceChargeFinal").val("")
-        $("#inputServiceChargeNominal").val("")
-        changeVatValue("service")
+    $('#cbInputServiceChargeFinal').on('change', function(event){
+      if ($('#cbInputServiceChargeFinal').is(":checked")) {
+        $("#inputServiceChargeFinal").prop("disabled",false)
       }
     });
 
-    $('#cbInputDiscountFinal').on('ifChecked', function(event){
-      $("#inputDiscountNominal").prop("disabled",false)
+    $('#cbInputServiceChargeFinal').on('change', function(event){
+      if ($('#cbInputServiceChargeFinal').is(":checked")) {
+        $("#inputServiceChargeFinal").prop("disabled",true)
+        if (value == false) {
+          $("#inputServiceChargeFinal").val("")
+          $("#inputServiceChargeNominal").val("")
+          changeVatValue("service")
+        }
+      }
     });
 
-    $('#cbInputDiscountFinal').on('ifUnchecked', function(event){
-      $("#inputDiscountNominal").prop("disabled",true)
-      if (value == false) {
-        $("#inputDiscountNominal").val("")
-        changeVatValue("discount")
+    $('#cbInputDiscountFinal').on('change', function(event){
+      if ($('#cbInputDiscountFinal').is(":checked")) {
+        $("#inputDiscountNominal").prop("disabled",false)
+      }
+    });
+
+    $('#cbInputDiscountFinal').on('change', function(event){
+      if ($('#cbInputDiscountFinal').is(":checked")) {
+        $("#inputDiscountNominal").prop("disabled",true)
+        if (value == false) {
+          $("#inputDiscountNominal").val("")
+          changeVatValue("discount")
+        }
       }
     });
   }
@@ -5565,7 +5602,7 @@
     // append = ""
     //   append = append + "<tr style='height:10px' class='trDocPendukung'>"
     //     append = append + "<td>"
-    //       append = append + '<button type="button" class="bx bx-times btnRemoveAddDocPendukung" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
+    //       append = append + '<button type="button" class="bx bx-x btnRemoveAddDocPendukung" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
     //       append = append + '<input style="display:inline;font-family: inherit;width: 90px;" class="bx bx-cloud-upload pull-right inputDocPendukung_'+incrementDoc+' files" type="file" name="inputDocPendukung[]" id="inputDocPendukung">'
     //     append = append + "</td>"
     //     append = append + "<td>"
@@ -5577,10 +5614,10 @@
     append = ""
       append = append + "<tr style='height:10px' class='trDocPendukung'>"
         append = append + "<td>"
-          append = append + '<button type="button" class="bx bx-times btnRemoveAddDocPendukung" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
+          append = append + '<button type="button" class="bx bx-x btnRemoveAddDocPendukung" style="display:inline;color:red;background-color:transparent;border:none"></button>&nbsp'
           append = append + '<label for="inputDocPendukung" style="margin-bottom:0px">'
           append = append + '<span class="bx bx-cloud-upload" style="display:inline"></span>'
-          append = append + '<input style="display:inline;font-family: inherit;width: 90px;" class=" inputDocPendukung_'+ incrementDoc +' files" type="file" name="inputDocPendukung" id="inputDocPendukung" data-value="'+incrementDoc+'">'
+          append = append + '<input style="display:inline;width: 90px;" class=" inputDocPendukung_'+ incrementDoc +' files" type="file" name="inputDocPendukung" id="inputDocPendukung" data-value="'+incrementDoc+'">'
           append = append + '</label>'
         append = append + "</td>"
         append = append + "<td>"
@@ -5594,7 +5631,7 @@
   $(document).on('click', '.btnRemoveAddDocPendukung', function() {
     $(this).closest("tr").remove();
     if($('#tableDocPendukung tr').length == 0){
-      $("#titleDoc").hide()
+      $("#titleDoc").attr('style','display:none!important')
     }
   });
 
@@ -5628,7 +5665,7 @@
 
   function rejectSirkulasi(){
     if ($("#reasonRejectSirkular").val() == "") {
-      $("#reasonRejectSirkular").closest('.form-group').addClass('has-error')
+      $("#reasonRejectSirkular").closest('.form-group').addClass('needs-validation')
       $("#reasonRejectSirkular").closest('textarea').next('span').show();
       $("#reasonRejectSirkular").prev('.input-group-text').css("background-color","red");
     }else{

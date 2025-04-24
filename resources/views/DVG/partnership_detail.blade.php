@@ -588,20 +588,24 @@ Partnership Detail
 					</div>
 				</div>
 				<div class="tab-pane" id="tab_4">
-					<div class="table-responsive">
-						<table class="table table-bordered nowrap table-striped dataTable" id="tbLog"
-							style="width: 100%" cellspacing="0">
-							<thead>
-								<tr>
-									<th>No</th>
-									<th>Activity</th>
-									<th>Created at</th>
-									<th>PIC</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered nowrap table-striped dataTable" id="tbLog"
+									style="width: 100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Activity</th>
+											<th>Created at</th>
+											<th>PIC</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1223,7 +1227,7 @@ Partnership Detail
 
 				$(".btn-dropdown-toggle").click(function () {
 					if ($(this).closest("div").closest(".card-header").next().is(":visible")) {
-						$(this).closest("div").closest(".card-header").next().hide()
+						$(this).closest("div").closest(".card-header").next().attr('style','display:none!important')
 						$(this).find("i").removeClass('bx bx-chevron-down').addClass(
 							'bx bx-chevron-up')
 					} else {
@@ -1355,12 +1359,12 @@ Partnership Detail
 					if (value.status == "Done") {
 						$(".checked-" + key).attr("checked", "true")
 						$(".checked-" + key).prop("disabled", true)
-						$(".activeTrash-" + key).hide()
+						$(".activeTrash-" + key).attr('style','display:none!important')
 					} else {
 						if (accesable.includes('targetTools')) {
 							$(".activeTrash-" + key).show()
 						} else {
-							$(".activeTrash-" + key).hide()
+							$(".activeTrash-" + key).attr('style','display:none!important')
 						}
 					}
 
@@ -1375,7 +1379,7 @@ Partnership Detail
 								}
 							})
 							$(".checked-" + key).prop("disabled", true)
-							$(".activeTrash-" + key).hide()
+							$(".activeTrash-" + key).attr('style','display:none!important')
 							$("small.status-" + key).text("Done")
 
 						},
@@ -1543,7 +1547,7 @@ Partnership Detail
 				var numItems = items.length;
 				var perPage = 2;
 
-				items.slice(perPage).hide();
+				items.slice(perPage).attr('style','display:none!important');
 
 				$('#pagination-container').pagination({
 					items: numItems,
@@ -1553,7 +1557,7 @@ Partnership Detail
 					onPageClick: function (pageNumber) {
 						var showFrom = perPage * (pageNumber - 1);
 						var showTo = showFrom + perPage;
-						items.hide().slice(showFrom, showTo).show();
+						items.attr('style','display:none!important').slice(showFrom, showTo).show();
 					}
 				});
 			},
@@ -1868,7 +1872,7 @@ Partnership Detail
 			var reader = new FileReader();
 			reader.onload = function (e) {
 				$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-				$('#imagePreview').hide();
+				$('#imagePreview').attr('style','display:none!important');
 				$('#imagePreview').fadeIn(650);
 			}
 			reader.readAsDataURL(input.files[0]);
@@ -1885,7 +1889,7 @@ Partnership Detail
 			var reader = new FileReader();
 			reader.onload = function (e) {
 				$('#badgePreview').css('background-image', 'url(' + e.target.result + ')');
-				$('#badgePreview').hide();
+				$('#badgePreview').attr('style','display:none!important');
 				$('#badgePreview').fadeIn(650);
 			}
 			reader.readAsDataURL(input.files[0]);

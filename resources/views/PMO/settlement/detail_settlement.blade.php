@@ -186,7 +186,7 @@ Detail Settlement
 					$("#titleMonreq").text(result.settlement.no_monreq)
 					initTableDetail(result.settlement.pid_details,result.settlement.sub_category,result)
 
-					$("#btnExportSettlement").hide()
+					$("#btnExportSettlement").attr('style','display:none!important')
 					if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Project Management Manager')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Project Management')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.group','Financial And Accounting')->exists()}}") {
 						$("#btnApproveSettlement").text('Approve')
 					}else if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Chief Operating Officer')->exists()}}") {
@@ -602,8 +602,8 @@ Detail Settlement
 
 		function validationCheck(data){
 			if ($(data).val() != '') {
-				$(data).next('.help-block').hide()
-				$(data).next().next('.help-block').hide()
+				$(data).next('.help-block').attr('style','display:none!important')
+				$(data).next().next('.help-block').attr('style','display:none!important')
 				$(data).closest(".form-group").removeClass('has-error')
 			}
 		}

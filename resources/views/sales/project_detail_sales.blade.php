@@ -400,7 +400,7 @@ Lead Register
 			                      	<th hidden></th>
 			                        <th title="Product Tagging is Required!">Brand Tag</th>
 			                        <th>Technology Tag</th>
-			                        <th>Price</th>
+			                        <th width="50%">Price</th>
 			                        <td class="text-center">
 			                          	<button class="btn btn-sm btn-primary" id="btn-addTagging" type="button" style="border-radius:50%;width: 25px;height: 25px;vertical-align: text-top;">
 									    	<i class="bx bx-plus"></i>
@@ -1356,7 +1356,7 @@ Lead Register
 								$("#project_budget").prev('.input-group-text').css("background-color","red");
 			  			}else{
 			  				$("#project_budget").closest('.form-group').removeClass('has-error')
-								$("#project_budget").closest('div div').next('span').hide();
+								$("#project_budget").closest('div div').next('span').attr('style','display:none!important');
 								$("#project_budget").prev('.input-group-text').css("background-color","#aaa");
 
 			  				var fd = new FormData()	
@@ -1463,7 +1463,7 @@ Lead Register
 								$("#project_budget").prev('.input-group-text').css("background-color","red");
 							}else{
 								$("#project_budget").closest('.form-group').removeClass('has-error')
-								$("#project_budget").closest('div div').next('span').hide();
+								$("#project_budget").closest('div div').next('span').attr('style','display:none!important');
 								$("#project_budget").prev('.input-group-text').css("background-color","#aaa");
 
 								var fd = new FormData()
@@ -1766,7 +1766,7 @@ Lead Register
 					}
 			}else if("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','System Designer Architecture')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Presales Support Architecture')->exists()}}"){
 				$("#project_budget,#priority,#proyek_size").prop("disabled",true)
-				$("#btn-addTagging").hide()
+				$("#btn-addTagging").attr('style','display:none!important')
 				$("#tbtagging").closest("form").prop("disabled",true)
 				$("#tbtagging").find("tr").find("td:last-child").remove()
 			}
@@ -1774,7 +1774,7 @@ Lead Register
 			// 	$("#btnSubmitSD").prop("disabled",true)
 			// 	$("#project_budget,#priority,#proyek_size").prop("disabled",true)
 			// 	$("#pov,#assesment,#propossed_design").prop("disabled",true)
-			// 	$("#btn-addTagging").hide()
+			// 	$("#btn-addTagging").attr('style','display:none!important')
 			// 	$("#tbtagging").closest("form").prop("disabled",true)
 			// 	$("#tbtagging").find("tr").find("td:last-child").remove()
 			// }
@@ -2002,13 +2002,13 @@ Lead Register
       append = append + " </td>"
       append = append + " <td>"
       append = append + " <div class='input-group'>"
-      append = append + " <span class='input-group-text' data-bs-toggle='tooltip' title='50000' style='background-color: #aaa; color:white;font-style: italic;width:150px'>Rp.</span>"
+      append = append + " <span class='input-group-text' data-bs-toggle='tooltip' title='50000' style='background-color: #aaa; color:white;font-style: italic;'>Rp.</span>"
       append = append + " <input data-value='" + i + "' class='money form-control new-price-sol' name='new-price-sol' type='text' placeholder='Enter Product Price'>"
       append = append + " </div>"
       append = append + " <span class='help-block' style='display:none'>Can't submit because the nominal value is 0 rupiah!</span>"
       append = append + " </td>"
       append = append + " <td class='text-center'>"
-      append = append + " <button type='button' data-value='"+i+"' style='width: auto !important;' class='btn btn-xs btn-danger btn-flat btn-trash-tagging' value='"+i+"'><i class='bx bx-trash'></i></button><button type='button' data-value='"+i+"' style='width: auto !important;margin-left:5px' class='btn btn-xs btn-primary btn-flat disabled'><i class='bx bx-pencil'></i></button>"
+      append = append + " <button type='button' data-value='"+i+"' style='width: auto !important;' class='btn btn-xs btn-danger btn-flat btn-trash-tagging' value='"+i+"'><i class='bx bx-trash'></i></button><button type='button' data-value='"+i+"' style='width: auto !important;' class='btn btn-xs btn-primary btn-flat disabled'><i class='bx bx-pencil'></i></button>"
       append = append + " </td>"
       append = append + "</tr>"
       
@@ -2624,7 +2624,7 @@ Lead Register
     			$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').addClass("has-error")
     			$(".new-price-sol[data-value='" + dataValue + "']").prev('.input-group-text').css("background-color","red")
     		}else{
-	    		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.help-block').css('color','red').hide()
+	    		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.help-block').css('color','red').attr('style','display:none!important')
 					$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').removeClass("has-error")
 					$(".new-price-sol[data-value='" + dataValue + "']").prev('.input-group-text').css("background-color","background-color:#aaa;color:white")
 
@@ -2806,7 +2806,7 @@ Lead Register
 			    		$(this).find(".new-price-sol").closest('.input-group').next('.help-block').text("Please check again brand price nominal!")
 		    			console.log('tisssss')
 		    		}else{
-		    			$(this).find(".new-price-sol").closest('.input-group').next('.help-block').css('color','red').hide()
+		    			$(this).find(".new-price-sol").closest('.input-group').next('.help-block').css('color','red').attr('style','display:none!important')
 							$(this).find(".new-price-sol").closest('.input-group').removeClass("has-error")
 							$(this).find(".new-price-sol").prev('.input-group-text').css("background-color","background-color:#aaa;color:white")
 							data.append("tagData[tagProduct]["+i+"][tag_price]",$(this).find(".new-price-sol").val().replace(/\D/g, ""))
@@ -3084,7 +3084,7 @@ Lead Register
 
 		        $("#addService").click(function() {
 		            $("#nextBtn").prop("disabled", false);
-		            $(this).hide()
+		            $(this).attr('style','display:none!important')
 
 		            var append = ""
 		            append = append + "<tr class='new-product new-service'>"

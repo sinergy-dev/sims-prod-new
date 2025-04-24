@@ -717,15 +717,15 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
   function fillInput(val) {
     if (val == "idea") {
       $("#idea").closest('.form-group').removeClass('has-error')
-      $("#idea").closest('.form-group').find('.help-block').hide();
+      $("#idea").closest('.form-group').find('.help-block').attr('style','display:none!important');
       $("#idea").prev('.input-group-addon').css("background-color", "red");
     } else if (val == "konsep_bisnis") {
       $("#konsep_bisnis").closest('.form-group').closest('.form-group').removeClass('has-error')
-      $("#konsep_bisnis").closest('.form-group').find('.help-block').hide();
+      $("#konsep_bisnis").closest('.form-group').find('.help-block').attr('style','display:none!important');
       $("#konsep_bisnis").prev('.input-group-addon').css("background-color", "red");
     } else if (val == "referensi") {
       $("#referensi_bisnis").closest('.form-group').closest('.form-group').removeClass('has-error')
-      $("#referensi_bisnis").closest('.form-group').find('.help-block').hide();
+      $("#referensi_bisnis").closest('.form-group').find('.help-block').attr('style','display:none!important');
       $("#referensi_bisnis").prev('.input-group-addon').css("background-color", "red");
     }
   }
@@ -900,7 +900,7 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
 
         $.each(result, function(key, value) {
           if (key === "TOTAL") {
-            append += '<tr>';
+            append += '<tr class="text-bg-primary">';
             append += '<td>' + no++ + '</td>';
             append += '<td>' + key + '</td>';
             append += '<td align="right"><i>' + new Intl.NumberFormat('id').format(value[0].sum_amounts) + '</i></td>';
@@ -929,7 +929,7 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
             append += '<tbody>';
 
             $.each(value[0].details, function(detailKey, detailValue) {
-              append += '<tr>';
+              append += '<tr class="text-bg-primary">';
               append += '<td>' + detailValue.name + '</td>';
               append += '<td align="right">' + new Intl.NumberFormat('id').format(detailValue.deal_prices) + '</td>';
               append += '<td><center>' + detailValue.leads + '</center></td>';

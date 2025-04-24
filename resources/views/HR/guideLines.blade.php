@@ -190,13 +190,13 @@
 				prepend = prepend + '<hr>'
 				prepend = prepend + '<div class="form-group">'
 				prepend = prepend + '<label>Source of Information</label>'
-				prepend = prepend + '<div><a href='+result[0].link_url+' target="_blank"><i class="bx bx-external-link fa-2x"></i>'+result[0].link_url + '</a></div>'
+				prepend = prepend + '<div><a style="white-space:normal;word-wrap:break-word;overflow-wrap:break-word;" href='+result[0].link_url+' target="_blank"><i class="bx bx-external-link fa-2x"></i>'+result[0].link_url + '</a></div>'
 				prepend = prepend + '</div>'
 
 				$('#modal-body').html(prepend)
         	},
     	})
-		$('#submitGuide').hide()
+		$('#submitGuide').attr('style','display:none!important')
 	}
 
 	function editGuide(id){		

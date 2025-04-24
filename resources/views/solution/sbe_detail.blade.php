@@ -55,8 +55,29 @@ SBE Detail
         }
 
         input[name='inputSumPriceGrandTotal']{
-            color: white;
+            color: white!important;
             background-color:#42855B!important;
+        }
+
+        /* Keep Select2 container fixed */
+
+        select:not(#inputLead) + .select2-container {
+          /* your styles here */
+            width: 150px!important;
+        }
+
+        /* Prevent selected text from stretching the box */
+        .select2-container--default .select2-selection--single {
+          width: 100% !important;
+          overflow: hidden !important;
+        }
+
+        /* Prevent long text from expanding the selected item */
+        .select2-selection__rendered {
+          display: block !important;
+          white-space: nowrap !important;
+          overflow: hidden !important;
+          text-overflow: ellipsis !important;
         }
 	</style>
 @endsection
@@ -84,7 +105,7 @@ SBE Detail
                 @csrf
                 <div class="form-group">
                     <textarea class="form-control" name="textareaNotes" id="textareaNotes" placeholder="Enter Notes" onkeyup="validateInput(this)"></textarea>
-                    <span class="invalid-feedback" style="display:none">Please fill Notes!</span>
+                    <span class="invalid-feedback" style="display:none!important">Please fill Notes!</span>
 
                 </div>
             </form>
@@ -166,7 +187,7 @@ SBE Detail
         var data = ["PMO","PMO SID","PMO MSM"]
         var dataRadio = ["Ver 1","Ver 2","Ver 3"]
 
-        append = append + '<div class="row" style="display:none">'
+        append = append + '<div class="row" style="display:none!important">'
             append = append + '<div class="col-md-12 col-xs-12">'
                 append = append + ' <div class="alert alert-danger alert-dismissible">'
                     append = append + '      <h6><i class="icon fa fa-ban"></i> Reject Notes!</h6>'
@@ -180,7 +201,7 @@ SBE Detail
             append = append + '                    <div class="card-header d-flex">'
             append = append + '                        <h6 class="card-title">Preview</h6>'
             append = append + '                        <div class="card-tools ms-auto">'
-            append = append + '                         <button class="btn btn-sm btn-linkedin" style=";display:none" onclick="addNotes()" id="btnAddNotes">Notes</button>'
+            append = append + '                         <button class="btn btn-sm btn-linkedin" style=";display:none!important" onclick="addNotes()" id="btnAddNotes">Notes</button>'
             append = append + '                        </div>'
             append = append + '                    </div>'
             append = append + '                    <div class="card-body" id="boxConfigTemp">'
@@ -308,8 +329,8 @@ SBE Detail
                 }
             })
             
-            append = append + '                     <button class="btn btn-sm btn-warning" style="margin-bottom: 10px;margin-right:60px;position: absolute;right:10px;bottom: 0;display:none" onclick="resetConfig()" id="btnResetConfig">Reset</button>'
-            append = append + '                     <button class="btn btn-sm text-bg-primary" style="margin-bottom: 10px;position: absolute;right: 10px;bottom: 0;display:none" onclick="saveFuncConf()" id="btnSaveConf">Save</button>'
+            append = append + '                     <button class="btn btn-sm btn-warning" style="margin-bottom: 10px;margin-right:60px;position: absolute;right:10px;bottom: 0;display:none!important" onclick="resetConfig()" id="btnResetConfig">Reset</button>'
+            append = append + '                     <button class="btn btn-sm text-bg-primary" style="margin-bottom: 10px;position: absolute;right: 10px;bottom: 0;display:none!important" onclick="saveFuncConf()" id="btnSaveConf">Save</button>'
             append = append + '                    </div>'            
             append = append + '                </div>'            
             append = append + '            </div>'
@@ -373,10 +394,11 @@ SBE Detail
                         id_sbe:window.location.href.split("/")[4].split("?")[0] 
                     },success:function(result){
                         if (result.status[0].status == "Fixed") {
-                            $("#btnAddNotes").hide()
-                            $("#btnGeneratePdf").hide()
-                            $("#btnResetConfig").hide()
-                            $("#btnSaveConf").hide()
+                            console.log("sinii")
+                            $("#btnAddNotes").attr('style', 'display: none !important');
+                            $("#btnGeneratePdf").attr('style', 'display: none !important');
+                            $("#btnResetConfig").attr('style', 'display: none !important');
+                            $("#btnSaveConf").attr('style', 'display: none !important');
                             $("input[type='radio']").prop("disabled",true)
                             $("input[type='radio']").each(function(index,item){
                                  $(item).each(function(indexes,itemRadio){
@@ -384,10 +406,16 @@ SBE Detail
                                  })                           
                             })
                         }else{
+                            console.log("apa sinii")
+
                             if(accesable.includes('btnGeneratePdf')){
                                 if (result.result != "WIN") {
-                                    $("#btnGeneratePdf").hide()
+                            console.log("apa iya")
+
+                                    $("#btnGeneratePdf").attr('style', 'display: none !important');
                                 }else{
+                            console.log("apa engga")
+
                                     $("#btnGeneratePdf").show()
                                 }
                             }
@@ -395,8 +423,8 @@ SBE Detail
 
                         var nik = '"' + "{{Auth::User()->nik}}" + '"'
                         if (!accesable.includes('radioConfig') || result.presales.includes(nik)) {
-                            $("#btnResetConfig").hide()
-                            $("#btnSaveConf").hide()
+                            $("#btnResetConfig").attr('style', 'display: none !important');
+                            $("#btnSaveConf").attr('style', 'display: none !important');
                             $("input[type='radio']").prop("disabled",true)
                             $("input[type='radio']").each(function(index,item){
                                 $(item).each(function(indexes,itemRadio){
@@ -460,7 +488,7 @@ SBE Detail
                         }else{
                             var bg_color = "#f19e38"
                         }
-                        appendTemporary = appendTemporary + '<div class="row">'
+                        appendTemporary = appendTemporary + '<div class="row mb-4">'
                         appendTemporary = appendTemporary + '            <div class="col-md-3 col-xs-12" style="text-align:-webkit-center">'
                         appendTemporary = appendTemporary + '              <a onclick="showTemporarySBE('+ items[0].id +')">'
                         appendTemporary = appendTemporary + '                <div style="width: 100px;height: 100px;background-color: '+ bg_color +';color: white;text-align: center;vertical-align: middle;display: flex;">'
@@ -477,9 +505,9 @@ SBE Detail
                         appendTemporary = appendTemporary + '                    <table class="table table-bordered" id="tablePreviewConfig" width="100%">'
                         appendTemporary = appendTemporary + '                        <thead style="background-color:'+ bg_color +';color:white">'
                         appendTemporary = appendTemporary + '                            <tr>'
-                        appendTemporary = appendTemporary + '                                <th>No</th>'
-                        appendTemporary = appendTemporary + '                                <th>Function</th>'
-                        appendTemporary = appendTemporary + '                                <th width="150">Total</th>'
+                        appendTemporary = appendTemporary + '                                <th style="color:white">No</th>'
+                        appendTemporary = appendTemporary + '                                <th style="color:white">Function</th>'
+                        appendTemporary = appendTemporary + '                                <th style="color:white" width="150">Total</th>'
                         appendTemporary = appendTemporary + '                            </tr>'
                         appendTemporary = appendTemporary + '                        </thead>'
                         appendTemporary = appendTemporary + '                        <tbody>'
@@ -506,7 +534,7 @@ SBE Detail
                         sumTotalPrice += parseInt(items[0].detail_config_nominal) 
                     })
 
-                    appendTemporary = appendTemporary + '     <button class="btn btn-sm btn-success mt-4" onclick="generatePDF()" id="btnGeneratePdf" style="display:none;float:right">Generate</button>'
+                    appendTemporary = appendTemporary + '     <button class="btn btn-sm btn-success mt-4" onclick="generatePDF()" id="btnGeneratePdf" style="display:none!important;float:right"><i class="bx bx-import"></i>&nbspGenerate</button>'
                     $("#boxConfigTemp").append(appendTemporary).fadeIn('slow')
 
 
@@ -514,12 +542,12 @@ SBE Detail
                     appendGrandTotal = appendGrandTotal + "<div class='row'>"
                     appendGrandTotal = appendGrandTotal + "     <div class='pull-right'>"
                     appendGrandTotal = appendGrandTotal + "         <div class='col-md-12'>"
-                    appendGrandTotal = appendGrandTotal + "             <table class='table text-bg-success'>"
+                    appendGrandTotal = appendGrandTotal + "             <table class='table table-bordered text-bg-success'>"
                     appendGrandTotal = appendGrandTotal + "                 <tr>"
-                    appendGrandTotal = appendGrandTotal + "                     <th colspan=2>"
+                    appendGrandTotal = appendGrandTotal + "                     <th colspan=2 style='color:white'>"
                     appendGrandTotal = appendGrandTotal + "                         Grand Total Price"
                     appendGrandTotal = appendGrandTotal + "                     </th>"
-                    appendGrandTotal = appendGrandTotal + "                     <th width='150'>"
+                    appendGrandTotal = appendGrandTotal + "                     <th width='150' style='color:white'>"
                     appendGrandTotal = appendGrandTotal + formatter.format(sumTotalPrice)
                     appendGrandTotal = appendGrandTotal + "                     </th>"
                     appendGrandTotal = appendGrandTotal + "                 </tr>"
@@ -549,15 +577,15 @@ SBE Detail
         append = append + '    <div class="col-md-12 col-xs-12 mb-4">'
         append = append + '        <div class="form-group">'
         append = append + '            <label>Lead ID*</label>'
-        append = append + '            <select onchange="validateInput(this)" class="form-control select2" name="inputLead" id="inputLead" style="width:100%"><option></option></select>'
-        append = append + '            <span class="invalid-feedback" style="display:none">Please Select Lead Id!</span>'
+        append = append + '            <select onchange="validateInput(this)" class="form-control select2" name="inputLead" id="inputLead" style="width:100%!important"><option></option></select>'
+        append = append + '            <span class="invalid-feedback" style="display:none!important">Please Select Lead Id!</span>'
         append = append + '        </div>'
         append = append + '    </div>'
         append = append + '    <div class="col-md-6 mb-4">'
         append = append + '        <div class="form-group">'
         append = append + '            <label>Estimated Running*</label>'
         append = append + '            <input onkeyup="validateInput(this)" type="text" class="form-control" name="inputEstimatedRun" id="inputEstimatedRun" placeholder="End of February">'
-        append = append + '            <span class="invalid-feedback" style="display:none">Please Fill Estimated Running!</span>'
+        append = append + '            <span class="invalid-feedback" style="display:none!important">Please Fill Estimated Running!</span>'
         append = append + '        </div>'
         append = append + '    </div>'
         append = append + '    <div class="col-md-6 mb-4">'
@@ -565,7 +593,7 @@ SBE Detail
         append = append + '            <label>Project Location*</label>'
         // append = append + '            <textarea onkeyup="validateInput(this)" class="form-control" style="resize: vertical;" name="textareaLoc" id="textareaLoc"></textarea>'
         append = append + '               <input class="form-control" name="textareaLoc" id="textareaLoc" placeholder="Jakarta" onkeyup="validateInput(this)">'
-        append = append + '            <span class="invalid-feedback" style="display:none">Please Fill Project Location!</span>'
+        append = append + '            <span class="invalid-feedback" style="display:none!important">Please Fill Project Location!</span>'
         append = append + '        </div>'
         append = append + '    </div>'
         append = append + '</div>'
@@ -587,13 +615,13 @@ SBE Detail
         append = append + '                 Maintenance and Services'
         append = append + '             </label>'
         append = append + '         </div>'
-        append = append + '         <span class="invalid-feedback" style="display:none">Please Select Config!</span>'
+        append = append + '         <span class="invalid-feedback" style="display:none!important">Please Select Config!</span>'
         append = append + '</div>'
         append = append + '        <div class="nav-align-top mt-5">'
         append = append + '            <ul class="nav nav-tabs">'
-        append = append + '                <li class="nav-item disabled" disabled style="display:none"><button type="button" data-bs-toggle="tab"                data-bs-target="#tab_1" aria-controls="navs-tab-home" aria-selected="true" href="#tab_1" class="nav-link" role="tab">Supply Only</button></li>'
-        append = append + '                <li class="nav-item disabled" disabled style="display:none"><button type="button" data-bs-toggle="tab"                data-bs-target="#tab_2" aria-controls="navs-tab-home" aria-selected="true" href="#tab_2" class="nav-link" role="tab">Implementation</button></</li>'
-        append = append + '                <li class="nav-item disabled" disabled style="display:none"><button type="button" data-bs-toggle="tab"                data-bs-target="#tab_3" aria-controls="navs-tab-home" aria-selected="true" href="#tab_3" class="nav-link" role="tab">Maintenance & Managed Service</button></</li>'
+        append = append + '                <li class="nav-item disabled" disabled style="display:none!important"><button type="button" data-bs-toggle="tab"                data-bs-target="#tab_1" aria-controls="navs-tab-home" aria-selected="true" href="#tab_1" class="nav-link" role="tab">Supply Only</button></li>'
+        append = append + '                <li class="nav-item disabled" disabled style="display:none!important"><button type="button" data-bs-toggle="tab"                data-bs-target="#tab_2" aria-controls="navs-tab-home" aria-selected="true" href="#tab_2" class="nav-link" role="tab">Implementation</button></</li>'
+        append = append + '                <li class="nav-item disabled" disabled style="display:none!important"><button type="button" data-bs-toggle="tab"                data-bs-target="#tab_3" aria-controls="navs-tab-home" aria-selected="true" href="#tab_3" class="nav-link" role="tab">Maintenance & Managed Service</button></</li>'
         // append = append + '                <li style="float: right;display: inline-flex;">'
         // append = append + '                     <label style="vertical-align: middle;display: inline;margin-top: 10px;margin-right: 10px;'
         // append = append + '                         ">Duration*</label>'
@@ -607,21 +635,21 @@ SBE Detail
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Duration*</label>'
         append = append + '                                 <input class="form-control" id="durationSO" name="durationSO" onkeyup="validateInput(this)" fdprocessedid="52jb4" placeholder="Input Duration">'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Duration!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Duration!</span>'
         append = append + '                             </div>'
         append = append + '                         </div>'
         append = append + '                         <div class="col-md-6 mb-4">'
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Scope Of Work*</label>'
         append = append + '                                      <textarea onkeyup="validateInput(this)" class="form-control" style="resize: vertical;height: 150px;" name="textareaSOWSo" id="textareaSOWSo"></textarea>'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Scope of Work!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Scope of Work!</span>'
         append = append + '                             </div>'
         append = append + '                         </div>'
         append = append + '                         <div class="col-md-6 mb-4">'
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Out Of Scope*</label>'
         append = append + '                                      <textarea onkeyup="validateInput(this)" class="form-control" style="resize: vertical;height: 150px;" row="20" name="textareaScopeSo" id="textareaScopeSo"></textarea>'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Out of Scope!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Out of Scope!</span>'
         append = append + '                              </div>'
         append = append + '                         </div>'
         append = append + '                     </div>'
@@ -629,22 +657,22 @@ SBE Detail
         append = append + '                         <table class="table" name="tableSO" id="tableItemsSO_0">'
         append = append + '                             <thead>'
         append = append + '                                 <tr>'
-            append = append + '                                <th width=20%>'
+            append = append + '                                <th>'
             append = append + '                                    Items'
             append = append + '                                </th>'
-            append = append + '                                <th width=25%>'
+            append = append + '                                <th>'
             append = append + '                                    Detail Items'
             append = append + '                                </th>'
-            append = append + '                                <th width=5%>'
+            append = append + '                                <th>'
             append = append + '                                    Qty'
             append = append + '                                </th>'
-            append = append + '                                <th width=24%>'
+            append = append + '                                <th>'
             append = append + '                                    Price'
             append = append + '                                </th>'
-            append = append + '                                <th width=6%>'
+            append = append + '                                <th>'
             append = append + '                                    Manpower'
             append = append + '                                </th>'
-            append = append + '                                <th width=20%>'
+            append = append + '                                <th>'
             append = append + '                                    Total'
             append = append + '                                </th>'
             append = append + '                                <td>'
@@ -655,10 +683,10 @@ SBE Detail
         append = append + '                        <tbody>'
         append = append + '                            <tr>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="InputItems" id="InputItems" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="InputItems" id="InputItems" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <select type="" style="width: 450px" class="select2 form-control detailItemsSO_0" name="detailItemsSO">'
+        append = append + '                                    <select type="" style="width:150px" class="select2 form-control detailItemsSO_0" name="detailItemsSO">'
         append = append + '                                        <option></option>'
         append = append + '                                    </select>'
         append = append + '                                </td>'
@@ -666,13 +694,13 @@ SBE Detail
         append = append + '                                    <input type="number" style="width:60px" class="form-control qtyItems" name="qtyItems" id="qtyItems" onkeyup="changeQtyItems(this)">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="priceItems" id="priceItems" disabled="" style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="priceItems" id="priceItems" disabled="" style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
         append = append + '                                    <input type="" style="width:60px" class="form-control" name="manpowerItems" id="manpowerItems" onkeyup="changeManPower(this)">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
         append = append + '                                <button onclick="removeItemsDetailSO(this,0)" class="btn btn-sm text-bg-danger" style="width:35px"><i class="icon-base bx bx-trash-alt"></i></button>'
@@ -683,7 +711,7 @@ SBE Detail
         append = append + '                            <tr>'
         append = append + '                                <td colspan="4"></td>'
         append = append + '                                <th>Grand Total</th>'
-        append = append + '                                <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:300px"></td>'
+        append = append + '                                <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:150px"></td>'
         append = append + '                            </tr>'
         append = append + '                        </tfoot>'
         // append = append + '                    <hr>'
@@ -700,21 +728,21 @@ SBE Detail
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Duration*</label>'
         append = append + '                                 <input class="form-control" id="durationImp" name="durationImp" onkeyup="validateInput(this)" fdprocessedid="52jb4" placeholder="Input Duration">'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Duration!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Duration!</span>'
         append = append + '                             </div>'
         append = append + '                         </div>'
         append = append + '                         <div class="col-md-6 mb-4">'
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Scope Of Work*</label>'
         append = append + '                                      <textarea onkeyup="validateInput(this)" class="form-control" style="resize: vertical;height: 150px;" name="textareaSOWImp" id="textareaSOWImp"></textarea>'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Scope of Work!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Scope of Work!</span>'
         append = append + '                             </div>'
         append = append + '                         </div>'
         append = append + '                         <div class="col-md-6 mb-4">'
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Out Of Scope*</label>'
         append = append + '                                      <textarea onkeyup="validateInput(this)" class="form-control" style="resize: vertical;height: 150px;" row="20" name="textareaScopeImp" id="textareaScopeImp"></textarea>'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Out of Scope!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Out of Scope!</span>'
         append = append + '                              </div>'
         append = append + '                         </div>'
         append = append + '                     </div>'
@@ -748,10 +776,10 @@ SBE Detail
         append = append + '                        <tbody>'
         append = append + '                            <tr>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="InputItemsImp" id="InputItemsImp" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="InputItemsImp" id="InputItemsImp" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <select type="" style="width: 450px" class="select2 form-control detailItemsImp_0" name="detailItemsImp">'
+        append = append + '                                    <select type="" style="width:150px" class="select2 form-control detailItemsImp_0" name="detailItemsImp">'
         append = append + '                                        <option></option>'
         append = append + '                                    </select>'
         append = append + '                                </td>'
@@ -759,13 +787,13 @@ SBE Detail
         append = append + '                                    <input type="number" style="width:60px" class="form-control" name="qtyItemsImp" id="qtyItemsImp" onkeyup="changeQtyItems(this)">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="priceItemsImp" id="priceItemsImp" disabled="" style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="priceItemsImp" id="priceItemsImp" disabled="" style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
         append = append + '                                    <input type="" style="width:60px" class="form-control" name="manpowerItemsImp" onkeyup="changeManPower(this)" id="manpowerItemsImp">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
         append = append + '                                <button class="btn btn-sm text-bg-danger" id="removeItemsDetailImp" onclick="removeItemsDetailImp(this,0)" style="width:35px;"><i class="icon-base bx bx-trash-alt"></i></button>'
@@ -776,7 +804,7 @@ SBE Detail
         append = append + '                            <tr>'
         append = append + '                                <td colspan="4"></td>'
         append = append + '                                <th>Grand Total</th>'
-        append = append + '                                <td><input style="width:300px" type="text" class="form-control" name="inputGrandTotal" disabled></td>'
+        append = append + '                                <td><input style="width:150px" type="text" class="form-control" name="inputGrandTotal" disabled></td>'
         append = append + '                            </tr>'
         append = append + '                        </tfoot>'
         append = append + '                    </table>'
@@ -792,21 +820,21 @@ SBE Detail
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Duration*</label>'
         append = append + '                                 <input class="form-control" id="durationMnS" name="durationMnS" onkeyup="validateInput(this)" fdprocessedid="52jb4" placeholder="Input Duration">'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Duration!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Duration!</span>'
         append = append + '                             </div>'
         append = append + '                         </div>'
         append = append + '                         <div class="col-md-6 mb-4">'
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Scope Of Work*</label>'
         append = append + '                                      <textarea onkeyup="validateInput(this)" class="form-control" style="resize: vertical;height: 150px;" name="textareaSOWMnS" id="textareaSOWMnS"></textarea>'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Scope of Work!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Scope of Work!</span>'
         append = append + '                             </div>'
         append = append + '                         </div>'
         append = append + '                         <div class="col-md-6 mb-4">'
         append = append + '                             <div class="form-group">'
         append = append + '                                 <label>Out Of Scope*</label>'
         append = append + '                                      <textarea onkeyup="validateInput(this)" class="form-control" style="resize: vertical;height: 150px;" row="20" name="textareaScopeMnS" id="textareaScopeMnS"></textarea>'
-        append = append + '                                         <span class="invalid-feedback" style="display:none">Please Fill Out of Scope!</span>'
+        append = append + '                                         <span class="invalid-feedback" style="display:none!important">Please Fill Out of Scope!</span>'
         append = append + '                              </div>'
         append = append + '                         </div>'
         append = append + '                     </div>'
@@ -840,10 +868,10 @@ SBE Detail
         append = append + '                        <tbody>'
         append = append + '                            <tr>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="InputItemsMnS" id="InputItemsMnS" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="InputItemsMnS" id="InputItemsMnS" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <select type="" style="width:450px" class="select2 form-control detailItemsMnS_0" name="detailItemsMnS">'
+        append = append + '                                    <select type="" style="width:150px" class="select2 form-control detailItemsMnS_0" name="detailItemsMnS">'
         append = append + '                                        <option></option>'
         append = append + '                                    </select>'
         append = append + '                                </td>'
@@ -851,13 +879,13 @@ SBE Detail
         append = append + '                                    <input type="number" style="width:60px" class="form-control" name="qtyItemsMnS" id="qtyItemsMnS" onkeyup="changeQtyItems(this)">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="priceItemsMnS" id="priceItemsMnS" disabled="" style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="priceItemsMnS" id="priceItemsMnS" disabled="" style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
         append = append + '                                    <input type="" style="width:60px" class="form-control" name="manpowerItemsMnS" id="manpowerItemsMnS" onkeyup="changeManPower(this)">'
         append = append + '                                </td>'
         append = append + '                                <td>'
-        append = append + '                                    <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:300px">'
+        append = append + '                                    <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:150px">'
         append = append + '                                </td>'
         append = append + '                                <td>'
         append = append + '                                 <button class="btn btn-sm text-bg-danger" id="removeItemsDetailMnS" onclick="removeItemsDetailMnS(this,0)" style="width:35px;"><i class="icon-base bx bx-trash-alt"></i></button>'
@@ -868,7 +896,7 @@ SBE Detail
         append = append + '                            <tr>'
         append = append + '                                <td colspan="4"></td>'
         append = append + '                                <th>Grand Total</th>'
-        append = append + '                                <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:300px"></td>'
+        append = append + '                                <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:150px"></td>'
         append = append + '                            </tr>'
         append = append + '                        </tfoot>'
         append = append + '                    </table>'
@@ -964,7 +992,8 @@ SBE Detail
             success:function(result){
                 $(".detailItems"+ type + "_" +value).select2({
                     placeholder:"Select Detail Items",
-                    data:result.data
+                    data:result.data,
+                    width: 'resolve'
                 }).on("change",function(e){
                 
                     // var priceTotal = 0
@@ -1172,10 +1201,10 @@ SBE Detail
 
                             append = append + ' <tr>'
                             append = append + '     <td>'
-                            append = append + '       <input type="" style="width:300px" class="form-control" name="inputItemsTemporary" id="" value="'+ key +'" placeholder="Ex: PM Maintenance">'
+                            append = append + '       <input type="" style="width:150px" class="form-control" name="inputItemsTemporary" id="" value="'+ key +'" placeholder="Ex: PM Maintenance">'
                             append = append + '     </td>'
                             append = append + '     <td>'
-                            append = append + '       <select type="" style="width:450px" class="select2 form-control detailItemsTemporary_'+ j +'" name="detailItemsTemporary" id="detailItemsTemporary">'
+                            append = append + '       <select type="" style="width:150px" class="select2 form-control detailItemsTemporary_'+ j +'" name="detailItemsTemporary" id="detailItemsTemporary">'
                             append = append + '             <option></option>'
                             append = append + '       </select>'
                             append = append + '     </td>'
@@ -1183,13 +1212,13 @@ SBE Detail
                             append = append + '         <input type="number" style="width:60px" class="form-control" name="" id="" value="'+ resultsDetail.qty +'">'
                             append = append + '     </td>'
                             append = append + '     <td>'
-                            append = append + '         <input type="" class="form-control priceItemsUpdate_'+ j +'" name="" id="" disabled="" value="'+ formatter.format(resultsDetail.price) +'" style="width:300px">'
+                            append = append + '         <input type="" class="form-control priceItemsUpdate_'+ j +'" name="" id="" disabled="" value="'+ formatter.format(resultsDetail.price) +'" style="width:150px">'
                             append = append + '     </td>'
                             append = append + '     <td>'
                             append = append + '         <input type="" style="width:60px" class="form-control" name="manpowerItemsUpdate" id="" value="'+ resultsDetail.manpower +'">'
                             append = append + '     </td>'
                             append = append + '     <td>'
-                            append = append + '         <input type="" class="form-control totalItemsTemporary_'+ j +'" name="totalItems" id="totalItemsUpdate" disabled value="'+ formatter.format(resultsDetail.total_nominal) +'" style="width:300px">'
+                            append = append + '         <input type="" class="form-control totalItemsTemporary_'+ j +'" name="totalItems" id="totalItemsUpdate" disabled value="'+ formatter.format(resultsDetail.total_nominal) +'" style="width:150px">'
                             append = append + '     </td>'
                             append = append + '     <td></td>'
                             append = append + ' </tr>' 
@@ -1220,7 +1249,7 @@ SBE Detail
                         append = append + '          <tr>'
                         append = append + '           <td colspan="4"></td>'
                         append = append + '           <th>Total Cost</th>'
-                        append = append + '           <td><input type="text" class="form-control" name="inputGrandTotal" id="inputGrandTotal" disabled style="width:300px"></td>'
+                        append = append + '           <td colspan=2><input type="text" class="form-control" name="inputGrandTotal" id="inputGrandTotal" disabled style="width:150px"></td>'
                         append = append + '          </tr>'
                         append = append + '        </tfoot>'
                         append = append + ' </table>'
@@ -1232,7 +1261,7 @@ SBE Detail
                     append = append + '</div>'
 
                     $(".content").append(append)
-                    $("table[name='tableShowConfig']:last").find("tr:last").after("<tr><th colspan=5 style='text-align:right'>Grand Total Cost</th><td><input class='form-control' style='text-align:right;width: 300px;' id='inputSumPriceGrandTotal' name='inputSumPriceGrandTotal'/></td></tr>")
+                    $("table[name='tableShowConfig']:last").find("tr:last").after("<tr><th colspan=5 style='text-align:right'>Grand Total Cost</th><td colspan=2><input class='form-control' style='text-align:right;width: 150px;' id='inputSumPriceGrandTotal' name='inputSumPriceGrandTotal'/></td></tr>")
 
                     var j = 0
                     $.each(result.detail_config, function(key, results){
@@ -1250,7 +1279,7 @@ SBE Detail
                         $("#tableShowConfig_"+j).find("tbody tr:not(:first-child)").each(function(item,result){
                             $(result).find(".form-control").each(function(v,w){
                                 if(w.name == "inputItemsTemporary"){
-                                    $(w).hide()
+                                    $(w).attr('style', 'display: none !important');
                                 }
                             })
                         })  
@@ -1291,8 +1320,8 @@ SBE Detail
         var cloneTr = $("#tableItemsSO_"+val).find("tbody tr:first").clone()
         // cloneTr
         cloneTr.find(":input[name='qtyItems']").val('').end().find(":input[name='priceItems']").val('').end().find(":input[name='manpowerItems']").val('').end().find(":input[name='totalItems']").val('').end()
-        cloneTr.find(":input[name='InputItems']").hide()
-        // cloneTr[0].children[0].firstElementChild.hide()
+        cloneTr.find(":input[name='InputItems']").attr('style', 'display: none !important');
+        // cloneTr[0].children[0].firstElementChild.attr('style', 'display: none !important');
         cloneTr.find("td:last").html("<button onclick='removeItemsDetailSO(this,"+ val +")' class='btn btn-sm text-bg-danger' style='width:35px'><i class='icon-base bx bx-trash-alt'></i></button>")
 
         cloneTr.children("select")
@@ -1368,10 +1397,10 @@ SBE Detail
             append = append + '     <tbody>'
             append = append + '         <tr>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" name="InputItems" id="InputItems" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:300px">'
+            append = append + '                 <input type="" class="form-control" name="InputItems" id="InputItems" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:150px">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <select type="" style="width: 450px" class="select2 form-control detailItemsSO_'+ countable +'" name="detailItemsSO">'
+            append = append + '                 <select type="" style="width:150px" class="select2 form-control detailItemsSO_'+ countable +'" name="detailItemsSO">'
             append = append + '                     <option></option>'
             append = append + '                 </select>'
             append = append + '             </td>'
@@ -1379,13 +1408,13 @@ SBE Detail
             append = append + '                 <input type="number" style="width:60px" class="form-control" name="qtyItems" id="qtyItems" onkeyup="changeQtyItems(this)">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" name="priceItems" id="priceItems" disabled="" style="width:300px">'
+            append = append + '                 <input type="" class="form-control" name="priceItems" id="priceItems" disabled="" style="width:150px">'
             append = append + '             </td>'
             append = append + '             <td>'
             append = append + '                 <input type="" style="width:60px" class="form-control" name="manpowerItems" id="manpowerItems" onkeyup="changeManPower(this)">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:300px">'
+            append = append + '                 <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:150px">'
             append = append + '             </td>'
             append = append + '             <td>'
             append = append + ' <button class="btn btn-sm text-bg-danger" id="removeItemsDetailSO" onclick="removeItemsDetailSO(this,'+ countable +')" style="width:35px;"><i class="icon-base bx bx-trash-alt"></i></button>'
@@ -1396,7 +1425,7 @@ SBE Detail
             append = append + '         <tr>'
             append = append + '             <td colspan="4"></td>'
             append = append + '             <th>Grand Total</th>'
-            append = append + '             <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:300px"></td>'
+            append = append + '             <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:150px"></td>'
             append = append + '         </tr>'
             append = append + '     </tfoot>'
             append = append + '</table>'
@@ -1421,7 +1450,7 @@ SBE Detail
         var countable = $("table[name='tableSO']").length
     
         if (countable == 1) {
-            $("table[name='tableSO']").hide()
+            $("table[name='tableSO']").attr('style', 'display: none !important');
             arrTableSO = []
             $("#removeItemsSO").remove()
         }else{
@@ -1435,7 +1464,7 @@ SBE Detail
         var cloneTr = $("#tableItemsImp_"+val).find("tbody tr:first").clone()
         // cloneTr
         cloneTr.find(":input[name='qtyItemsImp']").val('').end().find(":input[name='priceItemsImp']").val('').end().find(":input[name='manpowerItemsImp']").val('').end().find(":input[name='totalItems']").val('').end()
-        cloneTr.find(":input[name='InputItemsImp']").hide()
+        cloneTr.find(":input[name='InputItemsImp']").attr('style', 'display: none !important');
         // cloneTr[0].children[0].firstElementChild.remove()
         cloneTr.find("td:last").html("<button onclick='removeItemsDetailImp(this,"+ val +")' class='btn btn-sm text-bg-danger' style='width:35px'><i class='icon-base bx bx-trash-alt'></i></button>")
 
@@ -1515,10 +1544,10 @@ SBE Detail
             append = append + '     <tbody>'
             append = append + '         <tr>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" name="InputItemsImp" id="InputItems" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:300px">'
+            append = append + '                 <input type="" class="form-control" name="InputItemsImp" id="InputItems" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:150px">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <select type="" style="width: 450px" class="select2 form-control detailItemsImp_'+ countable +'" name="detailItemsImp">'
+            append = append + '                 <select type="" style="width:150px" class="select2 form-control detailItemsImp_'+ countable +'" name="detailItemsImp">'
             append = append + '                     <option></option>'
             append = append + '                 </select>'
             append = append + '             </td>'
@@ -1526,13 +1555,13 @@ SBE Detail
             append = append + '                 <input type="number" style="width:60px" class="form-control" name="qtyItemsImp" id="qtyItems" onkeyup="changeQtyItems(this)">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" name="priceItemsImp" disabled="" id="priceItems" style="width:300px">'
+            append = append + '                 <input type="" class="form-control" name="priceItemsImp" disabled="" id="priceItems" style="width:150px">'
             append = append + '             </td>'
             append = append + '             <td>'
             append = append + '                 <input type="" style="width:60px" class="form-control" name="manpowerItemsImp" id="manpowerItems" onkeyup="changeManPower(this)">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:300px">'
+            append = append + '                 <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:150px">'
             append = append + '             </td>'
             append = append + '             <td>'
             append = append + '             <button class="btn btn-sm text-bg-danger" id="removeItemsDetailImp" onclick="removeItemsDetailImp(this,'+ countable +')" style="width:35px"><i class="icon-base bx bx-trash-alt"></i></button>'
@@ -1543,7 +1572,7 @@ SBE Detail
             append = append + '         <tr>'
             append = append + '             <td colspan="4"></td>'
             append = append + '             <th>Grand Total</th>'
-            append = append + '             <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:300px"></td>'
+            append = append + '             <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:150px"></td>'
             append = append + '         </tr>'
             append = append + '     </tfoot>'
             append = append + '</table>'
@@ -1569,7 +1598,7 @@ SBE Detail
         var countable = $("table[name='tableImp']").length
 
         if (countable == 1) {
-            $("table[name='tableImp']").hide()
+            $("table[name='tableImp']").attr('style', 'display: none !important');
             arrTableImp = []
             $("#removeItemsImp").remove()
         }else{
@@ -1584,7 +1613,7 @@ SBE Detail
         var cloneTr = $("#tableItemsMnS_"+val).find("tbody tr:first").clone()
         // cloneTr
         cloneTr.find(":input[name='qtyItemsMnS']").val('').end().find(":input[name='priceItemsMnS']").val('').end().find(":input[name='manpowerItemsMnS']").val('').end().find(":input[name='totalItems']").val('').end()
-        cloneTr.find(":input[name='InputItemsMnS']").hide()
+        cloneTr.find(":input[name='InputItemsMnS']").attr('style', 'display: none !important');
         // cloneTr[0].children[0].firstElementChild.remove()
         cloneTr.find("td:last").html("<button onclick='removeItemsDetailMnS(this,"+ val +")' class='btn btn-sm text-bg-danger' style='width:35px'><i class='icon-base bx bx-trash-alt'></i></button>")
 
@@ -1664,10 +1693,10 @@ SBE Detail
             append = append + '     <tbody>'
             append = append + '         <tr>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" style="width:300px" name="InputItemsMnS" id="InputItems" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance">'
+            append = append + '                 <input type="" class="form-control" style="width:150px" name="InputItemsMnS" id="InputItems" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <select type="" style="width: 450px" class="select2 form-control detailItemsMnS_'+ countable +'" name="detailItemsMnS">'
+            append = append + '                 <select type="" style="width:150px" class="select2 form-control detailItemsMnS_'+ countable +'" name="detailItemsMnS">'
             append = append + '                     <option></option>'
             append = append + '                 </select>'
             append = append + '             </td>'
@@ -1675,13 +1704,13 @@ SBE Detail
             append = append + '                 <input type="number" style="width:60px" class="form-control" name="qtyItemsMnS" id="qtyItems" onkeyup="changeQtyItems(this)">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" name="priceItemsMnS" id="priceItems" disabled="" style="width:300px">'
+            append = append + '                 <input type="" class="form-control" name="priceItemsMnS" id="priceItems" disabled="" style="width:150px">'
             append = append + '             </td>'
             append = append + '             <td>'
             append = append + '                 <input type="" style="width:60px" class="form-control" id="manpowerItems" name="manpowerItemsMnS" onkeyup="changeManPower(this)">'
             append = append + '             </td>'
             append = append + '             <td>'
-            append = append + '                 <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:300px">'
+            append = append + '                 <input type="" class="form-control" name="totalItems" id="totalItems" disabled style="width:150px">'
             append = append + '             </td>'
             append = append + '             <td>'
             append = append + '<button class="btn btn-sm text-bg-danger" id="removeItemsDetailMnS" onclick="removeItemsDetailMnS(this,'+ countable +')" style="width:35px"><i class="icon-base bx bx-trash-alt"></i></button>'
@@ -1692,7 +1721,7 @@ SBE Detail
             append = append + '         <tr>'
             append = append + '             <td colspan="4"></td>'
             append = append + '             <th>Grand Total</th>'
-            append = append + '             <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:300px"></td>'
+            append = append + '             <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:150px"></td>'
             append = append + '         </tr>'
             append = append + '     </tfoot>'
             append = append + '</table>'
@@ -1718,7 +1747,7 @@ SBE Detail
         var countable = $("table[name='tableMnS']").length
 
         if (countable == 1) {
-            $("table[name='tableMnS']").hide()
+            $("table[name='tableMnS']").attr('style', 'display: none !important');
             arrTableMnS = []
             $("#removeItemsMnS").remove()
         }else{
@@ -1816,10 +1845,10 @@ SBE Detail
                             j++
                             append = append + ' <tr>'
                             append = append + '     <td>'
-                            append = append + '       <input type="" class="form-control" name="inputItemsUpdate" id="inputItemsUpdate" value="'+ key +'" placeholder="Ex: PM Maintenance" style="width:300px" data-attr="'+ i +'">'
+                            append = append + '       <input type="" class="form-control" name="inputItemsUpdate" id="inputItemsUpdate" value="'+ key +'" placeholder="Ex: PM Maintenance" style="width:150px" data-attr="'+ i +'">'
                             append = append + '     </td>'
                             append = append + '     <td>'
-                            append = append + '       <select type="" style="width: 450px" class="select2 form-control detailItemsUpdate_'+ j +'" name="detailItemsUpdate">'
+                            append = append + '       <select type="" style="width:150px" class="select2 form-control detailItemsUpdate_'+ j +'" name="detailItemsUpdate">'
                             append = append + '             <option></option>'
                             append = append + '       </select>'
                             append = append + '     </td>'
@@ -1827,13 +1856,13 @@ SBE Detail
                             append = append + '         <input type="number" style="width:60px" class="form-control qtyItemsUpdate_'+ j +'" name="qtyItemsUpdate" id="qtyItemsUpdate" onkeyup="changeQtyItems(this)" value="'+ resultsDetail.qty +'">'
                             append = append + '     </td>'
                             append = append + '     <td>'
-                            append = append + '         <input type="" class="form-control priceItemsUpdate_'+ j +'" name="priceItemsUpdate" id="priceItemsUpdate" disabled="" value="'+ formatter.format(resultsDetail.price) +'" style="width:300px">'
+                            append = append + '         <input type="" class="form-control priceItemsUpdate_'+ j +'" name="priceItemsUpdate" id="priceItemsUpdate" disabled="" value="'+ formatter.format(resultsDetail.price) +'" style="width:150px">'
                             append = append + '     </td>'
                             append = append + '     <td>'
                             append = append + '         <input type="" style="width:60px;margin-left:10px" class="form-control manpowerItems_'+ j +'" name="manpowerItemsUpdate" id="manpowerItemsUpdate" onkeyup="changeManPower(this)" value="'+ resultsDetail.manpower +'">'
                             append = append + '     </td>'
                             append = append + '     <td>'
-                            append = append + '         <input type="" class="form-control totalItems_'+ j +'" name="totalItems" id="totalItemsUpdate" data-value="'+ i +'" disabled value="'+ formatter.format(resultsDetail.total_nominal) +'" style="width:300px">'
+                            append = append + '         <input type="" class="form-control totalItems_'+ j +'" name="totalItems" id="totalItemsUpdate" data-value="'+ i +'" disabled value="'+ formatter.format(resultsDetail.total_nominal) +'" style="width:150px">'
                             append = append + '     </td>'
                             append = append + '     <td>'
                             append = append + '<button onclick="removeUpdateItemsDetail(this,'+ i +')" class="btn btn-sm text-bg-danger" style="width:35px"><i class="icon-base bx bx-trash-alt"></i></button>'
@@ -1846,7 +1875,7 @@ SBE Detail
                         append = append + '          <tr>'
                         append = append + '           <td colspan="4"></td>'
                         append = append + '           <th>Total Cost</th>'
-                        append = append + '           <td><input type="text" class="form-control" name="inputGrandTotal" id="inputGrandTotal" disabled style="width:300px"></td>'
+                        append = append + '           <td colspan=2><input type="text" class="form-control" name="inputGrandTotal" id="inputGrandTotal" disabled style="width:150px"></td>'
                         append = append + '          </tr>'
                         append = append + '        </tfoot>'
                         append = append + ' </table>'
@@ -1897,7 +1926,7 @@ SBE Detail
                     })
                     // append = append + '                    <hr>'
 
-                append = append + '  <div style="text-align:center">'
+                append = append + '  <div style="text-align:center" class="mt-4">'
                 append = append + '     <button class="btn btn-sm text-bg-primary" id="updateItems" style="margin: 0 auto;" onclick="updateItems(0)"><i class="icon-base bx bx-plus"></i>&nbsp Add Items</button>'
                 append = append + '  </div>'
                 append = append + '    </div>'
@@ -1912,7 +1941,7 @@ SBE Detail
                 append = append + '</div>'
                 
                 $(".content").append(append)
-                $("table[name='tableUpdateConfig']:last").find("tr:last").after("<tr><th colspan=5 style='text-align:right'>Grand Total Cost</th><td><input class='form-control' style='text-align:right;width: 300px;' id='inputSumPriceGrandTotal' name='inputSumPriceGrandTotal' disabled/></td></tr>")
+                $("table[name='tableUpdateConfig']:last").find("tr:last").after("<tr><th colspan=5 style='text-align:right'>Grand Total Cost</th><td colspan=2><input class='form-control' style='text-align:right;width: 150px;' id='inputSumPriceGrandTotal' name='inputSumPriceGrandTotal' disabled/></td></tr>")
 
                 $.each(result.detail_config, function(key, results){
                     tempInc++
@@ -1941,7 +1970,7 @@ SBE Detail
                     $("#tableItemsUpdateConfig_"+tempInc2).find("tbody tr:not(:first-child)").each(function(item,result){
                         $(result).find(".form-control").each(function(v,w){
                             if(w.name == "inputItemsUpdate"){
-                                $(w).hide()
+                                $(w).attr('style', 'display: none !important');
                             }
                         })
                     })
@@ -1975,8 +2004,8 @@ SBE Detail
         cloneTr.find("#qtyItemsUpdate").val('').end().find("#priceItemsUpdate").val('').end().find("#manpowerItemsUpdate").val('')
         cloneTr.find("#totalItemsUpdate").val('').end()
         cloneTr.find(":input[name='inputItemsUpdate']").attr('data-attr',val)
-        cloneTr.find(":input[name='inputItemsUpdate']").hide()
-        cloneTr.find("#detailItemsUpdate").removeClass("detailItemsUpdate_0").addClass("detailItemsUpdate_"+val)
+        cloneTr.find(":input[name='inputItemsUpdate']").attr('style', 'display: none !important');
+        cloneTr.find("select[name='detailItemsUpdate']").addClass("detailItemsUpdate_"+val)
         cloneTr.find("td:last").html("<button onclick='removeUpdateItemsDetail(this,"+ val +")' class='btn btn-sm text-bg-danger' style='width:35px'><i class='icon-base bx bx-trash-alt'></i></button>")
 
         cloneTr.children("select")
@@ -2016,7 +2045,7 @@ SBE Detail
         $("#"+table).find("tbody").find("tr:first").find("td:first").find(".form-control").val(latesItems)
 
         if ($("#"+table).find("tbody tr").length == 1) {
-            $("#"+table).find("tbody").find("tr:first").find("td:last").find(".text-bg-danger").hide()
+            $("#"+table).find("tbody").find("tr:first").find("td:last").find(".text-bg-danger").attr('style', 'display: none !important');
         }
 
         $("#"+table).find("tbody").find("tr:first").find("td:first").find(".form-control").show()
@@ -2064,10 +2093,10 @@ SBE Detail
         append = append + '     <tbody>'
         append = append + '         <tr>'
         append = append + '             <td>'
-        append = append + '                 <input type="" class="form-control" name="inputItemsUpdate" id="inputItemsUpdate" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:300px" data-attr="'+ countable +'">'
+        append = append + '                 <input type="" class="form-control" name="inputItemsUpdate" id="inputItemsUpdate" onkeyup="validateInput(this)" placeholder="Ex: PM Maintenance" style="width:150px" data-attr="'+ countable +'">'
         append = append + '             </td>'
         append = append + '             <td>'
-        append = append + '                 <select type="" style="width: 450px" class="select2 form-control detailItemsUpdate_'+ countable +'" name="detailItemsUpdate">'
+        append = append + '                 <select type="" style="width:150px" class="select2 form-control detailItemsUpdate_'+ countable +'" name="detailItemsUpdate">'
         append = append + '                     <option></option>'
         append = append + '                 </select>'
         append = append + '             </td>'
@@ -2075,13 +2104,13 @@ SBE Detail
         append = append + '                 <input type="number" style="width:60px" class="form-control" name="qtyItemsUpdate" id="qtyItemsUpdate" onkeyup="changeQtyItems(this)">'
         append = append + '             </td>'
         append = append + '             <td>'
-        append = append + '                 <input type="" class="form-control" name="priceItemsUpdate" id="priceItemsUpdate" disabled="" style="width:300px">'
+        append = append + '                 <input type="" class="form-control" name="priceItemsUpdate" id="priceItemsUpdate" disabled="" style="width:150px">'
         append = append + '             </td>'
         append = append + '             <td>'
         append = append + '                 <input type="" style="width:60px;margin-left:10px" class="form-control" name="manpowerItemsUpdate" id="manpowerItemsUpdate" onkeyup="changeManPower(this)">'
         append = append + '             </td>'
         append = append + '             <td>'
-        append = append + '                 <input type="" style="width:300px" class="form-control" name="totalItems" id="totalItemsUpdate" disabled>'
+        append = append + '                 <input type="" style="width:150px" class="form-control" name="totalItems" id="totalItemsUpdate" disabled>'
         append = append + '             </td>'
         append = append + '             <td>'
         append = append + '             <button class="btn btn-sm text-bg-danger" id="removeItemsDetailforUpdate" onclick="removeItemsDetailforUpdate()" style="width:35px"><i class="icon-base bx bx-trash-alt"></i></button>'
@@ -2092,7 +2121,7 @@ SBE Detail
         append = append + '         <tr>'
         append = append + '             <td colspan="4"></td>'
         append = append + '             <th>Grand Total</th>'
-        append = append + '             <td><input type="text" class="form-control" name="inputGrandTotal" disabled></td>'
+        append = append + '             <td><input type="text" class="form-control" name="inputGrandTotal" disabled style="width:150px"></td>'
         append = append + '         </tr>'
         append = append + '     </tfoot>'
         append = append + '</table>'
@@ -2115,7 +2144,7 @@ SBE Detail
         //     }
         // }
 
-        $("table[name='tableUpdateConfig']:last").find("tr:last").after("<tr><th colspan=5 style='text-align:right'>Grand Total Cost</th><td><input class='form-control' style='text-align:right;width: 300px;' id='inputSumPriceGrandTotal' name='inputSumPriceGrandTotal' disabled/></td></tr>")
+        $("table[name='tableUpdateConfig']:last").find("tr:last").after("<tr><th colspan=5 style='text-align:right'>Grand Total Cost</th><td colspan=2><input class='form-control' style='text-align:right;width: 150px;' id='inputSumPriceGrandTotal' name='inputSumPriceGrandTotal' disabled/></td></tr>")
 
         var sumPriceGrandTotal = 0
         $("table[name='tableUpdateConfig']").find("input[name='inputGrandTotal']").each(function(index,item){
@@ -2138,7 +2167,7 @@ SBE Detail
             $("#removeItemsDetailforUpdate").remove()
         } 
 
-         $("table[name='tableUpdateConfig']:last").find("tr:last").after("<tr><th colspan=5 style='text-align:right'>Grand Total Cost</th><td><input class='form-control' style='text-align:right;width: 300px;' id='inputSumPriceGrandTotal' name='inputSumPriceGrandTotal' disabled/></td></tr>")
+         $("table[name='tableUpdateConfig']:last").find("tr:last").after("<tr><th colspan=5 style='text-align:right'>Grand Total Cost</th><td colspan=2><input class='form-control' style='text-align:right;width: 150px;' id='inputSumPriceGrandTotal' name='inputSumPriceGrandTotal' disabled/></td></tr>")
 
         var sumPriceGrandTotal = 0
         $("table[name='tableUpdateConfig']").find("input[name='inputGrandTotal']").each(function(index,item){
@@ -2176,7 +2205,7 @@ SBE Detail
         // }
         else{
             // var append = ""
-            // append = append + ' <div class="alert alert-danger alert-dismissible" style="display:none">'
+            // append = append + ' <div class="alert alert-danger alert-dismissible" style="display:none!important">'
             // append = append + '      <h6><i class="icon-base bx bx-message-alt-error"></i> Alert!</h6>'
             // append = append + '      Please fill the empty row!'
             // append = append + ' </div>'
@@ -2375,7 +2404,7 @@ SBE Detail
                 
             })
             
-            $(".cbConfig']").each(function(item,value){
+            $(".cbConfig").each(function(item,value){
                 if ($("#"+value.id).is(":checked") == true) {
                     arrSelectConf.push(value.id)
 
@@ -2644,11 +2673,11 @@ SBE Detail
     function validateInput(val){
         if ($(val).is("select")) {
             if (val.value != "") {
-                $("#"+val.id).next().next().hide()
+                $("#"+val.id).next().next().attr('style', 'display: none !important');
                 $("#"+val.id).closest("div").removeClass("needs-validation")
             }
         }else if(val.type == "checkbox"){
-            $(val).last().closest("div").next().hide()
+            $(val).last().closest("div").next().attr('style', 'display: none !important');
             $(val).last().closest("div").closest(".form-group").removeClass("needs-validation")
 
             if ($(".cbConfig:checked").length == 1) {
@@ -2669,7 +2698,7 @@ SBE Detail
                     $('.nav-tabs li:nth-child(1)').show()
                     $('.nav-tabs li:nth-child(1)').prop('disabled', false).removeClass('disabled').find("a").attr("data-toggle","tab")
                 }else{
-                    $('.nav-tabs li:nth-child(1)').hide().prop('disabled', true).removeClass('active').addClass('disabled').find("a").removeAttr("data-toggle")
+                    $('.nav-tabs li:nth-child(1)').attr('style', 'display: none !important').prop('disabled', true).removeClass('active').addClass('disabled').find("a").removeAttr("data-toggle")
                     $('.tab-content div:nth-child(1)').removeClass('active')
 
                     if ($(".cbConfig:checked").length >= 1) {
@@ -2700,7 +2729,7 @@ SBE Detail
                     $('.nav-tabs li:nth-child(2)').prop('disabled', false).removeClass('disabled').find("a").attr("data-toggle","tab");
 
                 }else{
-                    $('.nav-tabs li:nth-child(2)').hide().prop('disabled', true).removeClass('active').addClass('disabled').find("a").removeAttr("data-toggle")
+                    $('.nav-tabs li:nth-child(2)').attr('style', 'display: none !important').prop('disabled', true).removeClass('active').addClass('disabled').find("a").removeAttr("data-toggle")
                     $('.tab-content div:nth-child(2)').removeClass('active')
 
                     if ($(".cbConfig:checked").length >= 1) {
@@ -2730,7 +2759,7 @@ SBE Detail
                     $('.nav-tabs li:nth-child(3)').prop('disabled', false).removeClass('disabled').find("a").attr("data-toggle","tab");
 
                 }else{
-                    $('.nav-tabs li:nth-child(3)').hide().prop('disabled', true).removeClass('active').addClass('disabled').find("a").removeAttr("data-toggle")
+                    $('.nav-tabs li:nth-child(3)').attr('style', 'display: none !important').prop('disabled', true).removeClass('active').addClass('disabled').find("a").removeAttr("data-toggle")
                     $('.tab-content div:nth-child(3)').removeClass('active');
 
                    
@@ -2759,7 +2788,7 @@ SBE Detail
             }
         }else{
             if (val.value != "") {
-                $("#"+val.id).next().hide()
+                $("#"+val.id).next().attr('style', 'display: none !important');
                 $("#"+val.id).closest("div").removeClass("needs-validation")
 
                 if (val.name == "inputDuration") {

@@ -712,7 +712,7 @@ class PresenceController extends Controller
         if ($actual->diff(new DateTime($settingSchedule->setting_on_time))->format('%R') == '+') {
             return "On-Time";
         } else if ($actual->diff(new DateTime($settingSchedule->setting_on_time))->format('%R') == '-' && $actual->diff(new DateTime($settingSchedule->setting_injury_time))->format('%R') == '+') {
-            return "Injury-Time";
+            return "On-Time";
         } else {
             return "Late";
         }

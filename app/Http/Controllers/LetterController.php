@@ -627,7 +627,7 @@ class LetterController extends Controller
     public function get_backdate_num(Request $request)
     {
         if (isset($request->tanggal)) {
-            $backdate_num = Letter::selectRaw('`no_letter` as `text`')->selectRaw('`no` as `id`')->where('status', 'T')->whereYear('created_at',substr($request->tanggal, 6,4))->orderBy('created_at','asc')->get();
+            $backdate_num = Letter::selectRaw('`no_letter` as `text`')->selectRaw('`no` as `id`')->where('status', 'T')->whereYear('created_at',substr($request->tanggal, 0,4))->orderBy('created_at','asc')->get();
             return array('results'=>$backdate_num);
         } else {
             $backdate_num = Letter::selectRaw('`no_letter` as `text`')->selectRaw('`no` as `id`')->where('status', 'T')->orderBy('created_at','asc')->get();

@@ -125,7 +125,7 @@
         <p style="font-size: 16px">
                 <b>Untuk detail dari Quotation dapat dilihat dengan mengunjungi halaman dibawah ini</b>
         </p>
-            <center><a href="{{url('/sales/quote/detail/'.$detail->id_quote)}}" target="_blank"><button class="button"> Detail Quotation </button></a></center>
+            <center><a href="{{url('/sales/quoteDetail/'.$detail->id_quote)}}" target="_blank"><button class="button"> Detail Quotation </button></a></center>
         <p style="font-size: 16px">
             Mohon periksa kembali jika ada kesalahan atau pertanyaan silahkan hubungi Team Developer (Ext: 384) atau email ke development@sinergy.co.id
         </p>

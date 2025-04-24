@@ -9,10 +9,6 @@
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.css" integrity="sha512-OWGg8FcHstyYFwtjfkiCoYHW2hG3PDWwdtczPAPUcETobBJOVCouKig8rqED0NMLcT9GtE4jw6IT1CSrwY87uw==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}"/>
 <style type="text/css">
-    #tes {
-    width: 150px;
-    height: 150px;
-    }
     .form-horizontal .control-label {
       padding-top: 7px;
       margin-bottom: 0;
@@ -220,26 +216,24 @@
       <div class="col-md-3">
         <div class="card card-primary">
           <div class="card-body card-profile">
-            <div style="margin-bottom: 100px;">
-              <div style="align-items: center;" class="avatar avatar-lg ms-10">
-                @if(Auth::User()->avatar != NULL)
-                  <img id="tes" class="profile-user-img img-responsive rounded-circle" src="{{Auth::User()->avatar}}" alt="User profile picture">
+            <div>
+              @if(Auth::User()->avatar != NULL)
+                <img id="tes" class="img-fluid rounded-circle" src="{{Auth::User()->avatar}}" alt="User profile picture">
+              @else
+                @if(Auth::User()->gambar == NULL || Auth::User()->gambar == "-" || Auth::User()->gambar == "")
+                  <img id="tes" class="img-fluid rounded-circle" src="{{ asset('image/place_profile_3.png')}}" alt="User profile picture">
                 @else
-                  @if(Auth::User()->gambar == NULL || Auth::User()->gambar == "-" || Auth::User()->gambar == "")
-                    <img id="tes" class="profile-user-img img-responsive rounded-circle" src="{{ asset('image/place_profile_3.png')}}" alt="User profile picture">
-                  @else
-                    <img id="tes" class="profile-user-img img-responsive rounded-circle" src="{{ asset('image/'.$user_profile->gambar)}}" alt="User profile picture" data-bs-toggle="modal" data-target="#pict_profile" onclick="nik_profile('{{$user_profile->nik}}')">
-                  @endif
+                  <img id="tes" class="img-fluid rounded-circle" src="{{ asset('image/'.$user_profile->gambar)}}" alt="User profile picture" data-bs-toggle="modal" data-target="#pict_profile" onclick="nik_profile('{{$user_profile->nik}}')">
                 @endif
-              </div>
+              @endif
             </div>
 
             <div class="mt-4">
-              <h6 class="profile-username text-center" style="padding-left: 5px;font-family: Arial, Helvetica, sans-serif;">{{ucfirst(strtolower($user_profile->name))}}</h6>
+              <h6 class="text-center">{{ucfirst(strtolower($user_profile->name))}}</h6>
               <!-- <p class="text-muted text-center">Software Engineer</p> -->
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <i class="bx bx-home">&nbsp</i><b class="">NIK</b> <b class="pull-right">{{$user_profile->nik}}</b>
+                  <i class="bx bx-user">&nbsp</i><b class="">NIK</b> <b class="pull-right">{{$user_profile->nik}}</b>
                 </li>
                 <li class="list-group-item">
                   <i class="bx bx-envelope">&nbsp</i><b class="">Email</b> <b class="pull-right">{{$user_profile->email}}</b>
@@ -394,9 +388,9 @@
                         <div class="row mb-4">
                           <div class="col-md-4">
                             <div class="card card-primary" style="background-color: #F7F7F7;">
-                              <div class="card-header">
-                                <h6 class="card-title">NPWP File</h6>
-                                <button type="button" class="btn btn-sm btn-sm btnRotateNpwp" style="color:black;float: right;background-color: transparent;" onclick="rotateImage('npwp','showgambarnpwp')" name=""><i class="fa  bx-rotate-right"></i></button>
+                              <div class="card-header d-flex">
+                                <h6 class="card-title mt-2">NPWP File</h6>
+                                <button type="button" class="btn ms-auto btnRotateNpwp" style="color:black;background-color: transparent;" onclick="rotateImage('npwp','showgambarnpwp')" name=""><i class="bx bx-rotate-right"></i></button>
                               </div>
                               <div class="card-body">
                                 @if($user_profile->npwp_file == "-" || $user_profile->npwp_file == "" || $user_profile->npwp_file == null)
@@ -413,9 +407,9 @@
 
                           <div class="col-md-4">
                             <div class="card card-primary" style="background-color: #F7F7F7;">
-                              <div class="card-header">
-                                <h6 class="card-title">KTP File</h6>
-                                <button type="button" class="btn btn-sm btn-sm btnRotateKtp" style="color:black;float: right;background-color: transparent;" onclick="rotateImage('npwp','showgambarktp')" name=""><i class="fa  bx-rotate-right"></i></button>
+                              <div class="card-header d-flex">
+                                <h6 class="card-title mt-2">KTP File</h6>
+                                <button type="button" class="btn ms-auto btnRotateKtp" style="color:black;background-color: transparent;" onclick="rotateImage('npwp','showgambarktp')" name=""><i class="bx bx-rotate-right"></i></button>
                               </div>
                               <div class="card-body">
                                 @if($user_profile->ktp_file == "-" || $user_profile->ktp_file == null || $user_profile->ktp_file == "")

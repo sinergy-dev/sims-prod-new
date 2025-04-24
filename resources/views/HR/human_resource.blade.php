@@ -1,6 +1,6 @@
 @extends('template.main_sneat')
 @section('tittle')
-Human Resources
+Human Capital
 @endsection
 @section('pageName')
 Employees
@@ -231,13 +231,13 @@ Employees
 			      <div class="row mb-4">
 			      	<div class="col-md-12">
 			      		<div class="pull-right" style="margin-right:10px">
-			      			<!-- <a href="{{action('HRController@exportExcelEmployee')}}"><button class="btn btn-xs btn-warning" style=" margin-bottom: 5px;" id="btnExport"><i class="bx bx-print"></i> EXCEL </button></a> -->
-			      			<button class="btnExport btn btn-sm btn-warning dropdown-toggle" data-bs-toggle="dropdown" id="btnExport" aria-haspopup="true" aria-expanded="false" style=" margin-bottom: 5px;"><i class="bx bx-print"> </i>&nbspExcel<span class="caret"></span></button>
+			      			<!-- <a href="{{action('HRController@exportExcelEmployee')}}"><button class="btn btn-sm btn-warning" style=" margin-bottom: 5px;" id="btnExport"><i class="bx bx-print"></i> EXCEL </button></a> -->
+			      			<button class="btnExport btn btn-sm btn-warning dropdown-toggle" data-bs-toggle="dropdown" id="btnExport" aria-haspopup="true" aria-expanded="false" style=" margin-bottom: 5px;"><i class="bx bx-export"> </i>&nbspExcel</button>
 				            <ul class="dropdown-menu">
 							    <li><a class="dropdown-item" href="{{action('HRController@exportExcelEmployee')}}">All</a></li>
 							    <li><a class="dropdown-item" href="{{action('HRController@exportExcelResignEmployee')}}">Resign</a></li>
 							</ul>
-				        	<button class="btn btn-xs btn-primary" onclick="showTabAdd(0)" id="btnAddEmployee" style="margin-bottom: 5px;display: none"><i class="bx bx-plus"></i>&nbsp Employee</button>
+				        	<button class="btn btn-sm btn-primary" onclick="showTabAdd(0)" id="btnAddEmployee" style="margin-bottom: 5px;display: none"><i class="bx bx-plus"></i>&nbsp Employee</button>
 			      		</div>			        
 				    </div>
 			      </div>
@@ -286,7 +286,7 @@ Employees
 				        		<div class="col-md-6 ms-auto pull-right">
 				        			<div class="input-group">
 					                    <input id="searchBarAll" type="text" class="form-control" onkeyup="searchCustom('data_all','searchBarAll')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowAll" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowAll" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -295,7 +295,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_all').DataTable().page.len(50).draw();$('#btnShowAll').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_all').DataTable().page.len(100).draw();$('#btnShowAll').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_all','searchBarAll')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_all','searchBarAll')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -360,13 +360,13 @@ Employees
 				                      </td>
 				                      <td>{{ $data->no_npwp }}</td>
 				                      <td>
-				                      	<button class="btn btn-xs btn-xs btn-primary btn-attach" value="{{$data->nik}}" name="edit_hurec" style="vertical-align: top;"><i class="bx bx-upload"></i>&nbspUpload</button>
+				                      	<button class="btn btn-sm btn-sm btn-primary btn-attach" value="{{$data->nik}}" name="edit_hurec" style="vertical-align: top;"><i class="bx bx-upload"></i>&nbspUpload</button>
 				                      </td>
 				                      <td>
-				                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" id="btnEdit" data-value="0" value="{{$data->nik}}" name="edit_hurec" style="vertical-align: top;"><i class="bx bx-search"></i>&nbspEdit</button>
-				                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+				                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" id="btnEdit" data-value="0" value="{{$data->nik}}" name="edit_hurec" style="vertical-align: top;"><i class="bx bx-search"></i>&nbspEdit</button>
+				                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 				                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-				                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+				                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 				                      </td>
 				                    </tr>
 				                    @endif
@@ -381,7 +381,7 @@ Employees
 				        		<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchManagement" type="text" class="form-control" onkeyup="searchCustom('data_sales','searchManagement')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -390,7 +390,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_sales','searchManagement')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_sales','searchManagement')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -417,11 +417,11 @@ Employees
 			                        {{$data->roles}}
 			                      </td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -436,7 +436,7 @@ Employees
 				        		<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchAe1" type="text" class="form-control" onkeyup="searchCustom('data_ae1','searchAe1')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -445,7 +445,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -472,11 +472,11 @@ Employees
 			                        {{$data->roles}}
 			                      </td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -491,7 +491,7 @@ Employees
 				        		<div class="col-md-6 ms-auto pull-right">
 				        			<div class="input-group">
 					                    <input id="searchAe2" type="text" class="form-control" onkeyup="searchCustom('data_ae2','searchAe2')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -500,7 +500,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae2','searchAe2')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae2','searchAe2')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -527,11 +527,11 @@ Employees
 			                        {{$data->roles}}
 			                      </td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -546,7 +546,7 @@ Employees
 				        		<div class="col-md-6 pull-right ms-auto">
 				        			<div class="input-group">
 					                    <input id="searchAe3" type="text" class="form-control" onkeyup="searchCustom('data_ae3','searchAe3')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -555,7 +555,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -582,11 +582,11 @@ Employees
 			                        {{$data->roles}}
 			                      </td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -601,7 +601,7 @@ Employees
 				        		<div class="col-md-6 pull-right ms-auto">
 				        			<div class="input-group">
 					                    <input id="searchAcc" type="text" class="form-control" onkeyup="ssearchCustom('data_acc','searchAcc')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -610,7 +610,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -635,11 +635,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -654,7 +654,7 @@ Employees
 				        		<div class="col-md-6 pull-right ms-auto">
 				        			<div class="input-group">
 					                    <input id="searchFns" type="text" class="form-control" onkeyup="searchCustom('data_fns','searchFns')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -663,7 +663,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -688,11 +688,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -707,7 +707,7 @@ Employees
 					        	<div class="col-md-6 pull-right ms-auto">
 				        			<div class="input-group">
 					                    <input id="searchSss" type="text" class="form-control" onkeyup="searchCustom('data_sss','searchSss')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -716,7 +716,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -741,11 +741,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -760,7 +760,7 @@ Employees
 					        	<div class="col-md-6 pull-right ms-auto">
 				        			<div class="input-group">
 					                    <input id="searchSsa" type="text" class="form-control" onkeyup="searchCustom('data_ssa','searchSsa')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -769,7 +769,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -794,11 +794,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -813,7 +813,7 @@ Employees
 					        	<div class="col-md-6 pull-right ms-auto">
 				        			<div class="input-group">
 					                    <input id="searchSsd" type="text" class="form-control" onkeyup="searchCustom('data_ssd','searchSsd')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -822,7 +822,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -847,11 +847,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -866,7 +866,7 @@ Employees
 					        	<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchSci" type="text" class="form-control" onkeyup="searchCustom('data_sci','searchSci')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -875,7 +875,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -900,11 +900,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -919,7 +919,7 @@ Employees
 					        	<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchIos" type="text" class="form-control" onkeyup="searchCustom('data_ios','searchIos')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -928,7 +928,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -953,11 +953,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -972,7 +972,7 @@ Employees
 					        	<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchAds" type="text" class="form-control" onkeyup="searchCustom('data_ads','searchAds')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -981,7 +981,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -1006,11 +1006,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -1025,7 +1025,7 @@ Employees
 					        	<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchPds" type="text" class="form-control" onkeyup="searchCustom('data_pds','searchPds')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -1034,7 +1034,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -1059,11 +1059,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -1078,7 +1078,7 @@ Employees
 					        	<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchPmo" type="text" class="form-control" onkeyup="searchCustom('data_pmo','searchPmo')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -1087,7 +1087,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -1112,11 +1112,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -1131,7 +1131,7 @@ Employees
 					        	<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchSdc" type="text" class="form-control" onkeyup="searchCustom('data_sdc','searchSdc')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -1140,7 +1140,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -1165,11 +1165,11 @@ Employees
 			                      <td>{{ucwords(strtolower($data->name))}}</td>
 			                      <td>{{$data->roles}}</td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -1184,7 +1184,7 @@ Employees
 					        	<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchOpd" type="text" class="form-control" onkeyup="searchCustom('data_opd','searchOpd')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -1193,7 +1193,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -1220,10 +1220,10 @@ Employees
 			                         {{$data->roles}}
 			                      </td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -1238,7 +1238,7 @@ Employees
 					        	<div class="col-md-6 ms-auto pull-right">
 						        	<div class="input-group">
 					                    <input id="searchPos" type="text" class="form-control" onkeyup="searchCustom('data_pos','searchPos')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -1247,7 +1247,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -1274,10 +1274,10 @@ Employees
 			                         {{$data->roles}}
 			                      </td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
-			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+			                        <button class="btn btn-sm btn-sm btn-primary" onclick="showEditTab(this.value,0)" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+			                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 			                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-			                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+			                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 			                      </td>
 			                    </tr>
 			                    @endif
@@ -1292,7 +1292,7 @@ Employees
 					        	<div class="col-md-6 pull-right ms-auto">
 				        			<div class="input-group">
 					                    <input id="searchResign" type="text" class="form-control" onkeyup="searchCustom('data_resign','searchResign')" placeholder="Search Anything">
-					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					                        Show 10 entries
 					                      </button>
 					                      <ul class="dropdown-menu">
@@ -1301,7 +1301,7 @@ Employees
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 					                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 					                      </ul>
-					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+					                      <button onclick="searchCustom('data_ae3','searchAe3')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 					                        <i class="bx bx-fw bx-search"></i>
 					                      </button>
 				                  	</div>
@@ -1327,7 +1327,7 @@ Employees
 			                         {{$data->roles}}
 			                      </td>
 			                      <td>
-			                        <button class="btn btn-xs btn-xs btn-primary"  onclick="showEditTab(this.value,0)" value="{{$data->nik}}"><i class="bx bx-search"></i>&nbspShow</button>
+			                        <button class="btn btn-sm btn-sm btn-primary"  onclick="showEditTab(this.value,0)" value="{{$data->nik}}"><i class="bx bx-search"></i>&nbspShow</button>
 			                      </td>
 			                    </tr>
 			                    @endforeach
@@ -1377,7 +1377,7 @@ Employees
 								    		<div class="col-md-6 ms-auto pull-right">
 									        	<div class="input-group">
 								                    <input id="searchALLMSP" type="text" class="form-control" onkeyup="searchCustom('data_all_msp','searchALLMSP')" placeholder="Search Anything">
-								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								                        Show 10 entries
 								                      </button>
 								                      <ul class="dropdown-menu">
@@ -1386,7 +1386,7 @@ Employees
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 								                      </ul>
-								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 								                        <i class="bx bx-fw bx-search"></i>
 								                      </button>
 							                  	</div>
@@ -1440,16 +1440,16 @@ Employees
 							                      </td>
 							                      <td>{{ $data->no_npwp }}</td>
 							                      <td>
-							                      	<button class="btn btn-xs btn-xs btn-primary btn-attach" value="{{$data->nik}}" name="edit_hurec" style="vertical-align: top;"><i class="bx bx-upload"></i>&nbspUpload</button>
+							                      	<button class="btn btn-sm btn-sm btn-primary btn-attach" value="{{$data->nik}}" name="edit_hurec" style="vertical-align: top;"><i class="bx bx-upload"></i>&nbspUpload</button>
 							                      </td>
 
 							                      <!-- <td><img src="{{ asset('image/'.$data->npwp_file) }}" style="max-height:200px;max-width:200px;margin-top:10px;"></td> -->
 							                      <td>
-							                        <button class="btn btn-xs btn-xs btn-primary btn-editan" onclick="showEditTab(this.value,0)"  id="btnEdit" value="{{$data->nik}}" name="edit_hurec" style="vertical-align: top;"><i class="bx bx-search"></i>&nbspEdit</button>
+							                        <button class="btn btn-sm btn-sm btn-primary btn-editan" onclick="showEditTab(this.value,0)"  id="btnEdit" value="{{$data->nik}}" name="edit_hurec" style="vertical-align: top;"><i class="bx bx-search"></i>&nbspEdit</button>
 
-							                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+							                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 							                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-							                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+							                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 							                      </td>
 							                    </tr>
 						                    @endforeach
@@ -1463,7 +1463,7 @@ Employees
 								        	<div class="col-md-6 ms-auto pull-right">
 									        	<div class="input-group">
 								                    <input id="searchSalesMsp" type="text" class="form-control" onkeyup="searchCustom('data_sales_msp','searchSalesMsp')" placeholder="Search Anything">
-								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								                        Show 10 entries
 								                      </button>
 								                      <ul class="dropdown-menu">
@@ -1472,7 +1472,7 @@ Employees
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 								                      </ul>
-								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 								                        <i class="bx bx-fw bx-search"></i>
 								                      </button>
 							                  	</div>
@@ -1503,11 +1503,11 @@ Employees
 						                      <td>&#8212</td>
 						                      @endif
 						                      <td>
-						                        <button class="btn btn-xs btn-xs btn-primary btn-editan" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+						                        <button class="btn btn-sm btn-sm btn-primary btn-editan" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-						                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+						                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 						                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-						                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+						                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 						                      </td>
 						                    </tr>
 						                    @endif
@@ -1522,7 +1522,7 @@ Employees
 								        	<div class="col-md-6 ms-auto pull-right">
 									        	<div class="input-group">
 								                    <input id="searchOPMSP" type="text" class="form-control" onkeyup="searchCustom('data_op_msp','searchOPMSP')" placeholder="Search Anything">
-								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								                        Show 10 entries
 								                      </button>
 								                      <ul class="dropdown-menu">
@@ -1531,7 +1531,7 @@ Employees
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 								                      </ul>
-								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 								                        <i class="bx bx-fw bx-search"></i>
 								                      </button>
 							                  	</div>
@@ -1562,11 +1562,11 @@ Employees
 							                      <td>&#8212</td>
 							                      @endif
 							                      <td>
-							                        <button class="btn btn-xs btn-xs btn-primary btn-editan" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+							                        <button class="btn btn-sm btn-sm btn-primary btn-editan" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-							                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+							                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 							                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-							                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+							                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 							                      </td>
 							                    </tr>
 							                    @endif
@@ -1581,7 +1581,7 @@ Employees
 								        	<div class="col-md-6 ms-auto pull-right">
 									        	<div class="input-group">
 								                    <input id="searchWarehouseMsp" type="text" class="form-control" onkeyup="searchCustom('data_warehouse_msp','searchWarehouseMsp')" placeholder="Search Anything">
-								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								                        Show 10 entries
 								                      </button>
 								                      <ul class="dropdown-menu">
@@ -1590,7 +1590,7 @@ Employees
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 								                      </ul>
-								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 								                        <i class="bx bx-fw bx-search"></i>
 								                      </button>
 							                  	</div>
@@ -1621,13 +1621,13 @@ Employees
 						                      <td>&#8212</td>
 						                      @endif
 						                      <td>
-						                        <!-- <button class="btn btn-xs btn-xs btn-primary btn-editan" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button> -->
+						                        <!-- <button class="btn btn-sm btn-sm btn-primary btn-editan" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button> -->
 
-						                        <button class="btn btn-xs btn-xs btn-primary btn-editan" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
+						                        <button class="btn btn-sm btn-sm btn-primary btn-editan" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspEdit</button>
 
-						                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-xs btn-xs btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
+						                        <a href="{{ url('delete_hr', $data->nik) }}"><button class="btn btn-sm btn-sm btn-danger" style="vertical-align: top;" onclick="return confirm('Are you sure want to delete this data? And this data is not used in other table')">
 						                        <i class="bx bx-trash"></i>&nbspDelete</button></a>
-						                        <button class="btn btn-xs btn-xs btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
+						                        <button class="btn btn-sm btn-sm btn-warning btnReset" id="btnReset" value="{{$data->nik}}" name="btnReset" style="vertical-align: top;"><i class="bx bx-refresh"></i>&nbspReset</button>
 						                      </td>
 						                    </tr>
 						                    @endif
@@ -1642,7 +1642,7 @@ Employees
 								        	<div class="col-md-6 ms-auto pull-right">
 									        	<div class="input-group">
 								                    <input id="searchResignMSP" type="text" class="form-control" onkeyup="searchCustom('data_resign_msp','searchResignMSP')" placeholder="Search Anything">
-								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-xs btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+								                      <button type="button" id="btnShowEntryRoleUser" class="btn btn-sm btn-outline-secondary btn-flat dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								                        Show 10 entries
 								                      </button>
 								                      <ul class="dropdown-menu">
@@ -1651,7 +1651,7 @@ Employees
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(50).draw();$('#btnShowEntryRoleUser').html('Show 50 entries')">50</a></li>
 								                        <li><a class="dropdown-item" href="#" onclick="$('#data_sales').DataTable().page.len(100).draw();$('#btnShowEntryRoleUser').html('Show 100 entries')">100</a></li>
 								                      </ul>
-								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-xs btn-outline-secondary btn-flat">
+								                      <button onclick="searchCustom('data_ae1','searchAe1')" type="button" class="btn btn-sm btn-outline-secondary btn-flat">
 								                        <i class="bx bx-fw bx-search"></i>
 								                      </button>
 							                  	</div>
@@ -1681,7 +1681,7 @@ Employees
 						                      <td>&#8212</td>
 						                      @endif
 						                      <td>
-						                        <button class="btn btn-xs btn-xs btn-primary btn-editan2" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspShow</button>
+						                        <button class="btn btn-sm btn-sm btn-primary btn-editan2" value="{{$data->nik}}" name="edit_hurec"><i class="bx bx-search"></i>&nbspShow</button>
 						                      </td>
 						                    </tr>
 						                    @endforeach
@@ -1760,8 +1760,8 @@ Employees
 			                    <div class="col-md-8">
 			                        <div class="input-group">
 			                        	<input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }} float-left" name="password" required>
-				                        <span class="input-group-addon">
-				                        	<i toggle="#password-field" class="bx bx-fw fa-eye  toggle-password"></i>
+				                        <span class="input-group-text">
+				                        	<i toggle="#password-field" class="bx bx-fw bxs-show toggle-password"></i>
 				                        </span>
 				                        @if ($errors->has('password'))
 				                            <span class="invalid-feedback">
@@ -1805,11 +1805,11 @@ Employees
 
 			                <div class="form-group row">
 			                    <label for="jenis_kelamin" style="padding-top: 7px;" class="col-md-4 control-label">{{ __('Gender') }}</label>
-			                    <div class="col-md-8 form-group" style="padding-left: 28px; padding-top: 7px">
+			                    <div class="col-md-8 form-group" style="padding-top: 7px">
 			                    	<div class="form-check">
 									  <label class="form-check-label" for="flexRadioDefault1"><input class="form-check-input" type="radio" name="jenis_kelamin" id="flexRadioDefault1" value="Pria">Male</label>
 									  
-									  <label class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="jenis_kelamin" style="margin-left: 25px;" id="flexRadioDefault2"  value="Wanita">Female</label>
+									  <label style="margin-left: 40px;" class="form-check-label" for="flexRadioDefault2"><input class="form-check-input" type="radio" name="jenis_kelamin" id="flexRadioDefault2"  value="Wanita">Female</label>
 									</div>
 			                    </div>
 			                </div>		                
@@ -2170,7 +2170,6 @@ Employees
 			                    </div>
 			                </div>
 		                </div>	                
-
 		                
 		                <div class="tab-add" style="display: none;">   
 			                <div class="form-group row">
@@ -2297,16 +2296,12 @@ Employees
 			                    </div>
 			                </div>
 			            </div>
-
-		                <div class="modal-footer">
-		                	<button type="button" class="btn btn-xs btn-outline-secondary" id="prevBtnAdd" onclick="NextPrevAdd()">Back</button>
-							<button type="button" class="btn btn-xs btn-primary" id="nextBtnAdd" onclick="NextPrevAdd()">Next</button>
-		                 <!--  <button type="button" class="btn btn-xs btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-		                  <button type="submit" class="btn btn-xs btn-primary"> -->
-		                  </button>
-		                </div>
 			          </form>
 			        </div>
+			        <div class="modal-footer">
+	                	<button type="button" class="btn btn-sm btn-outline-secondary" id="prevBtnAdd" onclick="NextPrevAdd()">Back</button>
+						<button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd" onclick="NextPrevAdd()">Next</button>
+	                </div>
 			      </div>
 			    </div>
 			</div>
@@ -2326,7 +2321,7 @@ Employees
 			            	<div class="mb-3 form-group row">
 			            		<label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIK') }}</label>
 			            		<div class="col-md-8">
-		                        	<input id="nik_update" type="text" class="col-md-8 form-control{{ $errors->has('nik') ? ' is-invalid' : '' }}" name="nik_update" value="{{ old('nik') }}" readonly autofocus>
+		                        	<input id="nik_update" type="text" class="col-md-8 form-control{{ $errors->has('nik') ? ' is-invalid' : '' }}" name="nik_update" value="{{ old('nik') }}" disabled autofocus>
 			            		</div>
 			            		@if ($errors->has('nik'))
 		                            <span class="invalid-feedback">
@@ -2453,7 +2448,7 @@ Employees
 			                    <label for="status_karyawan" class="col-md-4 col-form-label text-md-right">{{ __('Employee Status') }}</label>
 
 			                    <div class="col-md-4" id="div_status_karyawan_update">
-			                    	<input id="status_karyawan_update" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required readonly>
+			                    	<input id="status_karyawan_update" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required disabled>
 			                	</div>
 
 			                    <div class="col-md-4">
@@ -2485,7 +2480,7 @@ Employees
 			                    <label for="company" class="col-md-4 col-form-label text-md-right">{{ __('Company') }}</label>
 
 			                    <div class="col-md-4" id="div_company_view_update">
-			                    	<input id="company_view_update" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required readonly>
+			                    	<input id="company_view_update" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required disabled>
 			                	</div>
 
 			                    <div class="col-md-4">
@@ -2507,7 +2502,7 @@ Employees
 			                    <label for="divisi" class="col-md-4 col-form-label text-md-right">{{ __('Division') }}</label>
 
 			                    <div class="col-md-4" id="div_divisi_view_update">
-			                    	<input id="divisi_view_update" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required readonly>
+			                    	<input id="divisi_view_update" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required disabled>
 			                	</div>
 
 			                    <div class="col-md-4">
@@ -2526,7 +2521,7 @@ Employees
 			                    <label for="divisi" class="col-md-4 col-form-label text-md-right">{{ __('Sub-Division') }}</label>
 
 			                    <div class="col-md-4" id="div_subdivisi_view_update">
-			                    	<input id="sub_divisi_view_update" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  value="{{ old('email') }}" required readonly>
+			                    	<input id="sub_divisi_view_update" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  value="{{ old('email') }}" required disabled>
 			                	</div>
 
 			                    <div class="col-md-4">
@@ -2545,7 +2540,7 @@ Employees
 			                    <label for="posisi" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
 
 			                    <div class="col-md-4" id="div_posisi_view_update">
-			                    	<input id="posisi_view_update" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  value="{{ old('email') }}" required readonly>
+			                    	<input id="posisi_view_update" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  value="{{ old('email') }}" required disabled>
 			                	</div>
 
 			                    <div class="col-md-4">
@@ -2564,7 +2559,7 @@ Employees
 			                	<label for="roles_user" class="col-md-4 control-label margin-top">{{ __('Roles') }}</label>
 
 			                	<div class="col-md-4" id="div_roles_view_update">
-			                    	<input id="roles_view_update" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  required readonly>
+			                    	<input id="roles_view_update" type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  required disabled>
 			                	</div>
 
 			                    <div class="col-md-4 margin-top">
@@ -2663,18 +2658,16 @@ Employees
 			                    </div>
 			                </div>
 			            </div>             
-	                 
-
-			            <div class="modal-footer">
-			            	<button type="button" class="btn btn-xs btn-secondary" id="prevBtn" onclick="nextPrev()">Back</button>
-							<button type="button" class="btn btn-xs btn-primary" id="nextBtn" onclick="nextPrev()">Next</button>
-			             <!--  <button type="button" class="btn btn-xs btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-			              <button type="submit" class="btn btn-xs btn-primary btn-submit-update">
-			                  {{ __('Update') }}
-			              </button> -->
-			            </div>
 			          <!-- </form> -->
 			        </div>
+			        <div class="modal-footer">
+		            	<button type="button" class="btn btn-sm btn-secondary" id="prevBtn" onclick="nextPrev()">Back</button>
+						<button type="button" class="btn btn-sm btn-primary" id="nextBtn" onclick="nextPrev()">Next</button>
+		             	<!--  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+		              		<button type="submit" class="btn btn-sm btn-primary btn-submit-update">
+		                  {{ __('Update') }}
+		              	</button> -->
+		            </div>
 			      </div>		      
 			    </div>
 			</div>
@@ -2713,7 +2706,7 @@ Employees
 	                        <label for="nik" class="col-md-4 col-form-label text-md-right">{{ __('NIK') }}</label>
 
 	                        <div class="col-md-8">
-	                            <input id="nik_update_attach" type="text" class="form-control{{ $errors->has('nik') ? ' is-invalid' : '' }}" name="nik_profile" value="{{ old('nik') }}" readonly autofocus>
+	                            <input id="nik_update_attach" type="text" class="form-control{{ $errors->has('nik') ? ' is-invalid' : '' }}" name="nik_profile" value="{{ old('nik') }}" disabled autofocus>
 
 	                            @if ($errors->has('nik'))
 	                                <span class="invalid-feedback">
@@ -2786,8 +2779,8 @@ Employees
 	                    </center>
 
 		                <div class="modal-footer">
-		                  <button type="button" class="btn btn-xs btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-		                  <button type="submit" class="btn btn-xs btn-primary btn-submit-update">
+		                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+		                  <button type="submit" class="btn btn-sm btn-primary btn-submit-update">
 		                      {{ __('Update') }}
 		                  </button>
 		                </div>
@@ -3030,13 +3023,13 @@ Employees
           "processing": true,
 	      "language": {
             'loadingRecords': '&nbsp;',
-            'processing': '<i class="bx bx-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
+            'processing': '<i class="bx bx-spinner bx-spin bx-3x bx-fw"></i><span class="sr-only">Loading...</span> '
           },
           success: function(result){
           	$.each(result[0], function(key, value){
           		
           	   if (value.id_company == '2') {
-          	   	$("#div_roles").hide()
+          	   	$("#div_roles").attr('style','display:none!important')
           	   }else{
           	   	$("#div_roles").show()
           	   }
@@ -3047,26 +3040,26 @@ Employees
                	 	}else{
 						document.getElementById("nextBtn").style.display = "inline";
                	 	}
-               	   $("#nik_update").val(value.nik).prop("readonly", true);
-	               $("#name_update").val(value.name).prop("readonly", true);
-	               $("#email_update").val(value.email).prop("readonly", true);
-	               $("#date_of_entry_update").val(value.date_of_entry).prop("readonly", true);
-	               $("#date_of_birth_update").val(value.date_of_birth).prop("readonly", true);
-	               $("#akhir_kontrak_update").val(value.akhir_kontrak).prop("readonly", true);
-	               $("#address_update").val(value.address).prop("readonly", true);
-	               $("#phone_number_update").val(value.phone).prop("readonly", true);
-	               $("#no_ktp_update").val(value.no_ktp).prop("readonly", true);
-	               $("#no_kk_update").val(value.no_kk).prop("readonly", true);
-	               $("#no_npwp_update").val(value.no_npwp).prop("readonly", true);
-	               $("#tempat_lahir_update").val(value.tempat_lahir).prop("readonly", true);
-	               $("#email_personal_update").val(value.email_pribadi).prop("readonly", true);
-	               $("#bpjs_ket_update").val(value.bpjs_ket).prop("readonly", true);
-	               $("#bpjs_kes_update").val(value.bpjs_kes).prop("readonly", true);
-	               $("#address_ktp_update").val(value.alamat_ktp).prop("readonly", true);
-	               $("#pend_terakhir_update").val(value.pend_terakhir).prop("readonly", true);
-	               $("#name_ec_update").val(value.name_ec).prop("readonly", true);
-	               $("#phone_ec_update").val(value.phone_ec).prop("readonly", true);
-	               $("#hubungan_ec_update").val(value.hubungan_ec).prop("readonly", true);
+               	   $("#nik_update").val(value.nik).prop("disabled", true);
+	               $("#name_update").val(value.name).prop("disabled", true);
+	               $("#email_update").val(value.email).prop("disabled", true);
+	               $("#date_of_entry_update").val(value.date_of_entry).prop("disabled", true);
+	               $("#date_of_birth_update").val(value.date_of_birth).prop("disabled", true);
+	               $("#akhir_kontrak_update").val(value.akhir_kontrak).prop("disabled", true);
+	               $("#address_update").val(value.address).prop("disabled", true);
+	               $("#phone_number_update").val(value.phone).prop("disabled", true);
+	               $("#no_ktp_update").val(value.no_ktp).prop("disabled", true);
+	               $("#no_kk_update").val(value.no_kk).prop("disabled", true);
+	               $("#no_npwp_update").val(value.no_npwp).prop("disabled", true);
+	               $("#tempat_lahir_update").val(value.tempat_lahir).prop("disabled", true);
+	               $("#email_personal_update").val(value.email_pribadi).prop("disabled", true);
+	               $("#bpjs_ket_update").val(value.bpjs_ket).prop("disabled", true);
+	               $("#bpjs_kes_update").val(value.bpjs_kes).prop("disabled", true);
+	               $("#address_ktp_update").val(value.alamat_ktp).prop("disabled", true);
+	               $("#pend_terakhir_update").val(value.pend_terakhir).prop("disabled", true);
+	               $("#name_ec_update").val(value.name_ec).prop("disabled", true);
+	               $("#phone_ec_update").val(value.phone_ec).prop("disabled", true);
+	               $("#hubungan_ec_update").val(value.hubungan_ec).prop("disabled", true);
 
 	               $("#company_update").prop("disabled", true);
 	               $("#divisi_update").prop("disabled", true);
@@ -3076,50 +3069,70 @@ Employees
 	               $("#status_kerja_update").prop("disabled", true);
 
 	               if (value.status_kerja == 'Tetap') {
-	               	$("#status_karyawan_update").val("Karyawan Tetap").prop("readonly", true);
+	               	$("#status_karyawan_update").val("Karyawan Tetap").prop("disabled", true);
 	               }else if (value.status_kerja == 'Kontrak') {
-	               	$("#status_karyawan_update").val("Karyawan Kontrak").prop("readonly", true);
+	               	$("#status_karyawan_update").val("Karyawan Kontrak").prop("disabled", true);
 	               }else if (value.status_kerja == 'Magang') {
-	               	$("#status_karyawan_update").val("Karyawan Magang").prop("readonly", true);
+	               	$("#status_karyawan_update").val("Karyawan Magang").prop("disabled", true);
 	               }else if (value.status_kerja == 'Outsource') {
-	               	$("#status_karyawan_update").val("Karyawan Outsource").prop("readonly", true);
+	               	$("#status_karyawan_update").val("Karyawan Outsource").prop("disabled", true);
 	               }else{
-	               	$("#status_karyawan_update").val("").prop("readonly", true);
+	               	$("#status_karyawan_update").val("").prop("disabled", true);
 	               }
 	               if (value.npwp_file == null) {
-	               	$("#showgambarnpwp_update").attr("src","img/img_nf.png");
+	               	// $("#showgambarnpwp_update").attr("src","img/img_nf.png");
 	               } else {
 	               	$("#showgambarnpwp_update").attr("src","image/"+value.npwp_file);
 	               }
 	               if (value.ktp_file == null) {
-	               	$("#showgambarktp_update").attr("src","img/img_nf.png");
+	               	// $("#showgambarktp_update").attr("src","img/img_nf.png");
 	               } else {
 	               	$("#showgambarktp_update").attr("src","image/"+value.ktp_file);
 	               }
 	               if (value.bpjs_kes == null) {
-	               	$("#showgambarbpjs_kes_update").attr("src","img/img_nf.png");
+	               	// $("#showgambarbpjs_kes_update").attr("src","img/img_nf.png");
 	               } else {
 	               	$("#showgambarbpjs_kes_update").attr("src","image/"+value.bpjs_kes);
 	               }
 	               if (value.bpjs_ket == null) {
-	               	$("#showgambarbpjs_ket_update").attr("src","img/img_nf.png");
+	               	// $("#showgambarbpjs_ket_update").attr("src","img/img_nf.png");
 	               } else {
 	               	$("#showgambarbpjs_ket_update").attr("src","image/"+value.bpjs_ket);
 	               }
 	               
 
-	               $("#password_update").val(value.password).prop("readonly", true);
-	               $("#divisi_view_update").val(value.id_division).prop("readonly", true);
-	               $("#sub_divisi_view_update").val(value.id_territory).prop("readonly", true);
+	               $("#password_update").val(value.password).prop("disabled", true);
+	               $("#divisi_view_update").val(value.id_division).prop("disabled", true);
+	               $("#sub_divisi_view_update").val(value.id_territory).prop("disabled", true);
 	               if (value.id_company == 1) {
-	               	$("#company_view_update").val("SIP").prop("readonly", true);
+	               	$("#company_view_update").val("SIP").prop("disabled", true);
 	               }else{
-	               	$("#company_view_update").val("MSP").prop("readonly", true);
+	               	$("#company_view_update").val("MSP").prop("disabled", true);
 	               }
-	               $("#posisi_view_update").val(value.id_position).prop("readonly", true);
+	               $("#posisi_view_update").val(value.id_position).prop("disabled", true);
 	               
                }else{               		
-				   $("#nik_update").val(value.nik);
+				   	$("#nik_update").val(value.nik);
+	               	$("#name_update").val(value.name);
+	               	$("#email_update").val(value.email);
+	               	$("#date_of_entry_update").val(value.date_of_entry).prop("disabled",true);
+	               	$("#date_of_birth_update").val(value.date_of_birth).prop("disabled",true);
+	               	$("#akhir_kontrak_update").val(value.akhir_kontrak);
+	               	$("#address_update").val(value.address);
+	               	$("#address_ktp_update").val(value.alamat_ktp);
+	               	$("#phone_number_update").val(value.phone);
+	               	$("#no_ktp_update").val(value.no_ktp);
+	               	$("#no_kk_update").val(value.no_kk);
+	               	$("#no_npwp_update").val(value.no_npwp);
+	               	$("#tempat_lahir_update").val(value.tempat_lahir);
+	               	$("#email_personal_update").val(value.email_pribadi);
+	               	$("#bpjs_ket_update").val(value.bpjs_ket);
+	               	$("#bpjs_kes_update").val(value.bpjs_kes);
+	               	$("#pend_terakhir_update").val(value.pend_terakhir);
+	               	$("#name_ec_update").val(value.name_ec);
+	               	$("#phone_ec_update").val(value.phone_ec);
+	               	$("#hubungan_ec_update").val(value.hubungan_ec);
+
 				   if (!localStorage.getItem("name_update") == true) {
 	               	$("#name_update").val(value.name);
 				   	localStorage.setItem("name_update", $("#name_update").val())
@@ -3135,24 +3148,29 @@ Employees
 				   }
 
 				   if (!localStorage.getItem("date_of_entry_update") == true) {
-	               	$("#date_of_entry_update").val(value.date_of_entry).prop("readonly",true);
+	               	$("#date_of_entry_update").val(value.date_of_entry).prop("disabled",true);
 				   	localStorage.setItem("date_of_entry_update", $("#date_of_entry_update").val())
 				   }else{
 				   	localStorage.setItem("date_of_entry_update", $("#date_of_entry_update").val())
 				   }
 
 				   if (!localStorage.getItem("date_of_birth_update") == true) {
-	               	$("#date_of_birth_update").val(value.date_of_birth).prop("readonly",true);
+	               	$("#date_of_birth_update").val(value.date_of_birth).prop("disabled",true);
 				   	localStorage.setItem("date_of_birth_update", $("#date_of_birth_update").val())
 				   }else{
 				   	localStorage.setItem("date_of_birth_update", $("#date_of_birth_update").val())
 				   }
 
+				   localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
 				   if (!localStorage.getItem("akhir_kontrak_update") == true) {
-	               	$("#akhir_kontrak_update").val(value.akhir_kontrak);
 				   	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
+				   	if (value.akhir_kontrak != "" && value.akhir_kontrak != null) {
+	               		$("#akhir_kontrak_update").val(value.akhir_kontrak);
+				   	}else{
+	               		$("#akhir_kontrak_update").val(localStorage.getItem("akhir_kontrak_update"));
+				   	}
 				   }else{
-				   	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
+				   	localStorage.setItem("address_update", $("#address_update").val())
 				   }
 
 				   localStorage.setItem("address_update", $("#address_update").val())
@@ -3171,7 +3189,6 @@ Employees
 				   	if (!localStorage.getItem("addres_ktp_update") == true) {
 				   	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val());
 				   	if (value.alamat_ktp != "" && value.alamat_ktp != null) {
-				   		console.log(value.alamat_ktp)
 	               		$("#address_ktp_update").val(value.alamat_ktp);
 				   	}else{
 	               		$("#address_ktp_update").val(localStorage.getItem("address_ktp_update"));
@@ -3295,7 +3312,7 @@ Employees
 	               }
 
 	               if (value.npwp_file == null) {
-	               	$("#showgambarnpwp_update").attr("src","img/img_nf.png");
+	               	// $("#showgambarnpwp_update").attr("src","img/img_nf.png");
 	               } else {
 					   if (!localStorage.getItem("showgambarnpwp_update") == true) {
 		               	$("#showgambarnpwp_update").attr("src","image/"+value.npwp_file);
@@ -3304,7 +3321,7 @@ Employees
 	               	
 	               }
 	               if (value.ktp_file == null) {
-	               	$("#showgambarktp_update").attr("src","img/img_nf.png");
+	               	// $("#showgambarktp_update").attr("src","img/img_nf.png");
 	               } else {
 					   if (!localStorage.getItem("showgambarktp_update") == true) {
 		               	$("#showgambarktp_update").attr("src","image/"+value.ktp_file);
@@ -3312,7 +3329,7 @@ Employees
 					   }
 	               }
 	               if (value.bpjs_kes == null) {
-	               	$("#showgambarbpjs_kes_update").attr("src","img/img_nf.png");
+	               	// $("#showgambarbpjs_kes_update").attr("src","img/img_nf.png");
 	               } else {
 					   if (!localStorage.getItem("showgambarbpjs_kes_update") == true) {
 		               	$("#showgambarbpjs_kes_update").attr("src","image/"+value.bpjs_kes);
@@ -3320,7 +3337,7 @@ Employees
 					   }
 	               }
 	               if (value.bpjs_ket == null) {
-	               	$("#showgambarbpjs_ket_update").attr("src","img/img_nf.png");
+	               	// $("#showgambarbpjs_ket_update").attr("src","img/img_nf.png");
 	               } else {
 					   if (!localStorage.getItem("showgambarbpjs_ket_update") == true) {
 	               		$("#showgambarbpjs_ket_update").attr("src","image/"+value.bpjs_ket);
@@ -3333,7 +3350,7 @@ Employees
                			localStorage.setItem("password_update", $("#password_update").val())
 	               	}
 
-		            $("#roles_view_update").val(value.roles).prop("readonly", true);
+		            $("#roles_view_update").val(value.roles).prop("disabled", true);
 	              	if (!localStorage.getItem("roles_update") == true) {
 	               		if ($("#roles_user_update").val() != "") {
 			            	localStorage.setItem("roles_update",$("#roles_user_update").val())
@@ -3344,15 +3361,15 @@ Employees
 		            
 		            if (value.id_company == "1") {
 		            	
-		             	$("#company_view_update").val("SIP").prop("readonly", true);
+		             	$("#company_view_update").val("SIP").prop("disabled", true);
 	               		localStorage.setItem("company_update", 1)
 		            }else{
-		               	$("#company_view_update").val("MSP").prop("readonly", true);
+		               	$("#company_view_update").val("MSP").prop("disabled", true);
 	               		localStorage.setItem("company_update", 2)
 
 		            }
 
-		            $("#divisi_view_update").val(value.id_division).prop("readonly", true);
+		            $("#divisi_view_update").val(value.id_division).prop("disabled", true);
 	              	if (!localStorage.getItem("divisi_update") == true) {
 	               		if ($("#divisi_update").val() != "") {
 			            	localStorage.setItem("divisi_update",$("#divisi_update").val())
@@ -3361,7 +3378,7 @@ Employees
 			            }
 	               	}
 		            
-		      		$("#sub_divisi_view_update").val(value.id_territory).prop("readonly", true);
+		      		$("#sub_divisi_view_update").val(value.id_territory).prop("disabled", true);
 	              	if (!localStorage.getItem("sub_divisi_update") == true) {
 	               		if ($("#sub_divisi_update").val() != "") {
 			            	localStorage.setItem("sub_divisi_update",$("#sub_divisi_update").val())
@@ -3370,7 +3387,7 @@ Employees
 			            }
 	               	}	      
 
-		       		$("#posisi_view_update").val(value.id_position).prop("readonly", true);
+		       		$("#posisi_view_update").val(value.id_position).prop("disabled", true);
 	              	if (!localStorage.getItem("posisi_update") == true) {
 	               		if ($("#posisi_update").val() != "") {
 			            	localStorage.setItem("posisi_update",$("#posisi_update").val())
@@ -3382,9 +3399,9 @@ Employees
                }
                
             });
+        	$("#modal_update").modal("show")
           }
         });
-        $("#modal_update").modal("show")
         // .modal({
 	    //     backdrop: 'static',
 	    //     keyboard: false,
@@ -3475,7 +3492,7 @@ Employees
 					phone_ec_update:$("#phone_ec_update").val(),
 					hubungan_ec_update:$("#hubungan_ec_update").val(),
 					status_kerja_update:$("#status_kerja_update").val(),
-					akhir_kontrak_update:$("#akhir_kontrak_update").val()
+					akhir_kontrak_update:localStorage.getItem("akhir_kontrak_update")
 	            },
 	            success: function(result) {
 	                Swal.showLoading()
@@ -3633,32 +3650,32 @@ Employees
   //         success: function(result){
   
   //           $.each(result[0], function(key, value){
-  //              $("#nik_update").val(value.nik).prop("readonly", true);
-  //              $("#name_update").val(value.name).prop("readonly", true);
-  //              $("#email_update").val(value.email).prop("readonly", true);
-  //              $("#date_of_entry_update").val(value.date_of_entry).prop("readonly", true);
-  //              $("#date_of_birth_update").val(value.date_of_birth).prop("readonly", true);
-  //              $("#akhir_kontrak_update").val(value.akhir_kontrak).prop("readonly", true);
-  //              $("#address_update").val(value.address).prop("readonly", true);
-  //              $("#phone_number_update").val(value.phone).prop("readonly", true);
-  //              $("#no_ktp_update").val(value.no_ktp).prop("readonly", true);
-  //              $("#no_kk_update").val(value.no_kk).prop("readonly", true);
-  //              $("#no_npwp_update").val(value.no_npwp).prop("readonly", true);
-  //              $("#tempat_lahir_update").val(value.tempat_lahir).prop("readonly", true);
-  //              $("#email_personal_update").val(value.email_pribadi).prop("readonly", true);
-  //              $("#bpjs_ket_update").val(value.bpjs_ket).prop("readonly", true);
-  //              $("#bpjs_kes_update").val(value.bpjs_kes).prop("readonly", true);
-  //              $("#address_ktp_update").val(value.alamat_ktp).prop("readonly", true);
-  //              $("#pend_terakhir_update").val(value.pend_terakhir).prop("readonly", true);
+  //              $("#nik_update").val(value.nik).prop("disabled", true);
+  //              $("#name_update").val(value.name).prop("disabled", true);
+  //              $("#email_update").val(value.email).prop("disabled", true);
+  //              $("#date_of_entry_update").val(value.date_of_entry).prop("disabled", true);
+  //              $("#date_of_birth_update").val(value.date_of_birth).prop("disabled", true);
+  //              $("#akhir_kontrak_update").val(value.akhir_kontrak).prop("disabled", true);
+  //              $("#address_update").val(value.address).prop("disabled", true);
+  //              $("#phone_number_update").val(value.phone).prop("disabled", true);
+  //              $("#no_ktp_update").val(value.no_ktp).prop("disabled", true);
+  //              $("#no_kk_update").val(value.no_kk).prop("disabled", true);
+  //              $("#no_npwp_update").val(value.no_npwp).prop("disabled", true);
+  //              $("#tempat_lahir_update").val(value.tempat_lahir).prop("disabled", true);
+  //              $("#email_personal_update").val(value.email_pribadi).prop("disabled", true);
+  //              $("#bpjs_ket_update").val(value.bpjs_ket).prop("disabled", true);
+  //              $("#bpjs_kes_update").val(value.bpjs_kes).prop("disabled", true);
+  //              $("#address_ktp_update").val(value.alamat_ktp).prop("disabled", true);
+  //              $("#pend_terakhir_update").val(value.pend_terakhir).prop("disabled", true);
   //              $("#name_ec_update").val(value.name_ec)
   //              $("#phone_ec_update").val(value.phone_ec)
   //              $("#hubungan_ec_update").val(value.hubungan_ec)
   //              if (value.status_kerja == 'Tetap') {
-  //              	$("#status_karyawan_update").val("Karyawan Tetap").prop("readonly", true);
+  //              	$("#status_karyawan_update").val("Karyawan Tetap").prop("disabled", true);
   //              }else if (value.status_kerja == 'Kontrak') {
-  //              	$("#status_karyawan_update").val("Karyawan Kontrak").prop("readonly", true);
+  //              	$("#status_karyawan_update").val("Karyawan Kontrak").prop("disabled", true);
   //              }else{
-  //              	$("#status_karyawan_update").val("").prop("readonly", true);
+  //              	$("#status_karyawan_update").val("").prop("disabled", true);
   //              }
   //              if (value.npwp_file == null) {
   //              	$("#showgambarnpwp_update").attr("src","img/img_nf.png");
@@ -3682,27 +3699,27 @@ Employees
   //              }
                
 
-  //              $("#password_update").val(value.password).prop("readonly", true);
-  //              $("#divisi_view_update").val(value.id_division).prop("readonly", true);
-  //              $("#subdivisi_view_update").val(value.id_territory).prop("readonly", true);
+  //              $("#password_update").val(value.password).prop("disabled", true);
+  //              $("#divisi_view_update").val(value.id_division).prop("disabled", true);
+  //              $("#subdivisi_view_update").val(value.id_territory).prop("disabled", true);
   //              if (value.id_company == '1') {
-  //              	$("#company_view_update").val("SIP").prop("readonly", true);
+  //              	$("#company_view_update").val("SIP").prop("disabled", true);
   //              }else{
-  //              	$("#company_view_update").val("MSP").prop("readonly", true);
+  //              	$("#company_view_update").val("MSP").prop("disabled", true);
   //              }
-  //              $("#posisi_view_update").val(value.id_position).prop("readonly", true);
+  //              $("#posisi_view_update").val(value.id_position).prop("disabled", true);
 
                
   //           });
 
   //         }
   //       }); 
-  //       $(".btn-submit-update").hide();
-  //       $("#status_kerja_update").hide();
-  //       $("#company_update").hide();
-  //       $("#divisi_update").hide();
-  //       $("#sub_divisi_update").hide();
-  //       $("#posisi_update").hide();
+  //       $(".btn-submit-update").attr('style','display:none!important');
+  //       $("#status_kerja_update").attr('style','display:none!important');
+  //       $("#company_update").attr('style','display:none!important');
+  //       $("#divisi_update").attr('style','display:none!important');
+  //       $("#sub_divisi_update").attr('style','display:none!important');
+  //       $("#posisi_update").attr('style','display:none!important');
   //       $('#div_company_view_update').removeClass('col-md-4');
   //       $('#div_company_view_update').addClass('col-md-8');
   //       $('#div_status_karyawan_update').removeClass('col-md-4');
@@ -3765,7 +3782,7 @@ Employees
 	})
 
     $(".toggle-password").click(function() {
-        $(this).toggleClass("fa-eye fa-eye-slash");
+        $(this).toggleClass("bxs-show bxs-low-vision");
         var x = document.getElementById("password");
         if (x.type === "password") {
             x.type = "text";
@@ -3782,15 +3799,15 @@ Employees
     	$('#company').on('change', function() {
          var target=$(this).find(":selected").attr("data-target");
          var id=$(this).attr("id");
-        $("div[id^='"+id+"']").hide();
+        $("div[id^='"+id+"']").attr('style','display:none!important');
         $("#"+id+"-"+target).show();
-        $("#division-director").hide();
-        $("#division-specialist").hide();
-        $("#division-technical").hide();
-        $("#division-sales").hide();
-        $("#division-finance").hide();
-        $("#division-operation").hide();
-        $("#division-hr").hide();
+        $("#division-director").attr('style','display:none!important');
+        $("#division-specialist").attr('style','display:none!important');
+        $("#division-technical").attr('style','display:none!important');
+        $("#division-sales").attr('style','display:none!important');
+        $("#division-finance").attr('style','display:none!important');
+        $("#division-operation").attr('style','display:none!important');
+        $("#division-hr").attr('style','display:none!important');
       });
   	});
 
@@ -3798,7 +3815,7 @@ Employees
       $('#division').on('change', function() {
          var target=$(this).find(":selected").attr("data-target");
          var id=$(this).attr("id");
-        $("div[id^='"+id+"']").hide();
+        $("div[id^='"+id+"']").attr('style','display:none!important');
        $("#"+id+"-"+target).show();
        $("#"+id+"-"+target).show();
       });
@@ -3808,7 +3825,7 @@ Employees
       $('#division-msp').on('change', function() {
          var target=$(this).find(":selected").attr("data-target");
          var id=$(this).attr("id");
-        $("div[id^='"+id+"']").hide();
+        $("div[id^='"+id+"']").attr('style','display:none!important');
         $("#"+id+"-"+target).show();
       });
   	});
@@ -4087,13 +4104,13 @@ Employees
         $('#company_update').on('change', function() {
              var target=$(this).find(":selected").attr("data-target");
              var id=$(this).attr("id");
-        $("div[id^='"+id+"']").hide();
+        $("div[id^='"+id+"']").attr('style','display:none!important');
         $("#"+id+"-"+target).show();
-        $("#division_update-director").hide();
-        $("#division_update-technical").hide();
-        $("#division_update-sales").hide();
-        $("#division_update-operation").hide();
-        $("#division_update-hr").hide();
+        $("#division_update-director").attr('style','display:none!important');
+        $("#division_update-technical").attr('style','display:none!important');
+        $("#division_update-sales").attr('style','display:none!important');
+        $("#division_update-operation").attr('style','display:none!important');
+        $("#division_update-hr").attr('style','display:none!important');
       });
     });
 
@@ -4101,7 +4118,7 @@ Employees
           $('#division_update').on('change', function() {
              var target=$(this).find(":selected").attr("data-target");
              var id=$(this).attr("id");
-            $("div[id^='"+id+"']").hide();
+            $("div[id^='"+id+"']").attr('style','display:none!important');
            $("#"+id+"-"+target).show();
            $("#"+id+"-"+target).show();
           });
@@ -4111,7 +4128,7 @@ Employees
       $('#division-msp-update').on('change', function() {
          var target=$(this).find(":selected").attr("data-target");
          var id=$(this).attr("id");
-        $("div[id^='"+id+"']").hide();
+        $("div[id^='"+id+"']").attr('style','display:none!important');
        $("#"+id+"-"+target).show();
        $("#"+id+"-"+target).show();
       });
@@ -4549,7 +4566,7 @@ Employees
 	for(var i = 0 ; i<pageCount;i++){
 	    $("#pagin").append('<li><a href="#">'+(i+1)+'</a></li> ');
 	    if(i>pageSize){
-	       $("#pagin li").eq(i).hide();
+	       $("#pagin li").eq(i).attr('style','display:none!important');
 	    }
 	}
 
@@ -4560,7 +4577,7 @@ Employees
 	   slide();
 	});
 
-	prev.hide();
+	prev.attr('style','display:none!important');
 
 	var next = $("<li/>").addClass("next").html("Next").click(function(){
 	   startPage+=5;
@@ -4574,16 +4591,16 @@ Employees
 	$("#pagin li").first().find("a").addClass("current");
 
 	slide = function(sens){
-	   $("#pagin li").hide();
+	   $("#pagin li").attr('style','display:none!important');
 	   
 	   for(t=startPage;t<incremSlide;t++){
 	     $("#pagin li").eq(t+1).show();
 	   }
 	   if(startPage == 0){
 	     next.show();
-	     prev.hide();
+	     prev.attr('style','display:none!important');
 	   }else if(numberPage == totalSlidepPage ){
-	     next.hide();
+	     next.attr('style','display:none!important');
 	     prev.show();
 	   }else{
 	     next.show();
@@ -4594,7 +4611,7 @@ Employees
 	}
 
 	showPage = function(page) {
-		  $(".line-content").hide();
+		  $(".line-content").attr('style','display:none!important');
 		  $(".line-content").each(function(n) {
 		      if (n >= pageSize * (page - 1) && n < pageSize * page)
 		          $(this).show();

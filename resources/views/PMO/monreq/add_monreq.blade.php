@@ -349,8 +349,8 @@ Money Request
 
 			$(".divItemGroup[data-rowid='divPID-"+ n +"'] .divItem:last").after(append)
 
-			$(".divItem[data-rowid="+ count +"]").prev(".divItem").find('div.form-group.label_total_dinamis').hide()
-			$(".divItem[data-rowid="+ count +"]").prev(".divItem").find('div.form-group.div_total_dinamis').hide()
+			$(".divItem[data-rowid="+ count +"]").prev(".divItem").find('div.form-group.label_total_dinamis').attr('style','display:none!important')
+			$(".divItem[data-rowid="+ count +"]").prev(".divItem").find('div.form-group.div_total_dinamis').attr('style','display:none!important')
 
 			initSelect2(count,n)
     	$('.money').mask('#.##0', {reverse: true})
@@ -794,8 +794,8 @@ Money Request
 		function validationCheck(data,i){
 			if ($(data).val() != '') {
 
-				$(data).next('.invalid-feedback').hide()
-				$(data).next().next('.invalid-feedback').hide()
+				$(data).next('.invalid-feedback').attr('style','display:none!important')
+				$(data).next().next('.invalid-feedback').attr('style','display:none!important')
 				$(data).closest(".form-group").removeClass('needs-validation')
 
 				if (data.id == "input_price" || data.id == "input_qty") {
@@ -834,7 +834,7 @@ Money Request
 		}
 
 		function contentEditMonreq(count,data,dataSelect,dataRow){
-			$(".divPID:first").hide()
+			$(".divPID:first").attr('style','display:none!important')
 			// $(".divPID:first").closest(".card-body").find(".row:first-child").show()
 			var append = ''
 			//pid yang di loop

@@ -138,7 +138,7 @@
                                                             <th>Name</th>
                                                             <th>Idea</th>
                                                             <th>Business Concept</th>
-                                                            <th>Divisi</th>
+                                                            <th>Division</th>
                                                             <th>Create Date</th>
                                                             <th>Action</th>
                                                         </tr>
@@ -184,19 +184,19 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Nama</label>
+                                        <label for="">Name</label>
                                         <input type="text" class="form-control" name="nama" id="nama" disabled required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Divisi</label>
+                                        <label for="">Division</label>
                                         <input type="text" class="form-control" name="divisi" id="divisi" disabled required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Posisi</label>
+                                        <label for="">Position</label>
                                         <input type="text" class="form-control" name="posisi" id="posisi" disabled required>
                                     </div>
                                 </div>

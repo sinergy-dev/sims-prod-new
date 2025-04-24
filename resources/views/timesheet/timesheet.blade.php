@@ -201,7 +201,7 @@
         </div>
       </div>
       <div class="row">
-          <div class="col-md-4 col-xs-12">
+          <div class="col-md-3 col-xs-12">
             <div class="card card-solid mb-4">
               <div class="card-header with-border">
                 <h6 class="card-title">Event Color Definition</h6>
@@ -273,7 +273,7 @@
             </div>
 
           </div>
-          <div class="col-md-8 col-xs-12">
+          <div class="col-md-9 col-xs-12">
             <div class="card card-primary">
               <div class="card-header">
                 <div class="pull-left">
@@ -676,13 +676,13 @@
       })
 
       if (nik == '{{Auth::User()->nik}}') {
-        $('#btn_back_timesheet_spv').hide()
+        $('#btn_back_timesheet_spv').attr('style','display:none!important')
       }
 
       if(nik == "{{Auth::User()->nik}}"){
         $("#alertForRemaining").show()
       }else{
-        $("#alertForRemaining").hide()
+        $("#alertForRemaining").attr('style','display:none!important')
       }
 
       calendar = $('#calendar').fullCalendar({
@@ -1497,7 +1497,7 @@
                         $("#btn_delete_permit").show()
                         $("#btn_delete_permit").attr("onclick","deletePermit('"+ calEvent.id +"')")
                       }else{
-                        $("#btn_delete_permit").hide()
+                        $("#btn_delete_permit").attr('style','display:none!important')
                       }
                       $(".modal-title").text("Information")
                       $("#tbInfo").empty()
@@ -1552,7 +1552,7 @@
                         //   $('#textareaActivity_refer').prop("disabled",true)
                         //   $('#selectDuration_refer').prop("disabled",false)
                         //   $('#selectStatus_refer').prop("disabled",false)
-                        //   $("#ModalUpdateTimesheet").find('.modal-footer').hide()
+                        //   $("#ModalUpdateTimesheet").find('.modal-footer').attr('style','display:none!important')
                         // }else{
                           $('#selectType_refer').prop("disabled",false)
                           $('#selectLead_refer').prop("disabled",false)
@@ -1579,7 +1579,7 @@
                         //   $('#textareaActivity_refer').prop("disabled",true)
                         //   $('#selectDuration_refer').prop("disabled",false)
                         //   $('#selectStatus_refer').prop("disabled",false)
-                        //   $("#ModalUpdateTimesheet").find('.modal-footer').hide()
+                        //   $("#ModalUpdateTimesheet").find('.modal-footer').attr('style','display:none!important')
                         // }else{
                           $('#selectType_refer').prop("disabled",false)
                           $('#selectLead_refer').prop("disabled",false)
@@ -1612,7 +1612,7 @@
                     $("#btn_delete_permit").show()
                     $("#btn_delete_permit").attr("onclick","deletePermit('"+ calEvent.id +"')")
                   }else{
-                    $("#btn_delete_permit").hide()
+                    $("#btn_delete_permit").attr('style','display:none!important')
                   }
                   $(".modal-title").text("Information")
                   $("#tbInfo").empty()
@@ -1636,7 +1636,7 @@
                 }else{
                   $("#ModalUpdateTimesheet").modal("show")
                   $("#ModalUpdateTimesheet").find('.modal-footer').find(".btn-primary").removeClass("btn-primary").addClass("btn-warning").text('Update')
-                  $("#ModalUpdateTimesheet").find('.modal-footer').hide()
+                  $("#ModalUpdateTimesheet").find('.modal-footer').attr('style','display:none!important')
 
                   setSchedule(calEvent.start)
                   setDuration("refer")
@@ -1958,7 +1958,7 @@
             $('#textareaActivity').prop("disabled",true)
             $('#selectDuration').prop("disabled",true)
             $('#selectStatus').prop("disabled",true)
-            $("#ModalUpdateTimesheet").find('.modal-footer').hide()
+            $("#ModalUpdateTimesheet").find('.modal-footer').attr('style','display:none!important')
           }else{
             $('#selectType').prop("disabled",false)
             $('#selectLead').prop("disabled",false)
@@ -1968,7 +1968,7 @@
             $('#textareaActivity').prop("disabled",false)
             $('#selectDuration').prop("disabled",false)
             $('#selectStatus').prop("disabled",false)
-            $("#ModalUpdateTimesheet").find('.modal-footer').hide()
+            $("#ModalUpdateTimesheet").find('.modal-footer').attr('style','display:none!important')
           }
         }else{
           var momentDate = moment(start); // Replace with your own moment date
@@ -2014,7 +2014,7 @@
             $("#ModalAddTimesheet").find('.modal-footer').show()
           }else{
             //awalnya untuk staff di hide, tapi sesuai banyaknya permintaan jadi diaktifkan
-            // $("#ModalAddTimesheet").find('.modal-footer').hide()
+            // $("#ModalAddTimesheet").find('.modal-footer').attr('style','display:none!important')
             $("#ModalAddTimesheet").find('.modal-footer').show()
             $('#selectDuration').prop("disabled",true)
             $('#selectStatus').prop("disabled",true)
@@ -2162,7 +2162,7 @@
 
     function showHelp(params){
       if (params == 'level') {
-        $("#ModalAddTimesheet").find('.modal-footer').next("div").hide()
+        $("#ModalAddTimesheet").find('.modal-footer').next("div").attr('style','display:none!important')
 
         var appendHelp = ""
         appendHelp = appendHelp + '<div class="alert alert-secondary alert-dismissible" style="margin:15px">'
@@ -2206,7 +2206,7 @@
 
         $("#ModalAddTimesheet").find('.modal-footer').after(appendHelp)
       }else {
-        $("#ModalAddTimesheet").find('.modal-footer').next("div").hide()
+        $("#ModalAddTimesheet").find('.modal-footer').next("div").attr('style','display:none!important')
 
         var appendHelp = ""
         $.ajax({
@@ -2485,7 +2485,7 @@
             $("#selectLead_"+idValue).empty()
             $("#selectLead_"+idValue).select2("destroy")
           }
-          $("#selectLead_"+idValue).next().hide()
+          $("#selectLead_"+idValue).next().attr('style','display:none!important')
           $("#selectLead_"+idValue).closest("div").removeClass("has-error")
           $("#idAddPid_"+idValue).removeAttr("onclick","clickPIDAdjustment("+ idValue +")")
           $("#idAddPid_"+idValue).css("cursor","not-allowed")
@@ -2767,11 +2767,11 @@
     function validateInput(val,idValue){
       if ($(val).is("select")) {
           if (val.value != "") {
-              $(val).next().next().hide()
+              $(val).next().next().attr('style','display:none!important')
               $(val).closest("div").removeClass("has-error")
           }
       }else{
-        $("#"+val.id).next().hide()
+        $("#"+val.id).next().attr('style','display:none!important')
         $("#"+val.id).closest("div").removeClass("has-error")
       }
     }
@@ -3391,7 +3391,7 @@
     function clickPIDAdjustment(idValue){
       $("#divPid_"+idValue).show()
       $("#divPid_"+idValue).closest(".form-group").removeClass('has-error')
-      $("#divPid_"+idValue).closest(".form-group").find('.help-block').hide()
+      $("#divPid_"+idValue).closest(".form-group").find('.help-block').attr('style','display:none!important')
     }
 
     function closePidAdjustment(idValue){
@@ -3406,7 +3406,7 @@
         cancelButtonText: 'Cancel',
       }).then((result,data) => {
         if (result.value) {
-          $("#divPid_"+idValue).hide()
+          $("#divPid_"+idValue).attr('style','display:none!important')
           $("#inputPid_"+idValue).val("")       
         }else{
           Swal.close()
@@ -3415,7 +3415,7 @@
     }
 
     $('#ModalAddTimesheet').on('hidden.bs.modal', function () {
-      $("a[name='divPid']").hide()
+      $("a[name='divPid']").attr('style','display:none!important')
 
       $("#fieldset_0").find(".card-body").show("slow")
       $("#fieldset_0").find(".card-header").find("i").removeClass('bx bx-plus').addClass('bx bx-minus')
@@ -3642,7 +3642,7 @@
       $("#fieldset_"+i).find(".card-body").hide("slow")
 
       if ($("#fieldset_"+i).find(".card-header").next().is(":visible")) {
-        $("#fieldset_"+i).find(".card-header").next().hide()
+        $("#fieldset_"+i).find(".card-header").next().attr('style','display:none!important')
         $("#fieldset_"+i).find(".card-header").find("i").removeClass('bx bx-minus').addClass('bx bx-plus')
       }
 
@@ -3716,7 +3716,7 @@
 
     $("#ModalAddTimesheet").on("click", '.collapse-fieldset', function() {
       if ($(this).closest("div").closest(".card-header").next().is(":visible")) {
-        $(this).closest("div").closest(".card-header").next().hide()
+        $(this).closest("div").closest(".card-header").next().attr('style','display:none!important')
         $(this).find("i").removeClass('bx bx-minus').addClass('bx bx-plus')
       }else{
         $(this).closest("div").closest(".card-header").next().show()

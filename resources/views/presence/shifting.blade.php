@@ -930,7 +930,7 @@
 			var start = date.start.format("YYYY-MM-DD")
 			var end = date.end.format("YYYY-MM-DD")
 			$("#calendar").fullCalendar('addEventSource', "{{url('presence/shifting/getThisMonth')}}?start=" + start + "&end=" + end);
-			$("." + idProject).hide();
+			$("." + idProject).attr('style','display:none!important');
 			$("#listProject").fadeIn();
 		});
 	}
@@ -966,7 +966,7 @@
 			$("#buttonBack").attr("onclick","backListProject(" + idProject + ")");
 			globalIdUser = 0;
 			$("#listName").fadeIn();
-			$("#deletePlace").hide();
+			$("#deletePlace").attr('style','display:none!important');
 			$("#calendar").fullCalendar('option', {
 				editable: false,
 				droppable: false,

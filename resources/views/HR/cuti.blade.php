@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-fixedcolumns-bs5/fixedcolumns.bootstrap5.css')}}" />
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}"/>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.css" integrity="sha512-rBi1cGvEdd3NmSAQhPWId5Nd6QxE8To4ADjM2a6n0BrqQdisZ/RPUlm0YycDzvNL1HHAh1nKZqI0kSbif+5upQ==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.css" integrity="sha512-OWGg8FcHstyYFwtjfkiCoYHW2hG3PDWwdtczPAPUcETobBJOVCouKig8rqED0NMLcT9GtE4jw6IT1CSrwY87uw==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
   <style type="text/css">
     .flatpickr-day.flatpickr-disabled.hari_libur {
       color: red !important;
@@ -20,10 +20,6 @@
     #info_libur{
       text-align: left;
       padding-left: 15px;
-    }
-
-    .swal-wide{
-        width:850px !important;
     }
     
     #tooltip{
@@ -109,6 +105,14 @@
     .form-group{
       margin-bottom: 15px;
     }
+
+    .swal2-container{
+      z-index: 99999!important;
+    }
+
+    .swal2-deny{
+      display: none!important;
+    }
   </style>
 @endsection
 @section('content')
@@ -134,40 +138,40 @@
             @if($cek_cuti->status_karyawan == 'cuti')
               @if($total_cuti > 0)
               	@if($cek->status == null)
-                  <button type="button" class="btn btn-md text-bg-dark pull-right add_cuti" value="{{Auth::User()->nik}}" style="margin-left: 10px;width: 120px">
+                  <button type="button" class="btn btn-sm text-bg-dark pull-right add_cuti" value="{{Auth::User()->nik}}" style="margin-left: 10px;width: 120px">
                     <i class="bx bx-plus" style="margin-right: 5px"> </i> Permission
                   </button>
-                  <button class="btn btn-md text-bg-danger show-sisa-cuti" style="width: 150px">
-                    Show Sisa Cuti
+                  <button class="btn btn-sm text-bg-danger show-sisa-cuti" style="width: 150px">
+                    <i class="bx bx-show" style="margin-right: 5px"> </i> Show Sisa Cuti
                   </button>
   	            @elseif($cek_cuti->status == 'v' || $cek_cuti->status == 'd' || $cek_cuti->status == 'c')
-      	          <button type="button" class="btn btn-md text-bg-dark pull-right add_cuti" value="{{Auth::User()->nik}}" style="margin-left: 10px;width: 120px">
+      	          <button type="button" class="btn btn-sm text-bg-dark pull-right add_cuti" value="{{Auth::User()->nik}}" style="margin-left: 10px;width: 120px">
                     <i class="bx bx-plus" style="margin-right: 5px"> </i> Permission
                   </button>
-    	            <button class="btn btn-md text-bg-danger show-sisa-cuti" style="width: 150px">
-                    Show Sisa Cuti
+    	            <button class="btn btn-sm text-bg-danger show-sisa-cuti" style="width: 150px">
+                    <i class="bx bx-show" style="margin-right: 5px"> </i> Show Sisa Cuti
                   </button>
   	            @else
-                  <button type="button" class="btn btn-md text-bg-dark pull-right disabled disabled-permission" style="margin-left: 10px;width: 100px">
+                  <button type="button" class="btn btn-sm text-bg-dark pull-right disabled disabled-permission" style="margin-left: 10px;width: 120px">
                     <i class="bx bx-plus" style="margin-right: 5px"> </i> Permission
                   </button>
               	@endif
               @else
-                <button type="button" class="btn btn-md text-bg-dark pull-right disabled disabled-permission" style="margin-left: 10px;width: 100px">
+                <button type="button" class="btn btn-sm text-bg-dark pull-right disabled disabled-permission" style="margin-left: 10px;width: 120px">
                   <i class="bx bx-plus" style="margin-right: 5px"> </i> Permission
                 </button>
               @endif
             @endif
               
             <!-- <a href="{{action('HRGAController@cutipdf')}}" target="_blank" onclick="print()">
-              <button class="btn btn-md btn-danger disabled" style="width: 120px">
+              <button class="btn btn-sm btn-danger disabled" style="width: 120px">
                 <i class="bx bx-file-pdf-o" style="margin-right: 5px"></i>Preview PDF
               </button>
             </a>  -->
-            <button class="btn btn-md text-bg-primary" id="btnConfigPublicHoliday" style="margin-left: 10px;display: none!important;">
+            <button class="btn btn-sm text-bg-primary" id="btnConfigPublicHoliday" style="margin-left: 10px;display: none!important;">
               <i class="bx bx-plus" style="margin-right: 5px"></i>Public Holiday (tambahan)
             </button>
-           <!--  <button class="btn btn-md text-bg-primary" id="btnSetCuti" style="margin-left: 10px; display: none!important;" data-bs-toggle="modal" data-bs-target="#setting_cuti">
+           <!--  <button class="btn btn-sm text-bg-primary" id="btnSetCuti" style="margin-left: 10px; display: none!important;" data-bs-toggle="modal" data-bs-target="#setting_cuti">
               <i class="bx bx-wrench" style="margin-right: 5px"></i>Total Cuti
             </button> -->
             <select class="form-control text-bg-info pull-left" style="width: 100px; margin-right: 10px; display: none!important;" id="filter_com">
@@ -277,7 +281,7 @@
                       </select>
                     </div>
 
-                    <button class="btn btn-md text-bg-success" style="float: left;margin-left: 15px" onclick="exportExcel()">&nbspExport to <i class="bx bx-download"></i></button>
+                    <button class="btn btn-sm text-bg-success" style="float: left;margin-left: 15px" onclick="exportExcel()">&nbspExport to <i class="bx bx-download"></i></button>
                     </div>
                   
                 </div>
@@ -310,60 +314,60 @@
     <div class="modal fade" id="modalCuti" role="dialog">
       <div class="modal-dialog modal-md">
         <!-- Modal content-->
-        <div class="modal-content modal-md">
+        <div class="modal-content">
           <div class="modal-header">
             <h6 class="modal-title">Leaving Permit</h6>
           </div>
           <div class="modal-body">
               @csrf
               <form id="form-submit-cuti">
-              <div class="form-group" style="display: none!important">
-                <label>Sisa Cuti : </label>
-                <span name="sisa_cuti" id="sisa_cuti"></span><!-- 
-                <input type="text" name="sisa_cuti" id="sisa_cuti" style="width: 50px;color: black;text-decoration: bold" class="form-control sisa_cuti" value="" disabled=""> -->
-              </div>
-              <div class="row">
-                <div class="col-md-9">
-                  <div class="form-group">
-                      <label>Date</label>
-                      <div class="input-group date form-group">
-                        <input type="text" class="form-control" id="date_start" name="date_start" autocomplete="Off" required>
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i><span class="count"></span></span>
-                      </div>
+                <div class="form-group" style="display: none!important">
+                  <label>Sisa Cuti : </label>
+                  <span name="sisa_cuti" id="sisa_cuti"></span><!-- 
+                  <input type="text" name="sisa_cuti" id="sisa_cuti" style="width: 50px;color: black;text-decoration: bold" class="form-control sisa_cuti" value="" disabled=""> -->
+                </div>
+                <div class="row">
+                  <div class="col-md-9">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="date_start" name="date_start" required>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Available Days</label>
+                        <input type="text" class="form-control" id="avaliableDays" disabled="true">
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                      <label>Available Days</label>
-                      <input type="text" class="form-control" id="avaliableDays" disabled="true">
-                  </div>
+
+                <div class="form-group">
+                  <label>Jenis Cuti</label><br>
+                    <input type="radio" name="jenis_cuti" value="tahunan" required=""> Tahunan<br>
+                    <input type="radio" name="jenis_cuti" value="melahirkan"> Melahirkan<br>
+                    <input type="radio" name="jenis_cuti" value="other"> Other<br> 
                 </div>
-              </div>
 
-              <div class="form-group">
-                <label>Jenis Cuti</label><br>
-                  <input type="radio" name="jenis_cuti" value="tahunan" required=""> Tahunan<br>
-                  <input type="radio" name="jenis_cuti" value="melahirkan"> Melahirkan<br>
-                  <input type="radio" name="jenis_cuti" value="other"> Other<br> 
-              </div>
+                <div id="tooltip">
+                Anda melewati batas sisa cuti!
+                </div>
 
-              <div id="tooltip">
-              Anda melewati batas sisa cuti!
-              </div>
+                <div class="form-group">
+                    <label>Note</label>
+                    <textarea class="form-control" type="text" id="reason" name="reason"></textarea>
+                </div>
 
-              <div class="form-group">
-                  <label>Note</label>
-                  <textarea class="form-control" type="text" id="reason" name="reason"></textarea>
-              </div>
-
-              <input type="" name="lihat_hasil" id="lihat_hasil" class="lihat_hasil" hidden>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-times"></i>&nbspClose</button>
-               <!--  <button type="submit" class="btn btn-primary" id="btn-save" value="add"  data-bs-dismiss="modal" >Submit</button>
-                <input type="hidden" id="lead_id" name="lead_id" value="0"> -->
-                <button type="button" class="btn btn-primary btn-submit disabled" data-placement="top" id="btn-submit"><i class="bx bx-check"> </i>&nbspSubmit</button>
-              </div>
+                <input type="" name="lihat_hasil" id="lihat_hasil" class="lihat_hasil" hidden>
+              
               </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
+           <!--  <button type="submit" class="btn btn-sm btn-primary" id="btn-save" value="add"  data-bs-dismiss="modal" >Submit</button>
+            <input type="hidden" id="lead_id" name="lead_id" value="0"> -->
+            <button type="button" class="btn btn-sm btn-primary btn-submit disabled" data-placement="top" id="btn-submit"><i class="bx bx-check"> </i>&nbspSubmit</button>
           </div>
         </div>
       </div>
@@ -404,11 +408,10 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i><span class="count"></span></span>
                   </div> 
               </div>
-               
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal"><i class=" fa fa-times"></i>&nbspClose</button>
-                <button type="submit" class="btn btn-primary btn-sm btn-submit-update" id="btn-submit-update"><i class="fa fa-check"> </i>&nbspSubmit</button>
-              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-outline-secondary btn-sm" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
+            <button type="button" class="btn btn-sm btn-primary btn-sm btn-submit-update" id="btn-submit-update"><i class="bx bx-check"> </i>&nbspSubmit</button>
           </div>
         </div>
       </div>
@@ -457,8 +460,8 @@
                 </div>      
                  
                 <div class="modal-footer">
-                  <button type="submit" id="submit_approve" disabled class="btn btn-success"><i class=" fa fa-check"></i>&nbspApprove</button>
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class=" fa fa-times"></i>&nbspClose</button>
+                  <button type="submit" id="submit_approve" disabled class="btn btn-sm btn-success"><i class=" fa fa-check"></i>&nbspApprove</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" fa fa-times"></i>&nbspClose</button>
                 </div>
             </div>
           </div>
@@ -504,7 +507,7 @@
    
                  
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-times"></i>&nbspClose</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
                 </div>
             </form>
             </div>
@@ -527,8 +530,8 @@
                     <label>Masukkan Pengurangan Jatah Cuti Tahun ini (optional)</label>
                     <input type="" name="pengurangan_cuti" id="pengurangan_cuti" class="form-control" style="width: 60px">
                 </div>
-                <button class="btn btn-primary btn-xs" style="width: 60px">Submit</button>
-                <button type="button" class="btn btn-outline-secondary btn-xs" data-bs-dismiss="modal" style="width: 60px"><i class=" fa fa-times"></i>&nbspClose</button>
+                <button class="btn btn-sm btn-primary btn-xs" style="width: 60px">Submit</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-xs" data-bs-dismiss="modal" style="width: 60px"><i class=" fa fa-times"></i>&nbspClose</button>
             </form> -->
             <form method="POST" action="{{url('/setting_total_cuti')}}">
             <div class="form-group">
@@ -559,13 +562,13 @@
                   </div>
                   <div class="col-md-4">
                     <label>Lama Kerja</label>
-                    <input readonly="" type="" name="lama_kerja" id="lama_kerja" class="form-control">
+                    <input disabled="" type="" name="lama_kerja" id="lama_kerja" class="form-control">
                     <label>Tahun Masuk Kerja</label>
-                    <input readonly="" type="" name="tahun_masuk" id="tahun_masuk" class="form-control">
+                    <input disabled="" type="" name="tahun_masuk" id="tahun_masuk" class="form-control">
                   </div>
                   <div class="col-md-2">
                     <label>Sisa Cuti</label>
-                    <input type="" readonly="" name="current_cuti" id="current_cuti" class="form-control" style="width: 60px">
+                    <input type="" disabled="" name="current_cuti" id="current_cuti" class="form-control" style="width: 60px">
                   </div>
                   <div class="col-md-2">
                     <label>Set Cuti</label>
@@ -575,8 +578,8 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-primary btn-xs">Submit</button>
-            <button type="button" class="btn btn-outline-secondary btn-xs" data-bs-dismiss="modal" style="width: 60px"><i class=" fa fa-times"></i>&nbspClose</button>
+            <button class="btn btn-sm btn-primary btn-xs">Submit</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary btn-xs" data-bs-dismiss="modal" style="width: 60px"><i class=" fa fa-times"></i>&nbspClose</button>
           </div>
           </form>
         </div>
@@ -602,8 +605,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>&nbspClose</button>
-            <button type="submit" class="btn btn-success" onclick="submitConfigCuti()"><i class="fa fa-check"></i>&nbsp Submit</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>&nbspClose</button>
+            <button type="submit" class="btn btn-sm btn-success" onclick="submitConfigCuti()"><i class="fa fa-check"></i>&nbsp Submit</button>
           </div>
         </div>
       </div>
@@ -627,8 +630,8 @@
             <!-- </form> -->
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>&nbspClose</button>
-              <button type="button" class="btn btn-success-absen" onclick="submitDecline()"><i class="fa fa-check"></i>&nbsp Decline</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>&nbspClose</button>
+              <button type="button" class="btn btn-sm btn-success-absen" onclick="submitDecline()"><i class="fa fa-check"></i>&nbsp Decline</button>
             </div>
           </div>
         </div>
@@ -645,13 +648,13 @@
                 @csrf
               <div class="form-group">
                 <label for="sow">Decline reason</label>
-                <textarea name="keterangan_decline" id="keterangan_decline" class="form-control" readonly rows="5" style="resize: none;overflow-y: auto;"></textarea>
+                <textarea name="keterangan_decline" id="keterangan_decline" class="form-control" disabled rows="5" style="resize: none;overflow-y: auto;"></textarea>
               </div>
             </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>&nbspClose</button><!-- 
-              <button type="submit" class="btn btn-success-absen"><i class="fa fa-check"></i>&nbsp Decline</button> -->
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>&nbspClose</button><!-- 
+              <button type="submit" class="btn btn-sm btn-success-absen"><i class="fa fa-check"></i>&nbsp Decline</button> -->
             </div>
           </div>
         </div>
@@ -700,7 +703,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
@@ -710,7 +713,7 @@
 @section('scriptImport')
   <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
   <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.js" integrity="sha512-FbWDiO6LEOsPMMxeEvwrJPNzc0cinzzC0cB/+I2NFlfBPFlZJ3JHSYJBtdK7PhMn0VQlCY1qxflEG+rplMwGUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
   <script src="{{asset('assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js" integrity="sha512-mh+AjlD3nxImTUGisMpHXW03gE6F4WdQyvuFRkjecwuWLwD2yCijw4tKA3NsEFpA1C3neiKhGXPSIGSfCYPMlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -812,17 +815,15 @@
               var year_now = new Date().getFullYear();
               var swal_html = ''
               
-              swal_html = swal_html + '<div class="panel" style="background:aliceblue;font-weight:bold">'
-              swal_html = swal_html + '  <div class="panel-heading panel-info text-center btn-info">'
-              swal_html = swal_html + '    <b>Berikut Info total cuti : </b>'
-              swal_html = swal_html + '  </div>'
-              swal_html = swal_html + '  <div class="panel-body">'
-              swal_html = swal_html + '    <table class="text-center">'
-              swal_html = swal_html + '      <b>'
-              swal_html = swal_html + '        <p style="font-weight:bold">Total cuti ' + year_before + ' (*digunakan s/d 31 Maret) : ' + result[0].cuti + '</p>'
-              swal_html = swal_html + '        <p style="font-weight:bold">Total cuti ' + year_now + ' : ' + result[0].cuti2 + '</p>'
-              swal_html = swal_html + '      </b>'
-              swal_html = swal_html + '    </table>'
+              swal_html = swal_html + '<div class="card">'
+              swal_html = swal_html + '  <div class="card-body">'
+              swal_html = swal_html + '     <div class="card-title">'
+              swal_html = swal_html + '      <h5>Berikut info total cuti : </h5>'
+              swal_html = swal_html + '     </div>'
+              swal_html = swal_html + '     <ul>'
+              swal_html = swal_html + '        <li style="font-weight:bold;text-align:left">Tahun '+ year_before + ' (*digunakan s/d 31 Maret) : ' + result[0].cuti + '</li>'
+              swal_html = swal_html + '        <li style="font-weight:bold;text-align:left">Tahun ' + year_now + ' : ' + result[0].cuti2 + '</li>'
+              swal_html = swal_html + '     </ul>'
               swal_html = swal_html + '  </div>'
               swal_html = swal_html + '  </div>'
               swal_html = swal_html + '</div>'
@@ -850,7 +851,10 @@
               // swal_html = swal_html + '  </div>'
               // swal_html = swal_html + '  </div>'
               // swal_html = swal_html + '</div>'
-              swal.fire({title: "Hai, " + result[0].name, html: swal_html})
+              Swal.fire({
+                html: swal_html,
+                showCancelButton: false,
+              })
             },
           });
         });
@@ -932,14 +936,14 @@
             var daysOfWeekHighlighted = [0,6]
           }
 
-          const formattedDisableDate = disableDate.map(date => moment(date, "MM/DD/YYYY").format("YYYY-MM-DD"));
-          const formattedLiburNasional = hari_libur_nasional.map(date => moment(date, "MM/DD/YYYY").format("YYYY-MM-DD"));
+          const formattedDisableDate = disableDate.map(date => moment(date, "DD/MM/YYYY").format("YYYY-MM-DD"));
+          const formattedLiburNasional = hari_libur_nasional.map(date => moment(date, "DD/MM/YYYY").format("YYYY-MM-DD"));
 
           changeMonth = true
           flatpickr("#date_start", {
-              mode: "multiple", // Enable multi-date selection
-              dateFormat: "d/m/Y", // Equivalent to moment().format("L")
-              minDate: "today", // Start date from today
+              mode: "multiple",
+              dateFormat: "Y-m-d",
+              minDate: "today",
               disableMobile: true, // Ensures proper UI on mobile
               weekNumbers: true, // Shows week numbers
               locale: {
@@ -972,25 +976,25 @@
                 }
               },
               onChange: function(selectedDates, dateStr, instance) {
-                  $("#lihat_hasil").val(selectedDates.length);
-                  
-                  let cutis = parseFloat($("#sisa_cuti").text());
-                  let cutiss = parseFloat($(".lihat_hasil").val());
+                $("#lihat_hasil").val(selectedDates.length);
+                
+                let cutis = parseFloat($("#sisa_cuti").text());
+                let cutiss = parseFloat($(".lihat_hasil").val());
 
-                  $("#avaliableDays").val(result.parameterCuti[0].total_cuti - cutiss);
+                $("#avaliableDays").val(result.parameterCuti[0].total_cuti - cutiss);
 
-                  if (selectedDates.length > 0) {
-                      if (cutis >= cutiss) {
-                          $(".btn-submit").removeClass("disabled");
-                          $("#tooltip").hide();
-                      } else {
-                          $(".btn-submit").addClass("disabled");
-                          $("#tooltip").show();
-                      }
+                if (selectedDates.length > 0) {
+                  if (cutis >= cutiss) {
+                    $(".btn-submit").removeClass("disabled");
+                    $("#tooltip").attr('style','display:none!important');
                   } else {
-                      $(".btn-submit").addClass("disabled");
-                      $("#tooltip").show().text("Mohon untuk menginput tanggal cuti Anda!");
+                    $(".btn-submit").addClass("disabled");
+                    $("#tooltip").show();
                   }
+                } else {
+                  $(".btn-submit").addClass("disabled");
+                  $("#tooltip").show().text("Mohon untuk menginput tanggal cuti Anda!");
+                }
               },
               onMonthChange: function(selectedDates, dateStr, instance) {
                 changeMonth = false;
@@ -1036,72 +1040,6 @@
       }
 
       $("#modalCuti").modal("show");
-
-      $(document).on('click',"button[id^='btn-submit']",function(e){
-          if($("input[name='jenis_cuti']:checked").val()){
-            Swal.fire({
-            title: 'Are you sure?',
-            text: "Submit your leaving permit",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No',
-            }).then((result) => {
-              if (result.value) {
-                Swal.fire({
-                  title: 'Please Wait..!',
-                  text: "It's sending..",
-                  allowOutsideClick: false,
-                  allowEscapeKey: false,
-                  allowEnterKey: false,
-                  customClass: {
-                      popup: 'border-radius-0',
-                  },
-                  didOpen: () => {
-                      Swal.showLoading()
-                  }
-                })
-                $.ajax({
-                  type:"POST",
-                  url:"{{url('/store_cuti')}}",
-                  data:{
-                     _token: "{{ csrf_token() }}",
-                    reason:$("#reason").val(),
-                    jenis_cuti:$("input[name='jenis_cuti']:checked").val(),
-                    date_start:$("#date_start").val(),
-                    reason_edit:$("#reason_edit").val(),
-                    status_update:'R',
-                  },
-                  success: function(result){
-                    Swal.showLoading()
-                    Swal.fire(
-                      'Successfully!',
-                      'Leaving permit has been created.',
-                      'success'
-                    ).then((result) => {
-                      if (result.value) {
-                        $("#modalCuti").modal('hide');
-                      }
-                    }),setTimeout(function(){
-                      $('#datatablew').DataTable().ajax.url("{{url('get_cuti_byMonth')}}").load();
-                    },2000);
-                  }
-                })
-              }else if(result.dismiss === Swal.DismissReason.cancel){
-                $("#modalCuti").modal('hide');
-              }
-            }) 
-          }else{
-            // $("input[name='jenis_cuti']").prop('required',true);
-            Swal.fire(
-              'canceled',
-              'Silahkan pilih jenis cuti lebih dahulu!',
-              'error'
-              )
-          }
-      })
     })
 
     $("#btnConfigPublicHoliday").click(function(){
@@ -1153,6 +1091,83 @@
       $("#config_cuti").modal("show")
     })
 
+    $(document).on('click',"button[id^='btn-submit']",function(e){
+      if($("input[name='jenis_cuti']:checked").is(":checked") == true){
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "Submit your leaving permit",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
+        }).then((result) => {
+          $("#date_start")[0]._flatpickr.close(); 
+
+          if (result.value) {
+            Swal.fire({
+              title: 'Please Wait..!',
+              text: "It's sending..",
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              allowEnterKey: false,
+              customClass: {
+                  popup: 'border-radius-0',
+              },
+              didOpen: () => {
+                  Swal.showLoading()
+                  $("#date_start")[0]._flatpickr.close(); 
+              }
+            })
+            $.ajax({
+              type:"POST",
+              url:"{{url('/store_cuti')}}",
+              data:{
+                 _token: "{{ csrf_token() }}",
+                reason:$("#reason").val(),
+                jenis_cuti:$("input[name='jenis_cuti']:checked").val(),
+                date_start:$("#date_start").val(),
+                reason_edit:$("#reason_edit").val(),
+                status_update:'R',
+              },
+              success: function(result){ 
+                Swal.showLoading()
+                Swal.fire(
+                  'Successfully!',
+                  'Leaving permit has been created.',
+                  'success'
+                ).then((result) => {
+                  if (result.value) {
+                    $("#modalCuti").modal('hide');
+                    $("#date_start")[0]._flatpickr.close(); 
+
+                  }
+                }),setTimeout(function(){
+                  $("#date_start")[0]._flatpickr.close(); 
+                  $('#datatablew').DataTable().ajax.url("{{url('get_cuti_byMonth')}}").load();
+                },2000);
+              }
+            })
+          }else if(result.dismiss === Swal.DismissReason.cancel){
+            Swal.close()
+            $("#date_start")[0]._flatpickr.close(); 
+          }
+        }) 
+
+        $("#date_start")[0]._flatpickr.close(); 
+
+      }else{
+        // $("input[name='jenis_cuti']").prop('required',true);
+        Swal.fire({
+          title:'canceled',
+          text:'Silahkan pilih jenis cuti lebih dahulu!',
+          icon:'warning',
+          showCancelButton: true,
+        })
+      }
+    })
+
     $(document).on('click',"button[class^='approve_date']",function(e) {
         $.ajax({
           type:"GET",
@@ -1174,7 +1189,7 @@
                   $('#tanggal_cuti').empty();
 
                   table = table + '<tr>';
-                  table = table + '<td width="5%">' + '<input type="checkcard" class="check_date" name="check_date[]"' +'</td>';
+                  table = table + '<td width="5%">' + '<input type="checkbox" class="check_date input-form-check" name="check_date[]"' +'</td>';
                   table = table + '<td hidden>' + value.idtb_cuti_detail +'</td>';
                   table = table + '<td>' + moment(value.date_off).format('LL'); +'</td>';
                   table = table + '</tr>';
@@ -1213,7 +1228,7 @@
                   var accept = [];
                   var selector1 = '#detil_cuy tr input:checked'; 
                   var reject = [];
-                  var selector2 = '#detil_cuy tr input:checkcard:not(:checked)'
+                  var selector2 = '#detil_cuy tr input:checkbox:not(:checked)'
                   $.each($(selector1), function(idx, val) {
                     var id = $(this).parent().siblings(":first").text();
                     accept.push(id);
@@ -1229,7 +1244,7 @@
             }
         });
 
-            $("#detail_cuti").modal("show");
+        $("#detail_cuti").modal("show");
     });
     
     $(document).on('click',"button[id^='btn-edit']",function(e) {
@@ -1258,48 +1273,50 @@
                   disableDate.push(moment(value).format("L"))
               })
 
-              $("#Dates").flatpickr({
-                weekStart: 1,
-                // daysOfWeekDisabled: "0,6",
-                daysOfWeekHighlighted: [0,6],
-                minDate:'0',
-                startDate: moment().format("YYYY-MM-DD"),
-                format: 'yyyy-mm-dd',
-                todayHighlight: true,
-                multidate: true,
-                datesDisabled: disableDate,
-                beforeShowDay: function(date){
-                  var index = hari_libur_nasional.indexOf(moment(date).format("L"))
-                  if(index > 0){
-                    return {
-                      enabled: false,
-                      tooltip: hari_libur_nasional_tooltip[index],
-                      classes: 'hari_libur'
-                    };
-                  } else if(disableDate.indexOf(moment(date).format("L")) > 0) {
-                    return {
-                      enabled: false,
-                      tooltip: 'Cuti Pribadi',
-                    };
+              flatpickr("#Dates", {
+                mode: "multiple",
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                defaultDate: array,
+                disable: [
+                  function(date) {
+                    const formatted = moment(date).format("L"); // MM/DD/YYYY
+                    const formattedISO = moment(date).format("YYYY-MM-DD");
+
+                    const indexHoliday = hari_libur_nasional.indexOf(formatted);
+                    const isPersonalLeave = disableDate.includes(formattedISO);
+
+                    if (indexHoliday >= 0) {
+                      // Apply custom class using Flatpickr hook
+                      date.tooltip = hari_libur_nasional_tooltip[indexHoliday];
+                      return true; // Disable the date
+                    }
+
+                    if (isPersonalLeave) {
+                      return true;
+                    }
+
+                    return false; // Enable by default
                   }
-                },
-              }).flatpickr('setDate', array).on('changeDate', function(e) {
-                if (e.dates.length > 0) {
-                  if (parseFloat(array.length) >= parseFloat(e.dates.length)) {
-                    e.preventDefault();     
-                    $(".btn-submit-update").prop('disabled', false);
-                    $('#Dates').tooltip("disable");
-                  } else if (parseFloat(array.length) < parseFloat(e.dates.length)) {
-                    $(".btn-submit-update").prop('disabled', true);
-                    $('#Dates').tooltip("enable");
+                ],
+                onChange: function(selectedDates, dateStr, instance) {
+                  const numSelected = selectedDates.length;
+
+                  if (numSelected === 0) {
+                    $(".btn-submit-update").prop("disabled", true);
+                    $("#Dates")
+                      .attr('data-bs-toggle', 'tooltip') // make sure this attribute is there
+                      .attr('title', 'Tanggal harus diisi!')
+                      .tooltip('dispose')
+                      .tooltip({ trigger: 'hover' }) // or 'manual' if you want to control it
+                      .tooltip('show');
+                  } else if (parseFloat(array.length) < numSelected) {
+                    $(".btn-submit-update").prop("disabled", true);
+                    $("#Dates").tooltip("enable");
+                  } else {
+                    $(".btn-submit-update").prop("disabled", false);
+                    $("#Dates").tooltip("disable");
                   }
-                }else{
-                  $(".btn-submit-update").prop('disabled', true);
-                  $('#Dates').attr('title', 'Mohon untuk menginput tanggal cuti Anda!')
-                  .tooltip('fixTitle')
-                  .tooltip('enable');
-                  // $('#Dates').tooltip("enable");
-                  // $('#Dates').prop('tooltipText', 'Mohon untuk menginput tanggal cuti Anda!');
                 }
               });
             });
@@ -1307,72 +1324,70 @@
         $("#modalCuti_edit").modal("show");
         }
       });
-
-      $(document).on('click',"button[id^='btn-submit-update']",function(e){
-        
-        if ($("#Dates").val() == '') {
-          var dates_after = 'kosong';
-        }else{
-          var dates_after = $("#Dates").val();
-        }
-
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "Update your leaving permite",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes',
-          cancelButtonText: 'No',
-        }).then((result) => {
-          if (result.value) {
-            Swal.fire({
-              title: 'Please Wait..!',
-              text: "It's sending..",
-              allowOutsideClick: false,
-              allowEscapeKey: false,
-              allowEnterKey: false,
-              customClass: {
-                  popup: 'border-radius-0',
-              },
-              didOpen: () => {
-                  Swal.showLoading()
-              }
-            })
-            $.ajax({
-              type:"POST",
-              url:"{{url('/update_cuti')}}",
-              data:{
-                 _token: "{{ csrf_token() }}",
-                id_cuti:$("#id_cuti").val(),
-                dates_after:dates_after,
-                dates_before:$("#Dates_update").val(),
-                reason_edit:$("#reason_edit").val(),
-                status_update:'R',
-              },
-              success: function(result){
-                Swal.showLoading()
-                Swal.fire(
-                  'Updated!',
-                  'Leaving permite has been update.',
-                  'success'
-                ).then((result) => {
-                  if (result.value) {
-                    $("#modalCuti_edit").modal('hide');
-                  }
-                }),
-                setTimeout(function(){
-                  $('#datatablew').DataTable().ajax.url("{{url('get_cuti_byMonth')}}").load();
-                },2000);
-              }
-            })
-          }
-        })        
-      })
-
     });
 
+    $(document).on('click',"button[id^='btn-submit-update']",function(e){
+      if ($("#Dates").val() == '') {
+        var dates_after = 'kosong';
+      }else{
+        var dates_after = $("#Dates").val();
+      }
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Update your leaving permite",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire({
+            title: 'Please Wait..!',
+            text: "It's sending..",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false,
+            customClass: {
+                popup: 'border-radius-0',
+            },
+            didOpen: () => {
+                Swal.showLoading()
+            }
+          })
+          $.ajax({
+            type:"POST",
+            url:"{{url('/update_cuti')}}",
+            data:{
+               _token: "{{ csrf_token() }}",
+              id_cuti:$("#id_cuti").val(),
+              dates_after:dates_after,
+              dates_before:$("#Dates_update").val(),
+              reason_edit:$("#reason_edit").val(),
+              status_update:'R',
+            },
+            success: function(result){
+              Swal.showLoading()
+              Swal.fire({
+                title: 'Updated!',
+                text: 'Leaving permite has been update.',
+                icon: 'success',
+                showCancelButton: false
+              }).then((result) => {
+                if (result.value) {
+                  $("#modalCuti_edit").modal('hide');
+                }
+              }),
+              setTimeout(function(){
+                $('#datatablew').DataTable().ajax.url("{{url('get_cuti_byMonth')}}").load();
+              },2000);
+            }
+          })
+        }
+      })        
+    })
 
     function edit_cuti(id_cuti,date_start,date_end,reason_leave){
       $("#id_cuti").val(id_cuti);
@@ -1634,14 +1649,14 @@
                   if (userNik == row.nik) {
                       if (row.status === 'n' || row.status === 'R') {
                           return `
-                              <button type="button" class="btn btn-xs btn-primary" style="width: 70px" id="btn-edit" data-bs-toggle="tooltip" title="Edit" value="${row.id_cuti}">
-                                  <i class="bx bx-edit" style="margin-right: 5px"></i>Edit
+                              <button type="button" class="btn btn-sm btn-primary" id="btn-edit" data-bs-toggle="tooltip" title="Edit" value="${row.id_cuti}">
+                                  <i class="bx bx-edit"></i>Edit
                               </button>
-                              <button type="button" class="btn btn-xs btn-danger btn_delete" style="margin-left: 10px; width: 70px" data-bs-toggle="tooltip" title="Delete" value="${row.id_cuti}">
-                                  <i class="bx bx-trash" style="margin-right: 5px"></i>Delete
+                              <button type="button" class="btn btn-sm btn-danger btn_delete" data-bs-toggle="tooltip" title="Delete" value="${row.id_cuti}">
+                                  <i class="bx bx-trash"></i>Delete
                               </button>
-                              <button type="button" class="btn btn-xs btn-success btn_fu" style="margin-left: 10px; width: 80px" data-bs-toggle="tooltip" title="Follow Up Cuti" value="${row.id_cuti}">
-                                  <i class="bx bx-paper-plane" style="margin-right: 5px"></i>Follow Up
+                              <button type="button" class="btn btn-sm btn-success btn_fu" data-bs-toggle="tooltip" title="Follow Up Cuti" value="${row.id_cuti}">
+                                  <i class="bx bx-paper-plane"></i>Follow Up
                               </button>`;
                       } else {
                           return '-';
@@ -1649,12 +1664,12 @@
                   } else {
                       if (row.status === 'n' || row.status === 'R') {
                           return `
-                              <button name="approve_date" id="approve_date" class="approve_date btn btn-success btn-xs" style="width: 60px" value="${row.id_cuti}">Approve</button>
-                              <button class="btn btn-xs btn-danger btn_decline" style="width: 60px; margin-left: 5px" value="${row.id_cuti}" onclick="decline_cuti(${row.id_cuti})">Decline</button>`;
+                              <button name="approve_date" id="approve_date" class="approve_date btn btn-sm btn-success" style="width: 60px" value="${row.id_cuti}">Approve</button>
+                              <button class="btn btn-sm btn-danger btn_decline" style="width: 60px;" value="${row.id_cuti}" onclick="decline_cuti(${row.id_cuti})">Decline</button>`;
                       } else {
                           return `
-                              <button class="btn btn-xs btn-success disabled" style="width: 60px">Approve</button>
-                              <button class="btn btn-xs btn-danger disabled" style="width: 60px; margin-left: 5px">Decline</button>`;
+                              <button class="btn btn-sm btn-success disabled" style="width: 60px">Approve</button>
+                              <button class="btn btn-sm btn-danger disabled" style="width: 60px; margin-left: 5px">Decline</button>`;
                       }
                   }
               },
@@ -1718,7 +1733,7 @@
                 defaultContent: "-",
                 render: function (data, type, row) {
                     return data !== "-" ? `
-                        <button name="date_off" id="date_off" class="date_off btn btn-link p-0" value="${data}" style="border: none;">
+                        <button name="date_off" id="date_off" class="date_off btn btn-sm btn-link p-0" value="${data}" style="border: none;">
                             ${row.days} Days <i class="bx bx-zoom-in ms-1"></i>
                         </button>` : "-";
                 }
@@ -1856,7 +1871,8 @@
                   'success'
                 ),                 
                 setTimeout(function(){
-                    $('#datatablew').DataTable().ajax.url("{{url('get_cuti_byMonth')}}").load();
+                  location.reload()
+                  $('#datatablew').DataTable().ajax.url("{{url('get_cuti_byMonth')}}").load();
                 },2000);
               }
             })

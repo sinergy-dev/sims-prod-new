@@ -248,24 +248,28 @@ Detail Project
 		}
 
 		.select2{
-          width:100%!important;
-      	}
+      width:100%!important;
+  	}
 
-      	.form-group{
-      		margin-bottom: 15px;
-      	}
+  	.form-group{
+  		margin-bottom: 15px;
+  	}
 
-      	.gantt_container {
-            height: 600px;
-        }
+  	.gantt_container {
+        height: 600px;
+    }
 
-        .gantt_cal_light {
-	      position: fixed !important; /* Fixed positioning to center on the screen */
-	      top: 50% !important;       /* Move to the middle vertically */
-	      left: 50% !important;      /* Move to the middle horizontally */
-	      transform: translate(-50%, -50%) !important; /* Center it exactly */
-	      z-index: 10001;            /* Ensure it stays above the overlay */
-	  	}
+    .gantt_cal_light {
+	    position: fixed !important; /* Fixed positioning to center on the screen */
+	    top: 50% !important;       /* Move to the middle vertically */
+	    left: 50% !important;      /* Move to the middle horizontally */
+	    transform: translate(-50%, -50%) !important; /* Center it exactly */
+	    z-index: 10001;            /* Ensure it stays above the overlay */
+		}
+
+		.swal2-container{
+			z-index: 99999!important;
+		}
 
 	/*	.gantt_cal_cover {
 		    z-index: 10000; /* Ensure the overlay is below the lightbox */
@@ -1401,9 +1405,9 @@ Detail Project
     		}
 
     		if (window.location.search.split("=")[1] == "supply_only") {
-    			$("#btnFinalProject").hide()
-    			$("#btnAddWeekly").hide()
-    			$("#btnSendCSS").hide()
+    			$("#btnFinalProject").attr('style','display:none!important')
+    			$("#btnAddWeekly").attr('style','display:none!important')
+    			$("#btnSendCSS").attr('style','display:none!important')
     		}
     	}
     })
@@ -1476,8 +1480,8 @@ Detail Project
     function btnBack(){
     	console.log(firstPage)
     	if (firstPage) {
-    		$(".content-header").hide()
-    		$(".content").hide()
+    		$(".content-header").attr('style','display:none!important')
+    		$(".content").attr('style','display:none!important')
     		window.location.href = "{{url('PMO/project')}}"
     		// $(".content-title").text("Detail Project")
     		// showMilestoneData()
@@ -1498,8 +1502,8 @@ Detail Project
 		            // location.reload()
 		    		$(".content-title").text("Detail Project")
 		    		showMilestoneData()
-		    		$(".milestone").hide()
-		    		$(".show_project_charter").hide()
+		    		$(".milestone").attr('style','display:none!important')
+		    		$(".show_project_charter").attr('style','display:none!important')
 		    		$(".detail_project").show()
 		        } else {
 		            // Cancel the navigation (stay on the current page)
@@ -1523,12 +1527,13 @@ Detail Project
     				id:"Custom",
     				text:"Custom"
     			}
-    			]
+    			],
+    			dropdownParent:$("#ModalTypeMilestone")
     		})
     	}else{
     		milestone(status)
     		$(".milestone").show()
-    		$(".detail_project").hide()
+    		$(".detail_project").attr('style','display:none!important')
     	}
     }
 
@@ -1576,14 +1581,14 @@ Detail Project
 			}
 			$(".milestone").show()
 			$("#ModalTypeMilestone").modal("hide")
-	    	$(".detail_project").hide()
+	    	$(".detail_project").attr('style','display:none!important')
 		}
 		
 	}
 
     function btnshowMilestone(status,ganttstatus){
     	$(".milestone").show()
-    	$(".detail_project").hide()
+    	$(".detail_project").attr('style','display:none!important')
 
     	if (ganttstatus == "custom") {
     		function updateQueryParam(param, value) {
@@ -1695,7 +1700,7 @@ Detail Project
             	
             	if (result.data.milestone == 'true') {  
     				if (window.location.search.split("=")[1].split("&")[0] == "supply_only") {
-            			$("#btnAddMilestone").hide()
+            			$("#btnAddMilestone").attr('style','display:none!important')
             		}else{
             			$("#btnAddMilestone").find("i").removeClass('bx-plus').addClass('bx-show')
             			if (result.data.ganttStatus == "custom") {
@@ -1705,7 +1710,7 @@ Detail Project
             			}
 
     					if (result.data.kickoff == 'true') {
-		            		$("#btnAddMilestone").hide()
+		            		$("#btnAddMilestone").attr('style','display:none!important')
 		            	}else{
 		        			if (accesable.includes('btnAddMilestone')) {
 		    					$("#btnAddMilestone").show()
@@ -2764,7 +2769,7 @@ Detail Project
 			        count++;
 					++incLabel;
 					if ($(this)[0].innerText.replace(" ","") == 'PM') {
-						$("input[name='weightMilestone_Executing']:last").closest("div").closest(".row").next("span").hide()
+						$("input[name='weightMilestone_Executing']:last").closest("div").closest(".row").next("span").attr('style','display:none!important')
 						let countLastCloneStart = parseInt($('.form_Executing:last').find(".form-group:last").find("#startDateMilestone_Executing").attr("data-value"))
 						let countLastCloneEnd = parseInt($('.form_Executing:last').find(".form-group:last").find("#finishDateMilestone_Executing").attr("data-value"))
 						let countLastWeight = parseInt($('.form_Executing:last').find(".form-group:last").find("#weightMilestone").attr("data-value"))
@@ -2888,7 +2893,7 @@ Detail Project
 				    					$(this).removeAttr('value')
 				    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid finish date, cannot less than start date")
 				    				}else{
-				    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+				    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 				    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 				    				}
 				    			})
@@ -2898,7 +2903,7 @@ Detail Project
 				    					$(this).removeAttr('value')
 				    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid start date, cannot greater than finish date")
 				    				}else{
-				    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+				    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 				    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 				    				}
 				    			})
@@ -3010,7 +3015,7 @@ Detail Project
 						    					$(this).removeAttr('value')
 						    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid finish date, cannot less than start date")
 						    				}else{
-						    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+						    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 						    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 						    				}
 						    			})
@@ -3020,7 +3025,7 @@ Detail Project
 						    					$(this).removeAttr('value')
 						    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid start date, cannot greater than finish date")
 						    				}else{
-						    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+						    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 						    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 						    				}
 						    			})
@@ -3332,23 +3337,23 @@ Detail Project
 						}
 					}else{
 						if (x == "weight_0") {
-							$("input[name='weightMilestone_Initiating']:last").closest("div").closest(".row").next("span").hide()
-							$("input[name='weightMilestone_Initiating']:last").closest("div").closest(".row").next("span").next("span").hide()
+							$("input[name='weightMilestone_Initiating']:last").closest("div").closest(".row").next("span").attr('style','display:none!important')
+							$("input[name='weightMilestone_Initiating']:last").closest("div").closest(".row").next("span").next("span").attr('style','display:none!important')
 
 							// $("input[name='weightMilestone_Initiating']:last").closest("div").closest(".row").next("span").text("")
 						}else if (x == "weight_1") {
-							$("input[name='weightMilestone_Planning']:last").closest("div").closest(".row").next("span").hide()
-							$("input[name='weightMilestone_Planning']:last").closest("div").closest(".row").next("span").next("span").hide()
+							$("input[name='weightMilestone_Planning']:last").closest("div").closest(".row").next("span").attr('style','display:none!important')
+							$("input[name='weightMilestone_Planning']:last").closest("div").closest(".row").next("span").next("span").attr('style','display:none!important')
 
 							// $("input[name='weightMilestone_Planning']:last").closest("div").closest(".row").next("span").text("")
 						}else if (x == 'weight_2') {
-							$("input[name='weightMilestone_Executing']:last").closest("div").closest(".row").next("span").hide()
-							$("input[name='weightMilestone_Executing']:last").closest("div").closest(".row").next("span").next("span").hide()
+							$("input[name='weightMilestone_Executing']:last").closest("div").closest(".row").next("span").attr('style','display:none!important')
+							$("input[name='weightMilestone_Executing']:last").closest("div").closest(".row").next("span").next("span").attr('style','display:none!important')
 
 							// $("input[name='weightMilestone_Executing']:last").closest("div").closest(".row").next("span").text("")
 						}else if (x == 'weight_3') {
-							$("input[name='weightMilestone_Closing']:last").closest("div").closest(".row").next("span").hide()
-							$("input[name='weightMilestone_Closing']:last").closest("div").closest(".row").next("span").next("span").hide()
+							$("input[name='weightMilestone_Closing']:last").closest("div").closest(".row").next("span").attr('style','display:none!important')
+							$("input[name='weightMilestone_Closing']:last").closest("div").closest(".row").next("span").next("span").attr('style','display:none!important')
 
 							// $("input[name='weightMilestone_Closing']:last").closest("div").closest(".row").next("span").text("")
 						}
@@ -3358,18 +3363,18 @@ Detail Project
 				function validationEmptyMilestone(x,status){
 					if (status == true) {
 						$.each($("input[name='inputSolutionMilestone']"),function(index,item){
-							$(item).next("span").hide()
+							$(item).next("span").attr('style','display:none!important')
 							$(item).next("span").text("")
 						})
 
 						$.each($("input[name='"+ x +"']"),function(index,item){
 							$.each($(item).closest("form").find("input"),function(idx,items){
 								if(items.value != ""){
-									$(items).closest("div").closest(".row").next("span").hide()
+									$(items).closest("div").closest(".row").next("span").attr('style','display:none!important')
 									$(items).closest("div").closest(".row").next("span").text("")
 								}
 							})
-								// $("input[name='"+ x +"']:last").closest("div").closest(".row").next("span").hide()
+								// $("input[name='"+ x +"']:last").closest("div").closest(".row").next("span").attr('style','display:none!important')
 								// $("input[name='"+ x +"']:last").closest("div").closest(".row").next("span").text("")
 						})
 					}else{
@@ -3396,7 +3401,7 @@ Detail Project
 	    					$(this).removeAttr('value')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid finish date, cannot less than start date")
 	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 	    				}
 	    			})
@@ -3406,7 +3411,7 @@ Detail Project
 	    					$(this).removeAttr('value')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid finish date, cannot less than start date")
 	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 	    				}
 	    			})
@@ -3416,7 +3421,7 @@ Detail Project
 	    					$(this).removeAttr('value')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid finish date, cannot less than start date")
 	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 	    				}
 	    			})
@@ -3426,7 +3431,7 @@ Detail Project
 	    					$(this).removeAttr('value')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid finish date, cannot less than start date")
 	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 	    				}
 	    			})
@@ -3436,7 +3441,7 @@ Detail Project
 	    					$(this).removeAttr('value')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid start date, cannot greater than finish date")
 	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 	    				}
 	    			})
@@ -3447,7 +3452,7 @@ Detail Project
 	    					$(this).removeAttr('value')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid start date, cannot greater than finish date")
 	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 	    				}
 	    			})
@@ -3458,7 +3463,7 @@ Detail Project
 	    					$(this).removeAttr('value')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid start date, cannot greater than finish date")
 	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 	    				}
 	    			})
@@ -3469,7 +3474,7 @@ Detail Project
 	    					$(this).removeAttr('value')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid start date, cannot greater than finish date")
 	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").hide()
+	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
 	    				}
 	    			})
@@ -3999,7 +4004,7 @@ Detail Project
     	$(".content-title").text("Verify Project Charter")
 
     	$(".show_project_charter").show()
-    	$(".detail_project").hide()
+    	$(".detail_project").attr('style','display:none!important')
     	$("input[name='cbShowProjectCharter']").attr('disabled','disabled').closest('div').css('cursor','not-allowed')
 
     	$("#showBodyProjectCharter").empty("")
@@ -4496,7 +4501,7 @@ Detail Project
 					if (true) {}
 					$("#btnApproveSign").show()
 				}else{
-					$("#btnRejectNotes").hide()
+					$("#btnRejectNotes").attr('style','display:none!important')
 				}
 
 			    $("#btnApproveSign").click(function(){
@@ -5008,6 +5013,7 @@ Detail Project
               id_pmo:window.location.href.split("/")[5].split("?")[0],
             },success:function(result){
             	$('#sub_task_document').select2({
+            		dropdownParent:$("#ModalUploadNewDocument"),
 		            data:result.data,
 		            placeholder:"Select Sub Task",
 		        });
@@ -5161,7 +5167,6 @@ Detail Project
     }
 
     function btnUpdateStatusRisk(id){
-    	$(".select2").select2()
     	$("input[name='due_date'],input[name='review_date']").flatpickr({
     		autoclose:close
     	})
@@ -5183,6 +5188,10 @@ Detail Project
     			$("#due_date").val(moment(result[0].due_date).format('MM/DD/YYYY'))
     			$("#review_date").val(moment(result[0].review_date).format('MM/DD/YYYY'))
     			$("#selectStatusRisk").select2().val(result[0].status.toLowerCase()).trigger("change")
+
+    			$("#selectStatusRisk").select2({
+		    		dropdownParent:$("#ModalRisk")
+		    	})
     		}
     	})
 
@@ -5191,9 +5200,6 @@ Detail Project
     }
 
     function btnUpdateStatusIssue(id){
-    	$("#selectStatusIssue").select2({
-    		placeholder:"Select Issue"
-    	})
     	$("input[name='expected_date'],input[name='actual_date']").flatpickr({
     		autoclose:true
     	})
@@ -5212,6 +5218,11 @@ Detail Project
     			$("#expected_date").val(moment(result[0].expected_date).format('MM/DD/YYYY'))
     			$("#actual_date").val(moment(result[0].actual_date).format('MM/DD/YYYY'))
     			$("#selectStatusIssue").select2().val(result[0].status).trigger("change")
+
+    			$("#selectStatusIssue").select2({
+		    		placeholder:"Select Issue",
+		    		dropdownParent:$("#ModalIssue")
+		    	})
     		}
     	})
 
@@ -5310,7 +5321,7 @@ Detail Project
 	    			if ($('#divInfoIssue').is(':hidden')) {
 		    			$("#divInfoIssue").show()
 		    		}else{
-		    			$("#divInfoIssue").hide()
+		    			$("#divInfoIssue").attr('style','display:none!important')
 	    			}
 	    		}	    		
 
@@ -5328,11 +5339,11 @@ Detail Project
 
 
 				if ($(this).attr('value') == 'impact') {
-    				$("#divInfoRisk").hide()
+    				$("#divInfoRisk").attr('style','display:none!important')
     			}
 
     			if ($(this).attr('value') == 'likelihood') {
-    				$("#divInfoImpact").hide()
+    				$("#divInfoImpact").attr('style','display:none!important')
     			}
     			
 
@@ -5345,16 +5356,16 @@ Detail Project
     		if ($(this).attr('value') == 'impact') {
 	    		if ($('#divInfoImpact').is(':hidden')) {
 	    			$("#divInfoImpact").show()
-	    			$("#divInfoRisk").hide()
+	    			$("#divInfoRisk").attr('style','display:none!important')
 	    		}else{
-	    			$("#divInfoImpact").hide()
+	    			$("#divInfoImpact").attr('style','display:none!important')
 	    		}
     		}else if($(this).attr('value') == 'likelihood'){
 	    		if ($('#divInfoRisk').is(':hidden')) {
 	    			$("#divInfoRisk").show()
-	    			$("#divInfoImpact").hide()
+	    			$("#divInfoImpact").attr('style','display:none!important')
 	    		}else{
-	    			$("#divInfoRisk").hide()
+	    			$("#divInfoRisk").attr('style','display:none!important')
 	    		}
     		}
     	}
@@ -6122,7 +6133,7 @@ Detail Project
 
 					$("#divAddTerms").append(append3)
 					if (status == 'verify') {
-						$("#btnAddTerms").hide()
+						$("#btnAddTerms").attr('style','display:none!important')
 						let arrTerms = [], arrPayment = []
 		        		
 
@@ -6403,7 +6414,7 @@ Detail Project
 						})	
 
 						$("#textareaScheduleRemarks").closest(".form-group").removeClass(".needs-validation")
-						$("#textareaScheduleRemarks").next("span").hide()
+						$("#textareaScheduleRemarks").next("span").attr('style','display:none!important')
 
 				        $("#nextBtnFinal").attr('onclick','nextPrevAddFinal(1,"'+ status +'")')
 				        $("#prevBtnFinal").attr('onclick','nextPrevAddFinal(-1,"'+ status +'")')
@@ -6519,13 +6530,13 @@ Detail Project
 				$("#textareaRecommendation").next("span").show()
 				$("#textareaRecommendation").closest(".form-group").addClass("needs-validation")
 			}else{
-				$("#link_feedback").next("span").hide()
+				$("#link_feedback").next("span").attr('style','display:none!important')
 				$("#link_feedback").closest(".form-group").removeClass("needs-validation")
 
-				$("#textareaLessonLearn").next("span").hide()
+				$("#textareaLessonLearn").next("span").attr('style','display:none!important')
 				$("#textareaLessonLearn").closest(".form-group").removeClass("needs-validation")
 
-				$("#textareaRecommendation").next("span").hide()
+				$("#textareaRecommendation").next("span").attr('style','display:none!important')
 				$("#textareaRecommendation").closest(".form-group").removeClass("needs-validation")
 
 				swalFireCustom = {
@@ -7095,13 +7106,13 @@ Detail Project
     function validationCheck(data){    	
     	if($("#"+ $(data).attr('id')).val() != ""){
           $("#"+ $(data).attr('id')).closest(".form-group").removeClass("needs-validation")
-          $("#"+ $(data).attr('id')).next("span.invalid-feedback").hide()
+          $("#"+ $(data).attr('id')).next("span.invalid-feedback").attr('style','display:none!important')
 
           $("#"+ $(data).attr('id')).closest(".form-group").removeClass("needs-validation")
-          $("#"+ $(data).attr('id')).closest(".form-group").find("span.invalid-feedback").hide()
+          $("#"+ $(data).attr('id')).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
 
           $("input[name='"+ $(data).attr('name') + "']").closest(".form-group").removeClass("needs-validation")
-          $("input[name='"+ $(data).attr('name') + "']").closest(".form-group").find("span.invalid-feedback").hide()
+          $("input[name='"+ $(data).attr('name') + "']").closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#"+ $(data).attr('id')).attr("id") == "inputImpact" || $("#"+ $(data).attr('id')).attr("id") == "inputLikelihood") {
@@ -7124,7 +7135,7 @@ Detail Project
  	function showEmail(){
 	    firstPage = false
     	$(".content-title").text("Send Customer Satisfaction Survey")
-    	$(".detail_project").hide()
+    	$(".detail_project").attr('style','display:none!important')
     	$(".showEmail").show()
     	$(".showEmail").empty("")
 	    append = ""

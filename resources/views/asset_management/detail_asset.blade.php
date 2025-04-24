@@ -906,7 +906,7 @@
             $("#tablePeripheral").append(append)
             $("#tablePeripheral").prev('strong').show()
           }else{
-            $("#tablePeripheral").prev('strong').hide()
+            $("#tablePeripheral").prev('strong').attr('style','display:none!important')
           }
         }
       })
@@ -1008,18 +1008,18 @@
           }
           
           if(result.pid === "INTERNAL"){
-            $("#service_point").closest(".form-group").closest('.col-md-6').hide()
-            $("#selectStatusCustomer").closest(".form-group").closest('.col-md-6').hide()
-            // $("#selectLevelSupport").closest(".form-group").closest('.col-md-6').hide()
-            $("#inputMaintenanceStart").closest(".form-group").closest('.col-md-6').hide()
-            $("#inputMaintenanceEnd").closest(".form-group").closest('.col-md-6').hide()
-            $("#inputIdDeviceCustomer").closest(".form-group").closest('.col-md-6').hide()
-            $("#inputRMA").closest(".form-group").hide()
-            $("#inputLicense").closest(".form-group").hide()
-            $("#inputSLAUptime").closest(".form-group").hide()
-            $("#inputTotalTicket").closest(".form-group").hide()
-            $("#distance").closest(".form-group").hide()
-            $("#DocNonInternalContainer").hide()
+            $("#service_point").closest(".form-group").closest('.col-md-6').attr('style','display:none!important')
+            $("#selectStatusCustomer").closest(".form-group").closest('.col-md-6').attr('style','display:none!important')
+            // $("#selectLevelSupport").closest(".form-group").closest('.col-md-6').attr('style','display:none!important')
+            $("#inputMaintenanceStart").closest(".form-group").closest('.col-md-6').attr('style','display:none!important')
+            $("#inputMaintenanceEnd").closest(".form-group").closest('.col-md-6').attr('style','display:none!important')
+            $("#inputIdDeviceCustomer").closest(".form-group").closest('.col-md-6').attr('style','display:none!important')
+            $("#inputRMA").closest(".form-group").attr('style','display:none!important')
+            $("#inputLicense").closest(".form-group").attr('style','display:none!important')
+            $("#inputSLAUptime").closest(".form-group").attr('style','display:none!important')
+            $("#inputTotalTicket").closest(".form-group").attr('style','display:none!important')
+            $("#distance").closest(".form-group").attr('style','display:none!important')
+            $("#DocNonInternalContainer").attr('style','display:none!important')
             //buat delete id yang duplicate
             $("#DocNonInternalContainer").find("input").attr("id","") 
             $("#picContainer").empty("")
@@ -1029,9 +1029,9 @@
             $("#tableHistoryPid").closest(".card-primary").find(".card-title").html("<strong>History (PIC - Department)</strong>")
             $("#inputLicenseStart").closest(".form-group").find("label").text("License Start/Garansi*") 
             $("#inputLicenseEnd").closest(".form-group").find("label").text("License End/Garansi*") 
-            $(".divAsset:eq(1)").prev("hr").hide()
-            $(".divAsset:eq(1)").hide()
-            $("#btnAssignPeripheral").hide()
+            $(".divAsset:eq(1)").prev("hr").attr('style','display:none!important')
+            $(".divAsset:eq(1)").attr('style','display:none!important')
+            $("#btnAssignPeripheral").attr('style','display:none!important')
             let picContainer = $("#picContainer");
             let prContainer = $("#prContainer");
             let licenseContainer = $("#licenseContainer");
@@ -1072,16 +1072,16 @@
               console.log(e.params.data.id)
               if (e.params.data.id == null || e.params.data.id == '') {
                 $("#inputInstalledDate").val("")
-                $("#inputInstalledDate").closest(".input-group").next("span").hide()
+                $("#inputInstalledDate").closest(".input-group").next("span").attr('style','display:none!important')
               }else{
                 $("#inputInstalledDate").val("")
                 $("#inputInstalledDate").closest(".input-group").next("span").show()
               }
             }).on('select2:unselect', function (e) {
                 $("#inputInstalledDate").val("")
-                $("#inputInstalledDate").closest(".input-group").next("span").hide()
+                $("#inputInstalledDate").closest(".input-group").next("span").attr('style','display:none!important')
                 $("#inputBeritaAcara").val("")
-                $("#span_link_drive_berita_acara").hide()
+                $("#span_link_drive_berita_acara").attr('style','display:none!important')
             });
 
             //cek status asset
@@ -1189,7 +1189,7 @@
               placeholder:"Select 2nd Level Support",
             }).val(result.second_level_support).trigger("change")
             $(".divAsset:eq(0)").show()
-            $(".divAsset:eq(1)").hide()
+            $(".divAsset:eq(1)").attr('style','display:none!important')
             $(".divAsset:eq(2)").show()
           }else{
             $(".divAsset").show()
@@ -1231,7 +1231,7 @@
             if (result.status == 'Available') {
               $("#btnAssignPeripheral").show()
             }else{
-              $("#btnAssignPeripheral").hide()
+              $("#btnAssignPeripheral").attr('style','display:none!important')
             }
           }
 
@@ -1317,26 +1317,26 @@
 
           $("#titleDetailIdAsset").text(result.id_asset)
           if(result.status == "Available"){
-            $("#txtAreaReason").closest(".form-group").hide()
+            $("#txtAreaReason").closest(".form-group").attr('style','display:none!important')
           }else if(result.status == "Installed"){
-            $("#txtAreaReason").closest(".form-group").hide()
+            $("#txtAreaReason").closest(".form-group").attr('style','display:none!important')
           }else if(result.status == "Rent" || result.status == "Unavailable"){
             $("#txtAreaReason").closest(".form-group").show()
             $("#txtAreaReason").val(result.reason_status)
           }else{
-            $("#txtAreaReason").closest(".form-group").hide()
+            $("#txtAreaReason").closest(".form-group").attr('style','display:none!important')
           }
 
           if (result.category_code == 'COM') {
             $("#inputAccessoris").closest('.form-group').show()
             $("#inputAccessoris").val(result.accessoris)
           }else{
-            $("#inputAccessoris").closest('.form-group').hide()
+            $("#inputAccessoris").closest('.form-group').attr('style','display:none!important')
             $("#inputAccessoris").val(result.accessoris)
           }
           $("#inputSLAUptime").val(result.slaUptime)
           $("#inputTotalTicket").val(result.countTicket)
-          $(".divPeripheral").hide()
+          $(".divPeripheral").attr('style','display:none!important')
           showPeripheral(result.id)
           $("#tableTicketHistory").closest(".card-primary").show()
           InitiateHistoryTicket()
@@ -1563,14 +1563,14 @@
               if (result.pid != null) {
                 $("#selectEngAssign").closest(".form-group").show() 
               }else{
-                $("#selectEngAssign").closest(".form-group").hide()
+                $("#selectEngAssign").closest(".form-group").attr('style','display:none!important')
               }
             }else{
               $("#selectEngAssign").closest(".form-group").show() 
               // if (result.category_code == "CRM" || result.category_code == "ATM") {
               //   $("#selectEngAssign").closest(".form-group").show() 
               // }else{
-              //   $("#selectEngAssign").closest(".form-group").hide() 
+              //   $("#selectEngAssign").closest(".form-group").attr('style','display:none!important') 
               // }
             }
           }
@@ -1598,17 +1598,17 @@
                 $("#txtAreaReason").closest(".form-group").addClass("has-error")
               }
             }else if (id == "Available") {
-              $("#txtAreaReason").closest(".form-group").hide()
+              $("#txtAreaReason").closest(".form-group").attr('style','display:none!important')
               $("#inputPIC").empty("")
-              $("#inputPIC").next("span").next(".help-block").hide()
+              $("#inputPIC").next("span").next(".help-block").attr('style','display:none!important')
               $("#inputBeritaAcara").val("")
-              $("#span_link_drive_berita_acara").hide()
+              $("#span_link_drive_berita_acara").attr('style','display:none!important')
             }else if (id == "Installed") {
-              $("#txtAreaReason").closest(".form-group").hide()
+              $("#txtAreaReason").closest(".form-group").attr('style','display:none!important')
               $("#inputPIC").next("span").next(".help-block").show()
             }else{
-              $("#inputPIC").next("span").next(".help-block").hide()
-              $("#txtAreaReason").closest(".form-group").hide()
+              $("#inputPIC").next("span").next(".help-block").attr('style','display:none!important')
+              $("#txtAreaReason").closest(".form-group").attr('style','display:none!important')
             }
           
             if (oldStatus !== 'Available' && id === 'Available') {
@@ -2006,7 +2006,7 @@
               $("#txtAreaReason").next(".help-block").show()
             }else{
               $("#txtAreaReason").closest(".form-group").removeClass("has-error")
-              $("#txtAreaReason").next(".help-block").hide()
+              $("#txtAreaReason").next(".help-block").attr('style','display:none!important')
 
               url = "{{url('asset/updateAsset')}}"
 
@@ -2376,7 +2376,7 @@
 
       function clearValidationOnChange(data) {
         if ($(data).val() !== "") {
-          $(data).closest(".input-group").next("span").hide();
+          $(data).closest(".input-group").next("span").attr('style','display:none!important');
         }
       }
 

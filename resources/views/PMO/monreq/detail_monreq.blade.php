@@ -277,12 +277,12 @@ Money Request Detail
 					initTableDetail(result.monReq.pid_details)
 
 					if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Project Management Manager')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Project Management')->exists()}}") {
-						$("#btnUploadReceipt").hide()
-						$("#btnHoldMonreq").hide()
+						$("#btnUploadReceipt").attr('style','display:none!important')
+						$("#btnHoldMonreq").attr('style','display:none!important')
 						$("#btnApproveMonreq").text('Approve')
 					}else if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Chief Operating Officer')->exists()}}") {
-						$("#btnUploadReceipt").hide()
-						$("#btnHoldMonreq").hide()
+						$("#btnUploadReceipt").attr('style','display:none!important')
+						$("#btnHoldMonreq").attr('style','display:none!important')
 						$("#btnApproveMonreq").text('Acknowledge')
 					}else if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.group','Financial And Accounting')->exists()}}") {
 						$("#btnUploadReceipt").show()
@@ -292,8 +292,8 @@ Money Request Detail
 							$("#btnUploadReceipt").attr("disabled",true)
 						}
 					}else{
-						$("#btnHoldMonreq").hide()
-						$("#btnUploadReceipt").hide()
+						$("#btnHoldMonreq").attr('style','display:none!important')
+						$("#btnUploadReceipt").attr('style','display:none!important')
 					}
 					if (result.getSign == "{{Auth::User()->name}}") {
 						$("#btnApproveMonreq").prop("disabled",false)
@@ -306,23 +306,23 @@ Money Request Detail
 					var id_monreq = window.location.href.split("?")[1].split("=")[1]
 
 					if (result.monReq['status'] == 'NEW') {
-						$("#btnEditMonreq").hide()
-						$("#btnExportMonreq").hide()
+						$("#btnEditMonreq").attr('style','display:none!important')
+						$("#btnExportMonreq").attr('style','display:none!important')
 					}else if (result.monReq['status'] == 'UNAPPROVED') {
 						if (result.monReq['account_name'] == "{{Auth::User()->name}}") {
 							$("#btnEditMonreq").show()
 						}
 						$("#btnEditMonreq").closest("a").attr("href","{{url('/pmo/monreq/add_monreq?edit_monreq=')}}"+id_monreq)
-						$("#btnExportMonreq").hide()
+						$("#btnExportMonreq").attr('style','display:none!important')
 						$("#btnRejectMonreq").prop("disabled",true)
 						$("#btnApproveMonreq").prop("disabled",true)
 					}else if (result.monReq['status'] == 'APPROVED') {
-						$("#btnEditMonreq").hide()
+						$("#btnEditMonreq").attr('style','display:none!important')
 						$("#btnExportMonreq").show()
 					}else if (result.monReq['status'] == 'DONE') {
 						$("#btnExportMonreq").show()
-						$("#btnHoldMonreq").hide()
-						$("#btnUploadReceipt").hide()
+						$("#btnHoldMonreq").attr('style','display:none!important')
+						$("#btnUploadReceipt").attr('style','display:none!important')
 					}
 
 					// $("#btnExportMonreq").closest("a").attr('onclick','exportMonreq('+ id_monreq +')')
@@ -597,8 +597,8 @@ Money Request Detail
 
 		function validationCheck(data){
 			if ($(data).val() != '') {
-				$(data).next('.invalid-feedback').hide()
-				$(data).next().next('.invalid-feedback').hide()
+				$(data).next('.invalid-feedback').attr('style','display:none!important')
+				$(data).next().next('.invalid-feedback').attr('style','display:none!important')
 				$(data).closest(".form-group").removeClass('needs-validation')
 
 				if (data.id == 'upload_receipt') {

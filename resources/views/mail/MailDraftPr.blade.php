@@ -244,7 +244,7 @@
 			@elseif($detail->status == 'UNAPPROVED')
 				<center><a href="{{url('/admin/draftPR')}}?status=revision&no_pr={{$detail->id}}" target="_blank"><button class="button"> Detail Draft PR </button></a></center>
 			@elseif($detail->status == 'CIRCULAR')
-				<center><a href="{{url('/admin/detail/draftPR',$detail->id)}}" target="_blank"><button class="button"> Detail Draft PR </button></a></center>
+				<center><a href="{{url('/admin/detailDraftPR',$detail->id)}}" target="_blank"><button class="button"> Detail Draft PR </button></a></center>
 			@endif
 			<p style="font-size: 16px">
 				Mohon periksa kembali jika ada kesalahan atau pertanyaan silahkan hubungi Team Developer (Ext: 384) atau email ke development@sinergy.co.id
