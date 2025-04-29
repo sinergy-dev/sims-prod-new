@@ -159,7 +159,7 @@ class Claim extends Model
                         [$group, '%Manager', 'Project Manager', '%VP Program & Project Management%', 'Chief Operating Officer']
                     )
                     ->orderByRaw("CASE 
-                        WHEN position LIKE '%Project Management Manager%' THEN 1
+                        WHEN position LIKE '%Project Management Office Manager%' THEN 1
                         WHEN position LIKE '%VP Program & Project Management%' THEN 2
                         WHEN position = 'Chief Operating Officer' THEN 3
                         ELSE 4 END ");

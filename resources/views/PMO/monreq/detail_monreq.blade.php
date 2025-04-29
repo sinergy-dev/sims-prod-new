@@ -15,6 +15,10 @@ Money Request Detail
 		resize: vertical;
 		width: 100%;
 	}
+
+	.swal2-container{
+		z-index: 99999!important;
+	}
 </style>
 @endsection
 @section('content')
@@ -126,8 +130,7 @@ Money Request Detail
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="f2n9a">
-				<span aria-hidden="true">×</span></button>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" fdprocessedid="f2n9a"></button>
 				<h6 class="modal-title">Upload Receipt</h6>
 			</div>
 			<div class="modal-body">
@@ -149,8 +152,7 @@ Money Request Detail
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close" fdprocessedid="f2n9a">
-				<span aria-hidden="true">×</span></button>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" fdprocessedid="f2n9a"></button>
 				<h6 class="modal-title">Reject Money Request</h6>
 			</div>
 			<div class="modal-body">
@@ -375,7 +377,7 @@ Money Request Detail
 								appendPoT = appendPoT + '<div class="row mb-4">'
 									appendPoT = appendPoT + '<div class="col-md-6">'
 										appendPoT = appendPoT + '<div class="form-group" style="border: 1px solid #dee2e6 !important;padding: 5px;">'
-											appendPoT = appendPoT + '<a href="'+ result.monReq['proof_of_transfer'] +'" target="blank_"><i class="bx bx-fw fa-file-pdf-o"></i>proof_of_transfer.png</a>'
+											appendPoT = appendPoT + '<a href="'+ result.monReq['proof_of_transfer'] +'" target="blank_"><i class="bx bx-fw bxs-file-pdf"></i>proof_of_transfer.png</a>'
 										appendPoT = appendPoT + '</div>'
 									appendPoT = appendPoT + '</div>'
 								appendPoT = appendPoT + '</div>'

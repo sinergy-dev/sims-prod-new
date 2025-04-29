@@ -86,8 +86,8 @@ class Settlement extends Model
             ->where('status_karyawan','!=','dummy');
 
         foreach ($sign->get() as $key => $value) {
-            $sign->whereRaw("(`roles`.`name` = 'Project Management Manager' OR `roles`.`name` = 'VP Project Management' OR `roles`.`name` = 'Chief Operating Officer')")
-            ->orderByRaw('FIELD(position, "Project Management Manager", "VP Project Management", "Chief Operating Officer")');
+            $sign->whereRaw("(`roles`.`name` = 'Project Management Office Manager' OR `roles`.`name` = 'VP Program & Project Management' OR `roles`.`name` = 'Chief Operating Officer')")
+            ->orderByRaw('FIELD(position, "Project Management Office Manager", "VP Program & Project Management", "Chief Operating Officer")');
         }
 
         return empty($sign->get()->where('signed','false')->first()->name)?'-':$sign->get()->where('signed','false')->first()->name;

@@ -1754,8 +1754,43 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/sales/quote/sendMailtoCustomer', 'QuoteController@sendMailtoCustomer');
 	Route::get('sales/quote/getDataEmail', 'QuoteController@getDataEmail');
 
-	
+
 	Route::get('/authLogin/{id}','TestController@authentication');
+
+
+    //certification list
+    Route::get('/certification_list', 'CertificationListController@index');
+    Route::get('/certification_list/getDataByFilter', 'CertificationListController@getDataByFilter');
+    Route::post('/certification_list/storeRequest', 'CertificationListController@storeRequest');
+    Route::post('/certification_list/updateRequest', 'CertificationListController@updateRequest');
+    Route::post('/certification_list/storeRequestDetail', 'CertificationListController@storeRequestDetail');
+    Route::post('/certification_list/updateRequestDetail', 'CertificationListController@updateRequestDetail');
+    Route::post('/certification_list/deleteDetail', 'CertificationListController@deleteDetail');
+    Route::post('/certification_list/storeLastStepRequest', 'CertificationListController@storeLastStepRequest');
+    Route::post('/certification_list/updateLastStepRequest', 'CertificationListController@updateLastStepRequest');
+    Route::post('/certification_list/assignManager', 'CertificationListController@assignManager');
+    Route::post('/certification_list/rejectRequest', 'CertificationListController@rejectRequest');
+    Route::post('/certification_list/approveRequest', 'CertificationListController@approveRequest');
+    Route::post('/certification_list/saveParticipantChanges', 'CertificationListController@saveParticipantChanges');
+    Route::post('/certification_list/uploadProofExam/{id}', 'CertificationListController@uploadProofExam');
+    Route::get('/certification_list/getRequestDetail', 'CertificationListController@getRequestDetail');
+    Route::get('/certification_list/getDetail', 'CertificationListController@getDetail');
+    Route::get('/certification_list/getActivity', 'CertificationListController@getActivity');
+    Route::get('/certification_list/getParticipantList', 'CertificationListController@getParticipantList');
+    Route::get('/certification_list/getDetailById', 'CertificationListController@getDetailById');
+    Route::get('/certification_list/getPreview', 'CertificationListController@getPreview');
+    Route::get('/certification_list/detail/{id}', 'CertificationListController@detail');
+    Route::get('/certification_list/dashboard', 'CertificationListController@dashboard');
+    Route::get('/certification_list/getChartExamByStatus', 'CertificationListController@getChartExamByStatus');
+    Route::get('/certification_list/getChartExamByPurpose', 'CertificationListController@getChartExamByPurpose');
+    Route::get('/certification_list/getChartExamByDivision', 'CertificationListController@getChartExamByDivision');
+    Route::get('/certification_list/getChartExamByPartner', 'CertificationListController@getChartExamByPartner');
+    Route::get('/certification_list/getChartExamByLevel', 'CertificationListController@getChartExamByLevel');
+    Route::get('/certification_list/getDataTopExpiring', 'CertificationListController@getDataTopExpiring');
+    Route::get('/certification_list/getChartExam', 'CertificationListController@getChartExam');
+    Route::get('/certification_list/getAllUser', 'CertificationListController@getAllUser');
+    Route::get('/certification_list/getProofExam/{id}', 'CertificationListController@getProofExam');
+    Route::get('/certification_list/generatePDF', 'CertificationListController@generatePDF');
 });
 
 Route::get('testJoinDb','TestController@testJoinDb');

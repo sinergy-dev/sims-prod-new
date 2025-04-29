@@ -76,7 +76,7 @@ Money Request
 											<span class="invalid-feedback"></span>
 										</div>
 									</div>
-									<div class="col-md-1 col-xs-12">
+									<div class="col-md-1 col-xs-12" style="padding-left:0px!important;padding-right: 0px!important;">
 										<div class="form-group">
 											<label>Qty*</label>
 											<input onkeyup="validationCheck(this,0)" type="text" name="input_qty" id="input_qty" data-id="0-0" data-rowid="0" class="form-control input_qty">
@@ -114,7 +114,7 @@ Money Request
 									</div>
 									<div class="col-md-1 col-xs-12">
 										<div class="form-group">
-											<button style="width:40px;margin-top:25px" class="btn btn-sm text-bg-primary pull-right addRow" data-rowid="0" onclick="addRowItem(0)" disabled><i class="bx bx-plus"></i></button>
+											<button style="width:40px;margin-top:15px" class="btn btn-sm text-bg-primary pull-right addRow" data-rowid="0" onclick="addRowItem(0)" disabled><i class="bx bx-plus"></i></button>
 										</div>
 									</div>
 								</div>
@@ -304,7 +304,7 @@ Money Request
 						append = append + '<span class="invalid-feedback"></span>'
 					append = append + '</div>'
 				append = append + '</div>'
-				append = append + '<div class="col-md-1 col-xs-12">'
+				append = append + '<div class="col-md-1 col-xs-12" style="padding-left:0px!important;padding-right:0px!important">'
 					append = append + '<div class="form-group">'
 						append = append + '<label style="display:none">Qty*</label>'
 						append = append + '<input onkeyup="validationCheck(this,'+ n +')" type="text" name="input_qty" id="input_qty" data-id="'+ n + '-' + count +'" data-rowid="'+ count +'" class="form-control input_qty">'
@@ -389,7 +389,7 @@ Money Request
 										append = append + '<span class="invalid-feedback"></span>'
 									append = append + '</div>'
 								append = append + '</div>'
-								append = append + '<div class="col-md-1 col-xs-12">'
+								append = append + '<div class="col-md-1 col-xs-12" style="padding-left:0px!important;padding-right:0px!important">'
 									append = append + '<div class="form-group">'
 										append = append + '<label>Qty*</label>'
 										append = append + '<input onkeyup="validationCheck(this,'+ count +')" type="text" name="input_qty" id="input_qty" data-id="'+ count + '-' + '0' +'" data-rowid="'+ count +'" class="form-control input_qty">'
@@ -427,7 +427,7 @@ Money Request
 								append = append + '</div>'
 								append = append + '<div class="col-md-1 col-xs-12">'
 									append = append + '<div class="form-group">'
-										append = append + '<button style="width:40px;margin-top:25px" class="btn btn-sm text-bg-primary pull-right addRow" onclick="addRowItem('+ count +')" disabled data-rowid="'+ count +'"><i class="bx bx-plus"></i></button>'
+										append = append + '<button style="width:40px;margin-top:15px" class="btn btn-sm text-bg-primary pull-right addRow" onclick="addRowItem('+ count +')" disabled data-rowid="'+ count +'"><i class="bx bx-plus"></i></button>'
 									append = append + '</div>'
 								append = append + '</div>'
 							append = append + '</div>'
@@ -864,7 +864,7 @@ Money Request
 										append = append + '<span class="invalid-feedback"></span>'
 									append = append + '</div>'
 								append = append + '</div>'
-								append = append + '<div class="col-md-1 col-xs-12">'
+								append = append + '<div class="col-md-1 col-xs-12" style="padding-left:0px!important;padding-right:0px!important">'
 									append = append + '<div class="form-group">'
 										if (key == 0) {
 											append = append + '<label>Qty*</label>'
@@ -917,7 +917,7 @@ Money Request
 								if (key == 0) {
 									append = append + '<div class="col-md-1 col-xs-12">'
 										append = append + '<div class="form-group">'
-											append = append + '<button style="width:40px;margin-top:25px" class="btn btn-sm text-bg-primary pull-right addRow" onclick="addRowItem('+ count +')" disabled data-rowid="'+ count +'"><i class="bx bx-plus"></i></button>'
+											append = append + '<button style="width:40px;margin-top:15px" class="btn btn-sm text-bg-primary pull-right addRow" onclick="addRowItem('+ count +')" disabled data-rowid="'+ count +'"><i class="bx bx-plus"></i></button>'
 										append = append + '</div>'
 									append = append + '</div>'
 								}

@@ -39,7 +39,7 @@ Detail Settlement
 						</div>
 						<div class="table-responsive" style="min-width:100%">
 							<div style="max-width: 100%;overflow-x: scroll;">
-								<table class="table table-bordered table-striped" id="table_detail_settlement" style="width: 100%;" cellspacing="0">
+								<table class="table table-bordered" id="table_detail_settlement" style="width: 100%;" cellspacing="0">
 								</table>
 							</div>
 						</div>
@@ -293,8 +293,8 @@ Detail Settlement
 					}
 				append = append + '</tr>'
 			append = append + '</thead>'
-			$.each(contentTable,function(key,value){
-				append = append + '<tbody class="table" style="width:100%;white-space:nowrap">'
+			append = append + '<tbody class="table" style="white-space:nowrap">'
+				$.each(contentTable,function(key,value){
 					$.each(value.details,function(keys,values){
 						append = append + '<tr>'
 							append = append + '<td>'+ ++keys +'</td>'
@@ -321,7 +321,7 @@ Detail Settlement
 								}
 
 								if (results.settlement.status == 'DONE') {
-									append = append + '<td><div style="display:flex;gap:10px"><span style="display:inline">'+ values.sub_category +'</span><a href="'+ url +'" target="_blank"><button class="btn btn-xs text-bg-primary" style="display:inline;float:right"><i class="bx bx-paper-plane"></i></button></a><div></td>'
+									append = append + '<td><div style="display:flex;gap:10px"><span style="display:inline">'+ values.sub_category +'</span><a href="'+ url +'" target="_blank"><button class="btn btn-xs text-bg-primary" style="display:inline;float:right"><i class="bx bx-paper-plane" style="font-size:14px"></i></button></a><div></td>'
 								}else{
 									append = append + '<td>'+ values.description +'</td>'
 								}
@@ -330,21 +330,21 @@ Detail Settlement
 							}
 							append = append + '<td style="width:20px">'
 								if (values.receipt) {
-									append = append + '<a style="font-size:11px" href="'+ values.receipt +'" target="_blank"><i class="bx bx-images"></> Receipt</a>'
+									append = append + '<a style="font-size:11px" href="'+ values.receipt +'" target="_blank"><i class="bx bx-images" style="font-size:14px"></i> Receipt</a>'
 								}else{
 									append = append + ' - '
 								}
 							append = append + '</td>'
 							append = append + '<td style="width:20px">'
 								if (values.receipt_grab) {
-									append = append + '<a style="font-size:11px" href="'+ values.receipt_grab +'" target="_blank"><i class="bx bx-images"></> Receipt Grab</a>'
+									append = append + '<a style="font-size:11px" href="'+ values.receipt_grab +'" target="_blank"><i class="bx bx-images"  style="font-size:14px"></i> Receipt Grab</a>'
 								}else{
 									append = append + ' - '
 								}
 							append = append + '</td>'
-							append = append + '<td>'
+							append = append + '<td style="text-align:left">'
 								if (values.image) {
-									append = append + '<a style="font-size:11px" href="'+ values.image +'" target="_blank"><i class="bx bx-images"></> Image</a>'
+									append = append + '<a style="font-size:11px" href="'+ values.image +'" target="_blank"><i class="bx bx-images"  style="font-size:14px"></i> Image</a>'
 								}else{
 									append = append + ' - '
 								}
@@ -377,21 +377,21 @@ Detail Settlement
 								append = append + '</td>'
 							}
 						append = append + '</tr>'
-					append = append + '</tbody>'
 					})
-				append = append + '<tr>'
-					append = append + '<th colspan="3" style="text-align:right">Total</th>'
-					colLenght = headerTable.length + 6
-					$.each(headerTable,function(keyFooter,valueFooter){
-						$.each(valueFooter.total_by_pid,function(keysFooter,valuesFooter){
-							if (keysFooter == value.pid) {
-								append = append + '<th>Rp.'+ formatter.format(valuesFooter) +'</th>'
-							}
+					append = append + '<tr>'
+						append = append + '<th colspan="3" style="text-align:right">Total</th>'
+						colLenght = headerTable.length + 6
+						$.each(headerTable,function(keyFooter,valueFooter){
+							$.each(valueFooter.total_by_pid,function(keysFooter,valuesFooter){
+								if (keysFooter == value.pid) {
+									append = append + '<th>Rp.'+ formatter.format(valuesFooter) +'</th>'
+								}
+							})
 						})
-					})
-					append = append + '<td colspan="7"></td>'
-				append = append + '</tr>'
-			})
+						append = append + '<td colspan="7"></td>'
+					append = append + '</tr>'
+				})
+			append = append + '</tbody>'
 
 			append = append + '<tfoot>'
 				append = append + '<tr>'

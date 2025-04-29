@@ -184,8 +184,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align:right;padding-right: 50px;font-family:Tahoma, Geneva,sans-serif;"><u>{{$data['getSign'][0]['name']}}</u></td>
-			<td style="text-align:left;padding-left: 10px;font-family:Tahoma, Geneva,sans-serif;"><u>{{$data['getSign'][1]['name']}}</u></td>
+			<td style="text-align:right;padding-right: 60px;font-family:Tahoma, Geneva,sans-serif;"><u>{{$data['getSign'][0]['name']}}</u></td>
+			<td style="text-align:left;padding-left: 30px;font-family:Tahoma, Geneva,sans-serif;"><u>{{$data['getSign'][1]['name']}}</u></td>
 			<td style="text-align:center;font-family:Tahoma, Geneva,sans-serif;"><u>{{$data['getSign'][2]['name']}}</u></td>
 		</tr>
 		<tr>

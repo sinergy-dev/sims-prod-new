@@ -120,6 +120,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('ExpirePeminjamanAssetTech:expirepeminjamanassettech')->dailyAt('00:30');
 
         $schedule->command('ReminderPengembalianAssetTech:reminderpengembalianassettech')->dailyAt('08:00');
+        $schedule->command('remindExpiredCertificate:3month')->dailyAt('09:00');
 
         $schedule->command('pending:remind')->everyMinute();
     }
