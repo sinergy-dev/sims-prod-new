@@ -1753,9 +1753,11 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/sales/quote/saveSignature', 'QuoteController@saveSignature');
 	Route::post('/sales/quote/sendMailtoCustomer', 'QuoteController@sendMailtoCustomer');
 	Route::get('sales/quote/getDataEmail', 'QuoteController@getDataEmail');
+
+	
+	Route::get('/authLogin/{id}','TestController@authentication');
 });
 
-Route::get('/authLogin/{id}','TestController@authentication');
 Route::get('testJoinDb','TestController@testJoinDb');
 Route::get('/getHoliday','TestController@getWorkdays');
 Route::get('/testPMOEntertainPdf','TestController@testPMOEntertainPdf');

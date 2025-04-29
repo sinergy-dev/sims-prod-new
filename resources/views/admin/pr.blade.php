@@ -93,7 +93,7 @@
     @endif
 
     @if (session('success'))
-      <div class="alert alert-success notification-bar"><span>Notice : </span> {{ session('success') }}<button type="button" class="dismisbar transparant pull-right"><i class="bx bx-times fa-lg"></i></button><br>Get your Number PR :<h6> {{$pops->no_pr}}</h6></div>
+      <div class="alert alert-success notification-bar"><span>Notice : </span> {{ session('success') }}<button type="button" class="dismisbar transparant pull-right"><i class="bx bx-x fa-lg"></i></button><br>Get your Number PR :<h6> {{$pops->no_pr}}</h6></div>
     @endif
 
     @if (session('alert'))
@@ -325,7 +325,7 @@
               </div>            
                            
               <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-times"></i>&nbspClose</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
                 <button type="submit" class="btn btn-sm btn-primary"><i class="bx bx-check"> </i>&nbspSubmit</button>
               </div>
             </form>

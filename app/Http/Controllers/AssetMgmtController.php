@@ -22,7 +22,7 @@ use App\User;
 use Mail;
 use Illuminate\Validation\Rule;
 use Validator;
-
+use Log;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Google_Client;
@@ -1163,376 +1163,386 @@ class AssetMgmtController extends Controller
         $update = AssetMgmtDetail::where('id_asset',$request->id_asset)
                 ->orderby('id','desc')
                 ->first();
-        $storeDetail = new AssetMgmtDetail();
-        $storeDetail->id_asset = $request->id_asset;
-        $updateAssetMgmt = AssetMgmt::where('id',$request->id_asset)->orderby('id','desc')->first();
 
-        if ($update->id_device_customer != $request->idDeviceCustomer) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with ID Device Customer ' .$update->id_device_customer. ' to ' . $request->idDeviceCustomer;
-            $storeLog->save();
-        }
-        $storeDetail->id_device_customer = $request->idDeviceCustomer;
+        try {
+            $storeDetail = new AssetMgmtDetail();
+            $storeDetail->id_asset = $request->id_asset;
+            $updateAssetMgmt = AssetMgmt::where('id',$request->id_asset)->orderby('id','desc')->first();
 
-        if ($update->accessoris != $request->accessoris) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update accessoris ' .$update->accessoris. ' to ' . $request->accessoris;
-            $storeLog->save();
-        }
-        $storeDetail->accessoris = $request->accessoris;
+            if ($update->id_device_customer != $request->idDeviceCustomer) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with ID Device Customer ' .$update->id_device_customer. ' to ' . $request->idDeviceCustomer;
+                $storeLog->save();
+            }
+            $storeDetail->id_device_customer = $request->idDeviceCustomer;
 
-        if ($update->pid != $request->pid) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Project ID ' .$update->pid. ' to ' . $request->pid;
-            $storeLog->save();
-        }
-        $storeDetail->pid = $request->pid;
+            if ($update->accessoris != $request->accessoris) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update accessoris ' .$update->accessoris. ' to ' . $request->accessoris;
+                $storeLog->save();
+            }
+            $storeDetail->accessoris = $request->accessoris;
 
-        if ($update->kota != $request->kota) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Kota ' .$update->kota. ' to ' . $request->kota;
-            $storeLog->save();
-        }
-        $storeDetail->kota = $request->kota;
+            if ($update->pid != $request->pid) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Project ID ' .$update->pid. ' to ' . $request->pid;
+                $storeLog->save();
+            }
+            $storeDetail->pid = $request->pid;
 
-        if ($update->alamat_lokasi != $request->alamatLokasi) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Alamat Lokasi ' .$update->alamat_lokasi. ' to ' . $request->alamatLokasi;
-            $storeLog->save();
-        }
-        $storeDetail->alamat_lokasi = $request->alamatLokasi;
+            if ($update->kota != $request->kota) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Kota ' .$update->kota. ' to ' . $request->kota;
+                $storeLog->save();
+            }
+            $storeDetail->kota = $request->kota;
 
-        if ($update->detail_lokasi != $request->detailLokasi) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Detail Lokasi ' .$update->detail_lokasi. ' to ' . $request->detailLokasi;
-            $storeLog->save();
-        }
-        $storeDetail->detail_lokasi = $request->detailLokasi;
+            if ($update->alamat_lokasi != $request->alamatLokasi) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Alamat Lokasi ' .$update->alamat_lokasi. ' to ' . $request->alamatLokasi;
+                $storeLog->save();
+            }
+            $storeDetail->alamat_lokasi = $request->alamatLokasi;
 
-        if ($update->service_point != $request->servicePoint) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Service Point ' .$update->service_point. ' to ' . $request->servicePoint;
-            $storeLog->save();
-        }
-        $storeDetail->service_point = $request->servicePoint;
+            if ($update->detail_lokasi != $request->detailLokasi) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Detail Lokasi ' .$update->detail_lokasi. ' to ' . $request->detailLokasi;
+                $storeLog->save();
+            }
+            $storeDetail->detail_lokasi = $request->detailLokasi;
 
-        $storeDetail->latitude = $request->latitude;
-        $storeDetail->longitude = $request->longitude;
+            if ($update->service_point != $request->servicePoint) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Service Point ' .$update->service_point. ' to ' . $request->servicePoint;
+                $storeLog->save();
+            }
+            $storeDetail->service_point = $request->servicePoint;
 
-        if ($update->ip_address != $request->ipAddress) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with IP Address ' .$update->ip_address. ' to ' . $request->ipAddress;
-            $storeLog->save();
-        }
-        $storeDetail->ip_address = $request->ipAddress;
+            $storeDetail->latitude = $request->latitude;
+            $storeDetail->longitude = $request->longitude;
 
-        if ($update->server != $request->ipServer) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Server ' .$update->server. ' to ' . $request->ipServer;
-            $storeLog->save();
-        }
-        $storeDetail->server = $request->ipServer;
+            if ($update->ip_address != $request->ipAddress) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with IP Address ' .$update->ip_address. ' to ' . $request->ipAddress;
+                $storeLog->save();
+            }
+            $storeDetail->ip_address = $request->ipAddress;
 
-        if ($update->port != $request->port) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Port ' .$update->port. ' to ' . $request->port;
-            $storeLog->save();
-        }
-        $storeDetail->port = $request->port;
+            if ($update->server != $request->ipServer) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Server ' .$update->server. ' to ' . $request->ipServer;
+                $storeLog->save();
+            }
+            $storeDetail->server = $request->ipServer;
 
-        if ($update->status_cust != $request->statusCust) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Status Customer ' .$update->status_cust. ' to ' . $request->statusCust;
-            $storeLog->save();
-        }
-        $storeDetail->status_cust = $request->statusCust;
+            if ($update->port != $request->port) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Port ' .$update->port. ' to ' . $request->port;
+                $storeLog->save();
+            }
+            $storeDetail->port = $request->port;
 
-        if ($update->second_level_support != $request->secondLevelSupport) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Second Level Support ' .$update->second_level_support. ' to ' . $request->secondLevelSupport;
-            $storeLog->save();
-        }
-        $storeDetail->second_level_support = $request->secondLevelSupport;
+            if ($update->status_cust != $request->statusCust) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Status Customer ' .$update->status_cust. ' to ' . $request->statusCust;
+                $storeLog->save();
+            }
+            $storeDetail->status_cust = $request->statusCust;
 
-        //update Operating System disini ngubah di database 
-        if ($update->operating_system != $request->operatingSystem) {
+            if ($update->second_level_support != $request->secondLevelSupport) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Second Level Support ' .$update->second_level_support. ' to ' . $request->secondLevelSupport;
+                $storeLog->save();
+            }
+            $storeDetail->second_level_support = $request->secondLevelSupport;
+
+            //update Operating System disini ngubah di database
+            if ($update->operating_system != $request->operatingSystem) {
+                $updateAssetMgmt = AssetMgmt::where('id',$request->id_asset)->first();
+                //$storeDetail->operating_system = $request->operatingSystem;
+
+                $lines = explode("\n", $updateAssetMgmt->spesifikasi);
+
+                foreach($lines as $index=>$line){
+                    $line = trim($line);
+                    if (stripos($line, 'OS Version') === 0) {
+                        $lines[$index] = 'OS Version : ' . $request->operatingSystem;
+                        break;
+                    }
+                }
+                $updateAssetMgmt->spesifikasi = implode("\n", $lines);
+                $updateAssetMgmt->save();
+
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Operating System ' .$update->operating_system. ' to ' . $request->operatingSystem;
+                $storeLog->save();
+            }
+            $storeDetail->operating_system = $request->operatingSystem;
+            $storeDetail->save();
+
+
+            if ($update->version_os != $request->versionOs) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Version OS ' .$update->version_os. ' to ' . $request->versionOs;
+                $storeLog->save();
+            }
+            $storeDetail->version_os = $request->versionOs;
+
+            if ($update->installed_date != $request->installedDate) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Installed Date ' .$update->installed_date. ' to ' . $request->installedDate;
+                $storeLog->save();
+            }
+            $storeDetail->installed_date = $request->installedDate;
+
+            if ($update->license != $request->license) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with License ' .$update->license. ' to ' . $request->license;
+                $storeLog->save();
+            }
+            $storeDetail->license = $request->license;
+
+            if ($update->license_start_date != $request->licenseStartDate) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with License Start Date ' .$update->license_start_date. ' to ' . $request->licenseStartDate;
+                $storeLog->save();
+            }
+            $storeDetail->license_start_date = $request->licenseStartDate;
+
+            if ($update->license_end_date != $request->licenseEndDate) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with License End Date ' .$update->license_end_date. ' to ' . $request->licenseEndDate;
+                $storeLog->save();
+            }
+            $storeDetail->license_end_date = $request->licenseEndDate;
+
+            if ($update->maintenance_start != $request->maintenanceStart) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Maintenance Start ' .$update->maintenance_start. ' to ' . $request->maintenanceStart;
+                $storeLog->save();
+            }
+            $storeDetail->maintenance_start = $request->maintenanceStart;
+
+            if ($update->maintenance_end != $request->maintenanceEnd) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Maintenance End ' .$update->maintenance_end. ' to ' . $request->maintenanceEnd;
+                $storeLog->save();
+            }
+            $storeDetail->maintenance_end = $request->maintenanceEnd;
+
+            $updatePic = !isset($update->pic) ? "" : $update->pic;
+            $requestPic = !isset($request->inputPic) ? "" : $request->inputPic;
+
+            if ($updatePic != $requestPic && $update->pid == 'INTERNAL') {
+                $checkBASTPengembalian = DB::table('tb_asset_management_dokumen')
+                    ->where('id_detail_asset',$update->id_asset)
+                    ->where('document_name', 'Berita Acara Pengembalian')
+                    ->orderBy('id','desc')->first();
+
+                if ($checkBASTPengembalian == null && $update->pic !== null && $update->pic !== "null") {
+                    // $storeDetailAvailable = $update->replicate();
+                    // $storeDetailAvailable->installed_date = null;
+                    // $storeDetailAvailable->pic = null;
+                    // $storeDetailAvailable->save();
+                    Log::info('masuk bast pengembalian');
+//                Log::info($update);
+
+                    $pdfPathPengembalian = $this->getPdfBASTPengembalian($update->id_asset, $update->id);
+                    $this->uploadPdfBASTPengembalian($update->id_asset, $pdfPathPengembalian);
+                }
+
+
+                $pic_old = User::select('users.name')->join('role_user','role_user.user_id','=','users.nik')
+                    ->join('roles','roles.id','=','role_user.role_id')->where('users.nik',$update->pic);
+
+                $pic_new = User::select('users.name')->join('role_user','role_user.user_id','=','users.nik')
+                    ->join('roles','roles.id','=','role_user.role_id')->where('users.nik',$request->inputPic);
+
+
+                $pic_old_data = $pic_old->first();
+                $pic_new_data = $pic_new->first();
+
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::user()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+
+                if ($pic_old_data && $pic_new_data) {
+                    $storeLog->activity = 'Update PIC Asset from ' . $pic_old_data->name . ' to ' . $pic_new_data->name;
+                } else if ($pic_new_data) {
+                    $storeLog->activity = 'Update PIC Asset to ' . $pic_new_data->name;
+                }
+                $storeLog->save();
+
+                // if($pic_old->first() !== null){
+                //     $storeLog = new AssetMgmtLog();
+                //     $storeLog->id_asset = $request->id_asset;
+                //     $storeLog->operator = Auth::User()->name;
+                //     $storeLog->date_add = Carbon::now()->toDateTimeString();
+                //     $storeLog->activity = 'Update PIC Asset from ' .$pic_old->first()->name. ' to ' . $pic_new->first()->name;
+                //     $storeLog->save();
+                // }else{
+                //     $storeLog = new AssetMgmtLog();
+                //     $storeLog->id_asset = $request->id_asset;
+                //     $storeLog->operator = Auth::User()->name;
+                //     $storeLog->date_add = Carbon::now()->toDateTimeString();
+                //     $storeLog->activity = 'Update PIC Asset to ' . $pic_new->first()->name;
+                //     $storeLog->save();
+                // }
+
+                $storeDetail->pic = $request->inputPic;
+            }else{
+                $storeDetail->pic = $request->inputPic;
+            }
+
+            if ($update->client != $request->client) {
+                $storeLog = new AssetMgmtLog();
+                $storeLog->id_asset = $request->id_asset;
+                $storeLog->operator = Auth::User()->name;
+                $storeLog->date_add = Carbon::now()->toDateTimeString();
+                $storeLog->activity = 'Update Detail Asset with Client ' .$update->client. ' to ' . $request->client;
+                $storeLog->save();
+            }
+
             $updateAssetMgmt = AssetMgmt::where('id',$request->id_asset)->first();
-            //$storeDetail->operating_system = $request->operatingSystem;
 
-            $lines = explode("\n", $updateAssetMgmt->spesifikasi);
-            
-            foreach($lines as $index=>$line){
-                $line = trim($line);
-                if (stripos($line, 'OS Version') === 0) {
-                    $lines[$index] = 'OS Version : ' . $request->operatingSystem;
-                    break;
-                }
-            }
-            $updateAssetMgmt->spesifikasi = implode("\n", $lines);
-            $updateAssetMgmt->save();
-
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Operating System ' .$update->operating_system. ' to ' . $request->operatingSystem;
-            $storeLog->save();
-        }
-        $storeDetail->operating_system = $request->operatingSystem;    
-        $storeDetail->save();
-        
-
-        if ($update->version_os != $request->versionOs) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Version OS ' .$update->version_os. ' to ' . $request->versionOs;
-            $storeLog->save();
-        }
-        $storeDetail->version_os = $request->versionOs;
-
-        if ($update->installed_date != $request->installedDate) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Installed Date ' .$update->installed_date. ' to ' . $request->installedDate;
-            $storeLog->save();
-        }
-        $storeDetail->installed_date = $request->installedDate;
-
-        if ($update->license != $request->license) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with License ' .$update->license. ' to ' . $request->license;
-            $storeLog->save();
-        }
-        $storeDetail->license = $request->license;
-
-        if ($update->license_start_date != $request->licenseStartDate) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with License Start Date ' .$update->license_start_date. ' to ' . $request->licenseStartDate;
-            $storeLog->save();
-        }
-        $storeDetail->license_start_date = $request->licenseStartDate;
-
-        if ($update->license_end_date != $request->licenseEndDate) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with License End Date ' .$update->license_end_date. ' to ' . $request->licenseEndDate;
-            $storeLog->save();
-        }
-        $storeDetail->license_end_date = $request->licenseEndDate;
-
-        if ($update->maintenance_start != $request->maintenanceStart) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Maintenance Start ' .$update->maintenance_start. ' to ' . $request->maintenanceStart;
-            $storeLog->save();
-        }
-        $storeDetail->maintenance_start = $request->maintenanceStart;
-
-        if ($update->maintenance_end != $request->maintenanceEnd) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Maintenance End ' .$update->maintenance_end. ' to ' . $request->maintenanceEnd;
-            $storeLog->save();
-        }
-        $storeDetail->maintenance_end = $request->maintenanceEnd;
-
-        $updatePic = !isset($update->pic) ? "" : $update->pic;
-        $requestPic = !isset($request->inputPic) ? "" : $request->inputPic;
-        
-        if ($updatePic != $requestPic && $update->pid == 'INTERNAL') {
-            $checkBASTPengembalian = DB::table('tb_asset_management_dokumen')
-                                    ->where('id_detail_asset',$update->id_asset)
-                                    ->where('document_name', 'Berita Acara Pengembalian')
-                                    ->orderBy('id','desc')->first();
-
-            if ($checkBASTPengembalian == null && ($update->pic !== null || $update->pic != "null")) {
-                // $storeDetailAvailable = $update->replicate();
-                // $storeDetailAvailable->installed_date = null;
-                // $storeDetailAvailable->pic = null;
-                // $storeDetailAvailable->save();   
-
-                $pdfPathPengembalian = $this->getPdfBASTPengembalian($update->id_asset, $update->id);
-                $this->uploadPdfBASTPengembalian($update->id_asset, $pdfPathPengembalian);
-            }
-
-
-            $pic_old = User::select('users.name')->join('role_user','role_user.user_id','=','users.nik')
-                            ->join('roles','roles.id','=','role_user.role_id')->where('users.nik',$update->pic);
-
-            $pic_new = User::select('users.name')->join('role_user','role_user.user_id','=','users.nik')
-                                ->join('roles','roles.id','=','role_user.role_id')->where('users.nik',$request->inputPic);
-
-
-            $pic_old_data = $pic_old->first(); 
-            $pic_new_data = $pic_new->first();
-
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::user()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-
-            if ($pic_old_data && $pic_new_data) {
-                $storeLog->activity = 'Update PIC Asset from ' . $pic_old_data->name . ' to ' . $pic_new_data->name;
-            } else if ($pic_new_data) {
-                $storeLog->activity = 'Update PIC Asset to ' . $pic_new_data->name;
-            } 
-            $storeLog->save();
-
-            // if($pic_old->first() !== null){
-            //     $storeLog = new AssetMgmtLog();
-            //     $storeLog->id_asset = $request->id_asset;
-            //     $storeLog->operator = Auth::User()->name;
-            //     $storeLog->date_add = Carbon::now()->toDateTimeString();
-            //     $storeLog->activity = 'Update PIC Asset from ' .$pic_old->first()->name. ' to ' . $pic_new->first()->name;
-            //     $storeLog->save();
-            // }else{
-            //     $storeLog = new AssetMgmtLog();
-            //     $storeLog->id_asset = $request->id_asset;
-            //     $storeLog->operator = Auth::User()->name;
-            //     $storeLog->date_add = Carbon::now()->toDateTimeString();
-            //     $storeLog->activity = 'Update PIC Asset to ' . $pic_new->first()->name;
-            //     $storeLog->save();
-            // }
-
-            $storeDetail->pic = $request->inputPic; 
-        }else{   
-            $storeDetail->pic = $request->inputPic;
-        }
-
-        if ($update->client != $request->client) {
-            $storeLog = new AssetMgmtLog();
-            $storeLog->id_asset = $request->id_asset;
-            $storeLog->operator = Auth::User()->name;
-            $storeLog->date_add = Carbon::now()->toDateTimeString();
-            $storeLog->activity = 'Update Detail Asset with Client ' .$update->client. ' to ' . $request->client;
-            $storeLog->save();
-        }
-
-        $updateAssetMgmt = AssetMgmt::where('id',$request->id_asset)->first();
-
-        if (isset($request->inputPic)) {
-            $updateAssetMgmt->status = 'Installed';
-            $updateAssetMgmt->update();
-        }else{
-            if ($updateAssetMgmt->status != 'Rent' || $updateAssetMgmt != 'Unavailable') {
-                $updateAssetMgmt->status = 'Available';
+            if (isset($request->inputPic)) {
+                $updateAssetMgmt->status = 'Installed';
                 $updateAssetMgmt->update();
-            }
-        }
-
-        $storeDetail->client = $request->client;
-        $storeDetail->pr     = $update->pr;
-        $storeDetail->date_add = Carbon::now()->toDateTimeString();
-        $storeDetail->related_id_asset = $update->related_id_asset;
-
-        $id = AssetMgmt::where('id',$request->id_asset)->first()->id_asset;
-
-        if (isset($request->inputDoc)) {
-            if ($request->inputDoc != '' && $request->inputDoc != "undefined") {
-                $get_parent_drive = AssetMgmt::where('id', $request->id_asset)->first();
-
-                $file                   = $request->file('inputDoc');
-                $fileName               = 'Bukti Asset '.$id.'.pdf';
-                $filePath               = $file->getRealPath();
-                $extension              = $file->getClientOriginalExtension();
-
-                if ($get_parent_drive->parent_id_drive == null) {
-                    $parentID = $this->googleDriveMakeFolder($request->id_asset);
-                } else {
-                    $parentID = [];
-                    $parent_id = explode('"', $get_parent_drive->parent_id_drive)[1];
-                    array_push($parentID,$parent_id);
+            }else{
+                if ($updateAssetMgmt->status != 'Rent' || $updateAssetMgmt != 'Unavailable') {
+                    $updateAssetMgmt->status = 'Available';
+                    $updateAssetMgmt->update();
                 }
-
-                $storeDetail->document_location     = "Asset/Bukti Asset " . $id;
-                $storeDetail->document_name         = 'Bukti Asset '.$id;
-                $storeDetail->link_drive            = $this->googleDriveUploadCustom($fileName,$filePath,$parentID);
             }
-        }
 
-        $storeDetail->save();
+            $storeDetail->client = $request->client;
+            $storeDetail->pr     = $update->pr;
+            $storeDetail->date_add = Carbon::now()->toDateTimeString();
+            $storeDetail->related_id_asset = $update->related_id_asset;
 
-        if ($updatePic != $requestPic) {
-            $pdfPathBaru = $this->getPdfBASTAsset($request->id_asset,$storeDetail->id);
-            $this->uploadPdfBAST($request->id_asset,$pdfPathBaru);
+            $id = AssetMgmt::where('id',$request->id_asset)->first()->id_asset;
 
-            $to = User::select('email','name')
+            if (isset($request->inputDoc)) {
+                if ($request->inputDoc != '' && $request->inputDoc != "undefined") {
+                    $get_parent_drive = AssetMgmt::where('id', $request->id_asset)->first();
+
+                    $file                   = $request->file('inputDoc');
+                    $fileName               = 'Bukti Asset '.$id.'.pdf';
+                    $filePath               = $file->getRealPath();
+                    $extension              = $file->getClientOriginalExtension();
+
+                    if ($get_parent_drive->parent_id_drive == null) {
+                        $parentID = $this->googleDriveMakeFolder($request->id_asset);
+                    } else {
+                        $parentID = [];
+                        $parent_id = explode('"', $get_parent_drive->parent_id_drive)[1];
+                        array_push($parentID,$parent_id);
+                    }
+
+                    $storeDetail->document_location     = "Asset/Bukti Asset " . $id;
+                    $storeDetail->document_name         = 'Bukti Asset '.$id;
+                    $storeDetail->link_drive            = $this->googleDriveUploadCustom($fileName,$filePath,$parentID);
+                }
+            }
+
+            $storeDetail->save();
+
+            if ($updatePic != $requestPic) {
+                $pdfPathBaru = $this->getPdfBASTAsset($request->id_asset,$storeDetail->id);
+                $this->uploadPdfBAST($request->id_asset,$pdfPathBaru);
+
+                $to = User::select('email','name')
                     ->join('role_user','role_user.user_id','=','users.nik')
                     ->where('nik',$request->inputPic)->first();
 
-            $data = [
-                [   
-                    'name'              => $to->name,
-                    'id_asset'          => $storeDetail->id_asset, 
-                    'category'          => $storeDetail->category,
-                    'type_device'       => $storeDetail->vendor . " - " . $storeDetail->type_device . " - " . $storeDetail->serial_number,
-                    'spesifikasi'       => $storeDetail->spesifikasi,
-                    'link_drive'        => AssetMgmtDocument::where('id_detail_asset',$storeDetail->id)->first()->link_drive,
-                ]
-            ];
+                $data = [
+                    [
+                        'name'              => $to->name,
+                        'id_asset'          => $storeDetail->id_asset,
+                        'category'          => $storeDetail->category,
+                        'type_device'       => $storeDetail->vendor . " - " . $storeDetail->type_device . " - " . $storeDetail->serial_number,
+                        'spesifikasi'       => $storeDetail->spesifikasi,
+                        'link_drive'        => AssetMgmtDocument::where('id_detail_asset',$storeDetail->id)->first()->link_drive,
+                    ]
+                ];
 
-            Mail::to($to->email)->send(new MailGenerateBAST($data,'[SIMS-APP] Generate BAST')); 
-        } else {
-            $getIdDetailAsset = AssetMgmtDocument::where('id_detail_asset',$update->id)->first(); 
-            if ($getIdDetailAsset) {
-                $storeDokumen = $getIdDetailAsset->replicate();
-                $storeDokumen->id_detail_asset = $storeDetail->id;
-                $storeDokumen->save();
-            } 
+                Mail::to($to->email)->send(new MailGenerateBAST($data,'[SIMS-APP] Generate BAST'));
+            } else {
+                $getIdDetailAsset = AssetMgmtDocument::where('id_detail_asset',$update->id)->first();
+                if ($getIdDetailAsset) {
+                    $storeDokumen = $getIdDetailAsset->replicate();
+                    $storeDokumen->id_detail_asset = $storeDetail->id;
+                    $storeDokumen->save();
+                }
 
+            }
+        }catch (\Exception $e){
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
+            return $e->getMessage();
         }
+
 
         // BAST that is undefined
         // if (isset($request->inputDocBA)) {
@@ -3272,12 +3282,13 @@ class AssetMgmtController extends Controller
     //     return $data;
     // }
 
+//    public function getPdfBASTAsset(Request $request) // Request $request
     public function getPdfBASTAsset($id_asset, $id_detail_asset) // Request $request
-    {   
-        $pihak_pertama = User::select('users.name','users.nik','roles.name as departement','phone','ttd','date_of_entry as entry_date')
+    {
+        $pihak_pertama = DB::table('users')->select('users.name','users.nik','roles.name as departement','phone','ttd','date_of_entry as entry_date')
                         ->join('role_user','role_user.user_id','=','users.nik')
                         ->join('roles','roles.id','=','role_user.role_id')
-                        ->where('nik',Auth::User()->nik)
+                        ->where('nik',Auth::user()->nik)
                         ->first(); 
 
         $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')
@@ -3297,7 +3308,7 @@ class AssetMgmtController extends Controller
                         ->join('role_user','role_user.user_id','=','users.nik')
                         ->join('roles','roles.id','=','role_user.role_id')
                         ->where('roles.mini_group','Supply Chain & IT Support')
-                        ->orWhere('roles.mini_group','Internal Operation Support Manager')
+                        ->orWhere('roles.mini_group','Internal Operation Support')
                         ->where('roles.name','like','%Manager%')
                         ->first(); 
         }
@@ -3333,7 +3344,7 @@ class AssetMgmtController extends Controller
                         ->select('tb_asset_management_detail.id','tb_asset_management_detail.id_asset','roles.name','roles.group','users.name as name_pk','roles.mini_group','ttd','users.nik','users.date_of_entry as entry_date','users.phone','installed_date', 'users.id_territory')
                         ->where('tb_asset_management_detail.id_asset',$id_asset) //request->
                         ->where('tb_asset_management_detail.id',$id_detail_asset); //request->
-                        // ->where('tb_asset_management_detail.id_asset',$id_asset);
+                        // ->where('tb_asset_management_detail.id_asset',$request->id_asset);
 
         $pihak_kedua = $cek_role_pk->first();
         $roleName = $pihak_kedua->name;
@@ -3382,8 +3393,9 @@ class AssetMgmtController extends Controller
                             ->join('role_user','role_user.user_id','=','users.nik')
                             ->join('roles','roles.id','=','role_user.role_id')
                             ->where('group','like','%'.$ppGroup.'%')
-                            ->where('roles.name','like','%Project Management Manager%')
-                            ->first(); 
+                            ->where('roles.name','like','%Project Management Office Manager%')
+                            ->first();
+
         }
         else if (strpos($roleName, 'Renumeration, Personalia & GS Manager') === 0) {
             $atasan_pk = User::select('users.name','users.nik','roles.mini_group as departement','phone')
@@ -3398,8 +3410,8 @@ class AssetMgmtController extends Controller
                             ->join('roles','roles.id','=','role_user.role_id')
                             ->where('group','like','%'.$ppGroup.'%')
                             ->where('roles.name','like','VP%')
-                            ->first(); 
-        } 
+                            ->first();
+        }
         else if ($roleName === "Chief Executive Officer") {
             $atasan_pk = (object) [
                 'name'       => '-',
@@ -3414,7 +3426,7 @@ class AssetMgmtController extends Controller
                             ->join('roles','roles.id','=','role_user.role_id')
                             ->where('roles.name','like','Chief Executive Officer')
                             ->first(); 
-        } 
+        }
 
 
         // if (($salesUser && $salesUser->id === $pihak_kedua->id) || ($financeUser && $financeUser->id === $pihak_kedua->id)) {
@@ -3491,7 +3503,6 @@ class AssetMgmtController extends Controller
                                 ->where('roles.name','<>','Delivery Project Manager')
                                 ->where('roles.mini_group','like','%'.$mini_group.'%')
                                 ->first();
-        
                 if ($isManagerOnMiniGroup) {
                     $atasan_pk = $atasan_pk
                             ->where('roles.name','like','%Manager%')
@@ -3504,7 +3515,7 @@ class AssetMgmtController extends Controller
                             ->where('roles.name','like','VP%')
                             ->where('group','like','%'. $group .'%')
                             ->first();
-                } 
+                }
             }
             
             // $isManagerOnMiniGroup = User::select('users.name','users.nik','roles.mini_group as departement','phone')
@@ -3547,6 +3558,8 @@ class AssetMgmtController extends Controller
             //             ->first();
             // } 
         }
+
+//        return $atasan_pk->query();
         $installed_date = DB::table('tb_asset_management_detail')
                         ->select('installed_date')
                         ->where('tb_asset_management_detail.id_asset',$id_asset) //request->
@@ -3744,7 +3757,7 @@ class AssetMgmtController extends Controller
                             ->join('role_user','role_user.user_id','=','users.nik')
                             ->join('roles','roles.id','=','role_user.role_id')
                             ->where('group','like','%'.$ppGroup.'%')
-                            ->where('roles.name','like','%Project Management Manager%')
+                            ->where('roles.name','like','%Project Management Office Manager%')
                             ->first(); 
         }
         else if (strpos($roleName, 'Renumeration, Personalia & GS Manager') === 0) {

@@ -9,6 +9,8 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
   <!-- <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"> -->
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/select2/select2.css')}}" />
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/bootstrap-select/bootstrap-select.css')}}" />
+  <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
+
   <style type="text/css">
     .icon{
       width: 90px;
@@ -109,6 +111,9 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
 
     .form-group{
       margin-bottom: 15px;
+    }
+    .swal2-deny{
+      display: none!important;
     }
   </style>
 @endsection
@@ -486,18 +491,18 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
     </div>
   </div>
 
-  <div id="changePassword" class="modal fade" role="dialog">
+  <div id="changePasswordAlert" class="modal fade" role="dialog">
     <div class="modal-dialog modal-sm">
-      <div class="modal-content modal-style">
-        <div class="outer-reset">
-          <button type="button" class="close pull-right" style="width: 20px;" data-bs-dismiss="modal">&times;</button>
+      <div class="modal-content">
+        <div class="modal-header outer-reset">
+          <button type="button" class="btn-close" style="width: 20px;" data-bs-dismiss="modal"></button>
           <div class="inner-reset">
-            <i class="bx bx-warning bx-7x" style="color: white"></i>
+            <i class="bx bx-error bx-lg" style="color: white;font-size: larger!important;"></i>
           </div>
         </div>
         <div class="modal-body">
           <h6 style="text-align: center;"><b>Please change default password to protect your account !</b></h6>
-            <a href="{{url('/profile_user')}}#changePassword">
+            <a href="{{url('/profile_user')}}#changePassword" style="margin:80px">
               <span class="btn btn-sm btn-info btn-block" style="border-radius: 24px">Change Password</span>
             </a>
           <span data-bs-dismiss="modal" style="cursor: pointer;">
@@ -505,7 +510,7 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
           </span>
         </div>
         <div class="modal-footer">
-          <p class="text-center">©SIMS - 2023</p>              
+          <p class="text-center">©SIMS - {{date('Y')}}</p>              
         </div>
       </div>
     </div>
@@ -529,21 +534,21 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
                 <div class="form-group">
                   <label for="">Idea*</label>
                   <input type="text" class="form-control" name="idea" id="idea" placeholder="Input ide anda" onkeyup="fillInput('idea')" required>
-                  <span class="help-block" style="display:none!important;">Please fill Idea!</span>
+                  <span class="invalid-feedback" style="display:none!important;">Please fill Idea!</span>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Business Concept*</label>
                   <textarea class="form-control" name="konsep_bisnis" id="konsep_bisnis" cols="30" rows="10" onkeyup="fillInput('konsep_bisnis')" required></textarea>
-                  <span class="help-block" style="display:none!important;">Please fill Business Concept!</span>
+                  <span class="invalid-feedback" style="display:none!important;">Please fill Business Concept!</span>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="">Reference*</label>
                   <textarea class="form-control" name="referensi_bisnis" id="referensi_bisnis" cols="30" rows="10" onkeyup="fillInput('referensi')" required></textarea>
-                  <span class="help-block" style="display:none!important;">Please fill Reference!</span>
+                  <span class="invalid-feedback" style="display:none!important;">Please fill Reference!</span>
                 </div>
               </div>
             </div>
@@ -560,6 +565,7 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
 @endsection
 @section('scriptImport')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script> -->
 <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/bootstrap-select/bootstrap-select.js')}}"></script>
@@ -591,10 +597,6 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
     borderColor = config.colors.borderColor;
   }
 
-  if("{{Auth::User()->isDefaultPassword}}" == 'true'){
-      $("#changePassword").modal('show')
-  }
-
   $(document).ready(function(){
     startTime()
     initiateSmallBox(moment().year(),"initiate")
@@ -618,6 +620,11 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
       $("#ideaHub").modal("show");
     }
 
+    if("{{Auth::User()->isDefaultPassword}}" == 'true'){
+      // $("#changePasswordAlert").modal('show')
+      $("#changePasswordAlert").modal('show')
+    }
+
 
     $("#submitIdea").click(function () {
       let idea = $("#idea").val();
@@ -626,17 +633,17 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
       let referensiBisnis = $("#referensi_bisnis").val();
 
       if (!idea) {
-        $("#idea").closest('.form-group').addClass('has-error')
-        $("#idea").next('.help-block').show();
-        $("#idea").prev('.input-group-addon').css("background-color","red");
+        $("#idea").closest('.form-group').addClass('needs-validation')
+        $("#idea").next('.invalid-feedback').show();
+        $("#idea").prev('.input-group-text').css("background-color","red");
       }else if(!konsepBisnis){
-        $("#konsep_bisnis").closest('.form-group').addClass('has-error')
-        $("#konsep_bisnis").next('.help-block').show();
-        $("#konsep_bisnis").prev('.input-group-addon').css("background-color","red");
+        $("#konsep_bisnis").closest('.form-group').addClass('needs-validation')
+        $("#konsep_bisnis").next('.invalid-feedback').show();
+        $("#konsep_bisnis").prev('.input-group-text').css("background-color","red");
       }else if(!referensiBisnis){
-        $("#referensi_bisnis").closest('.form-group').addClass('has-error')
-        $("#referensi_bisnis").next('.help-block').show();
-        $("#referensi_bisnis").prev('.input-group-addon').css("background-color","red");
+        $("#referensi_bisnis").closest('.form-group').addClass('needs-validation')
+        $("#referensi_bisnis").next('.invalid-feedback').show();
+        $("#referensi_bisnis").prev('.input-group-text').css("background-color","red");
       }else{
         $.ajax({
           url: "{{ url('/idea_hub/store') }}",
@@ -716,17 +723,17 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
 
   function fillInput(val) {
     if (val == "idea") {
-      $("#idea").closest('.form-group').removeClass('has-error')
-      $("#idea").closest('.form-group').find('.help-block').attr('style','display:none!important');
-      $("#idea").prev('.input-group-addon').css("background-color", "red");
+      $("#idea").closest('.form-group').removeClass('needs-validation')
+      $("#idea").closest('.form-group').find('.invalid-feedback').attr('style','display:none!important');
+      $("#idea").prev('.input-group-text').css("background-color", "red");
     } else if (val == "konsep_bisnis") {
-      $("#konsep_bisnis").closest('.form-group').closest('.form-group').removeClass('has-error')
-      $("#konsep_bisnis").closest('.form-group').find('.help-block').attr('style','display:none!important');
-      $("#konsep_bisnis").prev('.input-group-addon').css("background-color", "red");
+      $("#konsep_bisnis").closest('.form-group').closest('.form-group').removeClass('needs-validation')
+      $("#konsep_bisnis").closest('.form-group').find('.invalid-feedback').attr('style','display:none!important');
+      $("#konsep_bisnis").prev('.input-group-text').css("background-color", "red");
     } else if (val == "referensi") {
-      $("#referensi_bisnis").closest('.form-group').closest('.form-group').removeClass('has-error')
-      $("#referensi_bisnis").closest('.form-group').find('.help-block').attr('style','display:none!important');
-      $("#referensi_bisnis").prev('.input-group-addon').css("background-color", "red");
+      $("#referensi_bisnis").closest('.form-group').closest('.form-group').removeClass('needs-validation')
+      $("#referensi_bisnis").closest('.form-group').find('.invalid-feedback').attr('style','display:none!important');
+      $("#referensi_bisnis").prev('.input-group-text').css("background-color", "red");
     }
   }
 

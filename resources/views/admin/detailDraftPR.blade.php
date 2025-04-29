@@ -100,6 +100,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h6 class="modal-title">Sirkulasi PR</h6>
+          <button class="btn-close" data-bs-togggle="modal"></button>
         </div>
         <div class="modal-body">
           <form method="POST" action="" id="sirkulasi_pr" name="sirkulasi_pr">
@@ -133,16 +134,16 @@
                 </table>
                 <div id="bottomPreviewSirkulasi">
                 </div>
-              </div>  
-              <div class="modal-footer">
-                <a target="_blank" class="btn btn-sm bg-orange pull-left" id="showPdf">Show PDF</a>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddNote" class="btn btn-sm text-bg-primary pull-left">Notes</button>
-                <button type="button" id="btnReject" class="btn btn-sm btn-danger">Reject</button>
-                <button type="button" id="btnAccept" class="btn btn-sm btn-success">Accept</button>
-              </div>            
+              </div>       
             </div>           
           </form>
         </div>
+        <div class="modal-footer">
+          <a target="_blank" class="btn btn-sm btn-warning" id="showPdf">Show PDF</a>
+          <button type="button" data-bs-toggle="modal" data-bs-target="#ModalAddNote" class="btn btn-sm text-bg-primary">Notes</button>
+          <button type="button" id="btnReject" class="btn btn-sm btn-danger">Reject</button>
+          <button type="button" id="btnAccept" class="btn btn-sm btn-success">Accept</button>
+        </div>  
       </div>
     </div>
   </div>
@@ -726,6 +727,12 @@
           data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
 
           callback.call(this, data);
+
+          if ($('html').hasClass('dark-style')) {
+            // do something if it has the class
+            console.log("betul")
+            $(".mentions").attr('style','display:none!important')
+          }
         }
       });
     }
@@ -742,12 +749,12 @@
   $(document).ready(function(){    
     // Pace.restart()
     // Pace.track(function() {
-      if (isLastStorePembanding == 'true') {
-        pembanding()
-      }else{
-        showDetail() 
-        loadDataSubmitted()   
-      } 
+    if (isLastStorePembanding == 'true') {
+      pembanding()
+    }else{
+      showDetail() 
+      loadDataSubmitted()   
+    } 
     // })
 
     $('input[class="files"]').change(function(){
@@ -1323,7 +1330,13 @@
 
             callback.call(this, data);
           }
-        });    
+        });  
+
+        if ($('html').hasClass('dark-style')) {
+          // do something if it has the class
+          console.log("betul")
+          $(".mentions").attr('style','display:none!important')
+        }  
       }
     })
   }
@@ -5284,10 +5297,10 @@
                 append = append + '<span style="font-size: 12px; important">'+ i +'</span>'
               append = append + '</td>'
               append = append + '<td width="20%">'
-                append = append + "<input id='inputNameProductEdit' data-value='' disabled style='font-size: 12px; important' class='form-control' type='' name='' value='"+ item.name_product + "'>"
+                append = append + "<input id='inputNameProductEdit' data-value='' disabled style='font-size: 12px;width:200px' class='form-control' type='' name='' value='"+ item.name_product + "'>"
               append = append + '</td>'
               append = append + '<td width="30%">'
-                append = append + '<textarea id="textAreaDescProductEdit" disabled data-value="" style="font-size: 12px; important;resize:none;height:150px;width:200px" class="form-control">'+ item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number
+                append = append + '<textarea id="textAreaDescProductEdit" disabled data-value="" style="font-size: 12px; important;resize:none;height:150px;width:400px" class="form-control">'+ item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number
                 append = append + '</textarea>'
               append = append + '</td>'
               append = append + '<td width="7%">'
@@ -5299,10 +5312,10 @@
               append = append + '</select>' 
               append = append + '</td>'
               append = append + '<td width="15%">'
-                append = append + '<input id="inputPriceEdit" disabled data-value="" style="font-size: 12px;width:100px" class="form-control" type="" name="" value="'+ formatter.format(item.nominal_product) +'">'
+                append = append + '<input id="inputPriceEdit" disabled data-value="" style="font-size: 12px;width:150px" class="form-control" type="" name="" value="'+ formatter.format(item.nominal_product) +'">'
               append = append + '</td>'
               append = append + '<td width="15%">'
-                append = append + '<input id="inputTotalPriceEdit" disabled data-value="" style="font-size: 12px;width:100px" class="form-control inputTotalPriceEdit" type="" name="" value="'+ formatter.format(item.grand_total) +'">'
+                append = append + '<input id="inputTotalPriceEdit" disabled data-value="" style="font-size: 12px;width:150px" class="form-control inputTotalPriceEdit" type="" name="" value="'+ formatter.format(item.grand_total) +'">'
               append = append + '</td>'
               append = append + '<td width="8%">'
                 append = append + '<button type="button" onclick="nextPrevAddPembanding(-1,'+ item.id_product +')" id="btnEditProduk" data-id="'+ value +'" data-value="'+ valueEdit +'" class="btn btn-sm btn-xs btn-warning bx bx-edit btnEditProduk" style="width:25px;height:25px;margin-bottom:5px"></button>'
@@ -5708,5 +5721,6 @@
       }) 
     }
   }
+
 </script>
 @endsection

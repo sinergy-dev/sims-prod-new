@@ -61,11 +61,11 @@
             @endif
 
             @if (session('success'))
-                <div class="alert alert-success notification-bar"><span>Notice : </span> {{ session('success') }}<button type="button" class="dismisbar transparant pull-right"><i class="bx bx-times fa-lg"></i></button><br>Get your Quote Number :<h6> {{$pops->quote_number}}</h6></div>
+                <div class="alert alert-success notification-bar"><span>Notice : </span> {{ session('success') }}<button type="button" class="dismisbar transparant pull-right"><i class="bx bx-x fa-lg"></i></button><br>Get your Quote Number :<h6> {{$pops->quote_number}}</h6></div>
             @endif
 
             @if (session('sukses'))
-                <div class="alert alert-success notification-bar"><span>Notice : </span> {{ session('success') }}<button type="button" class="dismisbar transparant pull-right"><i class="bx bx-times fa-lg"></i></button><br>Get your Quote Number :<h6> {{$pops2->quote_number}}</h6></div>
+                <div class="alert alert-success notification-bar"><span>Notice : </span> {{ session('success') }}<button type="button" class="dismisbar transparant pull-right"><i class="bx bx-x fa-lg"></i></button><br>Get your Quote Number :<h6> {{$pops2->quote_number}}</h6></div>
             @endif
 
             @if (session('alert'))
@@ -286,7 +286,7 @@
                                         <i class="bx bx-cloud-upload" style="margin-left:5px">
                                             <input id="uploadCsv" type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: none;"></i>
                                         <label for="uploadCsv">Upload CSV</label>
-                                        <i class="bx bx-times hidden" onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
+                                        <i class="bx bx-x hidden" onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
                                     </div>
                                 </div>
                                 <div style="display: flex;">
@@ -726,16 +726,16 @@
         function addQuote(n){
             let x = document.getElementsByClassName("tab-add");
             x[n].style.display = "inline"
-            x[n].classList.remove("d-none")
+            
             if(n == 0){
-                document.getElementById("prevBtnAdd").classList.add("d-none");
+                document.getElementById("prevBtnAdd").style.display = 'none';
                 $("#nextBtnAdd").attr('onclick','nextPrevAdd(1)')
             }else if(n == 1){
                 select2TypeProduct();
                 $("nextBtnAdd").attr('onclick', 'nextPrevAdd(1)')
                 $("#prevBtnAdd").attr('onclick','nextPrevAdd(-1)')
                 document.getElementById('prevBtnAdd').innerText = "Back";
-                document.getElementById("prevBtnAdd").classList.remove("d-none");
+                document.getElementById("prevBtnAdd").style.display = 'inline';
                 $('.money').mask('#.##0,00', {reverse: true})
                 $("#btnInitiateAddProduct").click(function(){
                     $(".tabGroupInitiateAdd").attr('style','display:none!important')
@@ -747,7 +747,7 @@
 
                 $("#prevBtnAdd").attr('onclick','nextPrevAdd(-1)')
                 $("#nextBtnAdd").attr('onclick','nextPrevAdd(1)')
-                document.getElementById("prevBtnAdd").classList.remove("d-none");
+                document.getElementById("prevBtnAdd").style.display = 'inline';
 
             }else if (n == 3) {
                 snowEditor = new Quill('#snow-editor', {
@@ -778,13 +778,13 @@
                 $(".modal-dialog").removeClass('modal-lg')
                 $("#prevBtnAdd").attr('onclick','nextPrevAdd(-1)')
                 $("#nextBtnAdd").attr('onclick','nextPrevAdd(1)')
-                document.getElementById("prevBtnAdd").classList.remove("d-none");
+                document.getElementById("prevBtnAdd").style.display = 'inline';
                 document.getElementById("nextBtnAdd").innerText = "Next";
             } else {
                 $(".modal-dialog").addClass('modal-lg')
                 $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                 $(".modal-title").text('')
-                document.getElementById("prevBtnAdd").classList.remove("d-none");
+                document.getElementById("prevBtnAdd").style.display = 'inline';
                 $("#headerPreviewFinal").empty()
                 document.getElementById("nextBtnAdd").innerText = "Create";
                 $("#nextBtnAdd").attr('onclick','createQuote("saved")');
@@ -998,9 +998,9 @@
                 success: function (data) {
                     let x = document.getElementsByClassName("tab-add");
                     x[n].style.display = "inline"
-                    x[n].classList.remove("d-none")
+                    
                     if(n == 0){
-                        document.getElementById("prevBtnAdd").classList.add("d-none");
+                        document.getElementById("prevBtnAdd").style.display = 'none';
                         if(data.product.length > 0){
                             $("#nextBtnAdd").attr('onclick','nextPrevUnfinished(2)')
                         }else{
@@ -1023,7 +1023,7 @@
                         $("nextBtnAdd").attr('onclick', 'nextPrevUnfinished(1)')
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         document.getElementById('prevBtnAdd').innerText = "Back";
-                        document.getElementById("prevBtnAdd").classList.remove("d-none");
+                        document.getElementById("prevBtnAdd").style.display = 'inline';
                         $('.money').mask('#.##0,00', {reverse: true})
                         $("#btnInitiateAddProduct").click(function(){
                             $(".tabGroupInitiateAdd").attr('style','display:none!important')
@@ -1045,7 +1045,7 @@
 
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         $("#nextBtnAdd").attr('onclick','nextPrevUnfinished(1)')
-                        document.getElementById("prevBtnAdd").classList.remove("d-none");
+                        document.getElementById("prevBtnAdd").style.display = 'inline';
 
                     }else if (n == 3) {
                         snowEditor = new Quill('#snow-editor', {
@@ -1079,13 +1079,13 @@
                         $(".modal-dialog").removeClass('modal-lg')
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         $("#nextBtnAdd").attr('onclick','nextPrevUnfinished(1)')
-                        document.getElementById("prevBtnAdd").classList.remove("d-none");
+                        document.getElementById("prevBtnAdd").style.display = 'inline';
                         document.getElementById("nextBtnAdd").innerText = "Next";
                     } else {
                         $(".modal-dialog").addClass('modal-lg')
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         $(".modal-title").text('')
-                        document.getElementById("prevBtnAdd").classList.remove("d-none");
+                        document.getElementById("prevBtnAdd").style.display = 'inline';
                         $("#headerPreviewFinal").empty()
                         document.getElementById("nextBtnAdd").innerText = "Create";
                         $("#nextBtnAdd").attr('onclick','createQuote("saved")');
@@ -1453,7 +1453,7 @@
                                         localStorage.setItem('isEditProduct', false);
                                         localStorage.setItem('isStoreCustomer', true);
                                         var x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");
+                                        x[currentTab].style.display = 'none';
                                         currentTab = currentTab + n;
                                         addQuote(currentTab);
                                     }, error: function () {
@@ -1469,10 +1469,10 @@
                         })
                     } else {
                         var x = document.getElementsByClassName("tab-add");
-                        x[currentTab].classList.add("d-none");
+                        x[currentTab].style.display = 'none';
                         currentTab = currentTab + n;
                         if (currentTab >= x.length) {
-                            x[n].classList.add("d-none");
+                            x[n].style.display = 'none';
                             currentTab = 0;
                         }
                         addQuote(currentTab);
@@ -1535,10 +1535,10 @@
                                     },success:function(){
                                         Swal.close()
                                         var x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");
+                                        x[currentTab].style.display = 'none';
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
-                                            x[n].classList.add("d-none");
+                                            x[n].style.display = 'none';
                                             currentTab = 0;
                                         }
                                         addQuote(currentTab);
@@ -1597,10 +1597,10 @@
                                     }, success: function () {
                                         Swal.close()
                                         let x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");
+                                        x[currentTab].style.display = 'none';
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
-                                            x[n].classList.add("d-none");
+                                            x[n].style.display = 'none';
                                             currentTab = 0;
                                         }
                                         addQuote(currentTab);
@@ -1637,10 +1637,10 @@
                 }else{
                     if ($('#uploadCsv').val() == "") {
                         var x = document.getElementsByClassName("tab-add");
-                        x[currentTab].classList.add("d-none");
+                        x[currentTab].style.display = 'none';
                         currentTab = currentTab + n;
                         if (currentTab >= x.length) {
-                            x[n].classList.add("d-none");
+                            x[n].style.display = 'none';
                             currentTab = 0;
                         }
                         addQuote(currentTab);
@@ -1678,10 +1678,10 @@
                                     reasonReject(result.text,"block","tabGroupInitiateAdd")
                                 }else{
                                     var x = document.getElementsByClassName("tab-add");
-                                    x[currentTab].classList.add("d-none");
+                                    x[currentTab].style.display = 'none';
                                     currentTab = currentTab + n;
                                     if (currentTab >= x.length) {
-                                        x[n].classList.add("d-none");
+                                        x[n].style.display = 'none';
                                         currentTab = 0;
                                     }
                                     addQuote(currentTab);
@@ -1733,10 +1733,10 @@
                                 $(".divReasonRejectRevision").remove()
                                 localStorage.setItem('store_tax', result);
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");
+                                x[currentTab].style.display = 'none';
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");
+                                    x[n].style.display = 'none';
                                     currentTab = 0;
                                 }
                                 addQuote(currentTab);
@@ -1782,10 +1782,10 @@
                                 $(".divReasonRejectRevision").remove()
                                 localStorage.setItem('store_tax', result);
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");
+                                x[currentTab].style.display = 'none';
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");
+                                    x[n].style.display = 'none';
                                     currentTab = 0;
                                 }
                                 addQuote(currentTab);
@@ -1802,10 +1802,10 @@
                     }
                 }else{
                     var x = document.getElementsByClassName("tab-add");
-                    x[currentTab].classList.add("d-none");
+                    x[currentTab].style.display = 'none';
                     currentTab = currentTab + n;
                     if (currentTab >= x.length) {
-                        x[n].classList.add("d-none");
+                        x[n].style.display = 'none';
                         currentTab = 0;
                     }
                     addQuote(currentTab);
@@ -1829,10 +1829,10 @@
                             success: function(data)
                             {
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");
+                                x[currentTab].style.display = 'none';
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");
+                                    x[n].style.display = 'none';
                                     currentTab = 0;
                                 }
                                 addQuote(currentTab);
@@ -1849,20 +1849,20 @@
                     }
                 }else{
                     var x = document.getElementsByClassName("tab-add");
-                    x[currentTab].classList.add("d-none");
+                    x[currentTab].style.display = 'none';
                     currentTab = currentTab + n;
                     if (currentTab >= x.length) {
-                        x[n].classList.add("d-none");
+                        x[n].style.display = 'none';
                         currentTab = 0;
                     }
                     addQuote(currentTab);
                 }
             }else{
                 var x = document.getElementsByClassName("tab-add");
-                x[currentTab].classList.add("d-none");
+                x[currentTab].style.display = 'none';
                 currentTab = currentTab + n;
                 if (currentTab >= x.length) {
-                    x[n].classList.add("d-none");
+                    x[n].style.display = 'none';
                     currentTab = 0;
                 }
                 addQuote(currentTab);
@@ -2024,7 +2024,7 @@
                                     localStorage.setItem('id_quote', result);
                                     localStorage.setItem('isEditProduct', false);
                                     var x = document.getElementsByClassName("tab-add");
-                                    x[currentTab].classList.add("d-none");
+                                    x[currentTab].style.display = 'none';
                                     currentTab = currentTab + n;
                                     unfinishedDraft(currentTab, result);
                                 }, error: function () {
@@ -2098,13 +2098,13 @@
                                     },success:function(){
                                         Swal.close()
                                         var x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");
+                                        x[currentTab].style.display = 'none';
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
-                                            x[n].classList.add("d-none");
+                                            x[n].style.display = 'none';
                                             currentTab = 0;
                                         }
-                                        x[currentTab].classList.remove("d-none");
+                                        x[currentTab].style.display = 'inline';
                                         unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
                                         addTable(0,localStorage.getItem('status_tax'))
                                         localStorage.setItem('isEditProduct',false)
@@ -2162,13 +2162,13 @@
                                     }, success: function () {
                                         Swal.close()
                                         let x = document.getElementsByClassName("tab-add");
-                                        x[currentTab].classList.add("d-none");
+                                        x[currentTab].style.display = 'none';
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
-                                            x[n].classList.add("d-none");
+                                            x[n].style.display = 'none';
                                             currentTab = 0;
                                         }
-                                        x[currentTab].classList.remove("d-none");
+                                        x[currentTab].style.display = 'inline';
                                         unfinishedDraft(currentTab,localStorage.getItem('id_quote'));
                                         localStorage.setItem('status_quote', 'draft')
                                         localStorage.setItem('store_tax', '')
@@ -2204,10 +2204,10 @@
                 }else{
                     if ($('#uploadCsv').val() == "") {
                         var x = document.getElementsByClassName("tab-add");
-                        x[currentTab].classList.add("d-none");
+                        x[currentTab].style.display = 'none';
                         currentTab = currentTab + n;
                         if (currentTab >= x.length) {
-                            x[n].classList.add("d-none");
+                            x[n].style.display = 'none';
                             currentTab = 0;
                         }
                         unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2245,10 +2245,10 @@
                                     reasonReject(result.text,"block","tabGroupInitiateAdd")
                                 }else{
                                     var x = document.getElementsByClassName("tab-add");
-                                    x[currentTab].classList.add("d-none");
+                                    x[currentTab].style.display = 'none';
                                     currentTab = currentTab + n;
                                     if (currentTab >= x.length) {
-                                        x[n].classList.add("d-none");
+                                        x[n].style.display = 'none';
                                         currentTab = 0;
                                     }
                                     unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2301,10 +2301,10 @@
                                 $(".divReasonRejectRevision").remove()
                                 localStorage.setItem('store_tax', result);
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");
+                                x[currentTab].style.display = 'none';
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");
+                                    x[n].style.display = 'none';
                                     currentTab = 0;
                                 }
                                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2351,10 +2351,10 @@
                                 $(".divReasonRejectRevision").remove()
                                 localStorage.setItem('store_tax', result);
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");
+                                x[currentTab].style.display = 'none';
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");
+                                    x[n].style.display = 'none';
                                     currentTab = 0;
                                 }
                                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2372,10 +2372,10 @@
                     }
                 }else{
                     var x = document.getElementsByClassName("tab-add");
-                    x[currentTab].classList.add("d-none");
+                    x[currentTab].style.display = 'none';
                     currentTab = currentTab + n;
                     if (currentTab >= x.length) {
-                        x[n].classList.add("d-none");
+                        x[n].style.display = 'none';
                         currentTab = 0;
                     }
                     unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2399,10 +2399,10 @@
                             success: function(data)
                             {
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].classList.add("d-none");
+                                x[currentTab].style.display = 'none';
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].classList.add("d-none");
+                                    x[n].style.display = 'none';
                                     currentTab = 0;
                                 }
                                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2419,20 +2419,20 @@
                     }
                 }else{
                     var x = document.getElementsByClassName("tab-add");
-                    x[currentTab].classList.add("d-none");
+                    x[currentTab].style.display = 'none';
                     currentTab = currentTab + n;
                     if (currentTab >= x.length) {
-                        x[n].classList.add("d-none");
+                        x[n].style.display = 'none';
                         currentTab = 0;
                     }
                     unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
                 }
             }else{
                 var x = document.getElementsByClassName("tab-add");
-                x[currentTab].classList.add("d-none");
+                x[currentTab].style.display = 'none';
                 currentTab = currentTab + n;
                 if (currentTab >= x.length) {
-                    x[n].classList.add("d-none");
+                    x[n].style.display = 'none';
                     currentTab = 0;
                 }
                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
@@ -2495,7 +2495,7 @@
                                     confirmButtonText: 'Reload',
                                 }).then((result) => {
                                     localStorage.setItem('status_quote','')
-                                    location.replace("{{url('sales/quote')}}")
+                                    location.reload()
                                 })
                             },
                             error: function () {

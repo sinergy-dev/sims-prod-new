@@ -706,7 +706,7 @@
           <!-- </form> -->
           </div>
           <div class="modal-footer">
-            <button class="btn btn-sm btn-secondary" type="button" data-bs-dismiss="modal"><i class=" bx bx-times"></i>&nbspClose</button>
+            <button class="btn btn-sm btn-secondary" type="button" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
             <button type="submit" class="btn btn-sm btn-primary" id="change_password"><i class="bx bx-check"> </i>&nbspSubmit</button>
           </div>
         </div>

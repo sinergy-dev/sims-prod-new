@@ -236,19 +236,6 @@ class DASHBOARDController extends Controller
                 ->get();
             $counts = count($count);
         
-        } elseif ($div == 'PMO' && $pos == 'STAFF') {
-            $count = DB::table('sales_lead_register')
-                ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
-                ->join('tb_contact', 'sales_lead_register.id_customer', '=', 'tb_contact.id_customer')
-                ->join('tb_pmo', 'tb_pmo.lead_id', '=', 'sales_lead_register.lead_id')
-                ->select('sales_lead_register.lead_id','tb_contact.customer_legal_name', 'sales_lead_register.opp_name',
-                'sales_lead_register.created_at', 'sales_lead_register.amount', 'users.name', 'sales_lead_register.result')
-                ->where('tb_pmo.pmo_nik', $nik)
-                ->where('id_company', '1')
-                ->whereYear('closing_date',$year_now)
-                ->get();
-            $counts = count($count);
-        
         } elseif ($div == 'PMO' && $pos == 'MANAGER') {
             $count = DB::table('sales_lead_register')
                 ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
@@ -1950,7 +1937,9 @@ class DASHBOARDController extends Controller
             $userToSend = DB::table('roles as r')
                 ->join('role_user as ru', 'r.id', 'ru.role_id')
                 ->join('users as u', 'ru.user_id', 'u.nik')
-                ->select('u.name', 'u.email');
+                ->select('u.name', 'u.email')
+                ->whereNot('u.status_karyawan', 'dummy');
+
 
             if ($idea->divisi == 'Solutions & Partnership Management'){
                 if ($role != 'VP Solutions & Partnership Management'){
@@ -1999,7 +1988,7 @@ class DASHBOARDController extends Controller
 
             $sender = Auth::user()->name;
 
-            Mail::to($userToSend->email)->send(new MailIdeaHub('[SIMS-App] Idea Hub - New Business Idea', $idea, $userToSend, $sender));
+//            Mail::to($userToSend->email)->send(new MailIdeaHub('[SIMS-App] Idea Hub - New Business Idea', $idea, $userToSend, $sender));
             DB::commit();
             return $idea->id;
         }catch (\Exception $exception){

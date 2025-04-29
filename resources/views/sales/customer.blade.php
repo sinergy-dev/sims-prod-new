@@ -38,6 +38,10 @@ Customer
   .form-group{
     margin-bottom:15px;
   }
+
+  .swal2-container{
+    z-index: 99999!important;
+  }
 </style>
 @endsection
 @section('content')

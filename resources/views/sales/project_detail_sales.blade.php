@@ -366,7 +366,7 @@ Lead Register
 				              </div>
 				              <input type="text" class="form-control money" placeholder="Enter Amount" name="project_budget" id="project_budget" pattern= "[0-9]">
 				            </div>
-		          			<span class="help-block" style="display:none">Project Budget Melebihi Amount!</span>
+		          			<span class="help-block" style="display:none!important">Project Budget Melebihi Amount!</span>
 		              </div>
 		              <div class="row">
 		              	<div class="form-group col-md-6">
@@ -525,7 +525,7 @@ Lead Register
 	                    </div>
 	                    <input class="form-control date" type="text" placeholder="Enter Submit Date" name="submit_date"  id="submit_date" value=""/>
 	                  </div>
-	          				<span class="help-block" style="display:none">Please Fill and Submit Date Before Result!</span>
+	          				<span class="help-block" style="display:none!important">Please Fill and Submit Date Before Result!</span>
 	                </div>
 	            	</div> 
 
@@ -537,7 +537,7 @@ Lead Register
 				              </div>
 				              <input type="text" class="form-control" placeholder="Enter Amount" name="deal_price" id="deal_price" pattern= "[0-9]">
 				          </div>
-	          			<span class="help-block" style="display:none">Please Fill and Submit Deal Price Before Result!</span>
+	          			<span class="help-block" style="display:none!important">Please Fill and Submit Deal Price Before Result!</span>
 	              </div>
 
 	              <div class="form-group">
@@ -556,7 +556,7 @@ Lead Register
 	    </div>
 
 	    <div class="row mb-4">
-	    	<div class="col-md-12" id="formPurchaseOrder" style="display:none;">
+	    	<div class="col-md-12" id="formPurchaseOrder" style="display:none!important;">
 		          <tooltip title="Please Submit TP For Fill this Form!" style="font-size: 14px" placement="top">
 		          </tooltip>
 		          <fieldset>
@@ -610,7 +610,7 @@ Lead Register
 	            <div class="card-header with-border">
 	            <h6 class="card-title">Change Log</h6>
 	              <div class="pull-right">
-	                <button type="button" class="btn btn-sm btn-primary btn-sm" id="addChangeLog" style="display:none;" data-bs-target="#modal_changelog_progress" data-bs-toggle="modal"><i class="bx bx-plus"></i> Progress</button>
+	                <button type="button" class="btn btn-sm btn-primary btn-sm" id="addChangeLog" style="display:none!important;" data-bs-target="#modal_changelog_progress" data-bs-toggle="modal"><i class="bx bx-plus"></i> Progress</button>
 	              </div>
 	            </div>
 	            <div class="card-body">
@@ -1060,7 +1060,7 @@ Lead Register
 
 	  		  			append = append + '<tr>'
 	  		  				append = append + '<td style="width:70%">'+result.data[0].name_ta+'</td>'
-	  		  				append = append + '<td style="width:30%"><div class="pull-right"><button id="btnEditTechAlliance" class="btn btn-sm btn-warning btn-sm" style="width:70px;display:none"'+ btnEditTechAlliance +'>Edit</button></div></td>'
+	  		  				append = append + '<td style="width:30%"><div class="pull-right"><button id="btnEditTechAlliance" class="btn btn-sm btn-warning btn-sm" style="width:70px;display:none!important"'+ btnEditTechAlliance +'>Edit</button></div></td>'
 	  		  			append = append + '</tr>'
 	  		  		append = append + '</table>'
   		  		append = append + '</td>'
@@ -1077,7 +1077,7 @@ Lead Register
 
 	  		  			append = append + '<tr>'
 	  		  				append = append + '<td style="width:70%">'+ '<strong>(Presales)</strong> ' + result.data[0].name_presales.split(",")[0] + '<br>' +  '<strong>(Contribute)</strong> ' + contPre +'</td>'
-	  		  				append = append + '<td style="width:30%"><div><button class="btn btn-sm btn-primary btn-sm pull-right" id="btnAddContPre" data-bs-toggle="modal" data-bs-target="#contributeModal" style="display:none;">Contribute</button><button class="btn btn-sm btn-warning btn-sm pull-right" id="btnEditPresales" style="width:70px;display:none;margin-right:10px"'+ btnEditPresales +'>Edit</button></div></td>'
+	  		  				append = append + '<td style="width:30%"><div><button class="btn btn-sm btn-primary btn-sm pull-right" id="btnAddContPre" data-bs-toggle="modal" data-bs-target="#contributeModal" style="display:none!important;">Contribute</button><button class="btn btn-sm btn-warning btn-sm pull-right" id="btnEditPresales" style="width:70px;display:none!important;margin-right:10px"'+ btnEditPresales +'>Edit</button></div></td>'
 
 	  		  			append = append + '</tr>'
 	  		  		append = append + '</table>'
@@ -1086,7 +1086,7 @@ Lead Register
   		  	@if(!App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Project Management Office Manager')->exists())
   		  	append = append + '<tr>'
   		  		append = append + '<th>Amount</th>'
-  		  		append = append + '<td><span class="amount_lead">'+ new Intl.NumberFormat('id').format(result.data[0].amount) +'</span><button class="btn btn-sm btn-warning btn-edit-amount btn-sm pull-right" style="display:none;width:70px">Edit</button></td>'
+  		  		append = append + '<td><span class="amount_lead">'+ new Intl.NumberFormat('id').format(result.data[0].amount) +'</span><button class="btn btn-sm btn-warning btn-edit-amount btn-sm pull-right" style="display:none!important;width:70px">Edit</button></td>'
   		  	append = append + '</tr>'
 					@endif
   		  	append = append + '<tr>'
@@ -1356,7 +1356,7 @@ Lead Register
 								$("#project_budget").prev('.input-group-text').css("background-color","red");
 			  			}else{
 			  				$("#project_budget").closest('.form-group').removeClass('has-error')
-								$("#project_budget").closest('div div').next('span').attr('style','display:none!important');
+								$("#project_budget").closest('div div').next('span').attr('style','display:none!important!important');
 								$("#project_budget").prev('.input-group-text').css("background-color","#aaa");
 
 			  				var fd = new FormData()	
@@ -1463,7 +1463,7 @@ Lead Register
 								$("#project_budget").prev('.input-group-text').css("background-color","red");
 							}else{
 								$("#project_budget").closest('.form-group').removeClass('has-error')
-								$("#project_budget").closest('div div').next('span').attr('style','display:none!important');
+								$("#project_budget").closest('div div').next('span').attr('style','display:none!important!important');
 								$("#project_budget").prev('.input-group-text').css("background-color","#aaa");
 
 								var fd = new FormData()
@@ -1766,7 +1766,7 @@ Lead Register
 					}
 			}else if("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','System Designer Architecture')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Presales Support Architecture')->exists()}}"){
 				$("#project_budget,#priority,#proyek_size").prop("disabled",true)
-				$("#btn-addTagging").attr('style','display:none!important')
+				$("#btn-addTagging").attr('style','display:none!important!important')
 				$("#tbtagging").closest("form").prop("disabled",true)
 				$("#tbtagging").find("tr").find("td:last-child").remove()
 			}
@@ -1774,7 +1774,7 @@ Lead Register
 			// 	$("#btnSubmitSD").prop("disabled",true)
 			// 	$("#project_budget,#priority,#proyek_size").prop("disabled",true)
 			// 	$("#pov,#assesment,#propossed_design").prop("disabled",true)
-			// 	$("#btn-addTagging").attr('style','display:none!important')
+			// 	$("#btn-addTagging").attr('style','display:none!important!important')
 			// 	$("#tbtagging").closest("form").prop("disabled",true)
 			// 	$("#tbtagging").find("tr").find("td:last-child").remove()
 			// }
@@ -2005,7 +2005,7 @@ Lead Register
       append = append + " <span class='input-group-text' data-bs-toggle='tooltip' title='50000' style='background-color: #aaa; color:white;font-style: italic;'>Rp.</span>"
       append = append + " <input data-value='" + i + "' class='money form-control new-price-sol' name='new-price-sol' type='text' placeholder='Enter Product Price'>"
       append = append + " </div>"
-      append = append + " <span class='help-block' style='display:none'>Can't submit because the nominal value is 0 rupiah!</span>"
+      append = append + " <span class='help-block' style='display:none!important'>Can't submit because the nominal value is 0 rupiah!</span>"
       append = append + " </td>"
       append = append + " <td class='text-center'>"
       append = append + " <button type='button' data-value='"+i+"' style='width: auto !important;' class='btn btn-xs btn-danger btn-flat btn-trash-tagging' value='"+i+"'><i class='bx bx-trash'></i></button><button type='button' data-value='"+i+"' style='width: auto !important;' class='btn btn-xs btn-primary btn-flat disabled'><i class='bx bx-pencil'></i></button>"
@@ -2624,7 +2624,7 @@ Lead Register
     			$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').addClass("has-error")
     			$(".new-price-sol[data-value='" + dataValue + "']").prev('.input-group-text').css("background-color","red")
     		}else{
-	    		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.help-block').css('color','red').attr('style','display:none!important')
+	    		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.help-block').css('color','red').attr('style','display:none!important!important')
 					$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').removeClass("has-error")
 					$(".new-price-sol[data-value='" + dataValue + "']").prev('.input-group-text').css("background-color","background-color:#aaa;color:white")
 
@@ -2806,7 +2806,7 @@ Lead Register
 			    		$(this).find(".new-price-sol").closest('.input-group').next('.help-block').text("Please check again brand price nominal!")
 		    			console.log('tisssss')
 		    		}else{
-		    			$(this).find(".new-price-sol").closest('.input-group').next('.help-block').css('color','red').attr('style','display:none!important')
+		    			$(this).find(".new-price-sol").closest('.input-group').next('.help-block').css('color','red').attr('style','display:none!important!important')
 							$(this).find(".new-price-sol").closest('.input-group').removeClass("has-error")
 							$(this).find(".new-price-sol").prev('.input-group-text').css("background-color","background-color:#aaa;color:white")
 							data.append("tagData[tagProduct]["+i+"][tag_price]",$(this).find(".new-price-sol").val().replace(/\D/g, ""))
@@ -3084,7 +3084,7 @@ Lead Register
 
 		        $("#addService").click(function() {
 		            $("#nextBtn").prop("disabled", false);
-		            $(this).attr('style','display:none!important')
+		            $(this).attr('style','display:none!important!important')
 
 		            var append = ""
 		            append = append + "<tr class='new-product new-service'>"

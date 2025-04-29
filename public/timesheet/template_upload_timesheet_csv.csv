@@ -1,117 +1,17 @@
 no;schedule;start_date;type;pid;level;activity;duration(menit);status;end_date;task;phase
-1;Planned;01/01/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/01/2025;Preventive;[MSM] Project
-2;Planned;01/02/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/02/2025;Preventive;[MSM] Project
-;Planned;01/03/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/03/2025;Preventive;[MSM] Project
-;Planned;01/04/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/04/2025;Preventive;[MSM] Project
-;Planned;01/05/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/05/2025;Preventive;[MSM] Project
-;;01/06/2025;;;;;;;01/06/2025;;
-;;01/07/2025;;;;;;;01/07/2025;;
-;Planned;01/08/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/08/2025;Preventive;[MSM] Project
-;Planned;01/09/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/09/2025;Preventive;[MSM] Project
-;Planned;01/10/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/10/2025;Preventive;[MSM] Project
-;Planned;01/11/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/11/2025;Preventive;[MSM] Project
-;Planned;01/12/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/12/2025;Preventive;[MSM] Project
-;;01/13/2025;;;;;;;01/13/2025;;
-;;01/14/2025;;;;;;;01/14/2025;;
-;Planned;01/15/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/15/2025;Preventive;[MSM] Project
-;Planned;01/16/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/16/2025;Preventive;[MSM] Project
-;Unplanned;01/17/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan pemindaha port yang mengarah ke switch access;60;Done;01/17/2025;Corrective;[MSM] Project
-;Unplanned;01/17/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan permintaan setting ACI untuk keperluan server;60;Done;01/17/2025;Corrective;[MSM] Project
-;Unplanned;01/18/2025;Project;097/BKES/SIP/XI/2024;D;Penarikan kabel baru dari ruang staff ahli ke ruang dirti;240;Done;01/18/2025;Corrective;[MSM] Project
-;Unplanned;01/19/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan pendampingan penarikan kabel baru di ruang ruang dirti;220;Done;01/19/2025;Corrective;[MSM] Project
-;;01/20/2025;;;;;;;01/20/2025;;
-;Planned;01/21/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/21/2025;Preventive;[MSM] Project
-;Planned;01/22/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/22/2025;Preventive;[MSM] Project
-;Planned;01/23/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/23/2025;Preventive;[MSM] Project
-;Planned;01/24/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/24/2025;Preventive;[MSM] Project
-;Planned;01/25/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;960;Done;01/25/2025;Preventive;[MSM] Project
-;;01/26/2025;;;;;;;01/26/2025;;
-;;01/27/2025;;;;;;;01/27/2025;;
-;;01/28/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;1440;Done;01/28/2025;Preventive;[MSM] Project
-;;01/29/2025;;;;;;;01/29/2025;;
-;Unplanned;01/30/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan konfigurasi perangkat switch Kepwil I Medan untuk integrasi ke ISE;;Done;01/30/2025;Corrective;[MSM] Project
-;Unplanned;01/30/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan konfigurasi perangkat switch KC Palu agar terintegrasi ke ISE;;Done;01/30/2025;Corrective;[MSM] Project
-;Planned;01/31/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;01/31/2025;Preventive;[MSM] Project
-;;02/01/2025;;;;;;;02/01/2025;;
-;;02/02/2025;;;;;;;02/02/2025;;
-;;02/03/2025;;;;;;;02/03/2025;;
-;Planned;02/04/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;960;Done;02/04/2025;Preventive;[MSM] Project
-;;02/05/2025;;;;;;;02/05/2025;;
-;Planned;02/06/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/06/2025;Preventive;[MSM] Project
-;Planned;02/07/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/07/2025;Preventive;[MSM] Project
-;Planned;02/08/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/08/2025;Preventive;[MSM] Project
-;;02/09/2025;;;;;;;02/09/2025;;
-;Planned;02/10/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/10/2025;Preventive;[MSM] Project
-;Planned;02/11/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;960;Done;02/11/2025;Preventive;[MSM] Project
-;;02/12/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/12/2025;Preventive;[MSM] Project
-;;02/13/2025;;;;;;;02/13/2025;;
-;;02/14/2025;;;;;;;02/14/2025;;
-;;02/15/2025;;;;;;;02/15/2025;;
-;;02/16/2025;;;;;;;02/16/2025;;
-;Planned;02/17/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/17/2025;Preventive;[MSM] Project
-;Unplanned;02/18/2025;Project;097/BKES/SIP/XI/2024;;Melakukan setting interface port channel leaf 114-117;70;Done;02/18/2025;Corrective;[MSM] Project
-;Unplanned;02/19/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan setting APIC untuk keperluan server;56;Done;02/19/2025;Corrective;[MSM] Project
-;;02/20/2025;;;;;;;02/20/2025;;
-;Unplanned;02/21/2025;Project;097/BKES/SIP/XI/2024;;Melakukan upgrade firmware ke versi 7.2.11 DC dan DRC;240;Done;02/21/2025;Corrective;[MSM] Project
-;Planned;02/22/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/22/2025;Preventive;[MSM] Project
-;;02/23/2025;;;;;;;02/23/2025;;
-;;02/24/2025;;;;;;;02/24/2025;;
-;;02/25/2025;;;;;;;02/25/2025;;
-;Planned;02/26/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/26/2025;Preventive;[MSM] Project
-;Planned;02/27/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/27/2025;Preventive;[MSM] Project
-;Planned;02/28/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;02/28/2025;Preventive;[MSM] Project
-;;03/01/2025;;;;;;;03/01/2025;;
-;Planned;03/02/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;960;Done;03/02/2025;Preventive;[MSM] Project
-;Planned;03/03/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/03/2025;Preventive;[MSM] Project
-;Planned;03/04/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/04/2025;Preventive;[MSM] Project
-;Planned;03/05/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;960;Done;03/05/2025;Preventive;[MSM] Project
-;Planned;03/06/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/06/2025;Preventive;[MSM] Project
-;;03/07/2025;;;;;;;03/07/2025;;
-;;03/08/2025;;;;;;;03/08/2025;;
-;Planned;03/09/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/09/2025;Preventive;[MSM] Project
-;Planned;03/10/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/10/2025;Preventive;[MSM] Project
-;Unplanned;03/11/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan setting apic untuk keperluan server pada leaf 124-125;49;Done;03/11/2025;Corrective;[MSM] Project
-;Planned;03/12/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/12/2025;Preventive;[MSM] Project
-;Planned;03/13/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/13/2025;Preventive;[MSM] Project
-;;03/14/2025;;;;;;;03/14/2025;;
-;;03/15/2025;;;;;;;03/15/2025;;
-;Planned;03/16/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/16/2025;Preventive;[MSM] Project
-;Planned;03/17/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/17/2025;Preventive;[MSM] Project
-;Planned;03/18/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/18/2025;Preventive;[MSM] Project
-;Planned;03/19/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/19/2025;Preventive;[MSM] Project
-;Unplanned;03/20/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan restart pada segment van dan melakukan exclude pada ip mesin absen tersebut;100;Done;03/20/2025;Corrective;[MSM] Project
-;Unplanned;03/20/2025;Project;097/BKES/SIP/XI/2024;D;Melakukan pemindahan port uplink ke switch 2 lantai 11 gedung rizali;74;Done;03/20/2025;Corrective;[MSM] Project
-;;03/21/2025;;;;;;;03/21/2025;;
-;Planned;03/22/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/22/2025;Preventive;[MSM] Project
-;Planned;03/23/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;03/23/2025;Preventive;[MSM] Project
-;;03/24/2025;;;;;;;03/24/2025;;
-;;03/25/2025;;;;;;;03/25/2025;;
-;;03/26/2025;;;;;;;03/26/2025;;
-;;03/27/2025;;;;;;;03/27/2025;;
-;;03/28/2025;;;;;;;03/28/2025;;
-;;03/29/2025;;;;;;;03/29/2025;;
-;;03/30/2025;;;;;;;03/30/2025;;
-;;03/31/2025;;;;;;;03/31/2025;;
-;;04/01/2025;;;;;;;04/01/2025;;
-;;04/02/2025;;;;;;;04/02/2025;;
-;;04/03/2025;;;;;;;04/03/2025;;
-;;04/04/2025;;;;;;;04/04/2025;;
-;;04/05/2025;;;;;;;04/05/2025;;
-;;04/06/2025;;;;;;;04/06/2025;;
-;;04/07/2025;;;;;;;04/07/2025;;
-;;04/08/2025;;;;;;;04/08/2025;;
-;;04/09/2025;;;;;;;04/09/2025;;
-;;04/10/2025;;;;;;;04/10/2025;;
-;Planned;04/11/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/11/2025;Preventive;[MSM] Project
-;Planned;04/12/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/12/2025;Preventive;[MSM] Project
-;Planned;04/13/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/13/2025;Preventive;[MSM] Project
-;Planned;04/14/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/14/2025;Preventive;[MSM] Project
-;Planned;04/15/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/15/2025;Preventive;[MSM] Project
-;;04/16/2025;;;;;;;04/16/2025;;
-;;04/17/2025;;;;;;;04/17/2025;;
-;Planned;04/18/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/18/2025;Preventive;[MSM] Project
-;Planned;04/19/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/19/2025;Preventive;[MSM] Project
-;;04/20/2025;;;;;;;04/20/2025;;
-;Planned;04/21/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/21/2025;Preventive;[MSM] Project
-;Planned;04/21/2025;Learning;;D;Standby on Site;240;Done;04/21/2025;Self Enhancement;[MSM] Project
-;Planned;04/22/2025;Project;097/BKES/SIP/XI/2024;D;Standby on Site;480;Done;04/22/2025;Preventive;[MSM] Project
+1;Unplanned;04/08/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/08/2025;Corrective;[MSM] Project
+2;Unplanned;04/09/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/09/2025;Corrective;[MSM] Project
+3;Unplanned;04/10/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/10/2025;Corrective;[MSM] Project
+4;Unplanned;04/11/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/11/2025;Corrective;[MSM] Project
+5;Unplanned;04/12/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/12/2025;Corrective;[MSM] Project
+6;Unplanned;04/13/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/13/2025;Corrective;[MSM] Project
+7;Unplanned;04/14/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/14/2025;Corrective;[MSM] Project
+8;Unplanned;04/15/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/15/2025;Corrective;[MSM] Project
+9;Unplanned;04/16/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/16/2025;Corrective;[MSM] Project
+10;Unplanned;04/17/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/17/2025;Corrective;[MSM] Project
+11;Unplanned;04/21/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/21/2025;Corrective;[MSM] Project
+12;Unplanned;04/22/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/22/2025;Corrective;[MSM] Project
+13;Unplanned;04/23/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/23/2025;Corrective;[MSM] Project
+14;Unplanned;04/24/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/24/2025;Corrective;[MSM] Project
+15;Unplanned;04/25/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/25/2025;Corrective;[MSM] Project
+16;Unplanned;04/28/2025;Project;053/BKES/SIP/VII/2024;D;Standby KP;720;Done;04/28/2025;Corrective;[MSM] Project

@@ -262,6 +262,9 @@ class TimesheetController extends Controller
 
     public function assignPidConfig(Request $request)
     {
+        $nik = Auth::User()->nik;
+        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group','role_user.role_id','mini_group')->where('user_id', $nik)->first(); 
+        
         if ($request->selectAssignFor == "Pid") {
            foreach (json_decode($request->selectPIDAssign,true) as $key => $value) {
                 $assign = new TimesheetPid();
@@ -274,13 +277,13 @@ class TimesheetController extends Controller
 
             $getDivision = User::select('id_division')->distinct()->where('nik',$request->selectPICAssign)->first();
 
-            $update = TimesheetConfig::where('division',$getDivision->id_division)->first();
+            $update = TimesheetConfig::where('division',$cek_role->mini_group)->first();
             if (isset($update)) {
                 $update->status_assign_pid = 'Pid';
                 $update->update(); 
             }       
         }else{
-            $update = TimesheetConfig::where('division',Auth::User()->id_division)->get();
+            $update = TimesheetConfig::where('division',$cek_role->mini_group)->get();
             if (count($update) != 0) {
                 foreach($update as $updates){
                     $updates = TimesheetConfig::where('division',$updates->division)->first();
@@ -839,9 +842,11 @@ class TimesheetController extends Controller
 
     public function storeLockDuration(Request $request)
     {
-        if (DB::table('tb_timesheet_lock_duration')->where('division',Auth::User()->id_division)->exists()) {
+        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group','role_user.role_id','mini_group')->where('user_id', Auth::User()->nik)->first(); 
+
+        if (DB::table('tb_timesheet_lock_duration')->where('division',$cek_role->mini_group)->exists()) {
             // if (DB::table('tb_timesheet_lock_duration')->where('division',Auth::User()->id_division)->first()->division == Auth::User()->id_division) {
-            $lock = TimesheetLockDuration::where('division',Auth::User()->id_division)->first();
+            $lock = TimesheetLockDuration::where('division',$cek_role->mini_group)->first();
             // } 
         } else {
             $lock = new TimesheetLockDuration();
@@ -898,8 +903,6 @@ class TimesheetController extends Controller
             $getAllPid = SalesProject::join('sales_lead_register', 'sales_lead_register.lead_id', '=', 'tb_id_project.lead_id')->join('users', 'users.nik', '=', 'sales_lead_register.nik')->select('id_project as id',DB::raw("CONCAT(`id_project`,' - ',`name_project`) AS text"))->where('id_company', '1')->orderby('tb_id_project.id_pro','desc')->get();
         }else{
             $cekPid = TimesheetPid::select('pid')->where('nik',$request->nik)->distinct()->pluck('pid');
-
-            return $cekPid;
 
             $getAllPid = SalesProject::join('sales_lead_register', 'sales_lead_register.lead_id', '=', 'tb_id_project.lead_id')->join('users', 'users.nik', '=', 'sales_lead_register.nik')->select('id_project as id',DB::raw("CONCAT(`id_project`,' - ',`name_project`) AS text"))->where('id_company', '1');
             
@@ -1074,7 +1077,9 @@ class TimesheetController extends Controller
 
     public function getLockDurationByDivision(Request $request)
     {
-        return $getLockDuration = TimesheetLockDuration::select('lock_duration','division')->where('division',Auth::User()->id_division)->get();
+        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group','role_user.role_id','mini_group')->where('user_id', Auth::User()->nik)->first(); 
+
+        return $getLockDuration = TimesheetLockDuration::select('lock_duration','division')->where('division',$cek_role->mini_group)->get();
     }
 
     public function getRoles()
@@ -1195,7 +1200,10 @@ class TimesheetController extends Controller
             $data = $data;
         }
 
-        $getLock = TimesheetLockDuration::where('division',Auth::User()->id_division)->first();
+        $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group','role_user.role_id','mini_group')->where('user_id', Auth::User()->nik)->first(); 
+
+
+        $getLock = TimesheetLockDuration::where('division',$cek_role->mini_group)->first();
 
         $getLeavingPermit = Cuti::join('tb_cuti_detail','tb_cuti_detail.id_cuti','tb_cuti.id_cuti')->select('date_off as start_date',DB::raw('CASE WHEN reason_leave IS NULL THEN "-" ELSE reason_leave END AS activity'))->where('nik',$request->nik)->where('tb_cuti.status','v')->whereBetween('date_off', [$startDate, $endDate])->orderby('start_date','desc')->get();
 
@@ -2137,7 +2145,7 @@ class TimesheetController extends Controller
         $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('name', 'roles.group')->where('user_id', $nik)->first(); 
 
         // return $role;
-        if ($role == 'Program & Project Management') {
+        if ($cek_role->group == 'Program & Project Management') {
             if ($cek_role->name == 'VP Program & Project Management' || $cek_role->name == 'Project Management Office Manager') {
                 $listGroup = User::join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')->where('roles.group','Program & Project Management')->pluck('nik');
 
@@ -2145,7 +2153,7 @@ class TimesheetController extends Controller
             } else {
                 $sumMandays  = Timesheet::join('users','users.nik','tb_timesheet.nik')->select('point_mandays','users.name','users.nik')->selectRaw('MONTH(start_date) AS month_number')->where('tb_timesheet.nik',$nik)->where('status','Done')->where('pid',$pid)->where('type','project')->get();
             }
-        }elseif ($role == 'Synergy System Management') {
+        }elseif ($cek_role->group == 'Synergy System Management') {
             if ($cek_role->name == 'VP Synergy System Management' || $cek_role->name == 'Synergy System & Services Manager' || $cek_role->name == 'Synergy System Delivery Manager' || $cek_role->name == 'Synergy System Architecture Manager') {
                 if ($cek_role->name == 'Synergy System & Services Manager') {
                     $listGroup = User::join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')->where('roles.mini_group','Synergy System & Services')->pluck('nik');

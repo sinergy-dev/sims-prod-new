@@ -1517,7 +1517,7 @@
                   appendDoc = appendDoc + '    display: inline;'
                   appendDoc = appendDoc + '"'
                   appendDoc = appendDoc + 'class="btnRemoveDoc_'+ incrementDoc +'"'
-                  appendDoc = appendDoc + '><i class="bx bx-times" style="'
+                  appendDoc = appendDoc + '><i class="bx bx-x" style="'
 
                   appendDoc = appendDoc + '    margin-top: 10px;'
                   appendDoc = appendDoc + '    color: red;'
@@ -2773,7 +2773,7 @@
       append = append + '"'
       append = append + 'class="btnRemoveDoc_'+ incrementDoc +'"'
 
-      append = append + '><i class="bx bx-times" style="'
+      append = append + '><i class="bx bx-x" style="'
 
       append = append + '    margin-top: 10px;'
       append = append + '    color: red;'

@@ -1880,16 +1880,13 @@ Employees
 			                <div class="form-group row"  style="display:none;"  id="company-sip">
 			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Division') }}</label>
 
-			                    <div class="col-md-8 margin-bottom">
+			                    <div class="col-md-8 mb-4">
 			                        <select id="division" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="division_sip" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select division --</option>
-			                            <!-- <option value="TECHNICAL" data-target="technical" id="technical">TECHNICAL</option> -->
 			                            <option value="FINANCE" data-target="finance" id="finance">FINANCE and ACCOUNTING</option>
-			                            <option value="HR" data-target="hr" id="hr">HUMAN RESOURCE</option>
+			                            <option value="HR" data-target="hr" id="hr">HUMAN CAPITAL</option>
 			                            <option value="SALES" data-target="sales" id="sales">SALES</option>
 			                            <option value="OPERATION" data-target="operation" id="operation">OPERATION</option>
-			                            <!-- <option value="BCD" data-target="bcd" id="bcd">BUSINESS CHANNEL DEVELOPEMNT</option> -->
-			                            <!-- <option value="SPECIALIST" data-target="specialist" id="specialist">OTHER</option> -->
 			                            <option value="NULL" data-target="director" id="director">NONE</option>
 			                        </select>
 			                        @if ($errors->has('division'))
@@ -1901,7 +1898,7 @@ Employees
 
 			                    <label for="roles_user" class="col-md-4 control-label margin-top">{{ __('Roles') }}</label>
 
-			                    <div class="col-md-8 margin-top">
+			                    <div class="col-md-8 mb-4">
 			                        <select id="roles_user" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="roles_user" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Roles --</option>
 			                            @foreach($roles as $data)
@@ -1932,7 +1929,7 @@ Employees
 
 			                    <label for="territory" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Territory') }}</label>
 
-			                    <div class="col-md-8 margin-bottom">
+			                    <div class="col-md-8 mb-4">
 			                        <select id="territory-expert-sales" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="territory_expert" value="{{ old('expert_sales') }}" autofocus>
 			                            <option value="">-- Select Territory --</option>
 			                        </select>
@@ -1959,7 +1956,7 @@ Employees
 			                <div class="form-group row"  style="display:none;"  id="division-technical">
 			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
-			                    <div class="col-md-8 margin-bottom">
+			                    <div class="col-md-8 mb-4">
 			                        <select id="subdivision-tech" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_tech" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Sub Division --</option>
 			                            <option value="DPG" data-target="dvg" id="dvg">IMPLEMENTATION</option>
@@ -1993,7 +1990,7 @@ Employees
 
 			                    <label for="territory" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Territory') }}</label>
 
-			                    <div class="col-md-8 margin-bottom">
+			                    <div class="col-md-8 mb-4">
 			                        <select id="territory-sales" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="territory" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Territory --</option>
 			                        </select>
@@ -2025,7 +2022,7 @@ Employees
 			                <div class="form-group row"  style="display:none;"  id="division-finance">
 			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
-			                    <div class="col-md-8 margin-bottom">
+			                    <div class="col-md-8 mb-4">
 			                        <select id="subdivision-finance" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_finance" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Sub Division --</option>
 			                            <option value="FINANCE" data-target="dvg" id="dvg">FINANCE</option>
@@ -2053,20 +2050,30 @@ Employees
 			                </div>
 
 			                <!-- Operation -->
-			                <div class="form-group row "  style="display:none;"  id="division-operation">
+			                <div class="form-group row"  style="display:none;"  id="division-operation">
 			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
-			                    <div class="col-md-8 margin-bottom">
-			                        <select id="subdivision-operation" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_operation" value="{{ old('division') }}" autofocus>
-			                            <option value="">-- Select Sub Division --</option>
-			                            <option value="SOL" data-target="SOL" id="SOL">SOL</option>
-			                            <option value="PMO" data-target="PMO" id="PMO">PMO</option>
-			                            <option value="SID" data-target="SID" id="SID">SID</option>
-			                            <option value="BCD" data-target="BCD" id="BCD">BCD</option>
-			                            <option value="MSM" data-target="MSM" id="MSM">MSM</option>
-			                            <option value="DP" data-target="DP" id="DP">DP</option>
-			                            <option value="DIR" data-target="DIR" id="DIR">NONE</option>
-			                        </select>
+			                    <div class="col-md-8 margin-bottom mb-4">
+			                        <select id="subdivision-operation" 
+									        class="form-control select2 {{ $errors->has('division') ? ' is-invalid' : '' }}" 
+									        name="id_sub_division_operation" 
+									        value="{{ old('division') }}" 
+									        autofocus>
+									    <option value="">-- Select Sub Division --</option>
+									    <option value="IOS">IOS</option>
+									    <option value="SPM">SPM</option>
+									    <option value="ICM">ICM</option>
+									    <option value="SSS">SSS</option>
+									    <option value="PMO">PMO</option>
+									    <option value="SSM">SSM</option>
+									    <option value="SSD">SSD</option>
+									    <option value="SSA">SSA</option>
+									    <option value="SCI">SCI</option>
+									    <option value="PPM">PPM</option>
+									    <option value="ADS">ADS</option>
+									    <option value="DTS">DTS</option>
+									    <option value="PDS">PDS</option>
+									</select>
 			                        @if ($errors->has('division'))
 			                            <span class="invalid-feedback">
 			                                <strong>{{ $errors->first('division') }}</strong>
@@ -2074,8 +2081,7 @@ Employees
 			                        @endif
 			                    </div>
 
-			                    <label for="division" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
-
+			                    <label for="position" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
 			                    <div class="col-md-8 margin-top">
 			                        <select id="position-operation" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_operation" autofocus>
 			                          <option value="">-- Select position --</option>
@@ -2088,12 +2094,28 @@ Employees
 			                    </div>
 			                </div>
 
-			                <!-- HR -->
-			                <div class="form-group row"  style="display:none;"  id="division-hr">
-			                    <label for="position" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Position') }}</label>
+			                 <!-- HR -->
+			                <div class="form-group row "  style="display:none;"  id="division-hr">
+			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
-			                    <div class="col-md-8 margin-bottom">
-			                        <select id="position-hr" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_hr" value="{{ old('division') }}" autofocus>
+			                    <div class="col-md-8 margin-bottom mb-4">
+			                        <select id="subdivision-hr" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_hr" value="{{ old('division') }}" autofocus>
+			                            <option value="">-- Select Sub Division --</option>
+			                            <option value="HCM">HCM</option>
+			                            <option value="POS">POS</option>
+			                            <option value="POD">POD</option>
+			                        </select>
+			                        @if ($errors->has('division'))
+			                            <span class="invalid-feedback">
+			                                <strong>{{ $errors->first('division') }}</strong>
+			                            </span>
+			                        @endif
+			                    </div>
+
+			                    <label for="division" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
+			                    <div class="col-md-8 margin-top">
+			                        <select id="position-hr" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_hr" autofocus>
+			                          <option value="">-- Select position --</option>
 			                        </select>
 			                        @if ($errors->has('division'))
 			                            <span class="invalid-feedback">
@@ -2143,7 +2165,7 @@ Employees
 			                <div class="form-group row"  style="display:none;"  id="division-msp-TECHNICAL_MSP">
 			                    <label for="division" class="col-md-4 control-label" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
-			                    <div class="col-md-8 margin-bottom">
+			                    <div class="col-md-8 mb-4">
 			                        <select id="subdivision-tech-msp" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_tech_msp" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Sub Division --</option>
 			                            <option value="PRESALES" data-target="dpg" id="dpg">PRESALES</option>
@@ -2564,7 +2586,7 @@ Employees
 
 			                    <div class="col-md-4 margin-top">
 			                        <select id="roles_user_update" onchange="roleSelect(this)" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="roles_user" autofocus>
-			                        	<option value="" selected>--Select Roles--</option>
+			                        	<option value="" selected>-- Select Roles --</option>
 			                            @foreach($roles as $data)
 			                            <option value="{{$data->id}}">{{$data->name}}</option>
 			                            @endforeach
@@ -2972,13 +2994,13 @@ Employees
 
     document.getElementById('modalAdd').addEventListener('hidden.bs.modal', function () {
 	    document.querySelectorAll('.tab-add').forEach(element => {
-	        element.style.display = "none";
+	        element.style.display = "none!important";
 	    });
 	});
 
 	document.getElementById('modal_update').addEventListener('hidden.bs.modal', function () {
 	    document.querySelectorAll('.tab').forEach(element => {
-	        element.style.display = "none";
+	        element.style.display = "none!important";
 	    });
 	});
 
@@ -3027,7 +3049,6 @@ Employees
           },
           success: function(result){
           	$.each(result[0], function(key, value){
-          		
           	   if (value.id_company == '2') {
           	   	$("#div_roles").attr('style','display:none!important')
           	   }else{
@@ -3111,27 +3132,8 @@ Employees
 	               }
 	               $("#posisi_view_update").val(value.id_position).prop("disabled", true);
 	               
-               }else{               		
+               	}else{        
 				   	$("#nik_update").val(value.nik);
-	               	$("#name_update").val(value.name);
-	               	$("#email_update").val(value.email);
-	               	$("#date_of_entry_update").val(value.date_of_entry).prop("disabled",true);
-	               	$("#date_of_birth_update").val(value.date_of_birth).prop("disabled",true);
-	               	$("#akhir_kontrak_update").val(value.akhir_kontrak);
-	               	$("#address_update").val(value.address);
-	               	$("#address_ktp_update").val(value.alamat_ktp);
-	               	$("#phone_number_update").val(value.phone);
-	               	$("#no_ktp_update").val(value.no_ktp);
-	               	$("#no_kk_update").val(value.no_kk);
-	               	$("#no_npwp_update").val(value.no_npwp);
-	               	$("#tempat_lahir_update").val(value.tempat_lahir);
-	               	$("#email_personal_update").val(value.email_pribadi);
-	               	$("#bpjs_ket_update").val(value.bpjs_ket);
-	               	$("#bpjs_kes_update").val(value.bpjs_kes);
-	               	$("#pend_terakhir_update").val(value.pend_terakhir);
-	               	$("#name_ec_update").val(value.name_ec);
-	               	$("#phone_ec_update").val(value.phone_ec);
-	               	$("#hubungan_ec_update").val(value.hubungan_ec);
 
 				   if (!localStorage.getItem("name_update") == true) {
 	               	$("#name_update").val(value.name);
@@ -3145,6 +3147,13 @@ Employees
 				   	localStorage.setItem("email_update", $("#email_update").val())
 				   }else{
 				   	localStorage.setItem("email_update", $("#email_update").val())
+				   }
+
+				   if (!localStorage.getItem("email_personal_update") == true) {
+	               	$("#email_personal_update").val(value.email_pribadi);
+				   	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
+				   }else{
+				   	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
 				   }
 
 				   if (!localStorage.getItem("date_of_entry_update") == true) {
@@ -3161,47 +3170,61 @@ Employees
 				   	localStorage.setItem("date_of_birth_update", $("#date_of_birth_update").val())
 				   }
 
-				   localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
 				   if (!localStorage.getItem("akhir_kontrak_update") == true) {
+	               	$("#akhir_kontrak_update").val(value.akhir_kontrak);
 				   	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
-				   	if (value.akhir_kontrak != "" && value.akhir_kontrak != null) {
-	               		$("#akhir_kontrak_update").val(value.akhir_kontrak);
-				   	}else{
-	               		$("#akhir_kontrak_update").val(localStorage.getItem("akhir_kontrak_update"));
-				   	}
 				   }else{
-				   	localStorage.setItem("address_update", $("#address_update").val())
+				   	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
 				   }
 
-				   localStorage.setItem("address_update", $("#address_update").val())
 				   if (!localStorage.getItem("address_update") == true) {
+	               	$("#address_update").val(value.address);
 				   	localStorage.setItem("address_update", $("#address_update").val())
-				   	if (value.address != "" && value.address != null) {
-	               		$("#address_update").val(value.address);
-				   	}else{
-	               		$("#address_update").val(localStorage.getItem("address_update"));
-				   	}
 				   }else{
 				   	localStorage.setItem("address_update", $("#address_update").val())
 				   }
 
-				   	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val())
-				   	if (!localStorage.getItem("addres_ktp_update") == true) {
-				   	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val());
-				   	if (value.alamat_ktp != "" && value.alamat_ktp != null) {
-	               		$("#address_ktp_update").val(value.alamat_ktp);
-				   	}else{
-	               		$("#address_ktp_update").val(localStorage.getItem("address_ktp_update"));
-				   	}
+				   if (!localStorage.getItem("address_ktp_update") == true) {
+	               	$("#address_ktp_update").val(value.alamat_ktp);
+				   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
 				   }else{
 				   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
 				   }
 
+				   // localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
+				   // if (!localStorage.getItem("akhir_kontrak_update") == true) {
+				   // 	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
+				   // 	if (value.akhir_kontrak != "" && value.akhir_kontrak != null) {
+	               // 		$("#akhir_kontrak_update").val(value.akhir_kontrak);
+				   // 	}else{
+	               // 		$("#akhir_kontrak_update").val(localStorage.getItem("akhir_kontrak_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
+				   // }
+
+				   // localStorage.setItem("address_update", $("#address_update").val())
 				   // if (!localStorage.getItem("address_update") == true) {
 				   // 	localStorage.setItem("address_update", $("#address_update").val())
-	      //          	$("#address_update").val(value.address);
+				   // 	if (value.address != "" && value.address != null) {
+	               // 		$("#address_update").val(value.address);
+				   // 	}else{
+	               // 		$("#address_update").val(localStorage.getItem("address_update"));
+				   // 	}
 				   // }else{
 				   // 	localStorage.setItem("address_update", $("#address_update").val())
+				   // }
+
+				   // 	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val())
+				   // 	if (!localStorage.getItem("addres_ktp_update") == true) {
+				   // 	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val());
+				   // 	if (value.alamat_ktp != "" && value.alamat_ktp != null) {
+	               // 		$("#address_ktp_update").val(value.alamat_ktp);
+				   // 	}else{
+	               // 		$("#address_ktp_update").val(localStorage.getItem("address_ktp_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
 				   // }
 
 				   if (!localStorage.getItem("phone_number_update") == true) {
@@ -3211,12 +3234,38 @@ Employees
 				   	localStorage.setItem("phone_number_update", $("#phone_number_update").val())
 				   }
 
+				   // localStorage.setItem('phone_number_update', $("#phone_number_update").val())
+				   // console.log($("#phone_number_update").val())
+				   // console.log("getItem")
+				   // 	if (!localStorage.getItem("phone_number_update") == true) {
+				   // 	localStorage.setItem('phone_number_update', $("#phone_number_update").val());
+				   // 	if (value.phone != "" && value.phone != null) {
+	               // 		$("#phone_number_update").val(value.phone);
+				   // 	}else{
+	               // 		$("#phone_number_update").val(localStorage.getItem("phone_number_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("phone_number_update", $("#phone_number_update").val())
+				   // }
+
 				   if (!localStorage.getItem("no_ktp_update") == true) {
 	               	$("#no_ktp_update").val(value.no_ktp);
 				   	localStorage.setItem("no_ktp_update", $("#no_ktp_update").val())
 				   }else{
 				   	localStorage.setItem("no_ktp_update", $("#no_ktp_update").val())
 				   }
+
+				   // localStorage.setItem('no_ktp_update', $("#no_ktp_update").val())
+				   // 	if (!localStorage.getItem("no_ktp_update") == true) {
+				   // 	localStorage.setItem('no_ktp_update', $("#no_ktp_update").val());
+				   // 	if (value.no_ktp != "" && value.no_ktp != null) {
+	               // 		$("#no_ktp_update").val(value.no_ktp);
+				   // 	}else{
+	               // 		$("#no_ktp_update").val(localStorage.getItem("no_ktp_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("no_ktp_update", $("#no_ktp_update").val())
+				   // }
 
 				   if (!localStorage.getItem("no_kk_update") == true) {
 	               	$("#no_kk_update").val(value.no_kk);
@@ -3225,12 +3274,36 @@ Employees
 				   	localStorage.setItem("no_kk_update", $("#no_kk_update").val())
 				   }
 
+				   // localStorage.setItem('no_kk_update', $("#no_kk_update").val())
+				   // 	if (!localStorage.getItem("no_kk_update") == true) {
+				   // 	localStorage.setItem('no_kk_update', $("#no_kk_update").val());
+				   // 	if (value.no_kk != "" && value.no_kk != null) {
+	               // 		$("#no_kk_update").val(value.no_kk);
+				   // 	}else{
+	               // 		$("#no_kk_update").val(localStorage.getItem("no_kk_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("no_kk_update", $("#no_kk_update").val())
+				   // }
+
 				   if (!localStorage.getItem("no_npwp_update") == true) {
 	               	$("#no_npwp_update").val(value.no_npwp);
 				   	localStorage.setItem("no_npwp_update", $("#no_npwp_update").val())
 				   }else{
 				   	localStorage.setItem("no_npwp_update", $("#no_npwp_update").val())
 				   }
+
+				   // localStorage.setItem('no_npwp_update', $("#no_npwp_update").val())
+				   // 	if (!localStorage.getItem("no_npwp_update") == true) {
+				   // 	localStorage.setItem('no_npwp_update', $("#no_npwp_update").val());
+				   // 	if (value.no_npwp != "" && value.no_npwp != null) {
+	               // 		$("#no_npwp_update").val(value.no_npwp);
+				   // 	}else{
+	               // 		$("#no_npwp_update").val(localStorage.getItem("no_npwp_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("no_npwp_update", $("#no_npwp_update").val())
+				   // }
 
 				   if (!localStorage.getItem("tempat_lahir_update") == true) {
 	               	$("#tempat_lahir_update").val(value.tempat_lahir);
@@ -3239,12 +3312,29 @@ Employees
 				   	localStorage.setItem("tempat_lahir_update", $("#tempat_lahir_update").val())
 				   }
 
-				   if (!localStorage.getItem("email_personal_update") == true) {
-	               	$("#email_personal_update").val(value.email_pribadi);
-				   	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
-				   }else{
-				   	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
-				   }
+				   // localStorage.setItem('tempat_lahir_update', $("#tempat_lahir_update").val())
+				   // 	if (!localStorage.getItem("tempat_lahir_update") == true) {
+				   // 	localStorage.setItem('tempat_lahir_update', $("#tempat_lahir_update").val());
+				   // 	if (value.tempat_lahir != "" && value.tempat_lahir != null) {
+	               // 		$("#tempat_lahir_update").val(value.tempat_lahir);
+				   // 	}else{
+	               // 		$("#tempat_lahir_update").val(localStorage.getItem("tempat_lahir_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("tempat_lahir_update", $("#tempat_lahir_update").val())
+				   // }
+
+				   // localStorage.setItem('email_personal_update', $("#email_personal_update").val())
+				   // 	if (!localStorage.getItem("email_personal_update") == true) {
+				   // 	localStorage.setItem('email_personal_update', $("#email_personal_update").val());
+				   // 	if (value.email_pribadi != "" && value.email_pribadi != null) {
+	               // 		$("#email_personal_update").val(value.email_pribadi);
+				   // 	}else{
+	               // 		$("#email_personal_update").val(localStorage.getItem("email_personal_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
+				   // }
 
 				   if (!localStorage.getItem("bpjs_ket_update") == true) {
 	               	$("#bpjs_ket_update").val(value.bpjs_ket);
@@ -3253,16 +3343,33 @@ Employees
 				   	localStorage.setItem("bpjs_ket_update", $("#bpjs_ket_update").val())
 				   }
 
-				   if (!localStorage.getItem("bpjs_kes_update") == true) {
-	               	$("#bpjs_kes_update").val(value.bpjs_kes);
-				   	localStorage.setItem("bpjs_kes_update", $("#bpjs_kes_update").val())
+				   // localStorage.setItem('bpjs_ket_update', $("#bpjs_ket_update").val())
+				   // 	if (!localStorage.getItem("bpjs_ket_update") == true) {
+				   // 	localStorage.setItem('bpjs_ket_update', $("#bpjs_ket_update").val());
+				   // 	if (value.bpjs_ket != "" && value.bpjs_ket != null) {
+	               // 		$("#bpjs_ket_update").val(value.bpjs_ket);
+				   // 	}else{
+	               // 		$("#bpjs_ket_update").val(localStorage.getItem("bpjs_ket_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("bpjs_ket_update", $("#bpjs_ket_update").val())
+				   // }
+
+				   if (!localStorage.getItem("address_ktp_update") == true) {
+	               	$("#address_ktp_update").val(value.alamat_ktp);
+				   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
 				   }else{
-				   	localStorage.setItem("bpjs_kes_update", $("#bpjs_kes_update").val())
+				   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
 				   }
 
-				   // if (!localStorage.getItem("address_ktp_update") == true) {
-	               // 	$("#address_ktp_update").val(value.alamat_ktp);
-				   // 	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
+				   // localStorage.setItem('address_ktp_update', $("#address_ktp_update").val())
+				   // 	if (!localStorage.getItem("address_ktp_update") == true) {
+				   // 	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val());
+				   // 	if (value.alamat_ktp != "" && value.alamat_ktp != null) {
+	               // 		$("#address_ktp_update").val(value.alamat_ktp);
+				   // 	}else{
+	               // 		$("#address_ktp_update").val(localStorage.getItem("address_ktp_update"));
+				   // 	}
 				   // }else{
 				   // 	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
 				   // }
@@ -3278,12 +3385,25 @@ Employees
 				   	localStorage.setItem("pend_terakhir_update", $("#pend_terakhir_update").val())
 				   }
 
+
 				   if (!localStorage.getItem("name_ec_update") == true) {
 	               	$("#name_ec_update").val(value.name_ec);
 				   	localStorage.setItem("name_ec_update", $("#name_ec_update").val())
 				   }else{
 				   	localStorage.setItem("name_ec_update", $("#name_ec_update").val())
 				   }
+
+				   // localStorage.setItem('name_ec_update', $("#name_ec_update").val())
+				   // 	if (!localStorage.getItem("name_ec_update") == true) {
+				   // 	localStorage.setItem('name_ec_update', $("#name_ec_update").val());
+				   // 	if (value.name_ec != "" && value.name_ec != null) {
+	               // 		$("#name_ec_update").val(value.name_ec);
+				   // 	}else{
+	               // 		$("#name_ec_update").val(localStorage.getItem("name_ec_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("name_ec_update", $("#name_ec_update").val())
+				   // }
 
 				   if (!localStorage.getItem("phone_ec_update") == true) {
 	               	$("#phone_ec_update").val(value.phone_ec);
@@ -3292,12 +3412,36 @@ Employees
 				   	localStorage.setItem("phone_ec_update", $("#phone_ec_update").val())
 				   }
 
+				   // localStorage.setItem('phone_ec_update', $("#phone_ec_update").val())
+				   // 	if (!localStorage.getItem("phone_ec_update") == true) {
+				   // 	localStorage.setItem('phone_ec_update', $("#phone_ec_update").val());
+				   // 	if (value.phone_ec != "" && value.phone_ec != null) {
+	               // 		$("#phone_ec_update").val(value.phone_ec);
+				   // 	}else{
+	               // 		$("#phone_ec_update").val(localStorage.getItem("phone_ec_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("phone_ec_update", $("#phone_ec_update").val())
+				   // }
+
 				   if (!localStorage.getItem("hubungan_ec_update") == true) {
 	               	$("#hubungan_ec_update").val(value.hubungan_ec);
 				   	localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
 				   }else{
 				   	localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
 				   }
+
+				   //  localStorage.setItem('hubungan_ec_update', $("#hubungan_ec_update").val())
+				   // 	if (!localStorage.getItem("hubungan_ec_update") == true) {
+				   // 	localStorage.setItem('hubungan_ec_update', $("#hubungan_ec_update").val());
+				   // 	if (value.hubungan_ec != "" && value.hubungan_ec != null) {
+	               // 		$("#hubungan_ec_update").val(value.hubungan_ec);
+				   // 	}else{
+	               // 		$("#hubungan_ec_update").val(localStorage.getItem("hubungan_ec_update"));
+				   // 	}
+				   // }else{
+				   // 	localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
+				   // }
 
 	               if (value.status_kerja == 'Tetap') {
 	               	$("#status_karyawan_update").val("Karyawan Tetap");
@@ -3396,8 +3540,7 @@ Employees
 			            }
 	               	}           
                
-               }
-               
+               	}
             });
         	$("#modal_update").modal("show")
           }
@@ -3502,6 +3645,10 @@ Employees
 		            ).then((result) => {
 		              if (result.value) {
 		                location.reload()
+		                const keys = Object.keys(localStorage);
+						keys.forEach(key => {
+						    localStorage.setItem(key, "");
+						});
 		              }
 		            })
 	            }
@@ -3898,17 +4045,45 @@ Employees
             $('#position-finance').html(append)
             var append = "<option > -- Select Position -- </option>";
 
-            if (result[1] == 'FINANCE') {
-              $.each(result[0], function(key, value){
+            $.each(result[0], function(key, value){
               append = append + "<option>" + value.name_position + "</option>";
             });
-            } else if (result[1] == 'ACC') {
-              $.each(result[0], function(key, value){
-              append = append + "<option>" + value.name_position + "</option>";
-            });
-            } 
+
+            // if (result[1] == 'FINANCE') {
+            //   $.each(result[0], function(key, value){
+            //   append = append + "<option>" + value.name_position + "</option>";
+            // });
+            // } else if (result[1] == 'ACC') {
+            //   $.each(result[0], function(key, value){
+            //   append = append + "<option>" + value.name_position + "</option>";
+            // });
+            // } 
 
             $('#position-finance').html(append);
+          },
+      });
+  	});
+
+  	$('#subdivision-hr').select2({
+  		dropdownParent:$("#modalAdd")
+  	})
+
+  	$('#subdivision-hr').change(function(){
+          $.ajax({
+          type:"GET",
+          url:'/dropdownTech',
+          data:{
+            id_assign:this.value,
+          },
+          success: function(result){
+            $('#position-hr').html(append)
+            var append = "<option > -- Select Position -- </option>";
+
+            $.each(result[0], function(key, value){
+              append = append + "<option>" + value.name_position + "</option>";
+            });
+
+            $('#position-hr').html(append);
           },
       });
   	});
@@ -3925,9 +4100,9 @@ Employees
             var append = "<option> </option>";
 
             if (result[1] == 'SPECIALIST') {
-            $.each(result[0], function(key, value){
-              append = append + "<option>" + value.name_territory + "</option>";
-            });
+	            $.each(result[0], function(key, value){
+	              append = append + "<option>" + value.name_territory + "</option>";
+	            });
             } 
 
             $('#territory-expert-sales').html(append);
@@ -3946,19 +4121,23 @@ Employees
             $('#territory-sales').html(append)
             var append = "<option> -- Select Territory </option>";
 
-            if (result[1] == 'SALES') {
             $.each(result[0], function(key, value){
               append = append + "<option>" + value.name_territory + "</option>";
             });
-            } 
 
             $('#territory-sales').html(append);
           },
       });
   	});
 
+  	$('#subdivision-operation').select2({
+        placeholder: "-- Select Sub Division --",
+        allowClear: true,
+        dropdownParent:$("#modalAdd")
+    });
+
   	$('#subdivision-operation').change(function(){
-          $.ajax({
+        $.ajax({
           type:"GET",
           url:'/dropdownTech',
           data:{
@@ -3968,47 +4147,17 @@ Employees
             $('#position-operation').html(append)
             var append = "<option > -- Select Position -- </option>";
 
-            if (result[1] == 'MSM') {
-	            $.each(result[0], function(key, value){
-	              append = append + "<option>" + value.name_position + "</option>";
-	            });
-            } else if (result[1] == 'PMO') {
-              	$.each(result[0], function(key, value){
-	              append = append + "<option>" + value.name_position + "</option>";
-	            });
-            } else if (result[1] == 'SID') {
-             //  	$.each(result[0], function(key, value){
-	            //   append = append + "<option>" + value.name_position + "</option>";
-	            // });
-	            append = append + "<option value='MANAGER'> MANAGER </option>";
-            	append = append + "<option value='ENGINEER SPV'> ENGINEER SPV </option>";
-            	append = append + "<option value='ENGINEER CO-SPV'> ENGINEER CO-SPV </option>";
-            	append = append + "<option value='ENGINEER STAFF'> ENGINEER STAFF </option>";
-            } else if (result[1] == 'DIR') {
-              	$.each(result[0], function(key, value){
-	              append = append + "<option>" + value.name_position + "</option>";
-	            });
-            } else if (result[1] == 'BCD') {
-            	append = append + "<option value='MANAGER'> MANAGER </option>";
-            	append = append + "<option value='PROCUREMENT'> PROCUREMENT </option>";
-            	append = append + "<option value='STAFF'> STAFF </option>";
-            	append = append + "<option value='ADMIN'> ADMIN </option>";
-            } else if (result[1] == 'DP') {
-            	append = append + "<option value='DP'> DP </option>";
-            } else {
-            	append = append + "<option value='MANAGER'> MANAGER </option>";
-            	append = append + "<option value='STAFF'> STAFF </option>";
-            	append = append + "<option value='ADMIN'> ADMIN </option>";
-            }
+            $.each(result[0], function(key, value){
+	        	append = append + "<option>" + value.name_position + "</option>";
+	    	})
 
             $('#position-operation').html(append);
           },
-      });
+      	});
   	});
 
-
-  	$('#division').change(function(){
-          $.ajax({
+  	$('#division-hr').change(function(){
+        $.ajax({
           type:"GET",
           url:'/dropdownTech',
           data:{
@@ -4018,15 +4167,13 @@ Employees
             $('#position-hr').html(append)
             var append = "<option > -- Select Position -- </option>";
 
-            if (result[1] == 'HR') {
             $.each(result[0], function(key, value){
               append = append + "<option>" + value.name_position + "</option>";
             });
-            }
 
             $('#position-hr').html(append);
           },
-      });
+      	});
   	});
 
 
@@ -4678,7 +4825,9 @@ Employees
 
 	function divisiSelect(id)
 	{
-		
+		$('#sub_divisi_update').select2({
+			dropdownParent:$("#modal_update")
+		})
 		$('#sub_divisi_update').html(append)
 
         if (id.value == 'TECHNICAL') {
@@ -4698,23 +4847,26 @@ Employees
 		}else if(id.value == 'OPERATION'){
         	var append = "<option value=''>-- Select Option --</option>";
 
-            append = append + "<option value='SOL'>" + "SOL" + "</option>";	
+            append = append + "<option value='IOS'>" + "IOS" + "</option>";	
+            append = append + "<option value='SPM'>" + "SPM" + "</option>";	
+            append = append + "<option value='ICM'>" + "ICM" + "</option>";	
+            append = append + "<option value='SSS'>" + "SSS" + "</option>";	
             append = append + "<option value='PMO'>" + "PMO" + "</option>";	
-            append = append + "<option value='SID'>" + "SID" + "</option>";	
-            append = append + "<option value='BCD'>" + "BCD" + "</option>";	
-            append = append + "<option value='DP'>" + "DP" + "</option>";	
-            append = append + "<option value='MSM'>" + "MSM" + "</option>";	        	
-            append = append + "<option value='NONE'>" + "NONE" + "</option>";	
+            append = append + "<option value='SSM'>" + "SSM" + "</option>";	        	
+            append = append + "<option value='SSD'>" + "SSD" + "</option>";
+            append = append + "<option value='SSA'>" + "SSA" + "</option>";	
+            append = append + "<option value='SCI'>" + "SCI" + "</option>";	
+            append = append + "<option value='PPM'>" + "PPM" + "</option>";	
+            append = append + "<option value='ADS'>" + "ADS" + "</option>";	
+            append = append + "<option value='DTS'>" + "DTS" + "</option>";	
+            append = append + "<option value='PDS'>" + "PDS" + "</option>";		
 			
 		}else if(id.value == 'HR'){
 			var append = "<option value=''>-- Select Option --</option>";
 
-            append = append + "<option value='VP HUMAN CAPITAL'>" + "VP HUMAN CAPITAL" + "</option>";
-    		append = append + "<option value='HR MANAGER'>" + "HR MANAGER" + "</option>";
-            append = append + "<option value='HR STAFF'>" + "STAFF HR" + "</option>";
-            append = append + "<option value='STAFF GA'>" + "STAFF GA" + "</option>";
-            append = append + "<option value='WAREHOUSE'>" + "WAREHOUSE" + "</option>";
-            append = append + "<option value='ADMIN'>" + "ADMIN" + "</option>";
+            append = append + "<option value='HCM'>" + "HCM" + "</option>";
+    		append = append + "<option value='POS'>" + "POS" + "</option>";
+            append = append + "<option value='OPD'>" + "OPD" + "</option>";
 
 		}else if(id.value == 'SALES'){
 			var append = "<option value=''>-- Select Option --</option>";
@@ -4731,25 +4883,12 @@ Employees
 
 		$('#posisi_update').html(append)
 
-		if(id.value == ''){
-			var append = "<option value=''>-- Select Option --</option>";
+		var append = "<option value=''>-- Select Option --</option>";
 
-    		append = append + "<option value='DIRECTOR'>" + "DIRECTOR" + "</option>";
+        append = append + "<option value='VP'>" + "VP" + "</option>";
+        append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
+        append = append + "<option value='STAFF'>" + "STAFF" + "</option>";
 
-		}else if(id.value == 'WAREHOUSE'){
-			var append = "<option value=''>-- Select Option --</option>";
-
-    		append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
-            append = append + "<option value='STAFF'>" + "STAFF" + "</option>";
-
-            $("#divisi_view_update").val('');
-		}else if (id.value == 'HUMAN RESOURCE') {
-			var append = "<option value=''>-- Select Option --</option>";
-
-            append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
-            append = append + "<option value='STAFF'>" + "STAFF" + "</option>";
-            append = append + "<option value='ADMIN'>" + "ADMIN" + "</option>";
-		}
 		$('#posisi_update').html(append);
 
 		$("#divisi_view_update").val($("#divisi_update").val());
@@ -4760,70 +4899,16 @@ Employees
 	function subdivisiSelect(id){
 		$('#posisi_update').html(append)
         var append = "<option value=''>-- Select Option --</option>";
-    	if (id.value == '') {
+    	
+    	append = append + "<option value='VP'>" + "VP" + "</option>";
+        append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
+        append = append + "<option value='STAFF'>" + "STAFF" + "</option>";
 
-    		append = append + "<option value='HEAD'>" + "HEAD" + "</option>";
-            append = append + "<option value='ADMIN'>" + "ADMIN" + "</option>";
-
-    	}else if(id.value == 'MSM'){
-
-    		append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
-            append = append + "<option value='ADMIN'>" + "ADMIN" + "</option>";
-            // append = append + "<option value='SERVICE PROJECT(HEAD)'>" + "SERVICE PROJECT (HEAD)" + "</option>";
-            //append = append + "<option value='SERVICE PROJECT(STAFF)'>" + "SERVICE PROJECT (STAFF)" + "</option>";
-            append = append + "<option value='SUPPORT ENGINEER'>" + "SUPPORT ENGINEER" + "</option>";
-            append = append + "<option value='SUPPORT ENGINEER SPV'>" + " SUPPORT ENGINEER SPV" + "</option>";
-            append = append + "<option value='SUPPORT ENGINEER CO-SPV'>" + " SUPPORT ENGINEER CO-SPV" + "</option>";
-            append = append + "<option value='HELP DESK SPV'>" + "HELP DESK SPV" + "</option>";
-            append = append + "<option value='HELP DESK'>" + "HELP DESK" + "</option>";
-            append = append + "<option value='CALL SO'>" + "CALL SO" + "</option>";
-
-    	}else if (id.value == 'PMO') {
-    		append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
-            append = append + "<option value='PM SPV'>" + "PM SPV" + "</option>";
-            append = append + "<option value='PM'>" + "PM" + "</option>";
-    		append = append + "<option value='SERVICE PROJECT SPV'>" + "SERVICE PROJECT SPV" + "</option>"
-    		append = append + "<option value='SERVICE PROJECT'>" + "SERVICE PROJECT" + "</option>"
-            append = append + "<option value='ADMIN'>" + "ADMIN" + "</option>";
-
-    	}else if (id.value == 'OPERATION') {
-
-    		append = append + "<option value='DIRECTOR'>" + "DIRECTOR" + "</option>";
-
-    	}else if (id.value == 'BCD'){
-        
-            append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
-            append = append + "<option value='STAFF'>" + "STAFF" + "</option>";
-            append = append + "<option value='PROCUREMENT'>" + "PROCUREMENT" + "</option>";
-            append = append + "<option value='ADMIN'>" + "ADMIN" + "</option>";
-
-        } else if (id.value == 'SID'){
-        
-            append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
-            append = append + "<option value='ENGINEER SPV'>" + "ENGINEER SPV" + "</option>";
-            append = append + "<option value='ENGINEER CO-SPV'>" + "ENGINEER CO-SPV" + "</option>";
-            append = append + "<option value='ENGINEER STAFF'>" + " ENGINEER STAFF" + "</option>";
-            append = append + "<option value='ADMIN'>" + "ADMIN" + "</option>";
-
-        }else if (id.value == 'DP'){
-        
-            append = append + "<option value='DP'>" + "DP" + "</option>";
-
-        }else{
-        
-            append = append + "<option value='MANAGER'>" + "MANAGER" + "</option>";
-            append = append + "<option value='STAFF'>" + "STAFF" + "</option>";
-            append = append + "<option value='ADMIN'>" + "ADMIN" + "</option>";
-
-        }
-        
         $('#posisi_update').html(append);
 
         $("#sub_divisi_view_update").val($("#sub_divisi_update").val());
 
 		localStorage.setItem("sub_divisi_update", $("#sub_divisi_update").val())
-
-
     }
 
     function posisiSelect(id){

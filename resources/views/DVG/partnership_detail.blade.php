@@ -329,6 +329,10 @@ Partnership Detail
 	      margin-left: 10px;
 	      font-size: 9px;
 	    }
+
+	    .swal2-container{
+	    	z-index: 99999!important;
+	    }
 	</style>
 @endsection
 @section('content')
@@ -677,7 +681,7 @@ Partnership Detail
 						<div class="form-group">
 							<label>Certificate File (image/jpg/png)</label>
 							<input type="file" id="imgCertPartner" name="imgCertPartner" accept="image">
-							<input type="file" id="imgCertPartner" name="imgCertPartner">
+							<input type="file" id="imgCertPartner" name="imgCertPartner" style="display:none;">
 							<span class="help-block" style="display:none;">Please Upload File Certificate!</span>
 						</div>
 					</form>
@@ -1043,15 +1047,15 @@ Partnership Detail
 							append = append +
 								' <img class="profile-user img-responsive img-circle" src="' +
 								data.avatar +
-								'" alt="Yuki" style="width: 100px;height:100px;position: relative;">'
+								'" alt="" style="width: 100px;height:100px;position: relative;">'
 						} else if (data.gambar != null && data.gambar != "-") {
 							append = append +
 								' <img class="profile-user img-responsive img-circle" src="{{ asset("image")}}/' +
 								data.gambar +
-								'" alt="Yuki" style="width: 100px;height:100px;position: relative;">'
+								'" alt="" style="width: 100px;height:100px;position: relative;">'
 						} else {
 							append = append +
-								' <img class="profile-user img-responsive" src="https://www.mycustomer.com/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png" alt="Yuki" style="width: 100px;height:100px;position: relative;">'
+								' <img class="profile-user img-responsive" src="https://www.mycustomer.com/sites/all/modules/custom/sm_pp_user_profile/img/default-user.png" alt="" style="width: 100px;height:100px;position: relative;">'
 						}
 						append = append + '</div>'
 						append = append + '</div>'

@@ -8,7 +8,7 @@
     <title>Quotation</title>
     <style>
         body {
-            font-family: Lucida Sans Unicode;
+            font-family: Lucida Sans Unicode, sans-serif;
             margin: 0;
             padding: 0;
         }
@@ -20,7 +20,7 @@
         .divider h6 {
             margin: 0;
             text-align: center;
-            font-family: Calibri;
+            font-family: Lucida Sans Unicode, sans-serif;
         }
 
         .table-container {

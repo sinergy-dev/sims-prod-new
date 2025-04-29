@@ -1427,7 +1427,7 @@ class TicketingController extends Controller
             ->get();
 
         if (isset($request->id_asset)) {
-	        if (TicketingEmailSLM::where('second_level_support',$getId->where('tb_asset_management_detail.id_asset',$request->id_asset)->first()->second_level_support)->first() != "") {
+	        if (TicketingEmailSLM::where('second_level_support',$getId->where('tb_asset_management_detail.id_asset',$request->id_asset)->orderby('date_add','desc')->first()->second_level_support)->first() != "") {
 				if ($getAll) {
 				    $getAll->engineers = $getEngineer;
 				}
@@ -2838,10 +2838,15 @@ class TicketingController extends Controller
             ->whereDate('e.presence_actual', Carbon::today())
             ->where('a.id_device_customer', $idAtm)
             ->where('b.serial_number', $serialNumber)
-            ->select('c.engineer_atm')
+            ->select('c.engineer_atm','a.second_level_support')
             ->get();
 
-        return $engineer;
+        $data = [
+            'data' => $engineer,
+            'second_level_support' => $engineer->first()->second_level_support
+        ];
+
+        return $data;
     }
 	public function getRequestPending(Request $req){
 		$idTicket = $req->idTicket;

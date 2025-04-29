@@ -4629,7 +4629,7 @@ Ticketing
 							// }
 
 							if ($('#inputEngineerOpen').val() == "") {
-								if (Array.isArray(result.engineers) && result.engineers.length > 0) {
+								if (Array.isArray(result.engineers) && result.engineers.length > 0 && result.second_level_support === "SIP") {
 									if (!$('#inputEngineerOpen').is('select')) {
 										$('#inputEngineerOpen').replaceWith('<select class="form-control" id="inputEngineerOpen"></select>');
 									}
@@ -5189,8 +5189,8 @@ Ticketing
 			$("#holderWaktu").prev().text("Time")
 
 			if($("#inputTypeTicket").val() == "Preventive Maintenance"){
-				$("#holderStatus").html("<b>" + schedule_date + "</b>");
-				$("#holderWaktu").html("<b>" + schedule_time + "</b>");
+				$("#holderStatus").html("<b>" + waktu + "</b>");
+				$("#holderWaktu").html("<b>" + waktu2 + "</b>");
 				$("#holderEngineer").show();
 				$("#holderEngineerOpen").html($("#inputEngineerOpen").val());
 				$("#holderSeverity").text($("#inputSeverity").val());
@@ -5201,8 +5201,8 @@ Ticketing
 				$("#holderDate").parent().attr('style','display:none!important')
 				$("#holderSeverity").parent().attr('style','display:none!important')
 			} else if($("#inputTypeTicket").val() == "Permintaan Penawaran"){
-				$("#holderStatus").html("<b>" + schedule_date + "</b>");
-				$("#holderWaktu").html("<b>" + schedule_time + "</b>");
+				$("#holderStatus").html("<b>" + waktu + "</b>");
+				$("#holderWaktu").html("<b>" + waktu2 + "</b>");
 				$("#holderEngineer").show();
 				$("#holderEngineerOpen").html($("#inputEngineerOpen").val());
 				$("#holderSeverity").text($("#inputSeverity").val());
@@ -5860,8 +5860,8 @@ Ticketing
 						var schedule_date = moment(($("#inputReportingTime").val() + " " + $("#inputReportingDate").val()), "HH:mm:ss DD/MM/YYYY ").format("D MMMM YYYY");
 						var schedule_time = moment(($("#inputReportingTime").val() + " " + $("#inputReportingDate").val()), "HH:mm:ss DD/MM/YYYY ").format("HH:mm");
 
-						$(".holderStatus").html("<b>" + schedule_date + "</b>");
-						$(".holderWaktu").html("<b>" + schedule_time + "</b>");
+						$(".holderStatus").html("<b>" + waktu + "</b>");
+						$(".holderWaktu").html("<b>" + waktu2 + "</b>");
 
 						$(".holderActivity").html($("#inputProblem").val())
 						$(".holderEngineer").html($("#inputEngineerOpen").val())
@@ -6916,8 +6916,8 @@ Ticketing
 						id_atm:result.id_atm,
 						serial_number:result.serial_device
 					},
-					success: function(data){
-						if (Array.isArray(data) && data.length > 0) {
+					success: function(result){
+						if (Array.isArray(result.data) && result.data.length > 0 && result.second_level_support === " SIP") {
 							if (!$('#ticketEngineer').is('select')) {
 								$('#ticketEngineer').replaceWith('<select class="form-control" id="ticketEngineer"></select>');
 							}
@@ -6927,7 +6927,7 @@ Ticketing
 							selectEngineer.append(new Option('Choose Engineer', '',true))
 							let engineerFound = false;
 
-							data.forEach(function(engineer) {
+							result.data.forEach(function(engineer) {
 								if (engineer.engineer_atm === engineers) {
 									engineerFound = true;
 								}

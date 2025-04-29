@@ -47,6 +47,14 @@
         .form-group{
             margin-bottom: 15px;
         }
+
+        .swal2-container {
+            z-index: 9999 !important;
+        }
+
+        .pull-right{
+            float: right;
+        }
     </style>
 @endsection
 @section('content')
@@ -192,7 +200,7 @@
                                         <i class="bx bx-cloud-upload" style="margin-left:5px">
                                             <input id="uploadCsv" class="hidden" type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: inline;"></i>
                                         <label for="uploadCsv">Upload CSV</label>
-                                        <i class="bx bx-times hidden" onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
+                                        <i class="bx bx-x hidden" onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
                                     </div>
                                 </div>
                                 <div style="display: flex;">
@@ -622,8 +630,8 @@
 
             var append = ""
 
-            append = append + '<div class="callout callout-danger divReasonRejectRevision" style="display:none">'
-            append = append + '<h6><i class="icon bx bx-cross"></i>'+ textTitle +'</h6>'
+            append = append + '<div class="alert alert-danger divReasonRejectRevision" style="display:none">'
+            append = append + '<h6><i class="icon bx bx-x"></i>'+ textTitle +'</h6>'
             if (reason != null){
                 append = append + '<p class="reason_reject_revision">'+ reason.replaceAll("\n","<br>")+'</p>'
             }

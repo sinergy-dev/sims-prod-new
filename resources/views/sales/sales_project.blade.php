@@ -216,10 +216,14 @@
           <label for="">Date</label>
           <input type="date" name="date" id="inputDate" class="form-control" required>
         </div>
-        <div class="form-group inputWithIcon inputIconBg">
+        <div class="form-group">
           <label for="">Amount</label>
-          <input type="text" class="form-control money" placeholder="Enter Amount" name="amount" id="inputAmount" required>
-          <i class="" aria-hidden="true" style="margin-bottom: 24px">Rp.</i>
+          <div class="input-group">
+            <span class="input-group-text">
+              <small>Rp</small>
+            </span>
+            <input type="text" class="form-control money" placeholder="Enter Amount" name="amount" id="inputAmount" required>
+          </div>
         </div>
         <div class="form-group">
           <label for="">Note</label>
@@ -227,11 +231,11 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-xs btn-outline-secondary" data-bs-dismiss="modal">
-          <i class=" bx bx-x">&nbsp</i>Close
+        <button class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
+          <i class=" bx bx-x"></i>Close
         </button>
-        <button class="btn btn-xs btn-primary" id="btn_submit" onclick="submitRequestID()" >
-          <i class="bx bx-check">&nbsp</i>Submit
+        <button class="btn btn-sm btn-primary" id="btn_submit" onclick="submitRequestID()" >
+          <i class="bx bx-check"></i>Submit
         </button>
       </div>
     </div>
@@ -1291,7 +1295,7 @@
           "defaultContent": "-",
           render: function (data, type, row) {
               if (row.status == 'requested') {
-                  return `<button class="btn btn-xs btn-primary btn-show" data-bs-toggle="modal" value="${row.id_pid}">Show</button>`;
+                  return `<button class="btn btn-xs btn-primary btn-show" data-bs-toggle="modal" value="${row.id_pid}"><i class="bx bx-show"></i>&nbspShow</button>`;
               } else if (row.status == 'done') {
                   return '<small class="label label-success"><i class="bx bx-clock-o"></i> Done</small>';
               }

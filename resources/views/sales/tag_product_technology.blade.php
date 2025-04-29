@@ -114,7 +114,7 @@ Tag Customer
 		            </div>
 
 			        <div class="modal-footer">
-			           <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal"><i class="bx bx-times"></i> Cancel</button>
+			           <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal"><i class="bx bx-x"></i> Cancel</button>
 			           <button type="submit" class="btn btn-sm btn-primary btn-submit-product"><i class="bx bx-check"></i> Submit</button>
 			        </div>
 	          </form>
@@ -144,7 +144,7 @@ Tag Customer
 		            </div>
 
 			        <div class="modal-footer">
-			           <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal"><i class="bx bx-times"></i> Cancel</button>
+			           <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal"><i class="bx bx-x"></i> Cancel</button>
 			           <button type="submit" class="btn btn-sm text-bg-warning btn-submit-product"><i class="bx bx-check"></i> Submit</button>
 			        </div>
 	          </form>
@@ -179,7 +179,7 @@ Tag Customer
 		            </div>
 
 			        <div class="modal-footer">
-			           <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal"><i class="bx bx-times"></i> Cancel</button>
+			           <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal"><i class="bx bx-x"></i> Cancel</button>
 			           <button type="submit" class="btn btn-sm btn-primary btn-submit-product"><i class="bx bx-check"></i> Submit</button>
 			        </div>
 	          </form>
@@ -214,7 +214,7 @@ Tag Customer
 		            </div>
 
 			        <div class="modal-footer">
-			           <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal"><i class="bx bx-times"></i> Cancel</button>
+			           <button type="button" class="btn btn-sm btn-default" data-bs-dismiss="modal"><i class="bx bx-x"></i> Cancel</button>
 			           <button type="submit" class="btn btn-sm btn-primary btn-submit-product"><i class="bx bx-check"></i> Submit</button>
 			        </div>
 	          </form>

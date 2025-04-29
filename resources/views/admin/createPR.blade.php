@@ -647,335 +647,335 @@
         </div>
         <div class="modal-body">
           <form method="POST" action="" id="modal_pr" name="modal_pr">
-          @csrf
-          <div class="tab-cek" style="display:none!important;">
-            <div class="form-group">
-              <label for="">To*</label>
-              <div class="input-group">  
-                  <input type="text" disabled class="form-control" placeholder="ex. eSmart Solution" id="inputToCek" name="inputToCek">
-                <div class="input-group-text">
-                  <input onchange="checkBoxCek('to_cek')" id="to_cek" name="chk[]" type="checkbox" class="form-check-input">
+            @csrf
+            <div class="tab-cek" style="display:none!important;">
+              <div class="form-group">
+                <label for="">To*</label>
+                <div class="input-group">  
+                    <input type="text" disabled class="form-control" placeholder="ex. eSmart Solution" id="inputToCek" name="inputToCek">
+                  <div class="input-group-text">
+                    <input onchange="checkBoxCek('to_cek')" id="to_cek" name="chk[]" type="checkbox" class="form-check-input">
+                  </div>
+                </div>
+              </div>        
+
+              <div class="row mb-4">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Type*</label>
+                    <div class="input-group">   
+                      <select type="text" disabled class="form-control" placeholder="ex. Internal Purchase Request" id="selectTypeCek">
+                          <option selected value="IPR">IPR (Internal Purchase Request)</option>
+                          <option value="EPR">EPR (Eksternal Purchase Request)</option>
+                      </select>
+                      <div class="input-group-text">
+                        <input onchange="checkBoxCek('type_cek')" id="type_cek" name="chk[]" type="checkbox" class="form-check-input">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Email*</label>
+                    <div class="input-group">   
+                      <input type="" disabled class="form-control" placeholder="ex. absolut588@gmail.com" id="inputEmailCek" name="inputEmailCek">
+                      <div class="input-group-text">
+                        <input onchange="checkBoxCek('email_cek')" id="email_cek" name="chk[]" type="checkbox" class="form-check-input">
+                      </div>
+                    </div>
+                    
+                  </div>
                 </div>
               </div>
-            </div>        
 
-            <div class="row mb-4">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Type*</label>
-                  <div class="input-group">   
-                    <select type="text" disabled class="form-control" placeholder="ex. Internal Purchase Request" id="selectTypeCek">
-                        <option selected value="IPR">IPR (Internal Purchase Request)</option>
-                        <option value="EPR">EPR (Eksternal Purchase Request)</option>
+              <div class="form-group">
+                  <label for="">Category</label>
+                  <div class="input-group">
+                    <select disabled type="text" class="form-control select2" name="selectCategoryCek" id="selectCategoryCek">
+                        <option value="">Select Category</option>
+                        <option value="Barang dan Jasa">Barang dan Jasa</option>
+                        <option value="Barang">Barang</option>
+                        <option value="Jasa">Jasa</option>
+                        <option value="Bank Garansi">Bank Garansi</option>
+                        <option value="Service">Service</option>
+                        <option value="Pajak Kendaraan">Pajak Kendaraan</option>
+                        <option value="ATK">ATK</option>
+                        <option value="Aset">Aset</option>
+                        <option value="Tinta">Tinta</option>
+                        <option value="Konsultasi dan Pelatihan">Konsultasi dan Pelatihan</option>
+                        <option value="Ujian">Ujian</option>
+                        <!-- <option value="Tiket">Tiket</option> -->
+                        <!-- <option value="Akomodasi">Akomodasi</option> -->
+                        <option value="Perjalanan Dinas">Perjalanan Dinas</option>
+                        <option value="Sponsor">Sponsor</option>
+                        <option value="Logistic">Logistic</option>
+                        <option value="Legal">Legal</option>
+                        <option value="License">License</option>
+                        <option value="Reference Fee Member">Reference Fee Member</option>
+                        <option value="Parkir">Parkir</option>
+                        <option value="Kesehatan">Kesehatan</option>
+                        <option value="Olahraga">Olahraga</option>
+                        <option value="Karangan Bunga">Karangan Bunga</option>
+                        <option value="Other">Other</option>
                     </select>
                     <div class="input-group-text">
-                      <input onchange="checkBoxCek('type_cek')" id="type_cek" name="chk[]" type="checkbox" class="form-check-input">
+                      <input onchange="checkBoxCek('category_cek')" id="category_Cek" name="chk[]" type="checkbox" class="form-check-input">
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row mb-4">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Phone*</label>
+                    <div class="input-group">
+                      <input class="form-control" id="inputPhoneCek" type="" name="" placeholder="ex. 999-999-999-999" disabled>
+                      <div class="input-group-text">
+                        <input onchange="checkBoxCek('phone_Cek')" id="phone_cek" name="chk[]" type="checkbox" class="form-check-input">
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="">Email*</label>
-                  <div class="input-group">   
-                    <input type="" disabled class="form-control" placeholder="ex. absolut588@gmail.com" id="inputEmailCek" name="inputEmailCek">
-                    <div class="input-group-text">
-                      <input onchange="checkBoxCek('email_cek')" id="email_cek" name="chk[]" type="checkbox" class="form-check-input">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="">Attention*</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="ex. Marsono" name="inputAttentionCek" id="inputAttentionCek" disabled>
+                      <div class="input-group-text">
+                        <input onchange="checkBoxCek('attention_cek')" id="attention_cek" name="chk[]" type="checkbox" class="form-check-input">
+                      </div>
                     </div>
                   </div>
+                </div>
+              </div> 
+
+              <div class="form-group">
+                <label for="">Subject*</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="ex. Pembelian laptop MSI Modern 14 (Sdri. Faiqoh, Sdr. Oktavian, Sdr. Subchana)" name="inputSubjectCek" id="inputSubjectCek" onkeyup="fillInput('subject')" disabled>
+                  <div class="input-group-text">
+                    <input onchange="checkBoxCek('subject_cek')" id="subject_cek" name="chk[]" type="checkbox" class="form-check-input">
+                  </div>
+                </div>
+                
+              </div>
+
+              <div class="form-group">
+                <label for="">Address*</label>
+                <div class="input-group">
+                  <textarea style="resize: none;height: 150px;" class="form-control" id="inputAddressCek" name="inputAddressCek" placeholder="ex. Plaza Pinangsia Lt. 1 No. 7-8 Jl. Pinangsia Raya no.1" onkeyup="fillInput('address')" disabled></textarea>
+                  <div class="input-group-text">
+                  <input onchange="checkBoxCek('address_cek')" id="address_cek" name="chk[]" type="checkbox" class="form-check-input">
+                  </div>
+                </div>
+                
+              </div>
+
+              <div class="form-group">
+                <label for="">Request Methode*</label>
+                <div class="input-group">
+                  <select type="text" class="form-control" placeholder="ex. Purchase Order" id="selectMethodeCek" disabled >
+                      <option selected value="purchase_order">Purchase Order</option>
+                      <option value="payment">Payment</option>
+                      <option value="reimbursement">Reimbursement</option>
+                  </select>
+                  <div class="input-group-text">
+                    <input onchange="checkBoxCek('methode_cek')" id="methode_cek" name="chk[]" type="checkbox" class="form-check-input">
+                  </div>
+                </div>              
+              </div>
+            </div>
+            <div class="tab-cek" style="display:none!important;">
+              <div class="table-responsive">
+                <table class="table no-wrap">
+                  <thead>
+                    <th>No</th>
+                    <th>Product</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                    <th><a class="pull-right" id="refreshTableCek"><i class="bx bx-refresh"></i>&nbsp</a></th>
+                  </thead>
+                  <tbody id="tbodyProductsCek"> 
+                  </tbody>
+                </table>
+              </div>            
+              <div class="row mb-4">
+                <div class="col-md-12" id="bottomProductsCek">
                   
                 </div>
               </div>
             </div>
-
-            <div class="form-group">
-                <label for="">Category</label>
-                <div class="input-group">
-                  <select disabled type="text" class="form-control select2" name="selectCategoryCek" id="selectCategoryCek">
-                      <option value="">Select Category</option>
-                      <option value="Barang dan Jasa">Barang dan Jasa</option>
-                      <option value="Barang">Barang</option>
-                      <option value="Jasa">Jasa</option>
-                      <option value="Bank Garansi">Bank Garansi</option>
-                      <option value="Service">Service</option>
-                      <option value="Pajak Kendaraan">Pajak Kendaraan</option>
-                      <option value="ATK">ATK</option>
-                      <option value="Aset">Aset</option>
-                      <option value="Tinta">Tinta</option>
-                      <option value="Konsultasi dan Pelatihan">Konsultasi dan Pelatihan</option>
-                      <option value="Ujian">Ujian</option>
-                      <!-- <option value="Tiket">Tiket</option> -->
-                      <!-- <option value="Akomodasi">Akomodasi</option> -->
-                      <option value="Perjalanan Dinas">Perjalanan Dinas</option>
-                      <option value="Sponsor">Sponsor</option>
-                      <option value="Logistic">Logistic</option>
-                      <option value="Legal">Legal</option>
-                      <option value="License">License</option>
-                      <option value="Reference Fee Member">Reference Fee Member</option>
-                      <option value="Parkir">Parkir</option>
-                      <option value="Kesehatan">Kesehatan</option>
-                      <option value="Olahraga">Olahraga</option>
-                      <option value="Karangan Bunga">Karangan Bunga</option>
-                      <option value="Other">Other</option>
-                  </select>
-                  <div class="input-group-text">
-                    <input onchange="checkBoxCek('category_cek')" id="category_Cek" name="chk[]" type="checkbox" class="form-check-input">
-                  </div>
-                </div>
-            </div>
-
-            <div class="row mb-4">
-              <div class="col-sm-6">
+            <div class="tab-cek" style="display:none!important">
+              <div id="formForPrExternalCek" style="display:none!important">
                 <div class="form-group">
-                  <label for="">Phone*</label>
-                  <div class="input-group">
-                    <input class="form-control" id="inputPhoneCek" type="" name="" placeholder="ex. 999-999-999-999" disabled>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <label>Lead Register*</label>
+                      <div class="input-group">
+                        <input disabled id="selectLeadIdCek" class="form-control"/>
+                        <div class="input-group-text">
+                          <input type="checkbox" disabled class="" name="" id="lead_cek" onchange="checkBoxCek('lead_cek')">
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="col-md-6">
+                      <label>PID*</label>
+                      <div class="input-group">
+                        <input id="selectPidCek" disabled class="form-control"/>
+                        <div class="input-group-text">
+                          <input type="checkbox" class="" name="" id="pid_cek" onchange="checkBoxCek('pid_Cek')">
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>                
+                
+                <div class="form-group">
+                  <label>SPK/Kontrak*</label>
+                  <div class="input-group" disabled>
+                    <div style="border: 1px solid #787bff !important;padding: 5px;background-color: #EEEEEE;">
+                      <i class="icon_spk" style="display:inline;color: #5f61e6;"></i>
+                      <a target="_blank" href="" id="link_spkCek"><input style="display: inline;background-color: transparent;border: none;" type="text" name="inputSPK" id="inputSPKCek" disabled></a>
+                    </div>
                     <div class="input-group-text">
-                      <input onchange="checkBoxCek('phone_Cek')" id="phone_cek" name="chk[]" type="checkbox" class="form-check-input">
+                      <input type="checkbox" class="" name="" id="spk_cek" onchange="checkBoxCek('spk_cek')">
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-sm-6">
+
                 <div class="form-group">
-                  <label for="">Attention*</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="ex. Marsono" name="inputAttentionCek" id="inputAttentionCek" disabled>
+                  <label>SBE*</label>
+                  <div class="input-group" disabled>
+                    <div style="border: 1px solid #787bff !important;padding: 5px;background-color: #EEEEEE;">
+                      <i class="icon_sbe" style="display:inline;color: #5f61e6;"></i>
+                      <a target="_blank" href="" id="link_sbeCek"><input style="display:inline;background-color: transparent;border: none;" type="text" name="inputSBECek" id="inputSBECek" disabled ></a>
+                    </div>
                     <div class="input-group-text">
-                      <input onchange="checkBoxCek('attention_cek')" id="attention_cek" name="chk[]" type="checkbox" class="form-check-input">
+                      <input type="checkbox" class="" name="" id="sbe_cek" onchange="checkBoxCek('sbe_cek')">
                     </div>
                   </div>
                 </div>
-              </div>
-            </div> 
+                
+                <div class="form-group">
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <label>Quote Supplier*</label>
+                      <div class="input-group" disabled>
+                        <div style="border: 1px solid #787bff !important;padding: 5px;background-color: #EEEEEE;">
+                          <i class="icon_quo" style="display:inline;color: #5f61e6;"></i>
+                          <a target="_blank" href="" id="link_quoteSupCek"><input style="display: inline;background-color: transparent;border: none;" type="text" name="inputQuoteSupplierCek" id="inputQuoteSupplierCek" disabled ></a>
+                        </div>
+                        <div class="input-group-text">
+                          <input type="checkbox" class="" name="" id="quoSup_cek" onchange="checkBoxCek('quoSup_cek')">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Quote Number*</label>
+                      <div class="input-group">
+                        <input disabled id="selectQuoteNumCek" class="form-control" />
+                        <div class="input-group-text">
+                          <input type="checkbox" class="" name="" id="quoNum_cek" onchange="checkBoxCek('quoNum_cek')">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
 
-            <div class="form-group">
-              <label for="">Subject*</label>
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="ex. Pembelian laptop MSI Modern 14 (Sdri. Faiqoh, Sdr. Oktavian, Sdr. Subchana)" name="inputSubjectCek" id="inputSubjectCek" onkeyup="fillInput('subject')" disabled>
-                <div class="input-group-text">
-                  <input onchange="checkBoxCek('subject_cek')" id="subject_cek" name="chk[]" type="checkbox" class="form-check-input">
+                <div class="form-group">
+                  <div id="docPendukungContainerCekEPR">
+                  </div>
+                </div>  
+              </div>
+                
+              <div id="formForPrInternalCek" style="display:none!important;">
+                <div id="docPendukungContainerCek">
+                  
                 </div>
               </div>
-              
-            </div>
-
-            <div class="form-group">
-              <label for="">Address*</label>
+            </div>   
+            <div class="tab-cek" style="display:none!important">
               <div class="input-group">
-                <textarea style="resize: none;height: 150px;" class="form-control" id="inputAddressCek" name="inputAddressCek" placeholder="ex. Plaza Pinangsia Lt. 1 No. 7-8 Jl. Pinangsia Raya no.1" onkeyup="fillInput('address')" disabled></textarea>
+                <div disabled class="form-control textarea-scrollbar" id="textAreaTOPCek" style="height: 210px;  font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221);resize: none;overflow: auto;">
+                </div>
                 <div class="input-group-text">
-                <input onchange="checkBoxCek('address_cek')" id="address_cek" name="chk[]" type="checkbox" class="form-check-input">
+                  <input type="checkbox" class="" name="chk[]" id="textarea_top_cek" name="" onchange="checkBoxCek('textareaTOP')">
                 </div>
               </div>
-              
-            </div>
-
-            <div class="form-group">
-              <label for="">Request Methode*</label>
-              <div class="input-group">
-                <select type="text" class="form-control" placeholder="ex. Purchase Order" id="selectMethodeCek" disabled >
-                    <option selected value="purchase_order">Purchase Order</option>
-                    <option value="payment">Payment</option>
-                    <option value="reimbursement">Reimbursement</option>
-                </select>
-                <div class="input-group-text">
-                  <input onchange="checkBoxCek('methode_cek')" id="methode_cek" name="chk[]" type="checkbox" class="form-check-input">
+            </div>  
+            <div class="tab-cek" style="display:none!important">
+              <div class="row mb-4">
+                <div class="col-md-12" id="headerPreviewFinalCek">
+                  
+                </div>
+              </div><br>
+              <div class="row mb-4">
+                <div class="col-md-12 table-responsive">
+                  <table class="table" style="white-space: nowrap;">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyFinalPageProductsCek">
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-md-12" id="bottomPreviewFinalCek">
+                  
                 </div>
               </div>              
-            </div>
-          </div>
-          <div class="tab-cek" style="display:none!important;">
-            <div class="table-responsive">
-              <table class="table no-wrap">
-                <thead>
-                  <th>No</th>
-                  <th>Product</th>
-                  <th>Description</th>
-                  <th>Qty</th>
-                  <th>Type</th>
-                  <th>Price</th>
-                  <th>Total Price</th>
-                  <th><a class="pull-right" id="refreshTableCek"><i class="bx bx-refresh"></i>&nbsp</a></th>
-                </thead>
-                <tbody id="tbodyProductsCek"> 
-                </tbody>
-              </table>
-            </div>            
-            <div class="row mb-4">
-              <div class="col-md-12" id="bottomProductsCek">
-                
-              </div>
-            </div>
-          </div>
-          <div class="tab-cek" style="display:none!important">
-            <div id="formForPrExternalCek" style="display:none!important">
-              <div class="form-group">
-                <div class="row mb-4">
-                  <div class="col-md-6">
-                    <label>Lead Register*</label>
-                    <div class="input-group">
-                      <input disabled id="selectLeadIdCek" class="form-control"/>
-                      <div class="input-group-text">
-                        <input type="checkbox" disabled class="" name="" id="lead_cek" onchange="checkBoxCek('lead_cek')">
-                      </div>
-                    </div>
-                    
-                  </div>
-                  <div class="col-md-6">
-                    <label>PID*</label>
-                    <div class="input-group">
-                      <input id="selectPidCek" disabled class="form-control"/>
-                      <div class="input-group-text">
-                        <input type="checkbox" class="" name="" id="pid_cek" onchange="checkBoxCek('pid_Cek')">
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div>
-              </div>                
-              
-              <div class="form-group">
-                <label>SPK/Kontrak*</label>
-                <div class="input-group" disabled>
-                  <div style="border: 1px solid #787bff !important;padding: 5px;background-color: #EEEEEE;">
-                    <i class="icon_spk" style="display:inline;color: #5f61e6;"></i>
-                    <a target="_blank" href="" id="link_spkCek"><input style="display: inline;background-color: transparent;border: none;" type="text" name="inputSPK" id="inputSPKCek" disabled></a>
-                  </div>
-                  <div class="input-group-text">
-                    <input type="checkbox" class="" name="" id="spk_cek" onchange="checkBoxCek('spk_cek')">
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>SBE*</label>
-                <div class="input-group" disabled>
-                  <div style="border: 1px solid #787bff !important;padding: 5px;background-color: #EEEEEE;">
-                    <i class="icon_sbe" style="display:inline;color: #5f61e6;"></i>
-                    <a target="_blank" href="" id="link_sbeCek"><input style="display:inline;background-color: transparent;border: none;" type="text" name="inputSBECek" id="inputSBECek" disabled ></a>
-                  </div>
-                  <div class="input-group-text">
-                    <input type="checkbox" class="" name="" id="sbe_cek" onchange="checkBoxCek('sbe_cek')">
-                  </div>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <div class="row mb-4">
-                  <div class="col-md-6">
-                    <label>Quote Supplier*</label>
-                    <div class="input-group" disabled>
-                      <div style="border: 1px solid #787bff !important;padding: 5px;background-color: #EEEEEE;">
-                        <i class="icon_quo" style="display:inline;color: #5f61e6;"></i>
-                        <a target="_blank" href="" id="link_quoteSupCek"><input style="display: inline;background-color: transparent;border: none;" type="text" name="inputQuoteSupplierCek" id="inputQuoteSupplierCek" disabled ></a>
-                      </div>
-                      <div class="input-group-text">
-                        <input type="checkbox" class="" name="" id="quoSup_cek" onchange="checkBoxCek('quoSup_cek')">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <label>Quote Number*</label>
-                    <div class="input-group">
-                      <input disabled id="selectQuoteNumCek" class="form-control" />
-                      <div class="input-group-text">
-                        <input type="checkbox" class="" name="" id="quoNum_cek" onchange="checkBoxCek('quoNum_cek')">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>  
-
-              <div class="form-group">
-                <div id="docPendukungContainerCekEPR">
-                </div>
-              </div>  
-            </div>
-              
-            <div id="formForPrInternalCek" style="display:none!important;">
-              <div id="docPendukungContainerCek">
-                
-              </div>
-            </div>
-          </div>   
-          <div class="tab-cek" style="display:none!important">
-            <div class="input-group">
-              <div disabled class="form-control textarea-scrollbar" id="textAreaTOPCek" style="height: 210px;  font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221);resize: none;overflow: auto;">
-              </div>
-              <div class="input-group-text">
-                <input type="checkbox" class="" name="chk[]" id="textarea_top_cek" name="" onchange="checkBoxCek('textareaTOP')">
-              </div>
-            </div>
-          </div>  
-          <div class="tab-cek" style="display:none!important">
-            <div class="row mb-4">
-              <div class="col-md-12" id="headerPreviewFinalCek">
-                
-              </div>
-            </div><br>
-            <div class="row mb-4">
-              <div class="col-md-12 table-responsive">
-                <table class="table" style="white-space: nowrap;">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Product</th>
-                      <th>Description</th>
-                      <th>Qty</th>
-                      <th>Type</th>
-                      <th>Price</th>
-                      <th>Total Price</th>
-                    </tr>
-                  </thead>
-                  <tbody id="tbodyFinalPageProductsCek">
-                    
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="row mb-4">
-              <div class="col-md-12" id="bottomPreviewFinalCek">
-                
-              </div>
-            </div>              
-          </div>  
-          <div class="tab-cek" style="display:none!important">
-            <div id="AllChecked">
-              <div style="display: inline;text-align:justify;">                
-                <span style="position:absolute;"><input type="checkbox" id="cbAllChecked" class="" value=""/></span>
-                <span style="display:flex;margin-left: 25px;display:flex;">Dengan ini saya menyatakan bahwa Draft PR ini sudah betul baik dari input yang diberikan beserta data pendukung yang dilampirkan dan Draft PR siap untuk dilanjutkan ke proses berikutnya</span>
-              </div>
-            </div>
-            <div id="notAllChecked" style="display:none!important;">
-                <div class="form-group">
-                  <label>Approve/Reject*</label><br>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" class=" radioConfirm" name="radioConfirm" value="approve">
-                      Approve
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" class=" radioConfirm" name="radioConfirm" value="reject">
-                      Reject
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group" style="display:none!important;" id="divReasonReject">
-                  <h6>Reason of Reject</h6>
-                  <textarea id="textAreaReasonReject" onkeyup="fillInput('reason_reject')" class="form-control" placeholder="ex. [Informasi Supplier - To] Ada Kesalahan Penulisan Nama" style="resize:vertical;"></textarea>
-                  <span class="invalid-feedback" style="display:none!important;">Please fill Reason!</span>
-                </div>
             </div>  
-          </div> 
-          <div class="modal-footer">
-              <button type="button" class="btn btn-sm btn-secondary" id="prevBtnAddAdmin">Back</button>
-              <button type="button" class="btn btn-sm btn-primary" id="nextBtnAddAdmin">Next</button>
-          </div>
-        </form>
+            <div class="tab-cek" style="display:none!important">
+              <div id="AllChecked">
+                <div style="display: inline;text-align:justify;">                
+                  <span style="position:absolute;"><input type="checkbox" id="cbAllChecked" class="" value=""/></span>
+                  <span style="display:flex;margin-left: 25px;display:flex;">Dengan ini saya menyatakan bahwa Draft PR ini sudah betul baik dari input yang diberikan beserta data pendukung yang dilampirkan dan Draft PR siap untuk dilanjutkan ke proses berikutnya</span>
+                </div>
+              </div>
+              <div id="notAllChecked" style="display:none!important;">
+                  <div class="form-group">
+                    <label>Approve/Reject*</label><br>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" class=" radioConfirm" name="radioConfirm" value="approve">
+                        Approve
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="radio" class=" radioConfirm" name="radioConfirm" value="reject">
+                        Reject
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group" style="display:none!important;" id="divReasonReject">
+                    <h6>Reason of Reject</h6>
+                    <textarea id="textAreaReasonReject" onkeyup="fillInput('reason_reject')" class="form-control" placeholder="ex. [Informasi Supplier - To] Ada Kesalahan Penulisan Nama" style="resize:vertical;"></textarea>
+                    <span class="invalid-feedback" style="display:none!important;">Please fill Reason!</span>
+                  </div>
+              </div>  
+            </div> 
+          </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary" id="prevBtnAddAdmin">Back</button>
+            <button type="button" class="btn btn-sm btn-primary" id="nextBtnAddAdmin">Next</button>
         </div>
       </div>
     </div>
@@ -1357,7 +1357,7 @@
             title:"Subject",
             render: function (data, type, row, meta){
               if (row.attention_notes == "False") {
-                return '<span class="badge text-bg-primary"><b><i>' + row.type_of_letter + '</i></b></span>&nbsp<i title="Pay Attention to the Notes!" class="bx bx-warning" style="color:red"></i> ' + row.title         
+                return '<span class="badge text-bg-primary"><b><i>' + row.type_of_letter + '</i></b></span>&nbsp<i title="Pay Attention to the Notes!" class="bx bx-error" style="color:red;font-size:18px"></i> ' + row.title         
               }else{
                 return '<span class="badge text-bg-primary"><b><i>' + row.type_of_letter + '</i></b></span> ' + row.title         
               }
@@ -1960,10 +1960,10 @@
                   append = append + '<span>'+ i +'</span>'
                 append = append + '</td>'
                 append = append + '<td width="20%">'
-                append = append + "<input data-value='' disabled style='font-size: 12px; important' class='form-control' type='' name='' value='"+ item.name_product + "'>"
+                append = append + "<input data-value='' disabled style='font-size: 12px;width:200px' class='form-control' type='' name='' value='"+ item.name_product + "'>"
                 append = append + '</td>'
                 append = append + '<td width="40%">'
-                  append = append + '<textarea disabled class="form-control" style="resize: none;height: 120px;font-size: 12px; important">' + item.description.replaceAll("<br>","\n") + '&#10;&#10;' + 'SN : ' + item.serial_number + '&#10;PN : ' + '\n' + item.part_number + '\n\n' + item.for  + '</textarea>'
+                  append = append + '<textarea disabled class="form-control" style="resize: none;height: 120px;font-size: 12px;width:400px">' + item.description.replaceAll("<br>","\n") + '&#10;&#10;' + 'SN : ' + item.serial_number + '&#10;PN : ' + '\n' + item.part_number + '\n\n' + item.for  + '</textarea>'
                 append = append + '</td>'
                 append = append + '<td width="5%">'
                   append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size: 12px; important">'
@@ -4121,10 +4121,10 @@
                     append = append + '<span>'+ i +'</span>'
                   append = append + '</td>'
                   append = append + '<td width="20%">'
-                  append = append + "<input data-value='' disabled style='font-size: 12px; important' class='form-control' type='' name='' value='"+ item.name_product + "'>"
+                  append = append + "<input data-value='' disabled style='font-size: 12px;width:200px' class='form-control' type='' name='' value='"+ item.name_product + "'>"
                   append = append + '</td>'
                   append = append + '<td width="40%">'
-                    append = append + '<textarea style="font-size: 12px;height:150px;resize:none" disabled class="form-control">' + item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number + '</textarea>'
+                    append = append + '<textarea style="font-size: 12px;height:150px;resize:none;width:400px" disabled class="form-control">' + item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number + '</textarea>'
                   append = append + '</td>'
                   append = append + '<td width="5%">'
                     append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size: 12px;">'
@@ -4394,26 +4394,26 @@
                 append = append + '<span style="font-size: 12px;">'+ i +'</span>'
               append = append + '</td>'
               append = append + '<td width="20%">'
-              append = append + "<input id='inputNameProductEdit' data-value='' disabled style='font-size: 12px;min-width:150px' class='form-control' type='' name='' value='"+ value.name_product + "'>"
+              append = append + "<input id='inputNameProductEdit' data-value='' disabled style='font-size: 12px;min-width:200px' class='form-control' type='' name='' value='"+ value.name_product + "'>"
               append = append + '</td>'
               append = append + '<td width="30%">'
-                append = append + '<textarea id="textAreaDescProductEdit" disabled data-value="" style="font-size: 12px;resize: none;min-height: 110px;min-width:200px" class="form-control">'+ value.description.replaceAll("<br>","\n") + '&#10;&#10;' + 'SN : ' + value.serial_number + '&#10;PN : ' + value.part_number
+                append = append + '<textarea id="textAreaDescProductEdit" disabled data-value="" style="font-size: 12px;resize: none;min-height: 110px;min-width:400px" class="form-control">'+ value.description.replaceAll("<br>","\n") + '&#10;&#10;' + 'SN : ' + value.serial_number + '&#10;PN : ' + value.part_number
                 append = append + '</textarea>'
               append = append + '</td>'
               append = append + '<td width="7%">'
-                append = append + '<input id="inputQtyEdit" data-value="" disabled style="font-size: 12px;" class="form-control" type="" name="" value="'+ value.qty +'">'
+                append = append + '<input id="inputQtyEdit" data-value="" disabled style="font-size: 12px;width:100px" class="form-control" type="" name="" value="'+ value.qty +'">'
               append = append + '</td>'
               append = append + '<td width="15%">'
-              append = append + '<select id="inputTypeProductEdit" disabled data-value="" style="font-size: 12px;" class="form-control">'
+              append = append + '<select id="inputTypeProductEdit" disabled data-value="" style="font-size: 12px;width:100px" class="form-control">'
               append = append + '<option>'+ value.unit.charAt(0).toUpperCase() + value.unit.slice(1) +'</option>'
               append = append + '</select>' 
               append = append + '</td>'
               append = append + '<td width="15%">'
 
-                append = append + '<input id="inputPriceEdit" disabled data-value="" style="font-size: 12px;width:100px" class="form-control money" type="" name="" value="'+ formatter.format(value.nominal_product) +'">'
+                append = append + '<input id="inputPriceEdit" disabled data-value="" style="font-size: 12px;width:150px" class="form-control money" type="" name="" value="'+ formatter.format(value.nominal_product) +'">'
               append = append + '</td>'
               append = append + '<td width="15%">'
-                append = append + '<input id="inputTotalPriceEditCek" disabled data-value="" style="font-size: 12px;width:100px" class="form-control inputTotalPriceEditCek" type="" name="" value="'+ formatter.format(value.grand_total) +'">'
+                append = append + '<input id="inputTotalPriceEditCek" disabled data-value="" style="font-size: 12px;width:150px" class="form-control inputTotalPriceEditCek" type="" name="" value="'+ formatter.format(value.grand_total) +'">'
               append = append + '</td>'
               append = append + '<td width="8%">'
                 append = append + '<button type="button" id="btnEditProdukCek" data-value="'+ item +'" class="btn btn-sm text-bg-warning bx bx-edit bx-2xs" style="width:25px;height:25px;margin-bottom:5px"></button>'

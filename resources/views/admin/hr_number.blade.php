@@ -59,7 +59,6 @@ Admin (HR)
           {{ session('update') }}
       </div>
     @endif
-
         @if (session('success'))
           <div class="alert alert-success notification-bar"><span>Notice : </span> {{ session('success') }}<button type="button" class="dismisbar transparant pull-right"><i class="bx bx-x fa-lg"></i></button><br>Get your Number HR :<h6> {{$pops->no_letter}}</h6></div>
         @endif
@@ -91,7 +90,7 @@ Admin (HR)
           </div>
           <div class="col-sm-10 col-xs-12">
             <div class="form-group btn-action-letter" style="float:right;">
-              <button type="button" class="btn btn-sm btn-success pull-right" id="" data-bs-target="#modal_pr" data-bs-toggle="modal" style="width: 125px;color: white"><i class="bx bx-plus"> </i>&nbsp Number HR</button>
+              <button type="button" class="btn btn-sm btn-success pull-right" id="" data-bs-target="#modal_pr" data-bs-toggle="modal" style="width: 180px;color: white"><i class="bx bx-plus"> </i>&nbsp Number HR</button>
               <button class="btn btn-sm btn-warning btn-flat" onclick="exportHrNumber('{{action('HRNumberController@downloadExcelAdminHR')}}')" style="margin-right: 10px;"><i class="bx bx-download"></i>&nbsp Excel</button>
             </div>
           </div>
@@ -102,7 +101,6 @@ Admin (HR)
                 <tr style="text-align: center;">
                   <th>No</th>
                   <th>Type</th>
-                  <th>Division</th>
                   <th>PT</th>
                   <th>Month</th>
                   <th>Date</th>
@@ -130,82 +128,81 @@ Admin (HR)
         <div class="modal-header">
           <h6 class="modal-title">Add Number HR</h6>
         </div>
-        <div class="modal-body">
-          <form method="POST" action="{{url('/store_admin_hr')}}" id="modal_pr" name="modal_pr">
-            @csrf
-          <div class="form-group">
-            <label for="">Type of Letter</label>
-            <select type="text" class="form-control" placeholder="Select Type of Letter" name="type" id="type" required>
-                <option value="PKWT">PKWT</option>
-                <option value="PKWTT">PKWTT</option>
-                <option value="SK">SK</option>
-                <option value="SP">SP</option>
-                <option value="IDS">IDS</option>
-                <option value="Legal">Legal</option>
-                <option value="PKM">PKM</option>
-                <option value="NDA">NDA</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="">Company</label>
-            <select type="text" class="form-control" placeholder="Select PT" name="pt" id="pt" required>
-                <option>SIP</option>
-                <option>MSP</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="">Date</label>
-            <div class="input-group">
-              <div class="input-group-text">
-                <i class="bx bx-calendar"></i>
+        <form method="POST" action="{{url('/store_admin_hr')}}" id="modal_pr" name="modal_pr">
+          @csrf
+          <div class="modal-body">            
+              <div class="form-group">
+                <label for="">Type of Letter</label>
+                <select type="text" class="form-control" placeholder="Select Type of Letter" name="type" id="type" required>
+                    <option value="PKWT">PKWT</option>
+                    <option value="PKWTT">PKWTT</option>
+                    <option value="SK">SK</option>
+                    <option value="SP">SP</option>
+                    <option value="IDS">IDS</option>
+                    <option value="Legal">Legal</option>
+                    <option value="PKM">PKM</option>
+                    <option value="NDA">NDA</option>
+                </select>
               </div>
-              <input type="text" class="form-control date" name="date" id="date_hr">
-            </div>
+              <div class="form-group">
+                <label for="">Company</label>
+                <select type="text" class="form-control" placeholder="Select PT" name="pt" id="pt" required>
+                    <option>SIP</option>
+                    <option>MSP</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="">Date</label>
+                <div class="input-group">
+                  <div class="input-group-text">
+                    <i class="bx bx-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control date" name="date" id="date_hr">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">To</label>
+                <input type="text" class="form-control" placeholder="To" name="to" id="to" required>
+              </div> 
+              <div class="form-group">
+                <label for="">Attention</label>
+                <input type="text" class="form-control" placeholder="Enter Attention" name="attention" id="attention" >
+              </div> 
+              <div class="form-group">
+                <label for="">Title</label>
+                <input type="text" class="form-control" placeholder="Enter Title" name="title" id="title" >
+              </div>
+              <div class="form-group">
+                <label for="">Project</label>
+                <input type="text" class="form-control" placeholder="Enter Project" name="project" id="project" >
+              </div>
+              <div class="form-group">
+                <label for="">Description</label>
+                <textarea class="form-control" id="description" name="description" placeholder="Enter Description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="">Division</label>
+                <select type="text" class="form-control" placeholder="Select Division" name="division" id="division" required>
+                    <option>PPM</option>
+                    <option>SSM</option>
+                    <option>SPM</option>
+                    <option>ICM</option>
+                    <option>FAT</option>
+                    <option>HCM</option>
+                    <option>SAL</option>
+                </select>
+              </div>
+              <!-- <div class="form-group">
+                <label for="">Project ID</label>
+                <input type="text" class="form-control" placeholder="Project ID" name="project_id" id="project_id">
+              </div> -->
           </div>
-          <div class="form-group">
-            <label for="">To</label>
-            <input type="text" class="form-control" placeholder="To" name="to" id="to" required>
-          </div> 
-          <div class="form-group">
-            <label for="">Attention</label>
-            <input type="text" class="form-control" placeholder="Enter Attention" name="attention" id="attention" >
-          </div> 
-          <div class="form-group">
-            <label for="">Title</label>
-            <input type="text" class="form-control" placeholder="Enter Title" name="title" id="title" >
-          </div>
-          <div class="form-group">
-            <label for="">Project</label>
-            <input type="text" class="form-control" placeholder="Enter Project" name="project" id="project" >
-          </div>
-          <div class="form-group">
-            <label for="">Description</label>
-            <textarea class="form-control" id="description" name="description" placeholder="Enter Description"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="">Division</label>
-            <select type="text" class="form-control" placeholder="Select Division" name="division" id="division" required>
-                <option>PMO</option>
-                <option>SOL</option>
-                <option>SID</option>
-                <option>BCD</option>
-                <option>MSM</option>
-                <option>SAL</option>
-                <option>FA</option>
-                <option>HR</option>
-                <option>AM</option>
-            </select>
-          </div>
-          <!-- <div class="form-group">
-            <label for="">Project ID</label>
-            <input type="text" class="form-control" placeholder="Project ID" name="project_id" id="project_id">
-          </div> -->
           <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
             <button type="submit" class="btn btn-sm btn-primary"><i class="bx bx-check"> </i>&nbspSubmit</button>
           </div>
         </form>
-        </div>
+
       </div>
     </div>
 </div>
@@ -220,62 +217,62 @@ Admin (HR)
         </div>
         <div class="modal-body">
           <form method="POST" action="{{url('/update_admin_hr')}}" id="modaledit" name="modaledit">
-            @csrf
-          <input type="text" hidden placeholder="Enter No PR" name="edit_no_letter" id="edit_no_letter">
-          <div class="form-group">
-            <label for="">Type of Letter</label>
-            <select type="text" class="form-control" placeholder="Select Type of Letter" name="edit_type" id="edit_type" required>
-                <option value="PKWT">PKWT</option>
-                <option value="PKWTT">PKWTT</option>
-                <option value="SK">SK</option>
-                <option value="SP">SP</option>
-                <option value="IDS">IDS</option>
-                <option value="Legal">Legal</option>
-                <option value="PKM">PKM</option>
-                <option value="NDA">NDA</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="">Company</label>
-            <select type="text" class="form-control" placeholder="Select PT" name="edit_company" id="edit_company" required>
-                <option>SIP</option>
-                <option>MSP</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="">Date</label>
-            <div class="input-group date">
-              <div class="input-group-addon">
-                <i class="bx bx-calendar"></i>
-              </div>
-              <input type="date" class="form-control pull-right date" name="edit_date" id="edit_date">
+              @csrf
+            <input type="text" hidden placeholder="Enter No PR" name="edit_no_letter" id="edit_no_letter">
+            <div class="form-group">
+              <label for="">Type of Letter</label>
+              <select type="text" class="form-control" placeholder="Select Type of Letter" name="edit_type" id="edit_type" required>
+                  <option value="PKWT">PKWT</option>
+                  <option value="PKWTT">PKWTT</option>
+                  <option value="SK">SK</option>
+                  <option value="SP">SP</option>
+                  <option value="IDS">IDS</option>
+                  <option value="Legal">Legal</option>
+                  <option value="PKM">PKM</option>
+                  <option value="NDA">NDA</option>
+              </select>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="">To</label>
-            <input type="text" class="form-control" placeholder="Enter To" name="edit_to" id="edit_to" >
-          </div>
-          <div class="form-group">
-            <label for="">Attention</label>
-            <input type="text" class="form-control" placeholder="Enter Attention" name="edit_attention" id="edit_attention" >
-          </div> 
-          <div class="form-group">
-            <label for="">Title</label>
-            <input type="text" class="form-control" placeholder="Enter Title" name="edit_title" id="edit_title" >
-          </div> 
-          <div class="form-group">
-            <label for="">Project</label>
-            <input type="text" class="form-control" placeholder="Enter Project" name="edit_project" id="edit_project" >
-          </div>
-          <div class="form-group">
-            <label for="">Description</label>
-            <textarea type="text" class="form-control" placeholder="Enter Description" name="edit_description" id="edit_description" > </textarea>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
-            <button type="submit" class="btn btn-sm btn-primary"><i class="bx bx-check"> </i>&nbspSubmit</button>
-          </div>
-        </form>
+            <div class="form-group">
+              <label for="">Company</label>
+              <select type="text" class="form-control" placeholder="Select PT" name="edit_company" id="edit_company" required>
+                  <option>SIP</option>
+                  <option>MSP</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="">Date</label>
+              <div class="input-group date">
+                <div class="input-group-text">
+                  <i class="bx bx-calendar"></i>
+                </div>
+                <input type="date" class="form-control pull-right date" name="edit_date" id="edit_date">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="">To</label>
+              <input type="text" class="form-control" placeholder="Enter To" name="edit_to" id="edit_to" >
+            </div>
+            <div class="form-group">
+              <label for="">Attention</label>
+              <input type="text" class="form-control" placeholder="Enter Attention" name="edit_attention" id="edit_attention" >
+            </div> 
+            <div class="form-group">
+              <label for="">Title</label>
+              <input type="text" class="form-control" placeholder="Enter Title" name="edit_title" id="edit_title" >
+            </div> 
+            <div class="form-group">
+              <label for="">Project</label>
+              <input type="text" class="form-control" placeholder="Enter Project" name="edit_project" id="edit_project" >
+            </div>
+            <div class="form-group">
+              <label for="">Description</label>
+              <textarea type="text" class="form-control" placeholder="Enter Description" name="edit_description" id="edit_description" > </textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal"><i class=" bx bx-x"></i>&nbspClose</button>
+          <button type="submit" class="btn btn-sm btn-primary"><i class="bx bx-check"> </i>&nbspSubmit</button>
         </div>
       </div>
     </div>
@@ -347,9 +344,9 @@ Admin (HR)
             json.data.forEach(function(data,index){
               if("{{Auth::User()->nik}}" == data.from) {
                 var x = '"' + data.no + '","' + data.to + '","' + data.attention+ '","' +data.title+ '","' +data.project+ '","' +data.description+ '","' +data.type_of_letter+ '","' +data.pt+ '","' +data.date+ '"'
-                data.btn_edit = "<button class='btn btn-sm btn-sm btn-primary' onclick='edit_hr_number(" + x + ")'>&nbsp Edit</button>";
+                data.btn_edit = "<button class='btn btn-sm btn-primary' onclick='edit_hr_number(" + x + ")'>Edit</button>";
               } else {
-                data.btn_edit = "<button class='btn btn-sm btn-sm btn-primary disabled'>&nbsp Edit</button>";
+                data.btn_edit = "<button class='btn btn-sm btn-primary disabled'>Edit</button>";
               }
                 
             });
@@ -360,7 +357,6 @@ Admin (HR)
         "columns": [
           { "data": "no_letter" },
           { "data": "type_of_letter" },
-          { "data": "divsion" },
           { "data": "pt" },
           { "data": "month" },
           { "data": "date" },

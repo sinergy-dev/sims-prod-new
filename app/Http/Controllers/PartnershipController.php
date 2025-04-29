@@ -383,6 +383,9 @@ class PartnershipController extends Controller
             $dataAll = json_decode($request->engData,true);
             if ($request->hasFile('imageData')) {
                 $files = $request->file('imageData');
+                if (!is_array($files)) {
+                    $files = [$files]; // wrap single file into an array
+                }
             } else {
                 $files = [];
             }

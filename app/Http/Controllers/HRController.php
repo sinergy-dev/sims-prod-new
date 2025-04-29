@@ -1281,72 +1281,12 @@ class HRController extends Controller
         // $nims = str_replace('/', '', $nim);
 
         $update = User::where('nik',$nik)->first();
-        // $update->nik            = $nik;
         $update->name           = $req['name'];
-        // $update->email          = $req['email'];
         $update->date_of_birth  = date("Y-m-d",strtotime(str_replace('/','-',$req['date_of_birth'])));
-        $update->date_of_entry  = date("Y-m-d",strtotime(str_replace('/','-',$req['date_of_entry'])));
         $update->phone          = substr(str_replace('.','',$req['phone']),1);
         $update->address        = $req['address'];
-        $update->no_ktp         = $req['no_ktp'];
-        $update->no_kk          = $req['no_kk'];
         $update->no_npwp        = $req['no_npwp'];
-        $update->npwp_file      = $req['npwp_file'];
-        $update->bpjs_kes       = $req['bpjs_kes'];
-        $update->bpjs_ket       = $req['bpjs_ket'];
         $update->telegram_id    = $req['telegram_id'];
-
-        // if($req->file('npwp_file') === null) {
-        //     $update->npwp_file = $update->npwp_file;
-        // } else {
-        //     $allowedfileExtension   = ['jpg','png', 'jpeg', 'JPG', 'PNG'];
-        //     $file                   = $req->file('npwp_file');
-        //     $fileName               = $nik."_npwp_ver1".".jpg";
-        //     $extension              = $file->getClientOriginalExtension();
-        //     $check                  = in_array($extension,$allowedfileExtension);
-
-        //     if ($check) {
-        //         $req->file('npwp_file')->move("image/", $fileName);
-        //         $update->npwp_file = $fileName;
-        //     } else {
-        //         return redirect()->back()->with('alert','Oops! Only jpg, png');
-        //     }
-            
-        // }
-
-        // if($req->file('ktp_file') === null) {
-        //     $update->ktp_file = $update->ktp_file;
-        // } else {
-        //     $allowedfileExtension   = ['jpg','png', 'jpeg', 'JPG', 'PNG'];
-        //     $file                   = $req->file('ktp_file');
-        //     $fileName               = $nik."_ktp_ver1".".jpg";
-        //     $extension              = $file->getClientOriginalExtension();
-        //     $check                  = in_array($extension,$allowedfileExtension);
-
-        //     if ($check) {
-        //         $req->file('ktp_file')->move("image/", $fileName);
-        //         $update->ktp_file = $fileName;
-        //     } else {
-        //         return redirect()->back()->with('alert','Oops! Only jpg, png');
-        //     }
-            
-        // }
-
-        // if ($req->file('bpjs_kes_file') === null) {
-            
-        // } else {
-        //     $fileName = $nik."_bpjs_kes_ver1".".jpg";
-        //     $req->file('bpjs_kes_file')->move("image/", $fileName);
-        //     $update->bpjs_kes_file = $fileName;
-        // }
-
-        // if ($req->file('bpjs_ket_file') === null) {
-            
-        // } else {
-        //     $fileName = $nik."_bpjs_ket_ver1".".jpg";
-        //     $req->file('bpjs_ket_file')->move("image/", $fileName);
-        //     $update->bpjs_ket_file = $fileName;
-        // }
 
         // Disini proses mendapatkan judul dan memindahkan letak gambar ke folder image
         $this->validate($req, [
@@ -1547,34 +1487,35 @@ class HRController extends Controller
 
     public function getDropdownTech(Request $request)
     {
-        if($request->id_assign=='DPG'){
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','ENGINEER STAFF SPV')
-                ->orWhere('id_position','ENGINEER STAFF CO-SPV')
-                ->orWhere('id_position','ENGINEER STAFF')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'PRESALES') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','STAFF')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'DVG') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','STAFF')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'NONE') {
-            return array(DB::table('tb_position')
-                ->select('name_position','id_position')
-                ->where('id_position','HEAD')
-                ->orwhere('id_position','ADMIN')
-                ->orwhere('id_position','INTERNAL IT')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'SALES') {
+        // if($request->id_assign=='DPG'){
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','ENGINEER STAFF SPV')
+        //         ->orWhere('id_position','ENGINEER STAFF CO-SPV')
+        //         ->orWhere('id_position','ENGINEER STAFF')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'PRESALES') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','STAFF')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'DVG') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','STAFF')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'NONE') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position','id_position')
+        //         ->where('id_position','HEAD')
+        //         ->orwhere('id_position','ADMIN')
+        //         ->orwhere('id_position','INTERNAL IT')
+        //         ->get(),$request->id_assign);
+        // } else 
+        if ($request->id_assign == 'SALES') {
             return array(DB::table('tb_territory')
                 ->select('name_territory')
                 ->where('id_territory','TERRITORY 1')
@@ -1584,130 +1525,139 @@ class HRController extends Controller
                 ->orWhere('id_territory','TERRITORY 5')
                 ->orWhere('id_territory','TERRITORY 6')
                 ->get(),$request->id_assign);
-        }else if ($request->id_assign == 'SPECIALIST') {
-            return array(DB::table('tb_territory')
-                ->select('name_territory')
-                ->where('id_territory','SPECIALIST')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'FINANCE') {
+        }else{
             return array(DB::table('tb_position')
                 ->select('name_position')
-                ->where('id_position','STAFF')
+                ->where('id_position','VP')
                 ->orWhere('id_position','MANAGER')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'ACC') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
                 ->orWhere('id_position','STAFF')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'MSM') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','SUPPORT ENGINEER SPV')
-                ->orWhere('id_position','SUPPORT ENGINEER CO-SPV')
-                ->orWhere('id_position','SUPPORT ENGINEER')
-                ->orWhere('id_position','HELP DESK SPV')
-                ->orWhere('id_position','HELP DESK')
-                ->orWhere('id_position','CALL SO')
-                ->orWhere('id_position','ADMIN')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'BCD') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','PROCUREMENT')
-                ->orWhere('id_position','STAFF')
-                ->orWhere('id_position','ADMIN')
-                ->get(),$request->id_assign);
-        }  else if ($request->id_assign == 'DP') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','DP')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'PMO') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','SERVICE PROJECT SPV')
-                ->orWhere('id_position','SERVICE PROJECT')
-                ->orWhere('id_position','PM SPV')
-                ->orWhere('id_position','PM')
-                ->orWhere('id_position','ADMIN')
-                ->get(),$request->id_assign);
-        }else if ($request->id_assign == 'DIR') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','DIRECTOR')
-                ->get(),$request->id_assign);
-        }else if ($request->id_assign == 'HR') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','VP HUMAN CAPITAL')
-                ->orwhere('id_position','HR MANAGER')
-                ->orWhere('id_position','STAFF HR')
-                ->orWhere('id_position','STAFF GA')
-                ->orWhere('id_position','WAREHOUSE')
-                ->orWhere('id_position','ADMIN')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'NULL') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','DIRECTOR')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'ADMIN_MSP') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','DIRECTOR')
-                ->orWhere('id_position','ADMIN')
-                ->orWhere('id_position','COURIER')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'SALES_MSP') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','STAFF')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'TECHNICAL_MSP') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','STAFF')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'NONE_MSP') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','STAFF')
-                ->orWhere('id_position','COURIER')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'WAREHOUSE_MSP') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','STAFF')
-                ->get(),$request->id_assign);
-        } else if ($request->id_assign == 'OPERATION_MSP') {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->orWhere('id_position','PM')
-                ->get(),$request->id_assign);
-        } else if($request->id_assign=='SID'){
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','ENGINEER SPV')
-                ->orWhere('id_position','ENGINEER CO-SPV')
-                ->orWhere('id_position','ENGINEER STAFF')
-                ->get(),$request->id_assign);
-        }else {
-            return array(DB::table('tb_position')
-                ->select('name_position')
-                ->where('id_position','MANAGER')
-                ->orWhere('id_position','STAFF')
+                ->orderByRaw("FIELD(id_position, 'VP', 'MANAGER', 'STAFF')")
                 ->get());
-        }
+        } 
+        // if ($request->id_assign == 'SPECIALIST') {
+        //     return array(DB::table('tb_territory')
+        //         ->select('name_territory')
+        //         ->where('id_territory','SPECIALIST')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'FINANCE') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','STAFF')
+        //         ->orWhere('id_position','MANAGER')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'ACC') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','STAFF')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'MSM') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','SUPPORT ENGINEER SPV')
+        //         ->orWhere('id_position','SUPPORT ENGINEER CO-SPV')
+        //         ->orWhere('id_position','SUPPORT ENGINEER')
+        //         ->orWhere('id_position','HELP DESK SPV')
+        //         ->orWhere('id_position','HELP DESK')
+        //         ->orWhere('id_position','CALL SO')
+        //         ->orWhere('id_position','ADMIN')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'BCD') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','PROCUREMENT')
+        //         ->orWhere('id_position','STAFF')
+        //         ->orWhere('id_position','ADMIN')
+        //         ->get(),$request->id_assign);
+        // }  else if ($request->id_assign == 'DP') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','DP')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'PMO') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','SERVICE PROJECT SPV')
+        //         ->orWhere('id_position','SERVICE PROJECT')
+        //         ->orWhere('id_position','PM SPV')
+        //         ->orWhere('id_position','PM')
+        //         ->orWhere('id_position','ADMIN')
+        //         ->get(),$request->id_assign);
+        // }else if ($request->id_assign == 'DIR') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','DIRECTOR')
+        //         ->get(),$request->id_assign);
+        // }else if ($request->id_assign == 'HR') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','VP HUMAN CAPITAL')
+        //         ->orwhere('id_position','HR MANAGER')
+        //         ->orWhere('id_position','STAFF HR')
+        //         ->orWhere('id_position','STAFF GA')
+        //         ->orWhere('id_position','WAREHOUSE')
+        //         ->orWhere('id_position','ADMIN')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'NULL') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','DIRECTOR')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'ADMIN_MSP') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','DIRECTOR')
+        //         ->orWhere('id_position','ADMIN')
+        //         ->orWhere('id_position','COURIER')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'SALES_MSP') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','STAFF')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'TECHNICAL_MSP') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','STAFF')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'NONE_MSP') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','STAFF')
+        //         ->orWhere('id_position','COURIER')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'WAREHOUSE_MSP') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','STAFF')
+        //         ->get(),$request->id_assign);
+        // } else if ($request->id_assign == 'OPERATION_MSP') {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->orWhere('id_position','PM')
+        //         ->get(),$request->id_assign);
+        // } else if($request->id_assign=='SID'){
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','ENGINEER SPV')
+        //         ->orWhere('id_position','ENGINEER CO-SPV')
+        //         ->orWhere('id_position','ENGINEER STAFF')
+        //         ->get(),$request->id_assign);
+        // }else {
+        //     return array(DB::table('tb_position')
+        //         ->select('name_position')
+        //         ->where('id_position','MANAGER')
+        //         ->orWhere('id_position','STAFF')
+        //         ->get());
+        // }
     }
 
     public function exportExcelEmployee(Request $request){

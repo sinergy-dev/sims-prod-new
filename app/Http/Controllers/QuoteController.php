@@ -217,7 +217,7 @@ class QuoteController extends Controller
         if ($role->name == 'VP Solutions & Partnership Management'){
             $leadId = $lead->where('nik', '1061184050');
         } else if($role->name == 'Technology Alliance Solutions' || $role->name == 'Product Development Specialist Manager'){
-            $leadId = $lead->where('nik', '1110492070');
+            $leadId = $lead->whereRaw("(`nik` = '1230100050' OR `nik` = '1110492070')");
         }else {
             $leadId = $lead->where('nik', Auth::user()->nik);
         }
@@ -419,8 +419,8 @@ class QuoteController extends Controller
 
         if ($role->name == 'VP Solutions & Partnership Management'){
             $leadId = $lead->where('nik', '1061184050');
-        } elseif($role->name == 'Technology Alliance Solutions' || $role->name == 'Product Development Specialist Manager'){
-            $leadId = $lead->where('nik', '1110492070');
+        } else if($role->name == 'Technology Alliance Solutions' || $role->name == 'Product Development Specialist Manager'){
+            $leadId = $lead->whereRaw("(`nik` = '1230100050' OR `nik` = '1110492070')");
         }else {
             $leadId = $lead->where('nik', Auth::user()->nik);
         }
@@ -1140,31 +1140,25 @@ class QuoteController extends Controller
             $quotationDate = Carbon::parse($quotation->date);
 
             if ($quotationDate < Carbon::today()){
-                $checkBackDateNumber = Quote::where('status_backdate','T')
-                    ->whereYear('created_at',date('Y'))
-                    ->orderBy('quote_number','asc')
-                    ->first();
-                if ($checkBackDateNumber != null){
-                    $no   = $checkBackDateNumber->quote_number.'/'.$position .'/'. $type.'/' . $month .'/'. $yearQuote;
-                }else{
-                    $countBackDate = Quote::where('status_backdate', 'F')->where('quote_number', 'like', '%'.date('Y'));
+
+                $countBackDate = Quote::where('status_backdate', 'F')->where('quote_number', 'like', '%'.date('Y'));
 //                        ->whereYear('quote_number_update', date('Y'));
-                    if ($countBackDate->count() > 0){
-                        $lastBackDate = $countBackDate->orderBy('date', 'desc')->first()->quote_number;
-                        $getLastNumberBackDate = explode("/",$lastBackDate)[0];
-                        $newBackDateNumber = $getLastNumberBackDate + 10;
-                        if($newBackDateNumber < 10){
-                            $finalNumber  = '000' . $newBackDateNumber;
-                        }elseif($newBackDateNumber > 9 && $newBackDateNumber < 100){
-                            $finalNumber = '00' . $newBackDateNumber;
-                        }elseif($newBackDateNumber >= 100){
-                            $finalNumber = '0' . $newBackDateNumber;
-                        }
-                        $no   = $finalNumber.'/'.$position .'/'. $type.'/' . $month .'/'. $yearQuote;
-                    }else{
-                        $no   = '0005'.'/'.$position .'/'. $type.'/' . $month .'/'. $yearQuote;
+                if ($countBackDate->count() > 0){
+                    $lastBackDate = $countBackDate->orderBy('created_at', 'desc')->first()->quote_number;
+                    $getLastNumberBackDate = explode("/",$lastBackDate)[0];
+                    $newBackDateNumber = $getLastNumberBackDate + 10;
+                    if($newBackDateNumber < 10){
+                        $finalNumber  = '000' . $newBackDateNumber;
+                    }elseif($newBackDateNumber > 9 && $newBackDateNumber < 100){
+                        $finalNumber = '00' . $newBackDateNumber;
+                    }elseif($newBackDateNumber >= 100){
+                        $finalNumber = '0' . $newBackDateNumber;
                     }
+                    $no   = $finalNumber.'/'.$position .'/'. $type.'/' . $month .'/'. $yearQuote;
+                }else{
+                    $no   = '0005'.'/'.$position .'/'. $type.'/' . $month .'/'. $yearQuote;
                 }
+
                 $quotation->quote_number = $no;
                 $quotation->status_backdate = 'F';
                 $quotation->type_of_letter = $type;
@@ -1178,7 +1172,7 @@ class QuoteController extends Controller
 //                        ->whereYear('quote_number_update',date('Y'))
                         ->where('quote_number', 'like', '%'.date('Y'))
                         ->where('quote_number', '!=', '-')
-                        ->orderBy('date','desc')
+                        ->orderBy('created_at','desc')
                         ->first()->quote_number;
 
                     $getLastNumberQuote =  explode("/",$quote)[0];
@@ -1337,7 +1331,7 @@ class QuoteController extends Controller
 //                            ->whereYear('quote_number_update',date('Y'))
                             ->where('quote_number', 'like', '%'.date('Y'))
                             ->where('quote_number', '!=', '-')
-                            ->orderBy('date','desc')
+                            ->orderBy('created_at','desc')
                             ->first()->quote_number;
                         $nmr = $quoteNumberBackdate + 10;
                         if($nmr < 10){
@@ -1362,7 +1356,7 @@ class QuoteController extends Controller
 //                            ->whereYear('quote_number_update',date('Y'))
                             ->where('quote_number', 'like', '%'.date('Y'))
                             ->where('quote_number', '!=', '-')
-                            ->orderBy('date','desc')
+                            ->orderBy('created_at','desc')
                             ->first()->quote_number;
                         $lastNumber = substr($quoteNumbers, -1);
                         if ($lastNumber == '4'){

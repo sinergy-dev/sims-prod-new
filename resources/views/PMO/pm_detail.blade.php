@@ -471,7 +471,7 @@ Detail Project
 	    			<div class="card-header">
 	    				<h6 class="card-title">Project Charter</h6>
 	    				<div class="card-tools">
-	    					<button class="btn btn-sm btn-danger" id="btnRejectNotes" style="display:none;" onclick="btnRejectNotes()"><i class="bx bx-times"></i>&nbspReject</button>
+	    					<button class="btn btn-sm btn-danger" id="btnRejectNotes" style="display:none;" onclick="btnRejectNotes()"><i class="bx bx-x"></i>&nbspReject</button>
 	    					<a class="btn btn-sm btn-primary" style="display:none;" href="{{action('PMProjectController@downloadProjectCharterPdf')}}"><i class="bx bx-file-pdf-o"></i>&nbspShow PDF</a>
 	    				</div>
 	    			</div>
@@ -5034,7 +5034,7 @@ Detail Project
       append = append + '"'
       append = append + 'class="btnRemoveDoc_'+ incrementDoc +'"'
 
-      append = append + '><i class="bx bx-times" style="'
+      append = append + '><i class="bx bx-x" style="'
       append = append + '    margin-top: 10px;'
       append = append + '    color: red;'
       append = append + '"></i>'

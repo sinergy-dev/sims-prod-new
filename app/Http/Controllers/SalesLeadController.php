@@ -2718,7 +2718,7 @@ class SalesLeadController extends Controller
 
         $tambah = new Sales();
         $tambah->lead_id = $lead;
-        if($cek_role->group == 'Sales' || $cek_role->name_role == 'VP Solutions & Partnership Management'){
+        if($cek_role->group == 'Sales' || $cek_role->name_role == 'VP Solutions & Partnership Management' || $cek_role->name_role == 'Product Development Specialist Manager'){
             $tambah->nik = Auth::User()->nik;
         } else {
             $tambah->nik = $request['owner_sales'];
@@ -2815,7 +2815,7 @@ class SalesLeadController extends Controller
         }
         $tambah_log = new SalesChangeLog();
         $tambah_log->lead_id = $lead;
-        if(Auth::User()->id_division == 'SALES' || Auth::User()->id_division == 'BCD' && Auth::User()->id_position == 'MANAGER'|| $cek_role->name_role == 'VP Solutions & Partnership Management'){
+        if(Auth::User()->id_division == 'SALES' || Auth::User()->id_division == 'BCD' && Auth::User()->id_position == 'MANAGER' || $cek_role->name_role == 'VP Solutions & Partnership Management' || $cek_role->name_role == 'Product Development Specialist Manager'){
             $tambah_log->nik = Auth::User()->nik;
         } else {
             $tambah_log->nik = $request['owner_sales'];
@@ -2827,7 +2827,7 @@ class SalesLeadController extends Controller
 
         $nik_sales = $request['owner_sales'];
 
-        if($cek_role->name_role == 'VP Solutions & Partnership Management'){
+        if($cek_role->name_role == 'VP Solutions & Partnership Management' || $cek_role->name_role == 'Product Development Specialist Manager'){
             $kirim = User::join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')->select('email')
                         ->where('nik', $nik_sales)
                         ->orWhere('roles.name', 'Chief Operating Officer')

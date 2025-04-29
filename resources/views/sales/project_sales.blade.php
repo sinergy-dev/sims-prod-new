@@ -748,7 +748,7 @@ Lead Register
 
       				if (("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Technology Alliance Solutions')->exists()}}")){
       					if (row.name_presales == '-') {
-      						title_assign = '<i class="bx bx-user-plus"></i>Tech Alliance'
+      						title_assign = '<i class="bx bx-user-plus"></i>Presales'
 		      				onclickAssign = "onclick=btnAssignPresales('assign','"+row.lead_id+"')"
 		      				status = 'assign'
       					}else{

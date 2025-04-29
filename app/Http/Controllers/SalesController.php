@@ -2144,7 +2144,7 @@ class SalesController extends Controller{
                 ->where('sales_lead_register.result','WIN')
                 ->where('tb_pmo.pmo_nik',$nik)
                 ->get();
-        } elseif($div == 'FINANCE' && $pos == 'MANAGER') {
+        } elseif($div == 'FINANCE' && $pos == 'VP') {
             $lead = DB::table('sales_lead_register')
                 ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
                 ->join('tb_contact', 'sales_lead_register.id_customer', '=', 'tb_contact.id_customer')
@@ -3318,7 +3318,7 @@ class SalesController extends Controller{
                         $pid_info->url_create = "/salesproject#acceptProjectID?" . $pid_info->id_pid;
                     }
 
-                    $users = User::select('name', 'email')->where('id_division','FINANCE')->where('id_position','MANAGER')->first();
+                    $users = User::select('name', 'email')->where('id_division','FINANCE')->where('id_position','VP')->first();
            
                     Mail::to('hellosinergy@gmail.com')->send(new MailResult($users,$pid_info));
                     Mail::to($users->email)->send(new MailResult($users,$pid_info));
@@ -4287,7 +4287,7 @@ class SalesController extends Controller{
                     ->where('tb_id_project.status','!=','WO')
                     ->get();
         }elseif($div == 'FINANCE'){
-            if ($pos == 'MANAGER') {
+            if ($pos == 'VP') {
                 $salessp = DB::table('tb_id_project')
                     ->join('sales_lead_register','sales_lead_register.lead_id','=','tb_id_project.lead_id')
                     ->join('sales_tender_process','sales_tender_process.lead_id','=','sales_lead_register.lead_id')
@@ -5615,7 +5615,7 @@ class SalesController extends Controller{
         $update->status = 'requested';
         $update->update();
 
-        // $users = User::select('name')->where('id_division','FINANCE')->where('id_position','MANAGER')->first();
+        // $users = User::select('name')->where('id_division','FINANCE')->where('id_position','VP')->first();
 
         $pid_info = DB::table('sales_lead_register')
             ->join('sales_tender_process','sales_tender_process.lead_id','=','sales_lead_register.lead_id')
@@ -5641,7 +5641,7 @@ class SalesController extends Controller{
             $pid_info->url_create = "/salesproject#acceptProjectID?" . $pid_info->id_pid;
         }
 
-        $users = User::select('name','email')->where('id_division','FINANCE')->where('id_position','MANAGER')->first();
+        $users = User::select('name','email')->where('id_division','FINANCE')->where('id_position','VP')->first();
         
         // Mail::to('faiqoh@sinergy.co.id')->send(new MailResult($users,$pid_info));
         // Mail::to('agastya@sinergy.co.id')->send(new MailResult($users,$pid_info));
@@ -5942,7 +5942,7 @@ class SalesController extends Controller{
             }
             $update->no_po_customer = $request['po_customer_edit'];
             $update->name_project = $request['name_project_edit'];
-            if (Auth::User()->id_position == 'MANAGER') {
+            if (Auth::User()->id_position == 'VP') {
                 $amunt = str_replace(',', '', $request['amount_edit']);
                 // $update->amount_idr = $amunt.(int)"00";
                 $update->amount_idr = $amunt;
@@ -6067,7 +6067,7 @@ class SalesController extends Controller{
             $dataPID = $dataPID->where('users.id_territory',Auth::User()->id_territory);
         }
 
-        if (Auth::User()->id_division == 'FINANCE' && Auth::User()->id_position == 'MANAGER' || Auth::User()->id_position == 'DIRECTOR' || Auth::User()->id_division == 'SALES' && Auth::User()->id_position != 'ADMIN') {
+        if (Auth::User()->id_division == 'FINANCE' && Auth::User()->id_position == 'VP' || Auth::User()->id_position == 'DIRECTOR' || Auth::User()->id_division == 'SALES' && Auth::User()->id_position != 'ADMIN') {
             $headerContent = ["No", "Date", "ID Project", "No. PO customer", "Customer Name", "Project Name",  "Amount IDR", "Sales"];
             $dataPID = $dataPID->select(
                 'tb_id_project.date',
