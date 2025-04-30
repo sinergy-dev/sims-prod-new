@@ -28,7 +28,7 @@ class Partnership extends Model
     public function getCertUserAttribute()
     {
         // return PartnershipCertification::where('id_partnership',$this->id_partnership)->get();
-        $certs = PartnershipCertification::join('users', 'users.name', '=', 'tb_partnership_certification.name')->select('id', 'id_partnership', 'level_certification', 'name_certification', 'tb_partnership_certification.name',  DB::raw("(CASE WHEN (expired_date is null) THEN '-' ELSE expired_date END) as expired_date"), 'certificate', 'avatar', 'gambar')->where('id_partnership',$this->id_partnership)->orderBy('level_certification', 'asc')->get();
+        $certs = PartnershipCertification::join('users', 'users.name', '=', 'tb_partnership_certification.name')->select('id', 'id_partnership', 'level_certification', 'name_certification', 'tb_partnership_certification.name',  DB::raw("(CASE WHEN (expired_date is null) THEN '-' ELSE expired_date END) as expired_date"), 'certificate', 'avatar', 'gambar','certification_link')->where('id_partnership',$this->id_partnership)->orderBy('level_certification', 'asc')->get();
         
         return $certs->groupBy('level_certification');
     }

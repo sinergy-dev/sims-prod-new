@@ -1063,15 +1063,23 @@ Partnership Detail
 						append = append + '<div class="card-footer">'
 						append = append + '<button value="' + data.id +
 							'" class="btn btn-xs btn-danger pull-right margin-left btn-delete-eng" style="vertical-align: top; width: 60px;display:none"><i class="bx bx-trash"></i> Delete</button>'
-						if (data.certificate != null) {
+						if(data.certification_link != null){
 							append = append +
-								'<a target="_blank" href="{{url("image/certificate_engineer/")}}/' +
-								data.certificate +
+									'<a target="_blank" href="https://drive.google.com/uc?export=download&id=' +
+									data.certification_link +
 
-								'"><button class="btn btn-xs btn-info pull-left"><i class="bx bx-download"></i> Download</button></a>'
-						} else {
-							append = append +
-								'<button class="btn btn-xs btn-outline-secondary pull-left disabled" title="Certificate is Empty!"><i class="bx bx-download"></i> Download</button>'
+									'"><button class="btn btn-xs btn-info pull-left"><i class="bx bx-download"></i> Download</button></a>'
+						}else{
+							if (data.certificate != null) {
+								append = append +
+										'<a target="_blank" href="{{url("image/certificate_engineer/")}}/' +
+										data.certificate +
+
+										'"><button class="btn btn-xs btn-info pull-left"><i class="bx bx-download"></i> Download</button></a>'
+							} else {
+								append = append +
+										'<button class="btn btn-xs btn-outline-secondary pull-left disabled" title="Certificate is Empty!"><i class="bx bx-download"></i> Download</button>'
+							}
 						}
 						append = append +
 							'<button class="btn btn-xs btn-primary pull-right btn-edit-eng" value="' +
