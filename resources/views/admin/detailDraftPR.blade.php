@@ -539,7 +539,7 @@
                       <label>Quote Supplier*</label>
                       <div style="border: 1px solid #dee2e6 !important;color: #337ab7;height: 34px;padding-bottom: 5px;padding-top: 3px;padding-left: 10px;">
                         <span class="bx bx-cloud-upload" style="display:inline;"></span>
-                        <input autocomplete="off" type="file" name="inputQuoteSupplier" id="inputQuoteSupplier" onkeyup="fillInput('quoteSupplier')" style="margin-top: 4px;display:inline;">
+                        <input autocomplete="off" type="file" name="inputQuoteSupplier" id="inputQuoteSupplier" onkeyup="fillInput('quoteSupplier')" style="margin-top: 4px;display:inline;text-overflow: ellipsis;white-space:nowrap;overflow:hidden;width: 200px;">
                       </div>
                       <span class="invalid-feedback" style="display:none;">Please fill Quote Supplier!</span>
                       <span style="display:none;" id="span_link_drive_quoteSup"><a id="link_quoteSup" target="_blank"><i class="bx bx-link"></i>&nbspLink drive</a></span>
@@ -5137,7 +5137,6 @@
   } 
 
   function changeVatValue(value=false){
-
     console.log(value)
     var tempVat = 0
     var finalVat = 0
@@ -5197,55 +5196,72 @@
     $('.money').mask('#.##0,00', {reverse: true})
     localStorage.setItem('status_tax',valueVat)
 
-    if (!isNaN(valueVat)) {
-      console.log("hoooo")
-      console.log(valueVat)
-      tempVat = Math.round((parseFloat(sum) - isNaN(parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ','')))?0:parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * (valueVat == false?0:parseFloat(valueVat) / 100))
-      if (!isNaN(value)) {
+
+    if (!isNaN(valueVat)) {   
+      setTimeout(function(){
+        tempVat = $("#inputDiscountNominal").val() == '' ? Math.round((parseFloat(sum)) * (valueVat == false?0:parseFloat(valueVat) / 100)) : Math.round((parseFloat(sum) - parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * (valueVat == false?0:parseFloat(valueVat) / 100))
+
+        finalVat = tempVat
+
+        finalGrand = tempGrand
+
+        tempTotal = parseFloat(sum)
+
         if (valueVat == 11) {
           valueVat = 12
-        }else if(valueVat == 1.1) {
+        }else if (valueVat == 1.1) {
           valueVat = 1.2
-        }else {
-          valueVat = valueVat
+        }else{
+          valueVat
         }
 
+        console.log(valueVat)
         $('.title_tax_add_pembanding').text(valueVat == '' || valueVat == 0?"":valueVat + '%')
 
-        $("#vat_tax").val(formatter.format(tempVat))
-      }
+        $("#vat_tax").val(formatter.format(isNaN(tempVat)?0:tempVat))
+      },500)
     }else{
-      console.log("hiiiii")
-
       if (value == 'pb1' || value == 'service') {
         tempVat = Math.round((parseFloat(sum) * ($("#vat_tax").val() == ""?0:parseFloat($("#vat_tax").val())) / 100))
       }else{
         tempVat = 0
         $("#vat_tax").val(formatter.format(tempVat))
       } 
-      
-      // $('.title_tax').text($("#vat_tax").val() == "" ||$("#vat_tax").val() == 0?"":$('.title_tax').text().replace("%","") + '%')
+
+      finalVat = tempVat
+
+      finalGrand = tempGrand
+
+      tempTotal = parseFloat(sum)
+      $('.title_tax_add_pembanding').text($("#vat_tax").val() == "" ||$("#vat_tax").val() == 0?"":$('.title_tax_add_pembanding').text().replace("%","") + '%')
     }
 
-    tempDiscNominal = isNaN(parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ','')))?0:parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ',''))
-    tempPb1 = Math.round(((parseFloat(sum) - tempDiscNominal)* ($("#inputPb1Final").val() == ""?0:parseFloat($("#inputPb1Final").val())) / 100))
-    tempService = Math.round(((parseFloat(sum) - tempDiscNominal) * ($("#inputServiceChargeFinal").val() == ""?0:parseFloat($("#inputServiceChargeFinal").val())) / 100))
-    
-    $("#tax_base_other_pembanding").val(formatter.format(customRound(formatter.format((sum - tempDiscNominal)*11/12))))
-    $("#inputPb1Nominal").val(formatter.format(tempPb1))
-    $("#inputServiceChargeNominal").val(formatter.format(tempService))
-    $("#inputDiscountFinal").val((tempDiscount))
+    setTimeout(function(){
+      tempDiscNominal = isNaN(parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ','')))?0:parseFloat($("#inputDiscountNominal").val().replace(/\./g,'').replace(',','.').replace(' ',''))
+      tempPb1 = Math.round(((parseFloat(sum) - tempDiscNominal)* ($("#inputPb1Final").val() == ""?0:parseFloat($("#inputPb1Final").val())) / 100))
+      tempService = Math.round(((parseFloat(sum) - tempDiscNominal) * ($("#inputServiceChargeFinal").val() == ""?0:parseFloat($("#inputServiceChargeFinal").val())) / 100))
+      
+      $("#tax_base_other_pembanding").val(formatter.format(customRound(formatter.format((sum - tempDiscNominal)*11/12))))
+      $("#inputPb1Nominal").val(formatter.format(tempPb1))
+      $("#inputServiceChargeNominal").val(formatter.format(tempService))
+      $("#inputDiscountFinal").val((tempDiscount))
 
-    tempGrand = sum + tempVat + tempPb1 + tempService - tempDiscNominal
+      tempGrand = sum + tempVat + tempPb1 + tempService - tempDiscNominal
+      changeValueGrandTotal(isNaN(tempGrand)?0:tempGrand)
+    },500)
 
     console.log(tempGrand)
     console.log(tempPb1)
 
-    $("#inputGrandTotalProductFinal").val(formatter.format(tempGrand))
+    // $("#inputGrandTotalProductFinal").val(formatter.format(tempGrand))
     localStorage.setItem('tax_pb',$("#inputPb1Final").val() == ""?0:parseFloat($("#inputPb1Final").val()))
     localStorage.setItem('service_charge',$("#inputServiceChargeFinal").val() == ""?0:parseFloat($("#inputServiceChargeFinal").
       val()))
     localStorage.setItem('discount',tempDiscount == ""?0:tempDiscount)
+  }
+
+  function changeValueGrandTotal(grandTotal){
+    $("#inputGrandTotalProductFinal").val(formatter.format(grandTotal))
   }
 
   localStorage.setItem('isRupiah',true)

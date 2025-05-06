@@ -181,7 +181,7 @@ class AssetMgmtController extends Controller
             )
             ->orderBy('tb_asset_management.created_at','desc'); 
 
-        $searchFields = ['asset_owner', 'tb_asset_management_detail.pid', 'serial_number', 'tb_asset_management.id_asset', 'type_device', 'vendor', 'rma', 'spesifikasi','notes','id_device_customer','client','pid','users.name','roles.name'];
+        $searchFields = ['asset_owner', 'tb_asset_management_detail.pid', 'serial_number', 'tb_asset_management.id_asset', 'type_device', 'vendor', 'rma', 'spesifikasi','notes','id_device_customer','client','pid','users.name','roles.name','notes'];
 
         if ($cek_role->mini_group == 'Supply Chain & IT Support' || $cek_role->name_role == 'VP Internal Chain Management' || $cek_role->name_role == 'Chief Operating Officer') {
             $data = $data;
@@ -271,7 +271,8 @@ class AssetMgmtController extends Controller
                 'tb_asset_management.id',
                 'id_device_customer',
                 'client',
-                DB::raw('CONCAT(users.name, " - ",roles.name) AS pic_name')
+                DB::raw('CONCAT(users.name, " - ",roles.name) AS pic_name'),
+                DB::raw('CASE WHEN reason_status IS NULL THEN "-" ELSE reason_status END AS reason')
             )->groupBy(
                 'tb_asset_management_detail.pid',
                 'asset_owner',
@@ -287,7 +288,8 @@ class AssetMgmtController extends Controller
                 'tb_asset_management.id',
                 'id_device_customer',
                 'client',
-                'pic_name'
+                'pic_name',
+                'reason'
             )
             ->orderBy('tb_asset_management.created_at','desc'); 
 
@@ -1727,11 +1729,15 @@ class AssetMgmtController extends Controller
         $getData = collect($getAll);
 
         if ($getAll->category_peripheral == '-' || $getAll->category_peripheral == null) {
-            if ($getAll->category_code == 'COM' || $getAll->category_code == 'FNT' || $getAll->category_code == 'ELC' || $getAll->category_code == 'VHC') {
+            if (
+                in_array($getAll->category_code, ['COM', 'FNT', 'ELC', 'VHC']) || 
+                empty($getAll->slaPlanned) || 
+                $getAll->slaPlanned == 0
+            ) {
                 $sla = 0;
-            }else{
-                $sla = (100 - ((($timeTrouble/3600)/$getAll->slaPlanned)*100));
-            }   
+            } else {
+                $sla = 100 - ((($timeTrouble / 3600) / $getAll->slaPlanned) * 100);
+            } 
 
             $getServicePoint = AssetMgmtServicePoint::where('service_point',$getAll->service_point)->first();
 
@@ -2464,8 +2470,7 @@ class AssetMgmtController extends Controller
             ->select('tb_asset_management_detail.pid','asset_owner','category','category_peripheral','tb_asset_management.id_asset','type_device','vendor','status','rma','spesifikasi','serial_number','notes','tb_asset_management.id','id_device_customer')
             ->orderBy('tb_asset_management.created_at','desc')->where('status','Rent'); 
 
-        if ($cek_role->mini_group == 'Supply Chain & IT Support' || $cek_role->name_role == 'VP Internal Chain Management' || $cek_role->name_role == 'Chief Operating Officer' || $cek_role->name_role == 'Asset, Facility & HSE Management') {
-            return 'oy';
+        if ($cek_role->mini_group == 'Supply Chain & IT Support' || $cek_role->name_role == 'VP Internal Chain Management' || $cek_role->name_role == 'Chief Operating Officer' || $cek_role->name_role == 'Asset, Facility & HSE Management' || $cek_role->name_role == 'Internal Operation Support Manager') {
             $countAll = $data->count();
             $countInstalled = $dataInstalled->count();
             $countAvailable = $dataAvailable->count();

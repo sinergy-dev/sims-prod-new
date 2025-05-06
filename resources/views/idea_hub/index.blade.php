@@ -86,7 +86,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane show active" role="tabpanel">
                                             <div class="table-responsive">
-                                                <table class="table table-bordered nowrap table-striped dataTable data" id="data_all" width="100%" cellspacing="0">
+                                                <table class="table table-bordered  table-striped dataTable data" id="data_all" width="100%" cellspacing="0">
                                                     <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -110,7 +110,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane show active" role="tabpanel">
                                             <div class="table-responsive">
-                                                <table class="table table-bordered nowrap table-striped dataTable data" id="data_point" width="100%" cellspacing="0">
+                                                <table class="table table-bordered  table-striped dataTable data" id="data_point" width="100%" cellspacing="0">
                                                     <thead>
                                                     <tr>
                                                         <th>No</th>

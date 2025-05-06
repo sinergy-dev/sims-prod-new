@@ -713,7 +713,7 @@
                     $('#selectTypeProduct').select2({
                         data:result,
                         placeholder:'Ex. Unit',
-                        dropdownParent: $('#modalAdd')
+                        dropdownParent: $('#modalAdd .modal-body')
                     })
                 }
             })

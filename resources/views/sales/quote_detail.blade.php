@@ -14,8 +14,11 @@
     <link rel="preload" href="{{ url('assets/css/bootstrap-timepicker.min.css')}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" href="{{ url('assets/css/jquery.mentionsInput.css')}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     {{--<link rel="preload" href="{{asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" as="style" onload="this.onload=null;this.rel='stylesheet'">--}}
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.min.css" integrity="sha512-Bhi4560umtRBUEJCTIJoNDS6ssVIls7oiYyT3PbhxZV+9uBbLVO/mWo56hrBNNbIfMXKvtIPJi/Jg+vpBpA7sg==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+{{--    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.min.css" integrity="sha512-Bhi4560umtRBUEJCTIJoNDS6ssVIls7oiYyT3PbhxZV+9uBbLVO/mWo56hrBNNbIfMXKvtIPJi/Jg+vpBpA7sg==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>--}}
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.css" integrity="sha512-OWGg8FcHstyYFwtjfkiCoYHW2hG3PDWwdtczPAPUcETobBJOVCouKig8rqED0NMLcT9GtE4jw6IT1CSrwY87uw==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/typography.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/katex.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/editor.css')}}" />
     <style type="text/css">
         p > strong::before{
             content: "@";
@@ -321,9 +324,36 @@
                         </div>
                         <div class="tab-add" style="display:none">
                             <div class="tabGroup">
-                                <div class="card-body pad">
-                                    <textarea class="textarea" id="textAreaTOP" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid rgb(221, 221, 221);" placeholder="ex. Terms & Condition"></textarea>
-                                    <span class="help-block" style="display:none;">Please fill Top of Payment!</span>
+                                <div class="card-body">
+                                    <div id="snow-toolbar">
+                                        <span class="ql-formats">
+                                          <select class="ql-font"></select>
+                                          <select class="ql-size"></select>
+                                        </span>
+                                        <span class="ql-formats">
+                                          <button class="ql-bold"></button>
+                                          <button class="ql-italic"></button>
+                                          <button class="ql-underline"></button>
+                                          <button class="ql-strike"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                          <select class="ql-color"></select>
+                                          <select class="ql-background"></select>
+                                        </span>
+                                        <span class="ql-formats">
+                                          <button class="ql-script" value="sub"></button>
+                                          <button class="ql-script" value="super"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                          <button class="ql-header" value="1"></button>
+                                          <button class="ql-header" value="2"></button>
+                                          <button class="ql-blockquote"></button>
+                                          <button class="ql-code-block"></button>
+                                        </span>
+                                    </div>
+                                    <div tabindex="0" id="snow-editor" onkeydown="fillInput('textArea_TOP')">
+                                    </div>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Term of Payment!</span>
                                 </div>
                             </div>
                         </div>
@@ -418,6 +448,8 @@
     </div>
 @endsection
 @section('scriptImport')
+    <script src="{{asset('assets/vendor/libs/quill/katex.js')}}"></script>
+    <script src="{{asset('assets/vendor/libs/quill/quill.js')}}"></script>
     <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
     <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.js" integrity="sha512-FbWDiO6LEOsPMMxeEvwrJPNzc0cinzzC0cB/+I2NFlfBPFlZJ3JHSYJBtdK7PhMn0VQlCY1qxflEG+rplMwGUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -429,8 +461,8 @@
     <script src="{{ url('assets/js/bootstrap-timepicker.min.js')}}"></script>
     <script src="{{ url('assets/js/jquery.emailinput.min.js')}}"></script>
     <script src="{{ url('assets/js/roman.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.all.min.js" integrity="sha512-ng0ComxRUMJeeN1JS62sxZ+eSjoavxBVv3l7SG4W/gBVbQj+AfmVRdkFT4BNNlxdDCISRrDBkNDxC7omF0MBLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="{{asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script> -->
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.all.min.js" integrity="sha512-ng0ComxRUMJeeN1JS62sxZ+eSjoavxBVv3l7SG4W/gBVbQj+AfmVRdkFT4BNNlxdDCISRrDBkNDxC7omF0MBLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+{{--    <!-- <script src="{{asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script> -->--}}
     <script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/jquery.mask.js')}}"></script>
     <script src="{{asset('assets/js/jquery.mentionsInput.js')}}" type="text/javascript"></script>
@@ -585,7 +617,7 @@
                     $('#selectTypeProduct').select2({
                         data:result,
                         placeholder:'Ex. Unit',
-                        dropdownParent: $('#modalAdd')
+                        dropdownParent: $('#modalAdd .modal-body')
                     })
                 }
             })
@@ -1782,7 +1814,7 @@
             $("#ModalUploadNewTTD").modal("show")
         })
 
-        $("#textAreaTOP").wysihtml5();
+        // $("#textAreaTOP").wysihtml5();
 
         // const firstLaunch = localStorage.setItem('firstLaunch',true)
 
@@ -2037,21 +2069,29 @@
                 document.getElementById("prevBtnAdd").style.display = "inline";
 
             }else if (n == 3) {
-                if ($('.wysihtml5-toolbar').length == 0) {
-                    $("#textAreaTOP").wysihtml5({
-                        toolbar: {
-                            "font-styles": true, // Font styling, e.g. h1, h2, etc.
-                            "emphasis": true, // Italics, bold, etc.
-                            "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
-                            "html": false, // Button which allows you to edit the generated HTML.
-                            "link": false, // Button to insert a link.
-                            "image": false, // Button to insert an image.
-                            "color": false, // Button to change color of font
-                            "blockquote": false, // Blockquote
-                            "size": true // options are xs, sm, lg
-                        }
-                    });
-                }
+                // if ($('.wysihtml5-toolbar').length == 0) {
+                //     $("#textAreaTOP").wysihtml5({
+                //         toolbar: {
+                //             "font-styles": true, // Font styling, e.g. h1, h2, etc.
+                //             "emphasis": true, // Italics, bold, etc.
+                //             "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
+                //             "html": false, // Button which allows you to edit the generated HTML.
+                //             "link": false, // Button to insert a link.
+                //             "image": false, // Button to insert an image.
+                //             "color": false, // Button to change color of font
+                //             "blockquote": false, // Blockquote
+                //             "size": true // options are xs, sm, lg
+                //         }
+                //     });
+                // }
+                snowEditor = new Quill('#snow-editor', {
+                    bounds: '#snow-editor',
+                    modules: {
+                        formula: true,
+                        toolbar: '#snow-toolbar'
+                    },
+                    theme: 'snow'
+                });
 
                 $(".modal-title").text('Terms & Condition')
                 $(".modal-dialog").removeClass('modal-lg')
@@ -2272,26 +2312,37 @@
 
                     }else if (n == 3) {
 
-                        if ($('.wysihtml5-toolbar').length == 0) {
-                            $("#textAreaTOP").wysihtml5({
-                                toolbar: {
-                                    "font-styles": true, // Font styling, e.g. h1, h2, etc.
-                                    "emphasis": true, // Italics, bold, etc.
-                                    "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
-                                    "html": false, // Button which allows you to edit the generated HTML.
-                                    "link": false, // Button to insert a link.
-                                    "image": false, // Button to insert an image.
-                                    "color": false, // Button to change color of font
-                                    "blockquote": false, // Blockquote
-                                    "size": true // options are xs, sm, lg
-                                }
-                            });
+                        // if ($('.wysihtml5-toolbar').length == 0) {
+                        //     $("#textAreaTOP").wysihtml5({
+                        //         toolbar: {
+                        //             "font-styles": true, // Font styling, e.g. h1, h2, etc.
+                        //             "emphasis": true, // Italics, bold, etc.
+                        //             "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
+                        //             "html": false, // Button which allows you to edit the generated HTML.
+                        //             "link": false, // Button to insert a link.
+                        //             "image": false, // Button to insert an image.
+                        //             "color": false, // Button to change color of font
+                        //             "blockquote": false, // Blockquote
+                        //             "size": true // options are xs, sm, lg
+                        //         }
+                        //     });
+                        // }
+                         snowEditor = new Quill('#snow-editor', {
+                            bounds: '#snow-editor',
+                            modules: {
+                                formula: true,
+                                toolbar: '#snow-toolbar'
+                            },
+                            theme: 'snow'
+                        });
+                        if(data.quote.term_payment != null ){
+                            snowEditor.clipboard.dangerouslyPasteHTML(data.quote.term_payment)
                         }
 
-                        if(data.quote.term_payment != null ){
-                            $("#textAreaTOP").val(data.quote.term_payment);
-                            $("#textAreaTOP").data('wysihtml5').editor.setValue(data.quote.term_payment);
-                        }
+                        // if(data.quote.term_payment != null ){
+                        //     $("#textAreaTOP").val(data.quote.term_payment);
+                        //     $("#textAreaTOP").data('wysihtml5').editor.setValue(data.quote.term_payment);
+                        // }
 
                         $(".modal-title").text('Terms & Condition')
                         $(".modal-dialog").removeClass('modal-lg')
@@ -3034,12 +3085,10 @@
 
             } else if(currentTab == 3){
                 if (n == 1) {
-                    if ($("#textAreaTOP").val() == "") {
-                        $("#textAreaTOP").closest('textarea').closest('div').closest('form').addClass('has-error')
-                        $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').show()
+                    if (snowEditor.getText().trim() == "") {
+                        $("#snow-editor").next('span').show()
                     }else{
-                        $("#textAreaTOP").closest('textarea').closest('div').closest('form').removeClass('has-error')
-                        $("#textAreaTOP").closest('textarea').next('input').next('iframe').next('span').attr('style','display:none!important')
+                        $("#snow-editor").next('span').attr('style','display:none!important')
 
                         $.ajax({
                             url: "{{'/sales/quote/storeTermPayment'}}",
@@ -3047,7 +3096,7 @@
                             data:{
                                 id_quote:localStorage.getItem('id_quote'),
                                 _token:"{{csrf_token()}}",
-                                term_payment:$("#textAreaTOP").val(),
+                                term_payment:snowEditor.root.innerHTML,
                             },
                             success: function(data)
                             {

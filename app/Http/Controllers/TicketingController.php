@@ -1802,7 +1802,7 @@ class TicketingController extends Controller
 			//Start Notification Job SLM
 	
 			if($request->id_atm != null || $request->client != 'BBJB'){
-				 $this->setNotif($detailTicketOpen->engineer, $request->id_ticket, $request->location);
+				 $this->setNotif($detailTicketOpen->engineer, $request->id_ticket, $request->location, $detailTicketOpen->id_atm);
 			}
 			//End Notification Job SLM
 	
@@ -2838,7 +2838,8 @@ class TicketingController extends Controller
             ->whereDate('e.presence_actual', Carbon::today())
             ->where('a.id_device_customer', $idAtm)
             ->where('b.serial_number', $serialNumber)
-            ->select('c.engineer_atm','a.second_level_support')
+            ->select('c.engineer_atm', DB::raw('MAX(a.second_level_support) as second_level_support'))
+            ->groupBy('c.engineer_atm')
             ->get();
 
         $data = [
@@ -4051,7 +4052,7 @@ class TicketingController extends Controller
 
 		if(isset($req->engineer)){
 			if(isset($req->engineer) && $detailTicketUpdate->id_atm != null && $clientAcronym[1] == 'BBJB'){
-				 $this->setNotif($req->engineer, $req->id_ticket, $detailTicketUpdate->location);
+				 $this->setNotif($req->engineer, $req->id_ticket, $detailTicketUpdate->location, $detailTicketUpdate->id_atm);
 			}
 		}
 
@@ -5427,12 +5428,18 @@ class TicketingController extends Controller
 		// Create new Spreadsheet object
 		$spreadsheet = new Spreadsheet();
 		$client = TicketingClient::find($req->client)->client_acronym;
+		if ($client == 'BPJS'){
+		    $client = 'BKES';
+        }else if($client == 'BJBR'){
+		    $client = 'BBJB';
+        }
 		if (isset($req->month)) {
 			$bulan = Carbon::createFromDate($req->year, $req->month + 1, 1)->format('M');
 		} else {
 			$bulan = '';
 		}
-		
+
+//		return $bulan;
 
 		// return $client . "/" . $bulan . "/" . $req->year;
 		// return $bulan . "/" . $req->year;
@@ -5706,8 +5713,7 @@ class TicketingController extends Controller
 
 			->setCellValue('F6','AWAL')
 			->setCellValue('G6','PERIODE PROBLEM')
-			->setCellValue('I6','AKHIR')
-			;
+			->setCellValue('I6','AKHIR');
 
 		$spreadsheet->getActiveSheet()->getStyle("I5")->getAlignment()->setWrapText(true);
 		$spreadsheet->getActiveSheet()->getStyle("J5")->getAlignment()->setWrapText(true);
@@ -7513,7 +7519,7 @@ class TicketingController extends Controller
 		return $name;
 	}
 
-	public function setNotif($engineerName, $idTicket, $location)
+	public function setNotif($engineerName, $idTicket, $location, $idATM)
 	{
 		$leader = DB::table('roles as a')
 						->leftjoin('role_user as b', 'a.id', 'b.role_id')
@@ -7549,7 +7555,7 @@ class TicketingController extends Controller
                 'created_at' => Carbon::now()
             ]);
 
-            $message = 'Hai, '.$engineerName.'. Anda memiliki ticket baru dengan ID: '. $idTicket .' Lokasi: '.$location.'. Segera accept tiket tersebut di SLM App.';
+            $message = 'Hai, '.$engineerName.'. Anda memiliki ticket baru dengan ID: '. $idTicket . ' ID ATM: '. $idATM .  ' Lokasi: '.$location.'. Segera accept tiket tersebut di SLM App.';
 
             $chatIDGroup = env('TELEGRAM_GROUP_CHAT_ID');
             // $this->telegramService->sendMessage($chatIDGroup, $message);
@@ -7561,7 +7567,7 @@ class TicketingController extends Controller
                 $this->telegramService->sendMessage($engineer->id_telegram, $message);
             }
         } else {
-            $message = 'Hai, '.$leader->name.'. Ticket dengan ID: '. $idTicket .' Lokasi: '.$location.'. Tidak memiliki engineer / engineer belum di set. Segera update ticket pada SIMS App agar tiket dapat segera ditangani. Terima kasih.';
+            $message = 'Hai, '.$leader->name.'. Ticket dengan ID: '. $idTicket . ' ID ATM: '. $idATM . ' Lokasi: '.$location.'. Tidak memiliki engineer / engineer belum di set. Segera update ticket pada SIMS App agar tiket dapat segera ditangani. Terima kasih.';
 
             $chatIDGroup = env('TELEGRAM_GROUP_CHAT_ID');
             if(!empty($chatIDGroup)){

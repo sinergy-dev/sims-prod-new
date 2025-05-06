@@ -111,7 +111,6 @@
           <div class="w-px-400 mx-auto mt-12 pt-5">
             <div class="logo text-center"><img src="{{asset('/img/siplogin.webp')}}" width="123" height="60" alt="Klorofil Logo"></div>
               <p class="text-center">Sinergy Integrated Management System</p>
-              <p class="text-center text-danger">Development [Purposed Only]</p>
               @if ($errors->has('email') || $errors->has('password'))
               <form id="formAuthentication" class="mb-6 needs-validation was-validated" method="POST" action="{{ route('login') }}" novalidate autocomplete="off">
               @else

@@ -398,9 +398,10 @@ class PMProjectController extends Controller
     public function downloadProjectCharterPdf(Request $request){
         // $pdf = PDF::loadView('PMO.Pdf.projectCharter');
         $data = PMOProjectCharter::join('tb_pmo', 'tb_pmo.id', 'tb_pmo_project_charter.id_project')->where('tb_pmo_project_charter.id_project',$request->id_pmo)->first();
+
         $data = json_decode($data,true);
 
-        // return $data;
+        return $data['project_id']['name_project'];
 
         $pdf = PDF::loadView('PMO.Pdf.projectCharter', compact('data'));
         $fileName =  $data['project_id']['project_id']  . ' Project Charter.pdf';
@@ -443,15 +444,15 @@ class PMProjectController extends Controller
 
     public function getPMStaff()
     {
-        $getPMStaff = collect(User::select(DB::raw('`nik` AS `id`,`name` AS `text`'))->whereRaw("(`id_position` = 'PM' OR `id_position` = 'PM SPV')")->where('status_karyawan', '!=', 'dummy')->where('id_company','1')->get());
-        $getPCStaff = collect(User::select(DB::raw('`nik` AS `id`,`name` AS `text`'))->whereRaw("(`id_position` = 'SERVICE PROJECT')")->where('status_karyawan', '!=', 'dummy')->where('id_company','1')->get());
+        $getPMStaff = collect(User::join('role_user','role_user.user_id','users.nik')->join('roles','roles.id','role_user.role_id')->select(DB::raw('`nik` AS `id`,`users`.`name` AS `text`'))->whereRaw("(`roles`.`name` = 'Delivery Project Manager')")->where('status_karyawan', '!=', 'dummy')->where('id_company','1')->get());
+        $getPCStaff = collect(User::join('role_user','role_user.user_id','users.nik')->join('roles','roles.id','role_user.role_id')->select(DB::raw('`nik` AS `id`,`users`.`name` AS `text`'))->whereRaw("(`roles`.`name` = 'Delivery Project Coordinator')")->where('status_karyawan', '!=', 'dummy')->where('id_company','1')->get());
 
         return array("data" => $getPMStaff->merge($getPCStaff));
     }
 
     public function getPCStaff()
     {
-        $getPCStaff = collect(User::select(DB::raw('`nik` AS `id`,`name` AS `text`'))->where('id_position','SERVICE PROJECT')->where('status_karyawan', '!=', 'dummy')->where('id_company','1')->get());
+        $getPCStaff = collect(User::join('role_user','role_user.user_id','users.nik')->join('roles','roles.id','role_user.role_id')->select(DB::raw('`nik` AS `id`,`users`.`name` AS `text`'))->whereRaw("(`roles`.`name` = 'Delivery Project Coordinator')")->where('status_karyawan', '!=', 'dummy')->where('id_company','1')->get());
 
         return array("data" => $getPCStaff);
     }

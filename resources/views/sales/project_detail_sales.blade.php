@@ -366,7 +366,7 @@ Lead Register
 				              </div>
 				              <input type="text" class="form-control money" placeholder="Enter Amount" name="project_budget" id="project_budget" pattern= "[0-9]">
 				            </div>
-		          			<span class="help-block" style="display:none!important">Project Budget Melebihi Amount!</span>
+		          			<span class="invalid-feedback" style="display:none!important">Project Budget Melebihi Amount!</span>
 		              </div>
 		              <div class="row">
 		              	<div class="form-group col-md-6">
@@ -525,7 +525,7 @@ Lead Register
 	                    </div>
 	                    <input class="form-control date" type="text" placeholder="Enter Submit Date" name="submit_date"  id="submit_date" value=""/>
 	                  </div>
-	          				<span class="help-block" style="display:none!important">Please Fill and Submit Date Before Result!</span>
+	          				<span class="invalid-feedback" style="display:none!important">Please Fill and Submit Date Before Result!</span>
 	                </div>
 	            	</div> 
 
@@ -537,7 +537,7 @@ Lead Register
 				              </div>
 				              <input type="text" class="form-control" placeholder="Enter Amount" name="deal_price" id="deal_price" pattern= "[0-9]">
 				          </div>
-	          			<span class="help-block" style="display:none!important">Please Fill and Submit Deal Price Before Result!</span>
+	          			<span class="invalid-feedback" style="display:none!important">Please Fill and Submit Deal Price Before Result!</span>
 	              </div>
 
 	              <div class="form-group">
@@ -2005,7 +2005,7 @@ Lead Register
       append = append + " <span class='input-group-text' data-bs-toggle='tooltip' title='50000' style='background-color: #aaa; color:white;font-style: italic;'>Rp.</span>"
       append = append + " <input data-value='" + i + "' class='money form-control new-price-sol' name='new-price-sol' type='text' placeholder='Enter Product Price'>"
       append = append + " </div>"
-      append = append + " <span class='help-block' style='display:none!important'>Can't submit because the nominal value is 0 rupiah!</span>"
+      append = append + " <span class='invalid-feedback' style='display:none!important'>Can't submit because the nominal value is 0 rupiah!</span>"
       append = append + " </td>"
       append = append + " <td class='text-center'>"
       append = append + " <button type='button' data-value='"+i+"' style='width: auto !important;' class='btn btn-xs btn-danger btn-flat btn-trash-tagging' value='"+i+"'><i class='bx bx-trash'></i></button><button type='button' data-value='"+i+"' style='width: auto !important;' class='btn btn-xs btn-primary btn-flat disabled'><i class='bx bx-pencil'></i></button>"
@@ -2092,7 +2092,7 @@ Lead Register
 		append += "      <span class='input-group-text' style='background-color: #aaa; color:white; font-style: italic;'>Rp.</span>";
 		append += "      <input disabled data-value='" + i + "' class='money form-control new-price-sol' value='0' type='text' placeholder='Enter Product Price'>";
 		append += "    </div>";
-		append += "    <span class='help-block' style='display: none;'>Can't submit because the nominal value is 0 rupiah!</span>";
+		append += "    <span class='invalid-feedback' style='display: none;'>Can't submit because the nominal value is 0 rupiah!</span>";
 		append += "  </td>";
 		append += "  <td class='text-center'>";
 		append += "    <button type='button' class='btn btn-xs btn-danger btn-flat btn-trash-tagging'><i class='bx bx-trash'></i></button>";
@@ -2614,17 +2614,17 @@ Lead Register
 
     function updateTagging(id_exist,product,techno,price,dataValue){
     	if ($(".new-price-sol[data-value='" + dataValue + "']").val() == "" || $(".new-price-sol[data-value='" + dataValue + "']").val() == "0") {
-    		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.help-block').css('color','red').show()
+    		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.invalid-feedback').css('color','red').show()
     		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').addClass("has-error")
     		$(".new-price-sol[data-value='" + dataValue + "']").prev('.input-group-text').css("background-color","red")
     	}else{
     		if ($(".new-price-sol[data-value='" + dataValue + "']").val().replace(/\D/g, "").length < 6) {
-    			$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.help-block').text("Please check again brand price nominal!")
-    			$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.help-block').css('color','red').show()
+    			$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.invalid-feedback').text("Please check again brand price nominal!")
+    			$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.invalid-feedback').css('color','red').show()
     			$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').addClass("has-error")
     			$(".new-price-sol[data-value='" + dataValue + "']").prev('.input-group-text').css("background-color","red")
     		}else{
-	    		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.help-block').css('color','red').attr('style','display:none!important!important')
+	    		$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').next('.invalid-feedback').css('color','red').attr('style','display:none!important!important')
 					$(".new-price-sol[data-value='" + dataValue + "']").closest('.input-group').removeClass("has-error")
 					$(".new-price-sol[data-value='" + dataValue + "']").prev('.input-group-text').css("background-color","background-color:#aaa;color:white")
 
@@ -2803,10 +2803,10 @@ Lead Register
 			    		$(this).find(".new-price-sol").closest('.input-group').next('span').css('color','red').show()
 			    		$(this).find(".new-price-sol").closest('.input-group').addClass("has-error")
 			    		$(this).find(".new-price-sol").prev('.input-group-text').css("background-color","red")
-			    		$(this).find(".new-price-sol").closest('.input-group').next('.help-block').text("Please check again brand price nominal!")
+			    		$(this).find(".new-price-sol").closest('.input-group').next('.invalid-feedback').text("Please check again brand price nominal!")
 		    			console.log('tisssss')
 		    		}else{
-		    			$(this).find(".new-price-sol").closest('.input-group').next('.help-block').css('color','red').attr('style','display:none!important!important')
+		    			$(this).find(".new-price-sol").closest('.input-group').next('.invalid-feedback').css('color','red').attr('style','display:none!important!important')
 							$(this).find(".new-price-sol").closest('.input-group').removeClass("has-error")
 							$(this).find(".new-price-sol").prev('.input-group-text').css("background-color","background-color:#aaa;color:white")
 							data.append("tagData[tagProduct]["+i+"][tag_price]",$(this).find(".new-price-sol").val().replace(/\D/g, ""))
@@ -2819,7 +2819,7 @@ Lead Register
 					i++
 	      });
 
-	      if ($('.help-block').is(":visible")) {
+	      if ($('.invalid-feedback').is(":visible")) {
 	      	storeSD = false
 	      }else{
 		      storeSD = true

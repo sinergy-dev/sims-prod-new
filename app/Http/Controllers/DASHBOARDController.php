@@ -1988,7 +1988,7 @@ class DASHBOARDController extends Controller
 
             $sender = Auth::user()->name;
 
-//            Mail::to($userToSend->email)->send(new MailIdeaHub('[SIMS-App] Idea Hub - New Business Idea', $idea, $userToSend, $sender));
+            Mail::to($userToSend->email)->send(new MailIdeaHub('[SIMS-App] Idea Hub - New Business Idea', $idea, $userToSend, $sender));
             DB::commit();
             return $idea->id;
         }catch (\Exception $exception){

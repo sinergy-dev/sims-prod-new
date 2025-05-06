@@ -2516,7 +2516,7 @@ class SalesLeadController extends Controller
                     $pid_info->url_create = "/salesproject#acceptProjectID?" . $pid_info->id_pid;
                 }
 
-                $users = User::select('name', 'email')->where('id_division','FINANCE')->where('id_position','MANAGER')->first();
+                $users = User::select('name', 'email')->where('id_division','FINANCE')->where('id_position','VP')->first();
        
                 Mail::to('hellosinergy@gmail.com')->send(new MailResult($users,$pid_info));
                 Mail::to($users->email)->cc(['ganjar@sinergy.co.id','damarsusanto@sinergy.co.id'])->send(new MailResult($users,$pid_info));
@@ -2660,7 +2660,7 @@ class SalesLeadController extends Controller
         $pid_info->url_create = "/salesproject#acceptProjectID?" . $pid_info->id_pid;
 
 
-        $users = User::select('name','email')->where('id_division','FINANCE')->where('id_position','MANAGER')->first();
+        $users = User::select('name','email')->where('id_division','FINANCE')->where('id_position','VP')->first();
         
         Mail::to($users->email)->send(new MailResult($users,$pid_info));
 

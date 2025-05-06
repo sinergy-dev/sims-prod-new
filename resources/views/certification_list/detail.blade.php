@@ -189,6 +189,18 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Project Phase</label>
+                                            <select name="projectPhase" id="projectPhase" class="form-control" style="width: 100%; " onchange="fillInput('projectPhase')" disabled>
+                                                <option value="">--Choose Project Phase--</option>
+                                                <option value="Opportunity">Opportunity</option>
+                                                <option value="Tender Submission">Tender Submission</option>
+                                                <option value="On Going">On Going</option>
+                                            </select>
+                                            <span class="invalid-feedback" style="display:none;">Please fill Project Phase!</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
                                         <div class="form-group" id="leadIdGroup">
                                             <label for="">Lead ID</label>
                                             <select name="leadId" id="leadId" class="form-control" style="width: 100%" onchange="fillInput('lead_id')">
@@ -208,18 +220,6 @@
                                                 @endforeach
                                             </select>
                                             <span class="invalid-feedback" style="display:none;">Please fill PID!</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="">Project Phase</label>
-                                            <select name="projectPhase" id="projectPhase" class="form-control" style="width: 100%; " onchange="fillInput('projectPhase')" disabled>
-                                                <option value="">--Choose Project Phase--</option>
-                                                <option value="Opportunity">Opportunity</option>
-                                                <option value="Tender Submission">Tender Submission</option>
-                                                <option value="On Going">On Going</option>
-                                            </select>
-                                            <span class="invalid-feedback" style="display:none;">Please fill Project Phase!</span>
                                         </div>
                                     </div>
                                 </div>

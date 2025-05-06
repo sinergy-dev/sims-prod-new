@@ -195,18 +195,37 @@ class CertificationListController extends Controller
     public function getDataByFilter(Request $request)
     {
         $role = Auth::user()->roles()->first()->name;
+        $group = Auth::user()->roles()->first()->group;
+        $miniGroup = Auth::user()->roles()->first()->mini_group;
         $nik = Auth::user()->nik;
         $query = DB::table('tb_certification_list as c')
             ->join('users as u', 'c.nik', 'u.nik')
             ->leftJoin('users as u2', 'c.circular_on', 'u2.nik')
             ->select('u.name', 'c.vendor', 'c.exam_purpose', 'u2.name as circular', 'c.is_circular', 'c.status','c.nik','c.id',
-            DB::raw('DATE(c.created_at) as date'));
+                DB::raw('DATE(c.created_at) as date'));
+
+        $nikByMiniGroup = DB::table('roles as r')->join('role_user as ru', 'r.id', 'ru.role_id')
+            ->where('r.mini_group', $miniGroup)
+            ->get()->pluck('user_id');
+
+        $nikByGroup = DB::table('roles as r')->join('role_user as ru', 'r.id', 'ru.role_id')
+            ->where('r.group', $group)
+            ->get()->pluck('user_id');
 
         if ($role == 'Chief Operating Officer' || $role == 'People Operations & Services Manager' ||
-            $role == 'Learning & HR Technology' || $role == 'VP Solutions & Partnership Management'){
-            $query = $query;
+            $role == 'Learning & HR Technology' || $role == 'VP Human Capital Management') {
+        }elseif (str_starts_with($role, 'VP ')) {
+            $query = $query->where(function ($q) use ($nik, $nikByGroup) {
+                $q->where('c.nik_manager', $nik)
+                    ->orWhere('c.nik', $nik)
+                    ->orWhereIn('c.nik', $nikByGroup);
+            });
         }else if(str_contains($role, 'Manager')){
-            $query = $query->where('c.nik_manager', $nik)->orwhere('c.nik', $nik);
+            $query = $query->where(function ($q) use ($nik, $nikByMiniGroup) {
+                $q->where('c.nik_manager', $nik)
+                    ->orWhere('c.nik', $nik)
+                    ->orWhereIn('c.nik', $nikByMiniGroup);
+            });
         }else{
             $query = $query->where('c.nik', $nik);
         }
@@ -436,7 +455,6 @@ class CertificationListController extends Controller
         try {
             DB::beginTransaction();
                 $exam = CertificationList::find($id);
-
                 if ($role == 'Channeling Partnership & Marketing' || $role == 'Learning & HR Technology'){
                     if ($role == 'Channeling Partnership & Marketing'){
                         if (strpos($exam->exam_purpose, "Self Enhancement") !== false){
@@ -449,15 +467,18 @@ class CertificationListController extends Controller
                             }
                         }
                     }else{
-                        if (strpos($exam->exam_purpose, "Self Enhancement") !== false){
-                            $manager = $this->getManagerByRole($role);
-                            if ($manager == null){
-                                $vp = $this->getVpByRole($role);
-                                $exam->nik_manager = $vp;
-                            }else{
-                                $exam->nik_manager = $manager;
-                            }
-                        }
+                        CertificationListDetail::where('certification_list_id', $id)
+                            ->update(['participant_nik' => null, 'participant_name' => null]);
+                        
+//                        if (strpos($exam->exam_purpose, "Self Enhancement") !== false){
+//                            $manager = $this->getManagerByRole($role);
+//                            if ($manager == null){
+//                                $vp = $this->getVpByRole($role);
+//                                $exam->nik_manager = $vp;
+//                            }else{
+//                                $exam->nik_manager = $manager;
+//                            }
+//                        }
                     }
                 }else{
                     $manager = $this->getManagerByRole($role);
@@ -1230,10 +1251,18 @@ class CertificationListController extends Controller
 
         $dataApproved = $this->getUserByNik($approved->nik);
         $dataAcknowledge = $this->getUserByNik($acknowledge->nik);
-        $user = $this->getUserByNik($exam->nik);
+        $nikLHR = $this->getNikByRole('Learning & HR Technology');
+        if ($nikLHR->nik == $exam->nik){
+            $user = $this->getUserByNik($exam->nik_manager);
+            $roles = DB::table('role_user as ru')->join('roles as r', 'ru.role_id', 'r.id')
+                ->where('ru.user_id', $exam->nik_manager)->first();
+        }else{
+            $user = $this->getUserByNik($exam->nik);
+            $roles = DB::table('role_user as ru')->join('roles as r', 'ru.role_id', 'r.id')
+                ->where('ru.user_id', $exam->nik)->first();
+        }
 
-        $roles = DB::table('role_user as ru')->join('roles as r', 'ru.role_id', 'r.id')
-            ->where('ru.user_id', $exam->nik)->first();
+
 
         $data = [
             'exam' => $exam,

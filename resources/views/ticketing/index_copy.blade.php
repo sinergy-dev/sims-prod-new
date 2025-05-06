@@ -4629,7 +4629,7 @@ Ticketing
 							// }
 
 							if ($('#inputEngineerOpen').val() == "") {
-								if (Array.isArray(result.engineers) && result.engineers.length > 0 && result.second_level_support === "SIP") {
+								if (Array.isArray(result.engineers) && result.engineers.length > 0 && (result.second_level_support === "SIP" || result.second_level_support === "SIP EOS")) {
 									if (!$('#inputEngineerOpen').is('select')) {
 										$('#inputEngineerOpen').replaceWith('<select class="form-control" id="inputEngineerOpen"></select>');
 									}
@@ -6744,6 +6744,7 @@ Ticketing
         })
       },
 			success: function(result){
+
 				Swal.close()
 				$("#escalateButton").attr("onclick","escalateTicket('" + result.id_ticket + "')")
 				$("#updateButton").attr("onclick","updateTicket('" + result.id_ticket + "')");
@@ -6908,52 +6909,75 @@ Ticketing
 				$("#ticketNote").val("");
 
 				var engineers = result.engineer;
+				if (!$('#ticketEngineer').is('input')) {
+					$('#ticketEngineer').replaceWith('<input type="text" class="form-control" id="ticketEngineer" placeholder="" required value="">');
+					$("#ticketEngineer").val(engineers);
+				}else{
+					$("#ticketEngineer").val(engineers);
+				}
 
-				$.ajax({
-					type:"GET",
-					url:"{{url('/ticketing/getDataAssignEngineer')}}",
-					data:{
-						id_atm:result.id_atm,
-						serial_number:result.serial_device
-					},
-					success: function(result){
-						if (Array.isArray(result.data) && result.data.length > 0 && result.second_level_support === " SIP") {
-							if (!$('#ticketEngineer').is('select')) {
-								$('#ticketEngineer').replaceWith('<select class="form-control" id="ticketEngineer"></select>');
-							}
-
-							var selectEngineer = $('#ticketEngineer');
-							selectEngineer.empty();
-							selectEngineer.append(new Option('Choose Engineer', '',true))
-							let engineerFound = false;
-
-							result.data.forEach(function(engineer) {
-								if (engineer.engineer_atm === engineers) {
-									engineerFound = true;
+				if(engineers === null || engineers === ''){
+					$.ajax({
+						type:"GET",
+						url:"{{url('/ticketing/getDataAssignEngineer')}}",
+						data:{
+							id_atm:result.id_atm,
+							serial_number:result.serial_device
+						},
+						success: function(result){
+							if (Array.isArray(result.data) && result.data.length > 0 && (result.second_level_support === "SIP" || result.second_level_support === "SIP EOS")) {
+								if (!$('#ticketEngineer').is('select')) {
+									$('#ticketEngineer').replaceWith('<select class="form-control" id="ticketEngineer"></select>');
 								}
-								selectEngineer.append(new Option(engineer.engineer_atm, engineer.engineer_atm, engineer.engineer_atm === engineers));
-							});
 
-							if (!engineerFound && engineers) {
-								selectEngineer.append(new Option(engineers, engineers, true));
-							}
-						} else {
-							if (!$('#ticketEngineer').is('input')) {
-								$('#ticketEngineer').replaceWith('<input type="text" class="form-control" id="ticketEngineer" placeholder="" required value="">');
-								$("#ticketEngineer").val(engineers);
-							}
-						}
+								var selectEngineer = $('#ticketEngineer');
+								selectEngineer.empty();
+								selectEngineer.append(new Option('Choose Engineer', '', true));
+								let engineerFound = false;
 
-						if ($('#ticketEngineer').is('select')) {
-							$("#ticketEngineer").val(result.engineer).trigger("change")
-							// if (result.engineer) {
-							// 	var engineerOpt = $("#ticketEngineer");
-	            //   var optiEngineer = new Option(result.engineer, result.engineer, true, true);
-	            //   engineerOpt.append(optiEngineer).trigger('change');
-							// }
+								result.data.forEach(function(engineer) {
+									if (String(engineer.engineer_atm).trim() === String(engineers).trim()) {
+										engineerFound = true;
+									}
+									selectEngineer.append(new Option(engineer.engineer_atm, engineer.engineer_atm, false));
+								});
+
+								if (!engineerFound && engineers) {
+									selectEngineer.append(new Option(engineers, engineers, false));
+								}
+
+								selectEngineer.select2({
+									placeholder: 'Choose Engineer',
+									allowClear: true,
+									width: '100%',
+									dropdownParent: $('#modal-ticket .modal-body')
+								});
+
+								selectEngineer.val(engineers).trigger('change');
+
+							} else {
+								if (!$('#ticketEngineer').is('input')) {
+									$('#ticketEngineer').replaceWith('<input type="text" class="form-control" id="ticketEngineer" placeholder="" required value="">');
+									$("#ticketEngineer").val(engineers);
+								}
+							}
+
+							if ($('#ticketEngineer').is('select')) {
+								$("#ticketEngineer").val(result.engineer).trigger("change")
+								// if (result.engineer) {
+								// 	var engineerOpt = $("#ticketEngineer");
+								//   var optiEngineer = new Option(result.engineer, result.engineer, true, true);
+								//   engineerOpt.append(optiEngineer).trigger('change');
+								// }
+							}
+						},
+						error: function(){
+							$("#ticketEngineer").val(engineers);
 						}
-					}
-				});
+					});
+				}
+
+
 
 				$("#ticketNumber").val(result.ticket_number_3party);
 

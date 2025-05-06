@@ -279,27 +279,27 @@ Detail Project
 @endsection
 @section('content')
 	<div class="container-xxl flex-grow-1 container-p-y">
-		<section class="content-header" style="display:none">
+		<section class="content-header" style="display:none!important">
 	        <h6>
 	    		<button class="btn btn-sm btn-danger" type="button" onclick="btnBack()" id="btnBack"><i class="bx bx-chevron-left"></i>&nbsp Back</button>
 	            <span class="content-title"></span>
 	        </h6>
 	    </section>
 
-	    <section class="content" style="display:none">
+	    <section class="content" style="display:none!important">
 	    	<div class="detail_project">
 		    	<div class="card mb-4">
 		            <div class="card-header">
 		            	<div class="row">
 		            		<div class="col-md-6 col-xs-12">
-		            			<button class="btn btn-sm btn-primary" id="btnAddMilestone" style="display:none"><i class="bx bx-plus"></i>&nbspMilestone</button>
-		                		<button class="btn btn-sm text-bg-success" id="btnAddWeekly" style="display:none"><i class="bx bx-plus"></i>&nbspWeekly Report</button>
+		            			<button class="btn btn-sm btn-primary" id="btnAddMilestone" style="display:none!important"><i class="bx bx-plus"></i>&nbspMilestone</button>
+		                		<button class="btn btn-sm text-bg-success" id="btnAddWeekly" style="display:none!important"><i class="bx bx-plus"></i>&nbspWeekly Report</button>
 		            		</div>
 		            		<div class="col-md-6 col-xs-12" style="text-align:right;">
 		            			<!-- <button class="btn btn-sm btn-vk" onclick="btnShowProjectCharter()"><i class="bx bx-show"></i>&nbspShow Project Charter</button> -->
 			                	<!-- <button class="btn btn-sm btn-warning"><i class="bx bx-forward"></i>&nbspNext Phase</button> -->
-			                	<button class="btn btn-sm btn-primary" style="display:none" disabled id="btnSendCSS" onclick="showEmail()"><i class="bx bx-paper-plane"></i>&nbspSend CSS</button>
-			                	<button class="btn btn-sm text-bg-success" disabled id="btnFinalProject" style="display:none"><i class="bx bx-plus"></i>&nbspFinal Project</button>		                	
+			                	<button class="btn btn-sm btn-primary" style="display:none!important" disabled id="btnSendCSS" onclick="showEmail()"><i class="bx bx-paper-plane"></i>&nbspSend CSS</button>
+			                	<button class="btn btn-sm text-bg-success" disabled id="btnFinalProject" style="display:none!important"><i class="bx bx-plus"></i>&nbspFinal Project</button>		                	
 			                	<!-- <div id="tooltip">
 								    Please Make Done Your Issue and Risks Before Create Final Project Report!
 								</div> -->
@@ -370,7 +370,7 @@ Detail Project
 		            	<h6 class="card-title">Issue & Problems</h6>
 		                <div class="card-tools">
 		                	<button class="btn btn-sm text-bg-success" onclick="exportExcelIssue()"><i class="bx bx-download"></i> Excel</button>
-		                	<button class="btn btn-sm btn-primary" id="btnAddIssue" style="display:none;" onclick="btnAddIssue()"><i class="bx bx-plus"></i>&nbspIssue</button>
+		                	<button class="btn btn-sm btn-primary" id="btnAddIssue" style="display:none!important;" onclick="btnAddIssue()"><i class="bx bx-plus"></i>&nbspIssue</button>
 		                </div>
 		            </div>
 
@@ -391,7 +391,7 @@ Detail Project
 		            	<h6 class="card-title">Risk</h6>
 		                <div class="card-tools">
 		                	<button class="btn btn-sm text-bg-success" onclick="exportExcelRisk()"><i class="bx bx-download"></i> Excel</button>
-		                	<button class="btn btn-sm btn-primary" id="btnAddRisk" style="display:none" onclick="btnAddRisk()"><i class="bx bx-plus"></i>&nbspRisk</button>
+		                	<button class="btn btn-sm btn-primary" id="btnAddRisk" style="display:none!important" onclick="btnAddRisk()"><i class="bx bx-plus"></i>&nbspRisk</button>
 		                </div>
 		            </div>
 
@@ -425,7 +425,7 @@ Detail Project
 		            <div class="card-header">
 		            	<h6 class="card-title">Documents</h6>
 		                <div class="card-tools">
-		                	<button class="btn btn-sm btn-primary" style="display:none" id="btnUploadDocument" onclick="btnUploadNewDocument()"><i class="bx bx-upload"></i>&nbspUpload Document</button>
+		                	<button class="btn btn-sm btn-primary" style="display:none!important" id="btnUploadDocument" onclick="btnUploadNewDocument()"><i class="bx bx-upload"></i>&nbspUpload Document</button>
 		                </div>
 		            </div>
 
@@ -442,7 +442,7 @@ Detail Project
 		            	<h6 class="card-title">Gantt Chart</h6>
 		                <div class="card-tools">
 		                	<button class="btn btn-sm text-bg-success" onclick="exportExcelGantt()"><i class="bx bx-download"></i>&nbspExport</button>
-		                	<button class="btn btn-sm btn-primary" style="display:none;" id="btnAddBaseline" onclick="btnAddBaseline()"><i class="bx bx-plus"></i>&nbspBaseline</button>
+		                	<button class="btn btn-sm btn-primary" style="display:none!important;" id="btnAddBaseline" onclick="btnAddBaseline()"><i class="bx bx-plus"></i>&nbspBaseline</button>
 
 		                </div>
 		            </div>
@@ -466,13 +466,13 @@ Detail Project
 		        </div>
 	    	</div>
 
-	    	<div class="show_project_charter" style="display:none">
+	    	<div class="show_project_charter" style="display:none!important">
 	    		<div class="card mb-4">
 	    			<div class="card-header">
 	    				<h6 class="card-title">Project Charter</h6>
 	    				<div class="card-tools">
-	    					<button class="btn btn-sm btn-danger" id="btnRejectNotes" style="display:none;" onclick="btnRejectNotes()"><i class="bx bx-x"></i>&nbspReject</button>
-	    					<a class="btn btn-sm btn-primary" style="display:none;" href="{{action('PMProjectController@downloadProjectCharterPdf')}}"><i class="bx bx-file-pdf-o"></i>&nbspShow PDF</a>
+	    					<button class="btn btn-sm btn-danger" id="btnRejectNotes" style="display:none!important;" onclick="btnRejectNotes()"><i class="bx bx-x"></i>&nbspReject</button>
+	    					<a class="btn btn-sm btn-primary" style="display:none!important;" href="{{action('PMProjectController@downloadProjectCharterPdf')}}"><i class="bx bxs-file-pdf"></i>&nbspShow PDF</a>
 	    				</div>
 	    			</div>
 	    			<div class="card-body" id="showBodyProjectCharter">
@@ -481,7 +481,7 @@ Detail Project
 	    		</div>
 	    	</div>
 
-	    	<div class="milestone" style="display:none;">
+	    	<div class="milestone" style="display:none!important;">
 	    		<!-- <div class="row">
 	    			<div class="col-md-12 col-xs-12">
 	    				<div class="timelines">
@@ -509,7 +509,7 @@ Detail Project
 	    		</div>
 	    	</div>
 
-	    	<div class="showEmail" style="display:none">
+	    	<div class="showEmail" style="display:none!important">
 	    	</div>
 		</section>
 	</div>
@@ -529,7 +529,7 @@ Detail Project
 	          <div class="form-group">
 	            <label for="">Reject Notes</label>
 	            <textarea id="rejectNotes" name="rejectNotes" class="form-control" placeholder="Reject Notes"></textarea>
-	            <span class="invalid-feedback" style="display:none;">Please fill reject notes!</span>
+	            <span class="invalid-feedback" style="display:none!important;">Please fill reject notes!</span>
 	          </div> 
 	      </div>                           
           <div class="modal-footer">
@@ -558,17 +558,17 @@ Detail Project
 		        <div class="form-group">
 		          	<label>Issue Description*</label>
 		          	<textarea id="textareaDescIssue" name="textareaDescIssue" class="form-control" placeholder="Issue" onkeyup="validationCheck(this)"></textarea>
-	                <span class="invalid-feedback" style="display:none;">Please fill Issue Description!</span>
+	                <span class="invalid-feedback" style="display:none!important;">Please fill Issue Description!</span>
 	          	</div>
 	          	<div class="form-group">
 		          	<label>Solution Plan*</label>
 		          	<textarea class="form-control" placeholder="Solution Plan" name="textareaSolutionPlan" id="textareaSolutionPlan" onkeyup="validationCheck(this)"></textarea>
-	                <span class="invalid-feedback" style="display:none;">Please fill Solution Plan!</span>
+	                <span class="invalid-feedback" style="display:none!important;">Please fill Solution Plan!</span>
 		        </div>
 		        <div class="form-group">
 		          	<label>Owner*</label>
 		          	<input type="text" class="form-control" placeholder="Owner" id="inputOwnerIssue" name="inputOwnerIssue" onkeyup="validationCheck(this)"/>
-	                <span class="invalid-feedback" style="display:none;">Please fill Owner!</span>
+	                <span class="invalid-feedback" style="display:none!important;">Please fill Owner!</span>
 		        </div>
 	          	<div class="row">
 	          		<div class="col-md-6 form-group">
@@ -577,7 +577,7 @@ Detail Project
                         <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                         <input type="text" name="expected_date" id="expected_date" class="form-control" placeholder="Select Expected Date" onchange="validationCheck(this)"/>
                       </div>
-                        <span class="invalid-feedback" style="display:none;">Please fill Expected Solved Date!</span>
+                        <span class="invalid-feedback" style="display:none!important;">Please fill Expected Solved Date!</span>
                     </div>
                     <div class="col-md-6 form-group">
                     <label>Actual Solved Date</label>
@@ -586,7 +586,7 @@ Detail Project
                         <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                         <input type="text" name="actual_date" id="actual_date" class="form-control" placeholder="Select Actual Date" onchange="validationCheck(this)"/>
                       </div>
-                        <span class="invalid-feedback" style="display:none;">Please fill Actual Solved Date!</span>
+                        <span class="invalid-feedback" style="display:none!important;">Please fill Actual Solved Date!</span>
                     </div>
                 </div>  
                 <div class="row">
@@ -594,7 +594,7 @@ Detail Project
 	                    <div class="form-group">
 	                      	<label>Rating/Severity* &nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-rating" value="rating"></i></label>
 		                    <input type="number" min="1" max="5" placeholder="1-5" name="inputRatingIssue" id="inputRatingIssue" class="form-control" onkeyup="validationCheck(this)"/>
-	                        <span class="invalid-feedback" style="display:none;">Please fill Rating/Severity!</span>
+	                        <span class="invalid-feedback" style="display:none!important;">Please fill Rating/Severity!</span>
 	                    </div>
                   	</div>
                   	<div class="col-md-6 col-xs-12">
@@ -604,7 +604,7 @@ Detail Project
 	                        <option value="open">Open</option>
 	                        <option value="close">Close</option>
 	                      </select>
-	                      <span class="invalid-feedback" style="display:none;">Please fill Status!</span>
+	                      <span class="invalid-feedback" style="display:none!important;">Please fill Status!</span>
 	                    </div>
                   </div>
                 </div>
@@ -635,14 +635,14 @@ Detail Project
                     <div class="form-group">
                       <label>Risk Description*</label>
                       <textarea class="form-control" id="textAreaRisk" name="textAreaRisk" placeholder="Risk Description"></textarea>
-                      <span class="invalid-feedback" style="display:none;">Please fill Risk Description!</span>
+                      <span class="invalid-feedback" style="display:none!important;">Please fill Risk Description!</span>
                     </div>
                     <div class="row">
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
                           <label>Owner*</label> 
                           <input type="text" class="form-control" id="inputOwner" name="inputOwner" placeholder="Owner"/>
-                          <span class="invalid-feedback" style="display:none;">Please fill Owner!</span>
+                          <span class="invalid-feedback" style="display:none!important;">Please fill Owner!</span>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">
@@ -650,7 +650,7 @@ Detail Project
 
                           <label>Impact*&nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-impact" value="impact"></i></label> 
                           <input max="5" min="1" type="number" class="form-control" onkeyup="validationCheck(this)" id="inputImpact" name="inputImpact" placeholder="1-5"/>
-                          <span class="invalid-feedback" style="display:none;">Please fill Impact!</span>
+                          <span class="invalid-feedback" style="display:none!important;">Please fill Impact!</span>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">
@@ -658,7 +658,7 @@ Detail Project
 
                           <label>Likelihood*&nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-likelihood" value="likelihood"></i></label> 
                           <input max="5" min="1" type="number" class="form-control" id="inputLikelihood" name="inputLikelihood" placeholder="1-5" onkeyup="validationCheck(this)"/>
-                          <span class="invalid-feedback" style="display:none;">Please fill Likelihood!</span>
+                          <span class="invalid-feedback" style="display:none!important;">Please fill Likelihood!</span>
                         </div>
                       </div>
                     </div>
@@ -675,7 +675,7 @@ Detail Project
                           <div class="form-group">
                             <label>Response*</label> 
                             <textarea class="form-control" id="textareaResponse" name="textareaResponse" placeholder="Response"></textarea>
-                            <span class="invalid-feedback" style="display:none;">Please fill Risk Response!</span>
+                            <span class="invalid-feedback" style="display:none!important;">Please fill Risk Response!</span>
                           </div>
                         </div>
                     </div>
@@ -688,7 +688,7 @@ Detail Project
                             <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input type="text" name="due_date" id="due_date" class="form-control" id="due_date" placeholder="Select Due Date" />
                           </div>
-                            <span class="invalid-feedback" style="display:none;">Please fill Due Date!</span>
+                            <span class="invalid-feedback" style="display:none!important;">Please fill Due Date!</span>
                         </div>
                       </div>
                       <div class="col-md-4 col-xs-12">
@@ -699,7 +699,7 @@ Detail Project
                             <span class="input-group-text"><i class="bx bx-calendar"></i></span>
                             <input type="text" name="review_date" id="review_date" class="form-control" id="review_date" placeholder="Select Review Date" />
                           </div>
-                            <span class="invalid-feedback" style="display:none;">Please fill Review Date!</span>
+                            <span class="invalid-feedback" style="display:none!important;">Please fill Review Date!</span>
                         </div>
                       </div>
                       <div class="col-md-4 col-xs-12">
@@ -710,14 +710,14 @@ Detail Project
                             <option value="Obsolete">Obsolete</option>
                             <option value="Accepted">Accepted</option>
                           </select>
-                          <span class="invalid-feedback" style="display:none;">Please fill Status!</span>
+                          <span class="invalid-feedback" style="display:none!important;">Please fill Status!</span>
                         </div>
                       </div>
                     </div>
               	</div> 
 	      		</div>
 
-              	<input type="" name="" id="id_risk" style="display:none">                         
+              	<input type="" name="" id="id_risk" style="display:none!important">                         
 	          	<div class="modal-footer">
 
 	              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -745,7 +745,7 @@ Detail Project
 	            <select id="sub_task_document" name="sub_task_document" class="form-control" onchange="validationCheck(this)">
 	            	<option></option>
 	            </select>
-	            <span class="invalid-feedback" style="display:none;">Please Select Sub Task!</span>
+	            <span class="invalid-feedback" style="display:none!important;">Please Select Sub Task!</span>
 	          </div> 
 
 	          <div class="table-responsive">
@@ -760,13 +760,13 @@ Detail Project
 			                      <input type="file" class="document" name="inputDoc" id="inputDoc_0" data-value="0" style="display: none;" onchange="validationCheck(this)">
 			                    </label>
 			                  </div>
-			                  <span class="invalid-feedback" style="display:none;color: red;">Please upload document!</span>
+			                  <span class="invalid-feedback" style="display:none!important;color: red;">Please upload document!</span>
 	                	</div>
 	                </td>
 	                <td>
 		                <div class="form-group">
 		                	<input id="inputDocTitle_0" name="inputDocName" data-value="0" type="text" name="" class="form-control" style="width:250px" placeholder="Document Name" onkeyup="validationCheck(this)">
-		                  	<span class="invalid-feedback" style="display:none;color: red;">Please fill document name!</span>
+		                  	<span class="invalid-feedback" style="display:none!important;color: red;">Please fill document name!</span>
 		              	</div>
 	                </td>
 	              </tr>
@@ -835,7 +835,7 @@ Detail Project
 		          		</tbody>		          		
 		          	</table>
 	          	</div>
-	          	<div class="tab-add" style="display:none">
+	          	<div class="tab-add" style="display:none!important">
 	          		<label style="margin-bottom:0px!important">Project Information</label>
 		          	<hr style="margin-bottom: 10px;margin-top: 5px;border-color: #f4f4f4;">
 		          	<div class="row">
@@ -847,14 +847,14 @@ Detail Project
 		                      	<span class="input-group-text"><i class="bx bx-calendar"></i></span>
 		                      	<input type="text" class="form-control" id="date_report_date" name="date_report_date" placeholder="Select report date" onchange="validationCheck(this)">
 		                      </div>
-		                      <span class="invalid-feedback" style="display:none;">Please fill Reporting Date!</span>
+		                      <span class="invalid-feedback" style="display:none!important;">Please fill Reporting Date!</span>
 		                    </div>
 		          		</div>
 		          		<div class="col-md-6">
 		          			<div class="form-group">
 		                      <label>Overall Progress*</label>
 		                      <input type="text" id="overall_progress" name="overall_progress" class="form-control" placeholder="Describe what percentage the project progress" name="" onkeyup="validationCheck(this)" disabled>
-		                      <span class="invalid-feedback" style="display:none;">Please fill Risk Description!</span>
+		                      <span class="invalid-feedback" style="display:none!important;">Please fill Risk Description!</span>
 		                    </div>
 		          		</div>
 		          	</div>    
@@ -862,21 +862,21 @@ Detail Project
 		          	<div class="form-group">
 	                  <label>Project Indicator*</label>
 	                  <div class="radio">
-	                  	<label><input type="radio" id="radioProjectIndicator" value="onTrack" class="minimal" name="radioProjectIndicator" onchange="validationCheck(this)">&nbsp&nbspSchedule on track, no major issue(s), no high risk(s)</label>
+	                  	<label><input type="radio" id="radioProjectIndicator" value="onTrack" name="radioProjectIndicator" onchange="validationCheck(this)">&nbsp&nbspSchedule on track, no major issue(s), no high risk(s)</label>
 	                  </div>
 	                  <div class="radio">
-	                  	<label><input type="radio" class="minimal" value="mightDelay" id="radioProjectIndicator" name="radioProjectIndicator" onchange="validationCheck(this)">&nbsp&nbspSchedule might delay, some issue(s), potential risk(s)</label>
+	                  	<label><input type="radio" value="mightDelay" id="radioProjectIndicator" name="radioProjectIndicator" onchange="validationCheck(this)">&nbsp&nbspSchedule might delay, some issue(s), potential risk(s)</label>
 	                  </div>
 	                  <div class="radio">
-	                  	<label><input type="radio" class="minimal" value="delayed" name="radioProjectIndicator" id="radioProjectIndicator" onchange="validationCheck(this)">&nbsp&nbspSchedule is delayed, major issue(s), and/or potential risk(s)</label>
+	                  	<label><input type="radio" value="delayed" name="radioProjectIndicator" id="radioProjectIndicator" onchange="validationCheck(this)">&nbsp&nbspSchedule is delayed, major issue(s), and/or potential risk(s)</label>
 	                  </div>
-		              <span class="invalid-feedback" style="display:none;">Please fill Project Indicator!</span>
+		              <span class="invalid-feedback" style="display:none!important;">Please fill Project Indicator!</span>
 	              	</div>
 
 	                <div class="form-group">
 	                  	<label>Project Status Summary</label>
 	                  	<textarea class="form-control" id="textareaStatusSummary" name="textareaStatusSummary" placeholder="Describe summary of progress project during this period" onkeyup="validationCheck(this)"></textarea>
-		              	<span class="invalid-feedback" style="display:none;">Please fill Status Summary!</span>
+		              	<span class="invalid-feedback" style="display:none!important;">Please fill Status Summary!</span>
 	                </div>
 
 		            <label style="margin-bottom:0px!important">Project Health Status</label>
@@ -886,7 +886,7 @@ Detail Project
 		          	
 		          	</div>		          	
 	          	</div>	                    
-	        <!--   	<div class="tab-add" style="display:none">
+	        <!--   	<div class="tab-add" style="display:none!important">
 	          		<label style="margin-bottom:0px!important">Issue</label>
 		          	<table id="tableWeeklyIssue" class="table" style="width:100%;border-collapse: separate;border-spacing: 0;">
 		          		<tbody id="tbodyWeeklyIssue">
@@ -895,24 +895,24 @@ Detail Project
 			          				<div class="form-group">
 						          		<label>Issue Description</label>
 						          		<textarea class="form-control" id="textAreaIssueDesc" name="textAreaIssueDesc" placeholder="Describe summary of progress project during this period" onkeyup="validationCheck(this)" data-value="0"></textarea>
-		                      			<span class="invalid-feedback" style="display:none;">Please fill Issue Description!</span>
+		                      			<span class="invalid-feedback" style="display:none!important;">Please fill Issue Description!</span>
 						          	</div>
 						          	<div class="form-group">
 						          		<label>Solution Plan</label>
 						          		<textarea class="form-control" id="textareaSolutionPlanIssue" name="textareaSolutionPlanIssue" placeholder="Describe summary of progress project during this period" onkeyup="validationCheck(this)" data-value="0"></textarea>
-		                      			<span class="invalid-feedback" style="display:none;">Please fill Solution Plan!</span>
+		                      			<span class="invalid-feedback" style="display:none!important;">Please fill Solution Plan!</span>
 						          	</div>
 						          	<div class="form-group">
 				          				<label>Owner</label>
 				          				<input type="text" class="form-control" name="inputOwnerIssue" id="inputOwnerIssue" placeholder="Owner" onkeyup="validationCheck(this)" data-value="0">
-		                      			<span class="invalid-feedback" style="display:none;">Please fill Owner!</span>
+		                      			<span class="invalid-feedback" style="display:none!important;">Please fill Owner!</span>
 				          			</div>
 						          	<div class="row">
 						          		<div class="col-md-3">
 						          			<div class="form-group">
 						          				<label>Rating/Severity</label>
 						          				<input type="number" class="form-control" name="inputRatingIssue" onkeyup="validationCheck(this)" id="inputRatingIssue" placeholder="1-5" max="5" min="1" data-value="0">
-		                      					<span class="invalid-feedback" style="display:none;">Please fill Rating!</span>
+		                      					<span class="invalid-feedback" style="display:none!important;">Please fill Rating!</span>
 						          			</div>
 						          		</div>	
 						          		<div class="col-md-3">
@@ -923,7 +923,7 @@ Detail Project
 						                        <span class="input-group-text"><i class="bx bx-calendar"></i></span>
 						                        <input type="text" name="expected_date_issue" id="expected_date_issue" class="form-control" placeholder="Select Expected Date" onchange="validationCheck(this)" data-value="0"/>
 					                     	 </div>
-					                        <span class="invalid-feedback" style="display:none;">Please fill Expected Solved Date!</span>
+					                        <span class="invalid-feedback" style="display:none!important;">Please fill Expected Solved Date!</span>
 						          			</div>
 					                    </div>
 					                    <div class="col-md-3">
@@ -934,7 +934,7 @@ Detail Project
 							                        <span class="input-group-text"><i class="bx bx-calendar"></i></span>
 							                        <input type="text" name="actual_date_issue" id="actual_date_issue" class="form-control" placeholder="Select Actual Date" onchange="validationCheck(this)" data-value="0"/>
 							                      </div>
-						                        <span class="invalid-feedback" style="display:none;">Please fill Actual Solved Date!</span>
+						                        <span class="invalid-feedback" style="display:none!important;">Please fill Actual Solved Date!</span>
 					                    	</div>
 					                    </div>	
 						          		<div class="col-md-3">
@@ -944,7 +944,7 @@ Detail Project
 						          					<option value="open">Open</option>
 						          					<option value="close">Close</option>
 						          				</select>
-		                      					<span class="invalid-feedback" style="display:none;">Please fill Status!</span>
+		                      					<span class="invalid-feedback" style="display:none!important;">Please fill Status!</span>
 						          			</div>
 						          		</div>	
 						          	</div>
@@ -957,7 +957,7 @@ Detail Project
 		          		<button type="button" class="btn btn-sm btn-primary" style="margin:0 auto;" onclick="addIssueWeekly()"><i class="bx bx-plus" ></i>&nbspIssue</button>
 		          	</div>
 	          	</div>
-	          	<div class="tab-add" style="display:none">
+	          	<div class="tab-add" style="display:none!important">
 	          		<label style="margin-bottom:0px!important">Risks</label>
 	          		<table id="tableWeeklyRisk" class="table" style="width:100%;border-collapse:separate;white-space: nowrap;">
 	          			<tbody id="tbodyRiskWeekly">
@@ -966,12 +966,12 @@ Detail Project
 	          						<div class="form-group">
 					          			<label>Risk Description</label>
 					          			<textarea class="form-control" data-value="0" placeholder="Risk Description" id="textareaDescriptionRisk" name="textareaDescriptionRisk" onkeyup="validationCheck(this)"></textarea>
-		                      			<span class="invalid-feedback" style="display:none;">Please fill Risk Description!</span>
+		                      			<span class="invalid-feedback" style="display:none!important;">Please fill Risk Description!</span>
 					          		</div>
 					          		<div class="form-group">
 					          			<label>Response Plan</label>
 					          			<textarea class="form-control" data-value="0" placeholder="Response Plan" id="textareaResponseRisk" name="textareaResponseRisk" onkeyup="validationCheck(this)"></textarea>
-		                      			<span class="invalid-feedback" style="display:none;">Please fill Response Plan!</span>
+		                      			<span class="invalid-feedback" style="display:none!important;">Please fill Response Plan!</span>
 					          		</div>
 					          		<div class="row">
 						          		<div class="col-md-3">
@@ -979,14 +979,14 @@ Detail Project
 						          				<label>Owner</label>
 						          				<input type="text" data-value="0" class="form-control" name="inputOwnerRisk" id="inputOwnerRisk" placeholder="Owner" onkeyup="validationCheck(this)">
 						          			</div>
-		                      				<span class="invalid-feedback" style="display:none;">Please fill Owner!</span>
+		                      				<span class="invalid-feedback" style="display:none!important;">Please fill Owner!</span>
 						          		</div>	
 						          		<div class="col-md-3">
 						          			<div class="form-group">
 						          				<label>Rating/Severity</label>
 						          				<input type="text" data-value="0" class="form-control" name="inputRatingRisk" id="inputRatingRisk" placeholder="1-5" max="5" min="1" onkeyup="validationCheck(this)">
 						          			</div>
-		                      				<span class="invalid-feedback" style="display:none;">Please fill Rating!</span>
+		                      				<span class="invalid-feedback" style="display:none!important;">Please fill Rating!</span>
 						          		</div>	
 						          		<div class="col-md-3">
 						          			<div class="form-group">
@@ -998,7 +998,7 @@ Detail Project
 						          					</div>
 						          					<input type="text" data-value="0" class="form-control " name="due_date_risk" id="due_date_risk" placeholder="Select Due Date" onchange="validationCheck(this)">
 						          				</div>
-		                      					<span class="invalid-feedback" style="display:none;">Please fill Due Date!</span>
+		                      					<span class="invalid-feedback" style="display:none!important;">Please fill Due Date!</span>
 						          			</div>
 						          		</div>	
 						          		<div class="col-md-3">
@@ -1009,7 +1009,7 @@ Detail Project
 					                            	<option value="obsolete">Obsolete</option>
 					                            	<option value="accepted">Accepted</option>
 					                          	</select>
-		                      					<span class="invalid-feedback" style="display:none;">Please fill Status!</span>
+		                      					<span class="invalid-feedback" style="display:none!important;">Please fill Status!</span>
 											</div>	
 						          		</div>
 						          	</div>
@@ -1022,7 +1022,7 @@ Detail Project
 		          		<button type="button" class="btn btn-sm btn-primary" style="margin:0 auto;" onclick="addRiskWeekly()"><i class="bx bx-plus" ></i>&nbspRisk</button>
 		          	</div>
 	          	</div> -->
-	        <!--   	<div class="tab-add" style="display:none;">
+	        <!--   	<div class="tab-add" style="display:none!important;">
 	          		<div class="form-group">
 	          			<label>Schedule Management</label>
 	          			<textarea class="form-control" placeholder="File Name of WBS Project timeline (.mpp) from"></textarea>
@@ -1052,7 +1052,7 @@ Detail Project
 		      	<div class="modal-body">
 		        <form action="" id="modal_final_report" name="modal_final_report">
 		          @csrf
-		        	<div class="tab-add-final" style="display:none;">
+		        	<div class="tab-add-final" style="display:none!important;">
 		          		<div class="tabGroup">
 		          		<div class="form-group">
 				        	<label>Customer</label>
@@ -1103,7 +1103,7 @@ Detail Project
 		                    </select>
 			          	</div> -->
 		          	</div>
-		          	<div class="tab-add-final" style="display:none;">
+		          	<div class="tab-add-final" style="display:none!important;">
 		          		<div class="tabGroup">
 		          			<div class="form-group">
 				          		<table id="tbMilestoneFinal" class="table" style="width:100%;border-collapse: collapse;">
@@ -1118,7 +1118,7 @@ Detail Project
 			          		</div>
 		          		</div>
 		          	</div>
-		          	<div class="tab-add-final" style="display:none;">
+		          	<div class="tab-add-final" style="display:none!important;">
 		          		<div class="tabGroup">
 		          			<div id="divShowChecklist">
 		          		
@@ -1152,7 +1152,7 @@ Detail Project
 	        	<select class="form-control" id="selectTypeMilestone" name="selectTypeMilestone">
 	        		<option></option>
 	        	</select>
-                <span class="invalid-feedback" style="display:none">Please Select Milestone Type!</span>
+                <span class="invalid-feedback" style="display:none!important">Please Select Milestone Type!</span>
 	        </div>
 	      </div>
 	      <div class="modal-footer">
@@ -2171,7 +2171,7 @@ Detail Project
 														}
 														append = append + '		</div>'
 													append = append + '</div>'
-													append = append +	'<span class="invalid-feedback" style="display:none;color:red"></span>'
+													append = append +	'<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 												append = append +' 	</div>'
 											})
 											append = append + '<div  style="display:flex;justify-content:center">'
@@ -2190,7 +2190,7 @@ Detail Project
 														append = append + "<div class='form-group'>"
 														append = append + "	<label>Solution Name</label>"
 														append = append + "	<input class='form-control' placeholder='Fill solution name' id='inputSolutionMilestone' name='inputSolutionMilestone' value='"+ idx +"'>"
-														append = append + "	<span style='display:none;color:red' class='invalid-feedback'></span>"
+														append = append + "	<span style='display:none!important;color:red' class='invalid-feedback'></span>"
 														append = append + "</div>"	
 														$.each(values,function(idx,valuesExecuting){
 															var startDateExecuting = '', endDateExecuting = ''
@@ -2235,14 +2235,14 @@ Detail Project
 																	append = append +'				</div>'
 																	append = append +' 			</div>'
 																	append = append +' 			<div class="col-md-1" style="padding-right:0px">'
-																	append = append +' 				<input value="'+ bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:75px;float:right;font-size:12px" data-value="'+ incIdx +'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" data-value="'+ incIdx +'" value="' + valuesExecuting.deliverable_document +'" style="display:none">'
+																	append = append +' 				<input value="'+ bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:75px;float:right;font-size:12px" data-value="'+ incIdx +'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" data-value="'+ incIdx +'" value="' + valuesExecuting.deliverable_document +'" style="display:none!important">'
 																	append = append +' 			</div>'
 																	append = append + '			<div class="col-md-1">				'
 
 																		append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
 																	append = append + '			</div>'
 																append = append +' 	</div>'
-																append = append +' <span class="invalid-feedback" style="display:none;color:red"></span>'
+																append = append +' <span class="invalid-feedback" style="display:none!important;color:red"></span>'
 															append = append +' 	</div>'
 														})
 
@@ -2289,7 +2289,7 @@ Detail Project
 																append = append +'				</div>'
 																append = append +' 			</div>'
 																append = append +' 			<div class="col-md-1" style="padding-right:0px">'
-																append = append +' 				<input value="'+ bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+ incIdx +'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none" data-value="'+ incIdx +'">'
+																append = append +' 				<input value="'+ bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+ incIdx +'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none!important" data-value="'+ incIdx +'">'
 																append = append +' 			</div>'
 																append = append + '<div class="col-md-1">				'
 																	if (incIdx != 0) {
@@ -2298,7 +2298,7 @@ Detail Project
 																	}
 																append = append + '</div>'												
 															append = append +' 	</div>'
-														append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'
+														append = append +'		<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 														append = append +' </div>'
 													})
 													append = append +'</form>'
@@ -2344,14 +2344,14 @@ Detail Project
 														append = append +'				</div>'
 														append = append +' 			</div>'
 														append = append +' 			<div class="col-md-1" style="padding-right:0px">'
-														append = append +' 				<input value="'+ values.bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+ incIdx +'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none" data-value="'+ incIdx +'">'
+														append = append +' 				<input value="'+ values.bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+ incIdx +'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none!important" data-value="'+ incIdx +'">'
 														append = append +' 			</div>'
 														append = append + '<div class="col-md-1">				'
 
 															append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
 														append = append +' </div>'	
 													append = append +' 	</div>'
-													append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'					
+													append = append +'		<span class="invalid-feedback" style="display:none!important;color:red"></span>'					
 													append = append +' 	</div>'
 												})
 												append = append +'</form>'
@@ -2383,14 +2383,14 @@ Detail Project
 													append = append +'				</div>'
 													append = append +' 			</div>'
 													append = append +' 			<div class="col-md-1" style="padding-right:0px">'
-													append = append +' 				<input value="'+ values.bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+idx+'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none" data-value="'+ incIdx +'">'
+													append = append +' 				<input value="'+ values.bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+idx+'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none!important" data-value="'+ incIdx +'">'
 													append = append +' 			</div>'
 													append = append + '<div class="col-md-1">				'
 
 														append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)"><i class="bx bx-trash"></i></button>'
 													append = append +'</div>'
 												append = append +' 	</div>'
-												append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'
+												append = append +'		<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 											append = append +' 	</div>'
 											})
 										append = append +'</form>'
@@ -2416,7 +2416,7 @@ Detail Project
 												append = append +'				</div>'
 												append = append +' 			</div>'
 												append = append +' 			<div class="col-md-1">'
-												append = append +' 				<input class="form-control" type="text" minlength="1" maxlength="4" id="weightMilestone" name="weightMilestone_'+ index +'" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px;margin-left: -15px;" data-value="0"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" style="display:none">'
+												append = append +' 				<input class="form-control" type="text" minlength="1" maxlength="4" id="weightMilestone" name="weightMilestone_'+ index +'" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px;margin-left: -15px;" data-value="0"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" style="display:none!important">'
 												append = append +' 			</div>'
 												append = append +'			<div class="col-md-2">'
 												append = append +'				<div class="form-group" style="margin-left: -15px;margin-top: 5px;">'
@@ -2428,7 +2428,7 @@ Detail Project
 													append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskDefined(this)" disabled><i class="bx bx-trash"></i></button>'
 												append = append +' </div>'
 											append = append +' 	</div>'
-											append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'
+											append = append +'		<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 										append = append + '</div>' 
 										append = append + '<div  style="display:flex;justify-content:center">'
 
@@ -2501,7 +2501,7 @@ Detail Project
 														}
 														append = append + '		</div>'
 													append = append + '</div>'
-													append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'
+													append = append +'		<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 												append = append +' 	</div>'
 											})
 											append = append + '<div  style="display:flex;justify-content:center">'
@@ -2554,14 +2554,14 @@ Detail Project
 														append = append +'				</div>'
 														append = append +' 			</div>'
 														append = append +' 			<div class="col-md-1" style="padding-right:0px">'
-														append = append +' 				<input value="'+ bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+ incIdx +'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none" data-value="'+ incIdx +'">'
+														append = append +' 				<input value="'+ bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+ incIdx +'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none!important" data-value="'+ incIdx +'">'
 														append = append +' 			</div>'
 														append = append + '<div class="col-md-1">				'
 
 															append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
 														append = append + '	</div>'
 														append = append +' 		</div>'
-														append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'					
+														append = append +'		<span class="invalid-feedback" style="display:none!important;color:red"></span>'					
 													append = append +' 	</div>'
 												})
 											append = append +'</form>'
@@ -2592,7 +2592,7 @@ Detail Project
 														append = append +'				</div>'
 														append = append +' 			</div>'
 														append = append +' 			<div class="col-md-1" style="padding-right:0px">'
-														append = append +' 				<input value="'+ values.bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+idx+'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none" data-value="'+ idx +'">'
+														append = append +' 				<input value="'+ values.bobot +'" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_'+ index +'" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value="'+idx+'"><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="' + values.deliverable_document +'" style="display:none!important" data-value="'+ idx +'">'
 														append = append +' 			</div>'
 														append = append + '<div class="col-md-1">				'
 
@@ -2600,7 +2600,7 @@ Detail Project
 
 														append = append +' </div>'
 													append = append +' 	</div>'
-													append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'
+													append = append +'		<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 												append = append +' 	</div>'
 											})
 										append = append +'</form>'
@@ -2641,7 +2641,7 @@ Detail Project
 
 												append = append +'</div>'
 											append = append +' 	</div>'
-											append = append +'		<span class="invalid-feedback" style="display:none;color:red"></span>'
+											append = append +'		<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 										append = append +' 	</div>'
 										append = append + '<div  style="display:flex;justify-content:center">'
 
@@ -2654,7 +2654,7 @@ Detail Project
 							append = append +'	<div style="margin-top:20px">'
 							//buat button save hanya di closing
 							// if (index == "Closing") {
-							append = append + '<button class="btn btn-sm btn-primary pull-right saveMilestone" style="display:none" id="saveMilestone">Save</button>'
+							append = append + '<button class="btn btn-sm btn-primary pull-right saveMilestone" style="display:none!important" id="saveMilestone">Save</button>'
 							// }
 							if (index == "Executing") {
 								// if (status == "Defined") {
@@ -2801,7 +2801,7 @@ Detail Project
 						// 						append = append + '</div> 			'
 						// 					append = append + '</div> 			'
 						// 					append = append + '<div class="col-md-1" style="padding-right: 0px;"> 				'
-						// 						append = append + '<input value="" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_Executing" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value=""><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="false" style="display:none"> 			'
+						// 						append = append + '<input value="" class="form-control click" type="text" minlength="1" maxlength="4" name="weightMilestone_Executing" id="weightMilestone" placeholder="weight %" style="display:inline;width:60px;float:right;font-size:12px" data-value=""><input type="text" name="deliverable_document" class="form-control" id="deliverable_document" value="false" style="display:none!important"> 			'
 						// 					append = append + '</div> '
 						// 					append = append + '<div class="col-md-1" style="float: right;padding-left: 25px;">'
 						// 						append = append + '<div class="checkbox">'
@@ -2812,7 +2812,7 @@ Detail Project
 						// 						append = append + '</div>'
 						// 					append = append + '</div>'
 						// 				append = append + '</div>'
-						// 				append = append +'<span class="invalid-feedback" style="display:none;color:red"></span>'
+						// 				append = append +'<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 						// 			append = append + '</div>'
 						// 		append = append + '</div>'
 						// 	})
@@ -2859,7 +2859,7 @@ Detail Project
 										append = append + '</div>'
 									append = append + '</div>'
 								append = append + '</div>'
-								append = append +'<span class="invalid-feedback" style="display:none;color:red"></span>'
+								append = append +'<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 							append = append + '</div>'
 						})
 
@@ -2911,7 +2911,7 @@ Detail Project
 				        })
 					}else{
 						// if ($("#inputSolutionMilestone").length == 0) {
-						// 	$(".form_Executing").find(".form-group:first").before("<div class='form-group'><label>Solution Name</label><input class='form-control' placeholder='Fill solution name' id='inputSolutionMilestone' name='inputSolutionMilestone'><span style='display:none;color:red' class='invalid-feedback'></span></div>")
+						// 	$(".form_Executing").find(".form-group:first").before("<div class='form-group'><label>Solution Name</label><input class='form-control' placeholder='Fill solution name' id='inputSolutionMilestone' name='inputSolutionMilestone'><span style='display:none!important;color:red' class='invalid-feedback'></span></div>")
 						// }
 
 						$.ajax({
@@ -2931,7 +2931,7 @@ Detail Project
 						        let countLastDeliverable = parseInt($('.form_Executing:last').find(".form-group:last").find("#deliverable_document").attr("data-value")) 
 
 						        if ($("#inputSolutionMilestone").length == 0) {
-									$(".form_Executing").find(".form-group:first").before("<div class='form-group'><label>Solution Name</label><input class='form-control' placeholder='Fill solution name' id='inputSolutionMilestone' name='inputSolutionMilestone'><span style='display:none;color:red' class='invalid-feedback'></span></div>")
+									$(".form_Executing").find(".form-group:first").before("<div class='form-group'><label>Solution Name</label><input class='form-control' placeholder='Fill solution name' id='inputSolutionMilestone' name='inputSolutionMilestone'><span style='display:none!important;color:red' class='invalid-feedback'></span></div>")
 								}
 
 								var append = ""
@@ -2940,7 +2940,7 @@ Detail Project
 									append = append + '<div class="form-group">'
 										append = append + '<label>Solution Name</label>'
 										append = append + '<input class="form-control" placeholder="Fill solution name" id="inputSolutionMilestone" name="inputSolutionMilestone">'
-										append = append + '<span style="display:none;color:red" class="invalid-feedback"></span>'
+										append = append + '<span style="display:none!important;color:red" class="invalid-feedback"></span>'
 									append = append + '</div>'
 								$.each(result.Executing,function(index,value){
 									append = append + '<div class="form-group">'
@@ -2977,7 +2977,7 @@ Detail Project
 												append = append + '<button class="btn btn-sm btn-danger" type="button" onclick="btnDeleteTaskCustom(this)"><i class="bx bx-trash"></i></button>'
 											append = append + '</div>'	
 										append = append + '</div>'
-										append = append +'<span class="invalid-feedback" style="display:none;color:red"></span>'
+										append = append +'<span class="invalid-feedback" style="display:none!important;color:red"></span>'
 									append = append + '</div>'
 								})
 								append = append + '</form>'
@@ -3469,14 +3469,19 @@ Detail Project
 	    			})
 
 	    			$("#startDateMilestone_Closing[data-value='"+ idx +"']").change(function(){
-						
-	    				if (Date.parse(moment(this.value).format("YYYY-MM-DD")) > Date.parse(moment($('#finishDateMilestone_Closing[data-value="'+ $(this).data("value") +'"]').val()).format("YYYY-MM-DD"))) {
-	    					$(this).removeAttr('value')
-	    					$(this).closest(".form-group").find("span.invalid-feedback").show().text("Please enter the valid start date, cannot greater than finish date")
-	    				}else{
-	    					$(this).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
-	    					$(this).closest(".form-group").find("span.invalid-feedback").text()
-	    				}
+							console.log(this.value + "closing")
+	    				const startDate = moment(this.value).format("YYYY-MM-DD");
+					    const finishDate = moment($('#finishDateMilestone_Closing[data-value="'+ $(this).data("value") +'"]').val()).format("YYYY-MM-DD");
+
+					    if (Date.parse(startDate) > Date.parse(finishDate)) {
+					        console.log("harusnya merah");
+					        $(this).val('');
+					        $(this).closest(".form-group").find("span.invalid-feedback")
+					            .show().text("Please enter a valid start date; it cannot be later than the finish date.");
+					    } else {
+					        $(this).closest(".form-group").find("span.invalid-feedback")
+					            .hide().text('');
+					    }
 	    			})
 				}
 
@@ -4018,14 +4023,14 @@ Detail Project
     			var append = ""
 				append = append + '	<div class="row">'
 				append = append + '	<div class="col-md-6">'
-				append = append + '		<div class="row">'
+				append = append + '		<div class="row mb-4">'
 				append = append + '			<div class="col-md-12">'
 
-				append = append + '							<div class="card card-primary">'
-				append = append + '				    <div class="card-header">'
-				append = append + '				      <h6 class="card-title">Customer Information</h6>'
+				append = append + '				<div class="card">'
+				append = append + '				    <div class="card-header text-bg-primary">'
+				append = append + '				      <h6 class="card-title text-white">Customer Information</h6>'
 				append = append + '				    </div>'
-				append = append + '				    <div class="card-body">'
+				append = append + '				    <div class="card-body mt-4">'
 				append = append + '				    	<fieldset disabled>'
 				append = append + '				    		<div class="form-group">'
 				append = append + '			                    <label for="">Customer*</label>'
@@ -4072,12 +4077,13 @@ Detail Project
 				append = append + '			  	</div>'
 				append = append + '			</div>'
 				append = append + '		</div>'
-				append = append + '		<div class="row">'
+
+				append = append + '		<div class="row mb-4">'
 				append = append + '			<div class="col-md-12">'
 
-				append = append + '				<div class="card card-primary">'
-				append = append + '				    <div class="card-header">'
-				append = append + '				      <h6 class="card-title">Initial Identified Risk</h6>'
+				append = append + '				<div class="card">'
+				append = append + '				    <div class="card-header text-bg-primary">'
+				append = append + '				      <h6 class="card-title text-white">Initial Identified Risk</h6>'
 				append = append + '				    </div>'
 				append = append + '				    <div class="card-body">'
 				append = append + '						<fieldset disabled id="showRiskProjectCharter">'
@@ -4090,13 +4096,13 @@ Detail Project
 				append = append + '		<div class="row">'
 				append = append + '			<div class="col-md-12 col-xs-12">'
 
-				append = append + '				<div class="card card-primary">'
+				append = append + '				<div class="card">'
 				append = append + '				    <div class="card-header">'
 				append = append + '				      <h6 class="card-title">Approval</h6>'
 				append = append + '				    </div>'
 				append = append + '				    <div class="card-body">'
 				append = append + '				    <fieldset disabled>'
-				append = append + '	                  <div class="row" id="rowSign">'
+				append = append + '	             <div class="row" id="rowSign">'
 
 				var appendSign = ""
 				
@@ -4150,197 +4156,205 @@ Detail Project
 						$("#rowSign").append(appendSign)
 					}
 				})
+
 				append = append + '	                  </div>  '
-				append = append + '				    </fieldset disabled>  '
-				append = append + '				    <button class="btn btn-sm btn-primary pull-right" style="display:none;margin-top:20px" type="button" id="btnApproveSign" style="margin-top:20px">Approve</button>'
+				append = append + '				    </fieldset>  '
+
+				append = append + '				    <button class="btn btn-sm btn-primary pull-right" style="display:none!important;margin-top:20px" type="button" id="btnApproveSign" style="margin-top:20px">Approve</button>'
 				append = append + '				    </div>'
 				append = append + '			  	</div>'
 				append = append + '			</div>'
 				append = append + '		</div>'
 				append = append + '	</div>'
-				append = append + '	<div class="col-md-6">'
 
-				append = append + '	  <div class="card card-primary">'
-				append = append + '	    <div class="card-header">'
-				append = append + '	      <h6 class="card-title">Project Information</h6>'
+				append = append + '	<div class="col-md-6">'
+				append = append + '	  <div class="card">'
+				append = append + '	    <div class="card-header text-bg-primary">'
+				append = append + '	      <h6 class="card-title text-white">Project Information</h6>'
 				append = append + '	    </div>'
 				append = append + '	    <div class="card-body">'
-
 				append = append + '	    	<fieldset disabled>'
-				append = append + '		      	<div class="row">'
-				append = append + '                    <div class="col-md-6">'
-				append = append + '                      <div class="form-group">'
-				append = append + '                        <label>Project ID Number*</label>'
-				append = append + '                        <select autocomplete="off" type="text" name="" class="form-control" id="" placeholder=""><option selected>'+ result[0].project_id.project_id 
-				append = append + '                          <option/>'
-				append = append + '                        </select>'
-				append = append + '                      </div>'
-				append = append + '                    </div>'
-				append = append + '                    <div class="col-md-6">'
-				append = append + '                      <div class="form-group">'
-				append = append + '                        <label>PO/SPK Number*</label> '
-				append = append + '                        <input type="text" name="" id="" class="form-control" placeholder="PO/SPK Number" value="'+ result[0].no_po_customer +'">'
-				append = append + '                      </div>'
-				append = append + '                    </div>'
-				append = append + '                 	</div>'
-				append = append + '                <div class="form-group">'
-				append = append + '                    <label>Project Name*</label>'
-				append = append + '                    <input autocomplete="off" placeholder="Project Name" type="text" name="" class="form-control" id="" value="'+ result[0].project_id.name_project +'">'
-				append = append + '                </div>'
-				append = append + '                 	<div class="form-group">'
-				append = append + '                    <label>Project Type*</label>'
-				append = append + '                      <div style="padding:10px;border:solid 1px #cccc;background: #eee;">'
-				append = append + '                        <label style="margin-right: 15px;"><input autocomplete="off" type="checkbox" name="cbShowProjectCharterProjectType" value="supply_only" class="minimal" id=""> Supply Only</label>'
-				append = append + '                        <label style="margin-right: 15px;"><input autocomplete="off" type="checkbox" name="cbShowProjectCharterProjectType" value="implementation" class="minimal" id=""> Implementation</label>'
-				append = append + '                        <label><input autocomplete="off" type="checkbox" name="cbShowProjectCharterProjectType" class="minimal" id="" value="maintenance"> Maintenance & Managed Service</label>'
-				append = append + '                      </div>'
-				append = append + '                 	</div>'
-				append = append + '                 	<div class="form-group">'
-				append = append + '                   	<label>Project Owner*</label>'
-				append = append + '                   	<input autocomplete="off" type="text" placeholder="Project Owner" name="" class="form-control" id="" value="'+ result[0].owner +'">'
-				append = append + '                 	</div>'
-				append = append + '                 	<div class="row">'
-				append = append + '                    <div class="col-md-6">'
-				append = append + '                      <div class="form-group">'
-				append = append + '                        <label>Project Manager*</label>'
-				append = append + '                        <select disabled class="form-control" id=""><option selected>'+ result[0].project_pm +'</option></select>'
-				append = append + '                      </div> '
-				append = append + '                    </div>'
-				append = append + '                    <div class="col-md-6">'
-				append = append + '                      <div class="form-group">'
-				append = append + '                        <label>Project Coordinator*</label>'
-				append = append + '                        <select disabled class="form-control" id=""><option selected>'+ result[0].project_pc +'</option></select>'
-				append = append + '                      </div> '
-				append = append + '                    </div>'
-				append = append + '                </div>'
-				append = append + '                 	<div class="form-group">'
-				append = append + '                    <label>Project Description*</label>'
-				append = append + '                    <textarea  autocomplete="off" type="number" name="" class="form-control" id="" placeholder="ex. 5" >'+ result[0].project_description +'</textarea>'
-				append = append + '                </div>'
-				append = append + '                 	<div class="form-group">'
-				append = append + '                    <label>Project Objectives*</label>'
-				append = append + '                    <textarea  autocomplete="off" type="number" name="" class="form-control" id="" placeholder="ex. 5" >'+ result[0].project_objectives +'</textarea>'
-				append = append + '                </div> '
-				append = append + '                 	<div class="form-group">'
-				append = append + '                    <label>Technology Use*</label>'
-				append = append + '                      <div class="form-group">'
-				// append = append + '                        <div class="col-md-12 col-xs-12" style="border:solid 1px #cccc;padding-left:5px!important;padding: 10px;margin-bottom: 15px;background:#eee">                      '
-				// append = append + '                          <div class="col-md-4 col-xs-12" style="padding-left:5px!important;">'
-				// append = append + '                            <label><input autocomplete="off" type="checkbox" name="cbShowProjectCharterTechUse" class="minimal form-control" id="" value="Borderless Network"> Borderless Network</label>'
-				// append = append + '                            <label><input autocomplete="off" type="checkbox" name="cbShowProjectCharterTechUse" class="minimal form-control" id="" value="Collaboration"> Collaboration</label>'
-				// append = append + '                          </div>'
-				// append = append + '                          <div class="col-md-3 col-xs-12" style="padding-left:5px!important;">'
-				// append = append + '                            <label><input autocomplete="off" type="checkbox" name="cbShowProjectCharterTechUse" class="minimal form-control" id="" value="Data Center"> Data Center</label>'
-				// append = append + '                            <label><input autocomplete="off" type="checkbox" name="cbShowProjectCharterTechUse" class="minimal form-control" id="" value="Security"> Security</label>'
-				// append = append + '                          </div>'
-				// append = append + '                          <div class="col-md-5 col-xs-12" style="padding-left:5px!important">  '
-				// append = append + '                            <label><input autocomplete="off" type="checkbox" name="cbShowProjectCharterTechUse" class="minimal form-control" id="" value="ATM/CRM"> ATM/CRM</label>'
-				// append = append + '                            <label><input autocomplete="off" type="checkbox" name="cbShowProjectCharterTechUse" class="minimal form-control" id="" value="Application Development"> Application Development</label>'
-				// append = append + '                          </div>'
-				append = append + '<div class="col-md-12 col-xs-12" style="border:solid 1px #cccc;padding-left:5px!important;padding: 10px;margin-bottom: 15px;background-color: #eee;">'
-				append = append + '  <div class="col-md-3 col-xs-12" style="padding-left:5px!important;">'
-				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Data Center" class="minimal form-control" id=""> Data Center</label><br>'
-				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Security" class="minimal form-control" id=""> Security</label><br>'
-				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="IoT" class="minimal form-control" id=""> IoT</label>'
-				append = append + '  </div>'
-				append = append + '  <div class="col-md-5 col-xs-12" style="padding-left:5px!important">   '
-				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="ATM/CRM" class="minimal form-control" id=""> ATM/CRM</label><br>'
-				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Application Development" class="minimal form-control" id=""> Application Development</label><br>'
-				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Cloud Computing" class="minimal form-control"id=""> Cloud Computing</label>'
-				append = append + '  </div>'
-				append = append + '  <div class="col-md-4 col-xs-12" style="padding-left:5px!important;">'
-				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Borderless Network" class="minimal form-control" id=""> Borderless Network</label><br>'
-				append = append + '    <label><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Collaboration" class="minimal form-control" id=""> Collaboration</label>'
-				append = append + '  </div>'
-				append = append + '</div>'
-				append = append + '                        </div>'
-				append = append + '                      </div>'
-				append = append + '                </div>'
-				append = append + '                 	<div class="row">'
-				append = append + '                    <div class="col-md-4">'
-				append = append + '                      <div class="form-group">'
-				append = append + '                        <label>Estimated Start Date*</label>'
-				append = append + '                        <div style="padding: 5px;border: solid 1px #ccc;background-color: #eee;">'
+					append = append + '		      	<div class="row mt-4">'
+						append = append + '                    <div class="col-md-6">'
+						append = append + '                      <div class="form-group">'
+						append = append + '                        <label>Project ID Number*</label>'
+						append = append + '                        <select autocomplete="off" type="text" name="" class="form-control" id="" placeholder=""><option selected>'+ result[0].project_id.project_id 
+						append = append + '                          <option/>'
+						append = append + '                        </select>'
+						append = append + '                      </div>'
+						append = append + '                    </div>'
 
-				append = append + '                        	<i class="bx bx-calendar" style="display: inline;"></i>&nbsp'
-				append = append + '                        	<span style="display:inline;font-size:12px">'+ result[0].estimated_start_date +'</span>'
-				append = append + '                        </div>'
-				append = append + '                      </div>'
-				append = append + '                    </div>'
-				append = append + '                    <div class="col-md-4">'
-				append = append + '                    	<div class="form-group">'
-				append = append + '	                        <label>Estimated Finish Date*</label>'
-				append = append + '	                        <div style="padding: 5px;border: solid 1px #ccc;background-color: #eee;">'
+						append = append + '                    <div class="col-md-6">'
+						append = append + '                      <div class="form-group">'
+						append = append + '                        <label>PO/SPK Number*</label> '
+						append = append + '                        <input type="text" name="" id="" class="form-control" placeholder="PO/SPK Number" value="'+ result[0].no_po_customer +'">'
+						append = append + '                      </div>'
+						append = append + '                    </div>'
+					append = append + '           </div>'
 
-				append = append + '	                        	<i class="bx bx-calendar" style="display: inline;"></i>&nbsp'
-				append = append + '	                        	<span style="display:inline;font-size:12px">'+ result[0].estimated_end_date +'</span>'
-				append = append + '	                        </div>'
-				append = append + '                      	</div>'
-				append = append + '                    </div>'
-				append = append + '                    <div class="col-md-4">'
-				append = append + '                      <div class="form-group">'
-				append = append + '                        <label>Flexibility*</label>'
-				append = append + '                        <input type="text" disabled name="flexibility" id="flexibility" class="form-control" value="'+ result[0].flexibility +'">'
-				append = append + '                      </div>'
-				append = append + '                    </div>'
-				append = append + '                 	</div>'
-				append = append + '                 	<div class="form-group">'
-				append = append + '                    <label>Market Segment*</label>'
-				append = append + '                    <input type="text" disabled name="market_segment" id="market_segment" class="form-control" value="'+ result[0].market_segment +'">'
-				append = append + '                </div>'
-				append = append + '                 	<div class="form-group">'
-				append = append + '                    <label>Scope of Work*</label>'
-				append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Scope of Work">'+ result[0].scope_of_work +'</textarea>'
-				append = append + '                </div>'
-				append = append + '                <div class="form-group">'
-				append = append + '                    <label>Out Of Scope*</label> '
-				append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Out of Work">'+ result[0].out_of_scope +'</textarea>'
-				append = append + '                </div>'
-				append = append + '                <div class="form-group">'
-				append = append + '                    <label>Customer Requirement*</label> '
-				append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Customer Requirement">'+ result[0].customer_requirement +'</textarea>'
-				append = append + '                </div>'
-				append = append + '                <div class="form-group">'
-				append = append + '                    <label>Term of Payment*</label>'
-				append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Customer Requirement">'+ result[0].terms_of_payment +'</textarea>'
-				append = append + '                </div>'
-				append = append + '                <div class="form-group">'
-				append = append + '                    <label>Internal Stakeholder Register*</label>'
-				append = append + '                    <div class="table-responsive">'
-				append = append + '                    	<table class="table" style="border-collapse:collapse;width: 100%;white-space: nowrap;" id="tbInternalStakeholderRegister">'
-				append = append + '                    		<tr>'
-				append = append + '                    			<th>Name</th>'
-				append = append + '                    			<th>Roles</th>'
-				append = append + '                    			<th>Phone</th>'
-				append = append + '                    			<th>Email</th>'
-				append = append + '                    		</tr>'
-				append = append + '                    		<tbody id="tbodyIStakeholderShowProjectCharter">'
-				append = append + '                    		</tbody>'
-				append = append + '                    	</table>'
-				append = append + '                    </div>'
-				append = append + '                </div>'
-				if (result[0].pid !== null){
-					append = append + '                <div class="form-group">'
-					append = append + '                    <label>SLA Project*</label>'
-					append = append + '                    <div class="table-responsive">'
-					append = append + '                    	<table class="table" style="border-collapse:collapse;width: 100%;white-space: nowrap;" id="tbInternalStakeholderRegister">'
-					append = append + '                    		<tr>'
-					append = append + '                    			<th>SLA Response</th>'
-					append = append + '                    			<th>SLA Resolution Critical</th>'
-					append = append + '                    			<th>SLA Resolution Major</th>'
-					append = append + '                    			<th>SLA Resolution Moderate</th>'
-					append = append + '                    			<th>SLA Resolution Minor</th>'
-					append = append + '                    		</tr>'
-					append = append + '                    		<tbody id="tbodySLAProjectCharter">'
-					append = append + '                    		</tbody>'
-					append = append + '                    	</table>'
-					append = append + '                    </div>'
-					append = append + '                </div>'
-				}
+					append = append + '           <div class="form-group">'
+						append = append + '              <label>Project Name*</label>'
+						append = append + '              <input autocomplete="off" placeholder="Project Name" type="text" name="" class="form-control" id="" value="'+ result[0].project_id.name_project +'">'
+					append = append + '            </div>'
+
+					append = append + '            <div class="form-group">'
+						append = append + '              	<label>Project Type*</label>'
+						append = append + '                 	<div style="padding:10px;border:solid 1px #cccc;background: #eee;">'
+						append = append + '                        <label style="margin-right: 15px;"><input autocomplete="off" type="checkbox" name="cbShowProjectCharterProjectType" value="supply_only" id=""> Supply Only</label>'
+						append = append + '                        <label style="margin-right: 15px;"><input autocomplete="off" type="checkbox" name="cbShowProjectCharterProjectType" value="implementation" id=""> Implementation</label>'
+						append = append + '                        <label><input autocomplete="off" type="checkbox" name="cbShowProjectCharterProjectType" id="" value="maintenance"> Maintenance & Managed Service</label>'
+						append = append + '                   </div>'
+						append = append + '           </div>'
+
+						append = append + '           <div class="form-group">'
+							append = append + '                   	<label>Project Owner*</label>'
+							append = append + '                   	<input autocomplete="off" type="text" placeholder="Project Owner" name="" class="form-control" id="" value="'+ result[0].owner +'">'
+						append = append + '           </div>'
+
+						append = append + '           <div class="row">'
+						append = append + '                    <div class="col-md-6">'
+						append = append + '                      <div class="form-group">'
+						append = append + '                        <label>Project Manager*</label>'
+						append = append + '                        <select disabled class="form-control" id=""><option selected>'+ result[0].project_pm +'</option></select>'
+						append = append + '                      </div> '
+						append = append + '                    </div>'
+
+						append = append + '                    <div class="col-md-6">'
+						append = append + '                      <div class="form-group">'
+						append = append + '                        <label>Project Coordinator*</label>'
+						append = append + '                        <select disabled class="form-control" id=""><option selected>'+ result[0].project_pc +'</option></select>'
+						append = append + '                      </div> '
+						append = append + '                    </div>'
+					append = append + '            </div>'
+
+					append = append + '            <div class="form-group">'
+						append = append + '              <label>Project Description*</label>'
+						append = append + '              <textarea  autocomplete="off" type="number" name="" class="form-control" id="" placeholder="ex. 5" >'+ result[0].project_description +'</textarea>'
+					append = append + '            </div>'
+
+					append = append + '            <div class="form-group">'
+						append = append + '               <label>Project Objectives*</label>'
+						append = append + '               <textarea  autocomplete="off" type="number" name="" class="form-control" id="" placeholder="ex. 5" >'+ result[0].project_objectives +'</textarea>'
+					append = append + '            </div> '
+
+					append = append + '			<div class="form-group">'
+						append = append + '      <label>Technology Use*</label>'
+						append = append + '		<div class="row" style="border:solid 1px #cccc;padding-left:5px!important;padding: 10px;margin-bottom: 15px;background-color: #eee;margin:0px">'
+							append = append + '  <div class="col-md-3 col-xs-12" style="padding-left:5px!important;">'
+								append = append + '    <label class="form-check-label"><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Data Center" class="form-check-input" id=""> Data Center</label><br>'
+								append = append + '    <label class="form-check-label"><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Security" class="form-check-input" id=""> Security</label><br>'
+								append = append + '    <label class="form-check-label"><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="IoT" class="form-check-input" id=""> IoT</label>'
+							append = append + '  </div>'
+
+							append = append + '  <div class="col-md-5 col-xs-12" style="padding-left:5px!important">   '
+								append = append + '    <label class="form-check-label"><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="ATM/CRM" class="form-check-input" id=""> ATM/CRM</label><br>'
+								append = append + '    <label class="form-check-label"><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Application Development" class="form-check-input" id=""> Application Development</label><br>'
+								append = append + '    <label class="form-check-label"><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Cloud Computing" class="form-check-input"id=""> Cloud Computing</label>'
+							append = append + '  </div>'
+
+							append = append + '  <div class="col-md-4 col-xs-12" style="padding-left:5px!important;">'
+								append = append + '    <label class="form-check-label"><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Borderless Network" class="form-check-input" id=""> Borderless Network</label><br>'
+								append = append + '    <label class="form-check-label"><input autocomplete="off" disabled type="checkbox" name="cbShowProjectCharterTechUse" value="Collaboration" class="form-check-input" id=""> Collaboration</label>'
+							append = append + '  </div>'
+						append = append + '</div>'
+					append = append + '			</div>'
+
+					append = append + '			<div class="row">'
+						append = append + '           <div class="col-md-4">'
+							append = append + '                      <div class="form-group">'
+							append = append + '                        <label>Estimated Start Date*</label>'
+							append = append + '                        <div style="padding: 5px;border: solid 1px #ccc;background-color: #eee;">'
+
+							append = append + '                        	<i class="bx bx-calendar" style="display: inline;"></i>&nbsp'
+							append = append + '                        	<span style="display:inline;font-size:12px">'+ result[0].estimated_start_date +'</span>'
+							append = append + '                        </div>'
+							append = append + '                      </div>'
+						append = append + '           </div>'
+
+						append = append + '           <div class="col-md-4">'
+							append = append + '                    	<div class="form-group">'
+							append = append + '	                        <label>Estimated Finish Date*</label>'
+							append = append + '	                        <div style="padding: 5px;border: solid 1px #ccc;background-color: #eee;">'
+
+							append = append + '	                        	<i class="bx bx-calendar" style="display: inline;"></i>&nbsp'
+							append = append + '	                        	<span style="display:inline;font-size:12px">'+ result[0].estimated_end_date +'</span>'
+							append = append + '	                        </div>'
+							append = append + '                      </div>'
+						append = append + '           </div>'
+
+						append = append + '           <div class="col-md-4">'
+							append = append + '                      <div class="form-group">'
+							append = append + '                        <label>Flexibility*</label>'
+							append = append + '                        <input type="text" disabled name="flexibility" id="flexibility" class="form-control" value="'+ result[0].flexibility +'">'
+							append = append + '                      </div>'
+						append = append + '           </div>'
+					append = append + '			</div>'
+
+					append = append + '           <div class="form-group">'
+						append = append + '             <label>Market Segment*</label>'
+						append = append + '             <input type="text" disabled name="market_segment" id="market_segment" class="form-control" value="'+ result[0].market_segment +'">'
+					append = append + '           </div>'
+
+					append = append + '           <div class="form-group">'
+						append = append + '                    <label>Scope of Work*</label>'
+						append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Scope of Work">'+ result[0].scope_of_work +'</textarea>'
+					append = append + '           </div>'
+
+					append = append + '           <div class="form-group">'
+						append = append + '                    <label>Out Of Scope*</label> '
+						append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Out of Work">'+ result[0].out_of_scope +'</textarea>'
+					append = append + '           </div>'
+
+					append = append + '           <div class="form-group">'
+						append = append + '                    <label>Customer Requirement*</label> '
+						append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Customer Requirement">'+ result[0].customer_requirement +'</textarea>'
+					append = append + '           </div>'
+
+					append = append + '           <div class="form-group">'
+						append = append + '                    <label>Term of Payment*</label>'
+						append = append + '                    <textarea disabled class="form-control" id="" name="" placeholder="Customer Requirement">'+ result[0].terms_of_payment +'</textarea>'
+					append = append + '           </div>'
+
+					append = append + '           <div class="form-group">'
+						append = append + '                <label>Internal Stakeholder Register*</label>'
+						append = append + '                <div class="table-responsive">'
+						append = append + '                  	<table class="table" style="border-collapse:collapse;width: 100%;white-space: nowrap;" id="tbInternalStakeholderRegister">'
+						append = append + '                    		<tr>'
+						append = append + '                   			<th>Name</th>'
+						append = append + '                    			<th>Roles</th>'
+						append = append + '                    			<th>Phone</th>'
+						append = append + '                    			<th>Email</th>'
+						append = append + '                    		</tr>'
+						append = append + '                    		<tbody id="tbodyIStakeholderShowProjectCharter">'
+						append = append + '                    		</tbody>'
+						append = append + '                   	</table>'
+						append = append + '                 </div>'
+					append = append + '           </div>'
+
+						if (result[0].pid !== null){
+							append = append + '                <div class="form-group">'
+								append = append + '                    <label>SLA Project*</label>'
+								append = append + '                    <div class="table-responsive">'
+									append = append + '                    	<table class="table" style="border-collapse:collapse;width: 100%;white-space: nowrap;" id="tbInternalStakeholderRegister">'
+									append = append + '                    		<tr>'
+									append = append + '                    			<th>SLA Response</th>'
+									append = append + '                    			<th>SLA Resolution Critical</th>'
+									append = append + '                    			<th>SLA Resolution Major</th>'
+									append = append + '                    			<th>SLA Resolution Moderate</th>'
+									append = append + '                    			<th>SLA Resolution Minor</th>'
+									append = append + '                    		</tr>'
+									append = append + '                    		<tbody id="tbodySLAProjectCharter">'
+									append = append + '                    		</tbody>'
+									append = append + '                    	</table>'
+								append = append + '                    </div>'
+							append = append + '                </div>'
+						}
+
 				append = append + '	    	</fieldset>'
 				append = append + '	    </div>'
 				append = append + '	  </div>'
 				append = append + '	</div>'
+
 				append = append + '</div>'
 
 				$("#showBodyProjectCharter").append(append)
@@ -4662,7 +4676,7 @@ Detail Project
 
 	      var append = ""
 	      
-	      append = append + '<div class="callout callout-danger divReasonRejectRevision" style="display:none">'
+	      append = append + '<div class="callout callout-danger divReasonRejectRevision" style="display:none!important">'
 
 	        append = append + '<h6><i class="icon bx bx-cross"></i>'+ textTitle +'</h6>'
 	        if (arrReason.length > 0) {
@@ -4906,9 +4920,9 @@ Detail Project
             	title:"Action",
               	render: function (data, type, row, meta){
                 	if (row.deliverable_document == "true") {
-                		return '<input type="checkbox" disabled class="minimal" name="cbTaskDone" id="cbTaskDone" value="'+ row.id_gantt +'"> Task Done'
+                		return '<input type="checkbox" disabled name="cbTaskDone" id="cbTaskDone" value="'+ row.id_gantt +'"> Task Done'
               		}else{
-                		return '<input type="checkbox" class="minimal" name="cbTaskDone" id="cbTaskDone" value="'+ row.id_gantt +'"> Task Done'
+                		return '<input type="checkbox" name="cbTaskDone" id="cbTaskDone" value="'+ row.id_gantt +'"> Task Done'
               		}
               	}
             },
@@ -4916,7 +4930,7 @@ Detail Project
         "rowCallback": function( row, data ) {
       		if (accesable.includes("cbTaskDone")) {
           		if (data.deliverable_document != "true") {
-          			$('td:eq(4)', row).html( '<input type="checkbox" class="minimal" name="cbTaskDone" id="cbTaskDone" value="'+ data.id_gantt +'"> Task Done');
+          			$('td:eq(4)', row).html( '<input type="checkbox" name="cbTaskDone" id="cbTaskDone" value="'+ data.id_gantt +'"> Task Done');
           			// $("input[name='cbTaskDone'][value="+ data.id_gantt +"]").prop("disabled",false)
           			// $("input[name='cbTaskDone'][value="+ data.id_gantt +"]").closest("div").removeClass("disabled").prop("disabled",false)
           		}else{
@@ -5040,11 +5054,11 @@ Detail Project
       append = append + '"></i>'
       append = append + '</span>'
 
-      append = append + '    &nbsp;<div style="display: inline;float: right;padding:5px;border:solid 1px #cccc;width: 280px;"> <label for="inputDoc_'+ incrementDoc +'" class="bx bx-upload" id="title_doc_'+ incrementDoc +'" data-value="'+ incrementDoc +'">&nbsp; <span>Upload Document</span> <input type="file" class="document" name="inputDoc" onchange="validationCheck(this)" id="inputDoc_'+ incrementDoc +'" data-value="'+ incrementDoc +'" style="display: none;color:red"></label></div><span class="invalid-feedback" style="display:none;color:red">Please upload document!</span></div>' 
+      append = append + '    &nbsp;<div style="display: inline;float: right;padding:5px;border:solid 1px #cccc;width: 280px;"> <label for="inputDoc_'+ incrementDoc +'" class="bx bx-upload" id="title_doc_'+ incrementDoc +'" data-value="'+ incrementDoc +'">&nbsp; <span>Upload Document</span> <input type="file" class="document" name="inputDoc" onchange="validationCheck(this)" id="inputDoc_'+ incrementDoc +'" data-value="'+ incrementDoc +'" style="display: none;color:red"></label></div><span class="invalid-feedback" style="display:none!important;color:red">Please upload document!</span></div>' 
       append = append + '  </td>'
       append = append + '  <td>'
 	  append = append + '<div class="form-group">'
-      append = append + '   <input placeholder="Document Name" onkeyup="validationCheck(this)" name="inputDocName" type="text" id="inputDocTitle_'+ incrementDoc +'" class="form-control" style="width:250px" data-value="'+ incrementDoc +'"><span class="invalid-feedback" style="display:none;color:red">Please fill document name!</span></div>'
+      append = append + '   <input placeholder="Document Name" onkeyup="validationCheck(this)" name="inputDocName" type="text" id="inputDocTitle_'+ incrementDoc +'" class="form-control" style="width:250px" data-value="'+ incrementDoc +'"><span class="invalid-feedback" style="display:none!important;color:red">Please fill document name!</span></div>'
       append = append + '  </td>'
       append = append + '</tr>'
       $("#tableUploadDoc").append(append) 
@@ -5242,24 +5256,24 @@ Detail Project
 		append = append +'	<div class="form-group">'
 		append = append +'      		<label>Issue Description</label>'
 		append = append +'      		<textarea class="form-control" data-value="' + incrementIssue +'" id="textAreaIssueDesc" name="textAreaIssueDesc" placeholder="Describe summary of progress project during this period" onkeyup="validationCheck(this)"></textarea>'
-		append = append +'     			<span class="invalid-feedback" style="display:none;">Please fill Issue Description!</span>'
+		append = append +'     			<span class="invalid-feedback" style="display:none!important;">Please fill Issue Description!</span>'
 		append = append +'      	</div>'
 		append = append +'      	<div class="form-group">'
 		append = append +'      		<label>Solution Plan</label>'
 		append = append +'      		<textarea class="form-control" data-value="' + incrementIssue +'" id="textareaSolutionPlanIssue" name="textareaSolutionPlanIssue" placeholder="Describe summary of progress project during this period" onkeyup="validationCheck(this)"></textarea>'
-		append = append +'     			<span class="invalid-feedback" style="display:none;">Please fill Solution Plan!</span>'
+		append = append +'     			<span class="invalid-feedback" style="display:none!important;">Please fill Solution Plan!</span>'
 		append = append +'      	</div>'
 		append = append +'      	<div class="form-group">'
 		append = append +' 				<label>Owner</label>'
 		append = append +' 				<input type="text" data-value="' + incrementIssue +'" class="form-control" name="inputOwnerIssue" id="inputOwnerIssue" placeholder="Owner" onkeyup="validationCheck(this)">'
-		append = append +'     			<span class="invalid-feedback" style="display:none;">Please fill Owner!</span>'
+		append = append +'     			<span class="invalid-feedback" style="display:none!important;">Please fill Owner!</span>'
 		append = append +' 			</div>'
 		append = append +'      	<div class="row">'
 		append = append +'      		<div class="col-md-3">'
 		append = append +'      			<div class="form-group">'
 		append = append +'      				<label>Rating/Severity* </label>'
 		append = append +'      				<input type="number" data-value="' + incrementIssue +'" class="form-control" name="inputRatingIssue" onkeyup="validationCheck(this)" id="inputRatingIssue" placeholder="1-5" max="5" min="1">'
-		append = append +'     					<span class="invalid-feedback" style="display:none;">Please fill Rating!</span>'
+		append = append +'     					<span class="invalid-feedback" style="display:none!important;">Please fill Rating!</span>'
 		append = append +'      			</div>'
 		append = append +'      		</div>	'
 		append = append +'      		<div class="col-md-3">'
@@ -5271,7 +5285,7 @@ Detail Project
 
 		append = append +'                    <input type="text" data-value="' + incrementIssue +'" name="expected_date_issue" id="expected_date_issue" class="form-control" placeholder="Select Expected Date" onchange="validationCheck(this)"/>'
 		append = append +'                	 </div>'
-		append = append +'                   <span class="invalid-feedback" style="display:none;">Please fill Expected Solved Date!</span>'
+		append = append +'                   <span class="invalid-feedback" style="display:none!important;">Please fill Expected Solved Date!</span>'
 		append = append +'      			</div>'
 		append = append +'               </div>'
 		append = append +'               <div class="col-md-3">'
@@ -5282,7 +5296,7 @@ Detail Project
 		append = append +'                     <span class="input-group-text"><i class="bx bx-calendar"></i></span>'
 		append = append +'                     <input type="text" data-value="' + incrementIssue +'" name="actual_date_issue" id="actual_date_issue" class="form-control" placeholder="Select Actual Date"onchange="validationCheck(this)"/>'
 		append = append +'                   </div>'
-		append = append +'                    <span class="invalid-feedback" style="display:none;">Please fill Actual Solved Date!</span>'
+		append = append +'                    <span class="invalid-feedback" style="display:none!important;">Please fill Actual Solved Date!</span>'
 		append = append +'               	</div>'
 		append = append +'               </div>	'
 		append = append +'      		<div class="col-md-3">'
@@ -5292,7 +5306,7 @@ Detail Project
 		append = append +'      					<option value="open">Open</option>'
 		append = append +'      					<option value="close">Close</option>'
 		append = append +'      				</select>'
-		append = append +'     					<span class="invalid-feedback" style="display:none;">Please fill Status!</span>'
+		append = append +'     					<span class="invalid-feedback" style="display:none!important;">Please fill Status!</span>'
 		append = append +'      			</div>'
 		append = append +'      		</div>	'
 		append = append +'      	</div>'
@@ -5383,12 +5397,12 @@ Detail Project
 		append = append + '				<div class="form-group">'
 		append = append + '      			<label>Risk Description</label>'
 		append = append + '      			<textarea class="form-control" data-value="' + incrementRisk +'" placeholder="Risk Description" id="textareaDescriptionRisk" name="textareaDescriptionRisk" onkeyup="validationCheck(this)"></textarea>'
-		append = append + '      			<span class="invalid-feedback" style="display:none;">Please fill Risk Description!</span>'
+		append = append + '      			<span class="invalid-feedback" style="display:none!important;">Please fill Risk Description!</span>'
 		append = append + '      		</div>'
 		append = append + '      		<div class="form-group">'
 		append = append + '      			<label>Response Plan</label>'
 		append = append + '      			<textarea class="form-control" data-value="' + incrementRisk +'" placeholder="Response Plan" id="textareaResponseRisk" name="textareaResponseRisk" onkeyup="validationCheck(this)"></textarea>'
-		append = append + '      			<span class="invalid-feedback" style="display:none;">Please fill Response Plan!</span>'
+		append = append + '      			<span class="invalid-feedback" style="display:none!important;">Please fill Response Plan!</span>'
 		append = append + '      		</div>'
 		append = append + '      		<div class="row">'
 		append = append + '          		<div class="col-md-3">'
@@ -5396,14 +5410,14 @@ Detail Project
 		append = append + '          				<label>Owner</label>'
 		append = append + '          				<input type="text" data-value="' + incrementRisk +'" class="form-control" name="inputOwnerRisk" id="inputOwnerRisk" placeholder="Owner" onkeyup="validationCheck(this)">'
 		append = append + '          			</div>'
-		append = append + '      				<span class="invalid-feedback" style="display:none;">Please fill Owner!</span>'
+		append = append + '      				<span class="invalid-feedback" style="display:none!important;">Please fill Owner!</span>'
 		append = append + '          		</div>	'
 		append = append + '          		<div class="col-md-3">'
 		append = append + '          			<div class="form-group">'
 		append = append + '          				<label>Rating/Severity</label>'
 		append = append + '          				<input type="text" data-value="' + incrementRisk +'" class="form-control" name="inputRatingRisk" id="inputRatingRisk" placeholder="1-5" max="5" min="1" onkeyup="validationCheck(this)">'
 		append = append + '          			</div>'
-		append = append + '      				<span class="invalid-feedback" style="display:none;">Please fill Rating!</span>'
+		append = append + '      				<span class="invalid-feedback" style="display:none!important;">Please fill Rating!</span>'
 		append = append + '          		</div>	'
 		append = append + '          		<div class="col-md-3">'
 		append = append + '          			<div class="form-group">'
@@ -5415,7 +5429,7 @@ Detail Project
 		append = append + '          					</div>'
 		append = append + '          					<input type="text" data-value="' + incrementRisk +'" class="form-control " name="due_date_risk" id="due_date_risk" placeholder="Select Due Date" onchange="validationCheck(this)">'
 		append = append + '          				</div>'
-		append = append + '      					<span class="invalid-feedback" style="display:none;">Please fill Due Date!</span>'
+		append = append + '      					<span class="invalid-feedback" style="display:none!important;">Please fill Due Date!</span>'
 		append = append + '          			</div>'
 		append = append + '          		</div>	'
 		append = append + '          		<div class="col-md-3">'
@@ -5426,7 +5440,7 @@ Detail Project
 		append = append + '                        	<option value="Obsolete">Obsolete</option>'
 		append = append + '                        	<option value="Accepted">Accepted</option>'
 		append = append + '                      	</select>'
-		append = append + '      					<span class="invalid-feedback" style="display:none;">Please fill Status!</span>'
+		append = append + '      					<span class="invalid-feedback" style="display:none!important;">Please fill Status!</span>'
 		append = append + '					</div>	'
 		append = append + '          		</div>'
 		append = append + '          	</div>'
@@ -5465,11 +5479,11 @@ Detail Project
 		  //       			appends = appends + '  	<div class="form-group">'
 				// 			appends = appends + '  		<label>'+ item +'</label>'
 				// 			appends = appends + '         		<div class="radio">'
-				// 			appends = appends + '         			<label><input value="R" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">R</label>&nbsp&nbsp&nbsp'
-				// 			appends = appends + '     				<label><input value="Y" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">Y</label>&nbsp&nbsp&nbsp'
-				// 			appends = appends + '     				<label><input value="G" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">G</label>'
+				// 			appends = appends + '         			<label><input value="R" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">R</label>&nbsp&nbsp&nbsp'
+				// 			appends = appends + '     				<label><input value="Y" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">Y</label>&nbsp&nbsp&nbsp'
+				// 			appends = appends + '     				<label><input value="G" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">G</label>'
 				// 			appends = appends + '         		</div>	'
-		  //                   appends = appends + '   <span class="invalid-feedback" style="display:none;">Please fill '+ item +'!</span>'			
+		  //                   appends = appends + '   <span class="invalid-feedback" style="display:none!important;">Please fill '+ item +'!</span>'			
 				// 			appends = appends + '  	</div>'
 		  //       		appends = appends + '</div>'
 		  //       })
@@ -5561,11 +5575,11 @@ Detail Project
 		        			appends = appends + '  	<div class="form-group">'
 							appends = appends + '  		<label>'+ item +'</label>'
 							appends = appends + '         		<div class="radio">'
-							appends = appends + '         			<label><input value="R" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">R</label>&nbsp&nbsp&nbsp'
-							appends = appends + '     				<label><input value="Y" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">Y</label>&nbsp&nbsp&nbsp'
-							appends = appends + '     				<label><input value="G" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">G</label>'
+							appends = appends + '         			<label><input value="R" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">R</label>&nbsp&nbsp&nbsp'
+							appends = appends + '     				<label><input value="Y" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">Y</label>&nbsp&nbsp&nbsp'
+							appends = appends + '     				<label><input value="G" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">G</label>'
 							appends = appends + '         		</div>	'
-		                    appends = appends + '   <span class="invalid-feedback" style="display:none;">Please fill '+ item +'!</span>'			
+		                    appends = appends + '   <span class="invalid-feedback" style="display:none!important;">Please fill '+ item +'!</span>'			
 							appends = appends + '  	</div>'
 		        		appends = appends + '</div>'
 		        })
@@ -5660,11 +5674,11 @@ Detail Project
 	        			appends = appends + '  	<div class="form-group">'
 						appends = appends + '  		<label>'+ item +'</label>'
 						appends = appends + '         		<div class="radio">'
-						appends = appends + '         			<label><input value="R" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">R</label>&nbsp&nbsp&nbsp'
-						appends = appends + '     				<label><input value="Y" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">Y</label>&nbsp&nbsp&nbsp'
-						appends = appends + '     				<label><input value="G" type="radio" class="minimal" name="radioProject_'+ item +'" onchange="validationCheck(this)">G</label>'
+						appends = appends + '         			<label><input value="R" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">R</label>&nbsp&nbsp&nbsp'
+						appends = appends + '     				<label><input value="Y" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">Y</label>&nbsp&nbsp&nbsp'
+						appends = appends + '     				<label><input value="G" type="radio" name="radioProject_'+ item +'" onchange="validationCheck(this)">G</label>'
 						appends = appends + '         		</div>	'
-	                    appends = appends + '   <span class="invalid-feedback" style="display:none;">Please fill '+ item +'!</span>'			
+	                    appends = appends + '   <span class="invalid-feedback" style="display:none!important;">Please fill '+ item +'!</span>'			
 						appends = appends + '  	</div>'
 	        		appends = appends + '</div>'
 	        })
@@ -6100,17 +6114,17 @@ Detail Project
 					append2 = append2 + '   <div class="form-group">'
 					append2 = append2 + '   	<label>Customer Satisfaction Survey</label>'
 					append2 = append2 + ' 		<input type="text" class="form-control" id="link_feedback" name="link_feedback" placeholder="Link G-sheet result feedback" />'
-					append2 = append2 + ' 		<span class="needs-validation" style="display:none">Please fill link feedback!</span>'
+					append2 = append2 + ' 		<span class="needs-validation" style="display:none!important">Please fill link feedback!</span>'
 					append2 = append2 + '   </div>'
 					append2 = append2 + '   <div class="form-group">'
 					append2 = append2 + '   	<label>Lesson Learnt</label>'
 					append2 = append2 + '   	<textarea class="form-control" placeholder="List Down Both Positive and Negative Lesson Learnt" id="textareaLessonLearn" name="textareaLessonLearn"></textarea>'
-					append2 = append2 + ' 		<span class="invalid-feedback" style="display:none">Please fill Lesson Learnt!</span>'
+					append2 = append2 + ' 		<span class="invalid-feedback" style="display:none!important">Please fill Lesson Learnt!</span>'
 					append2 = append2 + '   </div>'
 					append2 = append2 + '   <div class="form-group">'
 					append2 = append2 + '   	<label>Recommendation for Future Project</label>'
 					append2 = append2 + '   	<textarea placeholder="Recomendation for future project" class="form-control" id="textareaRecommendation" name="textareaRecomendation"></textarea>'
-					append2 = append2 + ' 		<span class="invalid-feedback" style="display:none">Please fill Recomendation for future project!</span>'
+					append2 = append2 + ' 		<span class="invalid-feedback" style="display:none!important">Please fill Recomendation for future project!</span>'
 					append2 = append2 + '   </div>'
 					append2 = append2 + '   <div class="form-group">'
 					append2 = append2 + '   	<label>Additional Notes/Comments</label>'
@@ -6362,7 +6376,7 @@ Detail Project
 							   	localStorage.setItem("cachedTextScheduleRemarks", $("#textareaScheduleRemarks").val());
 					   			$("#textareaScheduleRemarks").closest(".form-group").remove()
 
-							   	$("#tbMilestoneFinal").closest(".form-group").find("#selectScheduleSummaryFinal").closest("div .form-group").after("<div class='form-group'><label>Schedule Remarks</label><textarea class='form-control' id='textareaScheduleRemarks' placeholder='Schedule remarks'></textarea><span class='invalid-feedback' style='display:none'>Please fill Schedule Remarks!</span></div>")
+							   	$("#tbMilestoneFinal").closest(".form-group").find("#selectScheduleSummaryFinal").closest("div .form-group").after("<div class='form-group'><label>Schedule Remarks</label><textarea class='form-control' id='textareaScheduleRemarks' placeholder='Schedule remarks'></textarea><span class='invalid-feedback' style='display:none!important'>Please fill Schedule Remarks!</span></div>")
 
 							   	console.log($("#textareaScheduleRemarks").is(":visible"))
 							   	console.log(localStorage.getItem('cachedTextScheduleRemarks'))

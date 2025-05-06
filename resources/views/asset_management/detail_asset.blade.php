@@ -96,7 +96,7 @@
                   <label for="">Harga</label>
                   <div class="input-group">
                     <div class="input-group-text">
-                      <strong>RP</strong>
+                      Rp.
                     </div>
                     <input id="inputHarga" type="text" name="inputHarga" class="form-control money">
                   </div>
@@ -106,7 +106,7 @@
                   <label for="">Nilai Buku</label>
                   <div class="input-group">
                     <div class="input-group-text">
-                      <strong>RP</strong>
+                      Rp.
                     </div>
                     <input id="inputNilaiBuku" type="text" name="inputNilaiBuku" class="form-control money" disabled>
                   </div>
@@ -991,6 +991,10 @@
       })
     }
 
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     InitiateDetailPage()
     function InitiateDetailPage(){
       $.ajax({
@@ -1695,32 +1699,42 @@
             ]
           }).val(result.status_cust).trigger("change") 
 
-          $("#selectVendor, #selectVendorPeripheral").select2({
-              ajax: {
-                  url: '{{url("asset/getVendor")}}',
-                  data: function (params) {
-                    return {
-                      q:params.term
-                    };
-                  },
-                  processResults: function(data) {
-                      // Transforms the top-level key of the response object from 'items' to 'results'
-                      return {
-                          results: data
-                      };
-                  },
+          $("#selectVendor").select2({
+            ajax: {
+              url: '{{url("asset/getVendor")}}',
+              data: function (params) {
+                return {
+                  q:params.term
+                };
               },
-              placeholder: "Select Vendor",
-              tags: true,
-              createTag: function(params) {
+              processResults: function (data) {
+                // Transforms the top-level key of the response object from 'items' to 'results'
+                return {
+                  results: data
+                };
+              },
+            },
+            placeholder:"Select Vendor",
+            tags:true,
+            createTag: function(params) {
                 // Capitalize the first letter of the new tag
                 const capitalizedTag = capitalizeFirstLetter(params.term);
                 return {
                     id: capitalizedTag,
                     text: capitalizedTag
                 };
-              }
-          });
+            }, // optional if dropdown is inside a modal or a specific container
+            dropdownPosition: 'below'
+          }).on('select2:select', function(e) {
+            const selectedOption = e.params.data;
+            const capitalizedOption = capitalizeFirstLetter(selectedOption.text);
+            
+            // Update the displayed text and value
+            $('#selectVendor option[value="' + selectedOption.id + '"]').text(capitalizedOption).val(capitalizedOption);
+            
+            // Trigger a change event to update the Select2 display
+            $('#selectVendor').trigger('change');
+          })
 
           // Fetch the preselected item, and add to the control
           if (result.vendor != null) {
@@ -1747,7 +1761,7 @@
           var optionCatPeripheral = new Option(result.category_peripheral, result.category_peripheral, true, true);
           categoryPeripheralSelect.append(optionCatPeripheral).trigger('change');
 
-          $("#selectTypeDevice,#selectTypeDevicePeripheral").select2({
+          $("#selectTypeDevice").select2({
             ajax: {
               url: '{{url("asset/getTypeDevice")}}',
               processResults: function (data) {
@@ -1758,8 +1772,26 @@
               },
             },
             placeholder:"Select Type Device",
-            tags:true
-          })
+            tags:true,
+            createTag: function(params) {
+                // Capitalize the first letter of the new tag
+                const capitalizedTag = capitalizeFirstLetter(params.term);
+                return {
+                    id: capitalizedTag,
+                    text: capitalizedTag
+                };
+            }, // optional if dropdown is inside a modal or a specific container
+            dropdownPosition: 'below'
+          }).on('select2:select', function(e) {
+            const selectedOption = e.params.data;
+            const capitalizedOption = capitalizeFirstLetter(selectedOption.text);
+            
+            // Update the displayed text and value
+            $('#selectTypeDevice option[value="' + selectedOption.id + '"]').text(capitalizedOption).val(capitalizedOption);
+            
+            // Trigger a change event to update the Select2 display
+            $('#selectTypeDevice').trigger('change');
+          }) 
 
           if (result.type_device != null) {
             var typeDeviceSelect = $("#selectTypeDevice,#selectTypeDevicePeripheral");

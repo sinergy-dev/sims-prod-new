@@ -179,7 +179,6 @@
     }
 
     #daterange-timesheet{
-      width: 540px;
       text-align: center;
     }
 
@@ -314,14 +313,14 @@
                       <select class="form-control select2" name="selectSchedule" id="selectSchedule" onchange="validateInput(this)">
                         <option></option>
                       </select>
-                      <span class="help-block" style="display:none!important">Please select schedule!</span>
+                      <span class="invalid-feedback" style="display:none!important">Please select schedule!</span>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Date*</label>
                       <input type="text" class="form-control" id="daterange-input" name="" disabled="disabled">
-                      <span class="help-block" style="display:none!important">Please select date!</span>
+                      <span class="invalid-feedback" style="display:none!important">Please select date!</span>
                     </div>
                   </div>
                 </div>
@@ -331,13 +330,13 @@
                   <select class="form-control select2" name="selectType" id="selectType_refer" onchange="validateInput(this)">
                     <option></option>
                   </select>
-                  <span class="help-block" style="display:none!important">Please select Type!</span>
+                  <span class="invalid-feedback" style="display:none!important">Please select Type!</span>
                 </div>
 
                 <div class="form-group">
                   <label>PID/Lead ID</label>
                   <select class="form-control" name="selectLead" id="selectLead_refer" placeholder="Select Project Id" onchange="validateInput(this)"><option></option></select>
-                  <span class="help-block" style="display:none!important">Please select Lead ID!</span>
+                  <span class="invalid-feedback" style="display:none!important">Please select Lead ID!</span>
                   <small>Nomor PID tidak tersedia? <a style="cursor: not-allowed;" id="idAddPid_refer">tambahkan disini</a></small>
                   <div class="row" id="divPid_refer" style="display: none;">
                     <div class="col-lg-11 col-xs-11">
@@ -365,13 +364,13 @@
                 <div class="form-group">
                   <label>Level <small onclick="showHelp('level')"><i class="bx bx-info-circle"></i></small></label>
                   <select class="form-control" name="selectLevel" id="selectLevel_refer"><option></option></select>
-                  <span class="help-block" style="display:none!important">Please select Level!</span>
+                  <span class="invalid-feedback" style="display:none!important">Please select Level!</span>
                 </div>
 
                 <div class="form-group">
                   <label>Activity*</label>
                   <textarea class="form-control" name="textareaActivity" id="textareaActivity_refer" onkeyup="validateInput(this)" disabled></textarea> 
-                  <span class="help-block" style="display:none!important">Please fill Activity!</span>
+                  <span class="invalid-feedback" style="display:none!important">Please fill Activity!</span>
                 </div>
 
                 <div class="row">
@@ -379,14 +378,14 @@
                     <div class="form-group">
                       <label>Duration</label>
                       <select class="form-control" name="selectDuration" id="selectDuration_refer" onchange="validateInput(this)"><option></option></select>
-                      <span class="help-block" style="display:none!important">Please select Duration!</span>
+                      <span class="invalid-feedback" style="display:none!important">Please select Duration!</span>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Status</label>
                       <select class="form-control" name="selectStatus" id="selectStatus_refer" onchange="validateInput(this)"><option></option></select>
-                      <span class="help-block" style="display:none!important">Please select Status!</span>
+                      <span class="invalid-feedback" style="display:none!important">Please select Status!</span>
                     </div>
                   </div>
                 </div>
@@ -402,10 +401,10 @@
   </div> 
 
   <div class="modal fade" id="ModalAddTimesheet" role="dialog" data-backdrop="static">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header" style="padding-bottom: 0px;">
-          <div style="padding-bottom: 0px!important;">
+          <div style="padding-bottom: 0px!important;width: 100%;">
             <div class="form-group">
               <div class="input-group">
                 <div class="input-group-text">
@@ -424,9 +423,9 @@
           @csrf
           <fieldset style="padding-bottom: 5px;" id="fieldset_0">
             <div class="form-group" style="display:inline;">
-              <div class="card" style="border-top:none;width: 85%;float: left;border: 1px solid #ccc;">
+              <div class="card" style="border-top:none;width: 80%;float: left;border: 1px solid #ccc;">
                 <div class="card-header" style="display:flex;justify-content: space-between; align-items: center">
-                  <h6 class="card-title">Activity 1</h6>
+                  <h6 class="card-title" style="font-size:14px">Activity 1</h6>
                   <button type="button" class="btn btn-sm collapse-fieldset" fdprocessedid="gkstjs"><i class="bx bx-minus"></i>
                   </button>
                 </div>
@@ -445,7 +444,7 @@
                         <select class="form-control select2" name="selectType" id="selectType_0" onchange="validateInput(this)">
                           <option>  </option>
                         </select>
-                        <span class="help-block" style="display:none!important">Please select Type!</span>
+                        <span class="invalid-feedback" style="display:none!important">Please select Type!</span>
                       </div>
                     </div>
                   </div>
@@ -453,7 +452,7 @@
                   <div class="form-group">
                     <label>PID/Lead ID</label>
                     <select class="form-control" name="selectLead" id="selectLead_0" placeholder="Select Project Id" onchange="validateInput(this)"><option></option></select>
-                    <span class="help-block" style="display:none!important">Please select Lead ID!</span>
+                    <span class="invalid-feedback" style="display:none!important">Please select Lead ID!</span>
                     <small>Nomor PID tidak tersedia? <a style="cursor: not-allowed;" id="idAddPid_0" name="idAddPid">tambahkan disini</a></small>
                     <div class="row" id="divPid_0" name="divPid" style="display: none;">
                       <div class="col-lg-11 col-xs-11">
@@ -469,14 +468,14 @@
                       <div class="form-group">
                         <label>Task <small onclick="showHelp('task')"><i class="bx bx-info-circle"></i></small></label>
                         <select class="form-control" name="selectTask" id="selectTask_0"><option></option></select>
-                        <!-- <span class="help-block" style="display:none!important">Please select task!</span> -->
+                        <!-- <span class="invalid-feedback" style="display:none!important">Please select task!</span> -->
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Phase <small onclick="showHelp('phase')"><i class="bx bx-info-circle"></i></small></label>
                         <select class="form-control" name="selectPhase" id="selectPhase_0"><option></option></select>
-                        <!-- <span class="help-block" style="display:none!important">Please select phase!</span> -->
+                        <!-- <span class="invalid-feedback" style="display:none!important">Please select phase!</span> -->
                       </div>
                     </div>
                   </div>
@@ -484,13 +483,13 @@
                   <div class="form-group">
                     <label>Level <small onclick="showHelp('level')"><i class="bx bx-info-circle"></i></small></label>
                     <select class="form-control" name="selectLevel" id="selectLevel_0"><option></option></select>
-                    <span class="help-block" style="display:none!important">Please select Level!</span>
+                    <span class="invalid-feedback" style="display:none!important">Please select Level!</span>
                   </div>
 
                   <div class="form-group">
                     <label>Activity*</label>
                     <textarea class="form-control" name="textareaActivity" id="textareaActivity_0" onkeyup="validateInput(this)"></textarea> 
-                    <span class="help-block" style="display:none!important">Please fill Activity!</span>
+                    <span class="invalid-feedback" style="display:none!important">Please fill Activity!</span>
                   </div>
 
                   <div class="row">
@@ -498,14 +497,14 @@
                       <div class="form-group">
                         <label>Duration</label>
                         <select class="form-control" name="selectDuration" id="selectDuration_0" onchange="validateInput(this)"><option></option></select>
-                        <span class="help-block" style="display:none!important">Please select Duration!</span>
+                        <span class="invalid-feedback" style="display:none!important">Please select Duration!</span>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Status</label>
                         <select class="form-control" name="selectStatus" id="selectStatus_0" onchange="validateInput(this)"><option></option></select>
-                        <span class="help-block" style="display:none!important">Please select Status!</span>
+                        <span class="invalid-feedback" style="display:none!important">Please select Status!</span>
                       </div>
                     </div>
                   </div>
@@ -516,8 +515,8 @@
                 </div>
               </div>
             </div>
-            <div class="form-group" style="display:inline;margin-left: 25px;">
-              <button type="button" class="btn btn-sm btn-primary" id="btn_add_activity" value="0"><i class="bx bx-plus"></i></button>
+            <div class="form-group" style="display:inline;">
+              <button type="button" class="btn btn-sm btn-primary" id="btn_add_activity" style="margin-left: 5px;" value="0"><i class="bx bx-plus"></i></button>
             </div>
           </fieldset>
         </form>
@@ -543,19 +542,19 @@
                 <div class="form-group">
                   <label>Date*</label>
                   <input class="form-control" name="inputPermitDate" id="inputPermitDate" onchange="validateInput(this)"/>
-                  <span class="help-block" style="display:none!important">Please fill Date!</span>
+                  <span class="invalid-feedback" style="display:none!important">Please fill Date!</span>
                 </div>
                 <div class="form-group">
                   <label>Permit*</label>
                   <select class="form-control select2" name="selectPermit" id="selectPermit" onchange="validateInput(this)">
                     <option></option>
                   </select>
-                  <span class="help-block" style="display:none!important">Please fill Permit!</span>
+                  <span class="invalid-feedback" style="display:none!important">Please fill Permit!</span>
                 </div>
                 <div class="form-group">
                   <label>Activity*</label>
                   <textarea class="form-control" name="textareaActivityPermit" id="textareaActivityPermit" placeholder="Enter Activity" onkeyup="validateInput(this)"></textarea>
-                  <span class="help-block" style="display:none!important">Please fill Activity!</span>
+                  <span class="invalid-feedback" style="display:none!important">Please fill Activity!</span>
                 </div>
             </form>
           </div>
@@ -2266,7 +2265,8 @@
       $("#selectDuration_"+idValue).select2({
           placeholder:"Select Duration",
           data:arrDuration,
-          dropdownParent: $("#fieldset_"+idValue)
+          // dropdownParent: $("#fieldset_"+idValue)
+          dropdownParent:$("#ModalAddTimesheet .modal-body")
       })
     }
 
@@ -2286,7 +2286,8 @@
             var Select2 = $("#selectLead_"+idValue).select2({
               placeholder:"Select Lead Id",
               data:result,
-              dropdownParent: $("#fieldset_"+idValue)
+              // dropdownParent: $("#fieldset_"+idValue)
+              dropdownParent:$("#ModalAddTimesheet .modal-body")
             })
 
             return typeof Select2 !== 'undefined';
@@ -2299,7 +2300,8 @@
                   $("#selectLead_"+idValue).select2({
                     placeholder:"Select Lead Id",
                     data:result,
-                    dropdownParent: $("#fieldset_"+idValue)
+                    // dropdownParent: $("#fieldset_"+idValue)
+                    dropdownParent:$("#ModalAddTimesheet .modal-body")
                   })
 
                   if (pid != undefined) {
@@ -2324,7 +2326,7 @@
           if (result[0] == 'Alert') {
             $("#selectLead_"+idValue).closest("div").find("span").show()
             $("#selectLead_"+idValue).closest("div").addClass("has-error")
-            $("#selectLead_"+idValue).closest("div").find(".help-block").text(result[1]) 
+            $("#selectLead_"+idValue).closest("div").find(".invalid-feedback").text(result[1]) 
           }else{
             if ($("#selectLead_"+idValue).data('select2')) {
               $("#selectLead_"+idValue).select2('destroy');
@@ -2349,7 +2351,8 @@
                     $("#selectLead_"+idValue).select2({
                       placeholder:"Select Project Id",
                       data:result,
-                      dropdownParent: $("#fieldset_"+idValue)
+                      // dropdownParent: $("#fieldset_"+idValue)
+                      dropdownParent:$("#ModalAddTimesheet .modal-body")
                     })
 
                     if (pid != undefined) {
@@ -2374,7 +2377,8 @@
           var selectTask =  $("#selectTask_"+idValue).select2({
               placeholder:"Select Task",
               data:result,
-              dropdownParent: $("#fieldset_"+idValue)
+              // dropdownParent: $("#fieldset_"+idValue)
+              dropdownParent:$("#ModalAddTimesheet .modal-body")
           })
 
           if (value) {
@@ -2393,7 +2397,8 @@
           var selectPhase =  $("#selectPhase_"+idValue).select2({
             placeholder:"Select Phase",
             data:result,
-            dropdownParent: $("#fieldset_"+idValue)
+            // dropdownParent: $("#fieldset_"+idValue)
+            dropdownParent:$("#ModalAddTimesheet .modal-body")
           })
 
           if (value) {
@@ -2428,7 +2433,8 @@
             text:"E"
           },
         ],
-        dropdownParent: $("#fieldset_"+idValue)
+        // dropdownParent: $("#fieldset_"+idValue)
+        dropdownParent:$("#ModalAddTimesheet .modal-body")
       })
     }
 
@@ -2453,7 +2459,8 @@
             text:"Not-Done"
           },
         ],
-        dropdownParent: $("#fieldset_"+idValue)
+        // dropdownParent: $("#fieldset_"+idValue)
+        dropdownParent:$("#ModalAddTimesheet .modal-body")
       })
     }
 
@@ -2471,7 +2478,8 @@
             id: 'Approach',
             text: 'Approach'
         }],
-        dropdownParent: $("#fieldset_"+idValue)
+        // dropdownParent: $("#fieldset_"+idValue)
+        dropdownParent:$("#ModalAddTimesheet .modal-body")
       }).on('change', function() {
         var selectedOption = $(this).val();
         // Perform action based on the selected option
@@ -2699,7 +2707,8 @@
             id: 'Unplanned',
             text: 'Unplanned'
         }],
-        dropdownParent: $("#ModalAddTimesheet")
+        // dropdownParent: $("#ModalAddTimesheet")
+        dropdownParent:$("#ModalAddTimesheet .modal-body")
       }).on('change', function() {
         var selectedOption = $(this).val();
         // Perform action based on the selected option
@@ -2792,7 +2801,7 @@
           //   $("#selectLead_refer").closest("div").find("span").show()
           //   $("#selectLead_refer").closest("div").addClass("has-error")
           //   // $("#selectLead_refer").closest("div").find("span").text("Please select Project ID!")
-          //   $("#selectLead_refer").closest("div").find(".help-block").text("Please select Project ID!")          
+          //   $("#selectLead_refer").closest("div").find(".invalid-feedback").text("Please select Project ID!")          
           // }else 
           if($("#textareaActivity_refer").val() == ""){
             $("#textareaActivity_refer").closest("div").find("span").show()
@@ -2804,7 +2813,7 @@
           // if ($("#selectLead_refer").val() == "") {
           //   $("#selectLead_refer").closest("div").find("span").show()
           //   $("#selectLead_refer").closest("div").addClass("has-error")
-          //   $("#selectLead_refer").closest("div").find(".help-block").text("Please select Lead ID!")
+          //   $("#selectLead_refer").closest("div").find(".invalid-feedback").text("Please select Lead ID!")
           // }else 
           if($("#textareaActivity_refer").val() == ""){
             $("#textareaActivity_refer").closest("div").find("span").show()
@@ -2865,9 +2874,9 @@
                     }
                   }
                 // }
-                // $("#selectLead_"+index).closest("div").find(".help-block").text("Please select Project ID!")          
+                // $("#selectLead_"+index).closest("div").find(".invalid-feedback").text("Please select Project ID!")          
               }else{
-                // $("#selectLead_"+index).closest("div").find(".help-block").text("Please select Lead ID!")          
+                // $("#selectLead_"+index).closest("div").find(".invalid-feedback").text("Please select Lead ID!")          
               }
             }else if($(items).find(".card-body").find("#textareaActivity_"+index).val() == ""){
               $("#textareaActivity_"+index).closest("div").find("span").show()
@@ -2929,7 +2938,7 @@
       //     $("#selectLead").closest("div").find("span").show()
       //     $("#selectLead").closest("div").addClass("has-error")
       //     // $("#selectLead").closest("div").find("span").text("Please select Project ID!")
-      //     $("#selectLead").closest("div").find(".help-block").text("Please select Project ID!")          
+      //     $("#selectLead").closest("div").find(".invalid-feedback").text("Please select Project ID!")          
       //   }else if($("#textareaActivity").val() == ""){
       //     $("#textareaActivity").closest("div").find("span").show()
       //     $("#textareaActivity").closest("div").addClass("has-error")
@@ -2940,7 +2949,7 @@
       //   if ($("#selectLead").val() == "") {
       //     $("#selectLead").closest("div").find("span").show()
       //     $("#selectLead").closest("div").addClass("has-error")
-      //     $("#selectLead").closest("div").find(".help-block").text("Please select Lead ID!")
+      //     $("#selectLead").closest("div").find(".invalid-feedback").text("Please select Lead ID!")
       //   }else if($("#textareaActivity").val() == ""){
       //     $("#textareaActivity").closest("div").find("span").show()
       //     $("#textareaActivity").closest("div").addClass("has-error")
@@ -3391,7 +3400,7 @@
     function clickPIDAdjustment(idValue){
       $("#divPid_"+idValue).show()
       $("#divPid_"+idValue).closest(".form-group").removeClass('has-error')
-      $("#divPid_"+idValue).closest(".form-group").find('.help-block').attr('style','display:none!important')
+      $("#divPid_"+idValue).closest(".form-group").find('.invalid-feedback').attr('style','display:none!important')
     }
 
     function closePidAdjustment(idValue){
@@ -3547,7 +3556,7 @@
 
       appendfieldset = appendfieldset + '  <fieldset style="padding-bottom: 5px;" id="fieldset">'
       appendfieldset = appendfieldset + '    <div class="form-group" style="display:inline;">'
-      appendfieldset = appendfieldset + '      <div class="card bg-outline-secondary" style="border-top:none;width: 85%;float: left;border: 1px solid #ccc;">'
+      appendfieldset = appendfieldset + '      <div class="card bg-outline-secondary" style="border-top:none;width: 80%;float: left;border: 1px solid #ccc;">'
       appendfieldset = appendfieldset + '        <div class="card-header with-border d-flex">'
       appendfieldset = appendfieldset + '          <h6 class="card-title" style="margin-top:5px;font-size:14px">Activity '+ count_title +'</h6>'
       appendfieldset = appendfieldset + '          <button type="button" class="btn btn-sm collapse-fieldset ms-auto" data-widget="collapse" fdprocessedid="gkstjs"><i class="bx bx-minus"></i>'
@@ -3568,14 +3577,14 @@
       appendfieldset = appendfieldset + '              <select class="form-control select2" name="selectType" id="selectType" onchange="validateInput(this)">'
       appendfieldset = appendfieldset + '                <option>  </option>'
       appendfieldset = appendfieldset + '              </select>'
-      appendfieldset = appendfieldset + '              <span class="help-block" style="display:none!important">Please select Type!</span>'
+      appendfieldset = appendfieldset + '              <span class="invalid-feedback" style="display:none!important">Please select Type!</span>'
       appendfieldset = appendfieldset + '            </div>'
       appendfieldset = appendfieldset + '          </div>'
       appendfieldset = appendfieldset + '        </div>'
       appendfieldset = appendfieldset + '          <div class="form-group">'
       appendfieldset = appendfieldset + '            <label>PID/Lead ID</label>'
       appendfieldset = appendfieldset + '            <select class="form-control" name="selectLead" id="selectLead" placeholder="Select Project Id" onchange="validateInput(this)"><option></option></select>'
-      appendfieldset = appendfieldset + '            <span class="help-block" style="display:none!important">Please select Lead ID!</span>'
+      appendfieldset = appendfieldset + '            <span class="invalid-feedback" style="display:none!important">Please select Lead ID!</span>'
       appendfieldset = appendfieldset + '            <small>Nomor PID tidak tersedia? <a style="cursor: not-allowed;" id="idAddPid" name="idAddPid">tambahkan disini</a></small>'
       appendfieldset = appendfieldset + '            <div class="row" id="divPid" name="divPid" style="display: none;">'
       appendfieldset = appendfieldset + '              <div class="col-lg-11 col-xs-11">'
@@ -3589,40 +3598,40 @@
       appendfieldset = appendfieldset + '              <div class="form-group">'
       appendfieldset = appendfieldset + '                <label>Task <small onclick="showHelp("task")"><i class="bx bx-info-circle"></i></small></label>'
       appendfieldset = appendfieldset + '                <select class="form-control" name="selectTask" id="selectTask"><option></option></select>'
-      appendfieldset = appendfieldset + '                <!-- <span class="help-block" style="display:none!important">Please select task!</span> -->'
+      appendfieldset = appendfieldset + '                <!-- <span class="invalid-feedback" style="display:none!important">Please select task!</span> -->'
       appendfieldset = appendfieldset + '              </div>'
       appendfieldset = appendfieldset + '            </div>'
       appendfieldset = appendfieldset + '            <div class="col-md-6">'
       appendfieldset = appendfieldset + '              <div class="form-group">'
       appendfieldset = appendfieldset + '                <label>Phase <small onclick="showHelp("phase")"><i class="bx bx-info-circle"></i></small></label>'
       appendfieldset = appendfieldset + '                <select class="form-control" name="selectPhase" id="selectPhase"><option></option></select>'
-      appendfieldset = appendfieldset + '                <!-- <span class="help-block" style="display:none!important">Please select phase!</span> -->'
+      appendfieldset = appendfieldset + '                <!-- <span class="invalid-feedback" style="display:none!important">Please select phase!</span> -->'
       appendfieldset = appendfieldset + '              </div>'
       appendfieldset = appendfieldset + '            </div>'
       appendfieldset = appendfieldset + '          </div>'
       appendfieldset = appendfieldset + '          <div class="form-group">'
       appendfieldset = appendfieldset + '            <label>Level <small onclick="showHelp("level")"><i class="bx bx-info-circle"></i></small></label>'
       appendfieldset = appendfieldset + '            <select class="form-control" name="selectLevel" id="selectLevel"><option></option></select>'
-      appendfieldset = appendfieldset + '            <span class="help-block" style="display:none!important">Please select Level!</span>'
+      appendfieldset = appendfieldset + '            <span class="invalid-feedback" style="display:none!important">Please select Level!</span>'
       appendfieldset = appendfieldset + '          </div>'
       appendfieldset = appendfieldset + '          <div class="form-group">'
       appendfieldset = appendfieldset + '            <label>Activity*</label>'
       appendfieldset = appendfieldset + '            <textarea class="form-control" name="textareaActivity" id="textareaActivity" onkeyup="validateInput(this)"></textarea> '
-      appendfieldset = appendfieldset + '            <span class="help-block" style="display:none!important">Please fill Activity!</span>'
+      appendfieldset = appendfieldset + '            <span class="invalid-feedback" style="display:none!important">Please fill Activity!</span>'
       appendfieldset = appendfieldset + '          </div>'
       appendfieldset = appendfieldset + '          <div class="row">'
         appendfieldset = appendfieldset + '            <div class="col-md-6">'
           appendfieldset = appendfieldset + '              <div class="form-group">'
           appendfieldset = appendfieldset + '                <label>Duration</label>'
           appendfieldset = appendfieldset + '                <select class="form-control" name="selectDuration" id="selectDuration" onchange="validateInput(this)"><option></option></select>'
-          appendfieldset = appendfieldset + '                <span class="help-block" style="display:none!important">Please select Duration!</span>'
+          appendfieldset = appendfieldset + '                <span class="invalid-feedback" style="display:none!important">Please select Duration!</span>'
           appendfieldset = appendfieldset + '              </div>'
         appendfieldset = appendfieldset + '            </div>'
         appendfieldset = appendfieldset + '            <div class="col-md-6">'
           appendfieldset = appendfieldset + '              <div class="form-group">'
           appendfieldset = appendfieldset + '                <label>Status</label>'
           appendfieldset = appendfieldset + '                <select class="form-control" name="selectStatus" id="selectStatus" onchange="validateInput(this)"><option></option></select>'
-          appendfieldset = appendfieldset + '                <span class="help-block" style="display:none!important">Please select Status!</span>'
+          appendfieldset = appendfieldset + '                <span class="invalid-feedback" style="display:none!important">Please select Status!</span>'
           appendfieldset = appendfieldset + '              </div>'
         appendfieldset = appendfieldset + '            </div>'
       appendfieldset = appendfieldset + '          </div>'
@@ -3632,8 +3641,8 @@
       appendfieldset = appendfieldset + '        </div>'
       appendfieldset = appendfieldset + '      </div>'
       appendfieldset = appendfieldset + '    </div>'
-      appendfieldset = appendfieldset + '    <div class="form-group" style="display:inline;float: right;">'
-      appendfieldset = appendfieldset + '      <button type="button" class="btn btn-sm btn-danger" id="btn_delete_activity"><i class="bx bx-trash"></i></button>'
+      appendfieldset = appendfieldset + '    <div class="form-group" style="display:inline;">'
+      appendfieldset = appendfieldset + '      <button type="button" class="btn btn-sm btn-danger" id="btn_delete_activity" style="margin-left:5px"><i class="bx bx-trash"></i></button>'
       appendfieldset = appendfieldset + '      <button type="button" class="btn btn-sm btn-primary" id="btn_add_activity"><i class="bx bx-plus"></i></button>'
       appendfieldset = appendfieldset + '    </div>'
       appendfieldset = appendfieldset + '  </fieldset>'
@@ -3989,7 +3998,7 @@
 
         append = append + '<fieldset style="padding-bottom: 5px;" id="fieldset_'+ index +'">'
           append = append + '<div class="form-group" style="display:inline;">'
-            append = append + '<div class="card bg-outline-secondary" style="border-top:none;width: 85%;float: left;border: 1px solid #ccc;">'
+            append = append + '<div class="card bg-outline-secondary" style="border-top:none;width: 80%;float: left;border: 1px solid #ccc;">'
               append = append + '<div class="card-header with-border d-flex">'
                 append = append + '<h6 class="card-title" style="font-size:14px;margin-top:5px">Activity '+ ++countable +'</h6>'
                   append = append + '<button type="button" class="btn btn-sm ms-auto collapse-fieldset" fdprocessedid="gkstjs"><i class="bx bx-plus"></i>'
@@ -4010,14 +4019,14 @@
                       append = append + '<select class="form-control select2" name="selectType" id="selectType_'+ index +'" onchange="validateInput(this)">'
                         append = append + '<option>  </option>'
                       append = append + '</select>'
-                      append = append + '<span class="help-block" style="display:none!important">Please select Type!</span>'
+                      append = append + '<span class="invalid-feedback" style="display:none!important">Please select Type!</span>'
                     append = append + '</div>'
                   append = append + '</div>'
                 append = append + '</div>'
                 append = append + '<div class="form-group">'
                   append = append + '<label>PID/Lead ID</label>'
                    append = append + '<select class="form-control" name="selectLead" id="selectLead_'+ index +'" placeholder="Select Project Id" onchange="validateInput(this)"><option></option></select>'
-                  append = append + '<span class="help-block" style="display:none!important">Please select Lead ID!</span>'
+                  append = append + '<span class="invalid-feedback" style="display:none!important">Please select Lead ID!</span>'
                     append = append + '<small>Nomor PID tidak tersedia? <a style="cursor: not-allowed;" id="idAddPid_'+ index +'" name="idAddPid">tambahkan disini</a></small>'
                   append = append + '<div class="row" id="divPid_'+ index +'" name="divPid" style="display: none;">'
                     append = append + '<div class="col-lg-11 col-xs-11">'
@@ -4031,40 +4040,40 @@
                     append = append + '<div class="form-group">'
                       append = append + '<label>Task <small onclick="showHelp("task")"><i class="bx bx-info-circle"></i></small></label>'
                       append = append + '<select class="form-control" name="selectTask" id="selectTask_'+ index +'"><option></option></select>'
-                      append = append + '<span class="help-block" style="display:none!important">Please select task!</span>'
+                      append = append + '<span class="invalid-feedback" style="display:none!important">Please select task!</span>'
                     append = append + '</div>'
                   append = append + '</div>'
                   append = append + '<div class="col-md-6">'
                     append = append + '<div class="form-group">'
                       append = append + '<label>Phase <small onclick="showHelp("phase")"><i class="bx bx-info-circle"></i></small></label>'
                       append = append + '<select class="form-control" name="selectPhase" id="selectPhase_'+ index +'"><option></option></select>'
-                      append = append + '<span class="help-block" style="display:none!important">Please select phase!</span>'
+                      append = append + '<span class="invalid-feedback" style="display:none!important">Please select phase!</span>'
                     append = append + '</div>'
                   append = append + '</div>'
                 append = append + '</div>'
                 append = append + '<div class="form-group">'
                   append = append + '<label>Level <small onclick="showHelp("level")"><i class="bx bx-info-circle"></i></small></label>'
                   append = append + '<select class="form-control" name="selectLevel" id="selectLevel_'+ index +'"><option></option></select>'
-                  append = append + '<span class="help-block" style="display:none!important">Please select Level!</span>'
+                  append = append + '<span class="invalid-feedback" style="display:none!important">Please select Level!</span>'
                 append = append + '</div>'
                 append = append + '<div class="form-group">'
                   append = append + '<label>Activity*</label>'
                   append = append + '<textarea class="form-control" name="textareaActivity" id="textareaActivity_'+ index +'" onkeyup="validateInput(this)"></textarea> '
-                  append = append + '<span class="help-block" style="display:none!important">Please fill Activity!</span>'
+                  append = append + '<span class="invalid-feedback" style="display:none!important">Please fill Activity!</span>'
                 append = append + '</div>'
                 append = append + '<div class="row">'
                   append = append + '<div class="col-md-6">'
                     append = append + '<div class="form-group">'
                       append = append + '<label>Duration</label>'
                         append = append + '<select class="form-control" name="selectDuration" id="selectDuration_'+ index +'" onchange="validateInput(this)"><option></option></select>'
-                      append = append + '<span class="help-block" style="display:none!important">Please select Duration!</span>'
+                      append = append + '<span class="invalid-feedback" style="display:none!important">Please select Duration!</span>'
                     append = append + '</div>'
                   append = append + '</div>'
                   append = append + '<div class="col-md-6">'
                     append = append + '<div class="form-group">'
                       append = append + '<label>Status</label>'
                        append = append + '<select class="form-control" name="selectStatus" id="selectStatus_'+ index +'" onchange="validateInput(this)"><option></option></select>'
-                      append = append + '<span class="help-block" style="display:none!important">Please select Status!</span>'
+                      append = append + '<span class="invalid-feedback" style="display:none!important">Please select Status!</span>'
                     append = append + '</div>'
                   append = append + '</div>'
                 append = append + '</div>'
@@ -4074,7 +4083,7 @@
               append = append + '</div>'
             append = append + '</div>'
           append = append + '</div>'
-          append = append + '<div class="form-group" style="display:inline;float: right;">'
+          append = append + '<div class="form-group" style="display:inline;">'
             if (index > 0) {
               append = append + '<button type="button" style="margin-left:5px" class="btn btn-sm btn-danger btn-flat editBtn" id="btn_delete_activity" value="'+ index +'"><i class="bx bx-trash"></i></button>'
             } 

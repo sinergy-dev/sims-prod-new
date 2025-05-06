@@ -492,7 +492,7 @@
                   <div style="border: 1px solid #787bff !important;padding: 5px;color: #337ab7;">
                     <label for="inputQuoteSupplier" style="margin-bottom: 0px;">
                       <span class="bx bx-cloud-upload" style="display:inline;"></span>
-                      <input autocomplete="off" style="display: inline;font-family: inherit;" type="file" class="files" name="inputQuoteSupplier" id="inputQuoteSupplier" onchange="fillInput('quoteSupplier')" >
+                      <input autocomplete="off" style="display: inline;font-family: inherit;text-overflow: ellipsis;white-space:nowrap;overflow:hidden;width: 200px;" type="file" class="files" name="inputQuoteSupplier" id="inputQuoteSupplier" onchange="fillInput('quoteSupplier')" >
                     </label>
                   </div>
                   <span class="invalid-feedback" style="display:none;">Please fill Quote Supplier!</span>
@@ -1076,7 +1076,7 @@
           $('#selectTypeProduct').select2({
             data:result,
             placeholder:'Ex. Unit',
-            dropdownParent: $('#ModalDraftPr')
+            dropdownParent: $('#ModalDraftPr .modal-body')
           })
         }
       })
@@ -1498,7 +1498,12 @@
               if (title == 'Detail') {
                 return "<td><a href='"+ onclick +"' style='width:70px' class='btn btn-sm "+ btnClass +" btnCekDraftDusk_"+row.id+"' data-value='"+row.id+"' "+isDisabled+" id='"+ btnId +"' target='_blank'>"+ title +"</a>" + " " + "<button class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
               }else {
-                return "<td>"+ btnDetailUnApproved +"<a onclick='"+ onclick +"' "+isDisabled+" style='width:70px' class='btn btn-sm "+ btnClass +" btnCekDraftDusk_"+row.id+"' data-value='"+row.id+"' id='"+ btnId +"' target='_blank'>"+ title +"</a>" + " " + "<button "+isDisabled+" class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
+                if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Procurement & Vendor Management')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Supply Chain, CPS & Asset Management')->exists()}}") {
+                  return "<td>"+ btnDetailUnApproved +"<a onclick='"+ onclick +"' "+isDisabled+" style='width:70px' class='btn btn-sm "+ btnClass +" btnCekDraftDusk_"+row.id+"' data-value='"+row.id+"' id='"+ btnId +"' target='_blank'>"+ title +"</a>" + " " + "<button "+isDisabled+" class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
+                }else{
+                  return "<td>"+ btnDetailUnApproved + " " + "<button "+isDisabled+" class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
+                }
+                
               }
                                   
             },
@@ -3188,7 +3193,7 @@
                 appendBottom = appendBottom + '  </div>'
               appendBottom = appendBottom + '</div>'
 
-              appendBottom = appendBottom + '<div class="row mb-4" style="margin-top: 10px;">'
+              appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
               appendBottom = appendBottom + ' <div class="col-md-12 col-xs-12">'
               appendBottom = appendBottom + '   <div class="pull-right">'
                 appendBottom = appendBottom + '   <span style="margin-right: -5px;">Vat <span class="title_tax"></span></span>'
@@ -3199,7 +3204,7 @@
               appendBottom = appendBottom + ' </div>'
               appendBottom = appendBottom + '</div>'
 
-              appendBottom = appendBottom + '<div class="row mb-4" style="margin-top: 10px;">'
+              appendBottom = appendBottom + '<div class="row mb-4">'
                 appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
                 appendBottom = appendBottom + '    <div class="pull-right" style="display:flex">'
                 appendBottom = appendBottom + '      <span>PB1 <span class="title_pb1"></span></span>'
@@ -4178,7 +4183,7 @@
               appendBottom = appendBottom + ' </div>'
               appendBottom = appendBottom + '</div>'
 
-              appendBottom = appendBottom + '<div class="row mb-4" style="margin-top: 10px;">'
+              appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
               appendBottom = appendBottom + ' <div class="col-md-12 col-xs-12">'
               appendBottom = appendBottom + '   <div class="pull-right">'
                 appendBottom = appendBottom + '   <span style="margin-right: 15px;">Vat <span class="title_tax"></span></span>'
@@ -4189,7 +4194,7 @@
               appendBottom = appendBottom + ' </div>'
               appendBottom = appendBottom + '</div>'
 
-              appendBottom = appendBottom + '<div class="row mb-4" style="margin-top: 10px;">'
+              appendBottom = appendBottom + '<div class="row mb-4">'
                 appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
                 appendBottom = appendBottom + '    <div class="pull-right" style="display:flex">'
                 appendBottom = appendBottom + '      <span>PB1 <span class="title_pb1"></span></span>'
@@ -4786,8 +4791,8 @@
     // localStorage.setItem('tax_pb',0)
     // localStorage.setItem('service_charge',0)
     function customRound(num) {
-      var parseNum = parseFloat(num)
-      return Math.round(parseNum * 1000) / 1000;
+      var parseNum = parseFloat(num.replace(/\./g, "").replace(",", "."));
+      return Math.round(parseNum);
     } 
 
     function changeVatValue(value=false){
@@ -4882,6 +4887,8 @@
         tempService = Math.round((parseFloat(sum) - tempDiscNominal) * ($("#inputServiceChargeProduct").val() == ""?0:parseFloat($("#inputServiceChargeProduct").val())) / 100)
         
         $("#inputServiceChargeNominal").val(formatter.format(tempService))
+
+        console.log(formatter.format((tempTotal - tempDiscNominal)*11/12))
         $("#inputTaxBaseOtherFinal").val(formatter.format(customRound(formatter.format((tempTotal - tempDiscNominal)*11/12))))
 
         $("#inputPb1Nominal").val(formatter.format(tempPb1))
@@ -5957,7 +5964,7 @@
               appendBottom = appendBottom + '  </div>'
             appendBottom = appendBottom  + '</div>'
 
-            appendBottom = appendBottom + '<div class="row mb-4" style="margin-top: 10px;">'
+            appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
               appendBottom = appendBottom + '<div class="col-md-12 col-xs-12">'
               appendBottom = appendBottom + ' <div class="pull-right" style="display:flex">'
               appendBottom = appendBottom + '  <span style="margin-right: 15px;margin-top: 8px;display:block ruby">Vat <span class="title_tax"></span>'
@@ -5988,7 +5995,7 @@
               appendBottom = appendBottom + '</div>'
             appendBottom = appendBottom + '</div>'
 
-            appendBottom = appendBottom + '<div class="row mb-4" style="margin-top: 10px;">'
+            appendBottom = appendBottom + '<div class="row mb-4">'
               appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
               appendBottom = appendBottom + '    <div class="pull-right" style="display:flex">'
               appendBottom = appendBottom + '      <div class="checkbox" style="margin-top:5px"><label><input type="checkbox" class="" id="cbInputPb1Product">&nbsp&nbspPB1</label></div>'

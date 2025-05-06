@@ -97,6 +97,11 @@
     .swal2-container{
       z-index: 99999!important;
     }
+
+    #spesifikasiContainer .form-group {
+      display: block !important;
+      visibility: visible !important;
+    }
   </style>
 @endsection
 @section('content')
@@ -241,6 +246,7 @@
                     <li style="cursor: pointer;"><a class="dropdown-item"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="11"><span  class="text">Current PID</span></a></li>
                     <li style="cursor: pointer;"><a class="dropdown-item"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="12"><span  class="text">PIC - Department</span></a></li>
                     <li style="cursor: pointer;"><a class="dropdown-item"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="13"><span  class="text">Notes</span></a></li>
+                    <li style="cursor: pointer;"><a class="dropdown-item"><input style="margin: 0 10px 0 5px;" type="checkbox" onclick="changeColumnTable(this)" data-column="14"><span  class="text">Reason</span></a></li>
                   </ul>
                 </div>
               </div>
@@ -272,7 +278,7 @@
                 <select id="selectPeripheral" name="selectPeripheral" class="form-control divPeripheral" onchange="fillInput('selectPeripheral')" style="display:none;">
                   <option></option>
                 </select>
-                <span class="help-block" style="display:none;">Please fill Category Peripheral!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Category Peripheral!</span>
               </div>
 
               <div class="form-group">
@@ -287,19 +293,19 @@
                 <select id="selectAssetOwner" name="selectAssetOwner" class="form-control" onchange="fillInput('selectAssetOwner')">
                   <option></option>
                 </select>
-                <span class="help-block" style="display:none;">Please fill Asset Owner!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Asset Owner!</span>
               </div>
 
               <div class="form-group">
                 <label for="">PID*</label>
                 <select id="selectPID" name="selectPID" class="form-control" onchange="fillInput('selectPID')"><option></option></select>
-                <span class="help-block" style="display:none;">Please fill PID!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill PID!</span>
               </div> 
 
               <div class="form-group">
                 <label for="">Client*</label>
                 <input type="text" class="form-control" onkeyup="fillInput('inputClient')" id="inputClient" name="inputClient" disabled>
-                <span class="help-block" style="display:none;">Please fill Client!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Client!</span>
               </div>
                 
               <div class="form-group" id="clientContainer"></div>
@@ -311,7 +317,7 @@
                     <select  type="text" class="form-control" onchange="fillInput('selectCategory')" id="selectCategory" name="selectCategory">
                       <option></option>
                     </select>
-                    <span class="help-block" style="display:none;">Please fill Category!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Category!</span>
                   </div>
                 </div>
                 <!-- ini buat milih status -->
@@ -319,7 +325,7 @@
                   <div class="form-group">
                     <label for="">Status*</label>
                     <select autocomplete="off" type="" class="form-control" id="selectStatus" name="selectStatus" onchange="fillInput('selectStatus')"><option></option></select>
-                    <span class="help-block" style="display:none;">Please fill Status!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Status!</span>
                   </div>
                 </div>
               </div>
@@ -327,7 +333,7 @@
               <div class="form-group" style="display:none;">
                 <label for="">Reason*</label>
                 <textarea id="txtAreaReason" name="txtAreaReason" class="form-control" onkeyup="fillInput('txtAreaReason')"></textarea>
-                <span class="help-block" style="display:none;">Please fill Reason!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Reason!</span>
               </div>
 
               <div class="row" id="vendorContainer">
@@ -335,14 +341,14 @@
                   <div class="form-group">
                     <label for="">Vendor*</label>
                     <select id="selectVendor" name="selectVendor" class="form-control" onchange="fillInput('selectVendor')" onkeyup=""><option></option></select>
-                    <span class="help-block" style="display:none;">Please fill Vendor!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Vendor!</span>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="">Type Device*</label>
                     <select id="selectTypeDevice" name="selectTypeDevice" class="form-control" onchange="fillInput('selectTypeDevice')"><option></option></select>
-                    <span class="help-block" style="display:none;">Please fill Type Device!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Type Device!</span>
                   </div>
                 </div>
               </div>
@@ -350,7 +356,7 @@
               <div class="form-group" id='serialNumberGroup'>
                 <label for="">Serial Number*</label>
                 <input id="inputSerialNumber" name="inputSerialNumber" class="form-control" onkeyup="fillInput('inputSerialNumber')">
-                <span class="help-block" style="display:none;">Please fill Serial Number!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Serial Number!</span>
               </div>
 
               <div class="row">
@@ -359,7 +365,7 @@
                     <div class="form-group">
                       <label for="">Spesifikasi</label>
                       <input id="inputSpesifikasi" name="inputSpesifikasi" class="form-control" onkeyup="fillInput('inputSpesifikasi')">
-                      <span class="help-block" style="display:none;">Please fill Spesifikasi!</span>
+                      <span class="invalid-feedback" style="display:none;">Please fill Spesifikasi!</span>
                     </div>
                   </div>
                 </div>
@@ -371,7 +377,7 @@
                   <div class="form-group">
                     <label for="">RMA</label>
                     <input id="inputRMA" name="inputRMA" class="form-control" onkeyup="fillInput('inputRMA')">
-                    <span class="help-block" style="display:none;">Please fill RMA!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill RMA!</span>
                   </div>
                 </div>
               </div>
@@ -379,7 +385,7 @@
               <!-- <div class="form-group" id="tanggalPembelianContainer">
                 <label for="">Tanggal Pembelian</label>
                 <div class="input-group">
-                  <div class="input-group-addon">
+                  <div class="input-group-text">
                     <i class="bx bx-calendar"></i>
                   </div>
                   <input id="inputTglBeli" name="inputTglBeli" class="form-control" onchange="fillInput('inputTglBeli')">
@@ -391,7 +397,7 @@
                   <div class="form-group">
                     <label for="">Harga</label>
                     <div class="input-group">
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <strong>RP</strong>
                       </div>
                       <input id="inputHarga" type="text" name="inputHarga" class="form-control money" onkeyup="fillInput('inputHarga')">
@@ -402,7 +408,7 @@
                   <div class="form-group">
                     <label for="">Nilai Buku</label>
                     <div class="input-group">
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <strong>RP</strong>
                       </div>
                       <input id="inputNilaiBuku" type="text" name="inputNilaiBuku" class="form-control money" onkeyup="fillInput('inputNilaiBuku')" readonly>
@@ -414,7 +420,7 @@
               <div class="form-group" id="notesContainer">
                 <label for="">Notes</label>
                 <textarea id="txtAreaNotes" name="txtAreaNotes" class="form-control" onkeyup="fillInput('txtAreaNotes')"></textarea>
-                <span class="help-block" style="display:none;">Please fill Notes!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Notes!</span>
               </div>
 
               <div class="form-group">
@@ -433,7 +439,7 @@
                   <div class="form-group">
                     <label for="">ID Device Customer*</label>
                     <input autocomplete="off" type="" class="form-control" id="inputIdDeviceCustomer" name="inputIdDeviceCustomer" onkeyup="fillInput('inputIdDeviceCustomer')">
-                    <span class="help-block" style="display:none;">Please fill ID Device Customer!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill ID Device Customer!</span>
                   </div>
                 </div>
               </div>
@@ -443,7 +449,7 @@
                 <select autofocus type="text" class="form-control" onchange="fillInput('selectCity')" name="selectCity" id="selectCity">
                   <option></option>
                 </select>
-                <span class="help-block" style="display:none;">Please fill City!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill City!</span>
               </div>
 
               <div class="form-group" id="locationContainer"></div>
@@ -451,13 +457,13 @@
               <div class="form-group" id="addressLocationContainer">
                 <label for="">Location*</label>
                 <textarea onkeyup="fillInput('txtAddressLocation')" id="txtAddressLocation" name="txtAddressLocation" class="form-control"></textarea>
-                <span class="help-block" style="display:none;">Please fill Location!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Location!</span>
               </div>
 
               <div class="form-group" id="detailLocationContainer">
                 <label>Detail Address</label>
                 <input class="form-control" placeholder="Search Location..." type="text" onkeyup="fillInput('txtAreaLocation')" id="txtAreaLocation" name="txtAreaLocation">
-                <span class="help-block" style="display:none;">Please fill Detail Address!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Detail Address!</span>
               </div>
 
               <div class="form-group">
@@ -490,21 +496,21 @@
                   <div class="form-group">
                     <label for="">IP Address</label>
                     <input data-inputmask="'alias': 'ip'" data-mask class="form-control" id="inputIPAddress" name="inputIPAddress" onkeyup="fillInput('ip_address')">
-                    <span class="help-block" style="display:none;">Please fill Phone!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Phone!</span>
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="">Server</label>
                     <input data-inputmask="'alias': 'ip'" data-mask class="form-control" name="inputServer" id="inputServer" onkeyup="fillInput('inputServer')">
-                    <span class="help-block" style="display:none;">Please fill Server!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Server!</span>
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="">Port</label>
                     <input autocomplete="off" type="text" class="form-control"  name="inputPort" id="inputPort" onkeyup="fillInput('inputPort')">
-                    <span class="help-block" style="display:none;">Please fill Port!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Port!</span>
                   </div>
                 </div>
               </div>     
@@ -514,7 +520,7 @@
                   <div class="form-group">
                     <label for="">Status Customer*</label>
                     <select id="selectStatusCustomer" name="selectStatusCustomer" class="form-control" onchange="fillInput('selectStatusCustomer')"><option></option></select>
-                    <span class="help-block" style="display:none;">Please fill Status Customer!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Status Customer!</span>
                   </div>
                 </div>
               </div>     
@@ -524,7 +530,7 @@
                   <div class="form-group">
                     <label for="">Operating System</label>
                     <input autofocus type="text" class="form-control" onchange="fillInput('inputOS')" id="inputOS" name="inputOS">
-                    <span class="help-block" style="display:none;">Please fill Operating System!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Operating System!</span>
                   </div>
                 </div>
 
@@ -532,7 +538,7 @@
                   <div class="form-group">
                     <label for="">Version</label>
                     <input autocomplete="off" type="" class="form-control" id="inputVersion" name="inputVersion" onkeyup="fillInput('inputVersion')">
-                    <span class="help-block" style="display:none;">Please fill Version!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Version!</span>
                   </div>
                 </div>
               </div>
@@ -542,7 +548,7 @@
               <div class="form-group" id="tanggalPembelianContainer">
                   <label for="">Tanggal Pembelian</label>
                   <div class="input-group">
-                    <div class="input-group-addon">
+                    <div class="input-group-text">
                       <i class="bx bx-calendar"></i>
                     </div>
                     <input id="inputTglBeli" name="inputTglbeli" class="form-control" onchange="fillInput('inputTglBeli')">
@@ -556,7 +562,7 @@
                     <select autofocus class="form-control" name="type" id="selectLevelSupport" name="selectLevelSupport" onchange="fillInput('selectLevelSupport')">
                       <option></option>
                     </select>
-                    <span class="help-block" style="display:none;">Please fill 2nd Level Support!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill 2nd Level Support!</span>
                   </div>
                 </div>
 
@@ -565,11 +571,11 @@
                     <label for="">Installed Date*</label>
                     <div class="input-group">
                       <input autocomplete="off" class="form-control" id="inputInstalledDate" name="inputInstalledDate" onchange="fillInput('inputInstalledDate')"/>
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <i class="bx bx-calendar"></i>
                       </div>
                     </div>
-                    <span class="help-block" style="display:none;">Please fill Installed Date!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Installed Date!</span>
                   </div>
                 </div>
               </div>
@@ -577,7 +583,7 @@
               <div class="form-group">
                 <label for="">License*</label>
                 <input autocomplete="off" class="form-control" id="inputLicense" name="inputLicense" onkeyup="fillInput('inputLicense')"/>
-                <span class="help-block" style="display:none;">Please fill License!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill License!</span>
               </div>
 
               <div class="row">
@@ -586,11 +592,11 @@
                     <label for="">License Start*</label>
                     <div class="input-group">
                       <input autofocus type="text" class="form-control" onchange="fillInput('inputLicenseStart')" id="inputLicenseStart" name="inputLicenseStart">
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <i class="bx bx-calendar"></i>
                       </div>
                     </div>
-                    <span class="help-block" style="display:none;">Please fill License Start!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill License Start!</span>
                   </div>
                 </div>
 
@@ -599,11 +605,11 @@
                     <label for="">License End*</label>
                     <div class="input-group">
                       <input autocomplete="off" type="" class="form-control" id="inputLicenseEnd" name="inputLicenseEnd" onchange="fillInput('inputLicenseEnd')">
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <i class="bx bx-calendar"></i>
                       </div>
                     </div>
-                    <span class="help-block" style="display:none;">Please fill License End!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill License End!</span>
                   </div>
                 </div>
               </div>
@@ -614,11 +620,11 @@
                     <label for="">Maintenance Start*</label>
                     <div class="input-group">
                       <input autofocus type="text" class="form-control" onchange="fillInput('inputMaintenanceStart')" id="inputMaintenanceStart" name="inputMaintenanceStart">
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <i class="bx bx-calendar"></i>
                       </div>
                     </div>
-                    <span class="help-block" style="display:none;">Please fill Maintenance Start!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Maintenance Start!</span>
                   </div>
                 </div>
 
@@ -627,20 +633,20 @@
                     <label for="">Maintenance End*</label>
                     <div class="input-group">
                       <input autocomplete="off" type="" class="form-control" id="inputMaintenanceEnd" name="inputMaintenanceEnd" onchange="fillInput('inputMaintenanceEnd')">
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <i class="bx bx-calendar"></i>
                       </div>
                     </div>
-                    <span class="help-block" style="display:none;">Please fill Maintenance End!</span>
+                    <span class="invalid-feedback" style="display:none;">Please fill Maintenance End!</span>
                   </div>
                 </div>
               </div>
             </div>      
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-danger" id="prevBtnAdd">Back</button>
-                <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
-            </div>
           </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-danger" id="prevBtnAdd">Back</button>
+          <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
         </div>
       </div>
     </div>
@@ -785,12 +791,12 @@
             <div class="form-group">
               <label>Category Code</label>
               <input class="form-control" name="inputCatCode" id="inputCatCode" placeholder="Input Code (MAX 3 variable)" maxlength="3" style="text-transform:uppercase">
-              <span class="help-block" style="display:none;color: red;"></span>
+              <span class="invalid-feedback" style="display:none;color: red;"></span>
             </div>
             <div class="form-group">
               <label>Category Name</label>
               <input class="form-control" name="inputCatName" id="inputCatName" placeholder="Input Category Name">
-              <span class="help-block" style="display:none;color: red;"></span>
+              <span class="invalid-feedback" style="display:none;color: red;"></span>
             </div>
           </form>
         </div>
@@ -1072,15 +1078,22 @@
           }
         },
         {
+          title:"Reason",
+          render: function (data, type, row, meta){
+            return row.reason
+          }
+        },
+        {
           title:"Action",
           render: function (data, type, row, meta){
-           return "<a href='{{url('asset/detail')}}?id_asset="+ row.id +"' class='btn btn-sm btn-primary' target='_blank'>Detail</a><button class='btn btn-sm btn-primary' onclick='showQRDetail("+ row.id +","+ '"' + row.id_asset + '"' + ")' style='margin-left:5px'>Show QR</button>"
+           return "<a href='{{url('asset/detail')}}?id_asset="+ row.id +"' class='btn btn-sm btn-primary' target='_blank' data-bs-toggle='tooltip' title='Detail'><i class='bx bx-show'></i></a>" +
+                  "<button class='btn btn-sm btn-primary' data-bs-toggle='tooltip' title='Show QR' onclick='showQRDetail("+ row.id +","+ '"' + row.id_asset + '"' + ")' style='margin-left:5px'><i class='bx bx-qr-scan'></i></button>"
           }
         },
       ],
       "columnDefs": [
         {
-            "targets": [0,5,6,7,8,9,10,11,12,13], // Index of the column you want to hide (0-based index)
+            "targets": [0,5,6,7,8,9,10,11,12,13,14], // Index of the column you want to hide (0-based index)
             "visible": false,
             "searchable": false // Optional: if you don't want the column to be searchable
         }
@@ -1124,7 +1137,7 @@
                 $("#selectCity").select2({
                   placeholder:"Select City",
                   data:response,
-                  dropdownParent:$("#modal-add-asset")
+                  dropdownParent:$("#modal-add-asset .modal-body")
                 })
               },
               error: function(xhr, status, error) {
@@ -1141,7 +1154,7 @@
               $("#service_point").select2({
                 placeholder:"Select Service Point",
                 data:response,
-                dropdownParent:$("#modal-add-asset")
+                dropdownParent:$("#modal-add-asset .modal-body")
               })
             },
           });
@@ -1156,7 +1169,7 @@
           $("textarea[id=txtAddressLocation]").remove()
           $("select[id=txtAddressLocation]").select2({
             placeholder:"Select Location",
-            dropdownParent:$("#modal-add-asset")
+            dropdownParent:$("#modal-add-asset .modal-body")
           })
         }
 
@@ -1703,7 +1716,7 @@
         },
       },
       placeholder:"Select Asset Owner",
-      dropdownParent: $('#modal-add-asset'), // optional if dropdown is inside a modal or a specific container
+      dropdownParent: $('#modal-add-asset .modal-body'), // optional if dropdown is inside a modal or a specific container
       dropdownPosition: 'below'
     }).on('change', function(event) {
       event.stopPropagation(); // Prevents the event from bubbling up and potentially affecting other elements
@@ -1720,7 +1733,7 @@
         },
       },
       placeholder:"Select Category",
-      dropdownParent: $('#modal-add-asset'), // optional if dropdown is inside a modal or a specific container
+      dropdownParent: $('#modal-add-asset .modal-body'), // optional if dropdown is inside a modal or a specific container
       dropdownPosition: 'below'
     }).on('select2:select', function (e) {
       e.stopPropagation();
@@ -1755,8 +1768,8 @@
           if ($el.css("display") !== "none") {
               if (data.id != "inputIPAddress" && data.id != "inputPort" && data.id != "inputServer") {
                 if ($(data).val() == "") {
-                  $("#"+data.id).closest(".form-group").find(".help-block").hide()
-                  $("#"+data.id).closest(".form-group").removeClass("has-error")
+                  $("#"+data.id).closest(".form-group").find(".invalid-feedback").hide()
+                  $("#"+data.id).closest(".form-group").removeClass("needs-validation")
                 }
               }
           }
@@ -1767,8 +1780,8 @@
           if ($el.css("display") !== "none") {
               if (data.id != "inputIPAddress" && data.id != "inputPort" && data.id != "inputServer") {
                 if ($(data).val() == "") {
-                  $("#"+data.id).closest(".form-group").find(".help-block").hide()
-                  $("#"+data.id).closest(".form-group").removeClass("has-error")
+                  $("#"+data.id).closest(".form-group").find(".invalid-feedback").hide()
+                  $("#"+data.id).closest(".form-group").removeClass("needs-validation")
                 }
               }
           }
@@ -1779,8 +1792,8 @@
           if ($el.css("display") !== "none") {
               if (data.id != "inputIPAddress" && data.id != "inputPort" && data.id != "inputServer") {
                 if ($(data).val() == "") {
-                  $("#"+data.id).closest(".form-group").find(".help-block").hide()
-                  $("#"+data.id).closest(".form-group").removeClass("has-error")
+                  $("#"+data.id).closest(".form-group").find(".invalid-feedback").hide()
+                  $("#"+data.id).closest(".form-group").removeClass("needs-validation")
                 }
               }
           }
@@ -1848,37 +1861,48 @@
             }
             
             $("#vendorContainer").show();
-            data.forEach(function(item) {
-              var div = $('<div class="col-md-4 form-group">');
-              var label = $('<label>', {
+
+            // let container = $("#spesifikasiContainer")
+            data.forEach(function(item,index) {
+              // Start a new row every 3 items
+              // New row every 3 items
+              if (index % 3 === 0) {
+                  currentRow = $('<div class="row row-wrapper mb-3"></div>');
+                  spesifikasiContainer.append(currentRow);
+              }
+
+              let div = $('<div class="col-md-4 form-group"></div>');
+
+              let label = $('<label>', {
                   text: item.name
               });
-              div.append(label);
 
-              var select = $('<select>', {
+              let select = $('<select>', {
                   id: 'inputSpesifikasi_' + item.name,
                   name: 'inputSpesifikasi_' + item.name,
                   class: 'form-control',
-                  'data-spec-id': item.id,          
+                  'data-spec-id': item.id,
                   'data-spec-name': item.name,
-                  onchange: function() {
-                      fillInput('inputSpesifikasi_' + item.name);
+                  change: function () {
+                      fillInput(this.id);
                   }
               });
-              
-              $('<option>', {
+
+              select.append($('<option>', {
                   value: '',
                   text: 'Select ' + item.name
-              }).appendTo(select);
+              }));
 
-              div.append(select);
-              var alert = $('<span>',{
-                class : 'help-block',
-                style: 'display: none',
-                text: 'Please fill ' + item.name + '!'
+              let alert = $('<span>', {
+                  class: 'invalid-feedback',
+                  style: 'display: none;',
+                  text: 'Please fill ' + item.name + '!'
               });
-              div.append(alert);
-              spesifikasiContainer.append(div);
+
+              div.append(label, select, alert);
+              currentRow.append(div);
+
+              // spesifikasiContainer.append(div);
 
               fetchSpesifikasiDetails(item.id, select);
               
@@ -1890,7 +1914,7 @@
                 placeholder: 'Select ' + item.name,
                 allowClear: true,
                 tags: true,
-                dropdownParent: $('#modal-add-asset'),
+                dropdownParent: $('#modal-add-asset .modal-body'),
                 createTag: function(params) {
                   let term = params.term.trim();
                   if (term === '') {
@@ -1908,70 +1932,79 @@
             $("#inputAccessoris").closest(".form-group").remove()
             $("#vendorContainer").show();
             clearValidationOnChange();
-            data.forEach(function(item) {
-                    var div = $('<div class="col-md-6 form-group">');
+            data.forEach(function(item,index) {
+              if (index % 2 === 0) {
+                currentRow = $('<div class="row row-wrapper mb-3"></div>');
+                spesifikasiContainer.append(currentRow);
+              }
+
+                var div = $('<div class="col-md-6 form-group">');
+                
+                var input = $('<input>', {
+                    id: 'inputSpesifikasi_' + item.name,
+                    name: 'inputSpesifikasi_' + item.name,
+                    class: 'form-control',
                     
-                    var input = $('<input>', {
-                        id: 'inputSpesifikasi_' + item.name,
-                        name: 'inputSpesifikasi_' + item.name,
-                        class: 'form-control',
-                        
-                    });
-                    
-                    var label = $('<label>', {
-                        text: item.name
-                    });
+                });
+                
+                var label = $('<label>', {
+                    text: item.name
+                });
 
-                    var unitSpan = $('<span>', {
-                        class: 'input-group-addon',
-                        text: item.satuan
-                      });
-                    
-                    div.append(label).append(input);
-            
-                    input.on('keyup', function() {
-                        fillInput('inputSpesifikasi_' + item.name);
-                    });
+                var unitSpan = $('<span>', {
+                  class: 'input-group-text',
+                  style: 'font-size:12px',
+                  text: item.satuan
+                });
+                
+                div.append(label).append(input);
+        
+                input.on('keyup', function() {
+                    fillInput('inputSpesifikasi_' + item.name);
+                });
 
-                    if (item.satuan) {
-                        var inputGroup = $('<div>', { class: 'input-group' });
-                        inputGroup.append(input).append(unitSpan);
-                        div.append(inputGroup);
-                    } else {
-                        div.append(input);
-                    }
+                if (item.satuan) {
+                    var inputGroup = $('<div>', { class: 'input-group' });
+                    inputGroup.append(input).append(unitSpan);
+                    div.append(inputGroup);
+                } else {
+                    div.append(input);
+                }
 
-                    var alert = $('<span>',{
-                    class : 'help-block',
-                    style: 'display: none',
-                    text: 'Please fill ' + item.name + '!'
+                var alert = $('<span>',{
+                class : 'invalid-feedback',
+                style: 'display: none',
+                text: 'Please fill ' + item.name + '!'
 
-                    });
-                    div.append(alert);
+                });
+                div.append(alert);
 
-                    spesifikasiContainer.append(div);
+                currentRow.append(div);
+                    // spesifikasiContainer.append(div);
             });
           }
           else if (category === 'VHC'){ 
             $("#serialNumberGroup").hide();
             var row = $(`
-              <div class="col-md-6">
-                <div class="form-group" id="serialNumberGroupVehicle">
-                  <label>Nomor Polisi</label>
-                  <input id="inputNomorPolisi" name="inputNomorPolisi" class="form-control">
-                  <span class="help-block" style="display:none;">Please fill Nomor Polisi!</span>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" id="serialNumberGroupVehicle">
+                    <label>Nomor Polisi</label>
+                    <input id="inputNomorPolisi" name="inputNomorPolisi" class="form-control">
+                    <span class="invalid-feedback" style="display:none;">Please fill Nomor Polisi!</span>
+                  </div>
                 </div>
-              </div>
-              
-              <div class="col-md-6">
-                <div class="form-group" id="warnaGroup">
-                  <label>Warna</label>
-                  <input
-                    id="inputSpesifikasi_Warna"
-                    name="inputSpesifikasi_Warna"
-                    class="form-control"
-                    onkeyup="fillInput('inputSpesifikasi_Warna')">
-                  <span class="help-block" style="display:none;">Please fill Warna!</span>
+                
+                <div class="col-md-6">
+                  <div class="form-group" id="warnaGroup">
+                    <label>Warna</label>
+                    <input
+                      id="inputSpesifikasi_Warna"
+                      name="inputSpesifikasi_Warna"
+                      class="form-control"
+                      onkeyup="fillInput('inputSpesifikasi_Warna')">
+                    <span class="invalid-feedback" style="display:none;">Please fill Warna!</span>
+                  </div>
                 </div>
               </div>
             `);
@@ -1980,13 +2013,13 @@
             $("#inputNomorPolisi").on("input", function() {
               const $this = $(this);
               const $formGroup = $this.closest(".form-group");
-              const $helpBlock = $formGroup.find(".help-block");
+              const $helpBlock = $formGroup.find(".invalid-feedback");
               
-              $formGroup.removeClass("has-error");
+              $formGroup.removeClass("needs-validation");
               $helpBlock.hide();
 
               if (!$this.val().trim()) {
-                $formGroup.addClass("has-error");
+                $formGroup.addClass("needs-validation");
                 $helpBlock.show();
               }
             });
@@ -1994,56 +2027,62 @@
             clearValidationOnChange();
             $("#inputAccessoris").closest(".form-group").remove();
             $("#vendorContainer").show();
-            data.forEach(function(item) {
-                    if (item.name === 'Warna') {
-                      return;
-                    }
+            data.forEach(function(item,index) {
+              if (item.name === 'Warna') {
+                return;
+              }
 
-                    var div = $('<div class="col-md-6 form-group">');
-                    
-                    var input = $('<input>', {
-                        id: 'inputSpesifikasi_' + item.name,
-                        name: 'inputSpesifikasi_' + item.name,
-                        class: 'form-control',
-                        
-                    });
-                    
-                    var label = $('<label>', {
-                        text: item.name
-                    });
+              if (index % 2 === 0) {
+                currentRow = $('<div class="row row-wrapper mb-3"></div>');
+                spesifikasiContainer.append(currentRow);
+              }
 
-                    var unitSpan = $('<span>', {
-                        class: 'input-group-addon',
-                        text: item.satuan
-                      });
-                    
-                    div.append(label).append(input);
-            
-                    input.on('keyup', function() {
-                        fillInput('inputSpesifikasi_' + item.name);
-                    });
+              var div = $('<div class="col-md-6 form-group">');
+              
+              var input = $('<input>', {
+                  id: 'inputSpesifikasi_' + item.name,
+                  name: 'inputSpesifikasi_' + item.name,
+                  class: 'form-control',
+                  
+              });
+              
+              var label = $('<label>', {
+                  text: item.name
+              });
 
-                    input.on('input', function() {
-                      $(this).closest('.form-group').find('.help-block').hide();
-                      $(this).closest('.form-group').removeClass('has-error');
-                    });
+              var unitSpan = $('<span>', {
+                  class: 'input-group-text',
+                  text: item.satuan
+                });
+              
+              div.append(label).append(input);
+      
+              input.on('keyup', function() {
+                  fillInput('inputSpesifikasi_' + item.name);
+              });
 
-                    if (item.satuan) {
-                        var inputGroup = $('<div>', { class: 'input-group' });
-                        inputGroup.append(input).append(unitSpan);
-                        div.append(inputGroup);
-                    } else {
-                        div.append(input);
-                    }
+              input.on('input', function() {
+                $(this).closest('.form-group').find('.invalid-feedback').hide();
+                $(this).closest('.form-group').removeClass('needs-validation');
+              });
 
-                    var alert = $('<span>',{
-                      class : 'help-block',
-                      style: 'display: none',
-                      text: 'Please fill ' + item.name + '!'
-                    });
-                    div.append(alert);
+              if (item.satuan) {
+                  var inputGroup = $('<div>', { class: 'input-group' });
+                  inputGroup.append(input).append(unitSpan);
+                  div.append(inputGroup);
+              } else {
+                  div.append(input);
+              }
 
-                    spesifikasiContainer.append(div);
+              var alert = $('<span>',{
+                class : 'invalid-feedback',
+                style: 'display: none',
+                text: 'Please fill ' + item.name + '!'
+              });
+              div.append(alert);
+
+              currentRow.append(div);
+                    // spesifikasiContainer.append(div);
             });
           }
           else {
@@ -2065,11 +2104,11 @@
             div.append(select);
 
             var alert = $('<span>',{
-                    class : 'help-block',
-                    style: 'display: none',
-                    text: 'Please fill Spesifikasi!'
-                  });
-                  div.append(alert);
+              class : 'invalid-feedback',
+              style: 'display: none',
+              text: 'Please fill Spesifikasi!'
+            });
+            div.append(alert);
 
             spesifikasiContainer.append(div);
 
@@ -2114,8 +2153,8 @@
               value = $(this).find('select').val().trim();
           }
 
-          if ($(this).find('.input-group-addon').length > 0) {
-            var span = $(this).find('span').not('.help-block');
+          if ($(this).find('.input-group-text').length > 0) {
+            var span = $(this).find('span').not('.invalid-feedback');
             if (span.length > 0) {
                 spanText = ' ' + span.text().trim();
             }
@@ -2131,7 +2170,7 @@
   
     $("#selectStatus").select2({
       placeholder:"Select Status",
-      dropdownParent: $('#modal-add-asset'), 
+      dropdownParent: $('#modal-add-asset .modal-body'), 
       dropdownPosition: 'below',
       data:[
         {id:"Installed",text:"Installed"},
@@ -2161,7 +2200,7 @@
       toggleInstalledDate();
       if ($(this).val() === 'Available') {
         $("#inputInstalledDate").val('');
-        $("#inputInstalledDate").find('.help-block').hide();
+        $("#inputInstalledDate").find('.invalid-feedback').hide();
       }
     });
     
@@ -2194,7 +2233,7 @@
               text: capitalizedTag
           };
       },
-      dropdownParent: $('#modal-add-asset'), // optional if dropdown is inside a modal or a specific container
+      dropdownParent: $('#modal-add-asset .modal-body'), // optional if dropdown is inside a modal or a specific container
       dropdownPosition: 'below'
     }).on('select2:select', function(e) {
       const selectedOption = e.params.data;
@@ -2219,7 +2258,7 @@
       },
       placeholder:"Select Category Peripheral",
       tags:true,
-      dropdownParent: $("#modal-add-asset"),
+      dropdownParent: $("#modal-add-asset .modal-body"),
     })
 
     $("#selectTypeDevice").select2({
@@ -2242,7 +2281,7 @@
               text: capitalizedTag
           };
       },
-      dropdownParent: $('#modal-add-asset'), // optional if dropdown is inside a modal or a specific container
+      dropdownParent: $('#modal-add-asset .modal-body'), // optional if dropdown is inside a modal or a specific container
       dropdownPosition: 'below'
     }).on('select2:select', function(e) {
       const selectedOption = e.params.data;
@@ -2280,12 +2319,12 @@
               text: capitalizedTag
           };
       },
-      dropdownParent: $("#modal-add-asset"),
+      dropdownParent: $("#modal-add-asset .modal-body"),
     })
 
     $("#selectStatusCustomer").select2({
       placeholder:"Select Status Customer",
-      dropdownParent: $("#modal-add-asset"),
+      dropdownParent: $("#modal-add-asset .modal-body"),
       tags:true,
       data:[
         {id:"Beli",text:"Beli"},
@@ -2319,7 +2358,7 @@
         },
       },
       placeholder: 'Select PID',
-      dropdownParent: $('#modal-add-asset'), // optional if dropdown is inside a modal or a specific container
+      dropdownParent: $('#modal-add-asset .modal-body'), // optional if dropdown is inside a modal or a specific container
       dropdownPosition: 'below'
     }).on('select2:select', function (e) {
       let pid = e.params.data.id
@@ -2362,7 +2401,7 @@
           ],          
           placeholder:"Select 2nd Level Support",
           tags:true,
-          dropdownParent: $("#modal-add-asset"),
+          dropdownParent: $("#modal-add-asset .modal-body"),
         })
 
         let selectLicense = $('<select>', {
@@ -2429,7 +2468,7 @@
         prContainer.append(prInput);
 
         let prSpan = $('<span>',{
-          class: 'help-block',
+          class: 'invalid-feedback',
           style: 'display: none;',
           text: 'Please fill PR!'
         });
@@ -2448,7 +2487,7 @@
           },
           allowClear:true,
           placeholder:"Select PR",
-          dropdownParent: $("#modal-add-asset"),
+          dropdownParent: $("#modal-add-asset .modal-body"),
         })
 
         $("#inputPr").on("change", function () {
@@ -2511,12 +2550,12 @@
                   $('#lng').val(selectedLocation.long);   
                   $('#txtAreaLocation').val(selectedLocation.lokasi);
                   initMap(parseFloat(selectedLocation.lat),parseFloat(selectedLocation.long))
-                  $("#lat").closest(".form-group").find(".help-block").hide()
-                  $("#lat").closest(".form-group").removeClass("has-error")
-                  $("#lng").closest(".form-group").find(".help-block").hide()
-                  $("#lng").closest(".form-group").removeClass("has-error")
-                  $(this).closest(".form-group").find(".help-block").hide()
-                  $(this).closest(".form-group").removeClass("has-error")
+                  $("#lat").closest(".form-group").find(".invalid-feedback").hide()
+                  $("#lat").closest(".form-group").removeClass("needs-validation")
+                  $("#lng").closest(".form-group").find(".invalid-feedback").hide()
+                  $("#lng").closest(".form-group").removeClass("needs-validation")
+                  $(this).closest(".form-group").find(".invalid-feedback").hide()
+                  $(this).closest(".form-group").removeClass("needs-validation")
               }
             });
           }
@@ -2536,7 +2575,7 @@
         picContainer.append(selectPIC);
 
         let helpBlock = $('<span>', {
-            class: 'help-block',
+            class: 'invalid-feedback',
             text: 'Please fill PIC!',
             style: 'display:none;'
         });
@@ -2553,7 +2592,7 @@
               };
           },
           placeholder: 'Select PIC',
-          dropdownParent: $("#modal-add-asset")
+          dropdownParent: $("#modal-add-asset .modal-body")
         }}).on('select2:select', function (e) {
           e.stopPropagation();
         });
@@ -2570,8 +2609,8 @@
               $("#picContainer").hide();
               $("#inputPIC").val(null).trigger('change');
               $("#txtAreaReason").val(null).trigger('change');
-              $("#inputPIC").closest(".form-group").removeClass("has-error");
-              $("#inputPIC").closest(".form-group").find('.help-block').hide();
+              $("#inputPIC").closest(".form-group").removeClass("needs-validation");
+              $("#inputPIC").closest(".form-group").find('.invalid-feedback').hide();
             } else {
               $("#picContainer").show();
             }
@@ -2580,8 +2619,8 @@
 
         $("#inputPIC").on('change', function() {
           if ($(this).val()) { 
-              $(this).closest(".form-group").removeClass("has-error");
-              $(this).closest(".form-group").find('.help-block').hide();
+              $(this).closest(".form-group").removeClass("needs-validation");
+              $(this).closest(".form-group").find('.invalid-feedback').hide();
           }
         });
 
@@ -2683,15 +2722,15 @@
     function clearValidationOnChange() {
       $("input").on("input", function() {
           if ($(this).val() !== "") {
-              $(this).closest(".form-group").find(".help-block").hide();
-              $(this).closest(".form-group").removeClass("has-error");
+              $(this).closest(".form-group").find(".invalid-feedback").hide();
+              $(this).closest(".form-group").removeClass("needs-validation");
           }
       });
 
       $("select").on("change", function() {
           if ($(this).val() !== "") {
-              $(this).closest(".form-group").find(".help-block").hide();
-              $(this).closest(".form-group").removeClass("has-error");
+              $(this).closest(".form-group").find(".invalid-feedback").hide();
+              $(this).closest(".form-group").removeClass("needs-validation");
           }
       });
     }
@@ -2710,8 +2749,8 @@
               var id = data.id;
               if ($el.css("display") !== "none" && id !== "selectVendor" && id !== "selectStatus" && id !== "selectTypeDevice") {
                   if ($(data).val() == "") {
-                      $("select[name='"+ id +"']").closest(".form-group").find(".help-block").show();
-                      $("select[name='"+ id +"']").closest(".form-group").addClass("has-error");
+                      $("select[name='"+ id +"']").closest(".form-group").find(".invalid-feedback").show();
+                      $("select[name='"+ id +"']").closest(".form-group").addClass("needs-validation");
                   }
               }
            });
@@ -2721,8 +2760,8 @@
               if ($el.css("display") !== "none") {
                 if (data.id != "inputRMA" && data.id != "inputSpesifikasi" && data.id != "inputServer" && data.id != "inputTglBeli" && data.id != "inputHarga" && data.id != "inputNilaiBuku" && data.id != "inputBuktiAsset" && data.id != "inputSerialNumber" && data.id != "inputClient")  {
                   if ($(data).val() == "") {
-                    $("input[name='"+ data.id +"']").closest(".form-group").find(".help-block").show()
-                    $("input[name='"+ data.id +"']").closest(".form-group").addClass("has-error")
+                    $("input[name='"+ data.id +"']").closest(".form-group").find(".invalid-feedback").show()
+                    $("input[name='"+ data.id +"']").closest(".form-group").addClass("needs-validation")
                   }
                 }
               }
@@ -2730,22 +2769,22 @@
           
           if ($("#selectStatus").val() === 'Rent' || $("#selectStatus").val() === "Unavailable") {
             if ($("#txtAreaReason").val() === "") {
-              $("#txtAreaReason").closest(".form-group").addClass("has-error");
-              $("#txtAreaReason").closest(".form-group").find('.help-block').show();
+              $("#txtAreaReason").closest(".form-group").addClass("needs-validation");
+              $("#txtAreaReason").closest(".form-group").find('.invalid-feedback').show();
             } else {
-              $("#txtAreaReason").closest(".form-group").removeClass("has-error");
-              $("#txtAreaReason").closest(".form-group").find('.help-block').hide();
+              $("#txtAreaReason").closest(".form-group").removeClass("needs-validation");
+              $("#txtAreaReason").closest(".form-group").find('.invalid-feedback').hide();
             }
           }
 
           if ($("#selectPID").val() === 'INTERNAL') {
             if ($("#selectStatus").val() !== ("Available")) {
               if ($("#inputPIC").val() === null) {
-                $("#inputPIC").closest(".form-group").addClass("has-error");
-                $("#inputPIC").closest(".form-group").find('.help-block').show();
+                $("#inputPIC").closest(".form-group").addClass("needs-validation");
+                $("#inputPIC").closest(".form-group").find('.invalid-feedback').show();
               } else {
-                $("#inputPIC").closest(".form-group").removeClass("has-error");
-                $("#inputPIC").closest(".form-group").find('.help-block').hide();
+                $("#inputPIC").closest(".form-group").removeClass("needs-validation");
+                $("#inputPIC").closest(".form-group").find('.invalid-feedback').hide();
               }
             }
           }
@@ -2756,8 +2795,8 @@
               if ($el.css("display") !== "none") {
                 if (data.id != "inputSpesifikasi_Port" && data.id != "inputSpesifikasi_Speed") {
                   if ($(data).val() == "") {
-                    $("select[name='"+ data.id +"']").closest(".form-group").find(".help-block").show()
-                    $("select[name='"+ data.id +"']").closest(".form-group").addClass("has-error")
+                    $("select[name='"+ data.id +"']").closest(".form-group").find(".invalid-feedback").show()
+                    $("select[name='"+ data.id +"']").closest(".form-group").addClass("needs-validation")
                   }
                 }                
               }
@@ -2768,8 +2807,8 @@
               if ($el.css("display") !== "none") {
                 if (data.id != "inputRMA" && data.id != "inputSpesifikasi" && data.id != "inputServer" && data.id != "inputTglBeli" && data.id != "inputHarga" && data.id != "inputNilaiBuku" && data.id != "inputBuktiAsset" && data.id != 'inputClient') {
                   if ($(data).val() == "") {
-                    $("input[name='"+ data.id +"']").closest(".form-group").find(".help-block").show()
-                    $("input[name='"+ data.id +"']").closest(".form-group").addClass("has-error")
+                    $("input[name='"+ data.id +"']").closest(".form-group").find(".invalid-feedback").show()
+                    $("input[name='"+ data.id +"']").closest(".form-group").addClass("needs-validation")
                   }
                 }
               }
@@ -2777,22 +2816,22 @@
 
             if ($("#selectStatus").val() === 'Rent' || $("#selectStatus").val() === "Unavailable") {
               if ($("#txtAreaReason").val() === "") {
-                $("#txtAreaReason").closest(".form-group").addClass("has-error");
-                $("#txtAreaReason").closest(".form-group").find('.help-block').show();
+                $("#txtAreaReason").closest(".form-group").addClass("needs-validation");
+                $("#txtAreaReason").closest(".form-group").find('.invalid-feedback').show();
               } else {
-                $("#txtAreaReason").closest(".form-group").removeClass("has-error");
-                $("#txtAreaReason").closest(".form-group").find('.help-block').hide();
+                $("#txtAreaReason").closest(".form-group").removeClass("needs-validation");
+                $("#txtAreaReason").closest(".form-group").find('.invalid-feedback').hide();
               }
             }
 
             if ($("#selectPID").val() === 'INTERNAL') {
               if ($("#selectStatus").val() !== ("Available")) {
                 if ($("#inputPIC").val() === null) {
-                  $("#inputPIC").closest(".form-group").addClass("has-error");
-                  $("#inputPIC").closest(".form-group").find('.help-block').show();
+                  $("#inputPIC").closest(".form-group").addClass("needs-validation");
+                  $("#inputPIC").closest(".form-group").find('.invalid-feedback').show();
                 } else {
-                  $("#inputPIC").closest(".form-group").removeClass("has-error");
-                  $("#inputPIC").closest(".form-group").find('.help-block').hide();
+                  $("#inputPIC").closest(".form-group").removeClass("needs-validation");
+                  $("#inputPIC").closest(".form-group").find('.invalid-feedback').hide();
                 }
               }
             }
@@ -2800,28 +2839,28 @@
         } else {
           if ($("#selectStatus").val() === 'Rent' || $("#selectStatus").val() === "Unavailable") {
             if ($("#txtAreaReason").val() === "") {
-              $("#txtAreaReason").closest(".form-group").addClass("has-error");
-              $("#txtAreaReason").closest(".form-group").find('.help-block').show();
+              $("#txtAreaReason").closest(".form-group").addClass("needs-validation");
+              $("#txtAreaReason").closest(".form-group").find('.invalid-feedback').show();
             } else {
-              $("#txtAreaReason").closest(".form-group").removeClass("has-error");
-              $("#txtAreaReason").closest(".form-group").find('.help-block').hide();
+              $("#txtAreaReason").closest(".form-group").removeClass("needs-validation");
+              $("#txtAreaReason").closest(".form-group").find('.invalid-feedback').hide();
             }
           }
 
           if ($("#selectPID").val() === 'INTERNAL') {
             if ($("#selectStatus").val() !== ("Available")) {
               if ($("#inputPIC").val() === null) {
-                $("#inputPIC").closest(".form-group").addClass("has-error");
-                $("#inputPIC").closest(".form-group").find('.help-block').show();
+                $("#inputPIC").closest(".form-group").addClass("needs-validation");
+                $("#inputPIC").closest(".form-group").find('.invalid-feedback').show();
               } else {
-                $("#inputPIC").closest(".form-group").removeClass("has-error");
-                $("#inputPIC").closest(".form-group").find('.help-block').hide();
+                $("#inputPIC").closest(".form-group").removeClass("needs-validation");
+                $("#inputPIC").closest(".form-group").find('.invalid-feedback').hide();
               }
             }
           }
         }
 
-        if ($(".tab-add:first").find(".form-group").hasClass("has-error") == false) {
+        if ($(".tab-add:first").find(".form-group").hasClass("needs-validation") == false) {
           let x = document.getElementsByClassName("tab-add");
           x[currentTab].style.display = "none";
           currentTab = currentTab + n;
@@ -2850,8 +2889,8 @@
               if ($el.css("display") !== "none") {
                 if (data.id != "inputIdDeviceCustomer") {
                   if ($(data).val() == "") {
-                    $("#"+data.id).closest(".form-group").find(".help-block").show()
-                    $("#"+data.id).closest(".form-group").addClass("has-error")
+                    $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                    $("#"+data.id).closest(".form-group").addClass("needs-validation")
                   }
                 }
               }
@@ -2861,8 +2900,8 @@
               var $el = $(this);
               if ($el.css("display") !== "none" && data.id != "service_point") {
                   if ($(data).val() == "") {
-                      $("#"+data.id).closest(".form-group").find(".help-block").show()
-                      $("#"+data.id).closest(".form-group").addClass("has-error")
+                      $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                      $("#"+data.id).closest(".form-group").addClass("needs-validation")
                   }
               }
             })
@@ -2871,8 +2910,8 @@
               var $el = $(this);
               if ($el.css("display") !== "none") {
                   if ($(data).val() == "") {
-                      $(data).closest(".form-group").find(".help-block").show()
-                      $(data).closest(".form-group").addClass("has-error")
+                      $(data).closest(".form-group").find(".invalid-feedback").show()
+                      $(data).closest(".form-group").addClass("needs-validation")
                   }
               }
             })
@@ -2882,8 +2921,8 @@
               if ($el.css("display") !== "none") {
                 if (data.id != "inputClient") {
                   if ($(data).val() == "") {
-                    $("#"+data.id).closest(".form-group").find(".help-block").show()
-                    $("#"+data.id).closest(".form-group").addClass("has-error")
+                    $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                    $("#"+data.id).closest(".form-group").addClass("needs-validation")
                   }
                 }
               }
@@ -2893,15 +2932,15 @@
               var $el = $(this);
               if ($el.css("display") !== "none") {
                 if ($(data).val() == "") {
-                  $("#"+data.id).closest(".form-group").find(".help-block").show()
-                  $("#"+data.id).closest(".form-group").addClass("has-error")
+                  $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                  $("#"+data.id).closest(".form-group").addClass("needs-validation")
                 }
               }
             })
           }
         }
         
-        if ($(".tab-add:nth(2)").find(".form-group").hasClass("has-error") == false) {
+        if ($(".tab-add:nth(2)").find(".form-group").hasClass("needs-validation") == false) {
           let x = document.getElementsByClassName("tab-add");
           x[currentTab].style.display = "none";
           currentTab = currentTab + n;
@@ -2913,7 +2952,7 @@
           btnAddAsset(currentTab);
         }
       }else if (currentTab == 3){
-        if ($(".tab-add:nth(3)").find(".form-group").hasClass("has-error") == false) {
+        if ($(".tab-add:nth(3)").find(".form-group").hasClass("needs-validation") == false) {
           let x = document.getElementsByClassName("tab-add");
           x[currentTab].style.display = "none";
           currentTab = currentTab + n;
@@ -2934,8 +2973,8 @@
         if ($("#selectCategory").val() != "COM") {
           $.each($(".tab-add:first").find("select"),function(item,data){
             if ($(data).val() == "") {
-              $("select[name='"+ data.id +"']").closest(".form-group").find(".help-block").show()
-              $("select[name='"+ data.id +"']").closest(".form-group").addClass("has-error")
+              $("select[name='"+ data.id +"']").closest(".form-group").find(".invalid-feedback").show()
+              $("select[name='"+ data.id +"']").closest(".form-group").addClass("needs-validation")
             }
           })
 
@@ -2944,14 +2983,14 @@
             if ($el.css("display") !== "none") {
               if (data.id != "inputRMA" && data.id != "inputSpesifikasi" && data.id != "inputTglBeli" && data.id != "inputHarga" && data.id != "inputNilaiBuku") {
                 if ($(data).val() == "") {
-                  $("input[name='"+ data.id +"']").closest(".form-group").find(".help-block").show()
-                  $("input[name='"+ data.id +"']").closest(".form-group").addClass("has-error")
+                  $("input[name='"+ data.id +"']").closest(".form-group").find(".invalid-feedback").show()
+                  $("input[name='"+ data.id +"']").closest(".form-group").addClass("needs-validation")
                 }
               } 
             }
           })
 
-          checkInput = $(".tab-add:first").find(".form-group").hasClass("has-error")
+          checkInput = $(".tab-add:first").find(".form-group").hasClass("needs-validation")
         }
       }else{
         if ($("#selectCategory").val() != "COM") {
@@ -2960,8 +2999,8 @@
               var $el = $(this);
               if ($el.css("display") !== "none" && data.id != "selectStatusCustomer" && data.id != "selectLevelSupport") {
                   if ($(data).val() == "") {
-                      $("#"+data.id).closest(".form-group").find(".help-block").show()
-                      $("#"+data.id).closest(".form-group").addClass("has-error")
+                      $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                      $("#"+data.id).closest(".form-group").addClass("needs-validation")
                   }
               }
             });
@@ -2971,14 +3010,14 @@
                   if (data.id != "inputIPAddress" && data.id != "inputPort" && data.id != "inputServer" && data.id != "inputOS" && data.id != "inputVersion" && data.id != "inputMaintenanceStart" && data.id != "inputMaintenanceEnd") {
                     if($("inputLicense").val() === "Yes"){
                       if ($(data).val() == "") {
-                        $("#"+data.id).closest(".form-group").find(".help-block").show()
-                        $("#"+data.id).closest(".form-group").addClass("has-error")
+                        $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                        $("#"+data.id).closest(".form-group").addClass("needs-validation")
                       }
                     }else{
                       if(data.id != "inputLicenseStart" && data.id != "inputLicenseEnd"){
                         if ($(data).val() == "") {
-                        $("#"+data.id).closest(".form-group").find(".help-block").show()
-                        $("#"+data.id).closest(".form-group").addClass("has-error")
+                        $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                        $("#"+data.id).closest(".form-group").addClass("needs-validation")
                       }
                       }
                     }
@@ -2991,8 +3030,8 @@
               var $el = $(this);
               if ($el.css("display") !== "none") {
                   if ($(data).val() == "") {
-                      $("#"+data.id).closest(".form-group").find(".help-block").show()
-                      $("#"+data.id).closest(".form-group").addClass("has-error")
+                      $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                      $("#"+data.id).closest(".form-group").addClass("needs-validation")
                   }
               }
             })
@@ -3002,8 +3041,8 @@
               if ($el.css("display") !== "none") {
                   if (data.id != "inputIPAddress" && data.id != "inputPort" && data.id != "inputServer" && data.id != "inputOS" && data.id != "inputVersion") {
                     if ($(data).val() == "") {
-                      $("#"+data.id).closest(".form-group").find(".help-block").show()
-                      $("#"+data.id).closest(".form-group").addClass("has-error")
+                      $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                      $("#"+data.id).closest(".form-group").addClass("needs-validation")
                     }
                   }
               }
@@ -3013,8 +3052,8 @@
               var $el = $(this);
               if ($el.css("display") !== "none") {
                   if ($(data).val() == "") {
-                      $("#"+data.id).closest(".form-group").find(".help-block").show()
-                      $("#"+data.id).closest(".form-group").addClass("has-error")
+                      $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                      $("#"+data.id).closest(".form-group").addClass("needs-validation")
                   }
               }
             })
@@ -3024,17 +3063,17 @@
               if ($el.css("display") !== "none") {
                   if (data.id != "inputIPAddress" && data.id != "inputPort" && data.id != "inputServer" && data.id != "inputOS" && data.id != "inputVersion") {
                     if ($(data).val() == "") {
-                      $("#"+data.id).closest(".form-group").find(".help-block").show()
-                      $("#"+data.id).closest(".form-group").addClass("has-error")
+                      $("#"+data.id).closest(".form-group").find(".invalid-feedback").show()
+                      $("#"+data.id).closest(".form-group").addClass("needs-validation")
                     }
                   }
               }
             })
           }
           if ($(".tab-add:first").is(":visible")) {
-            checkInput = $(".tab-add:first").find(".form-group").hasClass("has-error")
+            checkInput = $(".tab-add:first").find(".form-group").hasClass("needs-validation")
           }else{
-            checkInput = $(".tab-add:nth(3)").find(".form-group").hasClass("has-error")
+            checkInput = $(".tab-add:nth(3)").find(".form-group").hasClass("needs-validation")
           }
         }
       }
@@ -3042,11 +3081,11 @@
       if ($('#selectStatus').val() !== 'Available') {
         var installedDate = $('#inputInstalledDate').val().trim();
         if (installedDate === '') {
-          $("#inputInstalledDate").closest(".form-group").find('.help-block').show();  
-          $("#inputInstalledDate").closest(".form-group").addClass("has-error")
+          $("#inputInstalledDate").closest(".form-group").find('.invalid-feedback').show();  
+          $("#inputInstalledDate").closest(".form-group").addClass("needs-validation")
         } else {
-          $("#inputInstalledDate").closest(".form-group").find('.help-block').hide();
-          $("#inputInstalledDate").closest(".form-group").removeClass("has-error");
+          $("#inputInstalledDate").closest(".form-group").find('.invalid-feedback').hide();
+          $("#inputInstalledDate").closest(".form-group").removeClass("needs-validation");
         }
       }
 
@@ -3366,8 +3405,8 @@
       }
 
       if ($("#"+argument).val() != "") {
-        $("#"+argument).closest(".form-group").removeClass("has-error")
-        $("#"+argument).closest(".form-group").find(".help-block").hide()
+        $("#"+argument).closest(".form-group").removeClass("needs-validation")
+        $("#"+argument).closest(".form-group").find(".invalid-feedback").hide()
       }
     }
 
@@ -3377,8 +3416,8 @@
       $(".tab-add").find("select").val("").trigger("change")
       $(".tab-add").find("input").val("")
       $(".tab-add").find("textarea").val("")
-      $(".tab-add").find(".form-group").removeClass("has-error")
-      $(".tab-add").find(".form-group").find(".help-block").hide()
+      $(".tab-add").find(".form-group").removeClass("needs-validation")
+      $(".tab-add").find(".form-group").find(".invalid-feedback").hide()
       $(".tab-add").find("textarea[id='txtAreaReason']").closest(".form-group").hide()
       $(".tab-add").find("textarea[id='txtAreaReason']").val("")
     });
@@ -3529,8 +3568,8 @@
               marker_sp.setVisible(true);
               map_sp.setZoom(17);
             }else{
-              $("#txtAreaLocation").closest(".form-group").find(".help-block").hide()
-              $("#txtAreaLocation").closest(".form-group").removeClass("has-error")
+              $("#txtAreaLocation").closest(".form-group").find(".invalid-feedback").hide()
+              $("#txtAreaLocation").closest(".form-group").removeClass("needs-validation")
               $("#txtAreaLocation").val(resultGoogle.results[0].formatted_address)
               map.setCenter({lat: lat, lng: lang});
               marker.setPosition({lat:lat , lng: lang});
@@ -3603,11 +3642,11 @@
             marker.setPosition(place.geometry.location);
             marker.setVisible(true);
 
-            $("#lat").closest(".form-group").find(".help-block").hide()
-            $("#lat").closest(".form-group").removeClass("has-error")
+            $("#lat").closest(".form-group").find(".invalid-feedback").hide()
+            $("#lat").closest(".form-group").removeClass("needs-validation")
 
-            $("#lng").closest(".form-group").find(".help-block").hide()
-            $("#lng").closest(".form-group").removeClass("has-error")
+            $("#lng").closest(".form-group").find(".invalid-feedback").hide()
+            $("#lng").closest(".form-group").removeClass("needs-validation")
 
             $("#lat").val(place.geometry.location.lat());
             $("#lng").val(place.geometry.location.lng());
@@ -3670,11 +3709,11 @@
       //     marker.setPosition(place.geometry.location);
       //     marker.setVisible(true);
 
-      //     $("#lat").closest(".form-group").find(".help-block").hide()
-      //     $("#lat").closest(".form-group").removeClass("has-error")
+      //     $("#lat").closest(".form-group").find(".invalid-feedback").hide()
+      //     $("#lat").closest(".form-group").removeClass("needs-validation")
 
-      //     $("#lng").closest(".form-group").find(".help-block").hide()
-      //     $("#lng").closest(".form-group").removeClass("has-error")
+      //     $("#lng").closest(".form-group").find(".invalid-feedback").hide()
+      //     $("#lng").closest(".form-group").removeClass("needs-validation")
 
       //     $("#lat").val(place.geometry.location.lat());
       //     $("#lng").val(place.geometry.location.lng());
