@@ -79,6 +79,8 @@
                 {{\Illuminate\Support\Facades\Auth::user()->name}} baru saja mengubah request certification, dengan detail sebagai berikut.
             @elseif($status == 'APPROVED')
                 Request yang anda ajukan telah di Approve, dengan detail sebagai berikut.
+            @elseif($status == 'Cancel')
+                Request telah dibatalkan, dengan detail sebagai berikut.
             @elseif($status == 'Proof of Exam')
                 {{\Illuminate\Support\Facades\Auth::user()->name}} telah upload bukti sertifikasi, dengan detail sebagai berikut.
             @endif

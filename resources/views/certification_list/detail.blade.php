@@ -759,16 +759,32 @@
                 });
             }
 
-            if (examStatus.toLowerCase() === "approved" && (nik === "{{$userNik}}" || userRole === 'Learning & HR Technology')) {
-                columns.push({
-                    title: "Action",
-                    data: null,
-                    render: function (data, type, row) {
+            {{--if (examStatus.toLowerCase() === "approved" && (nik === "{{$userNik}}" || userRole === 'Learning & HR Technology' || row.nik === "{{$userNik}}")) {--}}
+            {{--    columns.push({--}}
+            {{--        title: "Action",--}}
+            {{--        data: null,--}}
+            {{--        render: function (data, type, row) {--}}
+            {{--            return `<button class="btn btn-sm btn-primary upload-proof" data-id="${row.id}">Proof of Exam</button>`;--}}
+            {{--        },--}}
+            {{--        orderable: false--}}
+            {{--    });--}}
+            {{--}--}}
+
+            columns.push({
+                title: "Action",
+                data: null,
+                render: function (data, type, row) {
+                    const isApproved = examStatus.toLowerCase() === "approved";
+                    const isUserMatch = row.participant_nik === "{{$userNik}}" || nik === "{{$userNik}}" || userRole === 'Learning & HR Technology';
+
+                    if (isApproved && isUserMatch) {
                         return `<button class="btn btn-sm btn-primary upload-proof" data-id="${row.id}">Proof of Exam</button>`;
-                    },
-                    orderable: false
-                });
-            }
+                    } else {
+                        return ''; // or return '-' if you want a placeholder
+                    }
+                },
+                orderable: false
+            });
 
 
             $("#tbParticipantList").DataTable({

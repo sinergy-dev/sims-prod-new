@@ -1699,6 +1699,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('pmo/claim/getExportClaim','MonReqController@getExportClaim');
 	Route::get('pmo/claim/getExportKPHLClaim','MonReqController@getExportKPHLClaim');
 	Route::get('pmo/claim/getExportEntertainClaim','MonReqController@getExportEntertainClaim');
+	Route::get('pmo/monreq/remainingFundsByCategory','MonReqController@remainingFundsByCategory');
 
 	//project budget control
 	Route::get('pmo/pbc/index','PMOBudgetingController@index');
@@ -1791,6 +1792,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/certification_list/getAllUser', 'CertificationListController@getAllUser');
     Route::get('/certification_list/getProofExam/{id}', 'CertificationListController@getProofExam');
     Route::get('/certification_list/generatePDF', 'CertificationListController@generatePDF');
+    Route::post('/certification_list/cancelRequest', 'CertificationListController@cancelRequest');
 });
 
 Route::get('testJoinDb','TestController@testJoinDb');

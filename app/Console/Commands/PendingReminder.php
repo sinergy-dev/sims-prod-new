@@ -48,8 +48,13 @@ class PendingReminder extends Command
             syslog(LOG_INFO, "Loop for test pending remainder start ");
             foreach ($data->get() as $key => $value) {
                 syslog(LOG_INFO, "Data for test pending remainder " . $key);
-                $this->updateProgressTicket($value->id_ticket);
-                $this->updatePendingReminder($value->id);
+                $activity = TicketingActivity::where('id_ticket', $value->id_ticket)->orderByDesc('id')->first();
+                if ($activity->activity == 'PENDING'){
+                    $this->updateProgressTicket($value->id_ticket);
+                    $this->updatePendingReminder($value->id, 'TRUE');
+                }else{
+                    $this->updatePendingReminder($value->id, 'INVALID');
+                }
             }
             syslog(LOG_INFO, "Loop for test pending remainder finish ");
         } else {
@@ -68,9 +73,9 @@ class PendingReminder extends Command
         $activityTicketUpdate->save();
     }
 
-    public function updatePendingReminder($id_remaind){
+    public function updatePendingReminder($id_remaind, $status){
         $remainder = TicketingPendingReminder::find($id_remaind);
-        $remainder->remind_success = "TRUE";
+        $remainder->remind_success = $status;
 
         $remainder->save();
 

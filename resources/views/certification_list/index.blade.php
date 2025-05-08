@@ -487,7 +487,13 @@
                                     return `<button style='width:70px' class="btn btn-xs btn-warning btnDraft" disabled >Draft</button>`;
                                 }
                             }else{
-                                return `<a href="/certification_list/detail/${row.id}" target="_blank" style='width:70px' class="btn btn-xs btn-primary btnDetail">Detail</a>`;
+                                if (row.status !== 'Approved' && row.status !== 'Cancelled'){
+                                    return `<a href="/certification_list/detail/${row.id}" target="_blank" style='width:70px' class="btn btn-xs btn-primary btnDetail">Detail</a>
+                                            <button onclick="cancelRequest(${row.id})" style='width:70px' class="btn btn-xs btn-danger btnCancel">Cancel</button>`;
+                                }else{
+                                    return `<a href="/certification_list/detail/${row.id}" target="_blank" style='width:70px' class="btn btn-xs btn-primary btnDetail">Detail</a>
+                                            <button onclick="cancelRequest(${row.id})" style='width:70px' class="btn btn-xs btn-danger btnCancel" disabled>Cancel</button>`;
+                                }
                             }
                         },
                     },
@@ -516,6 +522,60 @@
             localStorage.setItem('isStore',false);
             localStorage.setItem('isEditParticipant',false)
         })
+
+        function cancelRequest(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Cancel Exam Request",
+                icon: 'warning',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Yes',
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    $.ajax({
+                        type: "POST",
+                        url: "/certification_list/cancelRequest",
+                        data: {
+                            _token:'{{ csrf_token() }}',
+                           id: id
+                        },
+                        beforeSend:function(){
+                            Swal.fire({
+                                title: 'Please Wait..!',
+                                text: "It's sending..",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                allowEnterKey: false,
+                                customClass: {
+                                    popup: 'border-radius-0',
+                                },
+                                didOpen: () => {
+                                    Swal.showLoading()
+                                }
+                            })
+                        },
+                        success: function (result) {
+                            Swal.close();
+                            Swal.fire({
+                                title: 'Success',
+                                text: 'Exam Request has been cancelled',
+                                icon: 'success'
+                            }).then((result) =>{
+                                location.reload()
+                            })
+                        }, error: function () {
+                            Swal.close()
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Something went wrong, please try again',
+                                icon: 'error'
+                            })
+                        }
+                    })
+                }
+            })
+        }
 
         function addRequest(n) {
             let x = document.getElementsByClassName("tab-add");

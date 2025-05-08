@@ -218,16 +218,36 @@ class CertificationListController extends Controller
             $query = $query->where(function ($q) use ($nik, $nikByGroup) {
                 $q->where('c.nik_manager', $nik)
                     ->orWhere('c.nik', $nik)
-                    ->orWhereIn('c.nik', $nikByGroup);
+                    ->orWhereIn('c.nik', $nikByGroup)
+                    ->orWhereExists(function ($subQuery) use ($nik) {
+                        $subQuery->select(DB::raw(1))
+                            ->from('tb_certification_list_detail as d')
+                            ->whereRaw('d.certification_list_id = c.id')
+                            ->where('d.participant_nik', $nik);
+                    });
             });
         }else if(str_contains($role, 'Manager')){
             $query = $query->where(function ($q) use ($nik, $nikByMiniGroup) {
                 $q->where('c.nik_manager', $nik)
                     ->orWhere('c.nik', $nik)
-                    ->orWhereIn('c.nik', $nikByMiniGroup);
+                    ->orWhereIn('c.nik', $nikByMiniGroup)
+                    ->orWhereExists(function ($subQuery) use ($nik) {
+                        $subQuery->select(DB::raw(1))
+                            ->from('tb_certification_list_detail as d')
+                            ->whereRaw('d.certification_list_id = c.id')
+                            ->where('d.participant_nik', $nik);
+                    });
             });
         }else{
-            $query = $query->where('c.nik', $nik);
+            $query = $query->where(function ($q) use ($nik) {
+                $q->where('c.nik', $nik)
+                    ->orWhereExists(function ($subQuery) use ($nik) {
+                        $subQuery->select(DB::raw(1))
+                            ->from('tb_certification_list_detail as d')
+                            ->whereRaw('d.certification_list_id = c.id')
+                            ->where('d.participant_nik', $nik);
+                    });
+            });
         }
 
         if($request->startDate != '' && $request->endDate != '' ){
@@ -996,7 +1016,7 @@ class CertificationListController extends Controller
                     'certification_list_id' => $exam->id,
                     'operator' => Auth::user()->name,
                     'activity' => Auth::user()->name . ' has uploaded proof of exam '. $examDetail->exam_name,
-                    'status' => 'Uplod proof of exam',
+                    'status' => 'Upload proof of exam',
                     'date' => Carbon::today()
                 ]);
 
@@ -1022,6 +1042,40 @@ class CertificationListController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
 
+    }
+
+    public function cancelRequest(Request $request)
+    {
+        $certification = CertificationList::find($request->id);
+        try {
+            DB::beginTransaction();
+            $certification->update([
+                'status' => 'Cancelled',
+                'is_circular' => null,
+                'circular_on' => null,
+            ]);
+
+            CertificationListActivity::create([
+                'certification_list_id' => $certification->id,
+                'operator' => Auth::user()->name,
+                'activity' => Auth::user()->name . ' has cancelled this request',
+                'status' => 'Cancel',
+                'date' => Carbon::today()
+            ]);
+
+            $subject = '[SIMS-APP] '. Auth::user()->name . ' has cancelled exam request';
+
+            $nikLHR = $this->getNikByRole('Learning & HR Technology');
+            $userToSend = $this->getUserByNik($nikLHR->nik);
+            Mail::to($userToSend->email)->cc('hcm@sinergy.co.id')->send(new MailCertificationList($subject, $certification, $userToSend, 'Cancel', null));
+
+            DB::commit();
+            return response()->json(['status' => 'success', 'message' => 'Success']);
+        }catch (\Exception $e){
+            DB::rollBack();
+            Log::error($e->getTraceAsString());
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 
     public function getAllUser()
