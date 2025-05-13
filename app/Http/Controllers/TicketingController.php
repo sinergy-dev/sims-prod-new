@@ -1288,7 +1288,7 @@ class TicketingController extends Controller
 	public function getAssetByClient(Request $request)
 	{
 
-		$getId = AssetMgmt::leftjoin('tb_asset_management_detail','tb_asset_management_detail.id_asset','tb_asset_management.id')->select('tb_asset_management_detail.id_asset','detail_lokasi','tb_asset_management_detail.id');
+		$getId = AssetMgmt::leftjoin('tb_asset_management_detail','tb_asset_management_detail.id_asset','tb_asset_management.id')->select('tb_asset_management_detail.id_asset','detail_lokasi','tb_asset_management_detail.id')->where('tb_asset_management.status','!=','Unavailable');
         $getLastId = DB::table($getId,'temp')->groupBy('id_asset')->selectRaw('MAX(`temp`.`id`) as `id_last_asset`')->selectRaw('id_asset');
         // return $getLastId->id_last_asset;
         if ($request->client == "INTERNAL") {
@@ -1338,6 +1338,7 @@ class TicketingController extends Controller
                 	ELSE CONCAT(CONCAT('(',users.name,' - ',roles.name,')'), ' - ',category,' - ',type_device,' - ',serial_number) END) as text")
             )
             ->where('tb_asset_management_detail.pid',$request->client)
+            ->where('tb_asset_management.status','!=','Unavailable')
             ->where('pic','!=',null)
             ->groupBy(
                 'tb_asset_management.id',
@@ -1358,6 +1359,7 @@ class TicketingController extends Controller
             // ->orderBy('tb_asset_management.created_at','desc')
             // ->where('client','like','%'.$client.'%')
             ->orderBy('tb_asset_management.created_at','desc')->where('client','like','%'.$client.'%')
+            ->where('tb_asset_management.status','!=','Unavailable')
             ->where(DB::raw("CONCAT(id_device_customer, ' - ', alamat_lokasi, ' - ', category, ' - ', vendor, ' - ' , type_device, ' - ', serial_number)"),'like','%'.request('q').'%')
             ->get();
         }
@@ -1888,16 +1890,31 @@ class TicketingController extends Controller
 
 		$downloadLink = "https://drive.google.com/uc?export=download&id=$fileId";
 
-		$tempFilePath = storage_path('app/public/Service-Report.pdf');
+        $originalPath = storage_path('app/temp/Service-Report-original.pdf');
 
-		try {
-			file_put_contents($tempFilePath, file_get_contents($downloadLink));
-		} catch (Exception $e) {
-			Log::error('Failed to download file: ' . $e->getMessage());
-			return null;
-		}
+        $compressedPath = storage_path('app/temp/Service-Report-compressed.pdf');
 
-		return $tempFilePath;
+        try {
+            if (!file_exists(storage_path('app/temp'))) {
+                mkdir(storage_path('app/temp'), 0755, true);
+            }
+
+            file_put_contents($originalPath, file_get_contents($downloadLink));
+
+            $command = "gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=" . escapeshellarg($compressedPath) . " " . escapeshellarg($originalPath);
+            exec($command, $output, $return_var);
+
+            if ($return_var !== 0 || !file_exists($compressedPath)) {
+                Log::error("PDF compression failed. Returning original.");
+                return $originalPath;
+            }
+
+            return $compressedPath;
+
+        } catch (Exception $e) {
+            Log::error('Failed to download or compress file: ' . $e->getMessage());
+            return null;
+        }
 	}
 
 	public function getPerformanceAll(){
@@ -5374,6 +5391,740 @@ class TicketingController extends Controller
 			return $name;
 		}
 	}
+
+	public function makeReportTicketSLM(Request $req){
+		$spreadsheet = new Spreadsheet();
+
+		$type = $req->type;
+
+		$title = 'Laporan Ticket SLM '. $req->start. " - " . $req->end;
+
+		$spreadsheet->getProperties()->setCreator('SIP')
+			->setLastModifiedBy('SIMS-APP')
+			->setTitle($title);
+
+		// Rename worksheet
+		$spreadsheet->getActiveSheet()->setTitle('Report');
+
+		// Report Title
+		$spreadsheet->getActiveSheet()->getRowDimension('2')->setRowHeight(35);
+		$spreadsheet->getActiveSheet()->setCellValue('J2', 'LAPORAN TICKET SLM' );
+		$spreadsheet->getActiveSheet()->getStyle('J2')->getFont()->setName('Calibri');
+		$spreadsheet->getActiveSheet()->getStyle('J2')->getFont()->setSize(24);
+		$spreadsheet->getActiveSheet()->getStyle('J2')->getFont()->setBold(true);
+		$spreadsheet->getActiveSheet()->getStyle('J2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+		$spreadsheet->getActiveSheet()->getStyle('J2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
+		// Report Month
+		$spreadsheet->getActiveSheet()->getRowDimension('2')->setRowHeight(35);
+		$spreadsheet->getActiveSheet()->setCellValue('B2', Carbon::createFromDate($req->start)->format('d-m-Y') . ' - ' . Carbon::createFromDate($req->end)->format('d-m-Y'));
+		$spreadsheet->getActiveSheet()->getStyle('B2')->getFont()->setName('Calibri');
+		$spreadsheet->getActiveSheet()->getStyle('B2')->getFont()->setSize(16);
+		$spreadsheet->getActiveSheet()->getStyle('B2')->getFont()->setBold(true);
+		$spreadsheet->getActiveSheet()->getStyle('B2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+		$spreadsheet->getActiveSheet()->getStyle('B2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
+		$Colom_Header = [
+			'borders' => [
+				'allBorders' => [
+					'borderStyle' => Border::BORDER_THIN,
+					'color' => ['argb' => 'FF000000'],
+				],
+			],
+			'font' => [
+				'name' => 'Calibri',
+				'bold' => false,
+				'size' => 11,
+			],
+			'alignment' => [
+				'horizontal' => Alignment::HORIZONTAL_CENTER,
+				'vertical' => Alignment::VERTICAL_CENTER,
+			],
+			'fill' => [
+				'fillType' => Fill::FILL_SOLID,
+				'color' => ['argb' => 'FF00B0F0'],
+			],
+		];
+
+		$border = [
+			'borders' => [
+				'allBorders' => [
+					'borderStyle' => Border::BORDER_THIN,
+					'color' => ['argb' => 'FF000000'],
+				],
+			],
+		];
+
+		$cancel_row = [
+			'fill' => [
+				'fillType' => Fill::FILL_SOLID,
+				'color' => ['argb' => 'FFFF0000'],
+			],
+		];
+        if ($type == 'PM'){
+            $spreadsheet->getActiveSheet()->getStyle('A4:CD4')->applyFromArray($Colom_Header);
+        }else{
+            $spreadsheet->getActiveSheet()->getStyle('A4:AQ4')->applyFromArray($Colom_Header);
+        }
+		$spreadsheet->getActiveSheet()->getRowDimension('4')->setRowHeight(25);
+
+		$spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(7);
+		$spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(30);
+		$spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(50);
+		$spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(10);
+		$spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('N')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('O')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('P')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('Q')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('R')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('S')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('T')->setWidth(35);
+		$spreadsheet->getActiveSheet()->getColumnDimension('U')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('V')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('W')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('Y')->setWidth(20);
+		$spreadsheet->getActiveSheet()->getColumnDimension('Z')->setWidth(30);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AA')->setWidth(30);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AB')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AC')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AD')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AE')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AF')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AG')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AH')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AI')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AJ')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AK')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AL')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AM')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AN')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AO')->setWidth(15);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AP')->setWidth(25);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AQ')->setWidth(50);
+		$spreadsheet->getActiveSheet()->getColumnDimension('AR')->setWidth(50);
+        $columns = [
+            'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ',
+            'BA', 'BB', 'BC', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BK',
+            'BL', 'BM', 'BN', 'BO', 'BP', 'BQ', 'BR', 'BS', 'BT', 'BU', 'BV',
+            'BW', 'BX', 'BY', 'BZ',
+            'CA', 'CB', 'CC','CD'
+        ];
+        foreach ($columns as $column) {
+            $spreadsheet->getActiveSheet()->getColumnDimension($column)->setWidth(18);
+        }
+
+		if($type == "PM"){
+			$spreadsheet->getActiveSheet(0)
+				->setCellValue('A4','NO')
+				->setCellValue('B4','ID Ticket')
+				->setCellValue('C4','ID Ticket Customer')
+				->setCellValue('D4','Customer Name')
+				->setCellValue('E4','Machine ID')
+				->setCellValue('F4','Location')
+				->setCellValue('G4','Address')
+				->setCellValue('H4','Status Aggrement')
+				->setCellValue('I4','Service Type')
+				->setCellValue('J4','Call No')
+				->setCellValue('K4','Problem Reported')
+				->setCellValue('L4','Reported By')
+				->setCellValue('M4','Create Time')
+				->setCellValue('N4','Problem Started')
+				->setCellValue('O4','Appointment Time')
+				->setCellValue('P4','Departure')
+				->setCellValue('Q4','Arrived at Location')
+				->setCellValue('R4','Working Started')
+				->setCellValue('S4','Working Finished')
+				->setCellValue('T4','Duration')
+				->setCellValue('U4','Vendor')
+				->setCellValue('V4','Type')
+				->setCellValue('W4','Model')
+				->setCellValue('X4','Serial No')
+				->setCellValue('Y4','Problem Type')
+				->setCellValue('Z4','Solution')
+				->setCellValue('AA4','Additional Note')
+				->setCellValue('AB4','Pin Cover')
+				->setCellValue('AC4','Upper Fascia Lock')
+				->setCellValue('AD4','Lower Fascia Lock')
+				->setCellValue('AE4','Safe Door Lock')
+				->setCellValue('AF4','Askim / ACT / EASD')
+				->setCellValue('AG4','FDI')
+				->setCellValue('AH4','CCTV')
+				->setCellValue('AI4','Fake Camera')
+				->setCellValue('AJ4','Ground')
+				->setCellValue('AK4','Voltase')
+				->setCellValue('AL4','UPS')
+				->setCellValue('AM4','Stabilizer')
+				->setCellValue('AN4','AC')
+				->setCellValue('AO4','Temperature')
+				->setCellValue('AP4','Additional Info')
+				->setCellValue('AQ4','Part Usage')
+				->setCellValue('AR4','Cassette Bad')
+				->setCellValue('AS4','Harddisk System')
+				->setCellValue('AT4','Harddisk Backup')
+                ->setCellValue('AU4','Motherboard')
+                ->setCellValue('AV4','Floppy Disk / DVD-Room')
+                ->setCellValue('AW4','Transport Head')
+                ->setCellValue('AX4','BIM / BVM')
+                ->setCellValue('AY4','Front Pass / Main Module')
+                ->setCellValue('AZ4','Board Master Controller')
+                ->setCellValue('BA4','ALU / Allignment Unit')
+                ->setCellValue('BB4','Distributor Module')
+                ->setCellValue('BC4','RM2 / RM3 CRS CPP')
+                ->setCellValue('BD4','Escrow / Reel Storage')
+                ->setCellValue('BE4','VS Module')
+                ->setCellValue('BF4','I/O - Collector Tray')
+                ->setCellValue('BG4','Printer Receipt / Journal')
+                ->setCellValue('BH4','IDCU / DIP  / Card Reader')
+                ->setCellValue('BI4','Monitor / LCD / Touchscreen')
+                ->setCellValue('BJ4','Protective Screen')
+                ->setCellValue('BK4','Microtouch Controller')
+                ->setCellValue('BL4','Power Supply Unit')
+                ->setCellValue('BM4','Power Distributor')
+                ->setCellValue('BN4','Special Electronic')
+                ->setCellValue('BO4','Softkey DDC / NDC')
+                ->setCellValue('BP4','EPP / Alpha Combi Key')
+                ->setCellValue('BQ4','Cash Lot Camera')
+                ->setCellValue('BR4','Portrait Camera')
+                ->setCellValue('BS4','Fitwin / Ethernet Card')
+                ->setCellValue('BT4','MDMS - Extractor Module')
+                ->setCellValue('BU4','Extractor Module')
+                ->setCellValue('BV4','Picker Module')
+                ->setCellValue('BW4','Shutter Module')
+                ->setCellValue('BX4','Dispenser Controller')
+                ->setCellValue('BY4','Distributor Board')
+                ->setCellValue('BZ4','V-Module')
+                ->setCellValue('CA4','Cassette / Reject')
+                ->setCellValue('CB4','Handle Fase / Fascia')
+                ->setCellValue('CC4','Combination Keys')
+                ->setCellValue('CD4','Keylock Cassette / Reject');
+
+        } else {
+            $spreadsheet->getActiveSheet(0)
+                ->setCellValue('A4','NO')
+                ->setCellValue('B4','ID Ticket')
+                ->setCellValue('C4','ID Ticket Customer')
+                ->setCellValue('D4','Customer Name')
+                ->setCellValue('E4','Machine ID')
+                ->setCellValue('F4','Location')
+                ->setCellValue('G4','Address')
+                ->setCellValue('H4','Status Aggrement')
+                ->setCellValue('I4','Service Type')
+                ->setCellValue('J4','Call No')
+                ->setCellValue('K4','Problem Reported')
+                ->setCellValue('L4','Reported By')
+                ->setCellValue('M4','Create Time')
+                ->setCellValue('N4','Problem Started')
+                ->setCellValue('O4','Appointment Time')
+                ->setCellValue('P4','Departure')
+                ->setCellValue('Q4','Arrived at Location')
+                ->setCellValue('R4','Working Started')
+                ->setCellValue('S4','Working Finished')
+                ->setCellValue('T4','Duration')
+                ->setCellValue('U4','Vendor')
+                ->setCellValue('V4','Type')
+                ->setCellValue('W4','Model')
+                ->setCellValue('X4','Serial No')
+                ->setCellValue('Y4','Problem Type')
+                ->setCellValue('Z4','Solution')
+                ->setCellValue('AA4','Additional Note')
+                ->setCellValue('AB4','Pin Cover')
+                ->setCellValue('AC4','Upper Fascia Lock')
+                ->setCellValue('AD4','Lower Fascia Lock')
+                ->setCellValue('AE4','Safe Door Lock')
+                ->setCellValue('AF4','Askim / ACT / EASD')
+                ->setCellValue('AG4','FDI')
+                ->setCellValue('AH4','CCTV')
+                ->setCellValue('AI4','Fake Camera')
+                ->setCellValue('AJ4','Ground')
+                ->setCellValue('AK4','Voltase')
+                ->setCellValue('AL4','UPS')
+                ->setCellValue('AM4','Stabilizer')
+                ->setCellValue('AN4','AC')
+                ->setCellValue('AO4','Temperature')
+                ->setCellValue('AP4','Additional Info')
+                ->setCellValue('AQ4','Part Usage')
+                ->setCellValue('AR4','Cassette Bad');
+		}
+
+
+			$value1 = $this->getDataTicketSLM($type,$req->start, $req->end);
+
+			foreach ($value1 as $key => $value) {
+				$spreadsheet->getActiveSheet()->getStyle('A' . (5 + $key))->applyFromArray($Colom_Header);
+				$spreadsheet->getActiveSheet()->getStyle('B' . (5 + $key) .  ':R' . (5 + $key))->applyFromArray($border);
+				$spreadsheet->getActiveSheet()->setCellValue('A' . (5 + $key),$key + 1);
+				$spreadsheet->getActiveSheet()->setCellValue('B' . (5 + $key),$value->ticket_id);
+				$spreadsheet->getActiveSheet()->setCellValue('C' . (5 + $key),$value->refrence);
+				$spreadsheet->getActiveSheet()->setCellValue('D' . (5 + $key),$value->customer);
+				$spreadsheet->getActiveSheet()->setCellValue('E' . (5 + $key),$value->machine_id);
+				$spreadsheet->getActiveSheet()->setCellValue('F' . (5 + $key),$value->lokasi);
+				$spreadsheet->getActiveSheet()->setCellValue('G' . (5 + $key),$value->address);
+				$spreadsheet->getActiveSheet()->setCellValue('H' . (5 + $key),$value->status_aggrement);
+				$spreadsheet->getActiveSheet()->setCellValue('I' . (5 + $key),$value->type_ticket);
+				$spreadsheet->getActiveSheet()->setCellValue('J' . (5 + $key),'-');
+                $label = match($value->type_ticket) {
+                    'TT'    => 'Trouble Ticket',
+                    'PM'    => 'Preventive Maintenance',
+                    'PL'  => 'Permintaan Layanan',
+                    default => '-',
+                };
+                $spreadsheet->getActiveSheet()->setCellValue('K' . (5 + $key),$label);
+                $spreadsheet->getActiveSheet()->setCellValue('L' . (5 + $key),$value->reported_by);
+                $spreadsheet->getActiveSheet()->setCellValue('M' . (5 + $key),$value->create_time);
+                $spreadsheet->getActiveSheet()->setCellValue('N' . (5 + $key),$value->problem_started);
+                $spreadsheet->getActiveSheet()->setCellValue('O' . (5 + $key),$value->appointment_date . ' ' . $value->appointment_time);
+                $spreadsheet->getActiveSheet()->setCellValue('P' . (5 + $key),$value->depart);
+                $spreadsheet->getActiveSheet()->setCellValue('Q' . (5 + $key),$value->arrival);
+                $spreadsheet->getActiveSheet()->setCellValue('R' . (5 + $key),$value->working_started);
+                $spreadsheet->getActiveSheet()->setCellValue('S' . (5 + $key),$value->working_finish);
+                    $workingStarted = Carbon::parse($value->working_started);
+                    $workingFinished = Carbon::parse($value->working_finish);
+
+                    $duration = $workingStarted->diff($workingFinished);
+
+                    $days = $duration->d;
+                    $hours = $duration->h;
+                    $minutes = $duration->i;
+                    $seconds = $duration->s;
+                $spreadsheet->getActiveSheet()->setCellValue('T' . (5 + $key),$days . ' days, '. $hours . ' hours, '. $minutes . ' minutes, '. $seconds . ' seconds');
+                $spreadsheet->getActiveSheet()->setCellValue('U' . (5 + $key),$value->vendor);
+                $spreadsheet->getActiveSheet()->setCellValue('V' . (5 + $key),$value->category);
+                $spreadsheet->getActiveSheet()->setCellValue('W' . (5 + $key),$value->type_device);
+                $spreadsheet->getActiveSheet()->setCellValue('X' . (5 + $key),$value->serial_device);
+                $spreadsheet->getActiveSheet()->setCellValue('Y' . (5 + $key),$value->problem_type);
+                $spreadsheet->getActiveSheet()->setCellValue('Z' . (5 + $key),$value->fix_type);
+                $spreadsheet->getActiveSheet()->setCellValue('AA' . (5 + $key),$value->note);
+                $spreadsheet->getActiveSheet()->setCellValue('AB' . (5 + $key),$value->pin_cover);
+                $spreadsheet->getActiveSheet()->setCellValue('AC' . (5 + $key),$value->upper_fascia_lock);
+                $spreadsheet->getActiveSheet()->setCellValue('AD' . (5 + $key),$value->lower_fascia_lock);
+                $spreadsheet->getActiveSheet()->setCellValue('AE' . (5 + $key),$value->safe_door_lock);
+                $spreadsheet->getActiveSheet()->setCellValue('AF' . (5 + $key),$value->askim);
+                $spreadsheet->getActiveSheet()->setCellValue('AG' . (5 + $key),$value->fdi);
+                $spreadsheet->getActiveSheet()->setCellValue('AH' . (5 + $key),$value->cctv);
+                $spreadsheet->getActiveSheet()->setCellValue('AI' . (5 + $key),$value->fake_camera);
+                $spreadsheet->getActiveSheet()->setCellValue('AJ' . (5 + $key),$value->ground );
+                $spreadsheet->getActiveSheet()->setCellValue('AK' . (5 + $key),$value->voltase );
+                $spreadsheet->getActiveSheet()->setCellValue('AL' . (5 + $key),$value->ups);
+                $spreadsheet->getActiveSheet()->setCellValue('AM' . (5 + $key),$value->stabilizer);
+                $spreadsheet->getActiveSheet()->setCellValue('AN' . (5 + $key),$value->ac);
+                $spreadsheet->getActiveSheet()->setCellValue('AO' . (5 + $key),$value->temperature);
+                $spreadsheet->getActiveSheet()->setCellValue('AP' . (5 + $key),$value->additional_info);
+                $spreadsheet->getActiveSheet()->setCellValue('AQ' . (5 + $key),$value->part_usage);
+                $spreadsheet->getActiveSheet()->setCellValue('AR' . (5 + $key),$value->cassette_bad);
+
+                if ($type == 'PM'){
+                    $spreadsheet->getActiveSheet()->setCellValue('AS' . (5 + $key),$value->hdd_system);
+                    $spreadsheet->getActiveSheet()->setCellValue('AT' . (5 + $key),$value->hdd_backup);
+                    $spreadsheet->getActiveSheet()->setCellValue('AU' . (5 + $key),$value->motherboard);
+                    $spreadsheet->getActiveSheet()->setCellValue('AV' . (5 + $key),$value->dvd_rom);
+                    $spreadsheet->getActiveSheet()->setCellValue('AW' . (5 + $key),$value->rear_pass);
+                    $spreadsheet->getActiveSheet()->setCellValue('AX' . (5 + $key),$value->bim);
+                    $spreadsheet->getActiveSheet()->setCellValue('AY' . (5 + $key),$value->main_module);
+                    $spreadsheet->getActiveSheet()->setCellValue('AZ' . (5 + $key),$value->board_master);
+                    $spreadsheet->getActiveSheet()->setCellValue('BA' . (5 + $key),$value->alu);
+                    $spreadsheet->getActiveSheet()->setCellValue('BB' . (5 + $key),$value->flat_pass);
+                    $spreadsheet->getActiveSheet()->setCellValue('BC' . (5 + $key),$value->rm_2);
+                    $spreadsheet->getActiveSheet()->setCellValue('BD' . (5 + $key),$value->escrow);
+                    $spreadsheet->getActiveSheet()->setCellValue('BE' . (5 + $key),$value->vs_module);
+                    $spreadsheet->getActiveSheet()->setCellValue('BF' . (5 + $key),$value->io_tray);
+                    $spreadsheet->getActiveSheet()->setCellValue('BG' . (5 + $key),$value->journal);
+                    $spreadsheet->getActiveSheet()->setCellValue('BH' . (5 + $key),$value->card_reader);
+                    $spreadsheet->getActiveSheet()->setCellValue('BI' . (5 + $key),$value->lcd);
+                    $spreadsheet->getActiveSheet()->setCellValue('BJ' . (5 + $key),$value->protective_screen);
+                    $spreadsheet->getActiveSheet()->setCellValue('BK' . (5 + $key),$value->microtouch);
+                    $spreadsheet->getActiveSheet()->setCellValue('BL' . (5 + $key),$value->psu);
+                    $spreadsheet->getActiveSheet()->setCellValue('BM' . (5 + $key),$value->power_distributor);
+                    $spreadsheet->getActiveSheet()->setCellValue('BN' . (5 + $key),$value->special_elc);
+                    $spreadsheet->getActiveSheet()->setCellValue('BO' . (5 + $key),$value->ndc);
+                    $spreadsheet->getActiveSheet()->setCellValue('BP' . (5 + $key),$value->epp);
+                    $spreadsheet->getActiveSheet()->setCellValue('BQ' . (5 + $key),$value->cash_lot);
+                    $spreadsheet->getActiveSheet()->setCellValue('BR' . (5 + $key),$value->portrait_camera);
+                    $spreadsheet->getActiveSheet()->setCellValue('BS' . (5 + $key),$value->fitwin);
+                    $spreadsheet->getActiveSheet()->setCellValue('BT' . (5 + $key),$value->mdms);
+                    $spreadsheet->getActiveSheet()->setCellValue('BU' . (5 + $key),$value->extractor);
+                    $spreadsheet->getActiveSheet()->setCellValue('BV' . (5 + $key),$value->picker);
+                    $spreadsheet->getActiveSheet()->setCellValue('BW' . (5 + $key),$value->shutter);
+                    $spreadsheet->getActiveSheet()->setCellValue('BX' . (5 + $key),$value->dispenser);
+                    $spreadsheet->getActiveSheet()->setCellValue('BY' . (5 + $key),$value->distributor);
+                    $spreadsheet->getActiveSheet()->setCellValue('BZ' . (5 + $key),$value->v_module);
+                    $spreadsheet->getActiveSheet()->setCellValue('CA' . (5 + $key),$value->cassette);
+                    $spreadsheet->getActiveSheet()->setCellValue('CB' . (5 + $key),$value->fascia);
+                    $spreadsheet->getActiveSheet()->setCellValue('CC' . (5 + $key),$value->comb_key);
+                    $spreadsheet->getActiveSheet()->setCellValue('CD' . (5 + $key),$value->keylock);
+                }
+
+
+			}
+
+			$name = 'Report_SLM_-_'. $type . '_-_' . $req->start . ' - ' . $req->end . '_-_' . Auth::user()->name . '.xlsx';
+			$writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+			$location = public_path() . '/report/' . $name;
+			ob_end_clean();
+			$writer->save($location);
+			return $name;
+		}
+
+    public function makeReportTicketSLMPending(Request $req){
+        $spreadsheet = new Spreadsheet();
+
+        $type = $req->type;
+
+        $title = 'Laporan Ticket SLM Pending'. $req->start. " - " . $req->end;
+
+        $spreadsheet->getProperties()->setCreator('SIP')
+            ->setLastModifiedBy('SIMS-APP')
+            ->setTitle($title);
+
+        // Rename worksheet
+        $spreadsheet->getActiveSheet()->setTitle('Report');
+
+        // Report Title
+        $spreadsheet->getActiveSheet()->getRowDimension('2')->setRowHeight(35);
+        $spreadsheet->getActiveSheet()->setCellValue('J2', 'LAPORAN TICKET SLM' );
+        $spreadsheet->getActiveSheet()->getStyle('J2')->getFont()->setName('Calibri');
+        $spreadsheet->getActiveSheet()->getStyle('J2')->getFont()->setSize(24);
+        $spreadsheet->getActiveSheet()->getStyle('J2')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->getStyle('J2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('J2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
+        // Report Month
+        $spreadsheet->getActiveSheet()->getRowDimension('2')->setRowHeight(35);
+        $spreadsheet->getActiveSheet()->setCellValue('B2', Carbon::createFromDate($req->start)->format('d-m-Y') . ' - ' . Carbon::createFromDate($req->end)->format('d-m-Y'));
+        $spreadsheet->getActiveSheet()->getStyle('B2')->getFont()->setName('Calibri');
+        $spreadsheet->getActiveSheet()->getStyle('B2')->getFont()->setSize(16);
+        $spreadsheet->getActiveSheet()->getStyle('B2')->getFont()->setBold(true);
+        $spreadsheet->getActiveSheet()->getStyle('B2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $spreadsheet->getActiveSheet()->getStyle('B2')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
+        $Colom_Header = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+            'font' => [
+                'name' => 'Calibri',
+                'bold' => false,
+                'size' => 11,
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'color' => ['argb' => 'FF00B0F0'],
+            ],
+        ];
+
+        $border = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => 'FF000000'],
+                ],
+            ],
+        ];
+
+        $cancel_row = [
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'color' => ['argb' => 'FFFF0000'],
+            ],
+        ];
+        $spreadsheet->getActiveSheet()->getStyle('A4:AF4')->applyFromArray($Colom_Header);
+        $spreadsheet->getActiveSheet()->getRowDimension('4')->setRowHeight(25);
+
+        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(7);
+        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(50);
+        $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(10);
+        $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('L')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('M')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('N')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('O')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('P')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('Q')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('R')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('S')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('T')->setWidth(35);
+        $spreadsheet->getActiveSheet()->getColumnDimension('U')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('V')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('W')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('X')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('Y')->setWidth(20);
+        $spreadsheet->getActiveSheet()->getColumnDimension('Z')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AA')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AB')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AC')->setWidth(15);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AD')->setWidth(50);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AE')->setWidth(30);
+        $spreadsheet->getActiveSheet()->getColumnDimension('AF')->setWidth(30);
+
+        if($type == "PM"){
+            $spreadsheet->getActiveSheet(0)
+                ->setCellValue('A4','NO')
+                ->setCellValue('B4','ID Ticket')
+                ->setCellValue('C4','ID Ticket Customer')
+                ->setCellValue('D4','Customer Name')
+                ->setCellValue('E4','Machine ID')
+                ->setCellValue('F4','Location')
+                ->setCellValue('G4','Address')
+                ->setCellValue('H4','Status Aggrement')
+                ->setCellValue('I4','Service Type')
+                ->setCellValue('J4','Call No')
+                ->setCellValue('K4','Problem Reported')
+                ->setCellValue('L4','Reported By')
+                ->setCellValue('M4','Create Time')
+                ->setCellValue('N4','Problem Started')
+                ->setCellValue('O4','Appointment Time')
+                ->setCellValue('P4','Departure')
+                ->setCellValue('Q4','Arrived at Location')
+                ->setCellValue('R4','Working Started')
+                ->setCellValue('S4','Working Finished')
+                ->setCellValue('T4','Duration')
+                ->setCellValue('U4','Vendor')
+                ->setCellValue('V4','Type')
+                ->setCellValue('W4','Model')
+                ->setCellValue('X4','Serial No')
+                ->setCellValue('Y4','Problem Type')
+                ->setCellValue('Z4','Solution')
+                ->setCellValue('AA4','Additional Note')
+                ->setCellValue('AB4','Part Usage')
+                ->setCellValue('AC4','Cassette Bad')
+                ->setCellValue('AD4','Pending History')
+                ->setCellValue('AE4','Operator')
+                ->setCellValue('AF4','Pending Time');
+        } else {
+            $spreadsheet->getActiveSheet(0)
+                ->setCellValue('A4','NO')
+                ->setCellValue('B4','ID Ticket')
+                ->setCellValue('C4','ID Ticket Customer')
+                ->setCellValue('D4','Customer Name')
+                ->setCellValue('E4','Machine ID')
+                ->setCellValue('F4','Location')
+                ->setCellValue('G4','Address')
+                ->setCellValue('H4','Status Aggrement')
+                ->setCellValue('I4','Service Type')
+                ->setCellValue('J4','Call No')
+                ->setCellValue('K4','Problem Reported')
+                ->setCellValue('L4','Reported By')
+                ->setCellValue('M4','Create Time')
+                ->setCellValue('N4','Problem Started')
+                ->setCellValue('O4','Appointment Time')
+                ->setCellValue('P4','Departure')
+                ->setCellValue('Q4','Arrived at Location')
+                ->setCellValue('R4','Working Started')
+                ->setCellValue('S4','Working Finished')
+                ->setCellValue('T4','Duration')
+                ->setCellValue('U4','Vendor')
+                ->setCellValue('V4','Type')
+                ->setCellValue('W4','Model')
+                ->setCellValue('X4','Serial No')
+                ->setCellValue('Y4','Problem Type')
+                ->setCellValue('Z4','Solution')
+                ->setCellValue('AA4','Additional Note')
+                ->setCellValue('AB4','Part Usage')
+                ->setCellValue('AC4','Cassette Bad')
+                ->setCellValue('AD4','Pending History')
+                ->setCellValue('AE4','Operator')
+                ->setCellValue('AF4','Pending Time');
+        }
+
+        $value1 = $this->getDataTicketSLMPending($type,$req->start, $req->end);
+        $index = 0;
+        $no = 1;
+        foreach ($value1 as $key => $value) {
+            $spreadsheet->getActiveSheet()->setCellValue('A' . (5 + $index), $no);
+            $spreadsheet->getActiveSheet()->getStyle('A' . (5 + $index) . ':AF' . (5 + $index))->applyFromArray($border);
+            $spreadsheet->getActiveSheet()->setCellValue('B' . (5 + $index),$value->ticket_id);
+            $spreadsheet->getActiveSheet()->setCellValue('C' . (5 + $index),$value->refrence);
+            $spreadsheet->getActiveSheet()->setCellValue('D' . (5 + $index),$value->customer);
+            $spreadsheet->getActiveSheet()->setCellValue('E' . (5 + $index),$value->machine_id);
+            $spreadsheet->getActiveSheet()->setCellValue('F' . (5 + $index),$value->lokasi);
+            $spreadsheet->getActiveSheet()->setCellValue('G' . (5 + $index),$value->address);
+            $spreadsheet->getActiveSheet()->setCellValue('H' . (5 + $index),$value->status_aggrement);
+            $spreadsheet->getActiveSheet()->setCellValue('I' . (5 + $index),$value->type_ticket);
+            $spreadsheet->getActiveSheet()->setCellValue('J' . (5 + $index),'-');
+            $label = match($value->type_ticket) {
+            'TT'    => 'Trouble Ticket',
+                    'PM'    => 'Preventive Maintenance',
+                    'PL'  => 'Permintaan Layanan',
+                    default => '-',
+                };
+                $spreadsheet->getActiveSheet()->setCellValue('K' . (5 + $index),$label);
+                $spreadsheet->getActiveSheet()->setCellValue('L' . (5 + $index),$value->reported_by);
+                $spreadsheet->getActiveSheet()->setCellValue('M' . (5 + $index),$value->create_time);
+                $spreadsheet->getActiveSheet()->setCellValue('N' . (5 + $index),$value->problem_started);
+                $spreadsheet->getActiveSheet()->setCellValue('O' . (5 + $index),$value->appointment_date . ' ' . $value->appointment_time);
+                $spreadsheet->getActiveSheet()->setCellValue('P' . (5 + $index),$value->depart);
+                $spreadsheet->getActiveSheet()->setCellValue('Q' . (5 + $index),$value->arrival);
+                $spreadsheet->getActiveSheet()->setCellValue('R' . (5 + $index),$value->working_started);
+                $spreadsheet->getActiveSheet()->setCellValue('S' . (5 + $index),$value->working_finish);
+                    $workingStarted = Carbon::parse($value->working_started);
+                    $workingFinished = Carbon::parse($value->working_finish);
+
+                    $duration = $workingStarted->diff($workingFinished);
+
+                    $days = $duration->d;
+                    $hours = $duration->h;
+                    $minutes = $duration->i;
+                    $seconds = $duration->s;
+                $spreadsheet->getActiveSheet()->setCellValue('T' . (5 + $index),$days . ' days, '. $hours . ' hours, '. $minutes . ' minutes, '. $seconds . ' seconds');
+                $spreadsheet->getActiveSheet()->setCellValue('U' . (5 + $index),$value->vendor);
+                $spreadsheet->getActiveSheet()->setCellValue('V' . (5 + $index),$value->category);
+                $spreadsheet->getActiveSheet()->setCellValue('W' . (5 + $index),$value->type_device);
+                $spreadsheet->getActiveSheet()->setCellValue('X' . (5 + $index),$value->serial_device);
+                $spreadsheet->getActiveSheet()->setCellValue('Y' . (5 + $index),$value->problem_type);
+                $spreadsheet->getActiveSheet()->setCellValue('Z' . (5 + $index),$value->fix_type);
+                $spreadsheet->getActiveSheet()->setCellValue('AA' . (5 + $index),$value->note);
+                $spreadsheet->getActiveSheet()->setCellValue('AB' . (5 + $index),$value->part_usage);
+                $spreadsheet->getActiveSheet()->setCellValue('AC' . (5 + $index),$value->cassette_bad);
+                $activity = TicketingActivity::where('id_ticket', $value->ticket_id)->where('activity', 'PENDING')->get();
+                 if ($activity->count()) {
+                     foreach ($activity as $detail) {
+                         // Style border untuk baris pending
+                         $spreadsheet->getActiveSheet()->getStyle('A' . (5 + $index) . ':AF' . (5 + $index))->applyFromArray($border);
+
+                         $spreadsheet->getActiveSheet()->setCellValue('AD' . (5 + $index), $detail->note);
+                         $spreadsheet->getActiveSheet()->setCellValue('AE' . (5 + $index), $detail->operator);
+                         $spreadsheet->getActiveSheet()->setCellValue('AF' . (5 + $index), Carbon::parse($detail->date)->format('d-m-Y H:i:s'));
+                         $index++;
+                     }
+                 } else {
+                     // Jika tidak ada pending activity, tetap naik index dan beri border agar tidak lompat
+                     $spreadsheet->getActiveSheet()->getStyle('A' . (5 + $index) . ':AF' . (5 + $index))->applyFromArray($border);
+                     $index++;
+                 }
+
+                $no++;
+//                foreach ($activity as $detail){
+//                    $spreadsheet->getActiveSheet()->setCellValue('AD' . (5 + $index),$detail->note);
+//                    $spreadsheet->getActiveSheet()->setCellValue('AE' . (5 + $index),$detail->operator);
+//                    $spreadsheet->getActiveSheet()->setCellValue('AF' . (5 + $index),Carbon::parse($detail->date)->format('d-m-Y H:i:s'));
+//                    $index++;
+//                }
+			}
+
+        $name = 'Report_SLM_Pending_-_'. $type . '_-_' . $req->start . ' - ' . $req->end . '_-_' . Auth::user()->name . '.xlsx';
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $location = public_path() . '/report/' . $name;
+        ob_end_clean();
+        $writer->save($location);
+        return $name;
+    }
+
+    public function getDataTicketSLMPending($type, $start, $end)
+    {
+        $spuSub = DB::table('slm_part_usage')
+            ->selectRaw("id_ticket, GROUP_CONCAT(CONCAT(part_name, ' (', qty, ')') SEPARATOR ', ') as part_usage")
+            ->groupBy('id_ticket');
+
+        $scbSub = DB::table('slm_cassette_bad')
+            ->selectRaw("id_ticket, GROUP_CONCAT(CONCAT(cassette_name, ' (', removed_cassette_number, ')') SEPARATOR ', ') as cassette_bad")
+            ->groupBy('id_ticket');
+
+        $dataTicketing = DB::table('ticketing__slm as ts')
+            ->join('ticketing__detail as td', 'ts.id_ticket', 'td.id_ticket')
+            ->join('ticketing__id as ti', 'ts.id_ticket', 'ti.id_ticket')
+            ->leftjoin('slm_activity_information as sai', 'ts.id_ticket', 'sai.id_ticket')
+            ->join('tb_asset_management as tam', 'td.serial_device', 'tam.serial_number')
+            ->join('tb_asset_management_detail as tamd', function($join) {
+                $join->on('td.id_atm', '=', 'tamd.id_device_customer')
+                    ->whereColumn('tam.id', 'tamd.id_asset');
+            })
+            ->leftJoinSub($spuSub, 'spu', function ($join) {
+                $join->on('ts.id_ticket', '=', 'spu.id_ticket');
+            })
+            ->leftJoinSub($scbSub, 'scb', function ($join) {
+                $join->on('ts.id_ticket', '=', 'scb.id_ticket');
+            })
+            ->select('ts.id','td.id_ticket as ticket_id', 'tamd.client as customer', 'tamd.id_device_customer as machine_id', 'tamd.alamat_lokasi as lokasi',
+                'tamd.detail_lokasi as address', DB::raw("
+                CASE 
+                    WHEN NOW() BETWEEN tamd.maintenance_start AND tamd.maintenance_end   
+                THEN 'WARRANTY'
+                ELSE 'NO WARRANTY' 
+                END AS status_aggrement"), 'td.type_ticket','td.reporting_time as create_time', 'ti.operator as reported_by','td.problem', 'ts.problem_started', 'ts.appointment_date',
+                'ts.appointment_time', 'ts.depart', 'ts.arrival_at_location as arrival', 'ts.working_started', 'ts.working_finish','tam.vendor', 'tam.category', 'tam.type_device',
+                'td.serial_device','sai.*','spu.part_usage', 'scb.cassette_bad','td.refrence')
+            ->where('td.type_ticket', $type)
+            ->whereBetween(DB::raw('DATE(ts.date_time)'), [$start, $end])
+            ->where('ts.status', 'CLOSE')
+            ->orderByDesc('ts.id')
+            ->distinct()
+            ->get();
+
+        return $dataTicketing;
+
+    }
+
+	public function getDataTicketSLM($type, $start, $end)
+    {
+        $spuSub = DB::table('slm_part_usage')
+            ->selectRaw("id_ticket, GROUP_CONCAT(CONCAT(part_name, ' (', qty, ')') SEPARATOR ', ') as part_usage")
+            ->groupBy('id_ticket');
+
+        $scbSub = DB::table('slm_cassette_bad')
+            ->selectRaw("id_ticket, GROUP_CONCAT(CONCAT(cassette_name, ' (', removed_cassette_number, ')') SEPARATOR ', ') as cassette_bad")
+            ->groupBy('id_ticket');
+
+        $dataTicketing = DB::table('ticketing__slm as ts')
+            ->join('ticketing__detail as td', 'ts.id_ticket', 'td.id_ticket')
+            ->join('ticketing__id as ti', 'ts.id_ticket', 'ti.id_ticket')
+            ->leftjoin('slm_activity_information as sai', 'ts.id_ticket', 'sai.id_ticket')
+            ->leftjoin('slm_additional_list as sal', 'ts.id_ticket', 'sal.id_ticket')
+            ->leftjoin('slm_environment as se', 'ts.id_ticket', 'se.id_ticket')
+            ->leftjoin('slm_pmchecklist as spc', 'ts.id_ticket', 'spc.id_ticket')
+            ->join('tb_asset_management as tam', 'td.serial_device', 'tam.serial_number')
+            ->join('tb_asset_management_detail as tamd', function($join) {
+                $join->on('td.id_atm', '=', 'tamd.id_device_customer')
+                    ->whereColumn('tam.id', 'tamd.id_asset');
+            })
+            ->leftJoinSub($spuSub, 'spu', function ($join) {
+                $join->on('ts.id_ticket', '=', 'spu.id_ticket');
+            })
+            ->leftJoinSub($scbSub, 'scb', function ($join) {
+                $join->on('ts.id_ticket', '=', 'scb.id_ticket');
+            })
+            ->select('ts.id','td.id_ticket as ticket_id', 'tamd.client as customer', 'tamd.id_device_customer as machine_id', 'tamd.alamat_lokasi as lokasi',
+            'tamd.detail_lokasi as address', DB::raw("
+                CASE 
+                    WHEN NOW() BETWEEN tamd.maintenance_start AND tamd.maintenance_end   
+                THEN 'WARRANTY'
+                ELSE 'NO WARRANTY' 
+                END AS status_aggrement"), 'td.type_ticket','td.reporting_time as create_time', 'ti.operator as reported_by','td.problem', 'ts.problem_started', 'ts.appointment_date',
+            'ts.appointment_time', 'ts.depart', 'ts.arrival_at_location as arrival', 'ts.working_started', 'ts.working_finish','tam.vendor', 'tam.category', 'tam.type_device',
+            'td.serial_device','sai.*', 'sal.*', 'se.*', 'spc.*','spu.part_usage', 'scb.cassette_bad','td.refrence')
+            ->where('td.type_ticket', $type)
+            ->whereBetween(DB::raw('DATE(ts.date_time)'), [$start, $end])
+            ->where('ts.status', 'CLOSE')
+            ->orderByDesc('ts.id')
+            ->distinct()
+            ->get();
+
+        return $dataTicketing;
+
+    }
+
 
 	public function getPerformanceByFinishTicket($acronym_client,$period,$type){
 		$occurring_ticket = DB::table('ticketing__activity')

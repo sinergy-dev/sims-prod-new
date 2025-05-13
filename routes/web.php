@@ -11,13 +11,15 @@
 |
 */
 
+use App\Http\Controllers\Auth\LoginController;
+
 // Route::get('/authGoogle','TestController@authGoogle');
 // Route::get('/testAfterAuth','TestController@testAfterAuth');
 // Route::post('/testAfterAuthSave','TestController@testAfterAuthSave');
 
 Route::get('/redirect', 'Auth\LoginController@redirectToProvider');
 Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
-
+Route::post('/check-email', [LoginController::class, 'checkEmail'])->name('check.email');
 
 Auth::routes();
 
@@ -37,7 +39,7 @@ Route::get('testGetWorkDays','PresenceController@getWorkDaysRoute');
 
 Route::get('/create-storage-link', function () {
     Artisan::call('storage:link');
-    return 'Tautan simbolik ke folder penyimpanan telah dibuat.';
+    return 'Tautan simbolik ke folder penyimpanan telah dibuat.';
 });
 
 Route::get('testCutiEmail','TestController@mailCuti');
@@ -952,7 +954,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/getAssetTransaction','AssetController@getAssetTransaction');
 
 	//Warehouse asset new
-	Route::get('/asset_pinjam_new', 'AssetControllerNew@index');	
+	// Route::get('/asset_pinjam_new', 'AssetControllerNew@index');	
 
 
 	Route::get('/asset_pinjam', 'AssetController@index');
@@ -1386,6 +1388,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::get('/ticketing/report/getParameter','TicketingController@getReportParameter');
 	Route::get('/ticketing/report/make','TicketingController@makeReportTicket');
+	Route::get('/ticketing/report/makeSLM','TicketingController@makeReportTicketSLM');
+	Route::get('/ticketing/report/makeSLMPending','TicketingController@makeReportTicketSLMPending');
 	Route::get('/ticketing/report/makePID','TicketingController@makeReportTicketPID');
 	Route::get('/ticketing/report/download','TicketingController@downloadReportTicket');
 	Route::get('/ticketing/report/new','TicketingController@getReportNew');
@@ -1517,58 +1521,58 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-	Route::get('/insights','InsightsController@index');
-	Route::get('/insights/create','InsightsController@create');
-	Route::delete('/insights/delete/{id}','InsightsController@destroy');
-	Route::post('/insights/store','InsightsController@store');
-	Route::get('/insights/edit/{id}','InsightsController@edit');
-	Route::put('/insights/update/{id}','InsightsController@update');	
-	Route::post('/ckeditor/upload','InsightsController@ckstore')->name('ckeditor.upload');
+	// Route::get('/insights','InsightsController@index');
+	// Route::get('/insights/create','InsightsController@create');
+	// Route::delete('/insights/delete/{id}','InsightsController@destroy');
+	// Route::post('/insights/store','InsightsController@store');
+	// Route::get('/insights/edit/{id}','InsightsController@edit');
+	// Route::put('/insights/update/{id}','InsightsController@update');	
+	// Route::post('/ckeditor/upload','InsightsController@ckstore')->name('ckeditor.upload');
 	
-	Route::get('/solution','SolutionController@index');
-	Route::post('/solution/create','SolutionController@store');
-	Route::put('/solution/update/{id}','SolutionController@update');
+	// Route::get('/solution','SolutionController@index');
+	// Route::post('/solution/create','SolutionController@store');
+	// Route::put('/solution/update/{id}','SolutionController@update');
 	
-	Route::get('/message','QuotationController@index');
-	Route::get('/message/detail/{id}','QuotationController@show');
-	Route::delete('/message/delete/{id}','QuotationController@destroy');
-	Route::post('/message/send','QuotationController@store');
-	Route::get('/message/show','QuotationController@showData');
+	// Route::get('/message','QuotationController@index');
+	// Route::get('/message/detail/{id}','QuotationController@show');
+	// Route::delete('/message/delete/{id}','QuotationController@destroy');
+	// Route::post('/message/send','QuotationController@store');
+	// Route::get('/message/show','QuotationController@showData');
 	
-	Route::get('/tag', 'TagController@index');
-	Route::delete('/tag/delete/{id}', 'TagController@destroy');
-	Route::get('/tag/edit/{id}', 'TagController@edit');
-	Route::put('/tag/update/{id}', 'TagController@update');
+	// Route::get('/tag', 'TagController@index');
+	// Route::delete('/tag/delete/{id}', 'TagController@destroy');
+	// Route::get('/tag/edit/{id}', 'TagController@edit');
+	// Route::put('/tag/update/{id}', 'TagController@update');
 	
-	Route::get('/campaign','CampaignController@index');
-	Route::get('/campaign/create','CampaignController@create');
-	Route::post('/campaign/store','CampaignController@store');
-	Route::get('/campaign/edit/{id}','CampaignController@edit');
-	Route::put('/campaign/update/{id}','CampaignController@update');
-	Route::delete('/campaign/delete/{id}','CampaignController@destroy');
+	// Route::get('/campaign','CampaignController@index');
+	// Route::get('/campaign/create','CampaignController@create');
+	// Route::post('/campaign/store','CampaignController@store');
+	// Route::get('/campaign/edit/{id}','CampaignController@edit');
+	// Route::put('/campaign/update/{id}','CampaignController@update');
+	// Route::delete('/campaign/delete/{id}','CampaignController@destroy');
 	
-	Route::get('/category','CategoryController@index');
-	Route::post('/category/store','CategoryController@store');
-	Route::get('/category/p/edit/{id}','CategoryController@editP');
-	Route::put('/category/p/update/{id}','CategoryController@updateP');
-	Route::delete('/category/dp/{id}','CategoryController@destroyP');
+	// Route::get('/category','CategoryController@index');
+	// Route::post('/category/store','CategoryController@store');
+	// Route::get('/category/p/edit/{id}','CategoryController@editP');
+	// Route::put('/category/p/update/{id}','CategoryController@updateP');
+	// Route::delete('/category/dp/{id}','CategoryController@destroyP');
 	
-	Route::get('/project-references', 'ProjectController@index');
-	Route::get('/project-references/create', 'ProjectController@create');
-	Route::post('/project-references/store', 'ProjectController@store');
-	Route::get('/project-references/edit/{id}', 'ProjectController@edit');
-	Route::delete('/project-references/destroy/{id}', 'ProjectController@destroy');
-	Route::put('/project-references/update/{id}', 'ProjectController@update');
+	// Route::get('/project-references', 'ProjectController@index');
+	// Route::get('/project-references/create', 'ProjectController@create');
+	// Route::post('/project-references/store', 'ProjectController@store');
+	// Route::get('/project-references/edit/{id}', 'ProjectController@edit');
+	// Route::delete('/project-references/destroy/{id}', 'ProjectController@destroy');
+	// Route::put('/project-references/update/{id}', 'ProjectController@update');
 	
-	Route::get('/career','CareerController@index');
-	Route::get('/career/register','CareerController@register');
-	Route::delete('/career/register/{id}','CareerController@register_destroy');
-	Route::post('/career/store','CareerController@store');
-	Route::delete('/career/d/{id}','CareerController@destroy');
-	Route::put('/career/update/{id}','CareerController@update');
-	Route::get('/career/edit/{id}','CareerController@edit');
-	Route::get('career/data/{id}', 'CareerController@show');
-	Route::get('/career/create','CareerController@create');	
+	// Route::get('/career','CareerController@index');
+	// Route::get('/career/register','CareerController@register');
+	// Route::delete('/career/register/{id}','CareerController@register_destroy');
+	// Route::post('/career/store','CareerController@store');
+	// Route::delete('/career/d/{id}','CareerController@destroy');
+	// Route::put('/career/update/{id}','CareerController@update');
+	// Route::get('/career/edit/{id}','CareerController@edit');
+	// Route::get('career/data/{id}', 'CareerController@show');
+	// Route::get('/career/create','CareerController@create');	
 
 	Route::get('asset/index','AssetMgmtController@index');
 	Route::get('asset/detail','AssetMgmtController@detail_asset');
@@ -1857,24 +1861,24 @@ Route::get('testGCal','TestController@testGCal');
 Route::get('downloadSbePdf','TestController@downloadSbePdf');
 Route::get('testMailSBE','TestController@testMailSBE');
 
-Route::get('/tag-setting', 'OtherConfigController@tag');
-Route::get('/tag-setting/edit/{id}', 'OtherConfigController@tagEdit');
-Route::put('/tag-setting/update/{id}', 'OtherConfigController@tagUpdate');
+// Route::get('/tag-setting', 'OtherConfigController@tag');
+// Route::get('/tag-setting/edit/{id}', 'OtherConfigController@tagEdit');
+// Route::put('/tag-setting/update/{id}', 'OtherConfigController@tagUpdate');
 
 
-Route::get('/customer-setting', 'OtherConfigController@customer');
-Route::get('/customer-setting/show/{id}', 'OtherConfigController@show');
-Route::put('/customer-setting/update/{id}', 'OtherConfigController@update');
+// Route::get('/customer-setting', 'OtherConfigController@customer');
+// Route::get('/customer-setting/show/{id}', 'OtherConfigController@show');
+// Route::put('/customer-setting/update/{id}', 'OtherConfigController@update');
 
-Route::get('/subscription', 'OtherConfigController@subscription');
-Route::delete('/subscription/delete/{id}', 'OtherConfigController@subsDelete');
+// Route::get('/subscription', 'OtherConfigController@subscription');
+// Route::delete('/subscription/delete/{id}', 'OtherConfigController@subsDelete');
 
-Route::get('/solution','SolutionController@index');
-Route::get('/solution/create','SolutionController@create');
-Route::post('/solution/store','SolutionController@store');
-Route::get('/solution/edit/{id}','SolutionController@edit');
-Route::put('/solution/update/{id}','SolutionController@update');
-Route::delete('/solution/delete/{id}','SolutionController@destroy');
+// Route::get('/solution','SolutionController@index');
+// Route::get('/solution/create','SolutionController@create');
+// Route::post('/solution/store','SolutionController@store');
+// Route::get('/solution/edit/{id}','SolutionController@edit');
+// Route::put('/solution/update/{id}','SolutionController@update');
+// Route::delete('/solution/delete/{id}','SolutionController@destroy');
 
 Route::get('/getWarning','TestController@getWarning');
 // Route::get('timesheet/getPhaseByDivisionForTable','TimesheetController@getPhaseByDivisionForTable');

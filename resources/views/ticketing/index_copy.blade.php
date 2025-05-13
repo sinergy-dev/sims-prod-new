@@ -1400,6 +1400,8 @@ Ticketing
 									<option value="finishReport">Finish Report</option>
 									<option value="finishReportPid">Finish Report PID</option>
 									<option value="helpdeskReport">Helpesk Report</option>
+									<option value="slmReport">SLM Report</option>
+									<option value="slmReportPending">SLM Report Pending</option>
 									<!-- <option value="managerReport">Manager Report</option> -->
 								</select>
 							</div>
@@ -9519,7 +9521,19 @@ Ticketing
 		},
 		function (start, end) {
 			$('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-			$("#ReportingButtonGoNew").show()
+			if ($("#selectReportingType").val() == "slmReport") {
+				var urlAjax = '{{url("/ticketing/report/makeSLM")}}?type=' + $("#selectTypeTicket").val() + '&start=' + $('#daterange-btn').data('daterangepicker').startDate.format('YYYY-MM-DD') + '&end=' + $('#daterange-btn').data('daterangepicker').endDate.format('YYYY-MM-DD')
+				$("#ReportingButtonGo").attr('onclick',"getReport('" + urlAjax + "')")
+
+				$("#ReportingButtonGo").show()
+			}else if($("#selectReportingType").val() == "slmReportPending"){
+				var urlAjax = '{{url("/ticketing/report/makeSLMPending")}}?type=' + $("#selectTypeTicket").val() + '&start=' + $('#daterange-btn').data('daterangepicker').startDate.format('YYYY-MM-DD') + '&end=' + $('#daterange-btn').data('daterangepicker').endDate.format('YYYY-MM-DD')
+				$("#ReportingButtonGo").attr('onclick',"getReport('" + urlAjax + "')")
+
+				$("#ReportingButtonGo").show()
+			}else{
+				$("#ReportingButtonGoNew").show()
+			}
 		}
 	);
 
@@ -9834,6 +9848,15 @@ Ticketing
 			$(".divReportingYear").show()
 			$(".divReportingMonth").show()
 			$(".divDateRange").attr('style','display:none!important')
+		}else if ($(this).val() == 'slmReport' || $(this).val() == 'slmReportPending') {
+			$("#selectPIDReport").empty("")
+
+			$(".divReportingClient").attr('style','display:none!important')
+			$(".divPID").attr('style','display:none!important')
+			$(".divTypeTicket").show()
+			$(".divReportingYear").attr('style','display:none!important')
+			$(".divReportingMonth").attr('style','display:none!important')
+			$(".divDateRange").show()
 		} else {
 			$(".divReportingClient").attr('style','display:none!important')
 			$(".divPID").attr('style','display:none!important')
@@ -9927,7 +9950,7 @@ Ticketing
 							if(result == 0){
 								swalWithCustomClass.fire({
 									//icon: 'error',
-									title: 'Success!',
+									title: 'Error!',
 									text: "The file is unavailable",
 									type: 'error',
 									//confirmButtonText: '<a style="color:#fff;" href="report/' + result.slice(1) + '">Get Report</a>',
