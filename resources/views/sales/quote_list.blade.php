@@ -43,6 +43,13 @@
             z-index: 9999 !important;
         }
 
+        .select2-container {
+            z-index: 1055 !important;
+        }
+
+        .select2-dropdown {
+            z-index: 1060 !important;
+        }
         .pull-right{
             float: right;
         }
@@ -172,7 +179,7 @@
 
     <!--MODAL ADD-->
     <div class="modal fade" id="modalAdd" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg ">
             <div class="modal-content modal-md">
                 <div class="modal-header">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload()"></button>
@@ -196,7 +203,7 @@
                                 @if($role->name == 'Account Executive')
                                     <div class="form-group">
                                         <label for="">Position</label>
-                                        <select type="text" class="form-control" name="position" id="position" required>
+                                        <select type="text" class="custom-form-control-select w-100" name="position" id="position" required>
                                             <option value="">--Choose Position--</option>
                                             <option value="TAM">TAM</option>
                                             <option value="DIR">DIR</option>
@@ -291,7 +298,8 @@
                                 </div>
                                 <div style="display: flex;">
                                 <!--              <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1IDI8NVdVskSl__qQVfsrugEamr01W4IA')}}" style="cursor:pointer;">link</a></span> -->
-                                    <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1Hwpgo-RcVkmQdND7159f5l4Ah-qgcNwK')}}" style="cursor:pointer;">link</a></span>
+                                    <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1G8JIaREKOPlQypwMCaQ6o5vdujrLV5Ar')}}" style="cursor:pointer;">link</a></span>
+{{--                                    <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1Hwpgo-RcVkmQdND7159f5l4Ah-qgcNwK')}}" style="cursor:pointer;">link</a></span>--}}
                                 </div>
                                 <div style="display: flex;">
                                     <span style="margin: 0 auto;">And make sure, the change of template only at row 2, any change on row 1 (header) will be reject</span>
@@ -309,22 +317,34 @@
                                     <span class="invalid-feedback" style="display:none!important;">Please fill Description!</span>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-4">
+                                        <label for="">Time Period</label>
+                                        <div class="input-group">
+                                            <input autocomplete="off" type="number" name="" class="form-control" id="inputTimePeriod" placeholder="Ex. 12" onkeyup="fillInput('time_period')">
+                                            <div class="input-group-text">
+                                                Month
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Qty*</label>
                                             <input autocomplete="off" type="number" name="" class="form-control" id="inputQtyProduct" placeholder="ex. 5" onkeyup="fillInput('qty_product')">
-                                            <span class="invalid-feedback" style="display:none!important;">Please fill Qty!</span>
+                                            <span class="help-block" style="display:none;">Please fill Qty!</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2" style="margin-bottom:10px">
+                                    <div class="col-md-4" style="margin-bottom:10px">
                                         <label>Type*</label>
-                                        {{--                                            <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>--}}
+                                        {{--                                            <i class="fa fa-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>--}}
                                         <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
                                             <option>
                                         </select>
-                                        <span class="invalid-feedback" style="display:none!important;">Please fill Unit!</span>
+                                        <span class="help-block" style="display:none;">Please fill Unit!</span>
                                     </div>
-                                    <div class="col-md-4" style="margin-bottom:10px">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-bottom:10px">
                                         <label>Price*</label>
                                         <div class="input-group">
                                             <div class="input-group-text">
@@ -332,9 +352,9 @@
                                             </div>
                                             <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceProduct" placeholder="ex. 500,000.00" onkeyup="fillInput('price_product')">
                                         </div>
-                                        <span class="invalid-feedback" style="display:none!important;">Please fill Price!</span>
+                                        <span class="help-block" style="display:none;">Please fill Price!</span>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label for="">Price List</label>
                                         <div class="input-group">
                                             <div class="input-group-text">
@@ -368,6 +388,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div id="additionalInputContainer">
+                                    </div>
+                                </div>
+                                <div class="text-end mt-2">
+                                    <button type="button" class="btn btn-sm btn-warning" onclick="addAdditionalInput()"><i class="bx bx-plus"></i></button>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-add" style="display:none!important">
@@ -377,6 +404,7 @@
                                     <th>No</th>
                                     <th>Product</th>
                                     <th>Description</th>
+                                    <th>Time Period</th>
                                     <th>Qty</th>
                                     <th>Type</th>
                                     <th>Price List</th>
@@ -428,7 +456,7 @@
                                     </div>
                                     <div tabindex="0" id="snow-editor" onkeydown="fillInput('textArea_TOP')">
                                     </div>
-                                    <span class="invalid-feedback" style="display:none!important;">Please fill Top of Payment!</span>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Term of Payment!</span>
                                 </div>
                             </div>
                         </div>
@@ -447,6 +475,8 @@
                                                 <th>No</th>
                                                 <th>Product</th>
                                                 <th>Description</th>
+                                                <th class="dynamic-header-placeholder"></th>
+                                                <th>Time Period</th>
                                                 <th>Qty</th>
                                                 <th>Type</th>
                                                 <th>Price List</th>
@@ -713,7 +743,8 @@
                     $('#selectTypeProduct').select2({
                         data:result,
                         placeholder:'Ex. Unit',
-                        dropdownParent: $('#modalAdd .modal-body')
+                        dropdownParent: $('#modalAdd .modal-body'),
+                        width: '100%'
                     })
                 }
             })
@@ -827,6 +858,7 @@
                         var append = ""
                         var i = 0
                         var valueGrandTotal = 0;
+                        var additionalHeaders = [];
                         function formatCurrency(value) {
                             let numericValue = parseFloat(value);
                             if (isNaN(numericValue)) numericValue = 0;
@@ -838,6 +870,25 @@
                             }).format(numericValue);
                         }
                         $.each(result.product,function(value,item){
+                            if (value === 0) {
+                                for (let j = 1; j <= 5; j++) {
+                                    const col = item[`additional_column_${j}`];
+                                    if (col && col.includes("-")) {
+                                        const header = col.split("-")[0].trim();
+                                        if (header) {
+                                            additionalHeaders.push({ index: j, header }); // simpan index untuk pemetaan td nanti
+                                        }
+                                    }
+                                }
+
+                                let dynamicHeaderHTML = "";
+                                additionalHeaders.forEach(h => {
+                                    dynamicHeaderHTML += `<th>${h.header}</th>`;
+                                });
+
+                                $(".table thead tr th.dynamic-header-placeholder").replaceWith(dynamicHeaderHTML);
+                            }
+
                             i++
                             valueGrandTotal += parseFloat(item.grand_total);
                             append = append + '<tr>'
@@ -849,6 +900,17 @@
                             append = append + '</td>'
                             append = append + '<td width="35%">'
                             append = append + '<textarea readonly class="form-control" style="height: 250px;resize: none;height: 120px;font-size: 12px;">' + item.description.replaceAll("<br>","\n") + '</textarea>'
+                            append = append + '</td>'
+                            additionalHeaders.forEach(h => {
+                                const col = item[`additional_column_${h.index}`];
+                                let value = "-";
+                                if (col && col.includes("-")) {
+                                    value = col.split("-")[1]?.trim() || "";
+                                }
+                                append += `<td style="font-size: 12px;"><input type="text" readonly class="form-control" value="${value}"></td>`;
+                            });
+                            append = append + '<td width="10%">'
+                            append = append + '<input readonly class="form-control" type="" name="" value="'+ (item.jangka_waktu ? item.jangka_waktu : '-') +'" style="width:45px;font-size: 12px;">'
                             append = append + '</td>'
                             append = append + '<td width="10%">'
                             append = append + '<input readonly class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size: 12px;">'
@@ -1020,7 +1082,7 @@
                         $('#quote_type').val(data.quote.project_type)
                     }else if(n == 1){
                         select2TypeProduct();
-                        $("nextBtnAdd").attr('onclick', 'nextPrevUnfinished(1)')
+                        $("#nextBtnAdd").attr('onclick', 'nextPrevUnfinished(1)')
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         document.getElementById('prevBtnAdd').innerText = "Back";
                         document.getElementById("prevBtnAdd").style.display = 'inline';
@@ -1121,6 +1183,7 @@
                         var append = ""
                         var i = 0
                         var valueGrandTotal = 0;
+                        var additionalHeaders = [];
                         function formatCurrency(value) {
                             let numericValue = parseFloat(value);
                             if (isNaN(numericValue)) numericValue = 0;
@@ -1132,6 +1195,24 @@
                             }).format(numericValue);
                         }
                         $.each(data.product,function(value,item){
+                            if (value === 0) {
+                                for (let j = 1; j <= 5; j++) {
+                                    const col = item[`additional_column_${j}`];
+                                    if (col && col.includes("-")) {
+                                        const header = col.split("-")[0].trim();
+                                        if (header) {
+                                            additionalHeaders.push({ index: j, header }); // simpan index untuk pemetaan td nanti
+                                        }
+                                    }
+                                }
+
+                                let dynamicHeaderHTML = "";
+                                additionalHeaders.forEach(h => {
+                                    dynamicHeaderHTML += `<th>${h.header}</th>`;
+                                });
+
+                                $(".table thead tr th.dynamic-header-placeholder").replaceWith(dynamicHeaderHTML);
+                            }
                             i++
                             valueGrandTotal += parseFloat(item.grand_total)
                             append = append + '<tr>'
@@ -1143,6 +1224,17 @@
                             append = append + '</td>'
                             append = append + '<td width="35%">'
                             append = append + '<textarea readonly class="form-control" style="height: 250px;resize: none;height: 120px;font-size: 12px;">' + item.description.replaceAll("<br>","\n") + '</textarea>'
+                            append = append + '</td>'
+                            additionalHeaders.forEach(h => {
+                                const col = item[`additional_column_${h.index}`];
+                                let value = "-";
+                                if (col && col.includes("-")) {
+                                    value = col.split("-")[1]?.trim() || "";
+                                }
+                                append += `<td style="font-size: 12px;"><input type="text" readonly class="form-control" value="${value}"></td>`;
+                            });
+                            append = append + '<td width="10%">'
+                            append = append + '<input readonly class="form-control" type="" name="" value="'+ (item.jangka_waktu ? item.jangka_waktu : '-') +'" style="width:75px;font-size: 12px;">'
                             append = append + '</td>'
                             append = append + '<td width="10%">'
                             append = append + '<input readonly class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size: 12px;">'
@@ -1300,6 +1392,40 @@
             localStorage.setItem('id_quote', '')
         })
 
+        let additionalCount = 0;
+        const maxAdditional = 5;
+
+        function addAdditionalInput() {
+            if (additionalCount >= maxAdditional) {
+                Swal.fire({
+                    text: 'Max 5 Additional Info',
+                    icon: 'warning',
+                    title: 'Warning'
+                });
+                return;
+            }
+
+            additionalCount++;
+            const container = $('#additionalInputContainer');
+            const inputId = 'additional' + additionalCount;
+
+            const inputGroup = $(`
+            <div class="input-group mb-2" id="group-${inputId}">
+                <input type="text" class="form-control" id="${inputId}" placeholder="'Header - Value' ex: Serial Number - 1933420192 ">
+                <button class="btn btn-danger" type="button" onclick="removeAdditionalInput('${inputId}')">-</button>
+            </div>
+        `);
+
+            container.append(inputGroup);
+        }
+
+        function removeAdditionalInput(id) {
+            $('#group-' + id).remove();
+            additionalCount--;
+        }
+
+        let additionalInputs = [];
+
         currentTab = 0;
         function nextPrevAdd(n, value) {
             valueEdit = value
@@ -1336,12 +1462,22 @@
                                 $("#inputDescProduct").val(item.description.replaceAll("<br>","\n"))
                                 $("#inputQtyProduct").val(item.qty)
                                 $('#selectTypeProduct').val(item.unit)
+                                $("#inputTimePeriod").val(item.jangka_waktu)
                                 select2TypeProduct(item.unit)
                                 $("#inputPriceProduct").val(formatter.format(nominal))
                                 $("#inputPriceList").val(formatter.format(item.price_list))
                                 $("#inputTotalPriceList").val(formatter.format(item.total_price_list))
                                 $("#inputTotalPrice").val(formatter.format(item.grand_total))
                                 $("#inputPriceProduct").closest("div").find(".input-group-text").text("Rp.")
+                                additionalCount = 0;
+
+                                for (let i = 1; i <= 5; i++) {
+                                    const col = item[`additional_column_${i}`];
+                                    if (col && col.trim() !== "") {
+                                        addAdditionalInput();
+                                        $(`#additional${additionalCount}`).val(col);
+                                    }
+                                }
                             })
                         }
                     })
@@ -1503,6 +1639,9 @@
                             $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
                         } else{
                             if (localStorage.getItem('isEditProduct') == 'true') {
+                                $('#additionalInputContainer input').each(function (index) {
+                                    additionalInputs[index] = $(this).val();
+                                });
                                 $.ajax({
                                     url: "{{url('/sales/updateProductQuote')}}",
                                     type: 'post',
@@ -1513,11 +1652,17 @@
                                         nameProduct: $("#inputNameProduct").val(),
                                         descProduct: $("#inputDescProduct").val().replaceAll("\n", "<br>"),
                                         qtyProduct: $("#inputQtyProduct").val(),
+                                        timePeriod: $("#inputTimePeriod").val(),
                                         typeProduct: $("#selectTypeProduct").val(),
                                         priceProduct: $("#inputPriceProduct").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         priceList: $("#inputPriceList").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         totalPrice: $("#inputTotalPrice").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         inputGrandTotalProduct: $("#inputGrandTotalProduct").val(),
+                                        additional1: additionalInputs[0],
+                                        additional2: additionalInputs[1],
+                                        additional3: additionalInputs[2],
+                                        additional4: additionalInputs[3],
+                                        additional5: additionalInputs[4],
                                     },beforeSend:function(){
                                         Swal.fire({
                                             title: 'Please Wait..!',
@@ -1553,8 +1698,11 @@
                                         $("#inputPriceProduct").val('')
                                         $("#inputQtyProduct").val('')
                                         $("#inputTotalPrice").val('')
+                                        $("#inputTimePeriod").val('')
                                         $("#inputPriceList").val('')
+                                        $("#inputTotalPriceList").val('')
                                         $("#selectTypeProduct").val('')
+                                        $('#additionalInputContainer').empty();
                                     }, error: function () {
                                         Swal.close()
                                         Swal.fire({
@@ -1565,6 +1713,9 @@
                                     }
                                 })
                             }else {
+                                $('#additionalInputContainer input').each(function (index) {
+                                    additionalInputs[index] = $(this).val();
+                                });
                                 $.ajax({
                                     url: "{{url('/sales/storeProductQuote')}}",
                                     type: 'post',
@@ -1574,11 +1725,17 @@
                                         nameProduct: $("#inputNameProduct").val(),
                                         descProduct: $("#inputDescProduct").val().replaceAll("\n", "<br>"),
                                         qtyProduct: $("#inputQtyProduct").val(),
+                                        timePeriod: $("#inputTimePeriod").val(),
                                         typeProduct: $("#selectTypeProduct").val(),
                                         priceProduct: $("#inputPriceProduct").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         priceList: $("#inputPriceList").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         totalPrice: $("#inputTotalPrice").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         inputGrandTotalProduct: $("#inputGrandTotalProduct").val(),
+                                        additional1: additionalInputs[0] ,
+                                        additional2: additionalInputs[1] ,
+                                        additional3: additionalInputs[2] ,
+                                        additional4: additionalInputs[3] ,
+                                        additional5: additionalInputs[4] ,
                                     },
                                     beforeSend: function () {
                                         Swal.fire({
@@ -1611,10 +1768,13 @@
                                         $("#inputDescProduct").val('')
                                         $("#inputPriceProduct").val('')
                                         $("#inputPriceList").val('')
+                                        $("#inputTimePeriod").val('')
                                         $("#inputQtyProduct").val('')
                                         $("#inputTotalPrice").val('')
+                                        $("#inputTotalPriceList").val('')
                                         $("#selectTypeProduct").val('')
                                         $(".tabGroupInitiateAdd").show()
+                                        $('#additionalInputContainer').empty();
                                         x[n].children[1].style.display = 'none'
                                         document.getElementsByClassName('tabGroupInitiateAdd')[0].childNodes[1].style.display = 'flex'
                                     }, error: function () {
@@ -1907,6 +2067,7 @@
                                 $("#inputNameProduct").val(item.name)
                                 $("#inputDescProduct").val(item.description.replaceAll("<br>","\n"))
                                 $("#inputQtyProduct").val(item.qty)
+                                $("#inputTimePeriod").val(item.jangka_waktu)
                                 $('#selectTypeProduct').val(item.unit)
                                 select2TypeProduct(item.unit)
                                 $("#inputPriceProduct").val(formatter.format(nominal))
@@ -1914,6 +2075,16 @@
                                 $("#inputPriceList").val(formatter.format(item.price_list))
                                 $("#inputTotalPriceList").val(formatter.format(item.total_price_list))
                                 $("#inputPriceProduct").closest("div").find(".input-group-text").text("Rp.")
+                                  $('#additionalInputContainer').empty();
+                                additionalCount = 0;
+
+                                for (let i = 1; i <= 5; i++) {
+                                    const col = item[`additional_column_${i}`];
+                                    if (col && col.trim() !== "") {
+                                        addAdditionalInput();
+                                        $(`#additional${additionalCount}`).val(col);
+                                    }
+                                }
                             })
                         }
                     })
@@ -2066,6 +2237,9 @@
                             $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
                         } else{
                             if (localStorage.getItem('isEditProduct') == 'true') {
+                                $('#additionalInputContainer input').each(function (index) {
+                                    additionalInputs[index] = $(this).val();
+                                });
                                 $.ajax({
                                     url: "{{url('/sales/updateProductQuote')}}",
                                     type: 'post',
@@ -2076,11 +2250,17 @@
                                         nameProduct: $("#inputNameProduct").val(),
                                         descProduct: $("#inputDescProduct").val().replaceAll("\n", "<br>"),
                                         qtyProduct: $("#inputQtyProduct").val(),
+                                        timePeriod: $("#inputTimePeriod").val(),
                                         typeProduct: $("#selectTypeProduct").val(),
                                         priceProduct: $("#inputPriceProduct").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         priceList: $("#inputPriceList").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         totalPrice: $("#inputTotalPrice").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         inputGrandTotalProduct: $("#inputGrandTotalProduct").val(),
+                                        additional1: additionalInputs[0],
+                                        additional2: additionalInputs[1],
+                                        additional3: additionalInputs[2],
+                                        additional4: additionalInputs[3],
+                                        additional5: additionalInputs[4],
                                     },beforeSend:function(){
                                         Swal.fire({
                                             title: 'Please Wait..!',
@@ -2115,10 +2295,14 @@
                                         $("#inputNameProduct").val('')
                                         $("#inputDescProduct").val('')
                                         $("#inputPriceProduct").val('')
+                                        $("#inputTimePeriod").val('')
                                         $("#inputPriceList").val('')
                                         $("#inputQtyProduct").val('')
                                         $("#inputTotalPrice").val('')
+                                        $("#inputTotalPriceList").val('')
                                         $("#selectTypeProduct").val('')
+                                        $('#additionalInputContainer').empty();
+
                                     },
                                     error: function () {
                                         Swal.close()
@@ -2130,6 +2314,9 @@
                                     }
                                 })
                             }else {
+                                $('#additionalInputContainer input').each(function (index) {
+                                    additionalInputs[index] = $(this).val();
+                                });
                                 $.ajax({
                                     url: "{{url('/sales/storeProductQuote')}}",
                                     type: 'post',
@@ -2139,11 +2326,17 @@
                                         nameProduct: $("#inputNameProduct").val(),
                                         descProduct: $("#inputDescProduct").val().replaceAll("\n", "<br>"),
                                         qtyProduct: $("#inputQtyProduct").val(),
+                                        timePeriod: $("#inputTimePeriod").val(),
                                         typeProduct: $("#selectTypeProduct").val(),
                                         priceProduct: $("#inputPriceProduct").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         priceList: $("#inputPriceList").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         totalPrice: $("#inputTotalPrice").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         inputGrandTotalProduct: $("#inputGrandTotalProduct").val(),
+                                        additional1: additionalInputs[0] ,
+                                        additional2: additionalInputs[1] ,
+                                        additional3: additionalInputs[2] ,
+                                        additional4: additionalInputs[3] ,
+                                        additional5: additionalInputs[4] ,
                                     },
                                     beforeSend: function () {
                                         Swal.fire({
@@ -2161,7 +2354,7 @@
                                         })
                                     }, success: function () {
                                         Swal.close()
-                                        let x = document.getElementsByClassName("tab-add");
+                                        var x = document.getElementsByClassName("tab-add");
                                         x[currentTab].style.display = 'none';
                                         currentTab = currentTab + n;
                                         if (currentTab >= x.length) {
@@ -2169,20 +2362,23 @@
                                             currentTab = 0;
                                         }
                                         x[currentTab].style.display = 'inline';
-                                        unfinishedDraft(currentTab,localStorage.getItem('id_quote'));
-                                        localStorage.setItem('status_quote', 'draft')
+                                        unfinishedDraft(currentTab, localStorage.getItem('id_quote'));
+                                        addTable(0,localStorage.getItem('status_tax'))
+                                        localStorage.setItem('status_quote','draft')
                                         localStorage.setItem('store_tax', '')
-                                        // addTable(0, localStorage.getItem('status_tax'))
+                                        $(".tabGroupInitiateAdd").show()
+                                        $(".tab-add")[1].children[1].style.display = 'none'
+                                        document.getElementsByClassName('tabGroupInitiateAdd')[0].childNodes[1].style.display = 'flex'
                                         $("#inputNameProduct").val('')
                                         $("#inputDescProduct").val('')
                                         $("#inputPriceProduct").val('')
                                         $("#inputPriceList").val('')
                                         $("#inputQtyProduct").val('')
+                                        $("#inputTimePeriod").val('')
                                         $("#inputTotalPrice").val('')
+                                        $("#inputTotalPriceList").val('')
                                         $("#selectTypeProduct").val('')
-                                        $(".tabGroupInitiateAdd").show()
-                                        x[n].children[1].style.display = 'none'
-                                        document.getElementsByClassName('tabGroupInitiateAdd')[0].childNodes[1].style.display = 'flex'
+                                        $('#additionalInputContainer').empty();
                                     },
                                     error: function () {
                                         Swal.close()
@@ -2513,7 +2709,6 @@
         }
 
         function addTable(n,status,results=""){
-            console.log('masuk add table')
             $.ajax({
                 type: "GET",
                 url: '{{url('/sales/quote/getProductQuote')}}',
@@ -2538,6 +2733,9 @@
                         append = append + '<td width="30%">'
                         append = append + '<textarea id="textAreaDescProductEdit" readonly data-value="" style="font-size: 12px; important;resize:none;height:150px;width:200px" class="form-control">'+ item.description.replaceAll("<br>","\n") + '&#10;'
                         append = append + '</textarea>'
+                        append = append + '</td>'
+                        append = append + '<td width="10%">'
+                        append = append + '<input id="inputTimePeriodEdit" data-value="" readonly style="font-size: 12px; important;width:70px" class="form-control" type="number" name="" value="'+ item.jangka_waktu +'">'
                         append = append + '</td>'
                         append = append + '<td width="7%">'
                         append = append + '<input id="inputQtyEdit" data-value="" readonly style="font-size: 12px; important;width:70px" class="form-control" type="number" name="" value="'+ item.qty +'">'
@@ -3048,7 +3246,7 @@
                     @else
             var ArrColors = [
                     {
-                        name: 'Need Attention',style: 'color:white', color: 'text-bg-warning', icon: 'bx bx-traffic-cone',status:"NA",index: 0
+                        name: 'Need Attention',style: 'color:white', color: 'text-bg-warning', icon: 'bx bx-error',status:"NA",index: 0
                     },
                     {
                         name: 'Ongoing',style: 'color:white', color: 'btn-linkedin', icon: 'bx bx-edit',status:"OG",index: 1
@@ -3266,16 +3464,26 @@
                 $("#inputDescProduct").prev('.input-group-text').css("background-color","red");
             }
             if (val == "qty_product") {
-                if (localStorage.getItem('isRupiah') == 'true') {
-                    $("#inputTotalPrice").val($("#inputPriceProduct").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
-                    $("#inputTotalPriceList").val($("#inputPriceList").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                if (Number($("#inputTimePeriod").val()) > 0) {
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }else{
-                    $("#inputTotalPriceList").val($("#inputPriceList").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
-                    $("#inputTotalPrice").val($("#inputPriceProduct").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }
-                $("#inputQtyProduct").closest('.col-md-4').removeClass('needs-validation')
-                $("#inputQtyProduct").closest('input').next('span').attr('style','display:none!important');
-                $("#inputQtyProduct").prev('.input-group-text').css("background-color","red");
+                $("#inputQtyProduct").closest('.col-md-4').removeClass('has-error')
+                $("#inputQtyProduct").closest('input').next('span').hide();
+                $("#inputQtyProduct").prev('.input-group-addon').css("background-color","red");
+            }
+
+            if (val == "time_period"){
+                if ( Number($("#inputTimePeriod").val()) > 0) {
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                }else{
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                }
             }
 
             if (val == "type_product") {
@@ -3285,17 +3493,21 @@
             }
 
             if (val == "price_product") {
-                if (localStorage.getItem('isRupiah') == 'true') {
-                    $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                if ( Number($("#inputTimePeriod").val()) > 0) {
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }else{
                     $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }
-                $("#inputPriceProduct").closest('.col-md-4').removeClass('needs-validation')
-                $("#inputPriceProduct").closest('input').closest('.input-group').next('span').attr('style','display:none!important');
+                $("#inputPriceProduct").closest('.col-md-4').removeClass('has-error')
+                $("#inputPriceProduct").closest('input').closest('.input-group').next('span').hide();
                 $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
             }
             if (val == "price_list"){
-                $("#inputTotalPriceList").val($("#inputPriceList").val() == ''?0:formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                if ( Number($("#inputTimePeriod").val()) > 0) {
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                }else{
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                }
             }
             if (val == "spk") {
                 $("#inputSPK").closest('.form-group').removeClass('needs-validation')

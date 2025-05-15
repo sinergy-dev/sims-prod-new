@@ -17,7 +17,7 @@
             margin-top: 10px;
             margin-bottom: 20px;
         }
-        .divider h6 {
+        .divider h4 {
             margin: 0;
             text-align: center;
             font-family: Lucida Sans Unicode, sans-serif;
@@ -52,17 +52,19 @@
             margin: 0;
             padding: 0;
         }
-        .text-8 {
-            font-size: 8px !important;
-            margin: 0;
-            padding: 0;
-        }
         .text-10 * {
             font-size: 9px !important;
         }
 
+        .text-8 {
+            font-size: 8px !important;
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+        }
         .text-8 * {
             font-size: 8px !important;
+            vertical-align: middle;
         }
 
         .pdf-container {
@@ -121,31 +123,29 @@
     <p class="text-10">Jl. Letjen S. Parman Nomor 1AA</p>
     <p class="text-10">Kemanggisan - Pal Merah</p>
     <p class="text-10" >Jakarta 11480 - Indonesia</p>
-    <img src="{{ public_path('img/logo-sip-hd.png') }}" alt="Logo SIP" style="max-width: 20%; height: auto; margin-top: -70px; margin-left: 280px;">
-    <p class="text-10" style="margin-left: 550px; margin-top: -50px; margin-bottom: -20px;">
-        Phone <span style=""> : </span> <span> 62 21 583 555 99 </span>
-        <br>
-        Fax &nbsp;&nbsp;&nbsp;&nbsp; <span>: </span> <span> 62 21 583 55 188 </span>
+    <img src="{{ public_path('img/logo-sip-hd.png') }}" alt="Logo SIP" style="max-width: 13%; height: auto; margin-top: -70px; margin-left: 450px;">
+    <p class="text-10" style="margin-left: 880px; margin-top: -50px; margin-bottom: -20px;">
+        Phone <span style=""> : </span> <span> 62 21 50865 777 </span>
         <br>
         Email  &nbsp;<span> : </span>  <span> sales@sinergy.co.id </span>
     </p>
 </div>
 <br>
 <div  class="divider">
-    <h6 style="margin: 0; text-align: center; ">QUOTATION</h6>
+    <h4 style="margin: 0; text-align: center; ">QUOTATION</h4>
 </div>
 <div class="" style="margin: 0; padding: 0;">
     <table style="width: 100%; border-collapse: collapse; border: 1px solid;" >
         <tr>
-            <td colspan="2" style="width: 500px;">
+            <td colspan="2" style="width: 800px;">
                 <table style="font-size: 9px; width: 100%; border: none; line-height: 1.2;">
                     <tr>
-                        <td style="width: 70px; padding: 0 2px;">To</td>
+                        <td style="width: 70px; padding: 0 2px;">Kepada</td>
                         <td style="padding: 0 2px;">: <b>{{ $config->to }}</b></td>
                     </tr>
                     @if($config->building != null)
                         <tr>
-                            <td style="padding: 0 2px;">Address</td>
+                            <td style="padding: 0 2px;">Alamat</td>
                             <td style="padding: 0 2px;">: {{ $config->building }}</td>
                         </tr>
                         <tr>
@@ -158,7 +158,7 @@
                         </tr>
                     @else
                         <tr>
-                            <td style="padding: 0 2px;">Address</td>
+                            <td style="padding: 0 2px;">Alamat</td>
                             <td style="padding: 0 2px 0 10px;">: {{ $config->street }}</td>
                         </tr>
                         <tr>
@@ -179,19 +179,19 @@
                         <td style="padding: 0 2px;">: {{ $config->attention }}</td>
                     </tr>
                     <tr>
-                        <td style="padding: 0 2px;">From</td>
+                        <td style="padding: 0 2px;">Dari</td>
                         <td style="padding: 0 2px;">: {{ $config->from }}</td>
                     </tr>
                     <tr>
-                        <td style="padding: 0 2px;">Subject</td>
+                        <td style="padding: 0 2px;">Subjek</td>
                         <td style="padding: 0 2px;">: {{ $config->title }}</td>
                     </tr>
                 </table>
             </td>
-            <td style="width: 200px; border: 1px solid; vertical-align: top; line-height: 1.2;">
+            <td style="width: 300px; border: 1px solid; vertical-align: top;">
                 <table style="font-size: 9px; width: 100%; border: none;">
                     <tr>
-                        <td>Date</td>
+                        <td>Tanggal</td>
                         <td>: {{\Carbon\Carbon::parse($config->date)->format('d F Y')}}</td>
                     </tr>
                     <tr>
@@ -205,7 +205,8 @@
 </div>
 <br>
 <div class="column-12" style="margin-bottom: 5px; margin-left: 1px;">
-    <p class="text-10">We are pleased to present our price quotation, as detailed in the attached document.</p>
+    <p class="text-10">Dengan Hormat,</p>
+    <p class="text-10">Bersama ini kami sampaikan penawaran harga, sebagaimana terlampir:</p>
 </div>
 <div class="table-container" >
     <table style="border: 2px;">
@@ -258,9 +259,9 @@
         @endphp
         <tr>
             @if($isPriceList)
-                <th class="table-content-sub" style="width: 20px; border-bottom: 2px;">No</th>
-                <th class="table-content-sub" style="width: 70px; border-bottom: 2px;">Product</th>
-                <th class="table-content-sub" style="width: 80px; border-bottom: 2px;">Description</th>
+                <th class="table-content-sub" style="width: 30px; border-bottom: 2px;">No</th>
+                <th class="table-content-sub" style="width: 70px; border-bottom: 2px;">Produk</th>
+                <th class="table-content-sub" style="width: 150px; border-bottom: 2px;">Deskripsi</th>
                 @if($header1 != null)
                     <th class="table-content-sub" style=" border-bottom: 2px;">{{$header1}}</th>
                 @endif
@@ -276,16 +277,16 @@
                 @if($header5 != null)
                     <th class="table-content-sub" style=" border-bottom: 2px;">{{$header5}}</th>
                 @endif
-                <th class="table-content-sub" style="width: 50px; border-bottom: 2px;">Time Period</th>
-                <th colspan="2" class="table-content-sub" style="width: 20px; border-bottom: 2px;">Qty</th>
-                <th class="table-content-sub" style="width: 75px; border-bottom: 2px;">Pricelist</th>
-                <th class="table-content-sub" style="width: 75px;border-bottom: 2px;">Total Pricelist</th>
-                <th class="table-content-sub" style="width: 75px; border-bottom: 2px;">Unit Price</th>
-                <th class="table-content-sub" style="width: 100px;border-bottom: 2px;">Total Unit Price</th>
+                <th class="table-content-sub" style="width: 50px; border-bottom: 2px;">Jangka Waktu</th>
+                <th colspan="2" class="table-content-sub" style="width: 25px; border-bottom: 2px;">Jumlah</th>
+                <th class="table-content-sub" style="width: 90px; border-bottom: 2px;">Harga Jual</th>
+                <th class="table-content-sub" style="width: 90px;border-bottom: 2px;">Total Harga Jual</th>
+                <th class="table-content-sub" style="width: 90px; border-bottom: 2px;">Harga</th>
+                <th class="table-content-sub" style="width: 90px;border-bottom: 2px;">Total Harga</th>
             @else
-                <th class="table-content-sub" style="width: 20px; border-bottom: 2px;">No</th>
-                <th class="table-content-sub" style="width: 100px; border-bottom: 2px;">Product</th>
-                <th class="table-content-sub" style="width: 150px; border-bottom: 2px;">Description</th>
+                <th class="table-content-sub" style="width: 50px; border-bottom: 2px;">No</th>
+                <th class="table-content-sub" style="width: 100px; border-bottom: 2px;">Produk</th>
+                <th class="table-content-sub" style="width: 200px; border-bottom: 2px;">Deskripsi</th>
                 @if($header1 != null)
                     <th class="table-content-sub" style=" border-bottom: 2px;">{{$header1}}</th>
                 @endif
@@ -301,10 +302,10 @@
                 @if($header5 != null)
                     <th class="table-content-sub" style=" border-bottom: 2px;">{{$header5}}</th>
                 @endif
-                <th class="table-content-sub" style="width: 50px; border-bottom: 2px;">Time Period</th>
-                <th colspan="2" class="table-content-sub" style="width: 10px; border-bottom: 2px;">Qty</th>
-                <th class="table-content-sub" style="width: 90px; border-bottom: 2px;">Unit Price</th>
-                <th class="table-content-sub" style="width: 90px;border-bottom: 2px;">Total Unit Price</th>
+                <th class="table-content-sub" style="width: 50px; border-bottom: 2px;">Jangka Waktu</th>
+                <th colspan="2" class="table-content-sub" style="width: 20px; border-bottom: 2px;">Jumlah</th>
+                <th class="table-content-sub" style="width: 120px; border-bottom: 2px;">Harga</th>
+                <th class="table-content-sub" style="width: 120px;border-bottom: 2px;">Total Harga</th>
             @endif
         </tr>
         <tr style="height: 4px;">
@@ -398,23 +399,23 @@
                 <td class="text-8">{{$prod->name}}</td>
                 <td class="text-8">{!! $prod->description !!}</td>
                 @if($header1 != null)
-                    <td class="text-8">{{$value1}}</td>
+                <td class="text-8">{{$value1}}</td>
                 @endif
                 @if($header2 != null)
-                    <td class="text-8">{{$value2}}</td>
+                <td class="text-8">{{$value2}}</td>
                 @endif
                 @if($header3 != null)
-                    <td class="text-8">{{$value3}}</td>
+                <td class="text-8">{{$value3}}</td>
                 @endif
                 @if($header4 != null)
-                    <td class="text-8">{{$value4}}</td>
+                <td class="text-8">{{$value4}}</td>
                 @endif
                 @if($header5 != null)
-                    <td class="text-8">{{$value5}}</td>
+                <td class="text-8">{{$value5}}</td>
                 @endif
-                <td class="text-8"> <center>@if($prod->jangka_waktu != null){{$prod->jangka_waktu}} month @endif</center></td>
-                <td class="text-8" style="text-align: right; width: 10px;"><center>{{$prod->qty}}</center></td>
-                <td class="text-8" style="width: 10px;"><center>{{$prod->unit}}</center></td>
+                <td class="text-8"> <center>@if($prod->jangka_waktu != null){{$prod->jangka_waktu}} bulan @endif</center></td>
+                <td class="text-8" style="text-align: right;"><center>{{$prod->qty}}</center></td>
+                <td class="text-8"><center>{{$prod->unit}}</center></td>
                 @if($isPriceList)
                     <td class="text-8"><p>Rp  <span style="text-align: center; float:right;"> {{ number_format($nominalPriceList, 2, ',', '.')  }}</span></p></td>
                     <td class="text-8"><p>Rp  <span style="text-align: center; float:right;"> {{ number_format($totalPriceList, 2, ',', '.')  }}</span></p></td>
@@ -496,11 +497,12 @@
             <td colspan="{{$colspan}}" class="text-8" style="text-align: right;">
                 <b>Total</b>
             </td>
-            <td class="text-8" style="font-style: italic;"><b>Rp</b>  <span style="text-align: right; float:right;"><b> {{ number_format($nominalTotalFinal, 2, ',', '.')  }}</b></span></td>
+            <td class="text-8" style="font-style: italic;"><b>Rp</b> <span style="text-align: right; float:right;"><b> {{ number_format($nominalTotalFinal, 2, ',', '.')  }}</b></span>
+            </td>
         </tr>
         <tr>
             <td colspan="{{$colspan}}" class="text-8" style="text-align: right;">
-                Tax Basis
+                DPP Nilai Lainnya
             </td>
             <td class="text-8" style="font-style: italic;">Rp <span style="text-align: right; float:right;">{{ number_format($dpp, 2, ',', '.') }}</span></td>
         </tr>
@@ -512,27 +514,28 @@
         </tr>
         <tr style="border-top: 2px;">
             <td colspan="{{$colspan}}" class="text-8" style="text-align: right; background-color: #bbbbbb; border-top: 2px;">
-                <b>Grand Total</b>
+                <b>Total Setelah PPN</b>
             </td>
-            <td class="text-8" style="border-top: 2px; background-color: yellow;"><b>Rp</b> <span style="text-align: right; float:right; "><b>{{ number_format($nominalGrandTotalFinal, 2, ',','.') }}</b></span></td>
+            <td class="text-8" style="border-top: 2px; background-color: yellow;"><b>Rp</b> <span style="text-align: right; float:right; "><b>{{ number_format($nominalGrandTotalFinal, 2, ',','.') }}</b></span>
+            </td>
         </tr>
     </table>
 </div>
 <div class="column-12">
-    <p class="text-10"> <b>Terms and Condition:</b> </p>
+    <p class="text-10"> <b>Syarat dan Ketentuan:</b> </p>
     <div class="text-10" style="font-size: 10px; line-height: 1.2;">
         {!! $config->term_payment !!}
     </div>
     <br>
-    <p class="text-10">We kindly submit this price quotation letter, and should you have any further questions regarding this quotation,
+    <p class="text-10">Demikian surat penawaran harga ini kami sampaikan,
     </p>
-    <p class="text-10">please do not hesitate to contact us.</p>
+    <p class="text-10">Apabila ada pertanyaan lebih lanjut perihal penawaran ini, mohon dapat menghubungi kami.</p>
     <br>
-    <p class="text-10">Thank you for your attention and cooperation.</p>
+    <p class="text-10">Terima kasih atas perhatian dan kerjasama yang telah diberikan.</p>
     <br>
-    <p class="text-10">Best Regards,</p>
+    <p class="text-10">Hormat Saya,</p>
     <br>
-    <img src="{{ public_path('img/logo-sip-hd.png') }}" alt="Logo SIP" style="max-width: 18%; height: auto; opacity: 0.5; margin-left: 15px; tab-index: 1; margin-bottom: 15px;">
+    <img src="{{ public_path('img/logo-sip-hd.png') }}" alt="Logo SIP" style="max-width: 12%; height: auto; opacity: 0.5; margin-left: 15px; tab-index: 1; margin-bottom: 10px;">
     @if($config->sign && $config->nik == Auth::user()->nik)
         <img src="{{$config->sign}}" alt="" style="margin-left: -150px; tab-index: 2; margin-top: -10px; margin-bottom: 0; max-width: 17%">
     @endif

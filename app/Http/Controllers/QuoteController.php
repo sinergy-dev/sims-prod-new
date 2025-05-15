@@ -796,8 +796,14 @@ class QuoteController extends Controller
         $quoteProduct->id_quote = $request['id_quote'];
         $quoteProduct->name = $request['nameProduct'];
         $quoteProduct->qty = $request['qtyProduct'];
+        $quoteProduct->jangka_waktu = $request['timePeriod'];
         $quoteProduct->description = $request['descProduct'];
         $quoteProduct->nominal = $request['priceProduct'];
+        $quoteProduct->additional_column_1 = $request['additional1'];
+        $quoteProduct->additional_column_2 = $request['additional2'];
+        $quoteProduct->additional_column_3 = $request['additional3'];
+        $quoteProduct->additional_column_4 = $request['additional4'];
+        $quoteProduct->additional_column_5 = $request['additional5'];
         if(!empty($request['priceList'])){
             $quoteProduct->price_list = $request['priceList'];
             $quoteProduct->total_price_list = $request['priceList'] * $request['qtyProduct'];
@@ -877,8 +883,15 @@ class QuoteController extends Controller
         $quoteProduct->id_quote = $request['id_quote'];
         $quoteProduct->name = $request['nameProduct'];
         $quoteProduct->qty = $request['qtyProduct'];
+        $quoteProduct->jangka_waktu = $request['timePeriod'];
         $quoteProduct->description = $request['descProduct'];
         $quoteProduct->nominal = $request['priceProduct'];
+        $quoteProduct->additional_column_1 = $request['additional1'];
+        $quoteProduct->additional_column_2 = $request['additional2'];
+        $quoteProduct->additional_column_3 = $request['additional3'];
+        $quoteProduct->additional_column_4 = $request['additional4'];
+        $quoteProduct->additional_column_5 = $request['additional5'];
+
         if(!empty($request['priceList'])){
             $quoteProduct->price_list = $request['priceList'];
             $quoteProduct->total_price_list = $request['priceList'] * $request['qtyProduct'];
@@ -977,7 +990,7 @@ class QuoteController extends Controller
 
     public function uploadCSV(Request $request){
         $directory = "quote/";
-        $nameFile = "test_csv_upload.xlsx";
+        $nameFile = "import_product.xlsx";
 
         $newVersion = $request['new_version'] ?? null;
 
@@ -999,20 +1012,160 @@ class QuoteController extends Controller
             try{
                 if(count($result) >= 1){
                     foreach ($result as $key => $value) {
-                        if (is_numeric($value[3]) && is_numeric($value[5])) {
-                            if ($value[6] != null || $value[6] != ''){
-                                $insertProduct[] = ['id_quote' => $request->id_quote,'name' => $value[1], 'description' => (string)$value[2], 'qty' => $value[3], 'unit' => $value[4], 'nominal' => $value[5], 'grand_total' => $value[3]*$value[5], 'price_list' => $value[6], 'total_price_list' => $value[3]*$value[6]];
+                        if (is_numeric($value[3]) && is_numeric($value[6])) {
+                            if ($value[7] != null || $value[7] != ''){
+                                if ($value[4] != null && $value[4] > 0){
+                                    $insertProduct[] = [
+                                        'id_quote' => $request->id_quote,
+                                        'name' => $value[1],
+                                        'description' => (string)$value[2],
+                                        'qty' => $value[3],
+                                        'jangka_waktu' => $value[4],
+                                        'unit' => $value[5],
+                                        'nominal' => $value[6],
+                                        'grand_total' => $value[3]*$value[4]*$value[6],
+                                        'price_list' => $value[7],
+                                        'total_price_list' => $value[3]*$value[4]*$value[7],
+                                        'additional_column_1' => $value[8],
+                                        'additional_column_2' => $value[9],
+                                        'additional_column_3' => $value[10],
+                                        'additional_column_4' => $value[11],
+                                        'additional_column_5' => $value[12],
+                                    ];
+                                }else{
+                                    $insertProduct[] = [
+                                        'id_quote' => $request->id_quote,
+                                        'name' => $value[1],
+                                        'description' => (string)$value[2],
+                                        'qty' => $value[3],
+                                        'unit' => $value[5],
+                                        'nominal' => $value[6],
+                                        'grand_total' => $value[3]*$value[6],
+                                        'price_list' => $value[7],
+                                        'total_price_list' => $value[3]*$value[7],
+                                        'additional_column_1' => $value[8],
+                                        'additional_column_2' => $value[9],
+                                        'additional_column_3' => $value[10],
+                                        'additional_column_4' => $value[11],
+                                        'additional_column_5' => $value[12],
+                                    ];
+                                }
+
                             }else{
-                                $insertProduct[] = ['id_quote' => $request->id_quote,'name' => $value[1], 'description' => (string)$value[2], 'qty' => $value[3], 'unit' => $value[4], 'nominal' => $value[5], 'grand_total' => $value[3]*$value[5], 'price_list' => 0, 'total_price_list' => 0];
+                                if ($value[4] != null && $value[4] > 0){
+                                    $insertProduct[] = [
+                                        'id_quote' => $request->id_quote,
+                                        'name' => $value[1],
+                                        'description' => (string)$value[2],
+                                        'qty' => $value[3],
+                                        'jangka_waktu' => $value[4],
+                                        'unit' => $value[5],
+                                        'nominal' => $value[6],
+                                        'grand_total' => $value[3]*$value[4]*$value[6],
+                                        'price_list' => 0,
+                                        'total_price_list' => 0,
+                                        'additional_column_1' => $value[8],
+                                        'additional_column_2' => $value[9],
+                                        'additional_column_3' => $value[10],
+                                        'additional_column_4' => $value[11],
+                                        'additional_column_5' => $value[12],
+                                    ];
+                                }else{
+                                    $insertProduct[] = [
+                                        'id_quote' => $request->id_quote,
+                                        'name' => $value[1],
+                                        'description' => (string)$value[2],
+                                        'qty' => $value[3],
+                                        'unit' => $value[5],
+                                        'nominal' => $value[6],
+                                        'grand_total' => $value[3]*$value[6],
+                                        'price_list' => 0,
+                                        'total_price_list' => 0,
+                                        'additional_column_1' => $value[8],
+                                        'additional_column_2' => $value[9],
+                                        'additional_column_3' => $value[10],
+                                        'additional_column_4' => $value[11],
+                                        'additional_column_5' => $value[12],
+                                    ];
+                                }
+
+
                             }
                         }else{
-                            if ($value[6] != null || $value[6] != ""){
-                                $insertProduct[] = ['id_quote' => $request->id_quote,'name' => $value[1], 'description' => (string)$value[2], 'qty' => $value[3], 'unit' => $value[4], 'nominal_product' => preg_replace("/[^0-9]/", "", substr($value[5], 0, strpos($value[5], ","))),
-                                    'grand_total' => $value[3] * preg_replace(" /[^0-9]/", "", substr($value[5], 0, strpos($value[5], ","))), 'price_list' => preg_replace("/[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))), 'total_price_list' => $value[3] * preg_replace("/[^0-9]/", "", substr($value[6], 0, strpos($value[6], ",")))
-                                ];
+                            if ($value[7] != null || $value[7] != ""){
+                                if ($value[4] != null && $value[4] > 0){
+                                    $insertProduct[] = [
+                                        'id_quote' => $request->id_quote,
+                                        'name' => $value[1],
+                                        'description' => (string)$value[2],
+                                        'qty' => $value[3],
+                                        'jangka_waktu' => $value[4],
+                                        'unit' => $value[5],
+                                        'nominal_product' => preg_replace("/[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'grand_total' => $value[3] * $value[4] * preg_replace(" /[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'price_list' => preg_replace("/[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'total_price_list' => $value[3] * $value[4] * preg_replace("/[^0-9]/", "", substr($value[7], 0, strpos($value[7], ","))),
+                                        'additional_column_1' => $value[8],
+                                        'additional_column_2' => $value[9],
+                                        'additional_column_3' => $value[10],
+                                        'additional_column_4' => $value[11],
+                                        'additional_column_5' => $value[12],
+                                    ];
+                                }else{
+                                    $insertProduct[] = [
+                                        'id_quote' => $request->id_quote,
+                                        'name' => $value[1],
+                                        'description' => (string)$value[2],
+                                        'qty' => $value[3],
+                                        'unit' => $value[5],
+                                        'nominal_product' => preg_replace("/[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'grand_total' => $value[3] * preg_replace(" /[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'price_list' => preg_replace("/[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'total_price_list' => $value[3] * preg_replace("/[^0-9]/", "", substr($value[7], 0, strpos($value[7], ","))),
+                                        'additional_column_1' => $value[8],
+                                        'additional_column_2' => $value[9],
+                                        'additional_column_3' => $value[10],
+                                        'additional_column_4' => $value[11],
+                                        'additional_column_5' => $value[12],
+                                    ];
+                                }
                             }else{
-                                $insertProduct[] = ['id_quote' => $request->id_quote,'name' => $value[1], 'description' => (string)$value[2], 'qty' => $value[3], 'unit' => $value[4], 'nominal_product' => preg_replace("/[^0-9]/", "", substr($value[5], 0, strpos($value[5], ","))),
-                                    'grand_total' => $value[3] * preg_replace("/[^0-9]/", "", substr($value[5], 0, strpos($value[5], ","))), 'price_list' => 0, 'total_price_list' => 0];
+                                if ($value[4] != null && $value[4] > 0){
+                                    $insertProduct[] = [
+                                        'id_quote' => $request->id_quote,'name' => $value[1],
+                                        'description' => (string)$value[2],
+                                        'qty' => $value[3],
+                                        'jangka_waktu' => $value[4],
+                                        'unit' => $value[5],
+                                        'nominal_product' => preg_replace("/[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'grand_total' => $value[3] * $value[4] * preg_replace(" /[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'price_list' => 0,
+                                        'total_price_list' => 0,
+                                        'additional_column_1' => $value[8],
+                                        'additional_column_2' => $value[9],
+                                        'additional_column_3' => $value[10],
+                                        'additional_column_4' => $value[11],
+                                        'additional_column_5' => $value[12],
+                                    ];
+                                }else{
+                                    $insertProduct[] = [
+                                        'id_quote' => $request->id_quote,'name' => $value[1],
+                                        'description' => (string)$value[2],
+                                        'qty' => $value[3],
+                                        'unit' => $value[4],
+                                        'nominal_product' => preg_replace("/[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'grand_total' => $value[3] * preg_replace(" /[^0-9]/", "", substr($value[6], 0, strpos($value[6], ","))),
+                                        'price_list' => 0,
+                                        'total_price_list' => 0,
+                                        'additional_column_1' => $value[8],
+                                        'additional_column_2' => $value[9],
+                                        'additional_column_3' => $value[10],
+                                        'additional_column_4' => $value[11],
+                                        'additional_column_5' => $value[12],
+                                    ];
+                                }
+
+
                             }
                         }
                     }
@@ -1051,13 +1204,18 @@ class QuoteController extends Controller
             "product",
             "description",
             "qty",
+            "time_period(month)",
             "type(Pcs,Unit,Lot,Pack,Node)",
             "price(non-ppn)",
-            "pricelist(non-ppn)"
+            "pricelist(non-ppn)",
+            "additional_column1",
+            "additional_column2",
+            "additional_column3",
+            "additional_column4",
+            "additional_column5"
         );
 
         if (($open = fopen($locationFile, "r")) !== FALSE) {
-
             $i = 0;
             $array = [];
             while (($data = fgetcsv($open, 1000, ";")) !== FALSE) {
@@ -1585,11 +1743,61 @@ class QuoteController extends Controller
             'role' => $role,
             'territory' => $territory ?? null
         ];
+        $isPricelist = false;
+        $additionalColumn = 0;
+        foreach ($product as $prod){
+            if ((float)$prod->price_list > 0 && $prod->price_list != null){
+                $isPricelist = true;
+            }
+            if ($prod->additional_column_1 != null && $prod->additional_column_1 != '-'){
+                $additionalColumn += 1;
+            }
+            if ($prod->additional_column_2 != null && $prod->additional_column_2 != '-'){
+                $additionalColumn += 1;
+            }
+            if ($prod->additional_column_3 != null && $prod->additional_column_3 != '-'){
+                $additionalColumn += 1;
+            }
+            if ($prod->additional_column_4 != null && $prod->additional_column_4 != '-'){
+                $additionalColumn += 1;
+            }
+            if ($prod->additional_column_5 != null && $prod->additional_column_5 != '-'){
+                $additionalColumn += 1;
+            }
+            break;
+        }
 
-        if ($request['lang'] == 'id'){
-            $pdf =  PDF::loadView('sales.quotation_pdf', $data);
-        }else if($request['lang'] == 'en'){
-            $pdf =  PDF::loadView('sales.quotation_pdf_english', $data);
+
+        if ($isPricelist){
+            if ($additionalColumn > 1){
+                if ($request['lang'] == 'id') {
+                    $pdf = PDF::loadView('sales.quotation_pdf_landscape', $data)->setPaper('a4', 'landscape');
+                }else if($request['lang'] == 'en'){
+                    $pdf =  PDF::loadView('sales.quotation_pdf_english_landscape', $data)->setPaper('a4','landscape');
+                }
+            }else{
+                if ($request['lang'] == 'id') {
+                    $pdf =  PDF::loadView('sales.quotation_pdf', $data);
+
+                }else if($request['lang'] == 'en'){
+                    $pdf =  PDF::loadView('sales.quotation_pdf_english', $data);
+                }
+            }
+        }else{
+            if ($additionalColumn > 3){
+                if ($request['lang'] == 'id') {
+                    $pdf = PDF::loadView('sales.quotation_pdf_landscape', $data)->setPaper('a4', 'landscape');
+                }else if($request['lang'] == 'en'){
+                    $pdf =  PDF::loadView('sales.quotation_pdf_english_landscape', $data)->setPaper('a4','landscape');
+                }
+            }else{
+                if ($request['lang'] == 'id') {
+                    $pdf =  PDF::loadView('sales.quotation_pdf', $data);
+
+                }else if($request['lang'] == 'en'){
+                    $pdf =  PDF::loadView('sales.quotation_pdf_english', $data);
+                }
+            }
         }
 
         if ($config->sign != null){

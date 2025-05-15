@@ -17,7 +17,7 @@
             margin-top: 10px;
             margin-bottom: 20px;
         }
-        .divider h6 {
+        .divider h4 {
             margin: 0;
             text-align: center;
             font-family: Lucida Sans Unicode, sans-serif;
@@ -52,17 +52,19 @@
             margin: 0;
             padding: 0;
         }
-        .text-8 {
-            font-size: 8px !important;
-            margin: 0;
-            padding: 0;
-        }
         .text-10 * {
             font-size: 9px !important;
         }
 
+        .text-8 {
+            font-size: 8px !important;
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+        }
         .text-8 * {
             font-size: 8px !important;
+            vertical-align: middle;
         }
 
         .pdf-container {
@@ -121,23 +123,21 @@
     <p class="text-10">Jl. Letjen S. Parman Nomor 1AA</p>
     <p class="text-10">Kemanggisan - Pal Merah</p>
     <p class="text-10" >Jakarta 11480 - Indonesia</p>
-    <img src="{{ public_path('img/logo-sip-hd.png') }}" alt="Logo SIP" style="max-width: 20%; height: auto; margin-top: -70px; margin-left: 280px;">
-    <p class="text-10" style="margin-left: 550px; margin-top: -50px; margin-bottom: -20px;">
-        Phone <span style=""> : </span> <span> 62 21 583 555 99 </span>
-        <br>
-        Fax &nbsp;&nbsp;&nbsp;&nbsp; <span>: </span> <span> 62 21 583 55 188 </span>
+    <img src="{{ public_path('img/logo-sip-hd.png') }}" alt="Logo SIP" style="max-width: 13%; height: auto; margin-top: -70px; margin-left: 450px;">
+    <p class="text-10" style="margin-left: 880px; margin-top: -50px; margin-bottom: -20px;">
+        Phone <span style=""> : </span> <span> 62 21 50865 777 </span>
         <br>
         Email  &nbsp;<span> : </span>  <span> sales@sinergy.co.id </span>
     </p>
 </div>
 <br>
 <div  class="divider">
-    <h6 style="margin: 0; text-align: center; ">QUOTATION</h6>
+    <h4 style="margin: 0; text-align: center; ">QUOTATION</h4>
 </div>
 <div class="" style="margin: 0; padding: 0;">
     <table style="width: 100%; border-collapse: collapse; border: 1px solid;" >
         <tr>
-            <td colspan="2" style="width: 500px;">
+            <td colspan="2" style="width: 800px;">
                 <table style="font-size: 9px; width: 100%; border: none; line-height: 1.2;">
                     <tr>
                         <td style="width: 70px; padding: 0 2px;">To</td>
@@ -188,7 +188,7 @@
                     </tr>
                 </table>
             </td>
-            <td style="width: 200px; border: 1px solid; vertical-align: top; line-height: 1.2;">
+            <td style="width: 300px; border: 1px solid; vertical-align: top;">
                 <table style="font-size: 9px; width: 100%; border: none;">
                     <tr>
                         <td>Date</td>
@@ -258,9 +258,9 @@
         @endphp
         <tr>
             @if($isPriceList)
-                <th class="table-content-sub" style="width: 20px; border-bottom: 2px;">No</th>
+                <th class="table-content-sub" style="width: 30px; border-bottom: 2px;">No</th>
                 <th class="table-content-sub" style="width: 70px; border-bottom: 2px;">Product</th>
-                <th class="table-content-sub" style="width: 80px; border-bottom: 2px;">Description</th>
+                <th class="table-content-sub" style="width: 150px; border-bottom: 2px;">Description</th>
                 @if($header1 != null)
                     <th class="table-content-sub" style=" border-bottom: 2px;">{{$header1}}</th>
                 @endif
@@ -277,13 +277,13 @@
                     <th class="table-content-sub" style=" border-bottom: 2px;">{{$header5}}</th>
                 @endif
                 <th class="table-content-sub" style="width: 50px; border-bottom: 2px;">Time Period</th>
-                <th colspan="2" class="table-content-sub" style="width: 20px; border-bottom: 2px;">Qty</th>
-                <th class="table-content-sub" style="width: 75px; border-bottom: 2px;">Pricelist</th>
-                <th class="table-content-sub" style="width: 75px;border-bottom: 2px;">Total Pricelist</th>
-                <th class="table-content-sub" style="width: 75px; border-bottom: 2px;">Unit Price</th>
-                <th class="table-content-sub" style="width: 100px;border-bottom: 2px;">Total Unit Price</th>
+                <th colspan="2" class="table-content-sub" style="width: 25px; border-bottom: 2px;">Qty</th>
+                <th class="table-content-sub" style="width: 90px; border-bottom: 2px;">Pricelist</th>
+                <th class="table-content-sub" style="width: 90px;border-bottom: 2px;">Total Pricelist</th>
+                <th class="table-content-sub" style="width: 90px; border-bottom: 2px;">Unit Price</th>
+                <th class="table-content-sub" style="width: 90px;border-bottom: 2px;">Total Unit Price</th>
             @else
-                <th class="table-content-sub" style="width: 20px; border-bottom: 2px;">No</th>
+                <th class="table-content-sub" style="width: 50px; border-bottom: 2px;">No</th>
                 <th class="table-content-sub" style="width: 100px; border-bottom: 2px;">Product</th>
                 <th class="table-content-sub" style="width: 150px; border-bottom: 2px;">Description</th>
                 @if($header1 != null)
@@ -302,9 +302,9 @@
                     <th class="table-content-sub" style=" border-bottom: 2px;">{{$header5}}</th>
                 @endif
                 <th class="table-content-sub" style="width: 50px; border-bottom: 2px;">Time Period</th>
-                <th colspan="2" class="table-content-sub" style="width: 10px; border-bottom: 2px;">Qty</th>
-                <th class="table-content-sub" style="width: 90px; border-bottom: 2px;">Unit Price</th>
-                <th class="table-content-sub" style="width: 90px;border-bottom: 2px;">Total Unit Price</th>
+                <th colspan="2" class="table-content-sub" style="width: 80px; border-bottom: 2px;">Qty</th>
+                <th class="table-content-sub" style="width: 120px; border-bottom: 2px;">Unit Price</th>
+                <th class="table-content-sub" style="width: 120px;border-bottom: 2px;">Total Unit Price</th>
             @endif
         </tr>
         <tr style="height: 4px;">
@@ -381,7 +381,7 @@
                 $totalPriceList = str_replace(',', '.', $prod->total_price_list);
                 $totalPriceList = floatval($totalPriceList);
 
-                function getAdditionalValue(?string $column): string {
+               function getAdditionalValue(?string $column): string {
                     $parts = explode('-', $column ?? '');
                     return isset($parts[1]) ? trim($parts[1]) : '';
                 }
@@ -413,8 +413,8 @@
                     <td class="text-8">{{$value5}}</td>
                 @endif
                 <td class="text-8"> <center>@if($prod->jangka_waktu != null){{$prod->jangka_waktu}} month @endif</center></td>
-                <td class="text-8" style="text-align: right; width: 10px;"><center>{{$prod->qty}}</center></td>
-                <td class="text-8" style="width: 10px;"><center>{{$prod->unit}}</center></td>
+                <td class="text-8" style="text-align: right;"><center>{{$prod->qty}}</center></td>
+                <td class="text-8"><center>{{$prod->unit}}</center></td>
                 @if($isPriceList)
                     <td class="text-8"><p>Rp  <span style="text-align: center; float:right;"> {{ number_format($nominalPriceList, 2, ',', '.')  }}</span></p></td>
                     <td class="text-8"><p>Rp  <span style="text-align: center; float:right;"> {{ number_format($totalPriceList, 2, ',', '.')  }}</span></p></td>
@@ -532,7 +532,7 @@
     <br>
     <p class="text-10">Best Regards,</p>
     <br>
-    <img src="{{ public_path('img/logo-sip-hd.png') }}" alt="Logo SIP" style="max-width: 18%; height: auto; opacity: 0.5; margin-left: 15px; tab-index: 1; margin-bottom: 15px;">
+    <img src="{{ public_path('img/logo-sip-hd.png') }}" alt="Logo SIP" style="max-width: 12%; height: auto; opacity: 0.5; margin-left: 15px; tab-index: 1; margin-bottom: 10px;">
     @if($config->sign && $config->nik == Auth::user()->nik)
         <img src="{{$config->sign}}" alt="" style="margin-left: -150px; tab-index: 2; margin-top: -10px; margin-bottom: 0; max-width: 17%">
     @endif

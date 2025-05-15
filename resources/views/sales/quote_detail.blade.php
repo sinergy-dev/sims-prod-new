@@ -55,6 +55,14 @@
             z-index: 9999 !important;
         }
 
+        .select2-container {
+            z-index: 1055 !important; /* modal default: 1050 */
+        }
+
+        .select2-dropdown {
+            z-index: 1060 !important;
+        }
+
         .pull-right{
             float: right;
         }
@@ -108,83 +116,97 @@
     </div>
 
     <div class="modal fade" id="modalAdd" role="dialog" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
+        <div class="modal-dialog modal-lg ">
             <div class="modal-content modal-md">
                 <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload()">
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload()"></button>
                     <h6 class="modal-title">Add Quote</h6>
                 </div>
-                <div class="modal-body">
-                    <form method="POST" action="" id="modalAddQuote" name="modalAddQuote">
+                <form method="POST" action="" id="modalAddQuote" name="modalAddQuote">
+                    <div class="modal-body">
                         @csrf
-                        <div class="tab-add" style="display: none;">
+                        <div class="tab-add" style="display: none!important;">
                             <div class="tabGroup">
                                 <div class="form-group">
                                     <label for="">Lead ID*</label>
                                     <input type="text" name="lead_id" id="leadId" class="form-control" required style="width: 100%" disabled>
-                                    <span class="help-block" style="display:none;">Please fill Lead ID!</span>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Lead ID!</span>
                                 </div>
+                                @if(Auth::user()->roles()->first()->name == 'Account Executive')
+                                    <div class="form-group">
+                                        <label for="">Position</label>
+                                        <select type="text" class="custom-form-control-select w-100" name="position" id="position" required>
+                                            <option value="">--Choose Position--</option>
+                                            <option value="TAM">TAM</option>
+                                            <option value="DIR">DIR</option>
+                                        </select>
+                                        <span class="invalid-feedback" style="display:none!important;">Please fill Position!</span>
+                                    </div>
+                                @endif
                                 <div class="form-group">
                                     <label>Customer</label>
                                     <input type="text" class="form-control" name="customer" id="customer" required disabled>
-                                    <span class="help-block" style="display:none;">Please fill Customer!</span>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Customer!</span>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Telp*</label>
-                                            <input type="text" name="no_telp" id="no_telp" class="form-control" required disabled>
-                                            <span class="help-block" style="display:none;">Please fill Telp!</span>
+                                            <input type="text" name="no_telp" id="no_telp" class="form-control" required>
+                                            <span class="invalid-feedback" style="display:none!important;">Please fill Telp!</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Email*</label>
-                                            <input type="text" name="email" id="email" class="form-control" placeholder="ex: yono1122@gmail.com" required>
-                                            <span class="help-block" style="display:none;">Please fill Email!</span>
+                                            <input type="text" name="email" id="email" class="form-control" placeholder="ex: johndoe@gmail.com" onkeyup="fillInput('email')" required>
+                                            <span class="invalid-feedback" style="display:none!important;">Please fill Email!</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Date*</label>
-                                    <input type="date" class="form-control datepicker" name="date" id="date" required disabled>
-                                    <span class="help-block" style="display:none;">Please fill Date!</span>
+                                    <input type="date" class="form-control datepicker" name="date" id="date" required>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Date!</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Subject*</label>
-                                    <input type="text" class="form-control" name="subject" id="subject" required disabled>
-                                    <span class="help-block" style="display:none;">Please fill Subject!</span>
+                                    <input type="text" class="form-control" name="subject" id="subject" required>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Subject!</span>
                                 </div>
+                                {{--                                    <div class="form-group">--}}
+                                {{--                                        <label for="">Address*</label>--}}
+                                {{--                                        <textarea name="address" id="address" class="form-control" rows="3" placeholder="Building Name&#10;Street&#10;City - Province"></textarea>--}}
+                                {{--                                        <span class="invalid-feedback" style="display:none!important;">Please fill Address!</span>--}}
+                                {{--                                    </div>--}}
                                 <div class="form-group">
                                     <label for="">Building Name</label>
                                     <input type="text" class="form-control" name="building" id="building" placeholder="ex: Gedung Inlingua">
-                                    <span class="help-block" style="display: none;">Please fill Building Name!</span>
+                                    <span class="invalid-feedback" style="display: none!important;">Please fill Building Name!</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Street Name*</label>
                                     <input type="text" class="form-control" name="street" id="street" placeholder="ex: Jl. Puri Kencana Blok K6 No. 2M-2L" required>
-                                    <span class="help-block" style="display: none;">Please fill Street Name!</span>
+                                    <span class="invalid-feedback" style="display: none!important;">Please fill Street Name!</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="">City - Postal Code*</label>
                                     <input type="text" class="form-control" name="city" id="city" placeholder="ex: Jakarta - 11610" required>
-                                    <span class="help-block" style="display: none;">Please fill City - Postal Code!</span>
+                                    <span class="invalid-feedback" style="display: none!important;">Please fill City - Postal Code!</span>
                                 </div>
                                 <div class="form-group">
                                     <label>Attention*</label>
-                                    <input class="form-control" placeholder="ex: Yono Bakri" id="attention" name="attention" required>
-                                    <span class="help-block" style="display:none;">Please fill Attention!</span>
+                                    <input class="form-control" placeholder="ex: John Doe" id="attention" name="attention" required>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Attention!</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Quotation Type</label>
                                     <input type="text" name="quote_type" id="quote_type" class="form-control" placeholder="ex: Supply Only, Maintenance">
-                                    <span class="help-block" style="display:none;">Please fill Quotation Type!</span>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Quotation Type!</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-add" style="display: none;">
+                        <div class="tab-add" style="display: none!important;">
                             <div class="tabGroupInitiateAdd">
                                 <div class="form-group" style="display:flex">
                                     <button class="btn btn-sm btn-primary" id="btnInitiateAddProduct" type="button" style="margin:0 auto;"><i class="bx bx-plus"></i>&nbspAdd Product</button>
@@ -194,90 +216,95 @@
                                 </div>
                                 <div class="form-group" style="display: flex;">
                                     <div style="padding: 7px;
-                          border: 1px solid #dee2e6 !important;
-                          color: #337ab7;
-                          height: 35px;
-                          background-color: #eee;
-                          display: inline;
-                          margin: 0 auto;">
+                                      border: 1px solid #dee2e6 !important;
+                                      color: #337ab7;
+                                      height: 35px;
+                                      background-color: #eee;
+                                      display: inline;
+                                      margin: 0 auto;">
                                         <i class="bx bx-cloud-upload" style="margin-left:5px">
-                                            <input id="uploadCsv" class="hidden" type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: inline;"></i>
+                                            <input id="uploadCsv" type="file" name="uploadCsv" style="margin-top: 3px;width: 80px;display: none;"></i>
                                         <label for="uploadCsv">Upload CSV</label>
                                         <i class="bx bx-x hidden" onclick="cancelUploadCsv()" style="display:inline;color: red;"></i>
                                     </div>
                                 </div>
                                 <div style="display: flex;">
                                 <!--              <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1IDI8NVdVskSl__qQVfsrugEamr01W4IA')}}" style="cursor:pointer;">link</a></span> -->
-                                    <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1Hwpgo-RcVkmQdND7159f5l4Ah-qgcNwK')}}" style="cursor:pointer;">link</a></span>
+                                    <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1G8JIaREKOPlQypwMCaQ6o5vdujrLV5Ar')}}" style="cursor:pointer;">link</a></span>
+                                    {{--                                    <span style="margin: 0 auto;">You can get format of CSV from this <a href="{{url('https://drive.google.com/uc?export=download&id=1Hwpgo-RcVkmQdND7159f5l4Ah-qgcNwK')}}" style="cursor:pointer;">link</a></span>--}}
                                 </div>
                                 <div style="display: flex;">
                                     <span style="margin: 0 auto;">And make sure, the change of template only at row 2, any change on row 1 (header) will be reject</span>
                                 </div>
                             </div>
-                            <div class="tabGroup" style="display:none">
+                            <div class="tabGroup" style="display:none!important">
                                 <div class="form-group">
                                     <label>Product*</label>
                                     <input autocomplete="off" type="text" name="" class="form-control" id="inputNameProduct" placeholder="ex. Laptop MSI Modern 14" onkeyup="fillInput('name_product')">
-                                    <span class="help-block" style="display:none;">Please fill Name Product!</span>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Name Product!</span>
                                 </div>
                                 <div class="form-group">
                                     <label>Description*</label>
                                     <textarea onkeyup="fillInput('desc_product')" style="resize:vertical;height:150px" id="inputDescProduct" placeholder='ex. Laptop mSI Modern 14, Processor AMD Rayzen 7 5700, Memory 16GB, SSD 512 Gb, Screen 14", VGA vega 8, Windows 11 Home' name="inputDescProduct" class="form-control"></textarea>
-                                    <span class="help-block" style="display:none;">Please fill Description!</span>
+                                    <span class="invalid-feedback" style="display:none!important;">Please fill Description!</span>
                                 </div>
-                                <div class="row mb-4">
-                                    <div class="col-md-2">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">Time Period</label>
+                                        <div class="input-group">
+                                            <input autocomplete="off" type="number" name="" class="form-control" id="inputTimePeriod" placeholder="Ex. 12" onkeyup="fillInput('time_period')">
+                                            <div class="input-group-text">
+                                                Month
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Qty*</label>
                                             <input autocomplete="off" type="number" name="" class="form-control" id="inputQtyProduct" placeholder="ex. 5" onkeyup="fillInput('qty_product')">
                                             <span class="help-block" style="display:none;">Please fill Qty!</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-2" style="margin-bottom:10px">
+                                    <div class="col-md-4" style="margin-bottom:10px">
                                         <label>Type*</label>
-                                        {{--                                            <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>--}}
+                                        {{--                                            <i class="fa fa-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>--}}
                                         <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
                                             <option>
                                         </select>
                                         <span class="help-block" style="display:none;">Please fill Unit!</span>
                                     </div>
-                                    <div class="col-md-4" style="margin-bottom:10px">
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-bottom:10px">
                                         <label>Price*</label>
                                         <div class="input-group">
-                                            <div class="input-group-addon">
+                                            <div class="input-group-text">
                                                 Rp.
                                             </div>
                                             <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceProduct" placeholder="ex. 500,000.00" onkeyup="fillInput('price_product')">
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <span class="bx bx-caret-down"></span>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" onclick="changeCurreny('dollar')">IDR(RP)</a></li>
-                                                </ul>
-                                            </div>
                                         </div>
                                         <span class="help-block" style="display:none;">Please fill Price!</span>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <label for="">Price List</label>
                                         <div class="input-group">
-                                            <div class="input-group-addon">
+                                            <div class="input-group-text">
                                                 Rp.
                                             </div>
                                             <input autocomplete="off" type="text" name="" class="form-control money" id="inputPriceList" placeholder="ex. 500,000.00" onkeyup="fillInput('price_list')">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Total Price</label>
                                             <div class="input-group">
-                                                <div class="input-group-addon">
+                                                <div class="input-group-text">
                                                     Rp.
                                                 </div>
-                                                <input autocomplete="off" disabled type="text" name="" class="form-control" id="inputTotalPrice" placeholder="75.000.000,00">
+                                                <input autocomplete="off" readonly type="text" name="" class="form-control" id="inputTotalPrice" placeholder="75.000.000,00">
                                             </div>
                                         </div>
                                     </div>
@@ -285,23 +312,31 @@
                                         <div class="form-group">
                                             <label>Total Price List</label>
                                             <div class="input-group">
-                                                <div class="input-group-addon">
+                                                <div class="input-group-text">
                                                     Rp.
                                                 </div>
-                                                <input autocomplete="off" disabled type="text" name="" class="form-control" id="inputTotalPriceList" placeholder="75.000.000,00">
+                                                <input autocomplete="off" readonly type="text" name="" class="form-control" id="inputTotalPriceList" placeholder="75.000.000,00">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div id="additionalInputContainer">
+                                    </div>
+                                </div>
+                                <div class="text-end mt-2">
+                                    <button type="button" class="btn btn-sm btn-warning" onclick="addAdditionalInput()"><i class="bx bx-plus"></i></button>
+                                </div>
                             </div>
                         </div>
-                        <div class="tab-add" style="display:none">
+                        <div class="tab-add" style="display:none!important">
                             <div class="tabGroup table-responsive">
                                 <table class="table no-wrap">
                                     <thead>
                                     <th>No</th>
                                     <th>Product</th>
                                     <th>Description</th>
+                                    <th>Time Period</th>
                                     <th>Qty</th>
                                     <th>Type</th>
                                     <th>Price List</th>
@@ -314,15 +349,15 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row mb-4">
+                            <div class="row">
                                 <div class="col-md-12" id="bottomProducts">
                                 </div>
                             </div>
                             <div class="form-group" style="display:flex;margin-top: 10px;">
-                                <button class="btn btn-sm btn-primary" style="margin: 0 auto;" type="button" id="addProduct"><i class="bx bx-plus"></i>&nbsp Add product</button>
+                                <button class="btn btn-sm btn-sm btn-primary" style="margin: 0 auto;" type="button" id="addProduct"><i class="bx bx-plus"></i>&nbsp Add product</button>
                             </div>
                         </div>
-                        <div class="tab-add" style="display:none">
+                        <div class="tab-add" style="display:none!important">
                             <div class="tabGroup">
                                 <div class="card-body">
                                     <div id="snow-toolbar">
@@ -357,14 +392,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-add" style="display:none">
+                        <div class="tab-add" style="display:none!important">
                             <div class="tabGroup">
-                                <div class="row mb-4">
+                                <div class="row">
                                     <div class="col-md-12" id="headerPreviewFinal">
 
                                     </div>
                                 </div><br>
-                                <div class="row mb-4">
+                                <div class="row">
                                     <div class="col-md-12 table-responsive">
                                         <table class="table" style="white-space: nowrap;">
                                             <thead>
@@ -372,6 +407,8 @@
                                                 <th>No</th>
                                                 <th>Product</th>
                                                 <th>Description</th>
+                                                <th class="dynamic-header-placeholder-preview"></th>
+                                                <th>Time Period</th>
                                                 <th>Qty</th>
                                                 <th>Type</th>
                                                 <th>Price List</th>
@@ -386,19 +423,19 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="row mb-4">
+                                <div class="row">
                                     <div class="col-md-12" id="bottomPreviewFinal">
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-outline-secondary" id="prevBtnAdd">Back</button>
-                            <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" id="prevBtnAdd">Back</button>
+                        <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -461,8 +498,6 @@
     <script src="{{ url('assets/js/bootstrap-timepicker.min.js')}}"></script>
     <script src="{{ url('assets/js/jquery.emailinput.min.js')}}"></script>
     <script src="{{ url('assets/js/roman.js')}}"></script>
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.all.min.js" integrity="sha512-ng0ComxRUMJeeN1JS62sxZ+eSjoavxBVv3l7SG4W/gBVbQj+AfmVRdkFT4BNNlxdDCISRrDBkNDxC7omF0MBLQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
-{{--    <!-- <script src="{{asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script> -->--}}
     <script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/jquery.mask.js')}}"></script>
     <script src="{{asset('assets/js/jquery.mentionsInput.js')}}" type="text/javascript"></script>
@@ -474,6 +509,8 @@
     <script type="text/javascript">
         // $(".money").mask('000,000,000,000,000', {reverse: true})
         $('.money').mask('#.##0,00', {reverse: true})
+        let snowEditor ;
+
 
         window.onload = function(){
             localStorage.setItem("arrFilterBack", localStorage.getItem("arrFilter"))
@@ -599,13 +636,6 @@
                 }
             })
 
-            if (window.location.href.split("?")[1] == "hide") {
-                $("#btnSirkulasi").attr('style','display:none!important')
-                $("#btnFinalize").attr('style','display:none!important')
-                $("#btnRevision").attr('style','display:none!important')
-                $("#btnAddNotes").attr('style','display:none!important')
-                $("#BtnBack").attr('style','display:none!important')
-            }
         })
 
         function select2TypeProduct(value){
@@ -617,7 +647,7 @@
                     $('#selectTypeProduct').select2({
                         data:result,
                         placeholder:'Ex. Unit',
-                        dropdownParent: $('#modalAdd .modal-body')
+                        dropdownParent: $('#modalAdd')
                     })
                 }
             })
@@ -636,7 +666,7 @@
             $("#btnInitiateAddProduct").prop("disabled",false)
         }
 
-        $("#BtnBack").click(function(){
+        function buttonBack() {
             if (localStorage.getItem('isEmail') == 'true') {
                 $("#showDetail").empty()
                 localStorage.setItem('isEmail',false)
@@ -644,7 +674,9 @@
             }else{
                 $("#BtnBack").attr("href", "{{url('/sales/quote')}}")
             }
-        })
+        }
+
+
 
         let arrReason = []
         function reasonReject(reason,display,nameClass,typeCallout=""){
@@ -721,6 +753,8 @@
             append = append + '<th>No</th>'
             append = append + '<th width="20%">Product</th>'
             append = append + '<th width="40%">Description</th>'
+            append = append + '<th width="40%" class="dynamic-header-placeholder"></th>'
+            append = append + '<th width="10%">Time Period</th>'
             append = append + '<th width="5%">Qty</th>'
             append = append + '<th width="5%">Type</th>'
             append = append + '<th width="10%">Price List</th>'
@@ -938,7 +972,8 @@
             append = append + '</div>'
             append = append + '<div class="form-group">'
             append = append + '<div class="col-sm-12">'
-            append = append + '<button class="btn btn-sm btn-flat btn-primary pull-right" style="display:inline" onclick="sendOpenEmail('+version+')"><i class="bx bx-envelope-o"></i> Send</button>'
+            append = append + '<button class="btn btn-sm btn-flat btn-primary pull-right ml-4" style="display:inline" onclick="sendOpenEmail('+version+')"><i class="bx bx-envelope-o"></i> Send</button>'
+            append = append + '<button class="btn btn-sm btn-flat btn-danger pull-right mr-2" style="display:inline; margin-right: 3px;" id="BtnBack" onclick="buttonBack()">Back</button>'
             append = append + '</div>'
             append = append + '</div>'
             append = append + '</div>'
@@ -1122,7 +1157,32 @@
                     var append = ""
                     var i = 0
                     var valueGrandTotal = 0
+                    var additionalHeadersDetail = [];
                     $.each(result.product,function(value,item){
+                        if (value === 0) {
+                            let hasAdditionalColumn = false;
+                            for (let j = 1; j <= 5; j++) {
+                                const col = item[`additional_column_${j}`];
+                                if (col && col.includes("-") && col !== null && col !== "") {
+                                    const header = col.split("-")[0].trim();
+                                    if (header) {
+                                        additionalHeadersDetail.push({ index: j, header });
+                                        hasAdditionalColumn = true;
+                                    }
+                                }
+                            }
+                            let dynamicHeaderHTML = "";
+                            if (hasAdditionalColumn) {
+                                additionalHeadersDetail.forEach(h => {
+                                    dynamicHeaderHTML += `<th width='20%'>${h.header}</th>`;
+                                });
+
+                                $(".table thead tr th.dynamic-header-placeholder").replaceWith(dynamicHeaderHTML);
+                            }else{
+                                $(".table thead tr th.dynamic-header-placeholder").replaceWith(dynamicHeaderHTML);
+                            }
+
+                        }
                         i++
                         valueGrandTotal += parseFloat(item.grand_total)
                         append = append + '<tr>'
@@ -1134,6 +1194,17 @@
                         append = append + '</td>'
                         append = append + '<td>'
                         append = append + '<textarea style="width:500px;font-size:12px;height:150px;width:200px;resize:none" class="form-control" disabled>' + item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number +'</textarea>'
+                        append = append + '</td>'
+                        additionalHeadersDetail.forEach(h => {
+                            const col = item[`additional_column_${h.index}`];
+                            let value = "-";
+                            if (col && col.includes("-")) {
+                                value = col.split("-")[1]?.trim() || "";
+                            }
+                            append += `<td style="font-size: 12px;"><input type="text" readonly class="form-control" value="${value}"></td>`;
+                        });
+                        append = append + '<td>'
+                        append = append + '<input disabled class="form-control" type="" name="" value="'+ item.jangka_waktu +'" style="width:75px;font-size:12px">'
                         append = append + '</td>'
                         append = append + '<td>'
                         append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size:12px">'
@@ -1159,7 +1230,7 @@
                     appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
                     appendBottom = appendBottom + '    <form class="form-horizontal">'
                     appendBottom = appendBottom + '      <div class="form-group">'
-                    appendBottom = appendBottom + '        <label for="inputEmail3" class="col-sm-offset-6 col-sm-2 control-label">Total</label>'
+                    appendBottom = appendBottom + '        <label for="" class="col-sm-offset-6 col-sm-2 control-label">Total</label>'
                     appendBottom = appendBottom + '        <div class="col-sm-4">'
                     appendBottom = appendBottom + '          <input disabled="" type="text" class="form-control inputGrandTotalProductPreviewData" id="inputGrandTotalProductPreviewData" data-value="'+i+'" style="text-align:right">'
                     appendBottom = appendBottom + '        </div>'
@@ -1167,14 +1238,14 @@
 
 
                     appendBottom = appendBottom + '      <div class="form-group">'
-                    appendBottom = appendBottom + '        <label for="inputEmail4" class="col-sm-offset-6 col-sm-2 control-label">Vat <span class="title_tax"></span></label>'
+                    appendBottom = appendBottom + '        <label for="" class="col-sm-offset-6 col-sm-2 control-label">Vat <span class="title_tax"></span></label>'
                     appendBottom = appendBottom + '        <div class="col-sm-4">'
                     appendBottom = appendBottom + '          <input disabled="" style="text-align:right" type="text" class="form-control vat_tax_preview" id="vat_tax_previewData" data-value="'+i+'">'
                     appendBottom = appendBottom + '        </div>'
                     appendBottom = appendBottom + '      </div>'
 
                     appendBottom = appendBottom + '      <div class="form-group">'
-                    appendBottom = appendBottom + '        <label for="inputEmail5" class="col-sm-offset-6 col-sm-2 control-label">Grand Total</label>'
+                    appendBottom = appendBottom + '        <label for="" class="col-sm-offset-6 col-sm-2 control-label">Grand Total</label>'
                     appendBottom = appendBottom + '        <div class="col-sm-4">'
                     appendBottom = appendBottom + '          <input disabled="" style="text-align:right" type="text" class="form-control inputFinalPageTotalPriceData" id="inputFinalPageTotalPriceData" data-value="'+i+'">'
                     appendBottom = appendBottom + '        </div>'
@@ -1359,6 +1430,7 @@
                     $("#headerPreview").append(appendHeader)
                     var append = ""
                     var i = 0
+                    var additionalHeadersDetail = [];
 
                     function formatCurrency(value) {
                         let numericValue = parseFloat(value);
@@ -1373,6 +1445,31 @@
                     var valueGrandTotal = 0
 
                     $.each(result.product,function(value,item){
+                        if (value === 0) {
+                            let hasAdditionalColumn = false;
+                            for (let j = 1; j <= 5; j++) {
+                                const col = item[`additional_column_${j}`];
+                                if (col && col.includes("-") && col !== null && col !== "") {
+                                    const header = col.split("-")[0].trim();
+                                    if (header) {
+                                        additionalHeadersDetail.push({ index: j, header });
+                                        hasAdditionalColumn = true;
+                                    }
+                                }
+                            }
+                            let dynamicHeaderHTML = `<th class="dynamic-header-placeholder" style="display:none;" width='20%'></th>`;
+                            if (hasAdditionalColumn) {
+                                dynamicHeaderHTML = "";
+                                additionalHeadersDetail.forEach(h => {
+                                    dynamicHeaderHTML += `<th class="dynamic-header-placeholder" width='20%'>${h.header}</th>`;
+                                });
+
+                                $(".table thead tr th.dynamic-header-placeholder").replaceWith(dynamicHeaderHTML);
+                            }else{
+                                $(".table thead tr th.dynamic-header-placeholder").replaceWith(dynamicHeaderHTML);
+                            }
+
+                        }
                         i++
                         valueGrandTotal += parseFloat(item.grand_total)
                         append = append + '<tr>'
@@ -1384,6 +1481,17 @@
                         append = append + '</td>'
                         append = append + '<td>'
                         append = append + '<textarea style="font-size:12px;height:150px;width:200px;resize:none" class="form-control" disabled>' + item.description.replaceAll("<br>","\n") +'</textarea>'
+                        append = append + '</td>'
+                        additionalHeadersDetail.forEach(h => {
+                            const col = item[`additional_column_${h.index}`];
+                            let value = "-";
+                            if (col && col.includes("-")) {
+                                value = col.split("-")[1]?.trim() || "";
+                            }
+                            append += `<td style="font-size: 12px;"><input type="text" readonly class="form-control" value="${value}"></td>`;
+                        });
+                        append = append + '<td>'
+                        append = append + '<input disabled class="form-control" type="" name="" value="' + (item.jangka_waktu ? item.jangka_waktu : '-') + '" style="width:75px;font-size:12px">'
                         append = append + '</td>'
                         append = append + '<td>'
                         append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size:12px">'
@@ -1911,55 +2019,44 @@
                 $("#inputDescProduct").prev('.input-group-addon').css("background-color","red");
             }
             if (val == "qty_product") {
-                if (localStorage.getItem('isRupiah') == 'true') {
-                    $("#inputTotalPrice").val(
-                        formatter.format(
-                            Number($("#inputQtyProduct").val()) *
-                            parseFloat($("#inputPriceProduct").val().replace(/\./g, '').replace(',', '.').replace(' ', ''))
-                        )
-                    );
-                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                if (Number($("#inputTimePeriod").val()) > 0) {
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }else{
-                    $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                     $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
-
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }
                 $("#inputQtyProduct").closest('.col-md-4').removeClass('has-error')
-                $("#inputQtyProduct").closest('input').next('span').attr('style','display:none!important');
+                $("#inputQtyProduct").closest('input').next('span').hide();
                 $("#inputQtyProduct").prev('.input-group-addon').css("background-color","red");
             }
-            if (val == "price_product") {
-                formatter.format($("#inputPriceProduct").val())
-                if (localStorage.getItem('isRupiah') == 'true') {
+
+            if (val == "time_period"){
+                if ( Number($("#inputTimePeriod").val()) > 0) {
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                }else{
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                     $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                }
+            }
+            if (val == "price_product") {
+                if ( Number($("#inputTimePeriod").val()) > 0) {
+                    $("#inputTotalPrice").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }else{
                     $("#inputTotalPrice").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
                 }
                 $("#inputPriceProduct").closest('.col-md-4').removeClass('has-error')
-                $("#inputPriceProduct").closest('input').closest('.input-group').next('span').attr('style','display:none!important');
+                $("#inputPriceProduct").closest('input').closest('.input-group').next('span').hide();
                 $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
             }
             if (val == "price_list"){
-                $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                if ( Number($("#inputTimePeriod").val()) > 0) {
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputTimePeriod").val()) * Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                }else{
+                    $("#inputTotalPriceList").val(formatter.format(Number($("#inputQtyProduct").val()) * parseFloat($("#inputPriceList").val().replace(/\./g,'').replace(',','.').replace(' ',''))))
+                }
             }
-            if (val == "spk") {
-                $("#inputSPK").closest('.form-group').removeClass('has-error')
-                $("#inputSPK").closest('input').next('span').attr('style','display:none!important');
-                $("#inputSPK").prev('.input-group-addon').css("background-color","red");
-            }
-
-            if (val == "sbe") {
-                $("#inputSBE").closest('.form-group').removeClass('has-error')
-                $("#inputSBE").closest('input').next('span').attr('style','display:none!important');
-                $("#inputSBE").prev('.input-group-addon').css("background-color","red");
-            }
-
-            if (val == "quoteSupplier") {
-                $("#inputQuoteSupplier").closest('.form-group').removeClass('has-error')
-                $("#inputQuoteSupplier").closest('input').next('span').attr('style','display:none!important');
-                $("#inputQuoteSupplier").prev('.input-group-addon').css("background-color","red");
-            }
-
             if (val == "quoteNumber") {
                 $("#inputQuoteNumber").closest('.form-group').removeClass('has-error')
                 $("#inputQuoteNumber").closest('input').next('span').attr('style','display:none!important');
@@ -2018,8 +2115,6 @@
         function showPdf(){
             const signatureModal = new bootstrap.Modal(document.getElementById("signatureModal"));
             signatureModal.show();
-
-
         }
 
         $('#customer_quote').select2({
@@ -2035,6 +2130,11 @@
                 },
                 success: function (result) {
                     $('#customer').val(result.customer)
+                    $('#no_telp').val(result.phone)
+                    $('#subject').val(result.subject)
+                    $('#building').val(result.office_building)
+                    $('#street').val(result.street_address)
+                    $('#city').val(result.city + ' - ' + result.postal)
                     // $('#address').text(result.office_building + ' ' + result.street_address + ' ' + result.city)
                     // $('#no_telp').val(result.phone)
                     // $('#subject').val(result.subject)
@@ -2266,9 +2366,11 @@
                     x[n].style.display = "inline";
                     if(n == 0){
                         document.getElementById("prevBtnAdd").style.display = "none";
+                        console.log(data.quote.lead_id)
                         $("#nextBtnAdd").attr('onclick','nextPrevUnfinished(2)')
-                        $('#leadId').val(data.quote.lead_id).trigger('change')
+                        $('#leadId').val(data.quote.lead_id).trigger('change');
                         $('#subject').val(data.quote.title)
+                        $('#position').val(data.quote.position)
                         $('#date').val(data.quote.date)
                         $('#email').val(data.quote.email)
                         $('#attention').val(data.quote.attention)
@@ -2311,7 +2413,14 @@
                         document.getElementById("prevBtnAdd").style.display = "inline";
 
                     }else if (n == 3) {
-
+                        snowEditor = new Quill('#snow-editor', {
+                            bounds: '#snow-editor',
+                            modules: {
+                                formula: true,
+                                toolbar: '#snow-toolbar'
+                            },
+                            theme: 'snow'
+                        });
                         // if ($('.wysihtml5-toolbar').length == 0) {
                         //     $("#textAreaTOP").wysihtml5({
                         //         toolbar: {
@@ -2327,28 +2436,15 @@
                         //         }
                         //     });
                         // }
-                         snowEditor = new Quill('#snow-editor', {
-                            bounds: '#snow-editor',
-                            modules: {
-                                formula: true,
-                                toolbar: '#snow-toolbar'
-                            },
-                            theme: 'snow'
-                        });
+
                         if(data.quote.term_payment != null ){
                             snowEditor.clipboard.dangerouslyPasteHTML(data.quote.term_payment)
                         }
-
-                        // if(data.quote.term_payment != null ){
-                        //     $("#textAreaTOP").val(data.quote.term_payment);
-                        //     $("#textAreaTOP").data('wysihtml5').editor.setValue(data.quote.term_payment);
-                        // }
-
                         $(".modal-title").text('Terms & Condition')
                         $(".modal-dialog").removeClass('modal-lg')
                         $("#prevBtnAdd").attr('onclick','nextPrevUnfinished(-1)')
                         $("#nextBtnAdd").attr('onclick','nextPrevUnfinished(1)')
-                        document.getElementById("prevBtnAdd").style.display = "inline";
+                        document.getElementById("prevBtnAdd").style.display = 'inline';
                         document.getElementById("nextBtnAdd").innerText = "Next";
                     } else {
                         $(".modal-dialog").addClass('modal-lg')
@@ -2390,6 +2486,8 @@
                         var append = ""
                         var i = 0
                         var valueGrandTotal = 0;
+                        var additionalHeaders = [];
+
                         function formatCurrency(value) {
                             let numericValue = parseFloat(value);
                             if (isNaN(numericValue)) numericValue = 0;
@@ -2402,6 +2500,25 @@
                         }
 
                         $.each(data.product,function(value,item){
+                            if (value === 0) {
+
+                                for (let j = 1; j <= 5; j++) {
+                                    const col = item[`additional_column_${j}`];
+                                    if (col && col.includes("-")) {
+                                        const header = col.split("-")[0].trim();
+                                        if (header) {
+                                            additionalHeaders.push({ index: j, header });
+                                        }
+                                    }
+                                }
+
+                                let dynamicHeaderHTML = "";
+                                additionalHeaders.forEach(h => {
+                                    dynamicHeaderHTML += `<th>${h.header}</th>`;
+                                });
+
+                                $(".table thead tr th.dynamic-header-placeholder-preview").replaceWith(dynamicHeaderHTML);
+                            }
                             i++
                             valueGrandTotal += parseFloat(item.grand_total);
                             append = append + '<tr>'
@@ -2413,6 +2530,17 @@
                             append = append + '</td>'
                             append = append + '<td width="35%">'
                             append = append + '<textarea disabled class="form-control" style="width: 250px;resize: none;height: 120px;font-size: 12px;">' + item.description.replaceAll("<br>","\n") + '</textarea>'
+                            append = append + '</td>'
+                            additionalHeaders.forEach(h => {
+                                const col = item[`additional_column_${h.index}`];
+                                let value = "-";
+                                if (col && col.includes("-")) {
+                                    value = col.split("-")[1]?.trim() || "";
+                                }
+                                append += `<td style="font-size: 12px;"><input type="text" readonly class="form-control" value="${value}"></td>`;
+                            });
+                            append = append + '<td width="10%">'
+                            append = append + '<input readonly class="form-control" type="" name="" value="'+ (item.jangka_waktu ? item.jangka_waktu : '-') +'" style="width:75px;font-size: 12px;">'
                             append = append + '</td>'
                             append = append + '<td width="10%">'
                             append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size: 12px;">'
@@ -2570,7 +2698,44 @@
             localStorage.setItem('status_quote','')
         })
 
-        currentTab = 0;
+            let additionalCount = 0;
+            const maxAdditional = 5;
+
+            function addAdditionalInput() {
+                if (additionalCount >= maxAdditional) {
+                    Swal.fire({
+                        text: 'Max 5 Additional Info',
+                        icon: 'warning',
+                        title: 'Warning'
+                    });
+                    return;
+                }
+
+                additionalCount++;
+                const container = $('#additionalInputContainer');
+                const inputId = 'additional' + additionalCount;
+
+                const inputGroup = $(`
+            <div class="input-group mb-2" id="group-${inputId}">
+                <input type="text" class="form-control" id="${inputId}" placeholder="Header - Value ex: Serial Number - 1933420192 ">
+                <button class="btn btn-danger" type="button" onclick="removeAdditionalInput('${inputId}')">-</button>
+            </div>
+        `);
+
+                container.append(inputGroup);
+            }
+
+            function removeAdditionalInput(id) {
+                $('#group-' + id).remove();
+                additionalCount--;
+            }
+
+            let additionalInputs = [];
+            $('#additionalInputContainer input').each(function (index) {
+                additionalInputs[index] = $(this).val();
+            });
+
+            currentTab = 0;
 
         function nextPrevUnfinished(n, value) {
             valueEdit = value
@@ -2606,6 +2771,7 @@
                                 $("#inputNameProduct").val(item.name)
                                 $("#inputDescProduct").val(item.description.replaceAll("<br>","\n"))
                                 $("#inputQtyProduct").val(item.qty)
+                                $("#inputTimePeriod").val(item.jangka_waktu)
                                 $('#selectTypeProduct').val(item.unit)
                                 select2TypeProduct(item.unit)
                                 $("#inputPriceProduct").val(formatter.format(nominal))
@@ -2613,6 +2779,16 @@
                                 $("#inputPriceList").val(formatter.format(item.price_list))
                                 $("#inputTotalPriceList").val(formatter.format(item.total_price_list))
                                 $("#inputPriceProduct").closest("div").find(".input-group-addon").text("Rp.")
+                                $('#additionalInputContainer').empty();
+                                additionalCount = 0;
+
+                                for (let i = 1; i <= 5; i++) {
+                                    const col = item[`additional_column_${i}`];
+                                    if (col && col.trim() !== "") {
+                                        addAdditionalInput();
+                                        $(`#additional${additionalCount}`).val(col);
+                                    }
+                                }
                             })
                         }
                     })
@@ -2684,6 +2860,9 @@
                                         telp: $('#no_telp').val(),
                                         email: $('#email').val(),
                                         building: $('#building').val(),
+                                        @if(Auth::user()->roles()->first()->name =='Account Executive')
+                                        position: $('#position').val(),
+                                        @endif
                                         street: $('#street').val(),
                                         city: $('#city').val(),
                                         subject: $('#subject').val(),
@@ -2751,7 +2930,12 @@
                                         customer: $('#customer').val(),
                                         telp: $('#no_telp').val(),
                                         email: $('#email').val(),
-                                        address: $('#address').text(),
+                                        building: $('#building').val(),
+                                        @if(Auth::user()->roles()->first()->name =='Account Executive')
+                                        position: $('#position').val(),
+                                        @endif
+                                        street: $('#street').val(),
+                                        city: $('#city').val(),
                                         subject: $('#subject').val(),
                                         attention: $('#attention').val(),
                                         quote_type: $('#quote_type').val(),
@@ -2823,6 +3007,9 @@
                             $("#inputPriceProduct").prev('.col-md-4').css("background-color","red");
                         } else{
                             if (localStorage.getItem('isEditProduct') == 'true') {
+                                $('#additionalInputContainer input').each(function (index) {
+                                    additionalInputs[index] = $(this).val();
+                                });
                                 $.ajax({
                                     url: "{{url('/sales/updateProductQuote')}}",
                                     type: 'post',
@@ -2832,12 +3019,18 @@
                                         id_quote: localStorage.getItem('id_quote'),
                                         nameProduct: $("#inputNameProduct").val(),
                                         descProduct: $("#inputDescProduct").val().replaceAll("\n", "<br>"),
+                                        timePeriod: $("#inputTimePeriod").val(),
                                         qtyProduct: $("#inputQtyProduct").val(),
                                         typeProduct: $("#selectTypeProduct").val(),
                                         priceProduct: $("#inputPriceProduct").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         priceList: $("#inputPriceList").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         totalPrice: $("#inputTotalPrice").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         inputGrandTotalProduct: $("#inputGrandTotalProduct").val(),
+                                        additional1: additionalInputs[0],
+                                        additional2: additionalInputs[1],
+                                        additional3: additionalInputs[2],
+                                        additional4: additionalInputs[3],
+                                        additional5: additionalInputs[4],
                                     },beforeSend:function(){
                                         Swal.fire({
                                             title: 'Please Wait..!',
@@ -2873,7 +3066,11 @@
                                         $("#inputPriceProduct").val('')
                                         $("#inputQtyProduct").val('')
                                         $("#inputTotalPrice").val('')
+                                        $("#inputPriceList").val('')
+                                        $("#inputTotalPriceList").val('')
                                         $("#selectTypeProduct").val('')
+                                        $("#inputTimePeriod").val('')
+                                        $('#additionalInputContainer').empty();
                                     },
                                     error: function () {
                                         Swal.close()
@@ -2885,6 +3082,9 @@
                                     }
                                 })
                             }else {
+                                $('#additionalInputContainer input').each(function (index) {
+                                    additionalInputs[index] = $(this).val();
+                                });
                                 $.ajax({
                                     url: "{{url('/sales/storeProductQuote')}}",
                                     type: 'post',
@@ -2895,11 +3095,17 @@
                                         descProduct: $("#inputDescProduct").val().replaceAll("\n", "<br>"),
                                         qtyProduct: $("#inputQtyProduct").val(),
                                         typeProduct: $("#selectTypeProduct").val(),
+                                        timePeriod: $("#inputTimePeriod").val(),
                                         priceProduct: $("#inputPriceProduct").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         priceList: $("#inputPriceList").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         totalPrice: $("#inputTotalPrice").val().replace(/\./g, '').replace(',', '.').replace(' ', ''),
                                         inputGrandTotalProduct: $("#inputGrandTotalProduct").val(),
-                                        id_config: localStorage.getItem('id_config')
+                                        id_config: localStorage.getItem('id_config'),
+                                        additional1: additionalInputs[0] ,
+                                        additional2: additionalInputs[1] ,
+                                        additional3: additionalInputs[2] ,
+                                        additional4: additionalInputs[3] ,
+                                        additional5: additionalInputs[4] ,
                                     },
                                     beforeSend: function () {
                                         Swal.fire({
@@ -2932,7 +3138,11 @@
                                         $("#inputPriceProduct").val('')
                                         $("#inputQtyProduct").val('')
                                         $("#inputTotalPrice").val('')
+                                        $("#inputTotalPriceList").val('')
+                                        $("#inputPriceList").val('')
                                         $("#selectTypeProduct").val('')
+                                        $("#inputTimePeriod").val('')
+                                        $('#additionalInputContainer').empty();
                                         $(".tabGroupInitiateAdd").show()
                                         x[n].children[1].style.display = 'none'
                                         document.getElementsByClassName('tabGroupInitiateAdd')[0].childNodes[1].style.display = 'flex'
@@ -3101,10 +3311,10 @@
                             success: function(data)
                             {
                                 var x = document.getElementsByClassName("tab-add");
-                                x[currentTab].style.display = "none";
+                                x[currentTab].style.display = 'none';
                                 currentTab = currentTab + n;
                                 if (currentTab >= x.length) {
-                                    x[n].style.display = "none";
+                                    x[n].style.display = 'none';
                                     currentTab = 0;
                                 }
                                 unfinishedDraft(currentTab, localStorage.getItem('id_quote'), localStorage.getItem('id_config'));
@@ -3167,6 +3377,9 @@
                         append = append + '<td width="30%">'
                         append = append + '<textarea id="textAreaDescProductEdit" disabled data-value="" style="font-size: 12px; important;resize:none;height:150px;width:150px;" class="form-control">'+ item.description.replaceAll("<br>","\n") + '&#10;'
                         append = append + '</textarea>'
+                        append = append + '</td>'
+                        append = append + '<td width="10%">'
+                        append = append + '<input id="inputTimePeriodEdit" data-value="" readonly style="font-size: 12px; important;width:70px" class="form-control" type="number" name="" value="'+ item.jangka_waktu +'">'
                         append = append + '</td>'
                         append = append + '<td width="7%">'
                         append = append + '<input id="inputQtyEdit" data-value="" disabled style="font-size: 12px; important;width:70px" class="form-control" type="number" name="" value="'+ item.qty +'">'

@@ -107,6 +107,7 @@
         <th style="border-collapse: collapse;border: 1px solid;">No</th>
         <th style="border-collapse: collapse;border: 1px solid;">Product</th>
         <th style="border-collapse: collapse;border: 1px solid;">Description</th>
+        <th style="border-collapse: collapse;border: 1px solid;">Time Period</th>
         <th style="border-collapse: collapse;border: 1px solid;">Qty</th>
         <th style="border-collapse: collapse;border: 1px solid;">Unit</th>
         @if($isPriceList)
@@ -141,6 +142,7 @@
             <td>{{$eachProduct->name}}</td>
             <td>{!! nl2br($eachProduct->description) !!}
             </td>
+            <td style="text-align:center">@if($eachProduct->jangka_waktu != null){{$eachProduct->jangka_waktu}} month @else - @endif</td>
             <td style="text-align:center">{{$eachProduct->qty}}</td>
             <td style="text-align:center">{{$eachProduct->unit}}</td>
             @if($isPriceList)
@@ -156,6 +158,7 @@
     @endforeach
     <tr>
         <th><span style="color: white">-</span></th>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -181,51 +184,77 @@
             $ppn = $dpp * $config->tax_vat / 100;
         @endphp
         @if($isPriceList)
-            <th colspan="8" style="text-align:right">Total</th>
+            <th colspan="9" style="text-align:right">Total</th>
         @else
-            <th colspan="6" style="text-align:right">Total</th>
+            <th colspan="7" style="text-align:right">Total</th>
         @endif
         <th style="text-align:right;font-family:Consolas, monaco, monospace;">Rp. {{number_format($nominalTotalFinal,2)}}</th>
     </tr>
     @if($config->tax_vat != null)
         <tr>
-            @if($config->tax_vat != null)
-                <th colspan="8" style="text-align:right">DPP Nilai Lainnya</th>
+            @if($isPriceList)
+                @if($config->tax_vat != null)
+                    <th colspan="9" style="text-align:right">DPP Nilai Lainnya</th>
+                @else
+                    <th colspan="9" style="text-align:right"></th>
+                @endif
+                @if($config->tax_vat == 11 || $config->tax_vat == 12)
+                    <th style="text-align:right;font-family:Consolas, monaco, monospace;">Rp. {{number_format($dpp,2)}}</th>
+                @else
+                    <th style="text-align:right;font-family:Consolas, monaco, monospace;">0</th>
+                @endif
             @else
-                <th colspan="8" style="text-align:right"></th>
-            @endif
-            @if($config->tax_vat == 11 || $config->tax_vat == 12)
-                <th style="text-align:right;font-family:Consolas, monaco, monospace;">Rp. {{number_format($dpp,2)}}</th>
-            @else
-                <th style="text-align:right;font-family:Consolas, monaco, monospace;">0</th>
-            @endif
-        </tr>
-        <tr>
-            @if($config->tax_vat != null)
-                <th colspan="8" style="text-align:right">PPN {{$config->tax_vat}}%</th>
-            @else
-                <th colspan="8" style="text-align:right"></th>
-            @endif
-            @if($config->tax_vat == 11 || $config->tax_vat == 12)
-                <th style="text-align:right;font-family:Consolas, monaco, monospace;">Rp. {{number_format($ppn,2)}}</th>
-            @else
-                <th style="text-align:right;font-family:Consolas, monaco, monospace;">0</th>
+                @if($config->tax_vat != null)
+                    <th colspan="7" style="text-align:right">DPP Nilai Lainnya</th>
+                @else
+                    <th colspan="7" style="text-align:right"></th>
+                @endif
+                @if($config->tax_vat == 11 || $config->tax_vat == 12)
+                    <th style="text-align:right;font-family:Consolas, monaco, monospace;">Rp. {{number_format($dpp,2)}}</th>
+                @else
+                    <th style="text-align:right;font-family:Consolas, monaco, monospace;">0</th>
+                @endif
             @endif
         </tr>
         <tr>
             @if($isPriceList)
-                <th colspan="8" style="text-align:right">Grand Total</th>
+                @if($config->tax_vat != null)
+                    <th colspan="9" style="text-align:right">PPN {{$config->tax_vat}}%</th>
+                @else
+                    <th colspan="9" style="text-align:right"></th>
+                @endif
+                @if($config->tax_vat == 11 || $config->tax_vat == 12)
+                    <th style="text-align:right;font-family:Consolas, monaco, monospace;">Rp. {{number_format($ppn,2)}}</th>
+                @else
+                    <th style="text-align:right;font-family:Consolas, monaco, monospace;">0</th>
+                @endif
             @else
-                <th colspan="6" style="text-align:right">Grand Total</th>
+                @if($config->tax_vat != null)
+                    <th colspan="7" style="text-align:right">PPN {{$config->tax_vat}}%</th>
+                @else
+                    <th colspan="7" style="text-align:right"></th>
+                @endif
+                @if($config->tax_vat == 11 || $config->tax_vat == 12)
+                    <th style="text-align:right;font-family:Consolas, monaco, monospace;">Rp. {{number_format($ppn,2)}}</th>
+                @else
+                    <th style="text-align:right;font-family:Consolas, monaco, monospace;">0</th>
+                @endif
+            @endif
+        </tr>
+        <tr>
+            @if($isPriceList)
+                <th colspan="9" style="text-align:right">Grand Total</th>
+            @else
+                <th colspan="7" style="text-align:right">Grand Total</th>
             @endif
             <th style="text-align:right;font-family:Consolas, monaco, monospace; background-color: yellow">Rp. {{number_format($nominalGrandTotalFinal,2)}}</th>
         </tr>
     @else
         <tr>
             @if($isPriceList)
-                <th colspan="8" style="text-align:right">Grand Total</th>
+                <th colspan="9" style="text-align:right">Grand Total</th>
             @else
-                <th colspan="6" style="text-align:right">Grand Total</th>
+                <th colspan="7" style="text-align:right">Grand Total</th>
             @endif
             <th style="text-align:right;font-family:Consolas, monaco, monospace; background-color: yellow">Rp. {{number_format($nominalGrandTotalFinal,2)}}</th>
         </tr>
