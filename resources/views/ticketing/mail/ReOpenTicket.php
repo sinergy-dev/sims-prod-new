@@ -111,15 +111,15 @@
 		Best Regard,
 	</p>
 	<h6 style="color: #3c8dbc !important;margin-bottom: 0px" class="text-light-blue" >{{Auth::user()->name}}</h6>
-	<h6 style="color: #f39c12 !important;margin-top: 0px" class="text-yellow" ><i>Helpdesk</i></h6>
-	<p>
-		----------------------------------------<br>
-		PT. Sinergy Informasi Pratama (SIP)<br>
-		| Inlingua Building 2nd Floor |<br>
-		| Jl. Puri Raya, Blok A 2/3 No. 33-35 | Puri Indah |<br>
-		| Kembangan | Jakarta 11610 – Indonesia |<br>
-		| Mobile | 6285810557307 |<br>
-		| Phone | 021 - 58355599 |<br>
-		----------------------------------------<br>
-	</p>
+	<h6 style="color: #f39c12 !important;margin-top: 0px" class="text-yellow" ><i>{{Auth::user()->roles()->first()->name}}</i></h6>
+    <p>
+        ----------------------------------------<br>
+        PT. Sinergy Informasi Pratama (SIP)<br>
+        | Jakarta International Tower 15nd Floor |<br>
+        | Jl. Letjen S. Parman Nomor 1AA | Kemanggisan |<br>
+        | Pal Merah | Jakarta 11480 – Indonesia |<br>
+        | Mobile | 6285810557307 |<br>
+        | Phone | 021 - 50865 777 |<br>
+        ----------------------------------------<br>
+    </p>
 </div>
