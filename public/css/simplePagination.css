@@ -46,7 +46,7 @@ span.ellipse.clickable {
 	float: left;
 	color: #333;
 	font-size:14px;
-	line-height:24px;
+	line-height:38px;
 	font-weight: normal;
 	text-align: center;
 	border: 1px solid #AAA;
@@ -111,7 +111,7 @@ span.ellipse.clickable {
 	float: left;
 	color: #666;
 	font-size:14px;
-	line-height:24px;
+	line-height:38px;
 	font-weight: normal;
 	text-align: center;
 	border: 1px solid #BBB;
@@ -162,7 +162,7 @@ span.ellipse.clickable {
 	float: left;
 	color: #CCC;
 	font-size:14px;
-	line-height:24px;
+	line-height:38px;
 	font-weight: normal;
 	text-align: center;
 	border: 1px solid #222;

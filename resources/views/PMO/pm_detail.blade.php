@@ -3178,7 +3178,7 @@ Detail Project
 					
 					if($(this).closest("div").prev("form").attr("class") == "form_Executing"){
 						$(".form_Executing").each(function(){
-						    $(this).find('input[type!="checkbox"]').each(function(index,value){
+						    $(this).find('input[type!="checkbox"]').not('#deliverable_document').each(function(index,value){
 						        if(value.value == ""){
 						            arrExecutingCountNull.push(value.value)
 						        }
@@ -3186,8 +3186,11 @@ Detail Project
 						})
 
 						if (arrExecutingCountNull.length > 0) {
+							console.log(arrExecutingCountNull)
 							validationEmptyMilestone("weightMilestone_Executing",false)	
 						}else {
+							console.log(arrExecutingCountNull)
+
 							validationEmptyMilestone("weightMilestone_Executing",true)
 							// if ($("input[name='weightMilestone_Executing']:last").closest("div").closest(".row").next("span").text() == "Please Fill Empty Milestone Date/Weight!") {
 								
@@ -3361,6 +3364,7 @@ Detail Project
 				}
 
 				function validationEmptyMilestone(x,status){
+					console.log(status)
 					if (status == true) {
 						$.each($("input[name='inputSolutionMilestone']"),function(index,item){
 							$(item).next("span").attr('style','display:none!important')
@@ -3368,14 +3372,12 @@ Detail Project
 						})
 
 						$.each($("input[name='"+ x +"']"),function(index,item){
-							$.each($(item).closest("form").find("input"),function(idx,items){
+							$.each($(item).closest("form").find("input").not('#deliverable_document').not('input[name="cbDocMilestone"]'),function(idx,items){
 								if(items.value != ""){
 									$(items).closest("div").closest(".row").next("span").attr('style','display:none!important')
 									$(items).closest("div").closest(".row").next("span").text("")
 								}
 							})
-								// $("input[name='"+ x +"']:last").closest("div").closest(".row").next("span").attr('style','display:none!important')
-								// $("input[name='"+ x +"']:last").closest("div").closest(".row").next("span").text("")
 						})
 					}else{
 						$.each($("input[name='inputSolutionMilestone']"),function(index,item){
@@ -3385,7 +3387,7 @@ Detail Project
 						})
 
 						$.each($("input[name='"+ x +"']"),function(index,item){
-							 $.each($(item).closest("form").find("input"),function(idx,items){
+							 $.each($(item).closest("form").find("input").not('#deliverable_document').not('input[name="cbDocMilestone"]'),function(idx,items){
 						        if(items.value == ""){
 						            $(items).closest("div").closest(".row").next("span").show().text("Please Fill Empty Milestone Date/Weight!")
 						        }
@@ -5166,6 +5168,11 @@ Detail Project
     	$("#ModalIssue").modal("show")
     	$(".modal-title").text("Issue & Problems")
 
+		$("#selectStatusIssue").select2({
+			placeholder:"Select Issue",
+			dropdownParent:$("#ModalIssue")
+		})
+
     	$("#expected_date,#actual_date").flatpickr()
     }
 
@@ -5593,24 +5600,24 @@ Detail Project
 
 		        let arrHealthStatus = []
 
-				let arrRadioCek = []
-		        $("#cbProjectHealthStatus").find("input.minimal:checked").each(function(index,value){
+					let arrRadioCek = []
+		        $("#cbProjectHealthStatus").find("input:checked").each(function(index,value){
 				    arrHealthStatus.push({text:$( this ).attr("name"),value:$("input[name='"+ $( this ).attr("name") +"']:checked").val()})
-					arrRadioCek.push(value.value)
-				})
+						arrRadioCek.push(value.value)
+					})
 
-				if ((jQuery.inArray("R", arrRadioCek)) == -1 && (jQuery.inArray("Y", arrRadioCek)) == -1) {
-					$("#cbProjectHealthStatus").next("div .form-group").text("")
+					if ((jQuery.inArray("R", arrRadioCek)) == -1 && (jQuery.inArray("Y", arrRadioCek)) == -1) {
+						$("#cbProjectHealthStatus").next("div .form-group").text("")
 			    }
 
-		        let initCount = 0
-				$("#cbProjectHealthStatus").find("input.minimal").click(function(){
-					let radioCountDefine = 6
-					let minimalCount = ++initCount
-					let arrRadio = []
-					$("#cbProjectHealthStatus").find("input.minimal:checked").each(function(index,value){
+		      let initCount = 0
+					$("#cbProjectHealthStatus").find("input").click(function(){
+						let radioCountDefine = 6
+						let minimalCount = ++initCount
+						let arrRadio = []
+						$("#cbProjectHealthStatus").find("input:checked").each(function(index,value){
 					     
-					     arrRadio.push(value.value)
+					  arrRadio.push(value.value)
 					})
 
 					let countG = arrRadio.filter(x => x == "G").length
@@ -5619,7 +5626,9 @@ Detail Project
 
 					if (minimalCount == radioCountDefine) {
 						if((jQuery.inArray("R", arrRadio)) != -1 || (jQuery.inArray("Y", arrRadio)) != -1){
-						    $("#cbProjectHealthStatus").next("div .form-group").text("")
+
+							console.log("sinii")
+						  $("#cbProjectHealthStatus").next("div .form-group").text("")
 
 							$("#cbProjectHealthStatus").after("<div class='form-group'><label>Note Summary Health Status</label><textarea placeholder='Give explanation if there is any yellow / red status' class='form-control' id='textareaNoteSummaryHealth' name=areaNoteSummaryHealth'></textarea></div>")
 						}else if (countG == 6) {
@@ -5692,22 +5701,22 @@ Detail Project
 	        
 	        let arrHealthStatus = []
 
-			let arrRadioCek = []
-	        $("#cbProjectHealthStatus").find("input.minimal:checked").each(function(index,value){
+				let arrRadioCek = []
+	        $("#cbProjectHealthStatus").find("input:checked").each(function(index,value){
 			    arrHealthStatus.push({text:$( this ).attr("name"),value:$("input[name='"+ $( this ).attr("name") +"']:checked").val()})
-				arrRadioCek.push(value.value)
-			})
+					arrRadioCek.push(value.value)
+				})
 
-			if ((jQuery.inArray("R", arrRadioCek)) == -1 && (jQuery.inArray("Y", arrRadioCek)) == -1) {
-				$("#cbProjectHealthStatus").next("div .form-group").text("")
+				if ((jQuery.inArray("R", arrRadioCek)) == -1 && (jQuery.inArray("Y", arrRadioCek)) == -1) {
+					$("#cbProjectHealthStatus").next("div .form-group").text("")
 		    }
 
-	        let initCount = 0
-			$("#cbProjectHealthStatus").find("input.minimal").click(function(){
+	      let initCount = 0
+				$("#cbProjectHealthStatus").find("input").click(function(){
 				let radioCountDefine = 6
 				let minimalCount = ++initCount
 				let arrRadio = []
-				$("#cbProjectHealthStatus").find("input.minimal:checked").each(function(index,value){
+				$("#cbProjectHealthStatus").find("input:checked").each(function(index,value){
 				     
 				     arrRadio.push(value.value)
 				})
@@ -5771,8 +5780,8 @@ Detail Project
           $("input[name='radioProject_Partner']:last").closest("div .form-group").find(".invalid-feedback").show()
         }else{
         	let arrDisti = [], arrWeeklyIssue = [], arrWeeklyRisk = []
-	    	let cbProjectIndicator = '', cbProject = '', cbSchedule = '', cbTechnical = '', cbScope = '', cbResource = '', cbPartner = ''
-	    	$("#tbodyWeeklyDistiInformation tr").each(function(){
+	    		let cbProjectIndicator = '', cbProject = '', cbSchedule = '', cbTechnical = '', cbScope = '', cbResource = '', cbPartner = ''
+	    		$("#tbodyWeeklyDistiInformation tr").each(function(){
 	          	arrDisti.push({
 		            "recipient":$(this).find("#inputRecipientDisti").val(),
 		            "company":$(this).find("#inputCompanyDisti").val(),
@@ -5860,11 +5869,11 @@ Detail Project
 	        // formData.append('arrWeeklyIssue',JSON.stringify(arrWeeklyIssue))
 	        // formData.append('arrWeeklyRisk',JSON.stringify(arrWeeklyRisk))
 	        formData.append('cbProject',cbProject)
-			formData.append('cbSchedule',cbSchedule)
-			formData.append('cbTechnical',cbTechnical)
-			formData.append('cbScope',cbScope)
-			formData.append('cbResource',cbResource)
-			formData.append('cbPartner',cbPartner)	        
+					formData.append('cbSchedule',cbSchedule)
+					formData.append('cbTechnical',cbTechnical)
+					formData.append('cbScope',cbScope)
+					formData.append('cbResource',cbResource)
+					formData.append('cbPartner',cbPartner)	        
 
 	        swalSuccess = {
 	          icon: 'success',

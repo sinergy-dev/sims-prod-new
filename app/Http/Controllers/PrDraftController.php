@@ -528,7 +528,7 @@ class PrDraftController extends Controller
 
     public function getDropdownFilterPr(Request $request)
     {
-        $getData = DB::table('tb_pr_draft')->leftJoin('users', 'users.nik', '=', 'tb_pr_draft.issuance');
+        $getData = DB::table('tb_pr_draft')->leftJoin('users', 'users.nik', '=', 'tb_pr_draft.issuance')->where('users.status_karyawan','!=','dummy');
         $date = $getData->pluck('tb_pr_draft.created_at')->toArray();
         sort($date);
 
@@ -4041,8 +4041,9 @@ class PrDraftController extends Controller
         $kirim_user = User::join('role_user', 'role_user.user_id', '=', 'users.nik')->join('roles', 'roles.id', '=', 'role_user.role_id')
             ->select('email')
             ->where('status_karyawan', '!=', 'dummy')
-            ->where('roles.name', 'Procurement & Vendor Management')
-            ->orWhereIn('users.name',$request->emailMention)->get();
+            ->whereRaw("(`roles`.`name` = 'Procurement & Vendor Management' OR `users`.`nik` = '".$detail->issuance."')")
+            ->orWhereIn('users.name',$request->emailMention)
+            ->get();
 
         $territory = DB::table('users')->select('id_territory')->where('nik', $detail->issuance)->first()->id_territory;
         $cek_role = DB::table('role_user')->join('roles', 'roles.id', '=', 'role_user.role_id')

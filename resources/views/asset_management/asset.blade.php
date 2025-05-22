@@ -1080,7 +1080,13 @@
         {
           title:"Reason",
           render: function (data, type, row, meta){
-            return row.reason
+            let reason = row.reason
+
+            if (row.reason == null) {
+              reason == '-'
+            }
+
+            return reason
           }
         },
         {

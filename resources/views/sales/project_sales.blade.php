@@ -198,7 +198,7 @@ Lead Register
 									<label>Tahun</label>
 									<div id="filter_year_for_dir" style="display:none!important">
 										<div class="row">
-											<div style="display: inline;" class="col-md-6">	
+											<div style="display: inline;padding-right: 5px!important;padding-left: 5px!important;" class="col-md-6">	
 												<select class="select2 form-control" style="width:100%;display: inline;float: left;" id="year_dif_dir" multiple>
 												@foreach($year as $years)
 									              @if($years->year < $year_now-1)
@@ -211,7 +211,7 @@ Lead Register
 												</select>
 											</div>
 
-											<div style="display: inline;" class="col-md-6">
+											<div style="display: inline;padding-right: 5px!important;padding-left: 5px!important;" class="col-md-6">
 												<select class="select2 form-control" style="width:100%;display: inline;float: left;" id="year_dif2_dir" multiple>
 													@foreach($year as $years)
 										              @if($years->year < $year_now-1)
@@ -228,10 +228,10 @@ Lead Register
 									<div id="filter_year_for_oth" style="display:none!important">
 										<select class="select2 form-control" style="width:100%;display: inline;float: left;" id="year_dif" multiple>
 											@foreach($year as $years)
-							              @if($years->year < $year_now-1)
-								              {{-- @if($years->year < $year_now) --}}
-								                <option value="{{$years->year}}">{{$years->year}}</option>
-								              @endif
+							              		@if($years->year < $year_now-1)
+								              	{{-- @if($years->year < $year_now) --}}
+								                	<option value="{{$years->year}}">{{$years->year}}</option>
+								              	@endif
 								            @endforeach
 						              		<option selected value="{{date('Y')-1}}">{{date("Y")-1}}</option>
 					            			<option selected value="{{$year_now}}">{{$year_now}}</option>
@@ -1750,9 +1750,9 @@ Lead Register
 	var sumAmount = []
 	
 	$(document).ready(function(){  
-		var year 			= $('#year_dif').val();
+		var year 		= $('#year_dif').val();
 		var year_dir 	= $('#year_dif_dir').val();
-		var year2_dir = $('#year_dif2_dir').val();
+		var year2_dir 	= $('#year_dif2_dir').val();
 
 		$('#year_dif2_dir option').prop('disabled', false);
 		$('#year_dif_dir').val().forEach(function(value) {
@@ -2086,69 +2086,73 @@ Lead Register
 
 		$.each($(".cb-territory:checked"),function(key,value){
 			if (tempTer == 'territory[]=') {
-	      tempTer = tempTer + value.value
-	    }else{
-	      tempTer = tempTer + '&territory[]=' + value.value
-	    }
+		      tempTer = tempTer + value.value
+		    }else{
+		      tempTer = tempTer + '&territory[]=' + value.value
+		    }
 		})
 
-	  $.each($("#filter_sales").val(),function(key,value){
-	  	if (tempSales == 'sales_name[]=') {
-	      tempSales = tempSales + value
-	    }else{
-	      tempSales = tempSales + '&sales_name[]='+ value
-	    }
+	  	$.each($("#filter_sales").val(),function(key,value){
+		  	if (tempSales == 'sales_name[]=') {
+		      tempSales = tempSales + value
+		    }else{
+		      tempSales = tempSales + '&sales_name[]='+ value
+		    }
 		})
 
 		$.each($("#filter_sales_manager").val(),function(key,value){
 			if (tempSales == 'sales_name[]=') {
-	      tempSales = tempSales + value
-	    }else{
-	      tempSales = tempSales + '&sales_name[]='+ value
-	    }
+		      tempSales = tempSales + value
+		    }else{
+		      tempSales = tempSales + '&sales_name[]='+ value
+		    }
 		})
 
-		if ("{{Auth::User()->id_position}}" == 'DIRECTOR') {
-			if ($("#year_dif_dir").val() == '') {
-				temp = temp + '&year[]='+ new Date().getFullYear()
-			}else{
-				$.each($("#year_dif_dir").val(),function(key,value){
-					if (temp == 'year[]=') {
-			      temp = temp + value
-			    }else{
-			      temp = temp + '&year[]='+ value
-			    }
-
-					$("#year_dif2_dir option[value="+ value +"]").prop('disabled',true);
-				})
-			}
-
-			if ($("#year_dif2_dir").val() == '') {
-				temp = temp + '&year[]='+ new Date().getFullYear()
-			}else{
-				$.each($("#year_dif2_dir").val(),function(key,value){
-					if (temp == 'year[]=') {
-			      temp = temp + value
-			    }else{
-			      temp = temp + '&year[]='+ value
-			    }
-
-					$("#year_dif_dir option[value="+ value +"]").prop('disabled',true);
-				})
-			}
+		temp = 'year[]='
+		if ($("#year_dif").val() == '') {
+			temp = temp + '&year[]='+ new Date().getFullYear()
 		}else{
-			if ($("#year_dif").val() == '') {
-				temp = temp + '&year[]='+ new Date().getFullYear()
-			}else{
-				$.each($("#year_dif").val(),function(key,value){
-					if (temp == 'year[]=') {
+			$.each($("#year_dif").val(),function(key,value){
+				if (temp == 'year[]=') {
 			      temp = temp + value
 			    }else{
 			      temp = temp + '&year[]='+ value
 			    }
-				})
+			})
+		}
+
+		if ("{{Auth::User()->id_position}}" == 'DIRECTOR') {
+			if ($("#year_dif_dir").is(":visible")) {
+				if ($("#year_dif_dir").val().length == 0) {
+					temp = temp + '&year[]='+ new Date().getFullYear()
+				}else{
+					$.each($("#year_dif_dir").val(),function(key,value){
+						if (temp == 'year[]=') {
+				      temp = temp + value
+				    }else{
+				      temp = temp + '&year[]='+ value
+				    }
+
+						$("#year_dif2_dir option[value="+ value +"]").prop('disabled',true);
+					})
+				}
+
+				if ($("#year_dif2_dir").val().length == 0) {
+					temp = temp + '&year[]='+ new Date().getFullYear()
+				}else{
+					$.each($("#year_dif2_dir").val(),function(key,value){
+						if (temp == 'year[]=') {
+				      temp = temp + value
+				    }else{
+				      temp = temp + '&year[]='+ value
+				    }
+
+						$("#year_dif_dir option[value="+ value +"]").prop('disabled',true);
+					})
+				}
 			}
 		}
+
 
 		// if ($("#year_dif").val() == '') {
 		// 	temp = temp + '&year[]='+ new Date().getFullYear()
@@ -2164,10 +2168,10 @@ Lead Register
 
 		$.each($("#filter_ta").val(),function(key,value){
 			if (tempTa == 'ta_name[]=') {
-	      tempTa = tempTa + value
-	    }else{
-	      tempTa = tempTa + '&ta_name[]='+ value
-	    }
+		      tempTa = tempTa + value
+		    }else{
+		      tempTa = tempTa + '&ta_name[]='+ value
+		    }
 		})
 
 		$.each($("#filter_presales").val(),function(key,value){
@@ -2178,30 +2182,30 @@ Lead Register
 	    }
 		})
 
-	  $.each($('#searchTags').val(),function(key, value) {
-	    if (value.substr(0,1) == 'p') {
-	    	if (tempProduct == 'product_tag[]=') {
-		      tempProduct = tempProduct + value.substring(1)
-		    }else{
-		    	tempProduct = tempProduct + '&product_tag[]='+ value.substring(1)
+	  	$.each($('#searchTags').val(),function(key, value) {
+		    if (value.substr(0,1) == 'p') {
+		    	if (tempProduct == 'product_tag[]=') {
+			      tempProduct = tempProduct + value.substring(1)
+			    }else{
+			    	tempProduct = tempProduct + '&product_tag[]='+ value.substring(1)
+			    }
 		    }
-	    }
-	    if (value.substr(0,1) == 't') {
-	    	if (tempTech == 'tech_tag[]=') {
-		      tempTech = tempTech + value.substring(1)
-		    }else{
-		    	tempTech = tempTech + '&tech_tag[]='+ value.substring(1)
+		    if (value.substr(0,1) == 't') {
+		    	if (tempTech == 'tech_tag[]=') {
+			      tempTech = tempTech + value.substring(1)
+			    }else{
+			    	tempTech = tempTech + '&tech_tag[]='+ value.substring(1)
+			    }
 		    }
-	    }
-	  });
+	  	});
 
-	  $.each($('#filter_customer').val(),function(key,value){
-	  	if (tempCustomer == 'customer[]=') {
-	      tempCustomer = tempCustomer + value
-	    }else{
-	    	tempCustomer = tempCustomer + '&customer[]=' + value
-	    }
-	  })
+		$.each($('#filter_customer').val(),function(key,value){
+		  	if (tempCustomer == 'customer[]=') {
+		      tempCustomer = tempCustomer + value
+		    }else{
+		    	tempCustomer = tempCustomer + '&customer[]=' + value
+		    }
+		})
 		
 		$.each($(".cb-company:checked"),function(key,value){
 			if (tempCom == 'company[]=') {
@@ -2228,10 +2232,12 @@ Lead Register
 		}
 
 		if (tempSearch == 'search=') {
-      tempSearch = tempSearch + $('#searchLead').val()
-    }else{
-    	tempSearch = tempSearch + '&search=' + $('#searchLead').val()
-    }
+		  tempSearch = tempSearch + $('#searchLead').val()
+		}else{
+			tempSearch = tempSearch + '&search=' + $('#searchLead').val()
+		}
+
+    	console.log(temp)
 
 		var tempFiltered = '?' + temp + '&' + tempSales + '&' + tempTa + '&' + tempPresales + '&' + tempTer + '&' + tempCom + '&' + tempResult + '&' + tempProduct + '&' + tempTech + '&' + tempCustomer + '&' + tempSearch
 

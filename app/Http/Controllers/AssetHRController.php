@@ -126,7 +126,7 @@ class AssetHRController extends Controller
                     ->where('user_id', Auth::User()->nik)
                     ->first(); 
 
-        if ($cek_role->mini_group == "Supply Chain & IT Support Manager" || $cek_role->name == 'Internal Operation Support Manager' || $cek_role->name == 'VP Internal Chain Management') {
+        if ($cek_role->name == "Supply Chain & IT Support Manager" || $cek_role->name == 'Internal Operation Support Manager' || $cek_role->name == 'VP Internal Chain Management') {
             $current_request = DB::table('tb_asset_hr_request')
                            ->join('users','users.nik','=','tb_asset_hr_request.nik')
                            ->join('role_user','role_user.user_id','=','tb_asset_hr_request.accept_by')
@@ -185,6 +185,7 @@ class AssetHRController extends Controller
                             )
                            ->where('tb_asset_hr_request.status','<>','REQUEST')
                            ->where('tb_asset_hr_request.status','<>','ON PROGRESS')
+                           ->orderBy('updated_at','desc')
                            ->get();
 
             $historyCancel  = DB::table('tb_asset_hr_request')
@@ -241,7 +242,18 @@ class AssetHRController extends Controller
 
             if (stripos($cek_role->name, 'Manager') !== false) {
                 //for manager
-                $current_request = $current_request
+                if ($cek_role->name == 'People Operations & Services Manager') {
+                    $current_request = $current_request
+                           ->join('role_user','role_user.user_id','=','tb_asset_hr_request.nik')
+                           ->join('roles','roles.id','=','role_user.role_id')
+                           ->where('roles.group',$cek_role->group)
+                           ->where('roles.name', 'not like', '%VP%')
+                           ->where('tb_asset_hr_request.status','<>','ACCEPT')
+                           ->where('tb_asset_hr_request.status','<>','REJECT')
+                           ->where('tb_asset_hr_request.status','<>','CANCEL')
+                           ->get();
+                }else{
+                    $current_request = $current_request
                             ->join('role_user','role_user.user_id','=','tb_asset_hr_request.nik')
                             ->join('roles','roles.id','=','role_user.role_id')
                            ->where('roles.mini_group',$cek_role->mini_group)
@@ -249,6 +261,8 @@ class AssetHRController extends Controller
                            ->where('tb_asset_hr_request.status','<>','REJECT')
                            ->where('tb_asset_hr_request.status','<>','CANCEL')
                            ->get();
+                }
+                
                            
                 $historyCancel = $historyCancel->join('role_user','role_user.user_id','=','tb_asset_hr_request.nik')
                             ->join('roles','roles.id','=','role_user.role_id')
@@ -263,6 +277,7 @@ class AssetHRController extends Controller
                            ->where('roles.mini_group',$cek_role->mini_group)
                            ->where('tb_asset_hr_request.status','<>','REQUEST')
                            ->where('tb_asset_hr_request.status','<>','ON PROGRESS')
+                           ->orderBy('updated_at','desc')
                            ->get();
                 
             }else if(stripos($cek_role->name, 'VP') !== false){
@@ -292,6 +307,7 @@ class AssetHRController extends Controller
                             ->where('roles.group',$cek_role->group)
                             ->where('tb_asset_hr_request.status','<>','REQUEST')
                             ->where('tb_asset_hr_request.status','<>','ON PROGRESS')
+                            ->orderBy('updated_at','desc')
                             ->get();
             }else if($cek_role->name == "Chief Operating Officer" || $cek_role->name == "Chief Executive Officer" || $cek_role->name == "Financial Director") {
                 //for ops & direktur
@@ -314,6 +330,7 @@ class AssetHRController extends Controller
                             ->join('roles','roles.id','=','role_user.role_id')
                             ->where('tb_asset_hr_request.status','<>','REQUEST')
                             ->where('tb_asset_hr_request.status','<>','ON PROGRESS')
+                            ->orderBy('updated_at','desc')
                             ->get();
             }else{
                 //for staff
@@ -334,6 +351,7 @@ class AssetHRController extends Controller
                            ->where('tb_asset_hr_request.nik',Auth::User()->nik)
                            ->where('tb_asset_hr_request.status','<>','REQUEST')
                            ->where('tb_asset_hr_request.status','<>','ON PROGRESS')
+                           ->orderBy('updated_at','desc')
                            ->get();
             }
         }
@@ -688,11 +706,7 @@ class AssetHRController extends Controller
 
         $req_asset = collect(['insertdata'=>$insertData,'requestor_name'=>Auth::User()->name,'request_date'=>date("Y-m-d h:i:s"),'status'=>'new']);
 
-        $cc = User::select('email')
-                ->join('role_user','role_user.user_id','=','users.nik')
-                ->join('roles','roles.id','=','role_user.role_id')
-                ->where('users.status_karyawan','<>','dummy')
-                ->where('roles.name','Supply Chain & IT Support Manager')->orwhere('roles.name','Internal Operation Support Manager')->get();
+        $cc = User::select('email')->join('role_user','role_user.user_id','=','users.nik')->join('roles','roles.id','=','role_user.role_id')->where('users.status_karyawan','<>','dummy')->where('roles.name','Supply Chain & IT Support Manager')->orwhere('roles.name','Internal Operation Support Manager')->where('users.status_karyawan','<>','dummy')->get();
 
         $cek_role = DB::table('users')->join('role_user','role_user.user_id','users.nik')->join('roles','roles.id','role_user.role_id')->select('roles.name as name_role','group','mini_group')->where('user_id',Auth::User()->nik)->first();
 
@@ -725,14 +739,13 @@ class AssetHRController extends Controller
                 ->where('users.status_karyawan','<>','dummy')
                 ->where('roles.name','Chief Operating Officer')->first();
         }else{
-            $to = User::select('email')
-            ->join('role_user','role_user.user_id','=','users.nik')
-            ->join('roles','roles.id','=','role_user.role_id')
-            ->where('users.status_karyawan','<>','dummy')
-            ->where('roles.name','<>','Delivery Project Manager')
-            ->where('roles.name','like','%Manager%')
-            ->where('roles.mini_group','like','%'. $cek_role->mini_group .'%')->first();
-
+            $cekHasManagerOnMiniGroup = DB::table('roles')->join('role_user','roles.id','=','role_user.role_id')->where('roles.name','like','%Manager%')->where('roles.mini_group','like','%'. $cek_role->mini_group .'%')->first();
+            if ($cekHasManagerOnMiniGroup != null) {
+                $to = User::select('email')->join('role_user','role_user.user_id','=','users.nik')->join('roles','roles.id','=','role_user.role_id')->where('users.status_karyawan','<>','dummy')->where('roles.name','<>','Delivery Project Manager')->where('roles.name','like','%Manager%')->where('roles.mini_group','like','%'. $cek_role->mini_group .'%')->first();
+            }else{
+                $to = User::select('email')->join('role_user','role_user.user_id','=','users.nik')->join('roles','roles.id','=','role_user.role_id')->where('users.status_karyawan','<>','dummy')->where('roles.name','<>','Delivery Project Manager')->where('roles.name','like','%Manager%')->where('roles.group','like','%'. $cek_role->group .'%')->first();
+            }
+            
             $users = User::select('email')
                 ->select('users.name')
                 ->join('role_user','role_user.user_id','=','users.nik')
@@ -1250,6 +1263,7 @@ class AssetHRController extends Controller
                 $store_notes->id_request    = $request->id_request;
                 $store_notes->nik           = Auth::User()->nik;
                 $store_notes->notes         = 'Approve';
+                $store_notes->created_at    = date('Y-m-d h:i:s');
                 $store_notes->save();
             }
 
@@ -1285,6 +1299,7 @@ class AssetHRController extends Controller
             $store_notes->id_request = $request->id_request;
             $store_notes->nik        = Auth::User()->nik;
             $store_notes->notes        = 'Approve';
+            $store_notes->created_at    = date('Y-m-d h:i:s');
             $store_notes->save();
 
             $update->status         = 'PENDING';
@@ -1303,6 +1318,7 @@ class AssetHRController extends Controller
                 $store_notes->id_request    = $request->id_request;
                 $store_notes->nik           = Auth::User()->nik;
                 $store_notes->notes         = $request->notes;
+                $store_notes->created_at    = date('Y-m-d h:i:s');
                 $store_notes->save();
             }
 
@@ -1672,9 +1688,10 @@ class AssetHRController extends Controller
 
     public function storeNotesAssetTransaction(Request $request){
         $store_notes = new AssetNotesTransaction();
-        $store_notes->id_request = $request->id_request;
-        $store_notes->nik        = Auth::User()->nik;
-        $store_notes->notes      = $request->notes;
+        $store_notes->id_request    = $request->id_request;
+        $store_notes->nik           = Auth::User()->nik;
+        $store_notes->notes         = $request->notes;
+        $store_notes->created_at    = date('Y-m-d h:i:s');
         $store_notes->save();
 
         $asset = DB::table('tb_asset_hr_request')
@@ -1716,13 +1733,13 @@ class AssetHRController extends Controller
                 ->join('role_user','role_user.user_id','=','users.nik')
                 ->join('roles','roles.id','=','role_user.role_id')
                 ->where('users.status_karyawan','<>','dummy')
-                ->where('roles.name','Asset, Facility & HSE Management')->first();
+                ->where('roles.name','Internal Operation Support Manager')->first();
 
             $to = User::select('email')
                     ->join('role_user','role_user.user_id','=','users.nik')
                     ->join('roles','roles.id','=','role_user.role_id')
                     ->where('users.status_karyawan','<>','dummy')
-                    ->where('roles.name','Asset, Facility & HSE Management')->get();
+                    ->where('roles.name','Internal Operation Support Manager')->get();
 
             $cc = User::select('email')
                     ->join('role_user','role_user.user_id','=','users.nik')

@@ -15,6 +15,7 @@ Ticketing
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css')}}" />
 <link rel="preload" href="{{asset('assets/vendor/css/jquery.emailinput.min.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/flatpickr/flatpickr.css')}}"/>
+<link rel="preload" href="{{asset('css/simplePagination.css')}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <style type="text/css">
 	.table2 > tbody > tr > th, .table2 > tbody > tr > td {
 		border-color: #141414;border: 1px solid;padding: 3px;}
@@ -1147,7 +1148,7 @@ Ticketing
 										<button style="margin-left: 10px;" title="Refresh Table" id="reloadTable" type="button" class="btn btn-sm btn-secondary ">
 											<i class="bx bx-refresh"></i>
 										</button>
-										<button style="margin-left: 10px;" type="button" class="btn btn-sm btn-success">
+										<button style="margin-left: 10px;" type="button" id="exportTablePerformance" class="btn btn-sm btn-success">
 										  <i class="icon-base bx bx-export me-1"></i> Export to Excel
 										</button>
 									</div>
@@ -1354,7 +1355,7 @@ Ticketing
 									</div>									
 								</div>
 								<nav class="pull-right" aria-label="Page navigation example" style="margin-top:10px">
-								  <ul class="pagination justify-content-center" id="pagination">
+								  <ul class="justify-content-center" id="pagination-custom">
 								  </ul>
 								</nav>
 							</div>
@@ -3598,7 +3599,7 @@ Ticketing
 
 		//$('#tableTripRequest').attr('style','display:none!important');
 
-		// $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+		// $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
 		// 	var target = $(e.target).attr("href"); // Dapatkan target tab yang diklik
 
 		// 	// Jika tab yang diklik adalah `#tripRequest`, tampilkan tabel
@@ -10130,9 +10131,9 @@ Ticketing
     			// }
 
   				let append_column = ""
-    			append_column = append_column + "<div class='alert bg-gray disabled' style='margin-bottom:10px!important;break-inside:avoid;'>"
+    			append_column = append_column + "<div class='alert bg-secondary disabled' style='margin-bottom:10px!important;break-inside:avoid;'>"
 						append_column = append_column + "<div style='position:relative'>"
-							append_column = append_column + "<span class='showPID' data-value='"+ item +"' onclick='showPID("+ item +"," + '['+ nik[item].nik + "]" +")' style='position:absolute;right:0;top:0'><i class='fa fa-2x fa-angle-right'></i></span>"
+							append_column = append_column + "<span class='showPID' data-value='"+ item +"' onclick='showPID("+ item +"," + '['+ nik[item].nik + "]" +")' style='position:absolute;right:0;top:0'><i class='bx bx-chevron-right'></i></span>"
 							append_column = append_column + "	<h6><b class='titleh6' data-value='"+ item +"'></b></h6>"
 							append_column = append_column + "	<p class='titleP' data-value='"+ item +"'></p>"
 							append_column = append_column + "<div style='position:relative'>"
@@ -10142,8 +10143,8 @@ Ticketing
 									append_column = append_column + "<div class='row'>"
 										append_column = append_column + "<div class='col-md-12'>"
 											append_column = append_column + "<div>"
-												append_column = append_column + "<div style='display: flex;'><div class='input-group searchTablePID' style='flex-direction: row; margin: 10px; width: 50% !important;' data-value='"+ item +"'><input class='form-control' placeholder='Search Cutsomer/PID/Project Name' id='searchbarPID' onkeyup='searchCustomPID("+ item + ")' data-value='"+ item +"'><span class='input-group-btn'><button onclick='searchCustomPID("+ item + ")' type='button' class='btn btn-secondary btn-flat' fdprocessedid='f23lya'>	<i class='fa fa-fw fa-search'></i></button></span></div>"
-													append_column = append_column + "<span style='margin-top: 19px;' data-toggle='tooltip' data-placement='top' title='Please search for more PID list!'><i class='fa fa-question-circle' style='font-size: 1.2em;color: #579bcf;'></i></span>"
+												append_column = append_column + "<div style='display: flex;'><div class='input-group searchTablePID' style='flex-direction: row; margin: 10px; width: 90% !important;' data-value='"+ item +"'><input class='form-control' placeholder='Search Cutsomer/PID/Project Name' id='searchbarPID' onkeyup='searchCustomPID("+ item + ")' data-value='"+ item +"'><span class='input-group-text'><a onclick='searchCustomPID("+ item + ")'>	<i class='bx bx-search'></i></a></span></div>"
+													append_column = append_column + "<span style='margin-top: 19px;' data-bs-toggle='tooltip' data-placement='top' title='Please search for more PID list!'><i class='bx bx-alert-triangle' style='font-size: 1.2em;color: #579bcf;'></i></span>"
 												append_column = append_column + "</div>"
 											append_column = append_column + "</div>"
 											append_column = append_column + "<div class='boxPID' data-value='"+ item +"'>"
@@ -10172,9 +10173,9 @@ Ticketing
 
 				if (result.length == 0) {
 					$("#container_pid").html("<span style='display:flex;flex-direction:row-reverse'>Empty Data!</span>")
-					$("#pagination").attr('style','display:none!important')
+					$("#pagination-custom").attr('style','display:none!important')
 				}else{
-					$("#pagination").show()
+					$("#pagination-custom").show()
 				}
 
 				var items = $(".divSiteBox .alert");
@@ -10183,7 +10184,7 @@ Ticketing
 
 				items.slice(perPage).attr('style','display:none!important');
 
-				$('#pagination').pagination({
+				$('#pagination-custom').pagination({
 					items: numItems,
 					itemsOnPage: perPage,
 					prevText: "&laquo;",
@@ -10229,7 +10230,7 @@ Ticketing
 			$(".divPID[data-value='"+ item +"']").fadeIn('slow').css('width','')
 			$(".searchTablePID[data-value='"+ item +"']").show()
 			$(".btnSavePID[data-value='"+ item +"']").show()
-			$(".showPID[data-value='"+ item +"'] i").removeClass("fa-angle-right").addClass("fa-angle-down")
+			$(".showPID[data-value='"+ item +"'] i").removeClass("bx bx-chevron-right").addClass("bx bx-chevron-down")
 			$(".boxPID[data-value='"+ item +"']").append(append)
 			$(".boxPID[data-value='"+ item +"']").closest(".divPID").css({'background-color':'white','padding':'8px'});
 
@@ -10428,7 +10429,7 @@ Ticketing
 			$(".divPID[data-value='"+ item +"']").attr('style','display:none!important')
 			$(".searchTablePID[data-value='"+ item +"']").attr('style','display:none!important')
 			$(".btnSavePID[data-value='"+ item +"']").attr('style','display:none!important')
-			$(".showPID[data-value='"+ item +"'] i").removeClass("fa-angle-down").addClass("fa-angle-right")
+			$(".showPID[data-value='"+ item +"'] i").removeClass("bx bx-chevron-down").addClass("bx bx-chevron-right")
 			$(".boxPID[data-value='"+ item +"']").empty("")
 			$(".boxPID[data-value='"+ item +"']").closest(".divPID").css('background-color', '');
 		}
@@ -10617,9 +10618,9 @@ Ticketing
     			// }
 
   				let append_column = ""
-    			append_column = append_column + "<div class='alert bg-gray disabled' style='margin-bottom:10px!important;break-inside:avoid;'>"
+    			append_column = append_column + "<div class='alert bg-secondary disabled' style='margin-bottom:10px!important;break-inside:avoid;'>"
 						append_column = append_column + "<div style='position:relative'>"
-							append_column = append_column + "<span class='showPID' data-value='"+ item +"' onclick='showPID("+ item +"," + '['+ nik[item].nik + "]" +")' style='position:absolute;right:0;top:0'><i class='fa fa-2x fa-angle-right'></i></span>"
+							append_column = append_column + "<span class='showPID' data-value='"+ item +"' onclick='showPID("+ item +"," + '['+ nik[item].nik + "]" +")' style='position:absolute;right:0;top:0'><i class='bx bx-chevron-right'></i></span>"
 							append_column = append_column + "	<h6><b class='titleh6' data-value='"+ item +"'></b></h6>"
 							append_column = append_column + "	<p class='titleP' data-value='"+ item +"'></p>"
 							append_column = append_column + "<div style='position:relative'>"
@@ -10629,8 +10630,8 @@ Ticketing
 									append_column = append_column + "<div class='row'>"
 										append_column = append_column + "<div class='col-md-12'>"
 											append_column = append_column + "<div>"
-												append_column = append_column + "<div style='display: flex;'><div class='input-group searchTablePID' style='flex-direction: row; margin: 10px; width: 50% !important;' data-value='"+ item +"'><input class='form-control' placeholder='Search Cutsomer/PID/Project Name' id='searchbarPID' onkeyup='searchCustomPID("+ item + ")' data-value='"+ item +"'><span class='input-group-btn'><button onclick='searchCustomPID("+ item + ")' type='button' class='btn btn-secondary btn-flat' fdprocessedid='f23lya'>	<i class='fa fa-fw fa-search'></i></button></span></div>"
-													append_column = append_column + "<span style='margin-top: 19px;' data-toggle='tooltip' data-placement='top' title='Please search for more PID list!'><i class='fa fa-question-circle' style='font-size: 1.2em;color: #579bcf;'></i></span>"
+												append_column = append_column + "<div style='display: flex;'><div class='input-group searchTablePID' style='flex-direction: row; margin: 10px; width: 90% !important;' data-value='"+ item +"'><input class='form-control' placeholder='Search Cutsomer/PID/Project Name' id='searchbarPID' onkeyup='searchCustomPID("+ item + ")' data-value='"+ item +"'><span class='input-group-text'><a onclick='searchCustomPID("+ item + ")' type='button'>	<i class='bx bx-search'></i></button></span></div>"
+													append_column = append_column + "<span style='margin-top: 19px;' data-bs-toggle='tooltip' data-placement='top' title='Please search for more PID list!'><i class='bx bx-alert-triangle' style='font-size: 1.2em;color: #579bcf;'></i></span>"
 												append_column = append_column + "</div>"
 											append_column = append_column + "</div>"
 											append_column = append_column + "<div class='boxPID' data-value='"+ item +"'>"
@@ -10659,9 +10660,9 @@ Ticketing
 
 				if (result.length == 0) {
 					$("#container_pid").html("<span style='display:flex;flex-direction:row-reverse'>Empty Data!</span>")
-					$("#pagination").attr('style','display:none!important')
+					$("#pagination-custom").attr('style','display:none!important')
 				}else{
-					$("#pagination").show()
+					$("#pagination-custom").show()
 				}
 
 				var items = $(".divSiteBox .alert");
@@ -10670,7 +10671,7 @@ Ticketing
 
 				items.slice(perPage).attr('style','display:none!important');
 
-				$('#pagination').pagination({
+				$('#pagination-custom').pagination({
 					items: numItems,
 					itemsOnPage: perPage,
 					prevText: "&laquo;",
@@ -10716,7 +10717,7 @@ Ticketing
 			$(".divPID[data-value='"+ item +"']").fadeIn('slow').css('width','')
 			$(".searchTablePID[data-value='"+ item +"']").show()
 			$(".btnSavePID[data-value='"+ item +"']").show()
-			$(".showPID[data-value='"+ item +"'] i").removeClass("fa-angle-right").addClass("fa-angle-down")
+			$(".showPID[data-value='"+ item +"'] i").removeClass("bx bx-chevron-right").addClass("bx bx-chevron-down")
 			$(".boxPID[data-value='"+ item +"']").append(append)
 			$(".boxPID[data-value='"+ item +"']").closest(".divPID").css({'background-color':'white','padding':'8px'});
 
@@ -10916,7 +10917,7 @@ Ticketing
 			$(".divPID[data-value='"+ item +"']").attr('style','display:none!important')
 			$(".searchTablePID[data-value='"+ item +"']").attr('style','display:none!important')
 			$(".btnSavePID[data-value='"+ item +"']").attr('style','display:none!important')
-			$(".showPID[data-value='"+ item +"'] i").removeClass("fa-angle-down").addClass("fa-angle-right")
+			$(".showPID[data-value='"+ item +"'] i").removeClass("bx bx-chevron-down").addClass("bx bx-chevron-right")
 			$(".boxPID[data-value='"+ item +"']").empty("")
 			$(".boxPID[data-value='"+ item +"']").closest(".divPID").css('background-color', '');
 		}

@@ -1,58 +1,8 @@
 no;schedule;start_date;type;pid;level;activity;duration(menit);status;end_date;task;phase
-1;Unplanned;04/21/2025;Internal;;C;Siapin berkas kirim ke Joshua CCIE;30;Done;04/21/2025;Coordination;
-2;Unplanned;04/21/2025;Internal;;C;Onboarding Jovansyah dan Alvin;60;Done;04/21/2025;Coordination;
-3;Unplanned;04/21/2025;Internal;;C;Buat Draft Bonding;60;Done;04/21/2025;Coordination;
-4;Unplanned;04/21/2025;Internal;;C;Siapkan dokumen invoice PR safelog;15;Done;04/21/2025;Coordination;
-5;Unplanned;04/21/2025;Internal;;C;HC Weekly ;60;Done;04/21/2025;Coordination;
-6;Unplanned;04/21/2025;Internal;;C;Siapin berkas akuntansi 1 karyawan;10;Done;04/21/2025;Coordination;
-7;Unplanned;04/21/2025;Internal;;C;Buat flyer HSE Officer + upload;60;Done;04/21/2025;Coordination;
-8;Unplanned;04/21/2025;Internal;;C;Mengurus ID Card Jofansyah, Alfin, Fajar, Nugroho;25;Done;04/21/2025;Coordination;
-9;Unplanned;04/21/2025;Internal;;C;Kirim dokumen teknikal tes (2 orang);20;Done;04/21/2025;Coordination;
-10;Unplanned;04/21/2025;Internal;;C;Sortir CV Accounting;90;Done;04/21/2025;Coordination;
-11;Unplanned;04/21/2025;Internal;;C;Cek validasi dokumen calon karyawan;60;Done;04/21/2025;Coordination;
-12;Unplanned;04/21/2025;Internal;;C;Scan dokumen Prosedur;20;Done;04/21/2025;Coordination;
-13;Unplanned;04/22/2025;Internal;;C;Mengurus dokumen kirim ke Ary Rahmadian;45;Done;04/22/2025;Coordination;
-14;Unplanned;04/22/2025;Internal;;C;Buat PR ;150;Done;04/22/2025;Coordination;
-15;Unplanned;04/22/2025;Internal;;C;Buat bonding M.Naufal, Fatchurohman;150;Done;04/22/2025;Coordination;
-16;Unplanned;04/22/2025;Internal;;C;Mesin FC bermasalah;5;Done;04/22/2025;Coordination;
-17;Unplanned;04/22/2025;Internal;;C;Mengurus ID Card;40;Done;04/22/2025;Coordination;
-18;Unplanned;04/22/2025;Internal;;C;Sortir CV Accounting;10;Done;04/22/2025;Coordination;
-19;Unplanned;04/22/2025;Internal;;C;Followup kandidat QA intern + rekap rekrutmen;20;Done;04/22/2025;Coordination;
-20;Unplanned;04/22/2025;Internal;;C;Rekap BPJS Kesehatan ;30;Done;04/22/2025;Coordination;
-21;Unplanned;04/22/2025;Internal;;C;Request kartu nama;30;Done;04/22/2025;Coordination;
-22;Unplanned;04/23/2025;Internal;;C;Teknikal meeting QA Intern;75;Done;04/23/2025;Coordination;
-23;Unplanned;04/23/2025;Internal;;C;Print 3 dokumen untuk Andi Septian;10;Done;04/23/2025;Coordination;
-24;Unplanned;04/23/2025;Internal;;C;Scan dokumen Andi Septian;10;Done;04/23/2025;Coordination;
-25;Unplanned;04/23/2025;Internal;;C;Koordinasi kartu nama;10;Done;04/23/2025;Coordination;
-26;Unplanned;04/23/2025;Internal;;C;Revisi bonding karyawan;45;Done;04/23/2025;Coordination;
-27;Unplanned;04/23/2025;Internal;;C;Buat PKWT Andi Septian;120;Done;04/23/2025;Coordination;
-28;Unplanned;04/23/2025;Internal;;C;Meeting sosialisasi SIMSApp;90;Done;04/23/2025;Coordination;
-29;Unplanned;04/23/2025;Internal;;C;Buat PR EPT;60;Done;04/23/2025;Coordination;
-30;Unplanned;04/23/2025;Internal;;C;Isi rekap rekrutmen dan weekly;30;Done;04/23/2025;Coordination;
-31;Unplanned;04/23/2025;Internal;;C;Revisi kartu nama;30;Done;04/23/2025;Coordination;
-32;Unplanned;04/24/2025;Internal;;C;Fotocopy + bermasalah;30;Done;04/24/2025;Coordination;
-33;Unplanned;04/24/2025;Internal;;C;Koordinasi kartu nama;10;Done;04/24/2025;Coordination;
-34;Unplanned;04/24/2025;Internal;;C;Buat PR EPT;60;Done;04/24/2025;Coordination;
-35;Unplanned;04/24/2025;Internal;;C;Remind bonding Fatchur & M. Naufal;10;Done;04/24/2025;Coordination;
-37;Unplanned;04/24/2025;Internal;;C;Buat PR Dump;60;Done;04/24/2025;Coordination;
-38;Unplanned;04/24/2025;Internal;;C;Print absensi BPJS TK;5;Done;04/24/2025;Coordination;
-39;Unplanned;04/24/2025;Internal;;C;Cek Dokumen Safelog ;10;Done;04/24/2025;Coordination;
-40;Unplanned;04/24/2025;Internal;;C;Koordinasi ruangan meeting;10;Done;04/24/2025;Coordination;
-41;Unplanned;04/24/2025;Internal;;C;Koordinasi kandidat QA dan ASD;15;Done;04/24/2025;Coordination;
-42;Unplanned;04/24/2025;Internal;;C;Draft pencapaian sertifikasi;90;Done;04/24/2025;Coordination;
-43;Unplanned;04/24/2025;Internal;;C;PR reimburse exam fatchur;45;Done;04/24/2025;Coordination;
-44;Unplanned;04/24/2025;Internal;;C;Buat draft birthday karyawan;120;Done;04/24/2025;Coordination;
-45;Unplanned;04/24/2025;Internal;;C;Tanda tangan bonding;10;Done;04/24/2025;Coordination;
-46;Unplanned;04/25/2025;Internal;;C;Onboarding Andi Septian;90;Done;04/25/2025;Coordination;
-47;Unplanned;04/25/2025;Internal;;C;Koordinasi kartu nama Damar;20;Done;04/25/2025;Coordination;
-48;Unplanned;04/25/2025;Internal;;C;Print & revisi pkwt Andi;15;Done;04/25/2025;Coordination;
-49;Unplanned;04/25/2025;Internal;;C;Revisi PR;15;Done;04/25/2025;Coordination;
-50;Unplanned;04/25/2025;Internal;;C;Arrange interview QA Intern;30;Done;04/25/2025;Coordination;
-51;Unplanned;04/25/2025;Internal;;C;Cek Dokumen Safelog ;30;Done;04/25/2025;Coordination;
-52;Unplanned;04/25/2025;Internal;;C;Simsapp bermasalah;5;Done;04/25/2025;Coordination;
-53;Unplanned;04/25/2025;Internal;;C;Webinar;90;Done;04/25/2025;Coordination;
-54;Unplanned;04/25/2025;Internal;;C;Buat claim reimburse;20;Done;04/25/2025;Coordination;
-55;Unplanned;04/25/2025;Internal;;C;Sortir CV Accounting;45;Done;04/25/2025;Coordination;
-56;Unplanned;04/25/2025;Internal;;C;Buat PR Reimburse Badminton;30;Done;04/25/2025;Coordination;
-57;Unplanned;04/25/2025;Internal;;C;Buat absensi + rapihin dokumen;30;Done;04/25/2025;Coordination;
-58;Unplanned;04/25/2025;Internal;;C;Buat draft birthday karyawan;60;Done;04/25/2025;Coordination;
+1;Unplanned;05/15/2025;Project;097/BKES/SIP/XI/2024;D;Pengecekan jaringan di lantai 2 gedung brataranuh ;110;Done;05/15/2025;Priventive;[MSM] Project
+2;Unplanned;05/15/2025;Project;097/BKES/SIP/XI/2024;D;Pengecekan switch Kepwil 11 bali karena selalu reset booting;110;Done;05/15/2025;Priventive;[MSM] Project
+3;Unplanned;05/16/2025;Project;097/BKES/SIP/XI/2024;D;Setting dan pengetesan switch cisco 1200 di lantai 2 brataranuh;180;Done;05/16/2025;Priventive;[MSM] Project
+4;Unplanned;05/17/2025;Project;097/BKES/SIP/XI/2024;D;Standby Onsite;480;Done;05/17/2025;Priventive;[MSM] Project
+5;Unplanned;05/18/2025;Project;097/BKES/SIP/XI/2024;D;Standby Onsite;480;Done;05/18/2025;Priventive;[MSM] Project
+6;Unplanned;05/19/2025;Project;097/BKES/SIP/XI/2024;D;Konfigurasi vlan untuk KC Jaksel karena vlan belum terkonfigurasi;30;Done;05/18/2025;Priventive;[MSM] Project
+7;Unplanned;05/19/2025;Project;097/BKES/SIP/XI/2024;D;Stansby Monitoring Lantai 2 Brataranuh untuk keperluan vicon dengan Word Bank;180;Done;05/18/2025;Priventive;[MSM] Project

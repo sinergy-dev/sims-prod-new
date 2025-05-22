@@ -78,6 +78,10 @@ General Affair - Asset Request
   .form-group{
     margin-bottom: 15px;
   }
+
+  .swal2-container{
+    z-index: 99999!important;
+  }
 </style>
 @endsection
 @section('content')
@@ -310,7 +314,7 @@ General Affair - Asset Request
                           <td>{{$datas->duration}}</td> 
                           <td>{{$datas->reason}}</td> 
                           @if($datas->link_drive != null || $datas->link_drive != "")
-                            <td><a href="{{$datas->link_drive}}" target="_blank"><i class="bx bx-file"></i> files</a></td>                 
+                            <td><a href="{{$datas->link_drive}}" target="_blank"><i class="bx bx-file"></i> files</a></td>              
                           @else
                             <td> - </td>                   
                           @endif 
@@ -326,12 +330,40 @@ General Affair - Asset Request
                               <button class="btn btn-sm btn-primary btn-sm"  onclick="requestAssetAccept('{{$datas->id_request}}','ACCEPT')">Accept</button>
                               <button class="btn btn-sm btn-danger btn-sm"  onclick="requestAssetAccept('{{$datas->id_request}}','REJECT')">Reject</button>
                             @else
-                              <button class="btn btn-sm btn-warning btn-sm" onclick="requestAssetAccept('{{$datas->id_request}}','ACCEPT')">Update</button>
+                              @if(App\RoleUser::where('user_id', Auth::user()->nik)
+                                ->join('roles', 'roles.id', '=', 'role_user.role_id')
+                                ->where('roles.name', 'like', '%VP%')
+                                ->exists())
+                                  @if(App\RoleUser::where('user_id', $datas->nik)
+                                    ->join('roles', 'roles.id', '=', 'role_user.role_id')
+                                    ->where('roles.name', 'like', '%Manager%')
+                                    ->exists() || $datas->nik == Auth::User()->nik)
+                                    <button class="btn btn-sm btn-warning btn-sm" onclick="requestAssetAccept('{{$datas->id_request}}','ACCEPT')">Update</button>
+                                  @else
+                                    -
+                                  @endif
+                              @else
+                                <button class="btn btn-sm btn-warning btn-sm" onclick="requestAssetAccept('{{$datas->id_request}}','ACCEPT')">Update</button>
+                              @endif
                             @endif  
                           </td>
                           <td>
                             @if($datas->status == 'PENDING')
-                              <button class="btn btn-sm btn-warning btn-sm" onclick="requestAssetAccept('{{$datas->id_request}}','ACCEPT')">Update</button>
+                              @if(App\RoleUser::where('user_id', Auth::user()->nik)
+                                ->join('roles', 'roles.id', '=', 'role_user.role_id')
+                                ->where('roles.name', 'like', '%VP%')
+                                ->exists())
+                                  @if(App\RoleUser::where('user_id', $datas->nik)
+                                    ->join('roles', 'roles.id', '=', 'role_user.role_id')
+                                    ->where('roles.name', 'like', '%Manager%')
+                                    ->exists() || $datas->nik == Auth::User()->nik)
+                                    <button class="btn btn-sm btn-warning btn-sm" onclick="requestAssetAccept('{{$datas->id_request}}','ACCEPT')">Update</button>
+                                  @else
+                                    -
+                                  @endif 
+                              @else
+                                <button class="btn btn-sm btn-warning btn-sm" onclick="requestAssetAccept('{{$datas->id_request}}','ACCEPT')">Update</button>
+                              @endif
                             @else
                               @if(App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Financial Director')->exists() || App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Chief Executive Officer')->exists())
                                 N/A
@@ -627,7 +659,7 @@ General Affair - Asset Request
                   <div class="form-group">
                     <label>Date & Time</label>
                     <div class="input-group">
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <i class="bx bx-clock-o"></i>
                       </div>
                       <input type="text" class="form-control pull-right" id="eventsCalendar">
@@ -637,7 +669,7 @@ General Affair - Asset Request
                   <div class="form-group">
                     <label>Guest</label>
                     <div class="input-group">
-                      <div class="input-group-addon">
+                      <div class="input-group-text">
                         <i class="bx bx-user-plus"></i>
                       </div>
                       <select class="form-control" id="guestEmail" name="guestEmail" multiple="multiple">
@@ -667,7 +699,7 @@ General Affair - Asset Request
           <div class="form-group">
             <label>Date & Time</label>
             <div class="input-group">
-              <div class="input-group-addon">
+              <div class="input-group-text">
                 <i class="bx bx-clock-o"></i>
               </div>
               <input type="text" class="form-control pull-right" id="eventsCalendar">
@@ -687,7 +719,7 @@ General Affair - Asset Request
           <div class="form-group">
             <label>Guest</label>
             <div class="input-group">
-              <div class="input-group-addon">
+              <div class="input-group-text">
                 <i class="bx bx-user-plus"></i>
               </div>
               <select class="form-control" id="guestEmail" name="guestEmail" multiple="multiple">
@@ -700,7 +732,7 @@ General Affair - Asset Request
           <div class="form-group">
             <label>Group calendar</label>
             <div class="input-group">
-              <div class="input-group-addon">
+              <div class="input-group-text">
                 <i class="bx bx-calendar"></i>
               </div>
               <select class="form-control" id="groupCalendar" name="groupCalendar">
@@ -866,59 +898,59 @@ General Affair - Asset Request
             <form method="POST" id="formRequestAsset" action="{{url('/storeRequestAsset')}}" enctype="multipart/form-data">
                 @csrf
                   <!-- <div class="table-responsive" style="overflow-x: scroll;width: 100%;"> -->
-                  <!-- <table class="table" id="tbRequestModal" style="width: 100%;">
-                    <thead>
-                      <tr>
-                        <th width="20%">Name</th>
-                        <th width="20%">Category</th>
-                        <th width="20%">Merk</th>
-                        <th width="20%">Description</th>
-                        <th width="20%">Used for</th>
-                        <th width="20%">Duration</th>
-                        <th width="20%">Reason</th>
-                        <th width="20%">File</th>
-                        <th><button class="btn btn-sm btn-xs btn-success" type="button" id="btnAddRowReq" data-bs-toggle="tooltip" style="width:35px;height:30px;border-radius: 25px!important;outline: none;" ><i class="bx bx-plus"></i></button></th>
-                      </tr>
-                    </thead>
-                    <tbody id="tbody_request">
-                      <tr>
-                        <td>
-                          <input name="items[0][nama_barang_request]" id="nama_barang_request" class="form-control" placeholder="Input Product Name" style="width:150px" required>
-                        </td>
-                        <td>
-                          <input id="cat_req_id" data-rowid="0" hidden><select class="form-control" id="category_asset_request" name="items[0][category_asset_request]" data-rowid="0" required style="width:150px"></select>
-                        </td>
-                        <td>
-                          <input name="items[0][merk_barang_request]" id="merk_barang_request" class="form-control" placeholder="Input Merk" style="width:150px">
-                        </td>
-                        <td>
-                          <textarea class="form-control" id="link_barang_request" name="items[0][link_barang_request]" placeholder="Input Specification,*Suggest link for buy" required style="width:200px"></textarea>
-                        </td>                  
-                        <td>
-                          <select name="items[0][keperluan_barang_request]" id="keperluan_barang_request" class="form-control" required style="width:150px" data-rowid="0"><option></option></select>
-                        </td>
-                        <td>
-                          <div class="divDuration" data-rowid="0">
-                            <select name="items[0][duration_barang_request]" id="duration_barang_request" class="form-control" required style="width:200px" data-rowid="0"></select>
-                          </div>
-                          <div class="divDurationDate" data-rowid="0" style="display:none;">
-                            <input type="text" class="form-control" name="items[0][duration_date_range]" id="duration_date_range" data-rowid="0" style="width:200px;">
-                          </div>
-                        </td>
-                        <td>
-                          <textarea name="items[0][reason_barang_request]" id="reason_barang_request" class="form-control" placeholder="Reason" required style="width:250px"></textarea>
-                        </td>  
-                        <td>
-                          <input id="file_barang_request" name="items[0][file_barang_request]" type="file" multiple="multiple" class="form-control" style="width: 150px;">
-                        </td> 
-                        <td>
-                          <button class="btn btn-sm btn-xs btn-danger remove" type="button" data-bs-toggle="tooltip" style="width:35px;height:30px;border-radius: 25px!important;outline: none;float: right;" ><i class="bx bx-trash-o"></i></button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
- -->
-                <!-- </div> -->
+                    <!-- <table class="table" id="tbRequestModal" style="width: 100%;">
+                      <thead>
+                        <tr>
+                          <th width="20%">Name</th>
+                          <th width="20%">Category</th>
+                          <th width="20%">Merk</th>
+                          <th width="20%">Description</th>
+                          <th width="20%">Used for</th>
+                          <th width="20%">Duration</th>
+                          <th width="20%">Reason</th>
+                          <th width="20%">File</th>
+                          <th><button class="btn btn-sm btn-xs btn-success" type="button" id="btnAddRowReq" data-bs-toggle="tooltip" style="width:35px;height:30px;border-radius: 25px!important;outline: none;" ><i class="bx bx-plus"></i></button></th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody_request">
+                        <tr>
+                          <td>
+                            <input name="items[0][nama_barang_request]" id="nama_barang_request" class="form-control" placeholder="Input Product Name" style="width:150px" required>
+                          </td>
+                          <td>
+                            <input id="cat_req_id" data-rowid="0" hidden><select class="form-control" id="category_asset_request" name="items[0][category_asset_request]" data-rowid="0" required style="width:150px"></select>
+                          </td>
+                          <td>
+                            <input name="items[0][merk_barang_request]" id="merk_barang_request" class="form-control" placeholder="Input Merk" style="width:150px">
+                          </td>
+                          <td>
+                            <textarea class="form-control" id="link_barang_request" name="items[0][link_barang_request]" placeholder="Input Specification,*Suggest link for buy" required style="width:200px"></textarea>
+                          </td>                  
+                          <td>
+                            <select name="items[0][keperluan_barang_request]" id="keperluan_barang_request" class="form-control" required style="width:150px" data-rowid="0"><option></option></select>
+                          </td>
+                          <td>
+                            <div class="divDuration" data-rowid="0">
+                              <select name="items[0][duration_barang_request]" id="duration_barang_request" class="form-control" required style="width:200px" data-rowid="0"></select>
+                            </div>
+                            <div class="divDurationDate" data-rowid="0" style="display:none;">
+                              <input type="text" class="form-control" name="items[0][duration_date_range]" id="duration_date_range" data-rowid="0" style="width:200px;">
+                            </div>
+                          </td>
+                          <td>
+                            <textarea name="items[0][reason_barang_request]" id="reason_barang_request" class="form-control" placeholder="Reason" required style="width:250px"></textarea>
+                          </td>  
+                          <td>
+                            <input id="file_barang_request" name="items[0][file_barang_request]" type="file" multiple="multiple" class="form-control" style="width: 150px;">
+                          </td> 
+                          <td>
+                            <button class="btn btn-sm btn-xs btn-danger remove" type="button" data-bs-toggle="tooltip" style="width:35px;height:30px;border-radius: 25px!important;outline: none;float: right;" ><i class="bx bx-trash-o"></i></button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                     -->
+                  <!-- </div> -->
                 
                 <div style="margin-bottom: 20px;" class="divItem">
                   <div class="row">
@@ -972,13 +1004,12 @@ General Affair - Asset Request
                   <button class="btn btn-sm text-bg-primary" type="button" id="btnAddRowReq" data-bs-toggle="tooltip"><i class="bx bx-plus"></i> Add Item</button>
                   <button class="btn btn-sm btn-danger remove" type="button" data-bs-toggle="tooltip" style="width:35px;height:30px;outline: none;margin-left: 5px;" disabled><i class="bx bx-trash"></i></button>
                 </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
-                    <button type="submit" class="btn btn-sm btn-info"><i class="bx bx-check" id="submitReq"></i>&nbsp Submit</button>
-                </div>
-            </form>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal"><i class="bx bx-x"></i>&nbspClose</button>
+              <button type="submit" class="btn btn-sm btn-info"><i class="bx bx-check" id="submitReq"></i>&nbsp Submit</button>
+            </div>
+          </form>
         </div>
       </div>
   </div>
@@ -1312,11 +1343,10 @@ General Affair - Asset Request
             </div>
           </div> 
           <div class="card-footer" style="display: none;">
-              <img class="img-responsive img-circle img-sm" alt="Alt Text">
               <div class="img-push">
                 <div class="input-group">
                   <input type="text" class="form-control input-sm input-comment-accept-request" placeholder="Press enter to post comment">
-                  <span class="input-group-addon"><a href="#" class="btn-comment-accept-request" title="Send Notes"><i class="bx bx-paper-plane"></i></a></span>
+                  <span class="input-group-text"><a href="#" class="btn-comment-accept-request" title="Send Notes"><i class="bx bx-paper-plane"></i></a></span>
                 </div>
               </div>
           </div>       	
@@ -1635,7 +1665,8 @@ General Affair - Asset Request
                 text:"Select Date",
               },
             ],
-            dropdownPosition: 'below'
+            dropdownPosition: 'below',
+            dropdownParent:$("#requestAsset .modal-body")
           }).change(function(){
             if ($(this).val() == 'Select Date') {
               // $(".divDuration[data-rowid='"+ i +"']").show()
@@ -1659,7 +1690,9 @@ General Affair - Asset Request
           })
 
           $('#duration_barang_request[data-rowid="'+ i +'"] option[value="Lifetime"]').prop('disabled', false);
-          $('#duration_barang_request[data-rowid="'+ i +'"]').select2();
+          $('#duration_barang_request[data-rowid="'+ i +'"]').select2({
+            dropdownParent:$("#requestAsset .modal-body")
+          });
         }else{
           $("#duration_barang_request[data-rowid='"+ i +"']").select2({
             placeholder:"Select keperluan",
@@ -1673,7 +1706,8 @@ General Affair - Asset Request
                 text:"Select Date",
               },
             ],
-            dropdownPosition: 'below'
+            dropdownPosition: 'below',
+            dropdownParent:$("#requestAsset .modal-body")
           }).change(function(){
             if ($(this).val() == 'Select Date') {
               // $(".divDuration[data-rowid='"+ i +"']").show()
@@ -1697,7 +1731,9 @@ General Affair - Asset Request
           })
           $("#duration_barang_request[data-rowid='"+ i +"']").val("Select Date").trigger("change")
           $('#duration_barang_request[data-rowid="'+ i +'"] option[value="Lifetime"]').prop('disabled', true);
-          $('#duration_barang_request[data-rowid="'+ i +'"]').select2();
+          $('#duration_barang_request[data-rowid="'+ i +'"]').select2({
+            dropdownParent:$("#requestAsset .modal-body")
+          });
           // $(".divDurationDate[data-rowid='"+ i +"']").show()
           // $("#duration_date_range[data-rowid='"+ i +"']").daterangepicker({
           //   opens: 'center',
@@ -2174,32 +2210,38 @@ General Affair - Asset Request
               $("#notes_accept").closest(".form-group").attr('style','display:none!important')
               $("#notes_accept").closest(".form-group").next(".card-container").show()
 
-              $.each(result[0].notes,function(key,value) {
-                append = append + '<div class="card-comment" data-rowid="'+ key +'">'
-                  append = append + '<img class="img-circle img-sm" src="'+ value.image +'" alt="User Image">'
-                  append = append + '<div class="comment-text">'
-                  append = append + '<span class="username">'
-                  append = append + value.name
-                  
+              append += '<ul class="list-unstyled chat-contact-list py-2 mb-0">'
+                $.each(result[0].notes,function(key,value) {
+
                   const date = moment(value.created_at);
                   const formattedTime = date.format('h:mm A'); // Format time as "8:03 PM"
 
-                  if (date.isSame(moment(), 'day')) {
-                      // If the date is today
-                      append = append + '<span class="text-muted pull-right">'+ formattedTime +' Today</span>'
-                  } else if (date.isSame(moment().subtract(1, 'days'), 'day')) {
-                      // If the date is yesterday
-                      append = append + '<span class="text-muted pull-right">'+ formattedTime +' Yesterday</span>'
-                  } else {
-                      // For dates earlier than yesterday
-                      append = append + '<span class="text-muted pull-right">'+ formattedTime + ' '+ date.format('DD/MM/YYYY') + '</span>'
-                  }
+                  append += '<li class="chat-contact-list-item mb-1 card-comment" data-rowid="'+ key +'">'
+                    append += '<a class="d-flex align-items-center">'
+                      append += '<div class="flex-shrink-0 avatar">'
+                        append += '<img class="rounded-circle" src="'+ value.image +'" alt="User Image">'
+                      append += '</div>'
+                      append += '<div class="chat-contact-info flex-grow-1 ms-4">'
+                        append += '<div class="d-flex justify-content-between align-items-center">'
+                          append += '<h6 class="chat-contact-name text-truncate m-0 fw-normal">'+ value.name +'</h6>'
 
-                  append = append + '</span>'
-                  append = append + value.notes
-                  append = append + '</div>'
-                append = append + '</div>'
-              })
+                          if (date.isSame(moment(), 'day')) {
+                              // If the date is today
+                              append = append + '<small class="chat-contact-list-item-time">'+ formattedTime +' Today</small>'
+                          } else if (date.isSame(moment().subtract(1, 'days'), 'day')) {
+                              // If the date is yesterday
+                              append = append + '<small class="chat-contact-list-item-time">'+ formattedTime +' Yesterday</small>'
+                          } else {
+                              // For dates earlier than yesterday
+                              append = append + '<small class="chat-contact-list-item-time">'+ formattedTime + ' '+ date.format('DD/MM/YYYY') + '</small>'
+                          }
+                        append += '</div>'
+                        append += '<small class="chat-contact-status text-truncate" style="text-wrap:wrap">'+ value.notes +'</small>'
+                      append += '</div>'
+                    append += '</a>'
+                  append += '</li>'
+                })
+              append += '</ul>'
 
               $(".card-comments").append(append)
             }else{
@@ -2533,6 +2575,10 @@ General Affair - Asset Request
 
     $('#history_table').DataTable({
       pageLength: 20,
+      "ColumnDefs":[
+        { targets: 'no-sort', orderable: false }
+      ],
+      "aaSorting": [],
     })
 
     function activeTab(tab){
@@ -2643,7 +2689,7 @@ General Affair - Asset Request
 
     // on load of the page: switch to the currently selected tab
     var hash = window.location.hash;
-    $('#myTab a[href="' + hash + '"]').tab('show');
+    // $('#myTab a[href="' + hash + '"]').tab('show');
 
     function copyLinkUrl(url) {
         // Get the link element
@@ -2701,28 +2747,33 @@ General Affair - Asset Request
 
           var append = ""
 
-          append = append + '<div class="card-comment" data-rowid="'+ inc +'">'
-            append = append + '<img class="img-circle img-sm" src="{{Auth::User()->avatar_original}}" alt="User Image">'
-            append = append + '<div class="comment-text">'
-            append = append + '<span class="username">'
-            append = append + '{{Auth::User()->name}}'
-            const date = moment(result.created_at);
-              const formattedTime = date.format('h:mm A'); // Format time as "8:03 PM"
+          const date = moment(result.created_at);
+          const formattedTime = date.format('h:mm A'); // Format time as "8:03 PM"
 
-              if (date.isSame(moment(), 'day')) {
-                  // If the date is today
-                  append = append + '<span class="text-muted pull-right">'+ formattedTime +' Today</span>'
-              } else if (date.isSame(moment().subtract(1, 'days'), 'day')) {
-                  // If the date is yesterday
-                  append = append + '<span class="text-muted pull-right">'+ formattedTime +' Yesterday</span>'
-              } else {
-                  // For dates earlier than yesterday
-                  append = append + '<span class="text-muted pull-right">'+ formattedTime + date.fromNow() + '</span>'
-              }
-            append = append + '</span>'
-              append = append + result.notes
-            append = append + '</div>'
-          append = append + '</div>'
+          append += '<li class="chat-contact-list-item mb-1 card-comment" data-rowid="'+ inc +'">'
+            append += '<a class="d-flex align-items-center">'
+              append += '<div class="flex-shrink-0 avatar">'
+                append += '<img class="rounded-circle" src="{{Auth::User()->avatar_original}}" alt="User Image">'
+              append += '</div>'
+              append += '<div class="chat-contact-info flex-grow-1 ms-4">'
+                append += '<div class="d-flex justify-content-between align-items-center">'
+                  append += '<h6 class="chat-contact-name text-truncate m-0 fw-normal">{{Auth::User()->name}}</h6>'
+
+                  if (date.isSame(moment(), 'day')) {
+                      // If the date is today
+                      append = append + '<small class="chat-contact-list-item-time">'+ formattedTime +' Today</small>'
+                  } else if (date.isSame(moment().subtract(1, 'days'), 'day')) {
+                      // If the date is yesterday
+                      append = append + '<small class="chat-contact-list-item-time">'+ formattedTime +' Yesterday</small>'
+                  } else {
+                      // For dates earlier than yesterday
+                      append = append + '<small class="chat-contact-list-item-time">'+ formattedTime + ' '+ date.format('DD/MM/YYYY') + '</small>'
+                  }
+                append += '</div>'
+                append += '<small class="chat-contact-status text-truncate" style="text-wrap:wrap">'+ result.notes +'</small>'
+              append += '</div>'
+            append += '</a>'
+          append += '</li>'        
 
           $(".card-comments").find(".card-comment:first").before(append) 
           $('.input-comment-accept-request').val("")
@@ -2761,29 +2812,33 @@ General Affair - Asset Request
                 // Perform your desired action
                 var append = ""
 
-                append = append + '<div class="card-comment" data-rowid="'+ inc +'">'
-                  append = append + '<img class="img-circle img-sm" src="{{Auth::User()->avatar_original}}" alt="User Image">'
-                  append = append + '<div class="comment-text">'
-                  append = append + '<span class="username">'
-                  append = append + '{{Auth::User()->name}}'
-                  const date = moment(result.created_at);
-                  const formattedTime = date.format('h:mm A'); // Format time as "8:03 PM"
+                const date = moment(result.created_at);
+                const formattedTime = date.format('h:mm A'); // Format time as "8:03 PM"
 
-                  if (date.isSame(moment(), 'day')) {
-                      // If the date is today
-                      append = append + '<span class="text-muted pull-right">'+ formattedTime +' Today</span>'
-                  } else if (date.isSame(moment().subtract(1, 'days'), 'day')) {
-                      // If the date is yesterday
-                      append = append + '<span class="text-muted pull-right">'+ formattedTime +' Yesterday</span>'
-                  } else {
-                      // For dates earlier than yesterday
-                      append = append + '<span class="text-muted pull-right">'+ formattedTime + date.fromNow() + '</span>'
-                  }
+                append += '<li class="chat-contact-list-item mb-1 card-comment" data-rowid="'+ inc +'">'
+                  append += '<a class="d-flex align-items-center">'
+                    append += '<div class="flex-shrink-0 avatar">'
+                      append += '<img class="rounded-circle" src="{{Auth::User()->avatar_original}}" alt="User Image">'
+                    append += '</div>'
+                    append += '<div class="chat-contact-info flex-grow-1 ms-4">'
+                      append += '<div class="d-flex justify-content-between align-items-center">'
+                        append += '<h6 class="chat-contact-name text-truncate m-0 fw-normal">{{Auth::User()->name}}</h6>'
 
-                  append = append + '</span>'
-                    append = append + result.notes
-                  append = append + '</div>'
-                append = append + '</div>'
+                        if (date.isSame(moment(), 'day')) {
+                            // If the date is today
+                            append = append + '<small class="chat-contact-list-item-time">'+ formattedTime +' Today</small>'
+                        } else if (date.isSame(moment().subtract(1, 'days'), 'day')) {
+                            // If the date is yesterday
+                            append = append + '<small class="chat-contact-list-item-time">'+ formattedTime +' Yesterday</small>'
+                        } else {
+                            // For dates earlier than yesterday
+                            append = append + '<small class="chat-contact-list-item-time">'+ formattedTime + ' '+ date.format('DD/MM/YYYY') + '</small>'
+                        }
+                      append += '</div>'
+                      append += '<small class="chat-contact-status text-truncate" style="text-wrap:wrap">'+ result.notes +'</small>'
+                    append += '</div>'
+                  append += '</a>'
+                append += '</li>'
 
                 $(".card-comments").find(".card-comment:first").before(append) 
                 $('.input-comment-accept-request').val("")

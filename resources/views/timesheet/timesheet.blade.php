@@ -183,7 +183,15 @@
     }
 
     .swal2-container {
-        z-index: 9999 !important;
+      z-index: 9999 !important;
+    }
+
+    .select2-container {
+      z-index: 1055 !important; /* modal default: 1050 */
+    }
+
+    .select2-dropdown {
+      z-index: 1060 !important;
     }
   </style>
 @endsection
@@ -2261,12 +2269,16 @@
           }
         }
       });
-
+      if(idValue === 'refer'){
+        dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+      }else{
+        dropdownParent = $("#ModalAddTimesheet .modal-body")
+      }
       $("#selectDuration_"+idValue).select2({
           placeholder:"Select Duration",
           data:arrDuration,
           // dropdownParent: $("#fieldset_"+idValue)
-          dropdownParent:$("#ModalAddTimesheet .modal-body")
+          dropdownParent:dropdownParent
       })
     }
 
@@ -2282,12 +2294,17 @@
         type:"GET",
         url:"{{url('/timesheet/getLeadId')}}",
         success:function(result){
-          function isSelect2Loaded() {      
+          function isSelect2Loaded() {
+            if(idValue === 'refer'){
+              dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+            }else{
+              dropdownParent = $("#ModalAddTimesheet .modal-body")
+            }
             var Select2 = $("#selectLead_"+idValue).select2({
               placeholder:"Select Lead Id",
               data:result,
               // dropdownParent: $("#fieldset_"+idValue)
-              dropdownParent:$("#ModalAddTimesheet .modal-body")
+              dropdownParent:dropdownParent
             })
 
             return typeof Select2 !== 'undefined';
@@ -2297,11 +2314,16 @@
               if (isSelect2Loaded()) {
                   // Select2 script has been loaded
                   // You can proceed with using Select2
+                if(idValue === 'refer'){
+                  dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+                }else{
+                  dropdownParent = $("#ModalAddTimesheet .modal-body")
+                }
                   $("#selectLead_"+idValue).select2({
                     placeholder:"Select Lead Id",
                     data:result,
                     // dropdownParent: $("#fieldset_"+idValue)
-                    dropdownParent:$("#ModalAddTimesheet .modal-body")
+                    dropdownParent:dropdownParent
                   })
 
                   if (pid != undefined) {
@@ -2346,13 +2368,18 @@
 
             $(document).ready(function() {
                 if (isSelect2Loaded()) {
+                  if(idValue === 'refer'){
+                    dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+                  }else{
+                    dropdownParent = $("#ModalAddTimesheet .modal-body")
+                  }
                     // Select2 script has been loaded
                     // You can proceed with using Select2
                     $("#selectLead_"+idValue).select2({
                       placeholder:"Select Project Id",
                       data:result,
                       // dropdownParent: $("#fieldset_"+idValue)
-                      dropdownParent:$("#ModalAddTimesheet .modal-body")
+                      dropdownParent:dropdownParent
                     })
 
                     if (pid != undefined) {
@@ -2374,11 +2401,16 @@
         type:"GET",
         url:"{{url('/timesheet/getTaskByDivision')}}",
         success:function(result){
+          if(idValue === 'refer'){
+            dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+          }else{
+            dropdownParent = $("#ModalAddTimesheet .modal-body")
+          }
           var selectTask =  $("#selectTask_"+idValue).select2({
               placeholder:"Select Task",
               data:result,
               // dropdownParent: $("#fieldset_"+idValue)
-              dropdownParent:$("#ModalAddTimesheet .modal-body")
+              dropdownParent:dropdownParent
           })
 
           if (value) {
@@ -2394,11 +2426,16 @@
         type:"GET",
         url:"{{url('/timesheet/getPhaseByDivision')}}",
         success:function(result){
+          if(idValue === 'refer'){
+            dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+          }else{
+            dropdownParent = $("#ModalAddTimesheet .modal-body")
+          }
           var selectPhase =  $("#selectPhase_"+idValue).select2({
             placeholder:"Select Phase",
             data:result,
             // dropdownParent: $("#fieldset_"+idValue)
-            dropdownParent:$("#ModalAddTimesheet .modal-body")
+            dropdownParent:dropdownParent
           })
 
           if (value) {
@@ -2409,6 +2446,11 @@
     }
 
     function setLevel(idValue){
+      if(idValue === 'refer'){
+        dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+      }else{
+        dropdownParent = $("#ModalAddTimesheet .modal-body")
+      }
       $("#selectLevel_"+idValue).select2({
         placeholder:"Select Level",
         data:[
@@ -2434,11 +2476,16 @@
           },
         ],
         // dropdownParent: $("#fieldset_"+idValue)
-        dropdownParent:$("#ModalAddTimesheet .modal-body")
+        dropdownParent:dropdownParent
       })
     }
 
     function setStatus(idValue){
+      if(idValue === 'refer'){
+        dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+      }else{
+        dropdownParent = $("#ModalAddTimesheet .modal-body")
+      }
       $("#selectStatus_"+idValue).select2({
         placeholder:"Select Status",
         data:[
@@ -2460,11 +2507,16 @@
           },
         ],
         // dropdownParent: $("#fieldset_"+idValue)
-        dropdownParent:$("#ModalAddTimesheet .modal-body")
+        dropdownParent:dropdownParent
       })
     }
 
     function setType(idValue){
+      if(idValue === 'refer'){
+        dropdownParent = $("#ModalUpdateTimesheet .modal-body")
+      }else{
+        dropdownParent = $("#ModalAddTimesheet .modal-body")
+      }
       $("#selectType_"+idValue).select2({
         placeholder:"Select Type",
         data: [{
@@ -2479,7 +2531,7 @@
             text: 'Approach'
         }],
         // dropdownParent: $("#fieldset_"+idValue)
-        dropdownParent:$("#ModalAddTimesheet .modal-body")
+        dropdownParent: dropdownParent
       }).on('change', function() {
         var selectedOption = $(this).val();
         // Perform action based on the selected option

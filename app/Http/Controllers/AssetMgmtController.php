@@ -161,7 +161,8 @@ class AssetMgmtController extends Controller
                 'tb_asset_management.id',
                 'id_device_customer',
                 'client',
-                DB::raw('CONCAT(users.name, " - ",roles.name) AS pic_name')
+                DB::raw('CONCAT(users.name, " - ",roles.name) AS pic_name'),
+                DB::raw('CASE WHEN reason_status IS NULL THEN "-" ELSE reason_status END AS reason')
             )->groupBy(
                 'tb_asset_management_detail.pid',
                 'asset_owner',

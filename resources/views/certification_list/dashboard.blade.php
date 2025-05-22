@@ -17,9 +17,9 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.min.css" integrity="sha512-Bhi4560umtRBUEJCTIJoNDS6ssVIls7oiYyT3PbhxZV+9uBbLVO/mWo56hrBNNbIfMXKvtIPJi/Jg+vpBpA7sg==" crossorigin="anonymous" referrerpolicy="no-referrer" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
 
     <style type="text/css">
-        html,body,buttons,input,textarea,etc {
-            font-family: inherit;
-        }
+        /*html,body,buttons,input,textarea,etc {*/
+        /*    font-family: inherit;*/
+        /*}*/
 
         p > strong::before{
             content: "@";
@@ -71,7 +71,7 @@
             <div class="col-sm-6 ">
                 <div class="card card-primary">
                     <div class="card-header with-border">
-                        <h3 class="card-title">Total Exam By Status</h3>
+                        <h6 class="card-title">Total Exam By Status</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -87,7 +87,7 @@
             <div class="col-sm-6 ">
                 <div class="card card-primary">
                     <div class="card-header with-border">
-                        <h3 class="card-title">Total Exam</h3>
+                        <h6 class="card-title">Total Exam</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -105,7 +105,7 @@
             <div class="col-sm-6">
                 <div class="card card-primary">
                     <div class="card-header with-border">
-                        <h3 class="card-title">Total Exam By Purpose</h3>
+                        <h6 class="card-title">Total Exam By Purpose</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -121,7 +121,7 @@
             <div class="col-sm-6 ">
                 <div class="card card-primary">
                     <div class="card-header with-border">
-                        <h3 class="card-title">Total Exam By Division</h3>
+                        <h6 class="card-title">Total Exam By Division</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -139,7 +139,7 @@
             <div class="col-sm-6 ">
                 <div class="card card-primary">
                     <div class="card-header with-border">
-                        <h3 class="card-title">Total Exam By Partner</h3>
+                        <h6 class="card-title">Total Exam By Partner</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -155,7 +155,7 @@
             <div class="col-sm-6 ">
                 <div class="card card-primary">
                     <div class="card-header with-border">
-                        <h3 class="card-title">Total Exam By Level</h3>
+                        <h6 class="card-title">Total Exam By Level</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -173,7 +173,7 @@
             <div class="col-sm-12">
                 <div class="card card-primary">
                     <div class="card-header with-border">
-                        <h3 class="card-title">Top 10 Expired Certificate</h3>
+                        <h6 class="card-title">Top 10 Expired Certificate</h6>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -556,7 +556,7 @@
                     scales: {
                         yAxes: [{
                             ticks: {
-                                beginAtZero: true, // ⬅️ Ini penting untuk Chart.js v2
+                                beginAtZero: true,
                                 min: 0,
                                 stepSize: 1
                             },
@@ -566,6 +566,8 @@
                             }
                         }],
                         xAxes: [{
+                            barPercentage: 0.5,
+                            categoryPercentage: 0.5,
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Purpose'
@@ -647,6 +649,8 @@
                             }
                         }],
                         xAxes: [{
+                            barPercentage: 0.5,
+                            categoryPercentage: 0.5,
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Division'

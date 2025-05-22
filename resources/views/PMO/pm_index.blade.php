@@ -98,6 +98,18 @@
       .form-group{
         margin-bottom: 15px;
       }
+
+      .swal2-container {
+        z-index: 9999 !important;
+      }
+
+      .select2-container {
+        z-index: 1055 !important; /* modal default: 1050 */
+      }
+
+      .select2-dropdown {
+        z-index: 1060 !important;
+      }
   </style>
 @endsection
 @section('content')
@@ -162,14 +174,14 @@
                 <select id="selectPIDAssign" name="selectPIDAssign" class="select2 form-control" onchange="validationCheck(this)" required>
                   <option></option>
                 </select>
-                <span class="help-block" style="display:none;">Please select Project ID!</span>
+                <span class="invalid-feedback" style="display:none;">Please select Project ID!</span>
               </div> 
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label for="">Project Title*</label>
                 <input autocomplete="off" type="text" class="form-control" placeholder="Project Title" id="inputProjectTitle" name="inputProjectTitle" onkeyup="validationCheck(this)" readonly>
-                <span class="help-block" style="display:none;">Please fill Project Title!</span>
+                <span class="invalid-feedback" style="display:none;">Please fill Project Title!</span>
               </div> 
             </div>
           </div>
@@ -180,7 +192,7 @@
                 <label class="me-12" style="margin-right: 15px;"><input onchange="validationCheck(this)" autocomplete="off" type="checkbox" name="cbProjectType" class="form-check-input" id="" value="implementation">&nbspImplementation</label>
                 <label><input onchange="validationCheck(this)" autocomplete="off" type="checkbox" name="cbProjectType" class="form-check-input" id="" value="maintenance">&nbspMaintenance & Managed Service</label>
               </div>
-            <span class="help-block" style="display:none;">Please Select Project Type!</span>
+            <span class="invalid-feedback" style="display:none;">Please Select Project Type!</span>
           </div>
           <div class="row">
             <div class="col-md-6">
@@ -189,7 +201,7 @@
                 <select id="selectPM" name="selectPM" class="select2 form-control" onchange="validationCheck(this)">
                   <option></option>
                 </select>
-                <span class="help-block" style="display:none;">Please select Project Manager!</span>
+                <span class="invalid-feedback" style="display:none;">Please select Project Manager!</span>
               </div> 
             </div>
             <div class="col-md-6">
@@ -198,7 +210,7 @@
                 <select id="selectPC" name="selectPC" class="select2 form-control" onchange="validationCheck(this)" disabled>
                   <option></option>
                 </select>
-                <span class="help-block" style="display:none;">Please Select Project Coordinator!</span>
+                <span class="invalid-feedback" style="display:none;">Please Select Project Coordinator!</span>
               </div> 
             </div>
           </div>
@@ -217,516 +229,508 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">×</span></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
         <h6 class="modal-title">Customer Information</h6>
       </div>
       <div class="modal-body">
         <form action="" id="modal_project_charter" name="modal_project_charter">
-        @csrf
-          <div class="tab-add" style="display:none;">
-            <div class="tabGroup">
-              <div class="form-group">
-                <label for="">Customer*</label>
-                <input autocomplete="off" type="text" class="form-control" placeholder="Customer" id="inputCustomer" name="inputCustomer" onkeyup="validationCheck(this)">
-                <span class="help-block" style="display:none;">Please fill Customer!</span>
-              </div> 
+          @csrf
+            <div class="tab-add" style="display:none;">
+              <div class="tabGroup">
+                <div class="form-group">
+                  <label for="">Customer*</label>
+                  <input autocomplete="off" type="text" class="form-control" placeholder="Customer" id="inputCustomer" name="inputCustomer" onkeyup="validationCheck(this)">
+                  <span class="invalid-feedback" style="display:none;">Please fill Customer!</span>
+                </div> 
 
-              <div class="form-group">
-                <label for="">Address*</label>
-                <textarea class="form-control" placeholder="Address" id="textAreaAddress" name="textAreaAddress" onkeyup="validationCheck(this)"></textarea>
-                <span class="help-block" style="display:none;">Please fill Customer Address!</span>
-              </div> 
+                <div class="form-group">
+                  <label for="">Address*</label>
+                  <textarea class="form-control" placeholder="Address" id="textAreaAddress" name="textAreaAddress" onkeyup="validationCheck(this)"></textarea>
+                  <span class="invalid-feedback" style="display:none;">Please fill Customer Address!</span>
+                </div> 
 
-              <div class="form-group">
-                <label for="">Phone*</label>
-                <input autocomplete="off" class="form-control" placeholder="Customer Phone" id="inputPhone" name="inputPhone" onkeyup="validationCheck(this)">
-                <span class="help-block" style="display:none;">Please fill Customer Phone!</span>
-              </div>    
+                <div class="form-group">
+                  <label for="">Phone*</label>
+                  <input autocomplete="off" class="form-control" placeholder="Customer Phone" id="inputPhone" name="inputPhone" onkeyup="validationCheck(this)">
+                  <span class="invalid-feedback" style="display:none;">Please fill Customer Phone!</span>
+                </div>    
 
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="">Contact Person*</label>
-                    <input autocomplete="off" class="form-control" id="inputContactPerson" type="text" name="inputContactPerson" placeholder="Contact Person" onkeyup="validationCheck(this)">
-                    <span class="help-block" style="display:none;">Please fill Contact Person!</span>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="">Contact Person*</label>
+                      <input autocomplete="off" class="form-control" id="inputContactPerson" type="text" name="inputContactPerson" placeholder="Contact Person" onkeyup="validationCheck(this)">
+                      <span class="invalid-feedback" style="display:none;">Please fill Contact Person!</span>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="">Email*</label>
-                    <input autocomplete="off" type="email" class="form-control" placeholder="Email" name="inputEmail" id="inputEmail" onkeyup="validationCheck(this)">
-                    <span class="help-block" style="display:none;">Please fill Email!</span>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="">Email*</label>
+                      <input autocomplete="off" type="email" class="form-control" placeholder="Email" name="inputEmail" id="inputEmail" onkeyup="validationCheck(this)">
+                      <span class="invalid-feedback" style="display:none;">Please fill Email!</span>
+                    </div>
                   </div>
-                </div>
-              </div>  
+                </div>  
 
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="">CP Phone*</label>
-                    <input autocomplete="off" class="form-control" id="inputCpPhone" type="number" name="inputCpPhone" placeholder="Contact Person Phone" onkeyup="validationCheck(this)">
-                    <span class="help-block" style="display:none;">Please fill Contact Person Phone!</span>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="">CP Phone*</label>
+                      <input autocomplete="off" class="form-control" id="inputCpPhone" type="number" name="inputCpPhone" placeholder="Contact Person Phone" onkeyup="validationCheck(this)">
+                      <span class="invalid-feedback" style="display:none;">Please fill Contact Person Phone!</span>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="">CP Title*</label>
-                    <input autocomplete="off" type="text" class="form-control" placeholder="Contact Person Title" name="inputCpTitle" id="inputCpTitle" onkeyup="validationCheck(this)">
-                    <span class="help-block" style="display:none;">Please fill Contact Person Title!</span>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="">CP Title*</label>
+                      <input autocomplete="off" type="text" class="form-control" placeholder="Contact Person Title" name="inputCpTitle" id="inputCpTitle" onkeyup="validationCheck(this)">
+                      <span class="invalid-feedback" style="display:none;">Please fill Contact Person Title!</span>
+                    </div>
                   </div>
-                </div>
-              </div> 
+                </div> 
 
-              <div class="form-group">
-                <label>Customer Company's Logo*</label>
-                <input type="file" name="inputCompanyLogo" id="inputCompanyLogo" class="form-control files" onchange="validationCheck(this,'logo')">
-                <span class="help-block" style="display:none;">Please upload company's logo</span>
+                <div class="form-group">
+                  <label>Customer Company's Logo*</label>
+                  <input type="file" name="inputCompanyLogo" id="inputCompanyLogo" class="form-control files" onchange="validationCheck(this,'logo')">
+                  <span class="invalid-feedback" style="display:none;">Please upload company's logo</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="tab-add" style="display:none">
-            <div class="tabGroup">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Project ID Number*</label>
-                    <select autocomplete="off" type="text" name="inputPID" class="form-control" id="inputPID" placeholder="" onkeyup="validationCheck(this)">
-                      <option/>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>PO/SPK Number*</label> 
-                    <input readonly type="text" name="inputPoNumber" id="inputPoNumber" class="form-control" placeholder="PO/SPK Number">
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Project Name*</label>
-                <input readonly autocomplete="off" placeholder="Project Name" type="text" name="inputProjectName" class="form-control" id="inputProjectName">
-              </div>
-
-              <div class="form-group">
-                <label>Project Type*</label>
-                  <div style="padding:10px;border:solid 1px #cccc;background-color: #eee;">
-                    <label style="margin-right: 15px;"><input readonly autocomplete="off" type="checkcard" value="supply_only" name="cbProjectTypeAddProjectCharter" class="minimal" id=""> Supply Only</label>
-                    <label style="margin-right: 15px;"><input readonly autocomplete="off" type="checkcard" value="implementation" name="cbProjectTypeAddProjectCharter" class="minimal" id=""> Implementation</label>
-                    <label><input readonly autocomplete="off" type="checkcard" name="cbProjectTypeAddProjectCharter" value="maintenance" class="minimal" id=""> Maintenance & Managed Service</label>
-                  </div>
-                <!-- <span class="help-block" style="display:none;">Please Select Project Type!</span> -->
-              </div>
-
-              <div class="form-group">
-                <label>Project Owner*</label>
-                <input readonly autocomplete="off" type="text" placeholder="Project Owner" name="inputProjectOwner" class="form-control" id="inputProjectOwner">
-                <span class="help-block" style="display:none;">Please fill Project Owner!</span>
-              </div>
-              
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Project Manager*</label>
-                    <select class="form-control" id="selectPmProjectCharter" readonly></select>
-                    <span class="help-block" style="display:none;">Please fill Project Manager!</span>
-                  </div> 
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Project Coordinator*</label>
-                    <select class="form-control" id="selectPcProjectCharter" readonly></select>
-                    <span class="help-block" style="display:none;">Please fill Project Coordinator!</span>
-                  </div> 
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Project Description*</label>
-                <textarea  autocomplete="off" type="number" name="textAreaProjectDesc" class="form-control" id="textAreaProjectDesc" placeholder="Project Description" onkeyup="validationCheck(this)"></textarea>
-                <span class="help-block" style="display:none;">Please fill Project Description!</span>
-              </div> 
-
-              <div class="form-group">
-                <label>Project Objectives*</label>
-                <textarea  autocomplete="off" type="number" name="textAreaProjectObj" class="form-control" id="textAreaProjectObj" placeholder="Project Objectives" onkeyup="validationCheck(this)"></textarea>
-                <span class="help-block" style="display:none;">Please fill Project Objective!</span>
-              </div> 
-
-              <div class="form-group">
-                <label>Technology Use*</label>
-                  <div class="col-md-12 col-xs-12" style="border:solid 1px #cccc;padding-left:5px!important;padding: 10px;margin-bottom: 15px;">
-                    <div class="col-md-3 col-xs-12" style="padding-left:5px!important;">
-                      <label><input autocomplete="off" type="checkcard" name="cbTechUse" value="Data Center" class="minimal form-control" id="" onclick="validationCheck(this)"> Data Center</label>
-                      <label><input autocomplete="off" type="checkcard" name="cbTechUse" value="Security" class="minimal form-control" id="" onclick="validationCheck(this)"> Security</label><br>
-                      <label><input autocomplete="off" type="checkcard" name="cbTechUse" value="IoT" class="minimal form-control" id="" onclick="validationCheck(this)"> IoT</label>
-                      
-                    </div>
-                    <div class="col-md-5 col-xs-12" style="padding-left:5px!important">   
-                      <label><input autocomplete="off" type="checkcard" name="cbTechUse" value="ATM/CRM" class="minimal form-control" id="" onclick="validationCheck(this)"> ATM/CRM</label>
-                      <label><input autocomplete="off" type="checkcard" name="cbTechUse" value="Application Development" class="minimal form-control" id="" onclick="validationCheck(this)"> Application Development</label>
-                      <label><input autocomplete="off" type="checkcard" name="cbTechUse" value="Cloud Computing" class="minimal form-control" id="" onclick="validationCheck(this)"> Cloud Computing</label>
-                    </div>
-                    <div class="col-md-4 col-xs-12" style="padding-left:5px!important;">
-                      <label><input autocomplete="off" type="checkcard" name="cbTechUse" value="Borderless Network" class="minimal form-control" id="" onclick="validationCheck(this)"> Borderless Network</label>
-                      <label><input autocomplete="off" type="checkcard" name="cbTechUse" value="Collaboration" class="minimal form-control" id="" onclick="validationCheck(this)"> Collaboration</label>
-                      
+            <div class="tab-add" style="display:none">
+              <div class="tabGroup">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Project ID Number*</label>
+                      <select autocomplete="off" type="text" name="inputPID" class="form-control" id="inputPID" placeholder="" onkeyup="validationCheck(this)">
+                        <option/>
+                      </select>
                     </div>
                   </div>
-                <span class="help-block" style="display:none;">Please Select Technology Use!</span>
-              </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>PO/SPK Number*</label> 
+                      <input readonly type="text" name="inputPoNumber" id="inputPoNumber" class="form-control" placeholder="PO/SPK Number">
+                    </div>
+                  </div>
+                </div>
 
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="form-group">
-                      <label>Estimated Start Date*</label>
-                      <div class="input-group">
-                          <span class="input-group-addon"><i class="bx bx-calendar" style="display:inline"></i></span>
-                          <input type="text" name="inputStartDate" id="inputStartDate" placeholder="Select Start Date" class="form-control" style="display:inline" onchange="validationCheck(this)">
+                <div class="form-group">
+                  <label>Project Name*</label>
+                  <input readonly autocomplete="off" placeholder="Project Name" type="text" name="inputProjectName" class="form-control" id="inputProjectName">
+                </div>
+
+                <div class="form-group">
+                  <label>Project Type*</label>
+                    <div style="padding:10px;border:solid 1px #cccc;">
+                      <label style="margin-right: 15px;"><input readonly autocomplete="off" type="checkbox" value="supply_only" name="cbProjectTypeAddProjectCharter" class="minimal" id=""> Supply Only</label>
+                      <label style="margin-right: 15px;"><input readonly autocomplete="off" type="checkbox" value="implementation" name="cbProjectTypeAddProjectCharter" class="minimal" id=""> Implementation</label>
+                      <label><input readonly autocomplete="off" type="checkbox" name="cbProjectTypeAddProjectCharter" value="maintenance" class="minimal" id=""> Maintenance & Managed Service</label>
+                    </div>
+                  <!-- <span class="invalid-feedback" style="display:none;">Please Select Project Type!</span> -->
+                </div>
+
+                <div class="form-group">
+                  <label>Project Owner*</label>
+                  <input readonly autocomplete="off" type="text" placeholder="Project Owner" name="inputProjectOwner" class="form-control" id="inputProjectOwner">
+                  <span class="invalid-feedback" style="display:none;">Please fill Project Owner!</span>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Project Manager*</label>
+                      <select class="form-control" id="selectPmProjectCharter" readonly></select>
+                      <span class="invalid-feedback" style="display:none;">Please fill Project Manager!</span>
+                    </div> 
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Project Coordinator*</label>
+                      <select class="form-control" id="selectPcProjectCharter" readonly></select>
+                      <span class="invalid-feedback" style="display:none;">Please fill Project Coordinator!</span>
+                    </div> 
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Project Description*</label>
+                  <textarea  autocomplete="off" type="number" name="textAreaProjectDesc" class="form-control" id="textAreaProjectDesc" placeholder="Project Description" onkeyup="validationCheck(this)"></textarea>
+                  <span class="invalid-feedback" style="display:none;">Please fill Project Description!</span>
+                </div> 
+
+                <div class="form-group">
+                  <label>Project Objectives*</label>
+                  <textarea  autocomplete="off" type="number" name="textAreaProjectObj" class="form-control" id="textAreaProjectObj" placeholder="Project Objectives" onkeyup="validationCheck(this)"></textarea>
+                  <span class="invalid-feedback" style="display:none;">Please fill Project Objective!</span>
+                </div> 
+
+                <div class="form-group">
+                  <label>Technology Use*</label>
+                    <div class="col-md-12 col-xs-12" style="border:solid 1px #cccc;padding-left:5px!important;padding: 10px;margin-bottom: 15px;">
+                      <div class="col-md-3 col-xs-12" style="padding-left:5px!important;">
+                        <label class="form-check-label"><input autocomplete="off" type="checkbox" name="cbTechUse" value="Data Center" class="form-check-input" id="" onclick="validationCheck(this)"> Data Center</label>
+                        <label class="form-check-label"><input autocomplete="off" type="checkbox" name="cbTechUse" value="Security" class="form-check-input" id="" onclick="validationCheck(this)"> Security</label><br>
+                        <label class="form-check-label"><input autocomplete="off" type="checkbox" name="cbTechUse" value="IoT" class="form-check-input" id="" onclick="validationCheck(this)"> IoT</label>
+                        
                       </div>
-                    <span class="help-block" style="display:none;">Please Select Start Date!</span>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Estimated Finish Date*</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="bx bx-calendar" style="display:inline"></i></span>
-                        <input type="text" name="inputFinishDate" id="inputFinishDate" placeholder="Select Finish Date" class="form-control" style="display:inline" onchange="validationCheck(this)">
+                      <div class="col-md-5 col-xs-12" style="padding-left:5px!important">   
+                        <label class="form-check-label"><input autocomplete="off" type="checkbox" name="cbTechUse" value="ATM/CRM" class="form-check-input" id="" onclick="validationCheck(this)"> ATM/CRM</label>
+                        <label class="form-check-label"><input autocomplete="off" type="checkbox" name="cbTechUse" value="Application Development" class="form-check-input" id="" onclick="validationCheck(this)"> Application Development</label>
+                        <label class="form-check-label"><input autocomplete="off" type="checkbox" name="cbTechUse" value="Cloud Computing" class="form-check-input" id="" onclick="validationCheck(this)"> Cloud Computing</label>
+                      </div>
+                      <div class="col-md-4 col-xs-12" style="padding-left:5px!important;">
+                        <label class="form-check-label"><input autocomplete="off" type="checkbox" name="cbTechUse" value="Borderless Network" class="form-check-input" id="" onclick="validationCheck(this)"> Borderless Network</label>
+                        <label class="form-check-label"><input autocomplete="off" type="checkbox" name="cbTechUse" value="Collaboration" class="form-check-input" id="" onclick="validationCheck(this)"> Collaboration</label>
+                        
+                      </div>
                     </div>
-                    <span class="help-block" style="display:none;">Please Select Finish Date!</span>
+                  <span class="invalid-feedback" style="display:none;">Please Select Technology Use!</span>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Estimated Start Date*</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bx bx-calendar" style="display:inline"></i></span>
+                            <input type="text" name="inputStartDate" id="inputStartDate" placeholder="Select Start Date" class="form-control" style="display:inline" onchange="validationCheck(this)">
+                        </div>
+                      <span class="invalid-feedback" style="display:none;">Please Select Start Date!</span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Estimated Finish Date*</label>
+                      <div class="input-group">
+                          <span class="input-group-text"><i class="bx bx-calendar" style="display:inline"></i></span>
+                          <input type="text" name="inputFinishDate" id="inputFinishDate" placeholder="Select Finish Date" class="form-control" style="display:inline" onchange="validationCheck(this)">
+                      </div>
+                      <span class="invalid-feedback" style="display:none;">Please Select Finish Date!</span>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Flexibility*</label>
+                      <select name="selectFlexibility" id="selectFlexibility" class="form-control" placeholder="Select Flexibility" onchange="validationCheck(this)">
+                        <option value="Flexible">Flexible</option>
+                        <option value="TightSchedule">Tight Schedule</option>
+                      </select>
+                      <span class="invalid-feedback" style="display:none;">Please Select Flexibility!</span>
+
+                    </div>
                   </div>
                 </div>
 
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label>Flexibility*</label>
-                    <select name="selectFlexibility" id="selectFlexibility" class="form-control" placeholder="Select Flexibility" onchange="validationCheck(this)">
-                      <option value="Flexible">Flexible</option>
-                      <option value="TightSchedule">Tight Schedule</option>
-                    </select>
-                    <span class="help-block" style="display:none;">Please Select Flexibility!</span>
+                <div class="form-group">
+                  <label>Market Segment*</label>
+                  <select name="selectMarketSegment" id="selectMarketSegment" class="form-control" placeholder="Select Market Segment" onchange="validationCheck(this)">
+                    <option value="Finance / Banking">Finance / Banking</option>
+                    <option value="Government">Government</option>
+                    <option value="Power / Energy">Power / Energy</option>
+                    <option value="Telecommunication">Telecommunication</option>
+                    <option value="System Integrator">System Integrator</option>
+                    <option value="Expedition / Courier">Expedition / Courier</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Insurance">Insurance</option>
+                    <option value="Cement / Building">Cement / Building</option>
+                    <option value="Stock / Exchange">Stock / Exchange</option>
+                    <option value="Education">Education</option>
+                  </select>
+                  <span class="invalid-feedback" style="display:none;">Please Select Market Segment!</span>
 
+                </div>
+            
+              </div>
+            </div> 
+            <div class="tab-add" style="display:none">
+              <div class="tabGroup">
+                <div class="form-group">
+                  <label>Scope of Work*</label>
+                  <textarea class="form-control" id="textAreaSOW" name="textAreaSOW" placeholder="Scope of Work" onkeyup="validationCheck(this)"></textarea>
+                  <span class="invalid-feedback" style="display:none;">Please fill Scope of Work!</span>
+                </div>
+
+                <div class="form-group">
+                  <label>Out Of Scope*</label> 
+                  <textarea class="form-control" id="textAreaOutOfScope" name="textAreaOutOfScope" placeholder="Out of Scope" onkeyup="validationCheck(this)"></textarea>
+                  <span class="invalid-feedback" style="display:none;">Please fill Out of Scope!</span>
+                </div>
+
+                <div class="form-group">
+                  <label>Customer Requirement*</label> 
+                  <textarea class="form-control" id="textAreaCustomerRequirement" name="textAreaCustomerRequirement" placeholder="Customer Requirement" onkeyup="validationCheck(this)"></textarea>
+                  <span class="invalid-feedback" style="display:none;">Please fill Customer Requirement!</span>
+                </div>
+
+                <div class="form-group">
+                  <label>Term of Payment*</label>
+                  <textarea class="form-control" id="textAreaTOP" name="textAreaTOP" placeholder="Term of Payment" onkeyup="validationCheck(this)"></textarea>
+                  <span class="invalid-feedback" style="display:none;">Please fill Term of Payment!</span>
+                </div>
+
+                <div class="form-group">
+                  <label>Internal Stakeholder Register*</label>
+                  <div class="table-responsive">
+                    <table class="table" id="tbInternalStakeholderRegister" style="width:100%">
+                      <thead>
+                        <tr>
+                          <th width="30%">Name</th>
+                          <th width="25%">Role</th>    
+                          <th width="25%">Email</th>    
+                          <th width="20%">Phone</th>    
+                          <th><button type="button" onclick="btnPlusIStakeholder(0)" style="background-color: transparent;border: none;"><i class="bx bx-plus" style="color:#3c8dbc"></i></button></th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbodyInternalStakeholderRegister"></tbody>
+                    </table>
                   </div>
+                  <!-- <textarea class="form-control" id="textAreaStakeholder" name="textAreaStakeholder" placeholder="Stakeholder Register"></textarea> -->
+                  <span class="invalid-feedback" style="display:none;">Please fill Internal Stakeholder Register!</span>  
+                  <a onclick="addOutsideStakeholder()" style="cursor:pointer"><u>Add stakeholder outside SIP</u></a>
                 </div>
               </div>
-
-              <div class="form-group">
-                <label>Market Segment*</label>
-                <select name="selectMarketSegment" id="selectMarketSegment" class="form-control" placeholder="Select Market Segment" onchange="validationCheck(this)">
-                  <option value="Finance / Banking">Finance / Banking</option>
-                  <option value="Government">Government</option>
-                  <option value="Power / Energy">Power / Energy</option>
-                  <option value="Telecommunication">Telecommunication</option>
-                  <option value="System Integrator">System Integrator</option>
-                  <option value="Expedition / Courier">Expedition / Courier</option>
-                  <option value="Transportation">Transportation</option>
-                  <option value="Insurance">Insurance</option>
-                  <option value="Cement / Building">Cement / Building</option>
-                  <option value="Stock / Exchange">Stock / Exchange</option>
-                  <option value="Education">Education</option>
-                </select>
-                <span class="help-block" style="display:none;">Please Select Market Segment!</span>
-
-              </div>
-          
-            </div>
-          </div> 
-          <div class="tab-add" style="display:none">
-            <div class="tabGroup">
-              <div class="form-group">
-                <label>Scope of Work*</label>
-                <textarea class="form-control" id="textAreaSOW" name="textAreaSOW" placeholder="Scope of Work" onkeyup="validationCheck(this)"></textarea>
-                <span class="help-block" style="display:none;">Please fill Scope of Work!</span>
-              </div>
-
-              <div class="form-group">
-                <label>Out Of Scope*</label> 
-                <textarea class="form-control" id="textAreaOutOfScope" name="textAreaOutOfScope" placeholder="Out of Scope" onkeyup="validationCheck(this)"></textarea>
-                <span class="help-block" style="display:none;">Please fill Out of Scope!</span>
-              </div>
-
-              <div class="form-group">
-                <label>Customer Requirement*</label> 
-                <textarea class="form-control" id="textAreaCustomerRequirement" name="textAreaCustomerRequirement" placeholder="Customer Requirement" onkeyup="validationCheck(this)"></textarea>
-                <span class="help-block" style="display:none;">Please fill Customer Requirement!</span>
-              </div>
-
-              <div class="form-group">
-                <label>Term of Payment*</label>
-                <textarea class="form-control" id="textAreaTOP" name="textAreaTOP" placeholder="Term of Payment" onkeyup="validationCheck(this)"></textarea>
-                <span class="help-block" style="display:none;">Please fill Term of Payment!</span>
-              </div>
-
-              <div class="form-group">
-                <label>Internal Stakeholder Register*</label>
-                <div class="table-responsive">
-                  <table class="table" id="tbInternalStakeholderRegister" style="width:100%">
+            </div> 
+            <div class="tab-add" style="display:none">
+                <div class="tabGroup">
+                  <table class="table " style="width:100%;border-collapse: separate;border-spacing: 0;" >
                     <thead>
-                      <tr>
-                        <th width="30%">Name</th>
-                        <th width="25%">Role</th>    
-                        <th width="25%">Email</th>    
-                        <th width="20%">Phone</th>    
-                        <th><button type="button" onclick="btnPlusIStakeholder(0)" style="background-color: transparent;border: none;"><i class="bx bx-plus" style="color:#3c8dbc"></i></button></th>
-                      </tr>
+
                     </thead>
-                    <tbody id="tbodyInternalStakeholderRegister"></tbody>
+                    <tbody id="tbodyIdentifiedRisk">
+                      <tr id="firstTr">
+                        <td>
+                          <div class="form-group">
+                            <label>Risk Description*</label>
+                            <textarea class="form-control" id="textAreaRisk" name="textAreaRisk" placeholder="Risk Description" data-value="0" onkeyup="validationCheck(this)"></textarea>
+                            <span class="invalid-feedback" style="display:none;">Please fill Risk Description!</span>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                              <div class="form-group">
+                                <label>Owner*</label> 
+                                <input type="text" class="form-control" id="inputOwner" name="inputOwner" placeholder="Owner" data-value="0" onkeyup="validationCheck(this)"/>
+                                <span class="invalid-feedback" style="display:none;">Please fill Owner!</span>
+                              </div>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                              <div class="form-group">
+                                <label>Impact*&nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-impact" value="impact"></i></label> 
+                                <input max="5" min="1" type="number" class="form-control" id="inputImpact" name="inputImpact" placeholder="1-5" data-value="0" onkeyup="validationCheck(this)"/>
+                                <span class="invalid-feedback" style="display:none;">Please fill Impact!</span>
+                              </div>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                              <div class="form-group">
+                                <label>Likelihood*&nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-likelihood" value="likelihood"></i></label> 
+                                <input max="5" min="1" type="number" class="form-control" id="inputLikelihood" name="inputLikelihood" placeholder="1-5" data-value="0" onkeyup="validationCheck(this)"/>
+                                <span class="invalid-feedback" style="display:none;">Please fill Likelihood!</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- <div class="form-group">
+                            <label>Rank*</label>
+                            <input class="form-control" placeholder="Rank" id="inputRank" name="inputRank" data-value="0" onkeyup="validationCheck(this)"/>
+                            <span class="invalid-feedback" style="display:none;">Please fill Rank!</span>
+                          </div> -->
+                          <div class="form-group">
+                            <label>Impact Description*</label>
+                            <textarea class="form-control" placeholder="Impact Description" id="txtAreaImpactDesc" name="txtAreaImpactDesc" data-value="0" onkeyup="validationCheck(this)"></textarea>
+                            <span class="invalid-feedback" style="display:none;">Please fill Impact Description!</span>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12 col-xs-12">
+                              <div class="form-group">
+                                <label>Response*</label> 
+                                <textarea class="form-control" placeholder="" id="textareaResponse" name="textareaResponse" data-value="0" onkeyup="validationCheck(this)"></textarea>
+                                <span class="invalid-feedback" style="display:none;">Please fill Response!</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4 col-xs-12">
+                              <div class="form-group">
+                                <label>Due Date*</label>
+                                <div class="input-group">
+                                  <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                  <input type="text" name="due_date" class="form-control" placeholder="Select Due Date" id="due_date" data-value="0" onchange="validationCheck(this)"/>
+                                </div>
+                                <span class="invalid-feedback" style="display:none;">Please fill Due Date!</span>
+                              </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                              <div class="form-group">
+                                <label>Review Date*</label>
+                                <div class="input-group">
+                                  <span class="input-group-text"><i class="bx bx-calendar"></i></span>
+                                  <input type="text" name="review_date" class="form-control" id="review_date" placeholder="Select Review Date" data-value="0" onchange="validationCheck(this)"/>
+                                </div>
+                                <span class="invalid-feedback" style="display:none;">Please fill Review Date!</span>
+                              </div>
+                            </div>
+                            <div class="col-md-4 col-xs-12">
+                              <div class="form-group">
+                                <label>Status*</label>
+                                <select class="form-control select2 selectStatusProjectCharter" id="selectStatusProjectCharter" name="selectStatusProjectCharter" data-value="0" onkeyup="validationCheck(this)">
+                                  <option></option>
+                                </select>
+                                <span class="invalid-feedback" style="display:none;">Please fill Status!</span>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
-                <!-- <textarea class="form-control" id="textAreaStakeholder" name="textAreaStakeholder" placeholder="Stakeholder Register"></textarea> -->
-                <span class="help-block" style="display:none;">Please fill Internal Stakeholder Register!</span>  
-                <a onclick="addOutsideStakeholder()" style="cursor:pointer"><u>Add stakeholder outside SIP</u></a>
-              </div>
+                <div class="form-group" style="display: flex;margin-top: 10px;">
+                  <button type="button" id="btnAddIdentifiedRisk" style="margin:0 auto" class="btn btn-sm btn-primary"><i class="bx bx-plus"></i>&nbsp Identified Risk</button>
+                </div>
             </div>
-          </div> 
-          <div class="tab-add" style="display:none">
+            <div class="tab-add" style="display:none">
               <div class="tabGroup">
-                <table class="table " style="width:100%;border-collapse: separate;border-spacing: 0;" >
-                  <thead>
+                <div class="form-group">
+                  <label>PO/SPK/PKS*</label>
+                  <input type="file" class="form-control document" name="inputPO" id="inputPO" onchange="validationCheck(this)">
+                  <span class="invalid-feedback" style="display:none;">Please Fill Document PO/SPK/PKS!</span>
 
-                  </thead>
-                  <tbody id="tbodyIdentifiedRisk">
-                    <tr id="firstTr">
-                      <td>
-                        <div class="form-group">
-                          <label>Risk Description*</label>
-                          <textarea class="form-control" id="textAreaRisk" name="textAreaRisk" placeholder="Risk Description" data-value="0" onkeyup="validationCheck(this)"></textarea>
-                          <span class="help-block" style="display:none;">Please fill Risk Description!</span>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6 col-xs-12">
-                            <div class="form-group">
-                              <label>Owner*</label> 
-                              <input type="text" class="form-control" id="inputOwner" name="inputOwner" placeholder="Owner" data-value="0" onkeyup="validationCheck(this)"/>
-                              <span class="help-block" style="display:none;">Please fill Owner!</span>
-                            </div>
-                          </div>
-                          <div class="col-md-3 col-xs-12">
-                            <div class="form-group">
-                              <label>Impact*&nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-impact" value="impact"></i></label> 
-                              <input max="5" min="1" type="number" class="form-control" id="inputImpact" name="inputImpact" placeholder="1-5" data-value="0" onkeyup="validationCheck(this)"/>
-                              <span class="help-block" style="display:none;">Please fill Impact!</span>
-                            </div>
-                          </div>
-                          <div class="col-md-3 col-xs-12">
-                            <div class="form-group">
-                              <label>Likelihood*&nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-likelihood" value="likelihood"></i></label> 
-                              <input max="5" min="1" type="number" class="form-control" id="inputLikelihood" name="inputLikelihood" placeholder="1-5" data-value="0" onkeyup="validationCheck(this)"/>
-                              <span class="help-block" style="display:none;">Please fill Likelihood!</span>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- <div class="form-group">
-                          <label>Rank*</label>
-                          <input class="form-control" placeholder="Rank" id="inputRank" name="inputRank" data-value="0" onkeyup="validationCheck(this)"/>
-                          <span class="help-block" style="display:none;">Please fill Rank!</span>
-                        </div> -->
-                        <div class="form-group">
-                          <label>Impact Description*</label>
-                          <textarea class="form-control" placeholder="Impact Description" id="txtAreaImpactDesc" name="txtAreaImpactDesc" data-value="0" onkeyup="validationCheck(this)"></textarea>
-                          <span class="help-block" style="display:none;">Please fill Impact Description!</span>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12 col-xs-12">
-                            <div class="form-group">
-                              <label>Response*</label> 
-                              <textarea class="form-control" placeholder="Response" id="textareaResponse" name="textareaResponse" data-value="0" onkeyup="validationCheck(this)"></textarea>
-                              <span class="help-block" style="display:none;">Please fill Response!</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-4 col-xs-12">
-                            <div class="form-group">
-                              <label>Due Date*</label>
-                              <div class="input-group">
-                                <span class="input-group-addon"><i class="bx bx-calendar"></i></span>
-                                <input type="text" name="due_date" class="form-control" placeholder="Select Due Date" id="due_date" data-value="0" onchange="validationCheck(this)"/>
-                              </div>
-                              <span class="help-block" style="display:none;">Please fill Due Date!</span>
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-xs-12">
-                            <div class="form-group">
-                              <label>Review Date*</label>
-                              <div class="input-group">
-                                <span class="input-group-addon"><i class="bx bx-calendar"></i></span>
-                                <input type="text" name="review_date" class="form-control" id="review_date" placeholder="Select Review Date" data-value="0" onchange="validationCheck(this)"/>
-                              </div>
-                              <span class="help-block" style="display:none;">Please fill Review Date!</span>
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-xs-12">
-                            <div class="form-group">
-                              <label>Status*</label>
-                              <select class="form-control select2" id="selectStatusProjectCharter" name="selectStatusProjectCharter" data-value="0" onkeyup="validationCheck(this)">
-                                <option></option>
-                              </select>
-                              <span class="help-block" style="display:none;">Please fill Status!</span>
-                            </div>
-                          </div>
+                  <i class="bx bx-folder" style="display:none;color: #3c8dbc;"></i>&nbsp<a style="display:none" href="" target="_blank" id="link_input_po" name="link_input_po"></a>
+                </div>
+
+                <div class="form-group">
+                  <label>ToR/RKS*</label>
+                  <input type="file" class="form-control document" name="inputToR" id="inputToR" onchange="validationCheck(this)">
+                  <span class="invalid-feedback" style="display:none;">Please Fill Document ToR/RKS!</span>
+
+                  <i class="bx bx-folder" style="display:none;color: #3c8dbc;"></i>&nbsp<a href="" style="display:none" id="link_input_tor" name="link_input_tor" target="_blank"></a>
+                </div>
+
+                <div class="form-group">
+                  <label>SBE*</label>
+                  <input type="file" class="form-control document" name="inputSbe" id="inputSbe" onchange="validationCheck(this)">
+                  <span class="invalid-feedback" style="display:none;">Please Fill Document SBE!</span>
+
+                  <i class="bx bx-folder" style="display:none;color: #3c8dbc;"></i>&nbsp<a href="" style="display:none" id="link_input_sbe" name="link_input_sbe" target="_blank"></a>
+                </div>
+
+                <div class="table-responsive">
+                <table id="tableUploadDoc" class="table" style="width:100%;white-space: nowrap;">
+                  <tbody>
+                    <!-- <tr class="trDoc"> -->
+                    <!--   <td>
+                        <div style="padding:5px;border:solid 1px #cccc;width: 300px;">
+                          <label for="inputDoc_0" class="bx bx-upload" id="title_doc_0" data-value="0">&nbsp; <span>Upload Document</span>
+                            <input type="file" name="inputDoc" id="inputDoc_0" data-value="0" style="display: none;">
+                          </label>
                         </div>
                       </td>
-                    </tr>
+                      <td>
+                        <input id="inputDocTitle_0" data-value="0" type="" name="" class="form-control" style="width: 200px;">
+                      </td>
+                    </tr> -->
                   </tbody>
                 </table>
+                </div>
+                <div class="form-group" style="display: flex;margin-top: 20px;">
+                  <button type="button" id="btnAddDoc" style="margin:0 auto" class="btn btn-sm btn-primary" onclick="addDocPendukung()"><i class="bx bx-plus"></i>&nbsp Document</button>
+                </div> 
               </div>
-              <div class="form-group" style="display: flex;margin-top: 10px;">
-                <button type="button" id="btnAddIdentifiedRisk" style="margin:0 auto" class="btn btn-sm btn-primary"><i class="bx bx-plus"></i>&nbsp Identified Risk</button>
-              </div>
-          </div>
-          <div class="tab-add" style="display:none">
-            <div class="tabGroup">
+            </div> 
+            <div class="tab-add" style="display:none">
               <div class="form-group">
-                <label>PO/SPK/PKS*</label>
-                <input type="file" class="form-control document" name="inputPO" id="inputPO" onchange="validationCheck(this)">
-                <span class="help-block" style="display:none;">Please Fill Document PO/SPK/PKS!</span>
+                <label>Does this project have SLA?*</label>
+                <div class="form-group">
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optionRadioSla" id="optionRadioSlaYes" value="Yes">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                    <input type="radio" name="optionRadioSla" id="optionRadioSlaNo" value="No" checked>
+                      No
+                    </label>
+                  </div>
+                </div>
+                <span class="text-red" style="display:none">Please select option!</span>
+              </div>
+              <hr>
+              <div class="divSLA form-group" style="display:none;">
+                <label>Input SLA</label>
+                <div class="form-group">
+                  <label>SLA Response Time</label>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <input type="checkbox" name="cbSLA">
+                    </span>
+                    <input type="text" class="form-control" name="" id="slaResponseTime" placeholder="Input SLA Response Time (Ex:1 (hour); 0,83(hour); 0,5(hour); 0,25(hour))" disabled onkeypress="return isNumberKey(event)">
+                    <span class="input-group-text" style="background-color: gray;color: white;">
+                      hour
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>SLA Resolution Time (Severity Critical)</label>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <input type="checkbox" name="cbSLA">
+                    </span>
+                    <input type="text" class="form-control" name="" id="slaResolutionTimeCritical" placeholder="Input SLA Resolution Time (Severity Critical)" disabled onkeypress="return isNumberKey(event)">
+                    <span class="input-group-text" style="background-color: gray;color: white;">
+                      hour
+                    </span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>SLA Resolution Time (Severity Major)</label>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <input type="checkbox" name="cbSLA">
+                    </span>
+                    <input type="text" class="form-control" name="" id="slaResolutionTimeMajor" placeholder="Input SLA Resolution Time (Severity Major)" disabled onkeypress="return isNumberKey(event)">
+                    <span class="input-group-text" style="background-color: gray;color: white;">
+                      hour
+                    </span>
+                  </div>
+                </div>
 
-                <i class="bx bx-folder" style="display:none;color: #3c8dbc;"></i>&nbsp<a style="display:none" href="" target="_blank" id="link_input_po" name="link_input_po"></a>
-              </div>
+                <div class="form-group">
+                  <label>SLA Resolution Time (Severity Moderate)</label>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <input type="checkbox" name="cbSLA">
+                    </span>
+                    <input type="text" class="form-control" name="" id="slaResolutionTimeModerate" placeholder="Input SLA Resolution Time (Severity Moderate)" disabled onkeypress="return isNumberKey(event)">
+                    <span class="input-group-text" style="background-color: gray;color: white;">
+                      hour
+                    </span>
+                  </div>
+                </div>
 
-              <div class="form-group">
-                <label>ToR/RKS*</label>
-                <input type="file" class="form-control document" name="inputToR" id="inputToR" onchange="validationCheck(this)">
-                <span class="help-block" style="display:none;">Please Fill Document ToR/RKS!</span>
-
-                <i class="bx bx-folder" style="display:none;color: #3c8dbc;"></i>&nbsp<a href="" style="display:none" id="link_input_tor" name="link_input_tor" target="_blank"></a>
-              </div>
-
-              <div class="form-group">
-                <label>SBE*</label>
-                <input type="file" class="form-control document" name="inputSbe" id="inputSbe" onchange="validationCheck(this)">
-                <span class="help-block" style="display:none;">Please Fill Document SBE!</span>
-
-                <i class="bx bx-folder" style="display:none;color: #3c8dbc;"></i>&nbsp<a href="" style="display:none" id="link_input_sbe" name="link_input_sbe" target="_blank"></a>
-              </div>
-
-              <div class="table-responsive">
-              <table id="tableUploadDoc" class="table" style="width:100%;white-space: nowrap;">
-                <tbody>
-                  <!-- <tr class="trDoc"> -->
-                  <!--   <td>
-                      <div style="padding:5px;border:solid 1px #cccc;width: 300px;">
-                        <label for="inputDoc_0" class="bx bx-upload" id="title_doc_0" data-value="0">&nbsp; <span>Upload Document</span>
-                          <input type="file" name="inputDoc" id="inputDoc_0" data-value="0" style="display: none;">
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <input id="inputDocTitle_0" data-value="0" type="" name="" class="form-control" style="width: 200px;">
-                    </td>
-                  </tr> -->
-                </tbody>
-              </table>
-              </div>
-              <div class="form-group" style="display: flex;margin-top: 20px;">
-                <button type="button" id="btnAddDoc" style="margin:0 auto" class="btn btn-sm btn-primary" onclick="addDocPendukung()"><i class="bx bx-plus"></i>&nbsp Document</button>
-              </div> 
-            </div>
-          </div> 
-          <div class="tab-add" style="display:none">
-            <div class="form-group">
-              <label>Does this project have SLA?*</label>
-              <div class="form-group">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="optionRadioSla" id="optionRadioSlaYes" value="Yes">
-                    Yes
-                  </label>
+                <div class="form-group">
+                  <label>SLA Resolution Time (Severity Minor)</label>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <input type="checkbox" name="cbSLA">
+                    </span>
+                    <input type="text" class="form-control" name="" id="slaResolutionTimeMinor" placeholder="Input SLA Resolution Time (Severity Minor)" disabled onkeypress="return isNumberKey(event)">
+                    <span class="input-group-text" style="background-color: gray;color: white;">
+                      hour
+                    </span>
+                  </div>
                 </div>
-                <div class="radio">
-                  <label>
-                  <input type="radio" name="optionRadioSla" id="optionRadioSlaNo" value="No" checked>
-                    No
-                  </label>
-                </div>
+                <span class="text-red" style="display:none;">Please fill SLA Time!</span>
               </div>
-              <span class="text-red" style="display:none">Please select option!</span>
-            </div>
-            <hr>
-            <div class="divSLA form-group" style="display:none;">
-              <label>Input SLA</label>
-              <div class="form-group">
-                <span style="margin-left: 20px;">SLA Response Time</span>
-                <div class="checkcard">
-                  <label style="width: -moz-available;">
-                    <input type="checkcard" name="cbSLA" style="margin-top:10px">
-                    <div class="input-group">
-                      <input type="text" class="form-control" name="" style="width:100%!important" id="slaResponseTime" placeholder="Input SLA Response Time (Ex:1 (hour); 0,83(hour); 0,5(hour); 0,25(hour))" disabled onkeypress="return isNumberKey(event)">
-                      <span class="input-group-addon" style="background-color: gray;color: white;">
-                        hour
-                      </span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <span style="margin-left: 20px;">SLA Resolution Time (Severity Critical)</span>
-                <div class="checkcard">
-                  <label style="width: -moz-available;">
-                    <input type="checkcard" name="cbSLA" style="margin-top:10px">
-                    <div class="input-group">
-                      <input type="text" class="form-control" name="" style="width:100%!important" id="slaResolutionTimeCritical" placeholder="Input SLA Resolution Time (Severity Critical)" disabled onkeypress="return isNumberKey(event)">
-                      <span class="input-group-addon" style="background-color: gray;color: white;">
-                        hour
-                      </span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <span style="margin-left: 20px;">SLA Resolution Time (Severity Major)</span>
-                <div class="checkcard">
-                  <label style="width: -moz-available;">
-                    <input type="checkcard" name="cbSLA" style="margin-top:10px">
-                    <div class="input-group">
-                      <input type="text" class="form-control" name="" style="width:100%!important" id="slaResolutionTimeMajor" placeholder="Input SLA Resolution Time (Severity Major)" disabled onkeypress="return isNumberKey(event)">
-                      <span class="input-group-addon" style="background-color: gray;color: white;">
-                        hour
-                      </span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <span style="margin-left: 20px;">SLA Resolution Time (Severity Moderate)</span>
-                <div class="checkcard">
-                  <label style="width: -moz-available;">
-                    <input type="checkcard" name="cbSLA" style="margin-top:10px">
-                    <div class="input-group">
-                      <input type="text" class="form-control" name="" style="width:100%!important" id="slaResolutionTimeModerate" placeholder="Input SLA Resolution Time (Severity Moderate)" disabled onkeypress="return isNumberKey(event)">
-                      <span class="input-group-addon" style="background-color: gray;color: white;">
-                        hour
-                      </span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-              <div class="form-group">
-                <span style="margin-left: 20px;">SLA Resolution Time (Severity Minor)</span>
-                <div class="checkcard">
-                  <label style="width: -moz-available;">
-                    <input type="checkcard" name="cbSLA" style="margin-top:10px">
-                    <div class="input-group">
-                      <input type="text" class="form-control" name="" style="width:100%!important" id="slaResolutionTimeMinor" placeholder="Input SLA Resolution Time (Severity Minor)" disabled onkeypress="return isNumberKey(event)">
-                      <span class="input-group-addon" style="background-color: gray;color: white;">
-                        hour
-                      </span>
-                    </div>
-                  </label>
-                </div>
-              </div>
-              <span class="text-red" style="display:none;">Please fill SLA Time!</span>
-            </div>
-          </div>              
-        <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-secondary" id="prevBtnAdd">Cancel</button>
-            <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
-        </div>
-      </form>
+            </div>              
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" id="prevBtnAdd">Cancel</button>
+        <button type="button" class="btn btn-sm btn-primary" id="nextBtnAdd">Next</button>
       </div>
     </div>
   </div>
@@ -1130,21 +1134,21 @@
         emails = validateEmail($(data).val())
 
         if ($(data).val() == '-') {
-         $(data).closest('.form-group').removeClass('has-error')
+         $(data).closest('.form-group').removeClass('needs-validation')
          $(data).closest('input').next('span').attr('style','display:none!important')
-         $(data).prev('.input-group-addon').css("background-color","red")
+         $(data).prev('.input-group-text').css("background-color","red")
         }else{
           switch(emails){
             case null:
-              $(data).closest('.form-group').addClass('has-error')
+              $(data).closest('.form-group').addClass('needs-validation')
               $(data).closest('input').next('span').show();
-              $(data).prev('.input-group-addon').css("background-color","red");
+              $(data).prev('.input-group-text').css("background-color","red");
               $(data).closest('input').next('span').text("Enter a Valid Email Address!")
             break;
             default:
-              $(data).closest('.form-group').removeClass('has-error')
+              $(data).closest('.form-group').removeClass('needs-validation')
               $(data).closest('input').next('span').attr('style','display:none!important')
-              $(data).prev('.input-group-addon').css("background-color","red")
+              $(data).prev('.input-group-text').css("background-color","red")
           }
         }
       }else if ($(data).attr('type') == "phone") {
@@ -1252,61 +1256,61 @@
         }
 
         if($(data).val() != ""){
-          $(data).closest(".form-group").removeClass("has-error")
-          $(data).next("span.help-block").attr('style','display:none!important')
+          $(data).closest(".form-group").removeClass("needs-validation")
+          $(data).next("span.invalid-feedback").attr('style','display:none!important')
 
-          $(data).closest(".form-group").removeClass("has-error")
-          $(data).closest(".form-group").find("span.help-block").attr('style','display:none!important')
+          $(data).closest(".form-group").removeClass("needs-validation")
+          $(data).closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#textAreaRisk[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#textAreaRisk[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#textAreaRisk[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
+          $("#textAreaRisk[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("needs-validation")
+          $("#textAreaRisk[data-value='"+ $(data).data("value") +"']").next("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if($("#inputOwner[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#inputOwner[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#inputOwner[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
+          $("#inputOwner[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("needs-validation")
+          $("#inputOwner[data-value='"+ $(data).data("value") +"']").next("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#inputImpact[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#inputImpact[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#inputImpact[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
+          $("#inputImpact[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("needs-validation")
+          $("#inputImpact[data-value='"+ $(data).data("value") +"']").next("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#inputLikelihood[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#inputLikelihood[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#inputLikelihood[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
+          $("#inputLikelihood[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("needs-validation")
+          $("#inputLikelihood[data-value='"+ $(data).data("value") +"']").next("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#inputRank[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#inputRank[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#inputRank[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
+          $("#inputRank[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("needs-validation")
+          $("#inputRank[data-value='"+ $(data).data("value") +"']").next("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
+          $("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("needs-validation")
+          $("#txtAreaImpactDesc[data-value='"+ $(data).data("value") +"']").next("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#textareaResponse[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#textareaResponse[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#textareaResponse[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
+          $("#textareaResponse[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("needs-validation")
+          $("#textareaResponse[data-value='"+ $(data).data("value") +"']").next("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#due_date[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#due_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").removeClass("has-error")
-          $("#due_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").find("span.help-block").attr('style','display:none!important')
+          $("#due_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").removeClass("needs-validation")
+          $("#due_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
         }
 
         if ($("#review_date[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#review_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").removeClass("has-error")
-          $("#review_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").find("span.help-block").attr('style','display:none!important')
+          $("#review_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").removeClass("needs-validation")
+          $("#review_date[data-value='"+ $(data).data("value") +"']").closest(".form-group").find("span.invalid-feedback").attr('style','display:none!important')
         }
 
-        if ($("#selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").val() != "") {
-          $("#selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("has-error")
-          $("#selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").next("span.help-block").attr('style','display:none!important')
+        if ($(".selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").val() != "") {
+          $(".selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").closest("div").removeClass("needs-validation")
+          $(".selectStatusProjectCharter[data-value='"+ $(data).data("value") +"']").next("span.invalid-feedback").attr('style','display:none!important')
         }
         
       }   
@@ -1362,9 +1366,10 @@
           text: "Accepted"
         },
       ];
-      $("#selectStatusProjectCharter[data-value='"+ inc +"']").select2({
-          data:data,
-        placeholder:"Select Status"
+      $(".selectStatusProjectCharter[data-value='"+ inc +"']").select2({
+        data:data,
+        placeholder:"Select Status",
+        dropdownParent: $('#ModalProjectCharter .modal-body')
       })
     }
 
@@ -1596,7 +1601,7 @@
                 append = append +' </td>'
                 append = append +' <td>'
                 if (item.nik != '-') {
-                  append = append +'  <select style="font-size:12px" id="selectRoleStakeholder" class="select2 form-control" data-value="'+ index +'">'
+                  append = append +'  <select style="font-size:12px" class="select2 form-control selectRoleStakeholder" data-value="'+ index +'">'
                     append = append + ' <option value="Project Steering Committee">Project Steering Committee</option>'
                     append = append + ' <option value="Project Owner">Project Owner</option>'
                     append = append + ' <option value="Project Advisor">Project Advisor</option>'
@@ -1686,7 +1691,10 @@
             $.each(result[0].internal_stakeholder.data,function(index,item){
               $("#inputEmailStakeholder[data-value='"+ index +"']").val(item.email)
               $("#inputPhoneStakeholder[data-value='"+ index +"']").val(item.phone)
-              $("#selectRoleStakeholder[data-value='"+ index +"']").select2().val(item.role).trigger("change")
+              $(".selectRoleStakeholder").select2({
+                placeholder: "Select Role Stakeholder",
+                dropdownParent:$("#ModalProjectCharter")
+              }).val(item.role).trigger("change")
             })
 
             var appendRisk = ''
@@ -1700,7 +1708,7 @@
                   $('#textareaResponse[data-value='+ idx +']').val(item.risk_response)
                   $('#due_date[data-value='+ idx +']').val(moment(item.due_date).format('MM/DD/YYYY'))
                   $('#review_date[data-value='+ idx +']').val(moment(item.review_date).format('MM/DD/YYYY'))
-                  $('#selectStatusProjectCharter[data-value='+ idx +']').select2({
+                  $('.selectStatusProjectCharter[data-value='+ idx +']').select2({
                     data:[
                       {
                         id: "Active",
@@ -1715,7 +1723,8 @@
                         text: "Accepted"
                       },
                     ],
-                    placeholder:"Select Status"
+                    placeholder:"Select Status",
+                    dropdownParent: $('#ModalProjectCharter')
                   }).val(item.status).trigger('change')
                 }else{
                   console.log("testttt")
@@ -1729,41 +1738,41 @@
                   appendRisk = appendRisk + '     <div class="form-group">'
                   appendRisk = appendRisk + '      <label>Risk Description*</label>'
                   appendRisk = appendRisk + '      <textarea class="form-control" id="textAreaRisk" name="textAreaRisk" placeholder="Scope of Work" data-value="'+ idx +'" onkeyup="validationCheck(this)">'+ item.risk_description +'</textarea>'
-                  appendRisk = appendRisk + '      <span class="help-block" style="display:none;">Please fill Risk Description!</span>'
+                  appendRisk = appendRisk + '      <span class="invalid-feedback" style="display:none;">Please fill Risk Description!</span>'
                   appendRisk = appendRisk + '    </div>'
                   appendRisk = appendRisk + '    <div class="row">'
                   appendRisk = appendRisk + '      <div class="col-md-6 col-xs-12">'
                   appendRisk = appendRisk + '        <div class="form-group">'
                   appendRisk = appendRisk + '          <label>Owner*</label> '
                   appendRisk = appendRisk + '          <input type="text"  value="'+ item.risk_owner +'" class="form-control" id="inputOwner" name="inputOwner" placeholder="Owner" data-value="'+ idx +'" onkeyup="validationCheck(this)"/>'
-                  appendRisk = appendRisk + '          <span class="help-block" style="display:none;">Please fill Owner!</span>'
+                  appendRisk = appendRisk + '          <span class="invalid-feedback" style="display:none;">Please fill Owner!</span>'
                   appendRisk = appendRisk + '        </div>'
                   appendRisk = appendRisk + '      </div>'
                   appendRisk = appendRisk + '      <div class="col-md-3 col-xs-12">'
                   appendRisk = appendRisk + '        <div class="form-group">'
                   appendRisk = appendRisk + '          <label>Impact*</label> '
                   appendRisk = appendRisk + '          <input max="5" min="1" type="number" value="'+ item.impact +'" class="form-control" id="inputImpact" name="inputImpact" placeholder="1-5" data-value="'+ idx +'" onkeyup="validationCheck(this)"/>'
-                  appendRisk = appendRisk + '          <span class="help-block" style="display:none;">Please fill Impact!</span>'
+                  appendRisk = appendRisk + '          <span class="invalid-feedback" style="display:none;">Please fill Impact!</span>'
                   appendRisk = appendRisk + '        </div>'
                   appendRisk = appendRisk + '      </div>'
                   appendRisk = appendRisk + '      <div class="col-md-3 col-xs-12">'
                   appendRisk = appendRisk + '        <div class="form-group">'
                   appendRisk = appendRisk + '          <label>Likelihood*</label> '
                   appendRisk = appendRisk + '          <input max="5" min="1" type="number" value="'+ item.likelihood +'" class="form-control" id="inputLikelihood" name="inputLikelihood" placeholder="1-5" data-value="'+ idx +'" onkeyup="validationCheck(this)"/>'
-                  appendRisk = appendRisk + '          <span class="help-block" style="display:none;">Please fill Probability!</span>'
+                  appendRisk = appendRisk + '          <span class="invalid-feedback" style="display:none;">Please fill Probability!</span>'
                   appendRisk = appendRisk + '        </div>'
                   appendRisk = appendRisk + '      </div>'
                   appendRisk = appendRisk + '    </div>'
                   appendRisk = appendRisk + '    <div class="form-group">'      
                   appendRisk = appendRisk + '      <label>Impact Description*</label>'      
-                  appendRisk = appendRisk + '      <textarea class="form-control" placeholder="Impact Description" id="txtAreaImpactDesc" name="txtAreaImpactDesc" onkeyup="validationCheck(this)">'+ item.impact_description +'</textarea><span class="help-block" style="display:none;" data-value="'+ idx +'">Please fill Impact Description!</span>'      
+                  appendRisk = appendRisk + '      <textarea class="form-control" placeholder="Impact Description" id="txtAreaImpactDesc" name="txtAreaImpactDesc" onkeyup="validationCheck(this)">'+ item.impact_description +'</textarea><span class="invalid-feedback" style="display:none;" data-value="'+ idx +'">Please fill Impact Description!</span>'      
                   appendRisk = appendRisk + '    </div>'  
                   appendRisk = appendRisk + '    <div class="row">'
                   appendRisk = appendRisk + '        <div class="col-md-12 col-xs-12">'
                   appendRisk = appendRisk + '          <div class="form-group">'
                   appendRisk = appendRisk + '            <label>Response*</label> '
                   appendRisk = appendRisk + '            <textarea class="form-control" id="textareaResponse" name="textareaResponse" placeholder="Response" data-value="'+ idx +'" onkeyup="validationCheck(this)">' + item.risk_response
-                  appendRisk = appendRisk + '            </textarea><span class="help-block" style="display:none;">Please fill Risk Response!</span>'
+                  appendRisk = appendRisk + '            </textarea><span class="invalid-feedback" style="display:none;">Please fill Risk Response!</span>'
                   appendRisk = appendRisk + '          </div>'
                   appendRisk = appendRisk + '        </div>'
                   appendRisk = appendRisk + '    </div>'   
@@ -1773,10 +1782,10 @@
                   appendRisk = appendRisk + '          <label>Due Date*</label>'      
                   appendRisk = appendRisk + '          <div class="input-group">'      
 
-                  appendRisk = appendRisk + '            <span class="input-group-addon"><i class="bx bx-calendar"></i></span>'      
+                  appendRisk = appendRisk + '            <span class="input-group-text"><i class="bx bx-calendar"></i></span>'      
 
                   appendRisk = appendRisk + '            <input type="text" name="due_date" class="form-control" id="due_date" value="'+ moment(item.due_date).format('MM/DD/YYYY') +'" placeholder="Select Due Date" data-value="'+ idx +'" onchange="validationCheck(this)"/>'      
-                  appendRisk = appendRisk + '          </div><span class="help-block" style="display:none;">Please fill Due Date!</span>'      
+                  appendRisk = appendRisk + '          </div><span class="invalid-feedback" style="display:none;">Please fill Due Date!</span>'      
                   appendRisk = appendRisk + '        </div>'      
                   appendRisk = appendRisk + '      </div>'      
                   appendRisk = appendRisk + '      <div class="col-md-4 col-xs-12">'      
@@ -1784,20 +1793,20 @@
                   appendRisk = appendRisk + '          <label>Review Date*</label>'      
                   appendRisk = appendRisk + '          <div class="input-group">'      
 
-                  appendRisk = appendRisk + '            <span class="input-group-addon"><i class="bx bx-calendar"></i></span>'      
+                  appendRisk = appendRisk + '            <span class="input-group-text"><i class="bx bx-calendar"></i></span>'      
 
                   appendRisk = appendRisk + '            <input type="text" name="review_date" value="'+ moment(item.review_date).format('MM/DD/YYYY') +'" class="form-control" id="review_date" placeholder="Select Review Date" data-value="'+ idx +'" onchange="validationCheck(this)"/>'      
-                  appendRisk = appendRisk + '          </div><span class="help-block" style="display:none;">Please fill Review Date!</span>'      
+                  appendRisk = appendRisk + '          </div><span class="invalid-feedback" style="display:none;">Please fill Review Date!</span>'      
                   appendRisk = appendRisk + '        </div>'      
                   appendRisk = appendRisk + '      </div>'      
                   appendRisk = appendRisk + '      <div class="col-md-4 col-xs-12">'      
                   appendRisk = appendRisk + '        <div class="form-group">'      
                   appendRisk = appendRisk + '          <label>Status*</label>'      
-                  appendRisk = appendRisk + '          <select class="form-control select2" id="selectStatusProjectCharter" data-value="'+ idx +'" onchange="validationCheck(this)">'      
+                  appendRisk = appendRisk + '          <select class="form-control select2 selectStatusProjectCharter" data-value="'+ idx +'" onchange="validationCheck(this)">'
                   appendRisk = appendRisk + '            <option value="Active">Active</option>'
                   appendRisk = appendRisk + '            <option value="Obsolete">Obsolete</option>'      
                   appendRisk = appendRisk + '            <option value="Accepted">Accepted</option>'            
-                  appendRisk = appendRisk + '          </select><span class="help-block" style="display:none;">Please fill Status!</span>'      
+                  appendRisk = appendRisk + '          </select><span class="invalid-feedback" style="display:none;">Please fill Status!</span>'      
                   appendRisk = appendRisk + '        </div>'      
                   appendRisk = appendRisk + '      </div>'      
                   appendRisk = appendRisk + '    </div>'      
@@ -1805,7 +1814,7 @@
                   appendRisk = appendRisk + '</tr>'
 
                   $("#tbodyIdentifiedRisk").append(appendRisk)
-                  $('#selectStatusProjectCharter_'+idx).select2().val(item.status).trigger('change')
+                  $('.selectStatusProjectCharter_'+idx).select2().val(item.status).trigger('change')
                   // selectStatusProjectCharter(idx,item.status)
 
 
@@ -1883,12 +1892,14 @@
 
               $("#selectFlexibility").select2({
                 placeholder:"Select Flexibility",
-                cache:false
+                cache:false,
+                dropdownParent:$("#ModalProjectCharter .modal-body")
               })
 
               $("#selectMarketSegment").select2({
                 placeholder: "Select Market Segment",
-                cache:false
+                cache:false,
+                dropdownParent:$("#ModalProjectCharter .modal-body")
               })
 
               $("input[name='inputStartDate'],input[name='inputFinishDate'],input[name='due_date'],input[name='review_date']").datepicker({
@@ -1915,7 +1926,7 @@
 
               $("input[name='cbTechUse']").on('change', function() {
                 if ($(this).prop('checked')) {
-                  $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").removeClass("has-error")
+                  $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").removeClass("needs-validation")
                   $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").find("span").attr('style','display:none!important')
                 }
               })
@@ -2002,9 +2013,9 @@
       }
 
       var append = ""
-      append = append + '<div class="callout callout-danger divReasonRejectRevision" style="display:none">'
+      append = append + '<div class="alert alert-danger divReasonRejectRevision" style="display:none">'
 
-        append = append + '<h6><i class="icon bx bx-cross"></i>'+ textTitle +'</h6>'
+        append = append + '<h6><i class="icon bx bx-cog"></i>'+ textTitle +'</h6>'
 
         $.each(arrReason,function(item,value){
           
@@ -2137,7 +2148,7 @@
         }
       }else{
         $("input[name='optionRadioSla']").closest(".form-group").prev("label").addClass("text-red")
-        $("input[name='optionRadioSla']").closest(".form-group").addClass("has-error")
+        $("input[name='optionRadioSla']").closest(".form-group").addClass("needs-validation")
         $("input[name='optionRadioSla']").closest(".form-group").next("span").show()
       }
       
@@ -2147,24 +2158,24 @@
       let elementPM = document.getElementById('selectPM')
       let elementPC = document.getElementById('selectPC')
       if ($("#selectPIDAssign").val() == "") {
-        $("#selectPIDAssign").closest("div").addClass("has-error")
-        $("#selectPIDAssign").closest("div").find(".help-block").show()
+        $("#selectPIDAssign").closest("div").addClass("needs-validation")
+        $("#selectPIDAssign").closest("div").find(".invalid-feedback").show()
       }else if($("#inputProjectTitle").val() == ""){
-        $("#inputProjectTitle").closest("div").addClass("has-error")
+        $("#inputProjectTitle").closest("div").addClass("needs-validation")
         $("#inputProjectTitle").next("span").show()
       }else if($("input[name='cbProjectType']:checked").length == 0){
-        $("input[name='cbProjectType']").closest("div").closest("label").closest(".form-group").addClass("has-error")
+        $("input[name='cbProjectType']").closest("div").closest("label").closest(".form-group").addClass("needs-validation")
         $("input[name='cbProjectType']").closest("div").closest("label").closest("div").next("span").show()      
       }else if (!elementPM.disabled && !elementPC.disabled) {
         switch($("#selectPM").val()){
           case "":
-            $("#selectPM").closest("div").addClass("has-error")
+            $("#selectPM").closest("div").addClass("needs-validation")
             $("#selectPM").next("span").next("span").show()
           break;
           default:
           switch($("#selectPC").val()){
             case "":
-              $("#selectPC").closest("div").addClass("has-error")
+              $("#selectPC").closest("div").addClass("needs-validation")
               $("#selectPC").next("span").next("span").show()
             break;
             default:
@@ -2174,7 +2185,7 @@
       }else if (!elementPM.disabled) {
         switch($("#selectPM").val()){
           case "":
-            $("#selectPM").closest("div").addClass("has-error")
+            $("#selectPM").closest("div").addClass("needs-validation")
             $("#selectPM").next("span").next("span").show()
           break;
           default:
@@ -2183,7 +2194,7 @@
       }else if (!elementPC.disabled) {
         switch($("#selectPC").val()){
           case "":
-            $("#selectPC").closest("div").addClass("has-error")
+            $("#selectPC").closest("div").addClass("needs-validation")
             $("#selectPC").next("span").next("span").show()
           break;
           default:
@@ -2291,28 +2302,28 @@
       if (currentTab == 0) {
         if (n == 1) {
           if ($("#inputCustomer").val() == "") {
-            $("#inputCustomer").closest("div").addClass("has-error")
+            $("#inputCustomer").closest("div").addClass("needs-validation")
             $("#inputCustomer").next("span").show()
           }else if($("#textAreaAddress").val() == ""){
-            $("#textAreaAddress").closest("div").addClass("has-error")
+            $("#textAreaAddress").closest("div").addClass("needs-validation")
             $("#textAreaAddress").next("span").show()
           }else if($("#inputPhone").val() == ""){
-            $("#inputPhone").closest("div").addClass("has-error")
+            $("#inputPhone").closest("div").addClass("needs-validation")
             $("#inputPhone").next("span").show()
           }else if($("#inputContactPerson").val() == ""){
-            $("#inputContactPerson").closest("div").addClass("has-error")
+            $("#inputContactPerson").closest("div").addClass("needs-validation")
             $("#inputContactPerson").next("span").show()
           }else if($("#inputEmail").val() == ""){
-            $("#inputEmail").closest("div").addClass("has-error")
+            $("#inputEmail").closest("div").addClass("needs-validation")
             $("#inputEmail").next("span").show()
           }else if($("#inputCpPhone").val() == ""){
-            $("#inputCpPhone").closest("div").addClass("has-error")
+            $("#inputCpPhone").closest("div").addClass("needs-validation")
             $("#inputCpPhone").next("span").show()
           }else if($("#inputCpTitle").val() == ""){
-            $("#inputCpTitle").closest("div").addClass("has-error")
+            $("#inputCpTitle").closest("div").addClass("needs-validation")
             $("#inputCpTitle").next("span").show()
           }else if($("#inputCompanyLogo").val() == ""){
-            $("#inputCompanyLogo").closest("div").addClass("has-error")
+            $("#inputCompanyLogo").closest("div").addClass("needs-validation")
             $("#inputCompanyLogo").next("span").show()
           }else{
             const validateEmail = (email) => {
@@ -2369,9 +2380,9 @@
                 }
               })
             }else{
-              $("#inputEmail").closest('.form-group').addClass('has-error')
+              $("#inputEmail").closest('.form-group').addClass('needs-validation')
               $("#inputEmail").closest('input').next('span').show();
-              $("#inputEmail").prev('.input-group-addon').css("background-color","red");
+              $("#inputEmail").prev('.input-group-text').css("background-color","red");
               $("#inputEmail").closest('input').next('span').text("Enter a Valid Email Address!")
             }
           }
@@ -2388,28 +2399,28 @@
       }else if(currentTab == 1){
         if (n == 1) {
           if ($("#inputPID").val() == "") {
-            $("#inputPID").closest("div").addClass("has-error")
+            $("#inputPID").closest("div").addClass("needs-validation")
             $("#inputPID").next("span").show()
           }else if($("#textAreaProjectDesc").val() == ""){
-            $("#textAreaProjectDesc").closest("div").addClass("has-error")
+            $("#textAreaProjectDesc").closest("div").addClass("needs-validation")
             $("#textAreaProjectDesc").next("span").show()
           }else if($("#textAreaProjectObj").val() == ""){
-            $("#textAreaProjectObj").closest("div").addClass("has-error")
+            $("#textAreaProjectObj").closest("div").addClass("needs-validation")
             $("#textAreaProjectObj").next("span").show()
           }else if($("input[name='cbTechUse']:checked").length == 0){
-            $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").addClass("has-error")
+            $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").addClass("needs-validation")
             $("input[name='cbTechUse']").closest("div").closest("label").closest(".form-group").find("span").show()
           }else if($("#inputStartDate").val() == ""){
-            $("#inputStartDate").closest(".form-group").addClass("has-error")
-            $("#inputStartDate").closest(".form-group").find("span.help-block").show()
+            $("#inputStartDate").closest(".form-group").addClass("needs-validation")
+            $("#inputStartDate").closest(".form-group").find("span.invalid-feedback").show()
           }else if($("#inputFinishDate").val() == ""){
-            $("#inputFinishDate").closest(".form-group").addClass("has-error")
-            $("#inputFinishDate").closest(".form-group").find("span.help-block").show()
+            $("#inputFinishDate").closest(".form-group").addClass("needs-validation")
+            $("#inputFinishDate").closest(".form-group").find("span.invalid-feedback").show()
           }else if($("#selectFlexibility").val() == ""){
-            $("#selectFlexibility").closest("div").addClass("has-error")
+            $("#selectFlexibility").closest("div").addClass("needs-validation")
             $("#selectFlexibility").next("span").show()
           }else if($("#selectMarketSegment").val() == ""){
-            $("#selectMarketSegment").closest("div").addClass("has-error")
+            $("#selectMarketSegment").closest("div").addClass("needs-validation")
             $("#selectMarketSegment").next("span").show()
           }else{
             $("input[name='cbTechUse']:checked").each(function(idx,item){
@@ -2476,19 +2487,19 @@
       }else if (currentTab == 2) {
         if (n == 1) {
           if ($("#textAreaSOW").val() == "") {
-            $("#textAreaSOW").closest("div").addClass("has-error")
+            $("#textAreaSOW").closest("div").addClass("needs-validation")
             $("#textAreaSOW").next("span").show()
           }else if($("#textAreaOutOfScope").val() == ""){
-            $("#textAreaOutOfScope").closest("div").addClass("has-error")
+            $("#textAreaOutOfScope").closest("div").addClass("needs-validation")
             $("#textAreaOutOfScope").next("span").show()
           }else if($("#textAreaCustomerRequirement").val() == ""){
-            $("#textAreaCustomerRequirement").closest("div").addClass("has-error")
+            $("#textAreaCustomerRequirement").closest("div").addClass("needs-validation")
             $("#textAreaCustomerRequirement").next("span").show()
           }else if($("#textAreaTOP").val() == ""){
-            $("#textAreaTOP").closest("div").addClass("has-error")
+            $("#textAreaTOP").closest("div").addClass("needs-validation")
             $("#textAreaTOP").next("span").show()
           }else if($("#tbodyInternalStakeholderRegister tr").length == 0){
-            $("#tbInternalStakeholderRegister").closest(".form-group").addClass("has-error")
+            $("#tbInternalStakeholderRegister").closest(".form-group").addClass("needs-validation")
             $("#tbInternalStakeholderRegister").closest(".form-group").find("span").show()
           }else{
             let arrInternalStakeHolder = []
@@ -2514,7 +2525,7 @@
                 }else{
                   arrInternalStakeHolder.push({
                     "nik":$(this).find("#selectNameStakeholder").val(),
-                    "role":$(this).find("#selectRoleStakeholder").val(),
+                    "role":$(this).find(".selectRoleStakeholder").val(),
                     "email":$(this).find("#inputEmailStakeholder").val(),
                     "phone":$(this).find("#inputPhoneStakeholder").val()
                   })  
@@ -2580,35 +2591,35 @@
 
           $("#tbodyIdentifiedRisk tr").each(function() {
             if ($("#textAreaRisk[data-value='"+ $(this).find('#textAreaRisk').data("value") +"']").val() == "") {
-              $("#textAreaRisk[data-value='"+ $(this).find('#textAreaRisk').data("value") +"']").closest("div").addClass("has-error")
+              $("#textAreaRisk[data-value='"+ $(this).find('#textAreaRisk').data("value") +"']").closest("div").addClass("needs-validation")
               $("#textAreaRisk[data-value='"+ $(this).find('#textAreaRisk').data("value") +"']").next("span").show()
             }else if ($("#inputOwner[data-value='"+ $(this).find('#inputOwner').data("value") +"']").val() == "") {
-              $("#inputOwner[data-value='"+ $(this).find('#inputOwner').data("value") +"']").closest("div").addClass("has-error")
+              $("#inputOwner[data-value='"+ $(this).find('#inputOwner').data("value") +"']").closest("div").addClass("needs-validation")
               $("#inputOwner[data-value='"+ $(this).find('#inputOwner').data("value") +"']").next("span").show()
             }else if ($("#inputImpact[data-value='"+ $(this).find('#inputImpact').data("value") +"']").val() == "") {
-              $("#inputImpact[data-value='"+ $(this).find('#inputImpact').data("value") +"']").closest("div").addClass("has-error")
+              $("#inputImpact[data-value='"+ $(this).find('#inputImpact').data("value") +"']").closest("div").addClass("needs-validation")
               $("#inputImpact[data-value='"+ $(this).find('#inputImpact').data("value") +"']").next("span").show()
             }else if ($("#inputLikelihood[data-value='"+ $(this).find('#inputLikelihood').data("value") +"']").val() == "") {
-              $("#inputLikelihood[data-value='"+ $(this).find('#inputLikelihood').data("value") +"']").closest("div").addClass("has-error")
+              $("#inputLikelihood[data-value='"+ $(this).find('#inputLikelihood').data("value") +"']").closest("div").addClass("needs-validation")
               $("#inputLikelihood[data-value='"+ $(this).find('#inputLikelihood').data("value") +"']").next("span").show()
             }else if ($("#inputRank[data-value='"+ $(this).find('#inputRank').data("value") +"']").val() == "") {
-              $("#inputRank[data-value='"+ $(this).find('#inputRank').data("value") +"']").closest("div").addClass("has-error")
+              $("#inputRank[data-value='"+ $(this).find('#inputRank').data("value") +"']").closest("div").addClass("needs-validation")
               $("#inputRank[data-value='"+ $(this).find('#inputRank').data("value") +"']").next("span").show()
             }else if ($("#txtAreaImpactDesc[data-value='"+ $(this).find('#txtAreaImpactDesc').data("value") +"']").val() == "") {
-              $("#txtAreaImpactDesc[data-value='"+ $(this).find('#txtAreaImpactDesc').data("value") +"']").closest("div").addClass("has-error")
+              $("#txtAreaImpactDesc[data-value='"+ $(this).find('#txtAreaImpactDesc').data("value") +"']").closest("div").addClass("needs-validation")
               $("#txtAreaImpactDesc[data-value='"+ $(this).find('#txtAreaImpactDesc').data("value") +"']").next("span").show()
             }else if ($("#textareaResponse[data-value='"+ $(this).find('#textareaResponse').data("value") +"']").val() == "") {
-              $("#textareaResponse[data-value='"+ $(this).find('#textareaResponse').data("value") +"']").closest("div").addClass("has-error")
+              $("#textareaResponse[data-value='"+ $(this).find('#textareaResponse').data("value") +"']").closest("div").addClass("needs-validation")
               $("#textareaResponse[data-value='"+ $(this).find('#textareaResponse').data("value") +"']").next("span").show()
             }else if ($("#due_date[data-value='"+ $(this).find('#due_date').data("value") +"']").val() == "") {
-              $("#due_date[data-value='"+ $(this).find('#due_date').data("value") +"']").closest(".form-group").addClass("has-error")
+              $("#due_date[data-value='"+ $(this).find('#due_date').data("value") +"']").closest(".form-group").addClass("needs-validation")
               $("#due_date[data-value='"+ $(this).find('#due_date').data("value") +"']").closest(".form-group").find("span").show()
             }else if ($("#review_date[data-value='"+ $(this).find('#review_date').data("value") +"']").val() == "") {
-              $("#review_date[data-value='"+ $(this).find('#review_date').data("value") +"']").closest(".form-group").addClass("has-error")
+              $("#review_date[data-value='"+ $(this).find('#review_date').data("value") +"']").closest(".form-group").addClass("needs-validation")
               $("#review_date[data-value='"+ $(this).find('#review_date').data("value") +"']").closest(".form-group").find("span").show()
-            }else if ($("#selectStatusProjectCharter[data-value='"+ $(this).find('#selectStatusProjectCharter').data("value") +"']").val() == "") {
-              $("#selectStatusProjectCharter[data-value='"+ $(this).find('#selectStatusProjectCharter').data("value") +"']").closest("div").addClass("has-error")
-              $("#selectStatusProjectCharter[data-value='"+ $(this).find('#selectStatusProjectCharter').data("value") +"']").next("span").show()
+            }else if ($(".selectStatusProjectCharter[data-value='"+ $(this).find('.selectStatusProjectCharter').data("value") +"']").val() == "") {
+              $(".selectStatusProjectCharter[data-value='"+ $(this).find('.selectStatusProjectCharter').data("value") +"']").closest("div").addClass("needs-validation")
+              $(".selectStatusProjectCharter[data-value='"+ $(this).find('.selectStatusProjectCharter').data("value") +"']").next("span").show()
             }else{
               arrIdentifiedRisk.push({
                 "risk":$(this).find("#textAreaRisk").val(),
@@ -2620,7 +2631,7 @@
                 "response":$(this).find("#textareaResponse").val(),
                 "due_date":$(this).find("#due_date").val(),
                 "review_date":$(this).find("#review_date").val(),
-                "status":$(this).find("#selectStatusProjectCharter").val(),
+                "status":$(this).find(".selectStatusProjectCharter").val(),
               })
               if(++$i === $numItems) {
                saveTab(arrIdentifiedRisk)
@@ -2677,13 +2688,13 @@
       }else if(currentTab == 4){
         if (n == 1) {
           if ($("#inputPO").val() == "") {
-            $("#inputPO").closest("div").addClass("has-error")
+            $("#inputPO").closest("div").addClass("needs-validation")
             $("#inputPO").next("span").show()
           }else if ($("#inputToR").val() == "") {
-            $("#inputToR").closest("div").addClass("has-error")
+            $("#inputToR").closest("div").addClass("needs-validation")
             $("#inputToR").next("span").show()
           }else if ($("#inputSbe").val() == "") {
-            $("#inputSbe").closest("div").addClass("has-error")
+            $("#inputSbe").closest("div").addClass("needs-validation")
             $("#inputSbe").next("span").show()
           }else{
             formData = new FormData();
@@ -2881,7 +2892,7 @@
               append = append + "    <label style='margin-right: 15px;'><input checked autocomplete='off' type='checkbox' name='cbImpelementType' class='form-check-input' id='' value='service'>Service</label>"
               append = append + "    <label style='margin-right: 15px;'><input checked autocomplete='off' type='checkbox' name='cbImpelementType' class='form-check-input' id='' value='license'>License</label>"
               append = append + "  </div>"
-              append = append + "  <span class='help-block' style='display:none;'>Please Select Implementation Type!</span>"
+              append = append + "  <span class='invalid-feedback' style='display:none;'>Please Select Implementation Type!</span>"
               append = append + "</div>"
 
               if ($(this).closest("div .form-group").next(".form-group").is(":visible")) {
@@ -3054,14 +3065,14 @@
 
     let incIstakeholder = 0
     function btnPlusIStakeholder(){
-      $("#tbInternalStakeholderRegister").closest(".form-group").removeClass("has-error")
+      $("#tbInternalStakeholderRegister").closest(".form-group").removeClass("needs-validation")
       $("#tbInternalStakeholderRegister").closest(".form-group").find("span").attr('style','display:none!important')
 
       append = ""
       append = 
       append = append +'<tr>'
       append = append +'  <td><select id="selectNameStakeholder" name="selectNameStakeholder" class="select2 form-control selectNameStakeholder" data-value="'+ incIstakeholder +'"><option></option></select></td>'
-      append = append +'  <td><select style="font-size:12px" id="selectRoleStakeholder" class="select2 form-control" data-value="'+ incIstakeholder +'">'
+      append = append +'  <td><select style="font-size:12px" class="select2 form-control selectRoleStakeholder" data-value="'+ incIstakeholder +'">'
       append = append + ' <option value="Project Steering Committee">Project Steering Committee</option>'
       append = append + ' <option value="Project Owner">Project Owner</option>'
       append = append + ' <option value="Project Advisor">Project Advisor</option>'
@@ -3106,7 +3117,7 @@
             placeholder:"Select Name Stakeholder",
             data:result.data,
             dropdownCssClass: "myFont",
-            dropdownParent:$("#ModalProjectCharter") 
+            dropdownParent:$("#ModalProjectCharter .modal-body") 
           }).on('select2:select', function (e) {
             let filteredEmailPhone = filterByStakeholderName(e.params.data.id)
             // let filteredPhone = filterByStakeholderName(e.params.data.id)
@@ -3141,6 +3152,11 @@
 
       $(".select2").select2({
         dropdownCssClass: "myFont" 
+      })
+
+      $(".selectRoleStakeholder").select2({
+        placeholder: "Select Role Stakeholder",
+        dropdownParent:$("#ModalProjectCharter .modal-body")
       })
 
       incIstakeholder++
@@ -3189,14 +3205,14 @@
       append = append + '    <div class="form-group">'
       append = append + '      <label>Risk Description*</label>'
       append = append + '      <textarea class="form-control" id="textAreaRisk" name="textAreaRisk" placeholder="Risk Description" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)"></textarea>'
-      append = append + '      <span class="help-block" style="display:none;">Please fill Risk Description!</span>'
+      append = append + '      <span class="invalid-feedback" style="display:none;">Please fill Risk Description!</span>'
       append = append + '    </div>'
       append = append + '    <div class="row">'
       append = append + '      <div class="col-md-6 col-xs-12">'
       append = append + '        <div class="form-group">'
       append = append + '          <label>Owner*</label> '
       append = append + '          <input type="text" class="form-control" id="inputOwner" name="inputOwner" placeholder="Owner" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)"/>'
-      append = append + '          <span class="help-block" style="display:none;">Please fill Owner!</span>'
+      append = append + '          <span class="invalid-feedback" style="display:none;">Please fill Owner!</span>'
       append = append + '        </div>'
       append = append + '      </div>'
       append = append + '      <div class="col-md-3 col-xs-12">'
@@ -3205,7 +3221,7 @@
       append = append + '          <label>Impact*&nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-impact" value="impact" data-value="'+ incIdentifiedRisk +'"></i></label> '
 
       append = append + '          <input max="5" min="1" type="number" class="form-control" id="inputImpact" name="inputImpact" placeholder="1-5" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)"/>'
-      append = append + '          <span class="help-block" style="display:none;">Please fill Impact!</span>'
+      append = append + '          <span class="invalid-feedback" style="display:none;">Please fill Impact!</span>'
       append = append + '        </div>'
       append = append + '      </div>'
       append = append + '      <div class="col-md-3 col-xs-12">'
@@ -3214,7 +3230,7 @@
       append = append + '          <label>Likelihood*&nbsp<i style="color:#f39c12;" class="bx bx-info-circle help-btn-likelihood" value="likelihood" data-value="'+ incIdentifiedRisk +'"></i></label> '
 
       append = append + '          <input max="5" min="1" type="number" class="form-control" id="inputLikelihood" name="inputLikelihood" placeholder="1-5" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)"/>'
-      append = append + '          <span class="help-block" style="display:none;">Please fill Probability!</span>'
+      append = append + '          <span class="invalid-feedback" style="display:none;">Please fill Probability!</span>'
       append = append + '        </div>'
       append = append + '      </div>'
       append = append + '    </div>'
@@ -3224,14 +3240,14 @@
       // append = append + '    </div>'      
       append = append + '    <div class="form-group">'      
       append = append + '      <label>Impact Description*</label>'      
-      append = append + '      <textarea class="form-control" placeholder="Impact Description" id="txtAreaImpactDesc" name="txtAreaImpactDesc" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)"></textarea><span class="help-block" style="display:none;">Please fill Impact Description!</span>'      
+      append = append + '      <textarea class="form-control" placeholder="Impact Description" id="txtAreaImpactDesc" name="txtAreaImpactDesc" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)"></textarea><span class="invalid-feedback" style="display:none;">Please fill Impact Description!</span>'      
       append = append + '    </div>'   
       append = append + '    <div class="row">'
       append = append + '        <div class="col-md-12 col-xs-12">'
       append = append + '          <div class="form-group">'
       append = append + '            <label>Response*</label> '
       append = append + '            <textarea class="form-control" id="textareaResponse" name="textareaResponse" placeholder="Response" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)"/>'
-      append = append + '            </textarea><span class="help-block" style="display:none;">Please fill Risk Response!</span>'
+      append = append + '            </textarea><span class="invalid-feedback" style="display:none;">Please fill Risk Response!</span>'
       append = append + '          </div>'
       append = append + '        </div>'
       append = append + '    </div>'   
@@ -3241,10 +3257,10 @@
       append = append + '          <label>Due Date*</label>'      
       append = append + '          <div class="input-group">'      
 
-      append = append + '            <span class="input-group-addon"><i class="bx bx-calendar"></i></span>'      
+      append = append + '            <span class="input-group-text"><i class="bx bx-calendar"></i></span>'      
 
       append = append + '            <input type="text" name="due_date" class="form-control" id="due_date" onclick="showDatepicker(this)" placeholder="Select Due Date" data-value="'+ incIdentifiedRisk +'" onchange="validationCheck(this)"/>'      
-      append = append + '          </div><span class="help-block" style="display:none;">Please fill Due Date!</span>'      
+      append = append + '          </div><span class="invalid-feedback" style="display:none;">Please fill Due Date!</span>'      
       append = append + '        </div>'      
       append = append + '      </div>'      
       append = append + '      <div class="col-md-4 col-xs-12">'      
@@ -3252,18 +3268,18 @@
       append = append + '          <label>Review Date*</label>'      
       append = append + '          <div class="input-group">'      
 
-      append = append + '            <span class="input-group-addon"><i class="bx bx-calendar"></i></span>'      
+      append = append + '            <span class="input-group-text"><i class="bx bx-calendar"></i></span>'      
 
       append = append + '            <input type="text" name="review_date" class="form-control" id="review_date" onclick="showDatepicker(this)" placeholder="Select Review Date" data-value="'+ incIdentifiedRisk +'" onchange="validationCheck(this)"/>'      
-      append = append + '          </div><span class="help-block" style="display:none;">Please fill Review Date!</span>'      
+      append = append + '          </div><span class="invalid-feedback" style="display:none;">Please fill Review Date!</span>'      
       append = append + '        </div>'      
       append = append + '      </div>'      
       append = append + '      <div class="col-md-4 col-xs-12">'      
       append = append + '        <div class="form-group">'      
       append = append + '          <label>Status*</label>'      
-      append = append + '          <select class="form-control select2" id="selectStatusProjectCharter" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)">'      
+      append = append + '          <select class="form-control select2 selectStatusProjectCharter" data-value="'+ incIdentifiedRisk +'" onkeyup="validationCheck(this)">'
       append = append + '            <option></option>'      
-      append = append + '          </select><span class="help-block" style="display:none;">Please fill Status!</span>'      
+      append = append + '          </select><span class="invalid-feedback" style="display:none;">Please fill Status!</span>'      
       append = append + '        </div>'      
       append = append + '      </div>'      
       append = append + '    </div>'      
@@ -3282,13 +3298,13 @@
       // Animation complete.
         if ($("#divInfoRisk").length == 0 || $("#divInfoImpact").length == 0) {
             if ($("#divInfoImpact").length == 0) {
-              $("#selectStatusProjectCharter[data-value='"+ incIdentifiedRisk +"']").closest(".row").after("<div class='form-group' id='divInfoImpact'> (5) <b>Critical</b> - Disaster with potential to lead to business failure.<br>(4) <b>Major</b> - Major event which will be endured with proper management.<br>(3) <b>Moderate</b> - Significant event which can be managed under normal circumstances.<br>(2) <b>Minor</b> - Event with consequences which can be readily absorbed but requires management effort to minimise the impact.<br>(1) <b>Insignificant</b> - Low level risk. Existing controls and procedures will cope with event.</div>")
+              $(".selectStatusProjectCharter[data-value='"+ incIdentifiedRisk +"']").closest(".row").after("<div class='form-group' id='divInfoImpact'> (5) <b>Critical</b> - Disaster with potential to lead to business failure.<br>(4) <b>Major</b> - Major event which will be endured with proper management.<br>(3) <b>Moderate</b> - Significant event which can be managed under normal circumstances.<br>(2) <b>Minor</b> - Event with consequences which can be readily absorbed but requires management effort to minimise the impact.<br>(1) <b>Insignificant</b> - Low level risk. Existing controls and procedures will cope with event.</div>")
             
               
             }
             
             if ($("#divInfoRisk").length == 0) {
-              $("#selectStatusProjectCharter[data-value='"+ incIdentifiedRisk +"']").closest(".row").after("<div class='form-group' id='divInfoRisk'>(5) <b>Almost certain</b> - The event is expected to occur in most circumstances (daily / weekly)High level of known incidents (records / experiences)Strong likelihood of re-occurring, with high opportunities / means to re-occur<br>(4) <b>Likely</b> - The event will probably occur in most circumstances (monthly) Regular incidents known (recorded / experienced) Considerable opportunity, means to occur<br>(3) <b>Moderate</b> - The event should occur at some time (over 12 months) Few infrequent, random occurrences (recorded / experienced)Some opportunity or means to occur<br>(2) <b>Unlikely</b> - The event could occur at some time (2-5 years)No known incidents recorded or experienced Little opportunity, mean or reason to occur<br>(1) <b>Rare</b> - The event may occur only in exceptional circumstances (10 years) Highly unheard of Almost no opportunity to occur</div>")
+              $(".selectStatusProjectCharter[data-value='"+ incIdentifiedRisk +"']").closest(".row").after("<div class='form-group' id='divInfoRisk'>(5) <b>Almost certain</b> - The event is expected to occur in most circumstances (daily / weekly)High level of known incidents (records / experiences)Strong likelihood of re-occurring, with high opportunities / means to re-occur<br>(4) <b>Likely</b> - The event will probably occur in most circumstances (monthly) Regular incidents known (recorded / experienced) Considerable opportunity, means to occur<br>(3) <b>Moderate</b> - The event should occur at some time (over 12 months) Few infrequent, random occurrences (recorded / experienced)Some opportunity or means to occur<br>(2) <b>Unlikely</b> - The event could occur at some time (2-5 years)No known incidents recorded or experienced Little opportunity, mean or reason to occur<br>(1) <b>Rare</b> - The event may occur only in exceptional circumstances (10 years) Highly unheard of Almost no opportunity to occur</div>")
 
             }
 
@@ -3386,16 +3402,15 @@
     // Animation complete.
       if ($("#divInfoRisk").length == 0 || $("#divInfoImpact").length == 0) {
           if ($("#divInfoImpact").length == 0) {
-            $("#selectStatusProjectCharter[data-value='"+ $(this).closest("label").closest(".form-group").find("input").data("value")+"']").closest(".row").after("<div class='form-group' id='divInfoImpact'> (5) <b>Critical</b> - Disaster with potential to lead to business failure.<br>(4) <b>Major</b> - Major event which will be endured with proper management.<br>(3) <b>Moderate</b> - Significant event which can be managed under normal circumstances.<br>(2) <b>Minor</b> - Event with consequences which can be readily absorbed but requires management effort to minimise the impact.<br>(1) <b>Insignificant</b> - Low level risk. Existing controls and procedures will cope with event.</div>")
+            $(".selectStatusProjectCharter[data-value='"+ $(this).closest("label").closest(".form-group").find("input").data("value")+"']").closest(".row").after("<div class='form-group' id='divInfoImpact'> (5) <b>Critical</b> - Disaster with potential to lead to business failure.<br>(4) <b>Major</b> - Major event which will be endured with proper management.<br>(3) <b>Moderate</b> - Significant event which can be managed under normal circumstances.<br>(2) <b>Minor</b> - Event with consequences which can be readily absorbed but requires management effort to minimise the impact.<br>(1) <b>Insignificant</b> - Low level risk. Existing controls and procedures will cope with event.</div>")
           
             
           }
           
           if ($("#divInfoRisk").length == 0) {
-            $("#selectStatusProjectCharter[data-value='"+ $(this).closest("label").closest(".form-group").find("input").data("value") +"']").closest(".row").after("<div class='form-group' id='divInfoRisk'>(5) <b>Almost certain</b> - The event is expected to occur in most circumstances (daily / weekly)High level of known incidents (records / experiences)Strong likelihood of re-occurring, with high opportunities / means to re-occur<br>(4) <b>Likely</b> - The event will probably occur in most circumstances (monthly) Regular incidents known (recorded / experienced) Considerable opportunity, means to occur<br>(3) <b>Moderate</b> - The event should occur at some time (over 12 months) Few infrequent, random occurrences (recorded / experienced)Some opportunity or means to occur<br>(2) <b>Unlikely</b> - The event could occur at some time (2-5 years)No known incidents recorded or experienced Little opportunity, mean or reason to occur<br>(1) <b>Rare</b> - The event may occur only in exceptional circumstances (10 years) Highly unheard of Almost no opportunity to occur</div>")
+            $(".selectStatusProjectCharter[data-value='"+ $(this).closest("label").closest(".form-group").find("input").data("value") +"']").closest(".row").after("<div class='form-group' id='divInfoRisk'>(5) <b>Almost certain</b> - The event is expected to occur in most circumstances (daily / weekly)High level of known incidents (records / experiences)Strong likelihood of re-occurring, with high opportunities / means to re-occur<br>(4) <b>Likely</b> - The event will probably occur in most circumstances (monthly) Regular incidents known (recorded / experienced) Considerable opportunity, means to occur<br>(3) <b>Moderate</b> - The event should occur at some time (over 12 months) Few infrequent, random occurrences (recorded / experienced)Some opportunity or means to occur<br>(2) <b>Unlikely</b> - The event could occur at some time (2-5 years)No known incidents recorded or experienced Little opportunity, mean or reason to occur<br>(1) <b>Rare</b> - The event may occur only in exceptional circumstances (10 years) Highly unheard of Almost no opportunity to occur</div>")
 
           }
-
 
           if ($(this).attr('value') == 'impact') {
             $("#divInfoRisk").attr('style','display:none!important')
@@ -3442,11 +3457,11 @@
     //function for SLA
     $("input[name='cbSLA']").change(function(){
       if ($(this).is(":checked")) {
-        $(this).next("div").find("input").attr("disabled",false)
-        $(this).next("div").find("input").val("")
+        $(this).closest(".input-group").find("input:eq(1)").attr("disabled",false)
+        $(this).closest(".input-group").find("input:eq(1)").val("")
       }else{
-        $(this).next("div").find("input").attr("disabled",true)
-        $(this).next("div").find("input").val("")
+        $(this).closest(".input-group").find("input:eq(1)").attr("disabled",true)
+        $(this).closest(".input-group").find("input:eq(1)").val("")
       }
     })
 
@@ -3455,7 +3470,7 @@
         $(".divSLA").show()
       }else if($(this).val() == 'No'){
         $(".divSLA").attr('style','display:none!important')
-        $("input[name='cbSLA']").next("div").find("input").val("").attr("disabled",true)
+        $("input[name='cbSLA']").closest(".input-group").find("input:eq(1)").val("").attr("disabled",true)
         $("input[name='cbSLA']").prop("checked", false)
       }
     })

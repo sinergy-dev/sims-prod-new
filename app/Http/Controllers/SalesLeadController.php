@@ -2252,7 +2252,7 @@ class SalesLeadController extends Controller
                         DB::raw("CONCAT(`quote_number`, ' - ', `customer_legal_name`) AS `text`"), 
                         DB::raw('`id_quote` AS `id`')
                     )
-                    ->where('tb_quote.status', null)
+                    ->whereRaw("(`tb_quote`.`status` != 'choosed' OR `tb_quote`.`status` != 'APPROVED')")
                     ->where('tb_quote.id_customer', $request->id_customer)
                     ->orderBy('tb_quote.created_at', 'desc')
                     ->get();

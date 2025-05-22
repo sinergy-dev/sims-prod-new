@@ -778,7 +778,7 @@ class PMProjectController extends Controller
             }
 
             if ($get_id_pmo->parent_id_drive == null) {
-                $parentID = $this->googleDriveMakeFolder($request->project_id);
+                $parentID = $this->googleDriveMakeFolder($get_id_pmo->project_id);
             } else {
                 $parentID = [];
                 $parent_id = explode('"', $get_id_pmo->parent_id_drive)[1];
@@ -830,7 +830,7 @@ class PMProjectController extends Controller
             }
 
             if ($get_parent_drive->parent_id_drive == null) {
-                $parentID = $this->googleDriveMakeFolder($request->project_id);
+                $parentID = $this->googleDriveMakeFolder($get_id_pmo->project_id);
             } else {
                 $parentID = [];
                 $parent_id = explode('"', $get_parent_drive->parent_id_drive)[1];
@@ -880,7 +880,7 @@ class PMProjectController extends Controller
             }
 
             if ($get_parent_drive->parent_id_drive == null) {
-                $parentID = $this->googleDriveMakeFolder($request->project_id);
+                $parentID = $this->googleDriveMakeFolder($get_id_pmo->project_id);
             } else {
                 $parentID = [];
                 $parent_id = explode('"', $get_parent_drive->parent_id_drive)[1];
@@ -1329,7 +1329,7 @@ class PMProjectController extends Controller
                 }
 
                 if ($get_id_pmo->parent_id_drive == null) {
-                    $parentID = $this->googleDriveMakeFolder($request->project_id);
+                    $parentID = $this->googleDriveMakeFolder($get_id_pmo->project_id);
                 } else {
                     $parentID = [];
                     $parent_id = explode('"', $get_id_pmo->parent_id_drive)[1];
@@ -1416,7 +1416,7 @@ class PMProjectController extends Controller
                 }
 
                 if ($get_parent_drive->parent_id_drive == null) {
-                    $parentID = $this->googleDriveMakeFolder($request->project_id);
+                    $parentID = $this->googleDriveMakeFolder($get_id_pmo->project_id);
                 } else {
                     $parentID = [];
                     $parent_id = explode('"', $get_parent_drive->parent_id_drive)[1];
@@ -1501,7 +1501,7 @@ class PMProjectController extends Controller
                 }
 
                 if ($get_parent_drive->parent_id_drive == null) {
-                    $parentID = $this->googleDriveMakeFolder($request->project_id);
+                    $parentID = $this->googleDriveMakeFolder($get_id_pmo->project_id);
                 } else {
                     $parentID = [];
                     $parent_id = explode('"', $get_parent_drive->parent_id_drive)[1];

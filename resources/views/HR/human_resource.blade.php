@@ -2880,11 +2880,11 @@ Employees
 	$("#phone_ec").inputmask({"mask": "(+62) 999-9999-9999"});
 
 	$("#roles_user").select2({
-		dropdownParent:$("#modalAdd")
+		dropdownParent:$("#modalAdd .modal-body")
 	});
 
 	$("#roles_user_update").select2({
-		dropdownParent:$("#modal_update")
+		dropdownParent:$("#modal_update .modal-body")
 	})
 
 	$(document).ready(function(){
@@ -2906,6 +2906,14 @@ Employees
    	})
 
    	function showTabAdd(n){
+   		$('#modalAdd').find('input, select').each(function() {
+		    if ($(this).is('input')) {
+		        $(this).val('');
+		    } else if ($(this).is('select')) {
+		        $(this).val('').trigger('change'); // trigger 'change' for Select2
+		    }
+		});
+		
 		var x = document.getElementsByClassName("tab-add");
 		x[n].style.display = "inline";
 
@@ -2994,18 +3002,21 @@ Employees
 
     document.getElementById('modalAdd').addEventListener('hidden.bs.modal', function () {
 	    document.querySelectorAll('.tab-add').forEach(element => {
-	        element.style.display = "none!important";
+	        element.style.display = "none";
 	    });
 	});
 
 	document.getElementById('modal_update').addEventListener('hidden.bs.modal', function () {
 	    document.querySelectorAll('.tab').forEach(element => {
-	        element.style.display = "none!important";
+	        element.style.display = "none";
 	    });
 	});
 
 
     $('#modal_update').on('hidden.bs.modal', function () {
+    	document.querySelectorAll('.tab').forEach(element => {
+	        element.style.display = "none";
+	    });
     	currentTab = 0
       	n = 0
     })
@@ -3135,313 +3146,292 @@ Employees
                	}else{        
 				   	$("#nik_update").val(value.nik);
 
-				   if (!localStorage.getItem("name_update") == true) {
-	               	$("#name_update").val(value.name);
-				   	localStorage.setItem("name_update", $("#name_update").val())
-				   }else{
-				   	localStorage.setItem("name_update", $("#name_update").val())
-				   }
+				   	if (!localStorage.getItem("name_update") == true) {
+					   	if (value.name != null) {
+		               		$("#name_update").val(value.name);
+					   	}
+					   	localStorage.setItem("name_update", $("#name_update").val())
+					}else{
+						if (value.name != null) {
+		               		$("#name_update").val(value.name);
+					   	}else{
+		               		$("#name_update").val($("#name_update").val());
+					   	}
 
-				   if (!localStorage.getItem("email_update") == true) {
-	               	$("#email_update").val(value.email);
-				   	localStorage.setItem("email_update", $("#email_update").val())
-				   }else{
-				   	localStorage.setItem("email_update", $("#email_update").val())
-				   }
-
-				   if (!localStorage.getItem("email_personal_update") == true) {
-	               	$("#email_personal_update").val(value.email_pribadi);
-				   	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
-				   }else{
-				   	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
-				   }
-
-				   if (!localStorage.getItem("date_of_entry_update") == true) {
-	               	$("#date_of_entry_update").val(value.date_of_entry).prop("disabled",true);
-				   	localStorage.setItem("date_of_entry_update", $("#date_of_entry_update").val())
-				   }else{
-				   	localStorage.setItem("date_of_entry_update", $("#date_of_entry_update").val())
-				   }
-
-				   if (!localStorage.getItem("date_of_birth_update") == true) {
-	               	$("#date_of_birth_update").val(value.date_of_birth).prop("disabled",true);
-				   	localStorage.setItem("date_of_birth_update", $("#date_of_birth_update").val())
-				   }else{
-				   	localStorage.setItem("date_of_birth_update", $("#date_of_birth_update").val())
-				   }
-
-				   if (!localStorage.getItem("akhir_kontrak_update") == true) {
-	               	$("#akhir_kontrak_update").val(value.akhir_kontrak);
-				   	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
-				   }else{
-				   	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
-				   }
-
-				   if (!localStorage.getItem("address_update") == true) {
-	               	$("#address_update").val(value.address);
-				   	localStorage.setItem("address_update", $("#address_update").val())
-				   }else{
-				   	localStorage.setItem("address_update", $("#address_update").val())
-				   }
-
-				   if (!localStorage.getItem("address_ktp_update") == true) {
-	               	$("#address_ktp_update").val(value.alamat_ktp);
-				   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
-				   }else{
-				   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
-				   }
-
-				   // localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
-				   // if (!localStorage.getItem("akhir_kontrak_update") == true) {
-				   // 	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
-				   // 	if (value.akhir_kontrak != "" && value.akhir_kontrak != null) {
-	               // 		$("#akhir_kontrak_update").val(value.akhir_kontrak);
-				   // 	}else{
-	               // 		$("#akhir_kontrak_update").val(localStorage.getItem("akhir_kontrak_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
-				   // }
-
-				   // localStorage.setItem("address_update", $("#address_update").val())
-				   // if (!localStorage.getItem("address_update") == true) {
-				   // 	localStorage.setItem("address_update", $("#address_update").val())
-				   // 	if (value.address != "" && value.address != null) {
-	               // 		$("#address_update").val(value.address);
-				   // 	}else{
-	               // 		$("#address_update").val(localStorage.getItem("address_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("address_update", $("#address_update").val())
-				   // }
-
-				   // 	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val())
-				   // 	if (!localStorage.getItem("addres_ktp_update") == true) {
-				   // 	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val());
-				   // 	if (value.alamat_ktp != "" && value.alamat_ktp != null) {
-	               // 		$("#address_ktp_update").val(value.alamat_ktp);
-				   // 	}else{
-	               // 		$("#address_ktp_update").val(localStorage.getItem("address_ktp_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
-				   // }
-
-				   if (!localStorage.getItem("phone_number_update") == true) {
-	               	$("#phone_number_update").val(value.phone);
-				   	localStorage.setItem("phone_number_update", $("#phone_number_update").val())
-				   }else{
-				   	localStorage.setItem("phone_number_update", $("#phone_number_update").val())
-				   }
-
-				   // localStorage.setItem('phone_number_update', $("#phone_number_update").val())
-				   // console.log($("#phone_number_update").val())
-				   // console.log("getItem")
-				   // 	if (!localStorage.getItem("phone_number_update") == true) {
-				   // 	localStorage.setItem('phone_number_update', $("#phone_number_update").val());
-				   // 	if (value.phone != "" && value.phone != null) {
-	               // 		$("#phone_number_update").val(value.phone);
-				   // 	}else{
-	               // 		$("#phone_number_update").val(localStorage.getItem("phone_number_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("phone_number_update", $("#phone_number_update").val())
-				   // }
-
-				   if (!localStorage.getItem("no_ktp_update") == true) {
-	               	$("#no_ktp_update").val(value.no_ktp);
-				   	localStorage.setItem("no_ktp_update", $("#no_ktp_update").val())
-				   }else{
-				   	localStorage.setItem("no_ktp_update", $("#no_ktp_update").val())
-				   }
-
-				   // localStorage.setItem('no_ktp_update', $("#no_ktp_update").val())
-				   // 	if (!localStorage.getItem("no_ktp_update") == true) {
-				   // 	localStorage.setItem('no_ktp_update', $("#no_ktp_update").val());
-				   // 	if (value.no_ktp != "" && value.no_ktp != null) {
-	               // 		$("#no_ktp_update").val(value.no_ktp);
-				   // 	}else{
-	               // 		$("#no_ktp_update").val(localStorage.getItem("no_ktp_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("no_ktp_update", $("#no_ktp_update").val())
-				   // }
-
-				   if (!localStorage.getItem("no_kk_update") == true) {
-	               	$("#no_kk_update").val(value.no_kk);
-				   	localStorage.setItem("no_kk_update", $("#no_kk_update").val())
-				   }else{
-				   	localStorage.setItem("no_kk_update", $("#no_kk_update").val())
-				   }
-
-				   // localStorage.setItem('no_kk_update', $("#no_kk_update").val())
-				   // 	if (!localStorage.getItem("no_kk_update") == true) {
-				   // 	localStorage.setItem('no_kk_update', $("#no_kk_update").val());
-				   // 	if (value.no_kk != "" && value.no_kk != null) {
-	               // 		$("#no_kk_update").val(value.no_kk);
-				   // 	}else{
-	               // 		$("#no_kk_update").val(localStorage.getItem("no_kk_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("no_kk_update", $("#no_kk_update").val())
-				   // }
-
-				   if (!localStorage.getItem("no_npwp_update") == true) {
-	               	$("#no_npwp_update").val(value.no_npwp);
-				   	localStorage.setItem("no_npwp_update", $("#no_npwp_update").val())
-				   }else{
-				   	localStorage.setItem("no_npwp_update", $("#no_npwp_update").val())
-				   }
-
-				   // localStorage.setItem('no_npwp_update', $("#no_npwp_update").val())
-				   // 	if (!localStorage.getItem("no_npwp_update") == true) {
-				   // 	localStorage.setItem('no_npwp_update', $("#no_npwp_update").val());
-				   // 	if (value.no_npwp != "" && value.no_npwp != null) {
-	               // 		$("#no_npwp_update").val(value.no_npwp);
-				   // 	}else{
-	               // 		$("#no_npwp_update").val(localStorage.getItem("no_npwp_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("no_npwp_update", $("#no_npwp_update").val())
-				   // }
-
-				   if (!localStorage.getItem("tempat_lahir_update") == true) {
-	               	$("#tempat_lahir_update").val(value.tempat_lahir);
-				   	localStorage.setItem("tempat_lahir_update", $("#tempat_lahir_update").val())
-				   }else{
-				   	localStorage.setItem("tempat_lahir_update", $("#tempat_lahir_update").val())
-				   }
-
-				   // localStorage.setItem('tempat_lahir_update', $("#tempat_lahir_update").val())
-				   // 	if (!localStorage.getItem("tempat_lahir_update") == true) {
-				   // 	localStorage.setItem('tempat_lahir_update', $("#tempat_lahir_update").val());
-				   // 	if (value.tempat_lahir != "" && value.tempat_lahir != null) {
-	               // 		$("#tempat_lahir_update").val(value.tempat_lahir);
-				   // 	}else{
-	               // 		$("#tempat_lahir_update").val(localStorage.getItem("tempat_lahir_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("tempat_lahir_update", $("#tempat_lahir_update").val())
-				   // }
-
-				   // localStorage.setItem('email_personal_update', $("#email_personal_update").val())
-				   // 	if (!localStorage.getItem("email_personal_update") == true) {
-				   // 	localStorage.setItem('email_personal_update', $("#email_personal_update").val());
-				   // 	if (value.email_pribadi != "" && value.email_pribadi != null) {
-	               // 		$("#email_personal_update").val(value.email_pribadi);
-				   // 	}else{
-	               // 		$("#email_personal_update").val(localStorage.getItem("email_personal_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
-				   // }
-
-				   if (!localStorage.getItem("bpjs_ket_update") == true) {
-	               	$("#bpjs_ket_update").val(value.bpjs_ket);
-				   	localStorage.setItem("bpjs_ket_update", $("#bpjs_ket_update").val())
-				   }else{
-				   	localStorage.setItem("bpjs_ket_update", $("#bpjs_ket_update").val())
-				   }
-
-				   // localStorage.setItem('bpjs_ket_update', $("#bpjs_ket_update").val())
-				   // 	if (!localStorage.getItem("bpjs_ket_update") == true) {
-				   // 	localStorage.setItem('bpjs_ket_update', $("#bpjs_ket_update").val());
-				   // 	if (value.bpjs_ket != "" && value.bpjs_ket != null) {
-	               // 		$("#bpjs_ket_update").val(value.bpjs_ket);
-				   // 	}else{
-	               // 		$("#bpjs_ket_update").val(localStorage.getItem("bpjs_ket_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("bpjs_ket_update", $("#bpjs_ket_update").val())
-				   // }
-
-				   if (!localStorage.getItem("address_ktp_update") == true) {
-	               	$("#address_ktp_update").val(value.alamat_ktp);
-				   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
-				   }else{
-				   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
-				   }
-
-				   // localStorage.setItem('address_ktp_update', $("#address_ktp_update").val())
-				   // 	if (!localStorage.getItem("address_ktp_update") == true) {
-				   // 	localStorage.setItem('address_ktp_update', $("#address_ktp_update").val());
-				   // 	if (value.alamat_ktp != "" && value.alamat_ktp != null) {
-	               // 		$("#address_ktp_update").val(value.alamat_ktp);
-				   // 	}else{
-	               // 		$("#address_ktp_update").val(localStorage.getItem("address_ktp_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
-				   // }
-
-				   if (!localStorage.getItem("pend_terakhir_update") == true) {
-				   	localStorage.setItem("pend_terakhir_update", $("#pend_terakhir_update").val())
-				   	if (value.pend_terakhir != "") {
-	               		$("#pend_terakhir_update").val(value.pend_terakhir);
-				   	}else{
-	               		$("#pend_terakhir_update").val(localStorage.getItem("pend_terakhir_update"));
+				   		localStorage.setItem("name_update", $("#name_update").val())
 				   	}
-				   }else{
-				   	localStorage.setItem("pend_terakhir_update", $("#pend_terakhir_update").val())
-				   }
+
+				   	if (!localStorage.getItem("email_update") == true) {
+					   	if (value.email != null) {
+		               		$("#email_update").val(value.email);
+					   	}
+					   	localStorage.setItem("email_update", $("#email_update").val())
+					}else{
+						if (value.email != null) {
+		               		$("#email_update").val(value.email);
+					   	}else{
+		               		$("#email_update").val($("#email_update").val());
+					   	}
+
+				   		localStorage.setItem("email_update", $("#email_update").val())
+				   	}
+
+				   	if (!localStorage.getItem("email_personal_update") == true) {
+					   	if (value.email_pribadi != null) {
+		               		$("#email_personal_update").val(value.email_pribadi);
+					   	}
+					   	localStorage.setItem("email_personal_update", $("#email_personal_update").val())
+					}else{
+						if (value.email_pribadi != null) {
+		               		$("#email_personal_update").val(value.email_pribadi);
+					   	}else{
+		               		$("#email_personal_update").val($("#email_personal_update").val());
+					   	}
+
+				   		localStorage.setItem("email_personal_update", $("#email_personal_update").val())
+				    }
+
+				    if (!localStorage.getItem("date_of_entry_update") == true) {
+					   	if (value.date_of_entry != null) {
+		               		$("#date_of_entry_update").val(value.date_of_entry);
+					   	}
+					   	localStorage.setItem("date_of_entry_update", $("#date_of_entry_update").val())
+					}else{
+						if (value.date_of_entry != null) {
+		               		$("#date_of_entry_update").val(value.date_of_entry);
+					   	}else{
+		               		$("#date_of_entry_update").val($("#date_of_entry_update").val());
+					   	}
+
+				   		localStorage.setItem("date_of_entry_update", $("#date_of_entry_update").val())
+				    }
+
+				    if (!localStorage.getItem("date_of_birth_update") == true) {
+					   	if (value.date_of_birth != null) {
+		               		$("#date_of_birth_update").val(value.date_of_birth);
+					   	}
+					   	localStorage.setItem("date_of_birth_update", $("#date_of_birth_update").val())
+					}else{
+						if (value.date_of_birth != null) {
+		               		$("#date_of_birth_update").val(value.date_of_birth);
+					   	}else{
+		               		$("#date_of_birth_update").val($("#date_of_birth_update").val());
+					   	}
+
+				   		localStorage.setItem("date_of_birth_update", $("#date_of_birth_update").val())
+				    }
+
+				    if (!localStorage.getItem("akhir_kontrak_update") == true) {
+					   	if (value.akhir_kontrak != null) {
+		               		$("#akhir_kontrak_update").val(value.akhir_kontrak);
+					   	}
+					   	localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
+					}else{
+						if (value.akhir_kontrak != null) {
+		               		$("#akhir_kontrak_update").val(value.akhir_kontrak);
+					   	}else{
+		               		$("#akhir_kontrak_update").val($("#akhir_kontrak_update").val());
+					   	}
+
+				   		localStorage.setItem("akhir_kontrak_update", $("#akhir_kontrak_update").val())
+				    }
+
+				    if (!localStorage.getItem("address_update") == true) {
+					   	if (value.address != null) {
+		               		$("#address_update").val(value.address);
+					   	}
+					   	localStorage.setItem("address_update", $("#address_update").val())
+					}else{
+						if (value.address != null) {
+		               		$("#address_update").val(value.address);
+					   	}else{
+		               		$("#address_update").val($("#address_update").val());
+					   	}
+
+				   		localStorage.setItem("address_update", $("#address_update").val())
+				    }
+
+				    if (!localStorage.getItem("address_ktp_update") == true) {
+					   	if (value.alamat_ktp != null) {
+		               		$("#address_ktp_update").val(value.alamat_ktp);
+					   	}
+					   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
+					}else{
+						if (value.alamat_ktp != null) {
+		               		$("#address_ktp_update").val(value.alamat_ktp);
+					   	}else{
+		               		$("#address_ktp_update").val($("#address_ktp_update").val());
+					   	}
+
+				   		localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
+				    }
 
 
-				   if (!localStorage.getItem("name_ec_update") == true) {
-	               	$("#name_ec_update").val(value.name_ec);
-				   	localStorage.setItem("name_ec_update", $("#name_ec_update").val())
-				   }else{
-				   	localStorage.setItem("name_ec_update", $("#name_ec_update").val())
-				   }
+				    if (!localStorage.getItem("phone_number_update") == true) {
+					   	if (value.phone != null) {
+		               		$("#phone_number_update").val(value.phone);
+					   	}
+					   	localStorage.setItem("phone_number_update", $("#phone_number_update").val())
+					}else{
+						if (value.phone != null) {
+		               		$("#phone_number_update").val(value.phone);
+					   	}else{
+		               		$("#phone_number_update").val($("#phone_number_update").val());
+					   	}
 
-				   // localStorage.setItem('name_ec_update', $("#name_ec_update").val())
-				   // 	if (!localStorage.getItem("name_ec_update") == true) {
-				   // 	localStorage.setItem('name_ec_update', $("#name_ec_update").val());
-				   // 	if (value.name_ec != "" && value.name_ec != null) {
-	               // 		$("#name_ec_update").val(value.name_ec);
-				   // 	}else{
-	               // 		$("#name_ec_update").val(localStorage.getItem("name_ec_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("name_ec_update", $("#name_ec_update").val())
-				   // }
+				   		localStorage.setItem("phone_number_update", $("#phone_number_update").val())
+				    }
 
-				   if (!localStorage.getItem("phone_ec_update") == true) {
-	               	$("#phone_ec_update").val(value.phone_ec);
-				   	localStorage.setItem("phone_ec_update", $("#phone_ec_update").val())
-				   }else{
-				   	localStorage.setItem("phone_ec_update", $("#phone_ec_update").val())
-				   }
+				    if (!localStorage.getItem("no_ktp_update") == true) {
+					   	if (value.no_ktp != null) {
+		               		$("#no_ktp_update").val(value.no_ktp);
+					   	}
+					   	localStorage.setItem("no_ktp_update", $("#no_ktp_update").val())
+					}else{
+						if (value.no_ktp != null) {
+		               		$("#no_ktp_update").val(value.no_ktp);
+					   	}else{
+		               		$("#no_ktp_update").val($("#no_ktp_update").val());
+					   	}
 
-				   // localStorage.setItem('phone_ec_update', $("#phone_ec_update").val())
-				   // 	if (!localStorage.getItem("phone_ec_update") == true) {
-				   // 	localStorage.setItem('phone_ec_update', $("#phone_ec_update").val());
-				   // 	if (value.phone_ec != "" && value.phone_ec != null) {
-	               // 		$("#phone_ec_update").val(value.phone_ec);
-				   // 	}else{
-	               // 		$("#phone_ec_update").val(localStorage.getItem("phone_ec_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("phone_ec_update", $("#phone_ec_update").val())
-				   // }
+				   		localStorage.setItem("no_ktp_update", $("#no_ktp_update").val())
+				    }
 
-				   if (!localStorage.getItem("hubungan_ec_update") == true) {
-	               	$("#hubungan_ec_update").val(value.hubungan_ec);
-				   	localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
-				   }else{
-				   	localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
-				   }
+				    if (!localStorage.getItem("no_kk_update") == true) {
+					   	if (value.no_kk != null) {
+		               		$("#no_kk_update").val(value.no_kk);
+					   	}
+					   	localStorage.setItem("no_kk_update", $("#no_kk_update").val())
+					}else{
+						if (value.no_kk != null) {
+		               		$("#no_kk_update").val(value.no_kk);
+					   	}else{
+		               		$("#no_kk_update").val($("#no_kk_update").val());
+					   	}
 
-				   //  localStorage.setItem('hubungan_ec_update', $("#hubungan_ec_update").val())
-				   // 	if (!localStorage.getItem("hubungan_ec_update") == true) {
-				   // 	localStorage.setItem('hubungan_ec_update', $("#hubungan_ec_update").val());
-				   // 	if (value.hubungan_ec != "" && value.hubungan_ec != null) {
-	               // 		$("#hubungan_ec_update").val(value.hubungan_ec);
-				   // 	}else{
-	               // 		$("#hubungan_ec_update").val(localStorage.getItem("hubungan_ec_update"));
-				   // 	}
-				   // }else{
-				   // 	localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
-				   // }
+				   		localStorage.setItem("no_kk_update", $("#no_kk_update").val())
+				    }
+
+				    if (!localStorage.getItem("no_npwp_update") == true) {
+					   	if (value.no_npwp != null) {
+		               		$("#no_npwp_update").val(value.no_npwp);
+					   	}
+					   	localStorage.setItem("no_npwp_update", $("#no_npwp_update").val())
+					}else{
+						if (value.no_npwp != null) {
+		               		$("#no_npwp_update").val(value.no_npwp);
+					   	}else{
+		               		$("#no_npwp_update").val($("#no_npwp_update").val());
+					   	}
+
+				   		localStorage.setItem("no_npwp_update", $("#no_npwp_update").val())
+				    }
+
+				    if (!localStorage.getItem("tempat_lahir_update") == true) {
+					   	if (value.tempat_lahir != null) {
+		               		$("#tempat_lahir_update").val(value.tempat_lahir);
+					   	}
+					   	localStorage.setItem("tempat_lahir_update", $("#tempat_lahir_update").val())
+					}else{
+						if (value.tempat_lahir != null) {
+		               		$("#tempat_lahir_update").val(value.tempat_lahir);
+					   	}else{
+		               		$("#tempat_lahir_update").val($("#tempat_lahir_update").val());
+					   	}
+
+				   		localStorage.setItem("tempat_lahir_update", $("#tempat_lahir_update").val())
+				    }
+
+				    if (!localStorage.getItem("bpjs_ket_update") == true) {
+					   	if (value.bpjs_ket != null) {
+		               		$("#bpjs_ket_update").val(value.bpjs_ket);
+					   	}
+					   	localStorage.setItem("bpjs_ket_update", $("#bpjs_ket_update").val())
+					}else{
+						if (value.bpjs_ket != null) {
+		               		$("#bpjs_ket_update").val(value.bpjs_ket);
+					   	}else{
+		               		$("#bpjs_ket_update").val($("#bpjs_ket_update").val());
+					   	}
+
+				   		localStorage.setItem("bpjs_ket_update", $("#bpjs_ket_update").val())
+				    }
+
+				    if (!localStorage.getItem("address_ktp_update") == true) {
+					   	if (value.alamat_ktp != null) {
+		               		$("#address_ktp_update").val(value.alamat_ktp);
+					   	}
+					   	localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
+					}else{
+						if (value.alamat_ktp != null) {
+		               		$("#address_ktp_update").val(value.alamat_ktp);
+					   	}else{
+		               		$("#address_ktp_update").val($("#address_ktp_update").val());
+					   	}
+
+				   		localStorage.setItem("address_ktp_update", $("#address_ktp_update").val())
+				    }
+
+				    if (!localStorage.getItem("pend_terakhir_update") == true) {
+					   	if (value.pend_terakhir != null) {
+		               		$("#pend_terakhir_update").val(value.pend_terakhir);
+					   	}
+					   	localStorage.setItem("pend_terakhir_update", $("#pend_terakhir_update").val())
+					}else{
+						if (value.pend_terakhir != null) {
+		               		$("#pend_terakhir_update").val(value.pend_terakhir);
+					   	}else{
+		               		$("#pend_terakhir_update").val($("#pend_terakhir_update").val());
+					   	}
+
+				   		localStorage.setItem("pend_terakhir_update", $("#pend_terakhir_update").val())
+				    }
+
+				    if (!localStorage.getItem("name_ec_update") == true) {
+					   	if (value.name_ec != null) {
+		               		$("#name_ec_update").val(value.name_ec);
+					   	}
+					   	localStorage.setItem("name_ec_update", $("#name_ec_update").val())
+					}else{
+						if (value.name_ec != null) {
+		               		$("#name_ec_update").val(value.name_ec);
+					   	}else{
+		               		$("#name_ec_update").val($("#name_ec_update").val());
+					   	}
+
+				   		localStorage.setItem("name_ec_update", $("#name_ec_update").val())
+				    }
+
+				    if (!localStorage.getItem("phone_ec_update") == true) {
+					   	if (value.phone_ec != null) {
+		               		$("#phone_ec_update").val(value.phone_ec);
+					   	}
+					   	localStorage.setItem("phone_ec_update", $("#phone_ec_update").val())
+					}else{
+						if (value.phone_ec != null) {
+		               		$("#phone_ec_update").val(value.phone_ec);
+					   	}else{
+		               		$("#phone_ec_update").val($("#phone_ec_update").val());
+					   	}
+
+				   		localStorage.setItem("phone_ec_update", $("#phone_ec_update").val())
+				    }
+
+				    if (!localStorage.getItem("hubungan_ec_update") == true) {
+					   	if (value.hubungan_ec != null) {
+		               		$("#hubungan_ec_update").val(value.hubungan_ec);
+					   	}
+					   	localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
+					}else{
+						if (value.hubungan_ec != null) {
+		               		$("#hubungan_ec_update").val(value.hubungan_ec);
+					   	}else{
+		               		$("#hubungan_ec_update").val($("#hubungan_ec_update").val());
+					   	}
+
+				   		localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
+				    }
+				   	
 
 	               if (value.status_kerja == 'Tetap') {
 	               	$("#status_karyawan_update").val("Karyawan Tetap");
@@ -4065,7 +4055,7 @@ Employees
   	});
 
   	$('#subdivision-hr').select2({
-  		dropdownParent:$("#modalAdd")
+  		dropdownParent:$("#modalAdd .modal-body")
   	})
 
   	$('#subdivision-hr').change(function(){
@@ -4133,7 +4123,7 @@ Employees
   	$('#subdivision-operation').select2({
         placeholder: "-- Select Sub Division --",
         allowClear: true,
-        dropdownParent:$("#modalAdd")
+        dropdownParent:$("#modalAdd .modal-body")
     });
 
   	$('#subdivision-operation').change(function(){
@@ -4826,7 +4816,7 @@ Employees
 	function divisiSelect(id)
 	{
 		$('#sub_divisi_update').select2({
-			dropdownParent:$("#modal_update")
+			dropdownParent:$("#modal_update .modal-body")
 		})
 		$('#sub_divisi_update').html(append)
 

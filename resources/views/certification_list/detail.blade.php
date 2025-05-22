@@ -191,7 +191,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Project Phase</label>
-                                            <select name="projectPhase" id="projectPhase" class="form-control" style="width: 100%; " onchange="fillInput('projectPhase')" disabled>
+                                            <select name="projectPhase" id="projectPhase" class="custom-form-control-select w-100" style="width: 100%; " onchange="fillInput('projectPhase')" disabled>
                                                 <option value="">--Choose Project Phase--</option>
                                                 <option value="Opportunity">Opportunity</option>
                                                 <option value="Tender Submission">Tender Submission</option>
@@ -234,7 +234,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Status Renewal</label>
-                                            <select name="renewal" id="renewal" class="form-control" style="width: 100%" onchange="fillInput('renewal')">
+                                            <select name="renewal" id="renewal" class="custom-form-control-select w-100" style="width: 100%" onchange="fillInput('renewal')">
                                                 <option value="">--Choose Status Renewal--</option>
                                                 <option value="1">Renewal ke-1</option>
                                                 <option value="2">Renewal ke-2</option>
@@ -279,7 +279,7 @@
                                     </div>
                                     <div class="col-md-6" style="margin-bottom:10px">
                                         <label>Level</label>
-                                        <select style="width:100%;display:inline;" class="form-control" id="level" placeholder="" onchange="fillInput('level')">
+                                        <select style="width:100%;display:inline;" class="custom-form-control-select w-100" id="level" placeholder="" onchange="fillInput('level')">
                                             <option value="">--Choose Level--</option>
                                             <option value="Associate">Associate</option>
                                             <option value="Professional">Professional</option>
@@ -385,7 +385,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Status Exam*</label>
-                                    <select name="" id="proofStatusExam" class="form-control">
+                                    <select name="" id="proofStatusExam" class="custom-form-control-select w-100">
                                         <option value="">-- Choose Status Exam --</option>
                                         <option value="Pass">Pass</option>
                                         <option value="Fail">Fail</option>
@@ -398,7 +398,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Level*</label>
-                                    <select name="" id="proofLevel" class="form-control">
+                                    <select name="" id="proofLevel" class="custom-form-control-select w-100">
                                         <option value="">-- Choose Level --</option>
                                         <option value="Associate">Associate</option>
                                         <option value="Professional">Professional</option>

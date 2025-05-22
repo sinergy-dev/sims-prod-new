@@ -160,9 +160,11 @@ class CertificationListController extends Controller
     public function index()
     {
         $leadId = DB::table('sales_lead_register')
+            ->join('users','users.nik','sales_lead_register.nik')
             ->whereRaw("(`result` = 'INITIAL' OR `result` = '' OR  `result` = 'SD' OR `result` = 'TP')")
             ->select('lead_id','opp_name')
-            ->orderByDesc('created_at')
+            ->where('id_company','1')
+            ->orderByDesc('sales_lead_register.created_at')
             ->get();
 
         $pid = DB::table('tb_id_project')->where('status', 'NEW')
@@ -376,7 +378,7 @@ class CertificationListController extends Controller
             $examRequest->nik = $nik;
             $examRequest->vendor = $vendor;
             $examRequest->exam_purpose = $examPurposeString;
-            $examRequest->status = 'Saved';
+//            $examRequest->status = 'Saved';
             if ($leadId != null || !empty($leadId)){
                 $examRequest->lead_id = $leadId;
                 $examRequest->project_title = $projectTitle;
@@ -523,7 +525,7 @@ class CertificationListController extends Controller
                     'operator' => $name,
                     'activity' => $name. ' Create new request',
                     'status' => 'New',
-                    'date' => Carbon::today()
+                    'date' => Carbon::now()
                 ]);
 
              if ($role != 'Learning & HR Technology'){
@@ -593,7 +595,7 @@ class CertificationListController extends Controller
                     'operator' => $name,
                     'activity' => $name. ' has updated the request',
                     'status' => 'Update',
-                    'date' => Carbon::today()
+                    'date' => Carbon::now()
                 ]);
             $nikLHR = $this->getNikByRole('Learning & HR Technology');
             $userToSend = $this->getUserByNik($nikLHR->nik);
@@ -678,7 +680,7 @@ class CertificationListController extends Controller
                     'operator' => $name,
                     'activity' => $name. ' has re-assigned manager to '. $getData->name,
                     'status' => 'Re-Assign Manager',
-                    'date' => Carbon::today()
+                    'date' => Carbon::now()
                 ]);
                     $status = 'CIRCULAR';
                     $subject = '[SIMS-APP] Request Certification is Ready to Approve';
@@ -692,7 +694,7 @@ class CertificationListController extends Controller
                     'operator' => $name,
                     'activity' => $name. ' has assigned manager to '. $getData->name,
                     'status' => 'Assign Manager',
-                    'date' => Carbon::today()
+                    'date' => Carbon::now()
                 ]);
 
                 if ($exam->nik == $getNikLHR->nik){
@@ -736,7 +738,7 @@ class CertificationListController extends Controller
                     'operator' => Auth::user()->name,
                     'activity' => Auth::user()->name . ' has re-assigned participant exam from '. $participantOld . ' to ' . $data['participant_name'],
                     'status' => 'Re-Assign Participant',
-                    'date' => Carbon::today()
+                    'date' => Carbon::now()
                 ]);
             }elseif ($participantOld != null){
                 CertificationListActivity::create([
@@ -744,7 +746,7 @@ class CertificationListController extends Controller
                     'operator' => Auth::user()->name,
                     'activity' => Auth::user()->name . ' has re-assigned participant exam from '. $participantOld . ' to ' . $data['participant_name'],
                     'status' => 'Re-Assign Participant',
-                    'date' => Carbon::today()
+                    'date' => Carbon::now()
                 ]);
             }else{
                 CertificationListActivity::create([
@@ -752,7 +754,7 @@ class CertificationListController extends Controller
                     'operator' => Auth::user()->name,
                     'activity' => Auth::user()->name . ' has assigned exam '. $certificationDetail->exam_name . ' to ' . $data['participant_name'],
                     'status' => 'Assign Participant',
-                    'date' => Carbon::today()
+                    'date' => Carbon::now()
                 ]);
             }
         }
@@ -779,9 +781,9 @@ class CertificationListController extends Controller
             $examActivity = CertificationListActivity::create([
                 'certification_list_id' => $exam->id,
                 'operator' => $name,
-                'activity' => 'Request has rejected by '. $name,
+                'activity' => 'Request has rejected by '. $name . ' with note: ' . $note,
                 'status' => 'Reject Request',
-                'date' => Carbon::today()
+                'date' => Carbon::now()
             ]);
             DB::commit();
             $nik = $exam->nik;
@@ -882,7 +884,7 @@ class CertificationListController extends Controller
                 'operator' => $name,
                 'activity' => 'Request has approved by '. $name,
                 'status' => 'Approve Request',
-                'date' => Carbon::today()
+                'date' => Carbon::now()
             ]);
             Mail::to($userToSend->email)->send(new MailCertificationList($subject, $exam, $userToSend, $status, null));
             DB::commit();
@@ -908,7 +910,7 @@ class CertificationListController extends Controller
                 'operator' => $name,
                 'activity' => $name . ' has deleted exam ' . $certificationDetail->exam_name,
                 'status' => 'Delete exam detail',
-                'date' => Carbon::today()
+                'date' => Carbon::now()
             ]);
             $certificationDetail->delete();
             DB::commit();
@@ -1017,7 +1019,7 @@ class CertificationListController extends Controller
                     'operator' => Auth::user()->name,
                     'activity' => Auth::user()->name . ' has uploaded proof of exam '. $examDetail->exam_name,
                     'status' => 'Upload proof of exam',
-                    'date' => Carbon::today()
+                    'date' => Carbon::now()
                 ]);
 
                 $subject = '[SIMS-APP] '. Auth::user()->name . ' has uploaded proof of exam';
@@ -1060,7 +1062,7 @@ class CertificationListController extends Controller
                 'operator' => Auth::user()->name,
                 'activity' => Auth::user()->name . ' has cancelled this request',
                 'status' => 'Cancel',
-                'date' => Carbon::today()
+                'date' => Carbon::now()
             ]);
 
             $subject = '[SIMS-APP] '. Auth::user()->name . ' has cancelled exam request';

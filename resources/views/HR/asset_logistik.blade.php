@@ -114,7 +114,12 @@ General Affair - Logistik
     .form-group{
       margin-bottom: 15px;
     }
+
+    .swal2-container {
+      z-index: 9999 !important;
+    }
   </style>
+
 @endsection
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">

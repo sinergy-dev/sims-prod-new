@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/quill/editor.css')}}" />
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.css')}}" />
 <style type="text/css">
-  .modal { overflow: auto !important; }
   .textarea-scrollbar {
       /*overflow:scroll !important;*/    
       overflow-y: scroll !important;
@@ -93,6 +92,14 @@
 
   .swal2-deny{
     display: none!important;
+  }
+
+  .select2-container {
+    z-index: 1055 !important; /* modal default: 1050 */
+  }
+
+  .select2-dropdown {
+    z-index: 1060 !important;
   }
 </style>
 @endsection
@@ -260,6 +267,8 @@
                         <option value="Kesehatan">Kesehatan</option>
                         <option value="Olahraga">Olahraga</option>
                         <option value="Karangan Bunga">Karangan Bunga</option>
+                        <option value="Listrik">Listrik</option>
+                        <option value="Telfon">Telfon</option>
                         <option value="Other">Other</option>
                 </select>
                 <span class="invalid-feedback" style="display:none!important;">Please fill Category!</span>
@@ -717,6 +726,8 @@
                         <option value="Kesehatan">Kesehatan</option>
                         <option value="Olahraga">Olahraga</option>
                         <option value="Karangan Bunga">Karangan Bunga</option>
+                        <option value="Listrik">Listrik</option>
+                        <option value="Telfon">Telfon</option>
                         <option value="Other">Other</option>
                     </select>
                     <div class="input-group-text">
@@ -1076,7 +1087,7 @@
           $('#selectTypeProduct').select2({
             data:result,
             placeholder:'Ex. Unit',
-            dropdownParent: $('#ModalDraftPr .modal-body')
+            dropdownParent: $('#ModalDraftPr')
           })
         }
       })
@@ -1501,7 +1512,13 @@
                 if ("{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','Procurement & Vendor Management')->exists()}}" || "{{App\RoleUser::where('user_id',Auth::User()->nik)->join('roles','roles.id','=','role_user.role_id')->where('roles.name','VP Supply Chain, CPS & Asset Management')->exists()}}") {
                   return "<td>"+ btnDetailUnApproved +"<a onclick='"+ onclick +"' "+isDisabled+" style='width:70px' class='btn btn-sm "+ btnClass +" btnCekDraftDusk_"+row.id+"' data-value='"+row.id+"' id='"+ btnId +"' target='_blank'>"+ title +"</a>" + " " + "<button "+isDisabled+" class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
                 }else{
-                  return "<td>"+ btnDetailUnApproved + " " + "<button "+isDisabled+" class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
+                  if (row.status == 'UNAPPROVED') {
+                    return "<td>"+ btnDetailUnApproved + " " + "<button "+isDisabled+" class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
+                  }else if (row.status == 'REJECT') {
+                    return "<td>"+ btnDetailUnApproved +"<a onclick='"+ onclick +"' "+isDisabled+" style='width:70px' class='btn btn-sm "+ btnClass +" btnCekDraftDusk_"+row.id+"' data-value='"+row.id+"' id='"+ btnId +"' target='_blank'>"+ title +"</a>" + " " + "<button "+isDisabled+" class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
+                  }else{
+                    return "<td>"+ btnDetailUnApproved +"<a onclick='"+ onclick +"' "+isDisabled+" style='width:70px' class='btn btn-sm "+ btnClass +" btnCekDraftDusk_"+row.id+"' data-value='"+row.id+"' id='"+ btnId +"' target='_blank'>"+ title +"</a>" + " " + "<button "+isDisabled+" class='btn btn-sm btn-danger' "+ isDisabledCancel +" onclick='btnCancel("+ row.id +")' value='"+ value +"' style='width:70px'>Cancel</button></td>"
+                  }
                 }
                 
               }
@@ -6209,7 +6226,7 @@
 
     $("#ModalDraftPr").on('scroll', function() {
       if (isStartScroll == true) {
-        var scrollPosition = $("#ModalDraftPr").scrollTop();
+        var scrollPosition = $("#ModalDraftPr .modal-body").scrollTop();
         localStorage.setItem('scrollPosition', scrollPosition);
       }
       // Update the scroll position variable with the latest scroll position

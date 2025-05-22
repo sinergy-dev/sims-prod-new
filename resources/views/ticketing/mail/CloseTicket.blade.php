@@ -101,7 +101,7 @@
 	<p>
 		----------------------------------------<br>
 		PT. Sinergy Informasi Pratama (SIP)<br>
-		| Jakarta International Tower 15nd Floor |<br>
+		| Jakarta International Tower 15th Floor |<br>
 		| Jl. Letjen S. Parman Nomor 1AA | Kemanggisan |<br>
 		| Pal Merah | Jakarta 11480 – Indonesia |<br>
 		| Mobile | 6285810557307 |<br>

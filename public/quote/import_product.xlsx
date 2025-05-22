@@ -1,0 +1,130 @@
+﻿no;product;description;qty;time_period(month);type(Pcs,Unit,Lot,Pack,Node);price(non-ppn);pricelist(non-ppn);additional_column1;additional_column2;additional_column3;additional_column4;additional_column5
+1;-;Internet Access Area;1;;Lot;45576837181;;;;;;
+2;FS-1048E;Layer 2/3 FortiGate switch controller compatible switch with 48 x GE/10GE SFP/SFP+ slots and 6 x 40GE QSFP+ or 4 x 100GE QSFP28. Dual AC power supplies;4;;Unit;0;;;;;;
+3;FC-10-1E48F-247-02-36;FortiCare Premium Support;4;36;Unit;0;;;;;;
+4; FS-1048E-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+5;FS-SW-LIC-1000;SW License for FS-1000 Series Switches to activate Advanced Features;4;;Unit;0;;;;;;
+6;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;16;;Unit;0;;;;;;
+7;FN-TRAN-LX;1 GE SFP transceiver module, long range 10km, LC connector, SMF, 1310nm, -40°C to 85°C, for systems with SFP/SFP+ slots;8;;Unit;0;;;;;;
+8;FN-CABLE-QSFP+3;40 GE QSFP+ passive direct attach cable, 3m, -40°C to 85°C, transceivers included, for systems with QSFP+/QSFP28 slots;4;;Unit;0;;;;;;
+9;FG-900G;4x 25G SFP28 slots, 4 x 10GE SFP+ slots, 17 x GE RJ45 ports (including 1 x MGMT port, 16 x switch ports), 1 X 2.5G HA port, 8 x GE SFP slots, SPU NP7 and CP9 hardware accelerated, dual AC PSU.;4;;Unit;0;;;;;;
+10;FC-10-FG9H0-950-02-36;Unified Threat Protection (UTP) (IPS, Advanced Malware Protection, Application Control, URL, DNS & Video Filtering, Antispam Service, and FortiCare Premium);4;36;Unit;0;;;;;;
+11; FG-900G-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+12;FS-1048E;Layer 2/3 FortiGate switch controller compatible switch with 48 x GE/10GE SFP/SFP+ slots and 6 x 40GE QSFP+ or 4 x 100GE QSFP28. Dual AC power supplies;4;;Unit;0;;;;;;
+13;FC-10-1E48F-247-02-36;FortiCare Premium Support;4;36;Unit;0;;;;;;
+14; FS-1048E-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+15;FS-SW-LIC-1000;SW License for FS-1000 Series Switches to activate Advanced Features;4;;Unit;0;;;;;;
+16;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;96;;Unit;0;;;;;;
+17;FN-CABLE-QSFP+3;40 GE QSFP+ passive direct attach cable, 3m, -40°C to 85°C, transceivers included, for systems with QSFP+/QSFP28 slots;4;;Unit;0;;;;;;
+18;FAD-4200F;Application Delivery Controller - 4 x 40GbE QSFP+, 8 x 10GbE SFP+, 2 x GbE RJ45 management port, 1x 480G SSD, dual AC power supplies;4;;Unit;0;;;;;;
+19;FC-10-AD42F-731-02-36;Application Security - Network Security Bundle Plus WAF Signatures, WAF Adaptive Learning, FortiADC Cloud Sandbox, Credential Stuffing Defense, FortiGuard Data Loss Prevention Service, and FortiCare Premium;4;36;Unit;0;;;;;;
+20; FAD-4200F-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+21;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;8;;Unit;0;;;;;;
+22;FN-TRAN-GC;1 GE SFP transceiver module, range 30m, RJ45 connector, -40°C to 85°C, for systems with SFP/SFP+ slots;8;;Unit;0;;;;;;
+23;FS-1048E;Layer 2/3 FortiGate switch controller compatible switch with 48 x GE/10GE SFP/SFP+ slots and 6 x 40GE QSFP+ or 4 x 100GE QSFP28. Dual AC power supplies;4;;Unit;0;;;;;;
+24;FC-10-1E48F-247-02-36;FortiCare Premium Support;4;36;Unit;0;;;;;;
+25; FS-1048E-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+26;FS-SW-LIC-1000;SW License for FS-1000 Series Switches to activate Advanced Features;4;;Unit;0;;;;;;
+27;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;96;;Unit;0;;;;;;
+28;FN-CABLE-QSFP+3;40 GE QSFP+ passive direct attach cable, 3m, -40°C to 85°C, transceivers included, for systems with QSFP+/QSFP28 slots;4;;Unit;0;;;;;;
+29;-;Extranet Access Area;1;;Lot;14565300975;;;;;;
+30;FS-1048E;Layer 2/3 FortiGate switch controller compatible switch with 48 x GE/10GE SFP/SFP+ slots and 6 x 40GE QSFP+ or 4 x 100GE QSFP28. Dual AC power supplies;4;;Unit;0;;;;;;
+31;FC-10-1E48F-247-02-36;FortiCare Premium Support;4;36;Unit;0;;;;;;
+32; FS-1048E-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+33;FS-SW-LIC-1000;SW License for FS-1000 Series Switches to activate Advanced Features;4;;Unit;0;;;;;;
+34;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;16;;Unit;0;;;;;;
+35;FN-TRAN-LX;1 GE SFP transceiver module, long range 10km, LC connector, SMF, 1310nm, -40°C to 85°C, for systems with SFP/SFP+ slots;8;;Unit;0;;;;;;
+36;FN-CABLE-QSFP+3;40 GE QSFP+ passive direct attach cable, 3m, -40°C to 85°C, transceivers included, for systems with QSFP+/QSFP28 slots;4;;Unit;0;;;;;;
+37;FG-900G;4x 25G SFP28 slots, 4 x 10GE SFP+ slots, 17 x GE RJ45 ports (including 1 x MGMT port, 16 x switch ports), 1 X 2.5G HA port, 8 x GE SFP slots, SPU NP7 and CP9 hardware accelerated, dual AC PSU.;4;;Unit;0;;;;;;
+38;FC-10-FG9H0-950-02-36;Unified Threat Protection (UTP) (IPS, Advanced Malware Protection, Application Control, URL, DNS & Video Filtering, Antispam Service, and FortiCare Premium);4;36;Unit;0;;;;;;
+39; FG-900G-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+40;FS-1048E;Layer 2/3 FortiGate switch controller compatible switch with 48 x GE/10GE SFP/SFP+ slots and 6 x 40GE QSFP+ or 4 x 100GE QSFP28. Dual AC power supplies;4;;Unit;0;;;;;;
+41;FC-10-1E48F-247-02-36;FortiCare Premium Support;4;36;Unit;0;;;;;;
+42; FS-1048E-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+43;FS-SW-LIC-1000;SW License for FS-1000 Series Switches to activate Advanced Features;4;;Unit;0;;;;;;
+44;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;96;;Unit;0;;;;;;
+45;FN-CABLE-QSFP+3;40 GE QSFP+ passive direct attach cable, 3m, -40°C to 85°C, transceivers included, for systems with QSFP+/QSFP28 slots;4;;Unit;0;;;;;;
+46;-;WAN Access Area;1;;Lot;11502094712;;;;;;
+47;FS-1048E;Layer 2/3 FortiGate switch controller compatible switch with 48 x GE/10GE SFP/SFP+ slots and 6 x 40GE QSFP+ or 4 x 100GE QSFP28. Dual AC power supplies;4;;Unit;0;;;;;;
+48;FC-10-1E48F-247-02-36;FortiCare Premium Support;4;36;Unit;0;;;;;;
+49; FS-1048E-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+50;FS-SW-LIC-1000;SW License for FS-1000 Series Switches to activate Advanced Features;4;;Unit;0;;;;;;
+51;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;96;;Unit;0;;;;;;
+52;FN-CABLE-QSFP+3;40 GE QSFP+ passive direct attach cable, 3m, -40°C to 85°C, transceivers included, for systems with QSFP+/QSFP28 slots;4;;Unit;0;;;;;;
+53;FG-900G;4x 25G SFP28 slots, 4 x 10GE SFP+ slots, 17 x GE RJ45 ports (including 1 x MGMT port, 16 x switch ports), 1 X 2.5G HA port, 8 x GE SFP slots, SPU NP7 and CP9 hardware accelerated, dual AC PSU.;4;;Unit;0;;;;;;
+54;FC-10-FG9H0-950-02-36;Unified Threat Protection (UTP) (IPS, Advanced Malware Protection, Application Control, URL, DNS & Video Filtering, Antispam Service, and FortiCare Premium);4;36;Unit;0;;;;;;
+55; FG-900G-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+56;-;Core Switch Area;1;;Lot;71221932085;;;;;;
+57;FAD-4200F;Application Delivery Controller - 4 x 40GbE QSFP+, 8 x 10GbE SFP+, 2 x GbE RJ45 management port, 1x 480G SSD, dual AC power supplies;8;;Unit;0;;;;;;
+58;FC-10-AD42F-731-02-36;Application Security - Network Security Bundle Plus WAF Signatures, WAF Adaptive Learning, FortiADC Cloud Sandbox, Credential Stuffing Defense, FortiGuard Data Loss Prevention Service, and FortiCare Premium;8;36;Unit;0;;;;;;
+59; FAD-4200F-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";8;36;Unit;0;;;;;;
+60;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;32;;Unit;0;;;;;;
+61;FN-TRAN-GC;1 GE SFP transceiver module, range 30m, RJ45 connector, -40°C to 85°C, for systems with SFP/SFP+ slots;32;;Unit;0;;;;;;
+62;FG-900G;4x 25G SFP28 slots, 4 x 10GE SFP+ slots, 17 x GE RJ45 ports (including 1 x MGMT port, 16 x switch ports), 1 X 2.5G HA port, 8 x GE SFP slots, SPU NP7 and CP9 hardware accelerated, dual AC PSU.;4;;Unit;0;;;;;;
+63;FC-10-FG9H0-950-02-36;Unified Threat Protection (UTP) (IPS, Advanced Malware Protection, Application Control, URL, DNS & Video Filtering, Antispam Service, and FortiCare Premium);4;36;Unit;0;;;;;;
+64; FG-900G-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;
+65;FS-1048E;Layer 2/3 FortiGate switch controller compatible switch with 48 x GE/10GE SFP/SFP+ slots and 6 x 40GE QSFP+ or 4 x 100GE QSFP28. Dual AC power supplies;8;;Unit;0;;;;;;
+66;FC-10-1E48F-247-02-36;FortiCare Premium Support;8;36;Unit;0;;;;;;
+67; FS-1048E-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";8;36;Unit;0;;;;;;
+68;FS-SW-LIC-1000;SW License for FS-1000 Series Switches to activate Advanced Features;8;;Unit;0;;;;;;
+69;FN-TRAN-SFP+SR;10 GE SFP+ transceiver module, short range 300m, LC connector, MMF, 850nm, 0°C to 70°C, for systems with SFP+ slots;484;;Unit;0;;;;;;
+70;FN-CABLE-QSFP+3;40 GE QSFP+ passive direct attach cable, 3m, -40°C to 85°C, transceivers included, for systems with QSFP+/QSFP28 slots;8;;Unit;0;;;;;;
+71;FS-148F;Layer 2 FortiGate switch controller compatible switch with 48x 1G RJ45 and 4x 10G/1G SFP+/SFP ports and 1x RJ45 console port.;6;;Unit;0;;;;;;
+72;FC-10-148FN-247-02-36;FortiCare Premium Support;6;36;Unit;0;;;;;;
+73; FS-148F-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";6;36;Unit;0;;;;;;
+74;FS-148F;Layer 2 FortiGate switch controller compatible switch with 48x 1G RJ45 and 4x 10G/1G SFP+/SFP ports and 1x RJ45 console port.;3;;Unit;0;;;;;;
+75;FC-10-148FN-247-02-36;FortiCare Premium Support;3;36;Unit;0;;;;;;
+76; FS-148F-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";3;36;Unit;0;;;;;;
+77;-;Fortiweb;1;;Lot;43736947531;;;;;;
+78; FWB-3000F ;Web Application Firewall - 10 x 10GE SFP+ ports (2 bypass), 8 x GE RJ45 bypass ports, 2 x GE management ports, dual AC power supplies, 2x960GB SSD storage;4;;Unit;0;;;;;;
+79;FC-10-FW3KF-934-02-36;Standard Bundle (FortiCare Premium plus AV, FortiWeb Security Service, and IP Reputation);4;36;Unit;0;;;;;;
+80;FC-10-FW3KF-247-02-36;FortiCare Premium Support;4;36;Unit;0;;;;;;
+81; FWB-3000F-85-36 ;"NBD 8x5 ECS Premium Hardware Replacement Services for Fortinet
+*Approval by TAC Fortinet (RMA's Ticket) Required
+*NBD 8x5 SLA for Jakarta Area
+*Replacement Unit Delivered to Partner's Site";4;36;Unit;0;;;;;;

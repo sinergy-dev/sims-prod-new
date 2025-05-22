@@ -110,7 +110,7 @@
 						PR sudah mulai disirkulasi untuk diperiksa dan disetujui. Kepada masing-masing approver dimohon untuk segera melakukan pemeriksaan dan penyetujuan dari PR yang diajukan.
 					@endif
 				@elseif($detail->status == 'FINALIZED')
-					Proses sirkulasi PR sudah selesai dilakukan, kemudian PR sudah siap untuk di Finalisasi oleh BCD Procurement.
+					Proses sirkulasi PR sudah selesai dilakukan, kemudian PR sudah siap untuk di Finalisasi oleh Procurement.
 				@elseif($detail->status == 'UNAPPROVED')
 					Untuk proses sirkulasi PR Anda terhenti dengan alasan sebagai berikut:
 				@elseif($detail->status == 'CANCEL')
@@ -234,7 +234,7 @@
 						<b>Dimohon untuk Approver selanjutnya untuk memeriksa serta memastikan PR sudah sesuai. Jika dirasa tidak ada kesalahan dimohon untuk segera Approve PR tersebut.</b>
 					@endif
 				@elseif($detail->status == 'FINALIZED')
-					Dimohon untuk menantikan email finalisasi yang dikirim oleh BCD Procurement kepada Finance dengan lampiran yang sudah disiapkan.
+					Dimohon untuk menantikan email finalisasi yang dikirim oleh Procurement kepada Finance dengan lampiran yang sudah disiapkan.
 				@endif
 			</p>
 			@if($detail->status == 'DRAFT')

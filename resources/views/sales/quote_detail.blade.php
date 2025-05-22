@@ -745,7 +745,7 @@
             append = append + '<div id="headerPreview">'
             append = append + '</div>'
             append = append + '<div class="card p-4 mb-4">'
-            append = append + '<div class="card-header"><h6 class="card-title">Products</h6></div>'
+            append = append + '<div class="card-header" style="display:block ruby"><h6 class="card-title" style="margin-top:15px">Products</h6><div class="card-tools pull-right"><button type="button" class="btn btn-sm btn-card-tool btnProductCollapse mt-1"><span class="bx bx-lg bx-chevron-down"></span></button></div></div>'
             append = append + '<div class="card-body" id="bodyCollapseProduct">'
             append = append + '<div class="table-responsive">'
             append = append + '<table class="table no-wrap">'
@@ -1326,15 +1326,15 @@
             })
         }
 
-        $(document).on('click','.btnTerm[data-value="draft"]', function() {
-            if ($("#bodyCollapse[data-value='draft']").is(':visible') == true) {
-                $("#bodyCollapse[data-value='draft']").hide("slow")
-                $(this).find('span').removeClass("fa-angle-down").addClass("fa-angle-right")
+        $(document).on('click','.btnTerm', function() {
+            if ($("#bodyCollapse").is(':visible') == true) {
+                $("#bodyCollapse").hide("slow")
+                $(this).find('span').removeClass("bx-chevron-down").addClass("bx-chevron-right")
 
             }
-            if ($("#bodyCollapse[data-value='draft']").is(':hidden') == true){
-                $("#bodyCollapse[data-value='draft']").show('slow')
-                $(this).find('span').removeClass("fa-angle-right").addClass("fa-angle-down")
+            if ($("#bodyCollapse").is(':hidden') == true){
+                $("#bodyCollapse").show('slow')
+                $(this).find('span').removeClass("bx-chevron-right").addClass("bx-chevron-down")
             }
 
         })
@@ -1342,12 +1342,12 @@
         $(document).on('click','.btnProductCollapse', function() {
             if ($("#bodyCollapseProduct").is(':visible') == true) {
                 $("#bodyCollapseProduct").hide("slow")
-                $(this).find('span').removeClass("fa-angle-down").addClass("fa-angle-right")
+                $(this).find('span').removeClass("bx-chevron-down").addClass("bx-chevron-right")
 
             }
             if ($("#bodyCollapseProduct").is(':hidden') == true){
                 $("#bodyCollapseProduct").show('slow')
-                $(this).find('span').removeClass("fa-angle-right").addClass("fa-angle-down")
+                $(this).find('span').removeClass("bx-chevron-right").addClass("bx-chevron-down")
             }
 
         })
@@ -1558,10 +1558,8 @@
 
                     appendBottom = ""
                     appendBottom = appendBottom + '<div class="card">'
-                    appendBottom = appendBottom + '<div class="card-header with-border">'
-                    appendBottom = appendBottom + '<h6 class="card-title">Terms & Condition</h6>'
-                    appendBottom = appendBottom + '</div>'
-                    appendBottom = appendBottom + '<div class="card-body p-4" id="bodyCollapse" data-value="submitted">'
+                    appendBottom = appendBottom + '<div class="card-header" style="display:block ruby"><h6 class="card-title" style="margin-top:15px">Terms & Condition</h6><div class="card-tools pull-right"><button type="button" class="btn btn-sm btn-card-tool btnTerm mt-1"><span class="bx bx-lg bx-chevron-down"></span></button></div></div>'
+                    appendBottom = appendBottom + '<div class="card-body p-4" id="bodyCollapse">'
                     appendBottom = appendBottom + '<div class="form-control" id="termPreview" style="width: 100%; height: 200px; font-size: 12px; line-height: 18px; border: 1px solid rgb(221, 221);overflow:auto"></div>'
                     appendBottom = appendBottom + '</div>'
                     appendBottom = appendBottom + '</div>'

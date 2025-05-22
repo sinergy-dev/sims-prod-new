@@ -90,27 +90,13 @@
 					<b>Central Office</b>
 				</td>
 				<td style="width: 68%;font: 9px;">
-					: Jl. Puri Kencana Blok K6 No.2M-2L, Kembangan, Jakarta Barat 11610
+					: PT. Sinergy Informasi Pratama Jakarta International Tower Jl. Letjen S. Parman Nomor 1AA Kemanggisan - Pal Merah Jakarta 11480 - Indonesia
 				</td>
 				<td style="width: 5%;font: 9px;">
 					Tel
 				</td>
 				<td style="width: 15%;font: 9px;">
 					: +62 21 583 55599
-				</td>
-			</tr>
-			<tr>
-				<td style="width: 12%;font: 9px;">
-					<b>Operational Office</b>
-				</td>
-				<td style="width: 68%;font: 9px;">
-					: Gedung Inlingua Jl. Puri indah Kav. A2/3 No. 33-35, Puri Indah, Jakarta Barat 11610
-				</td>
-				<td style="width: 5%;font: 9px;">
-					Fax
-				</td>
-				<td style="width: 15%;font: 9px;">
-					: +62 21 583 55188
 				</td>
 			</tr>
 			<tr>

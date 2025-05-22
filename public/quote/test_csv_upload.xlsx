@@ -1,3 +1,9 @@
 ﻿no;product;description;qty;type(Pcs,Unit,Lot,Pack,Node);price(non-ppn);pricelist(non-ppn)
-1;product test 2;prodect test 2;30;Unit;4523000.98;0
-2;product test 3;product test 3;23;Unit;2890238;0
+1;C9300X-12Y-A;Catalyst 9300X 12x25G Fiber Ports, modular uplink Switch;2;Unit;290354600;
+1;CON-SNT-C9300X21;SNTC-8X5XNBD Catalyst 9300X 12x25G Fiber Ports, modul;2;Unit;86256600;
+1;C9300X-DNA-12Y-A;C9300 DNA Advantage, Term License;2;Unit;0;
+1;C9300-DNA-L-A-3Y;DNA Advantage 3 Year License;2;Unit;34330200;
+1;TE-EMBEDDED-T;Cisco ThousandEyes Enterprise Agent IBN Embedded;2;Unit;0;
+1;TE-EMBEDDED-T-3Y;ThousandEyes - Enterprise Agents;2;Unit;0;
+1;D-DNAS-EXT-S-T;Cisco DNA Spaces Extend Term License for Catalyst Switches;2;Unit;0;
+1;D-DNAS-EXT-S-3Y;Cisco DNA Spaces Extend for Catalyst Switching - 3Year;2;Unit;0;

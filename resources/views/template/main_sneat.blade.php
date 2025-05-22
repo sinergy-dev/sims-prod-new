@@ -65,6 +65,25 @@
 						white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block;max-width: 25ch;
 					}
 			}
+
+			<?php
+				header("Content-Type: text/css");
+		  	if (Auth::user()->is_mode == 1) {
+					$backgroundColor = '#2b2c40';
+  				$borderColor = '#4e4f6c';
+		  	}else{
+		  		$borderColor = "#ced1d5";
+					$backgroundColor = 'transparent';
+		  	}
+			?>
+
+			.custom-form-control-select {
+			  padding: calc(0.543rem - var(--bs-border-width)) calc(0.9375rem - var(--bs-border-width));
+			  height: 33px;
+			  background-color: <?= $backgroundColor ?>;
+			  border: var(--bs-border-width) solid <?= $borderColor ?>;
+			  border-radius: var(--bs-border-radius);
+			}
 		</style>
     <link rel="icon" type="image/x-icon" href="{{url('img/siplogooke.webp')}}" />
 

@@ -1,0 +1,97 @@
+﻿no;product;description;serial_number;part_number;qty;type(Pcs,Unit,Lot,Pack,Node);price(non-ppn)
+1;Cabang Banda Aceh;Jl. Cut Nyak Dhien Nomor 403, Lamteumen, Kec. Jaya Baru, Banda Aceh;;; 34 ;kg;9000
+2;Cabang Langsa;Jl. Prof. A. Majid Ibrahim (Sei pauh) No. 5, Sungai Pauh , Kota Langsa - 24412;;; 30 ;kg;9000
+3;Cabang Lhokseumawe;Jl. Iskandar Muda No. 1 Kp. Jawa Lama Kec. Banda Sakti Kota Lhokseumawe;;; 34 ;kg;9000
+4;Cabang Meulaboh;Jl. Tgk. Dirundeng no. 38, Kec. Johan Pahlawan, Meulaboh, Aceh Barat;;; 30 ;kg;13000
+5;Cabang Tapak Tuan;Jl. Jendral Sudirman Nomor 37, Desa Hilir, Kec. Tapaktuan, Kab. Aceh Selatan;;; 30 ;kg;13000
+6;Kedeputian Wilayah Xi;Jl. Pegangsaan Timur 56, Dangin Puri Klod, Kecamatan Denpasar Timur, Kota Denpasar 80232;;; 50 ;kg;7000
+7;Cabang Denpasar;Jl. D.I. Panjaitan No.6 Niti Mandala Renon Denpasar 80232;;; 50 ;kg;7000
+8;Cabang Klungkung;Jl. Gajah Mada No. 55 A Semarapura 80711;;; 50 ;kg;11000
+9;Cabang Bengkulu;Jl. Pembangunan Nomor 14 Kelurahan Jembatan Kecil, Kecamatan Singaran Pati, Kota Bengkulu, 38225;;; 50 ;kg;9000
+10;Cabang Gorontalo;Jl. Sultan Botutihe No. 58 Kel Ipilo Kec. Kota Timur Kota Gorontalo 96112;;; 100 ;kg;18500
+11;Cabang Jambi;Jl. Zainir Haviz No. 5, Kel. Paal Lima, Kec. Kota Baru, Kota Jambi 36144;;; 50 ;kg;9000
+12;Cabang Sukabumi;Jl. Siliwangi No. 120-122, Kelurahan Cikole Kecamatan Cikole Kota Sukabumi, Jawa Barat 43113;;; 50 ;kg;7000
+13;Cabang Karawang;Jl. A. Yani No.85 Kelurahan Karangpawitan, Kecamatan Karawang Barat, Kabupaten Karawang - 41315;;; 50 ;kg;7500
+14;Cabang Sumedang;Jl. R.A. Kartini No. 7 Sumedang;;; 50 ;kg;8000
+15;Cabang Cirebon;Jl. DR. Sudarsono No.43, Kelurahan Kesambi, Kecamatan Kesambi, Kota Cirebon, Provinsi Jawa Barat 45134;;; 30 ;kg;7500
+16;Cabang Tasikmalaya;Jl. Tanuwijaya No. 9 Tasikmalaya Jawa Barat, Empangsari, Kecamatan Tawang, Kota Tasikmalaya 46113;;; 50 ;kg;8000
+17;Cabang Soreang;Jl. Raya Soreang Banjaran Kp. Ciburial Timur No. 385 A Soreang - Kab Bandung Kode Pos 40911;;; 50 ;kg;6500
+18;Cabang Banjar;Jl. Dr. Husein Kartasasmita, Ds. Pintu Singa RT 01/18, Kel. Banjar, Kec. Banjar. Kota Banjar;;; 30 ;kg;7500
+19;Cabang Cimahi;Jl. Sangkuriang No. 65, Kecamatan Cimahi Utara, Kelurahan Cipageran, Kota Cimahi;;; 50 ;kg;7500
+20;Cabang Pekalongan;Jl. Singosari No.1, Podosugih, Kec. Pekalongan Barat, Kota Pekalongan, Jawa Tengah 51111;;; 30 ;kg;7500
+21;Cabang Purwokerto;Jl. Jend. Soedirman No.925, Kel. Berkoh, Kec. Purwokerto Selatan, Kabupaten Banyumas, Jawa Tengah 53146;;; 30 ;kg;7500
+22;Cabang Magelang;Jl. Gatot Soebroto No.2, Bulurejo, Kec. Mertoyudan, Kabupaten Magelang, Jawa Tengah 56172;;; 30 ;kg;8000
+23;Cabang Boyolali;Jl. Randu Asri, Siswodipuran, Kec. Boyolali, Kabupaten Boyolali, Jawa Tengah 57311;;; 50 ;kg;9000
+24;Cabang Surakarta;Jl. Ki Mangun Sarkoro No.114, Sumber, Kec. Banjarsari, Kota Surakarta, Jawa Tengah 57138;;; 34 ;kg;7000
+25;Cabang Pati;Jl. Diponegoro No.34, Ngarus, Kec. Pati,Kabupaten Pati, Jawa Tengah 59112;;; 50 ;kg;7500
+26;Cabang Kebumen;Jl. HM Sarbini No.100, Bumirejo, Kec. Kebumen, Kabupaten Kebumen, Jawa Tengah 54316;;; 30 ;kg;9000
+27;Cabang Kudus;Komplek Perkantoran Kudus, Jl. Mejobo Mlati Kidul, Mlati Kidul, Kec. Kota Kudus, Kabupaten Kudus, Jawa Tengah 59319;;; 50 ;kg;7500
+28;Cabang Kediri;Jl. Hasanuddin No. 57 Kediri;;; 30 ;kg;7500
+29;Cabang Kedeputian Wilayah Vii;Jl. Raya Jemur Sari No. 234, Kec. Tenggilis Mejoyo, Kota Surabaya;;; 30 ;kg;7000
+30;Cabang Jember;Jl. Riau No.24, Krajan Barat, Sumbersari, Kec. Sumbersari, Kabupaten Jember, Jawa Timur 68121;;; 30 ;kg;7600
+31;Cabang Surabaya;Jl. Dharmahusada Indah No. 2, Mojo, Gubeng, Surabaya 60285;;; 30 ;kg;7000
+32;Cabang Bojonegoro;Jl. Basuki Rahmat No.65A, Sukorejo Lor, Sukorejo, Kec. Bojonegoro, Kabupaten Bojonegoro, Jawa Timur 62115;;; 30 ;kg;8000
+33;Cabang Madiun;Jl. Timor no 6 Kelurahan Kartoharjo, Kec. Kartoharjo Kota Madiun 63116;;; 34 ;kg;8000
+34;Cabang Malang;Jln Raden Tumenggung Suryo 44 Malang;;; 34 ;kg;7600
+35;Cabang Sidoarjo;Jl.Erlangga No. 222, Kapasan, Kel. Sidokare, Kec. Sidoarjo, Kab. Sidoarjo 61214;;; 34 ;kg;7000
+36;Cabang Mojokero;Jl. Empunala No. 46, Balongsari, Kec. Magersari Kota Mojokerto;;; 30 ;kg;7000
+37;Cabang Pasuruan;Jl. Sultan Agung II No. 1 Pasuruan 67118;;; 30 ;kg;7000
+38;Cabang Banyuwangi;Jl. Letkol Istiqlah No.93, Lingkungan Mojoroto R, Mojopanggung, Kec. Giri, Kabupaten Banyuwangi, Jawa Timur 68422;;; 34 ;kg;8000
+39;Cabang Pamekasan;Jl. Raya Panglegur KM2 Pamekasan, Jawa Timur;;; 30 ;kg;7600
+40;Cabang Banjarmasin;Jl. A. Yani KM. 3 No. 139 Banjarmasin 70249 Kalimantan Selatan;;; 100 ;kg;13900
+41;Cabang Sampit;Jl. Jendral Sudirman KM. 7, Kelurahan Pasir Putih, Kecamatan MB Ketapang, Kabupaten Kotawaringin Timur, Kalteng;;; 100 ;kg;11000
+42;Cabang Kedeputian Wilayah Viii;Jl. Ruhui Rahayu No. 08 RT. 25 Kelurahan Sepinggan Baru Kota Balikpapan , Kalimantan Timur, 76115;;; 100 ;kg;13500
+43;Cabang Pontianak;Jl. Sultan Abdurrahman Nomor 135, Kelurahan Sungai Bangkong, Kecamatan Pontianak Kota, Kota Pontianak, Kalimantan Barat, 78010;;; 100 ;kg;11000
+44;Cabang Singkawang;Jl. Firdaus H. Rais No. 58 Kelurahan Pasiran, Kec. Singkawang Barat, Kota Singkawang 79123;;; 100 ;kg;13500
+45;Cabang Sintang;Jl. YC. Oevang Oeray, Kelurahan Bening Kota, Kabupaten Sintang - 78612;;; 100 ;kg;15000
+46;Cabang Bandar;Jl. Zainal Abidin Pagar Alam No.35 Rajabasa Kota Bandar Lampung;;; 50 ;kg;7000
+47;Cabang Kotabumi;Jl. Dahlia Nomor 117a, Kota Gapura, Kotabumi, Lampung Utara.;;; 50 ;kg;8500
+48;Cabang Ambon;L Ir. M. Putuhena, Wailela, Rumah Tiga, Kec. Teluk Ambo,Ambon, Maluku;;; 100 ;kg;25000
+49;Cabang Ternate;Jl. Cempaka Tanah Tinggi, Kompleks RSUD , Kel. Maliaro, Ternate 97711;;; 100 ;kg;25000
+50;Cabang Mataram;"Jl. Bung Karno Kelurahan Cininaya, Kecamatan Cakranegara, Kota
+Mataram, Kotak Pos 1019 83231";;; 100 ;kg;14500
+51;Cabang Bima;Jl. Soekarno Hatta RT. 017/RW. 006 Kel. Rabangodu Utara Kec. Raba Kota Bima 84113;;; 100 ;kg;16500
+52;Cabang Selong;Jl. Prof. M. Yamin No. 41 Selong, Lombok Timur 83611;;; 100 ;kg;15000
+53;Cabang Kupang;Jl. W.J. Lalamentik, Oebufu Kec. Oebobo.Kota Kupang Nusa Tenggara Timur 85111;;; 75 ;kg;18000
+54;Cabang Maumere;Jl.Wairklau, Kota Uneng, Kec. Alok, Kabupaten Sikka Maumere NTT 86111;;; 75 ;kg;22000
+55;Cabang Ende;Jl. Melati Bawah, Ende;;; 75 ;kg;21500
+56;Cabang Waingapu;Jl. Jendral Soeharto. Kel. Hambala Kec. Kota Waingapu Kab. Sumba Timur - NTT;;; 75 ;kg;23500
+57;Cabang Atambua;Jl. I.J.Kasimo Pasar Baru Atambua;;; 75 ;kg;19500
+58;Kedeputian Wilayah Xii;Jl. Raya Kotaraja No. 46, Wahno, Kec. Jayapura Selatan, Kota Jayapura, Papua, 99226 (lantai 2);;; 100 ;kg;25000
+59;Cabang Jayapura;Jl. Raya Kotaraja No. 46, Wahno, Kec. Jayapura Selatan, Kota Jayapura, Papua, 99226 (lantai 1);;; 100 ;kg;25000
+60;PT. QUALITA INDONESIA JAYAPURA (ExCabang Biak);Furia indah jalur VII lorong riset masuk hampir mentok pagar hitam biru, RT, 006 Rw. 002 kel wahno kec. abepura jayapura. (Ex : Jl. Sriwijaya, Kel Mandouw, Kec. Samofa, Kabupten Biak Numfor, Papua, 98117);;; 100 ;kg;25000
+61;Cabang Sorong;Jl. Sungai maruni, Km. 10, Samping Ruko Yupiter Sawagumu, Kec. Sorong Utara, Kota Sorong, Papua Barat, 98416;;; 100 ;kg;25000
+62;Kedeputian Wilayah Ii;Jl Jenderal Sudirman Nomor 3 Tangkerang Utara, Kec. Bukit Raya, Pekanbaru, Riau;;; 50 ;kg;8000
+63;Cabang Pekanbaru;Jl. Tuanku Tambusai Ujung Komp. 20 Ruko No. 6F-10J, Kel. Labuhbaru Barat, Kec. Payung Sekaki, Kota Pekanbaru, Provinsi Riau, 28292;;; 50 ;kg;8000
+64;Cabang Dumai;Jl. Jenderal Sudirman no 135 Dumai , Riau 28811;;; 50 ;kg;12000
+65;KC Rengat (Ex BPJS Kesehatan Kantor Kabupaten Indragiri Hilir);Jl. Raya Pematang Reba - Pekan Heran RT 01/RW 04 Pematang Reba, Rengat Barat, Kabupaten Indragiri Hulu, Riau 29351 (Ex : Jl. Bunga, No. 58, Kel. Tembilahan Hilir, Kec. Tembilahan, Indragiri Hilir, Riau);;; 50 ;kg;12000
+66;Cabang Batam;Jl. Gurindam, Kelurahan Teluk Tering, Kecamatan Batam Kota, Kota Batam, Kepulauan Riau, 29461;;; 50 ;kg;11000
+67;Kedeputian Wilayah Ix;Jl. Andi Pangerang Pettarani No.78 Masale, Panakkukang, Makassar 90013 (Lt.2);;; 100 ;kg;9000
+68;Cabang Makassar;Jl. Andi Pangerang Pettarani No.78 Masale, Panakkukang, Makassar 90013(Lt.1);;; 100 ;kg;9000
+69;Cabang Bulukumba;Jl. Kenari No. 2, Loka, Ujung Bulu Kab. Bulukumba;;; 100 ;kg;17500
+70;Cabang Watampone;Jl. Hos Cokroaminoto No. 34 Watampone;;; 100 ;kg;17500
+71;Cabang Parepare;Jl. Jend. Sudirman No. 105, Kel. Cappagalung, Kec. Bacukiki Barat, Kota Parepare 91122;;; 100 ;kg;17500
+72;Cabang Palopo;Jl. Andi Masjaya (eks. Gunung Torpedo) No.23 Kel. Boting, Kec. Wara, Kota Palopo;;; 100 ;kg;17500
+73;Cabang Makale;Jl. Pongtiku No. 23 - Poros Makale - Rantepao, Rantelemo, Kel. Sarira, Kec. Makale Utara, Kab. Tana Toraja;;; 100 ;kg;17500
+74;Cabang Palu;Jl. Prof. Moh. Yamin No. 31 Kota Palu 94112;;; 100 ;kg;15500
+75;Cabang Luwuk;Jl. Imam Bonjol No. 135 KM 2 Luwuk 94714;;; 100 ;kg;18500
+76;Cabang Kendari;Jl. Mayjend S. Parman No. 74 Kendari;;; 100 ;kg;20500
+77;Cabang Baubau;Jl. Sultan Dayanu Ikhsanuddin Kel. Lipu Kec. Betoambari Kota Baubau;;; 100 ;kg;21500
+78;Kedeputian Wilayah X;Jl. Tololiu Supit No. 11 Kel. Tingkulu, Manado 95119;;; 100 ;kg;18500
+79;Cabang Manado;Jl. Tololiu Supit No. 11 Kel. Tingkulu, Manado 95119;;; 100 ;kg;18500
+80;Cabang Padang;Jl. Khatib Sulaiman No. 52 Kelurahan Ulak Karang Selatan Kecamatan Padang Utara Kota Padang Sumatera Barat, 25134;;; 34 ;kg;9000
+81;Cabang Bukit Tinggi;Jl.Prof.dr. Hamka no 21 C, kelurahan tarokdipo, kecamatan guguk panjang, Bukittinggi, Sumatera Barat 26117;;; 34 ;kg;9000
+82;Cabang Payakumbuh;Jl. Ade Irma Suryani Nasution No. 10 Labuh Baru Kec. Payakumbuh Utara;;; 30 ;kg;9000
+83;Cabang Palembang;Jl. R.Sukamto 8 Ilir Palembang 30114;;; 34 ;kg;9000
+84;Cabang Prabumulih;Jl. Jend Sudirman KM 6 Kel. Gunung Ibul, Prabumulih Timur 31113 Sumatera Selatan;;; 50 ;kg;9000
+85;Cabang Lubuklinggau;Jl. Pembangunan Komplek Eks Perkantoran Pemda Kel. Air Kuti Kec. Lubuklinggau Timur I, Lubuklinggau - 31626;;; 50 ;kg;9000
+86;Kedeputian Wilayah I;Jl. Karya Nomor 135, Kelurahan Karang Berombak, Kecamatan Medan Barat, Kota Medan, Kode Pos 20117;;; 34 ;kg;9000
+87;Cabang Medan;Jl. Karya Nomor 135, Kelurahan Karang Berombak, Kecamatan Medan Barat, Kota Medan, Kode Pos 20117;;; 30 ;kg;9000
+88;Cabang Pematang Siantar;Jl. Perintis Kemerdekaan No.7. Pematangsiantar,Kel. Timbang Galung, Kec. Siantar Barat, Kode Pos 21116;;; 30 ;kg;9500
+89;Kc Sibolga (Ex Kantor Kabupaten Tapanuli Tengah);Jl. Dr. F.L. Tobing No. 5 Kelurahan Huta Tonga-Tonga, Kecamatan Sibolga Utara, Kota Sibolga (Ex : Jl. DR. F. L. Tobing No. 5 Pandan, Kab. Tapanuli Tengah, Sibolga 22512);;; 30 ;kg;17500
+90;Kc Kisaran (Ex Kantor Kota Tanjungbalai);Jl. Sisingamangaraja, no 485 A-C, Kelurahan Sendang sari Kecamatan Kota Kisaran Barat, Kabupaten Asahan. (Ex : Jl. Jenderal Sudirman KM 3 No. 459 Kelurahan Pahang Kecamatan Datuk Bandar Kota Tanjung Balai);;; 34 ;kg;16500
+91;Cabang Lubuk Pakam;Jl. Negara Lk. 1 No. 19 Kel. Petapahan Kec. Lubuk Pakam Kab. Deli Serdang Prov. Sumatera Utara Kode Pos 20514;;; 30 ;kg;16000
+92;Cabang Yogyakarta;Jl. Gedongkuning No.130A, Rejowinangun, Kec. Kotagede, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55171;;; 50 ;kg;7000
+93;Gedung Pandawa;Jl. Kenari No. 59 Muja Muju Kec. Umbulharjo Kota Yogyakarta 55165;;; 68 ;kg;7000
+94;Gedung Jelita;Jl KH Agus Salim no 2, Sondakan, Laweyan, Solo (Pelayanan PPU);;; 68 ;kg;7000
+95;Gedung Pandawa (Pengiriman Ulang);Jl. Kenari No. 59 Muja Muju Kec. Umbulharjo Kota Yogyakarta 55165;;; 68 ;kg;7000

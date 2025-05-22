@@ -364,7 +364,7 @@ Lead Register
 				              <div class="input-group-text" style="background-color:#aaa;color:white">
 				                Rp
 				              </div>
-				              <input type="text" class="form-control money" placeholder="Enter Amount" name="project_budget" id="project_budget" pattern= "[0-9]">
+				              <input type="text" class="form-control moneyNormal" placeholder="Enter Amount" name="project_budget" id="project_budget" pattern= "[0-9]">
 				            </div>
 		          			<span class="invalid-feedback" style="display:none!important">Project Budget Melebihi Amount!</span>
 		              </div>
@@ -398,9 +398,9 @@ Lead Register
 			                    <thead>
 			                      <tr>
 			                      	<th hidden></th>
-			                        <th title="Product Tagging is Required!">Brand Tag</th>
-			                        <th>Technology Tag</th>
-			                        <th width="50%">Price</th>
+			                        <th style="min-width: 150px;" title="Product Tagging is Required!">Brand Tag</th>
+			                        <th style="min-width: 150px;">Technology Tag</th>
+			                        <th style="min-width: 200px;">Price</th>
 			                        <td class="text-center">
 			                          	<button class="btn btn-sm btn-primary" id="btn-addTagging" type="button" style="border-radius:50%;width: 25px;height: 25px;vertical-align: text-top;">
 									    	<i class="bx bx-plus"></i>
@@ -471,7 +471,7 @@ Lead Register
 				              <div class="input-group-text" style="background-color:#aaa;color:white">
 				                Rp
 				              </div>
-				              <input type="text" class="form-control money" placeholder="Enter Amount" name="submit_price" id="submit_price" pattern= "[0-9]">
+				              <input type="text" class="form-control moneyNormal" placeholder="Enter Amount" name="submit_price" id="submit_price" pattern= "[0-9]">
 				          </div>
 	              </div>
 
@@ -501,7 +501,7 @@ Lead Register
 				              <div class="input-group-text" style="background-color:#aaa;color:white">
 				                Rp
 				              </div>
-				              <input type="text" class="form-control money" placeholder="Enter Amount" name="deal_price_total" id="deal_price_total" pattern= "[0-9]">
+				              <input type="text" class="form-control moneyNormal" placeholder="Enter Amount" name="deal_price_total" id="deal_price_total" pattern= "[0-9]">
 				          	</div>
 	            		<input type="text" name="amount_cek_tp" value="" hidden>
 	            	</div>
@@ -586,7 +586,7 @@ Lead Register
 						                <td></td>
 						                <td><center></center></td>
 						                <td><center></center></td>
-						                <td class="money"><center></center></td>
+						                <td class="moneyNormal"><center></center></td>
 						                <td><center></center></td>
 						                <td></td>
 						              </tr>
@@ -696,7 +696,7 @@ Lead Register
 
 			                            <div class="form-group">
 			                            	<label>Amount PO <sup><b>(Grand Total)</b></sup></label>
-			                            	<input type="text" name="amount_pid" id="amount_pid_result" class="form-control money" disabled="" autocomplete="off">
+			                            	<input type="text" name="amount_pid" id="amount_pid_result" class="form-control moneyNormal" disabled="" autocomplete="off">
 			                            </div>
 
 			                            <div class="form-group">
@@ -925,7 +925,13 @@ Lead Register
 		}
 
 		function initmoney(){
-			$(".money").mask('000.000.000.000', {reverse: true})
+			$(".money").mask('#.##0,00', {
+			  reverse: true
+			});
+
+			$(".moneyNormal").mask('#.##0',{
+			  reverse: true
+			})
 		}
 
 		function textAreaAdjust(element) {
@@ -1780,25 +1786,25 @@ Lead Register
 			// }
 		}
 
-		function grandTotal(){
-    	var sum = 0
-      $('.new-price-win').each(function() {
+	function grandTotal(){
+		var sum = 0
+      	$('.new-price-win').each(function() {
+          var temp = parseFloat(($(this).val() == "" ? "0" : $(this).val()).replace(/\./g, '').replace(',', '.'))
+          sum += temp;
+      	});
+      	$('.price_sbe_win').each(function() {
           var temp = parseInt(($(this).val() == "" ? "0" : $(this).val()).replace(/\D/g, ""))
           sum += temp;
-      });
-      $('.price_sbe_win').each(function() {
-          var temp = parseInt(($(this).val() == "" ? "0" : $(this).val()).replace(/\D/g, ""))
-          sum += temp;
-      });
+      	});
      
-      $("#table-grand-total").show()
-      var formatter = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      });
+      	$("#table-grand-total").show()
+  		var formatter = new Intl.NumberFormat('en-US', {
+    		minimumFractionDigits: 0,
+    		maximumFractionDigits: 0,
+  		});
 
-      $("#input_gran_total").val(formatter.format(sum))
-    }
+      	$("#input_gran_total").val(formatter.format(sum))
+	}
 
     var arrSbe = []
     arrSbe = [
@@ -1832,7 +1838,7 @@ Lead Register
       append = append + " <td style='white-space: nowrap'>"
       append = append + " <div class='input-group'>"
       append = append + " <span class='input-group-text' style='background-color: #aaa; color:white;font-style: italic;'>Rp.</span>"
-      append = append + " <input data-value='" + i + "' class='money form-control price_sbe' value='0' name='price_SBE' type='text' placeholder='Enter Product Price'>"
+      append = append + " <input data-value='" + i + "' class='moneyNormal form-control price_sbe' value='0' name='price_SBE' type='text' placeholder='Enter Product Price'>"
       append = append + " </div>"
       append = append + " </td>"
       append = append + " <td class='text-center'>"
@@ -1861,7 +1867,7 @@ Lead Register
       append = append + " <td style='white-space: nowrap'>"
       append = append + " <div class='input-group'>"
       append = append + " <span class='input-group-text' style='background-color: #aaa; color:white;font-style: italic;'>Rp.</span>"
-      append = append + " <input data-value='" + i + "' class='money form-control price_sbe_win' value='0' name='price_sbe_win' type='text' placeholder='Enter Product Price'>"
+      append = append + " <input data-value='" + i + "' class='moneyNormal form-control price_sbe_win' value='0' name='price_sbe_win' type='text' placeholder='Enter Product Price'>"
       append = append + " </div>"
       append = append + " </td>"
       append = append + " <td class='text-center'>"
@@ -1956,8 +1962,8 @@ Lead Register
             lead_id: window.location.href.split('/')[5],
         },
         success: function(result) {
-            $("#searchTagsProductSol[data-value='" + i + "']").empty("");
-            $("#searchTagsTechnologySol[data-value='" + i + "']").empty("");
+            $(".select2-customProductSol[data-value='" + i + "']").empty("");
+            $(".select2-customTechnologySol[data-value='" + i + "']").empty("");
             var product_tag = result.product_tag;
             var product_tag_selectOption = [];
 
@@ -1972,7 +1978,7 @@ Lead Register
                 technology_tag_selectOption.push(value)
             })
 
-            var TagProduct = $("#searchTagsProductSol[data-value='" + i + "']").select2({
+            var TagProduct = $(".select2-customProductSol[data-value='" + i + "']").select2({
                 dropdownParent: $('#formSD'),
                 placeholder: " Select #Tags#Product",
                 data: product_tag_selectOption,
@@ -1980,7 +1986,7 @@ Lead Register
                     return $.parseHTML('<span>' + selection.text + '</span>');
                 }
             })
-            var TagProduct = $("#searchTagsTechnologySol[data-value='" + i + "']").select2({
+            var TagProduct = $(".select2-customTechnologySol[data-value='" + i + "']").select2({
                 dropdownParent: $('#formSD'),
                 placeholder: " Select #Tags#Technology",
                 data: technology_tag_selectOption,
@@ -1995,10 +2001,10 @@ Lead Register
       var append = ""
       append = append + "<tr class='new-tagging'>"
       append = append + " <td><input hidden class='id' data-value='"+ i +"' />"
-      append = append + " <select class='form-control select2-customProductSol' data-value='" + i + "' id='searchTagsProductSol' name='searchTagsProductSol' style='width: 100%!important' required></select>"
+      append = append + " <select class='form-control select2-customProductSol' data-value='" + i + "' name='searchTagsProductSol' style='width: 100%!important' required></select>"
       append = append + " </td>"
       append = append + " <td>"
-      append = append + " <select class='form-control select2-customTechnologySol' data-value='" + i + "' id='searchTagsTechnologySol' name='searchTagsTechnologySol' style='width: 100%!important' required></select>"
+      append = append + " <select class='form-control select2-customTechnologySol' data-value='" + i + "' name='searchTagsTechnologySol' style='width: 100%!important' required></select>"
       append = append + " </td>"
       append = append + " <td>"
       append = append + " <div class='input-group'>"
@@ -2055,26 +2061,28 @@ Lead Register
 
     $(document).on('keypress', '.new-price-sol', function() {
     	if (isMobile == true) {
-			  Swal.fire({
-				  title: 'product price',
-				  input: 'text',
-				  inputAttributes: {
-				    autocapitalize: 'off',
-				    id: 'price'
-				  },
-				  onOpen: function(el) {
-	        	var container = $(el);
-	        	container.find('#price').mask('000.000.000.000', {reverse: true});
-	    		},
-				  showCancelButton: true,
-				  confirmButtonText: 'oke',
-				}).then((result) => {
-				  if (result.isConfirmed) {
-				    $(".new-price-sol[data-value='" + i + "']").val(result.value)
-				  }
-				})
+		  	Swal.fire({
+			  title: 'product price',
+			  input: 'text',
+			  inputAttributes: {
+			    autocapitalize: 'off',
+			    id: 'price'
+			  },
+			 onOpen: function(el) {
+        		var container = $(el);
+        		container.find('#price').mask('#.##0,00', {
+				  reverse: true
+				});
+    		},
+			  showCancelButton: true,
+			  confirmButtonText: 'oke',
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			    $(".new-price-sol[data-value='" + i + "']").val(result.value)
+			  }
+			})
     	}		
-		})   
+	})   
 
     function addTaggingNotEmpty(id,id_product,id_tech,price,i){
     	var append = ""
@@ -2082,10 +2090,10 @@ Lead Register
     	append += "<tr class='exist-tagging'>";
 		append += "  <td hidden><input id='tagging_status' data-value='" + i + "'/><input class='id' name='id' data-value='" + i + "'/></td>";
 		append += "  <td>";
-		append += "    <select disabled class='form-control col-xs-12 select2-customProductSol' data-value='" + i + "' id='searchTagsProductSol' style='width: 100% !important;'></select>";
+		append += "    <select disabled class='form-control col-xs-12 select2-customProductSol' data-value='" + i + "' style='width: 100% !important;'></select>";
 		append += "  </td>";
 		append += "  <td>";
-		append += "    <select disabled class='form-control col-xs-12 select2-customTechnologySol' data-value='" + i + "' id='searchTagsTechnologySol' style='width: 100% !important;'></select>";
+		append += "    <select disabled class='form-control col-xs-12 select2-customTechnologySol' data-value='" + i + "' style='width: 100% !important;'></select>";
 		append += "  </td>";
 		append += "  <td style='min-width: 200px;'>";
 		append += "    <div class='input-group'>";
@@ -2106,8 +2114,8 @@ Lead Register
         url: "{{url('/project/getProductTechTagDetail')}}",
         type: "GET",
         success: function(result) {
-            $("#searchTagsProductSol[data-value='" + i + "']").empty("");
-            $("#searchTagsTechnologySol[data-value='" + i + "']").empty("");
+            $(".select2-customProductSol[data-value='" + i + "']").empty("");
+            $(".select2-customTechnologySol[data-value='" + i + "']").empty("");
             var product_tag = result.product_tag;
             var product_tag_selectOption = [];
 
@@ -2128,7 +2136,7 @@ Lead Register
                 technology_tag_selectOption.push(value)
             })
 
-            var TagProduct = $("#searchTagsProductSol[data-value='" + i + "']").select2({
+            var TagProduct = $(".select2-customProductSol[data-value='" + i + "']").select2({
                 dropdownParent: $('#formSD'),
                 placeholder: " Select #Tags#Product",
                 data: product_tag_selectOption,
@@ -2137,7 +2145,7 @@ Lead Register
                 }
             })
             
-            var TagProduct = $("#searchTagsTechnologySol[data-value='" + i + "']").select2({
+            var TagProduct = $(".select2-customTechnologySol[data-value='" + i + "']").select2({
                 dropdownParent: $('#formSD'),
                 placeholder: " Select #Tags#Technology",
                 data: technology_tag_selectOption,
@@ -2148,6 +2156,14 @@ Lead Register
         }
     	})
 
+    	console.log(typeof price)
+
+    	var checkPrice = price
+
+    	if (!checkPrice.match(/,(\d{2})/)) {
+  			$(".new-price-sol[data-value='" + i + "']").addClass('moneyNormal').removeClass('money')
+  		}
+
   		$("[data-bs-toggle=tooltip][data-value='" + i + "']").mouseenter(function(){
     		var $this = $(this);
         $this.attr('title', 'uang');
@@ -2155,7 +2171,7 @@ Lead Register
     	$(".id[data-value='" + i + "']").val(id) 
   		$(".new-price-sol[data-value='" + i + "']").val(price)  
 
-      initmoney();
+      	initmoney();
     }
 
     function addProductTechInitiate(id,id_product,id_tech,price,i){
@@ -2242,7 +2258,7 @@ Lead Register
       append = append + " <td style='white-space: nowrap'>"
       append = append + " <div class='input-group'>"
       append = append + " <span class='input-group-text' style='background-color: #aaa; color:white;font-style: italic;'>Rp.</span>"
-      append = append + " <input data-value='" + i + "' class='money form-control price_sbe' value='0' disabled name='price_SBE' type='text' placeholder='Enter Product Price'>"
+      append = append + " <input data-value='" + i + "' class='moneyNormal form-control price_sbe' value='0' disabled name='price_SBE' type='text' placeholder='Enter Product Price'>"
       append = append + " </div>"
       append = append + " </td>"
       // append = append + " <td class='text-center'>"
@@ -2270,7 +2286,7 @@ Lead Register
 	      append = append + " <td style='white-space: nowrap'>"
 	      append = append + " <div class='input-group'>"
 	      append = append + " <span class='input-group-text' style='background-color: #aaa; color:white;font-style: italic;'>Rp.</span>"
-	      append = append + " <input data-value='" + i + "' class='money form-control price_sbe_win' disabled name='price_sbe_win' type='text' placeholder='Enter Product Price' value='0'>"
+	      append = append + " <input data-value='" + i + "' class='moneyNormal form-control price_sbe_win' disabled name='price_sbe_win' type='text' placeholder='Enter Product Price' value='0'>"
 	      append = append + " </div>"
 	      append = append + " </td>"
 	      // append = append + " </td>"
@@ -2530,7 +2546,7 @@ Lead Register
     	$(this).parents("tr").find(".price_sbe").prop("disabled",false)
     	$(this).parents("tr").find(".btn-edit-tagging-sbe").removeClass('btn-primary').addClass('btn-warning')
     	$(this).parents("tr").find(".btn-edit-tagging-sbe").find('i').removeClass('fa-pencil').addClass('fa-check')
-		  id_exist = $(this).parents("tr").find(".id_sbe").val()
+		id_exist = $(this).parents("tr").find(".id_sbe").val()
     	tag_sbe = $(this).parents("tr").find(".tag_sbe").val()
     	name_sbe = $(this).parents("tr").find(".tag_sbe option:selected").text()
     	price = $(this).parents("tr").find(".price_sbe").val()
@@ -2591,7 +2607,7 @@ Lead Register
     	$(this).parents("tr").find(".price_sbe_win").prop("disabled",false)
     	$(this).parents("tr").find(".btn-edit-tagging-sbe-win").removeClass('btn-primary').addClass('btn-warning')
     	$(this).parents("tr").find(".btn-edit-tagging-sbe-win").find('i').removeClass('fa-pencil').addClass('fa-check')
-		  id_exist = $(this).parents("tr").find(".id_sbe_win").val()
+		id_exist = $(this).parents("tr").find(".id_sbe_win").val()
     	tag_sbe = $(this).parents("tr").find(".tag_sbe_win").val()
     	name_sbe = $(this).parents("tr").find(".tag_sbe_win option:selected").text()
     	price = $(this).parents("tr").find(".price_sbe_win").val()
@@ -2700,11 +2716,11 @@ Lead Register
               if (result.value) {
               	localStorage.setItem("status_tagging_sbe", "pencil");
               	$(".tag_sbe[data-value='" + dataValue + "']").prop("disabled",true)
-					    	$(".price_sbe[data-value='" + dataValue + "']").prop("disabled",true)
-					    	$(".btn-edit-tagging-sbe[data-value='" + dataValue + "']").removeClass('btn-warning').addClass('btn-primary')
-					    	$(".btn-edit-tagging-sbe[data-value='" + dataValue + "']").find("i").removeClass('fa-check').addClass('fa-pencil')
-					    	// $("#btn-addSBE").prop('disabled',false).tooltip('disable')
-  							$("#btnSubmitSD").prop("disabled",false)
+		    	$(".price_sbe[data-value='" + dataValue + "']").prop("disabled",true)
+		    	$(".btn-edit-tagging-sbe[data-value='" + dataValue + "']").removeClass('btn-warning').addClass('btn-primary')
+		    	$(".btn-edit-tagging-sbe[data-value='" + dataValue + "']").find("i").removeClass('fa-check').addClass('fa-pencil')
+		    	// $("#btn-addSBE").prop('disabled',false).tooltip('disable')
+					$("#btnSubmitSD").prop("disabled",false)
               }
           })
         }
@@ -2792,14 +2808,14 @@ Lead Register
 
   			var storeSD = true
 	      $('#table-tagging #tbtagging .new-tagging').each(function() {
-	      	if ($(this).find(".new-price-sol").val().replace(/\D/g, "") == "" || $(this).find(".new-price-sol").val().replace(/\D/g, "") == "0") {
+	      	if ($(this).find(".new-price-sol").val().replace(/[^\d,]/g, "").replace(/(,\d{2})\d+$/, '$1') == "" || $(this).find(".new-price-sol").val().replace(/[^\d,]/g, "").replace(/(,\d{2})\d+$/, '$1') == "0") {
 		    		$(this).find(".new-price-sol").closest('.input-group').next('span').css('color','red').show()
 		    		$(this).find(".new-price-sol").closest('.input-group').addClass("has-error")
 		    		$(this).find(".new-price-sol").prev('.input-group-text').css("background-color","red")
 
 		    		console.log('tessss')
 		    	}else{
-		    		if ($(this).find(".new-price-sol").val().replace(/\D/g, "").length < 6) {
+		    		if ($(this).find(".new-price-sol").val().replace(/[^\d,]/g, "").replace(/(,\d{2})\d+$/, '$1').length < 6) {
 			    		$(this).find(".new-price-sol").closest('.input-group').next('span').css('color','red').show()
 			    		$(this).find(".new-price-sol").closest('.input-group').addClass("has-error")
 			    		$(this).find(".new-price-sol").prev('.input-group-text').css("background-color","red")
@@ -2809,14 +2825,14 @@ Lead Register
 		    			$(this).find(".new-price-sol").closest('.input-group').next('.invalid-feedback').css('color','red').attr('style','display:none!important!important')
 							$(this).find(".new-price-sol").closest('.input-group').removeClass("has-error")
 							$(this).find(".new-price-sol").prev('.input-group-text').css("background-color","background-color:#aaa;color:white")
-							data.append("tagData[tagProduct]["+i+"][tag_price]",$(this).find(".new-price-sol").val().replace(/\D/g, ""))
+							data.append("tagData[tagProduct]["+i+"][tag_price]",$(this).find(".new-price-sol").val().replace(/[^\d,]/g, "").replace(/(,\d{2})\d+$/, '$1'))
 			        data.append("tagData[tagProduct]["+i+"][tag_product][productTag]",$(this).find('.select2-customProductSol').select2("data")[0].id.substr(1))
 			        data.append("tagData[tagProduct]["+i+"][tag_product][productTagText]",$(this).find('.select2-customProductSol').select2("data")[0].text)
 			        data.append("tagData[tagProduct]["+i+"][tag_product][techTag]",$(this).find('.select2-customTechnologySol').select2("data")[0].id.substr(1))
 			         data.append("tagData[tagProduct]["+i+"][tag_product][techTagText]",$(this).find('.select2-customTechnologySol').select2("data")[0].text)
 		    		}		    		
-					}
-					i++
+				}
+				i++
 	      });
 
 	      if ($('.invalid-feedback').is(":visible")) {
@@ -3455,7 +3471,7 @@ Lead Register
           	render : function (data, type, row){
           		var check = row.status.split(", ")
           		if(row.status == 'Update Lead with Amount ' || row.status == 'Create Lead with Amount '){
-          			return row.status + '<i class="money">' + new Intl.NumberFormat('id').format(row.submit_price) + '</i>'
+          			return row.status + '<i class="moneyNormal">' + new Intl.NumberFormat('id').format(row.submit_price) + '</i>'
           		}else if (row.status == 'Update TP') {
           			return row.status + '-' + 'Submitted Price [<i>'+ new Intl.NumberFormat('id').format(row.submit_price) + '</i>] - Deal Price [<i>'+ new Intl.NumberFormat('id').format(row.deal_price) +'</i>]'
           		}else if (row.progress_date != null) {

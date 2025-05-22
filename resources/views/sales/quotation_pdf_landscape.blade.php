@@ -382,9 +382,11 @@
                 $totalPriceList = str_replace(',', '.', $prod->total_price_list);
                 $totalPriceList = floatval($totalPriceList);
 
-                function getAdditionalValue(?string $column): string {
-                    $parts = explode('-', $column ?? '');
-                    return isset($parts[1]) ? trim($parts[1]) : '';
+                if (!function_exists('getAdditionalValue')) {
+                    function getAdditionalValue(?string $column): string {
+                        $parts = explode('-', $column ?? '');
+                        return isset($parts[1]) ? trim($parts[1]) : '';
+                    }
                 }
 
                 $value1 = getAdditionalValue($prod->additional_column_1);

@@ -382,9 +382,11 @@
                 $totalPriceList = str_replace(',', '.', $prod->total_price_list);
                 $totalPriceList = floatval($totalPriceList);
 
-                function getAdditionalValue(?string $column): string {
-                    $parts = explode('-', $column ?? '');
-                    return isset($parts[1]) ? trim($parts[1]) : '';
+                if (!function_exists('getAdditionalValue')) {
+                    function getAdditionalValue(?string $column): string {
+                        $parts = explode('-', $column ?? '');
+                        return isset($parts[1]) ? trim($parts[1]) : '';
+                    }
                 }
 
                 $value1 = getAdditionalValue($prod->additional_column_1);
@@ -413,7 +415,7 @@
                 @if($header5 != null)
                     <td class="text-8">{{$value5}}</td>
                 @endif
-                <td class="text-8"> <center>@if($prod->jangka_waktu != null){{$prod->jangka_waktu}} month @endif</center></td>
+                <td class="text-8"> <center>@if($prod->jangka_waktu != null){{$prod->jangka_waktu}} bulan @endif</center></td>
                 <td class="text-8" style="text-align: right; width: 10px;"><center>{{$prod->qty}}</center></td>
                 <td class="text-8" style="width: 10px;"><center>{{$prod->unit}}</center></td>
                 @if($isPriceList)

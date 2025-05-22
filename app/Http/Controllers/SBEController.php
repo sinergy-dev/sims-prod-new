@@ -830,6 +830,10 @@ class SBEController extends Controller
             $getSign = $getSign->whereRaw("(`users`.`nik` = '" . $getPresales->nik_ta . "' OR `roles`.`name` = 'VP Solutions & Partnership Management')")
             ->orderByRaw('FIELD(position, "Technology Alliance Solutions","VP Solutions & Partnership Management","Presales")')->take(2)
             ->get();
+        } else if ($cek_role->name == 'Product Development Specialist Manager'){
+            $getSign = $getSign->whereRaw("(`users`.`nik` = '" . $getPresales->nik_ta . "' OR `roles`.`name` = 'VP Solutions & Partnership Management')")
+            ->orderByRaw('FIELD(position, "Product Development Specialist Manager","VP Solutions & Partnership Management","Presales")')->take(2)
+            ->get();
         }else {
             $getSign = $getSign->whereRaw("(`users`.`nik` = '" . $getPresales->nik . "' OR `roles`.`name` = 'VP Solutions & Partnership Management')")
             ->orderByRaw('FIELD(position, "Presales","System Designer","VP Solutions & Partnership Management")')

@@ -28,6 +28,10 @@
 		.form-group{
 			margin-bottom: 15px;
 		}
+
+		.swal2-container{
+			z-index: 9999;
+		}
 	</style>
 @endsection
 

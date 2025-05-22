@@ -292,23 +292,31 @@
                 <select type="text" class="form-control select2" name="selectCategory" id="selectCategory" style="width: 100%" onchange="fillInput('selectCategory')">
                     <option value="">Select Category</option>
                     <option value="Barang dan Jasa">Barang dan Jasa</option>
-                    <option value="Barang">Barang</option>
-                    <option value="Jasa">Jasa</option>
-                    <option value="Bank Garansi">Bank Garansi</option>
-                    <option value="Service">Service</option>
-                    <option value="Pajak Kendaraan">Pajak Kendaraan</option>
-                    <option value="ATK">ATK</option>
-                    <option value="Aset">Aset</option>
-                    <option value="Tinta">Tinta</option>
-                    <option value="Training">Training</option>
-                    <option value="Ujian">Ujian</option>
-                    <option value="Tiket">Tiket</option>
-                    <option value="Akomodasi">Akomodasi</option>
-                    <option value="Swab Test">Swab Test</option>
-                    <option value="Iklan">Iklan</option>
-                    <option value="Ekspedisi">Ekspedisi</option>
-                    <option value="Legal">Legal</option>
-                    <option value="Other">Other</option>
+                        <option value="Barang">Barang</option>
+                        <option value="Jasa">Jasa</option>
+                        <option value="Bank Garansi">Bank Garansi</option>
+                        <option value="Service">Service</option>
+                        <option value="Pajak Kendaraan">Pajak Kendaraan</option>
+                        <option value="ATK">ATK</option>
+                        <option value="Aset">Aset</option>
+                        <option value="Tinta">Tinta</option>
+                        <option value="Konsultasi dan Pelatihan">Konsultasi dan Pelatihan</option>
+                        <option value="Ujian">Ujian</option>
+                        <!-- <option value="Tiket">Tiket</option>
+                        <option value="Akomodasi">Akomodasi</option> -->
+                        <option value="Perjalanan Dinas">Perjalanan Dinas</option>
+                        <option value="Sponsor">Sponsor</option>
+                        <option value="Logistic">Logistic</option>
+                        <option value="Legal">Legal</option>
+                        <option value="License">License</option>
+                        <option value="Reference Fee Member">Reference Fee Member</option>
+                        <option value="Parkir">Parkir</option>
+                        <option value="Kesehatan">Kesehatan</option>
+                        <option value="Olahraga">Olahraga</option>
+                        <option value="Karangan Bunga">Karangan Bunga</option>
+                        <option value="Listrik">Listrik</option>
+                        <option value="Telfon">Telfon</option>
+                        <option value="Other">Other</option>
                 </select>
                 <span class="invalid-feedback" style="display:none;">Please fill Category!</span>
               </div>
@@ -1792,7 +1800,7 @@
               append = append + '<textarea style="width:500px;font-size:12px;height:150px;resize:none" class="form-control" disabled>' + item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number +'</textarea>'
             append = append + '</td>'
             append = append + '<td>'
-              append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size:12px">'
+              append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:70px;font-size:12px">'
             append = append + '</td>'
             append = append + '<td>'
               append = append + '<select disabled class="form-control" style="width:80px;font-size:12px">'
@@ -2182,7 +2190,7 @@
               append = append + '<textarea style="font-size:12px;width:200px;height:150px;resize:none" class="form-control" disabled>' + item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number +'</textarea>'
             append = append + '</td>'
             append = append + '<td>'
-              append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size:12px">'
+              append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:70px;font-size:12px">'
             append = append + '</td>'
             append = append + '<td>'
               append = append + '<select disabled class="form-control" style="width:80px;font-size:12px">'
@@ -2529,7 +2537,7 @@
                 append = append + '<textarea style="width:-webkit-fill-available;font-size:12px;height:150px;resize:none" class="form-control" disabled>' + item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number + '</textarea>'
               append = append + '</td>'
               append = append + '<td>'
-                append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;;font-size:12px">'
+                append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:70px;;font-size:12px">'
               append = append + '</td>'
               append = append + '<td>'
                 append = append + '<select disabled class="form-control" style="width:80px;font-size:12px">'
@@ -3121,7 +3129,7 @@
                 append = append + '<textarea style="font-size: 12px; important;height:150px;resize:none" class="form-control" disabled>' + item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number + '</textarea>'
               append = append + '</td>'
               append = append + '<td width="10%">'
-                append = append + '<input class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size:12px" disabled>'
+                append = append + '<input class="form-control" type="" name="" value="'+ item.qty +'" style="width:70px;font-size:12px" disabled>'
               append = append + '</td>'
               append = append + '<td width="10%">'
                 append = append + '<select style="width:80px;font-size:12px" class="form-control" disabled>'
@@ -3643,7 +3651,7 @@
                 append = append + '<textarea style="font-size: 12px; important;height:150px;resize:none" disabled class="form-control">' + item.description.replaceAll("<br>","\n") + '&#10;&#10;SN : ' + item.serial_number + '&#10;PN : ' + item.part_number + '</textarea>'
               append = append + '</td>'
               append = append + '<td width="10%">'
-                append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:45px;font-size: 12px; important">'
+                append = append + '<input disabled class="form-control" type="" name="" value="'+ item.qty +'" style="width:70px;font-size: 12px; important">'
               append = append + '</td>'
               append = append + '<td width="10%">'
                 append = append + '<select disabled style="width:75px;font-size: 12px; important" class="form-control">'
@@ -5358,7 +5366,7 @@
           appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
             appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
             appendBottom = appendBottom + '    <div class="pull-right" style="display:flex">'
-            appendBottom = appendBottom + '      <div class="checkbox" style="margin-top:5px"><label><input type="checkbox" class=" id="cbInputDiscountFinal">&nbsp&nbspDiscount</label></div>'
+            appendBottom = appendBottom + '      <div class="checkbox" style="margin-top:5px"><label><input type="checkbox" class="form-check-input" id="cbInputDiscountFinal">&nbsp&nbspDiscount</label></div>'
             appendBottom = appendBottom + '      <input disabled type="text" style="width:170px;display: inline;margin-left:15px" class="form-control inputDiscountNominal money" id="inputDiscountNominal" name="inputDiscountNominal" disabled onkeyup="changeVatValue('+ "'discount'"+')">'
             appendBottom = appendBottom + '      <input disabled type="text" style="width:80px;display: inline;" class="form-control inputDiscountFinal" id="inputDiscountFinal" name="inputDiscountFinal" disabled>'
             appendBottom = appendBottom + '    </div>'
@@ -5402,7 +5410,7 @@
           appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
             appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
             appendBottom = appendBottom + '    <div class="pull-right" style="display:flex">'
-            appendBottom = appendBottom + '      <div class="checkbox" style="margin-top:5px"><label><input type="checkbox" class=" id="cbInputPb1Final">&nbsp&nbspPB1</label></div>'
+            appendBottom = appendBottom + '      <div class="checkbox" style="margin-top:5px"><label><input type="checkbox" class="form-check-input" id="cbInputPb1Final">&nbsp&nbspPB1</label></div>'
             appendBottom = appendBottom + '      <input disabled type="text" style="width:170px;display: inline;margin-left:15px" class="form-control inputPb1Nominal" id="inputPb1Nominal" name="inputPb1Nominal">'
             appendBottom = appendBottom + '      <input disabled type="text" style="width:80px;display: inline;" class="form-control inputPb1Final" id="inputPb1Final" name="inputPb1Final" onkeyup="changeVatValue('+ "'pb1'"+')">'
             appendBottom = appendBottom + '    </div>'
@@ -5412,7 +5420,7 @@
           appendBottom = appendBottom + '<div class="row" style="margin-top: 10px;">'
             appendBottom = appendBottom + '  <div class="col-md-12 col-xs-12">'
             appendBottom = appendBottom + '    <div class="pull-right" style="display:flex">'
-            appendBottom = appendBottom + '      <div class="checkbox" style="margin-top:5px"><label><input type="checkbox" class=" id="cbInputServiceChargeFinal">&nbsp&nbspService Charge</label></div>'
+            appendBottom = appendBottom + '      <div class="checkbox" style="margin-top:5px"><label><input type="checkbox" class="form-check-input" id="cbInputServiceChargeFinal">&nbsp&nbspService Charge</label></div>'
             appendBottom = appendBottom + '      <input disabled type="text" style="width:170px;display: inline;margin-left:15px" class="form-control inputServiceChargeNominal" id="inputServiceChargeNominal" name="inputServiceChargeNominal">'
             appendBottom = appendBottom + '      <input disabled type="text" style="width:80px;display: inline;" class="form-control inputServiceChargeFinal" id="inputServiceChargeFinal" name="inputServiceChargeFinal" onkeyup="changeVatValue('+ "'service'"+')">'
             appendBottom = appendBottom + '    </div>'
@@ -5434,28 +5442,33 @@
           changeVatValue(status_tax)
         }
 
+        console.log(tax_pb)
+        console.log(service_charge)
+        console.log(discount)
+
+
         if (tax_pb == 0) {
-          toggleIcheckPajak(true)
+          toggleIcheckPajak(false)
         }else{
           $("#inputPb1Nominal").val(formatter.format(Math.round(($("#inputGrandTotalProduct").val() == ""?0:parseFloat($("#inputGrandTotalProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * tax_pb / 100)))
           $("#inputPb1Product").val(tax_pb)
-          toggleIcheckPajak(false)
+          toggleIcheckPajak(true)
         }
 
         if (service_charge == 0) {
-          toggleIcheckPajak(true)
+          toggleIcheckPajak(false)
         }else{
           $("#inputServiceChargeNominal").val(formatter.format(Math.round(($("#inputGrandTotalProduct").val() == ""?0:parseFloat($("#inputGrandTotalProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * service_charge / 100)))
           $("#inputServiceChargeProduct").val(service_charge)
-          toggleIcheckPajak(false)
+          toggleIcheckPajak(true)
         }
 
         if (discount == 0) {
-          toggleIcheckPajak(true)
+          toggleIcheckPajak(false)
         }else{
           $("#inputDiscountNominal").val(formatter.format(Math.round(($("#inputGrandTotalProduct").val() == ""?0:parseFloat($("#inputGrandTotalProduct").val().replace(/\./g,'').replace(',','.').replace(' ',''))) * discount / 100)))
           $("#inputDiscountProduct").val(discount)
-          toggleIcheckPajak(false)
+          toggleIcheckPajak(true)
         }
 
         // $("#inputPb1Final").inputmask("percentage", {
@@ -5528,7 +5541,7 @@
 
   function toggleIcheckPajak(value){
     $('#cbInputPb1Final').on('change', function(event){
-        if ($('#cbInputPb1Product').is(":checked")) {
+        if ($('#cbInputPb1Final').is(":checked")) {
           $("#inputPb1Final").prop("disabled",false)
         }
     });
@@ -5551,7 +5564,7 @@
     });
 
     $('#cbInputServiceChargeFinal').on('change', function(event){
-      if ($('#cbInputServiceChargeFinal').is(":checked")) {
+      if (!$('#cbInputServiceChargeFinal').is(":checked")) {
         $("#inputServiceChargeFinal").prop("disabled",true)
         if (value == false) {
           $("#inputServiceChargeFinal").val("")
@@ -5561,6 +5574,8 @@
       }
     });
 
+    console.log("checked")
+
     $('#cbInputDiscountFinal').on('change', function(event){
       if ($('#cbInputDiscountFinal').is(":checked")) {
         $("#inputDiscountNominal").prop("disabled",false)
@@ -5568,7 +5583,7 @@
     });
 
     $('#cbInputDiscountFinal').on('change', function(event){
-      if ($('#cbInputDiscountFinal').is(":checked")) {
+      if (!$('#cbInputDiscountFinal').is(":checked")) {
         $("#inputDiscountNominal").prop("disabled",true)
         if (value == false) {
           $("#inputDiscountNominal").val("")
