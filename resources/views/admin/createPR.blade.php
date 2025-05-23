@@ -222,7 +222,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="">Type*</label>
-                    <select autofocus type="text" class="form-control" name="type" onchange="fillInput('selectType')" placeholder="ex. Internal Purchase Request" id="selectType" required>
+                    <select autofocus type="text" class="custom-form-control-select w-100" name="type" onchange="fillInput('selectType')" placeholder="ex. Internal Purchase Request" id="selectType" required>
                         <option value="">Select Type</option>
                         <option value="IPR">IPR (Internal Purchase Request)</option>
                         <option value="EPR">EPR (Eksternal Purchase Request)</option>
@@ -242,7 +242,7 @@
 
               <div class="form-group">
                 <label for="">Category</label>
-                <select autofocus type="text" class="form-control select2" onchange="fillInput('selectCategory')" name="selectCategory" id="selectCategory" style="width: 100%">
+                <select autofocus type="text" class="custom-form-control-select w-100" onchange="fillInput('selectCategory')" name="selectCategory" id="selectCategory" style="width: 100%">
                     <option value="">Select Category</option>
                         <option value="Barang dan Jasa">Barang dan Jasa</option>
                         <option value="Barang">Barang</option>
@@ -304,7 +304,7 @@
 
               <div class="form-group">
                 <label for="">Request Methode*</label>
-                <select autofocus type="text" class="form-control" placeholder="ex. Purchase Order" name="type" id="selectMethode" required >
+                <select autofocus type="text" class="custom-form-control-select w-100" placeholder="ex. Purchase Order" name="type" id="selectMethode" required >
                     <option value="">Select Methode</option>
                     <option value="purchase_order">Purchase Order</option>
                     <option value="payment">Payment</option>
@@ -397,7 +397,7 @@
                   <label>Type*</label>
                   <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>
                   <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
-                    <option>                  
+                    <option></option>                
                   </select>
                   <span class="invalid-feedback" style="display:none!important;">Please fill Unit!</span>
                 </div>
@@ -463,7 +463,7 @@
                     <div class="form-group">
                       <label>PID*</label>
                       <select id="selectPid" style="width: 100%;" class="select2 form-control" onchange="fillInput('selectPID')">
-                        <option>
+                        <option></option>
                       </select>
                       <span class="invalid-feedback" style="display:none;">Please fill PID!</span>
                       <!-- <span id="makeId" style="cursor: pointer;">other?</span>
@@ -489,7 +489,7 @@
                 <div class="form-group">
                   <label>Quote Number*</label>
                   <select name="selectQuoteNumber" class="select2 form-control" id="selectQuoteNumber" >
-                    <option>
+                    <option></option>
                   </select>
                   <!-- <input type="file" class="files" name="inputQuoteNumber" id="inputQuoteNumber" class="form-control" onkeyup="fillInput('quoteNumber')"> -->
                   <span class="invalid-feedback" style="display:none;">Please fill Quote Number!</span>
@@ -2263,7 +2263,7 @@
                   $("#selectTo").select2({
                     data:results,
                     placeholder:"Select Supplier",
-                    dropdownParent:$("#ModalDraftPr")
+                    dropdownParent:$("#ModalDraftPr .modal-body")
                   }).val(result.pr.to).trigger("change")
 
                   $("#selectTo").change(function(){
@@ -2385,7 +2385,7 @@
                 if (result.pr.category == 'Perjalanan Dinas') {
                   append = append + '<div class="form-group">'
                     append = append + '<label>Budget Type*</label>'
-                      append = append + '<select name="selectBudgetType" class="form-control" id="selectBudgetType" placeholder="Select Budget Type" onchange="fillInput(' + "'" + 'budget_type' + "'" + ')">'
+                      append = append + '<select name="selectBudgetType" class="custom-form-control-select w-100" id="selectBudgetType" placeholder="Select Budget Type" onchange="fillInput(' + "'" + 'budget_type' + "'" + ')">'
                         append = append + '<option value="" disabled selected>Select Budget Type</option>'
                         append = append + '<option value="OPERASIONAL">OPERASIONAL</option>'
                         append = append + '<option value="NON-OPERASIONAL">NON-OPERASIONAL</option>'
@@ -2545,7 +2545,7 @@
 
                         $("#selectPid").select2({
                             placeholder: "Select/Input Pid",
-                            dropdownParent: $('#ModalDraftPr'),
+                            dropdownParent: $('#ModalDraftPr .modal-body'),
                             tags: true,
                             data: result.data,
                         }).on('change', function() {
@@ -2561,7 +2561,7 @@
                               $("#selectLeadId").select2({
                                   data: result.data,
                                   placeholder: "Select Lead Register",
-                                  dropdownParent: $('#ModalDraftPr')
+                                  dropdownParent: $('#ModalDraftPr .modal-body')
                               })
 
                               var lead_id = $("#selectLeadId option:selected").text();
@@ -2577,7 +2577,7 @@
                                   $("#selectQuoteNumber").select2({
                                       data: result.data,
                                       placeholder: "Select Quote Number",
-                                      dropdownParent: $('#ModalDraftPr')
+                                      dropdownParent: $('#ModalDraftPr .modal-body')
                                   })
                                 }
                               }) 
@@ -3370,7 +3370,7 @@
               $("#selectTo").select2({
                 data:result,
                 placeholder:"Select Supplier",
-                dropdownParent:$("#ModalDraftPr")
+                dropdownParent:$("#ModalDraftPr .modal-body")
               }).change(function(){
                 $.ajax({
                   url:"{{url('/admin/getSupplierDetail')}}",
@@ -3418,7 +3418,7 @@
             if ($("#selectCategory").val() == 'Perjalanan Dinas') {
               append = append + '<div class="form-group">'
                 append = append + '<label>Budget Type*</label>'
-                  append = append + '<select name="selectBudgetType" class="form-control" id="selectBudgetType" placeholder="Select Budget Type" onchange="fillInput(' + "'" + 'budget_type' + "'" + ')">'
+                  append = append + '<select name="selectBudgetType" class="custom-form-control-select w-100" id="selectBudgetType" placeholder="Select Budget Type" onchange="fillInput(' + "'" + 'budget_type' + "'" + ')">'
                     append = append + '<option value="" disabled selected>Select Budget Type</option>'
                     append = append + '<option value="OPERASIONAL">OPERASIONAL</option>'
                     append = append + '<option value="NON-OPERASIONAL">NON-OPERASIONAL</option>'
@@ -3468,7 +3468,7 @@
                           };
                         },
                       },
-                      dropdownParent: $('#ModalDraftPr'),
+                      dropdownParent: $('#ModalDraftPr .modal-body'),
                     })
                   }else{
                     console.log("cuman show lagi")
@@ -3536,7 +3536,7 @@
               $("#selectPid").select2({
                   data: result.data,
                   placeholder: "Select/Input Pid",
-                  dropdownParent: $('#ModalDraftPr'),
+                  dropdownParent: $('#ModalDraftPr .modal-body'),
                   tags: true
               }).on('select2:select', function() {
                 var data = $("#selectPid option:selected").text();
@@ -3559,7 +3559,7 @@
                     $("#selectLeadId").select2({
                         data: result.data,
                         placeholder: "Select Lead Register",
-                        dropdownParent: $('#ModalDraftPr')
+                        dropdownParent: $('#ModalDraftPr .modal-body')
                     })
 
                     if (result.linkSbe.length > 0) {
@@ -3594,7 +3594,7 @@
                     $("#selectQuoteNumber").select2({
                         data: result.data,
                         placeholder: "Select Quote Number",
-                        dropdownParent: $('#ModalDraftPr')
+                        dropdownParent: $('#ModalDraftPr .modal-body')
                     })
                   }
                 }) 
@@ -6312,7 +6312,7 @@
                         };
                       },
                     },
-                    dropdownParent: $('#ModalDraftPr'),
+                    dropdownParent: $('#ModalDraftPr .modal-body'),
                   })
                 }else{
                   $("#fromBudgetType").closest(".form-group").show()
@@ -7240,7 +7240,7 @@
     $('#makeId').click(function(){
       $('#project_idNew').show()
       $('#project_id').val("").select2({
-        dropdownParent:$("#ModalDraftPr")
+        dropdownParent:$("#ModalDraftPr .modal-body")
       }).trigger("change")
 
       $("#selectPid").closest('.form-group').removeClass('needs-validation ')

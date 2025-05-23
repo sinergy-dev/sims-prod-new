@@ -44,8 +44,6 @@ class PartnershipController extends Controller
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position; 
 
-        $notifClaim = '';
-
         if ($ter != null) {
             $notif = DB::table('sales_lead_register')
             ->select('opp_name','nik')
@@ -172,23 +170,6 @@ class PartnershipController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         if ($ter != null) {
             $notif = DB::table('sales_lead_register')
             ->select('opp_name','nik','lead_id')
@@ -221,7 +202,7 @@ class PartnershipController extends Controller
                         ->select('id_partnership', 'partner' , 'level', 'renewal_date', 'annual_fee', 'sales_target', 'sales_certification', 'engineer_certification', 'type', 'doc')
                         ->get();
 
-        return view('DVG.partnership', compact('notif','notifOpen','notifsd','notiftp', 'datas', 'notifClaim', 'notifc'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('partnership')]);
+        return view('DVG.partnership', compact('notif','notifOpen','notifsd','notiftp', 'datas', 'notifc'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('partnership')]);
     }
 
     public function getDataPartnership()

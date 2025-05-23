@@ -147,30 +147,13 @@ class CalendarController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         $event_data = DB::table('tb_event')
                             ->join('users', 'users.nik', '=', 'tb_event.created_by')
                             ->select('id', 'created_by', 'title', 'date', 'start_time', 'end_time', 'category', 'venue', 'organizer', 'attendee', 'users.name')
                             ->orderBy('date', 'desc')
                             ->get();
 
-        return view('calendar', compact('notifClaim', 'notif', 'notifOpen', 'notifsd', 'notiftp', 'event_data'));
+        return view('calendar', compact( 'notif', 'notifOpen', 'notifsd', 'notiftp', 'event_data'));
 
     }
 }

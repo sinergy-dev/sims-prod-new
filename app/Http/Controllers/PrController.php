@@ -174,28 +174,6 @@ class PrController extends Controller
 
         $tahun = date("Y");
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        }
-
         $sidebar_collapse = true;
 
         $year_before = PR::select(DB::raw('YEAR(created_at) year'))->orderBy('year','desc')->groupBy('year')->get();
@@ -204,7 +182,7 @@ class PrController extends Controller
 
         $user = User::select('name', 'nik')->where('id_company', '1')->where('status_karyawan', '!=', 'dummy')->orderBy('name','asc')->get();
 
-        return view('admin/pr', compact('notif','notifOpen','notifsd','notiftp' ,'pops', 'sidebar_collapse','year_before','tahun','pid', 'notifClaim', 'user'))->with(['initView'=> $this->initMenuBase()]);
+        return view('admin/pr', compact('notif','notifOpen','notifsd','notiftp' ,'pops', 'sidebar_collapse','year_before','tahun','pid', 'user'))->with(['initView'=> $this->initMenuBase()]);
     }
 
     public function getCountPr(Request $request)
@@ -932,24 +910,7 @@ class PrController extends Controller
                         ->select('tb_pr.no','tb_pr.no_pr', 'tb_pr.position', 'tb_pr.type_of_letter', 'tb_pr.month', 'tb_pr.date', 'tb_pr.to', 'tb_pr.attention', 'tb_pr.title', 'tb_pr.project', 'tb_pr.description', 'tb_pr.from', 'tb_pr.division', 'tb_pr.issuance', 'tb_pr.project_id', 'users.name')
                         ->get();
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
-        return view('report/pr', compact('notif','notifOpen','notifsd','notiftp','id_pro', 'datas', 'notifClaim'));
+        return view('report/pr', compact('notif','notifOpen','notifsd','notiftp','id_pro', 'datas'));
     }
 
     public function downloadExcelPr(Request $request) {

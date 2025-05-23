@@ -13,11 +13,11 @@ use App\TicketingDetail;
 use App\TicketingActivity;
 use App\TicketingResolve;
 use App\TicketingClient;
-use App\TicketingATM;
-use App\TicketingATMPeripheral;
+//use App\TicketingATM;
+//use App\TicketingATMPeripheral;
 use App\TicketingSeverity;
-use App\TicketingAbsen;
-use App\TicketingSwitch;
+//use App\TicketingAbsen;
+//use App\TicketingSwitch;
 use App\TicketingPendingReminder;
 use App\TicketingEscalateEngineer;
 use App\TicketingEmail;
@@ -1383,29 +1383,29 @@ class TicketingController extends Controller
 
 		// return $request->client_id;
 
-		return TicketingATM::where('owner',$request->client_id)
-			->select(
-				'id',
-				DB::raw('CONCAT(`atm_id`," - ", `location`) AS `text`')
-			)
-			->get()->all();
+//		return TicketingATM::where('owner',$request->client_id)
+//			->select(
+//				'id',
+//				DB::raw('CONCAT(`atm_id`," - ", `location`) AS `text`')
+//			)
+//			->get()->all();
 	}
 
-	public function getAbsenId(Request $req){
-		return TicketingAbsen::select(
-				'id',
-				DB::raw('CONCAT(`nama_cabang`," - ", `nama_kantor`) AS `text`')
-			)
-			->get()->all();
-	}
+//	public function getAbsenId(Request $req){
+//		return TicketingAbsen::select(
+//				'id',
+//				DB::raw('CONCAT(`nama_cabang`," - ", `nama_kantor`) AS `text`')
+//			)
+//			->get()->all();
+//	}
 
-	public function getSwitchId(Request $req){
-		return TicketingSwitch::select(
-				'id',
-				DB::raw('CONCAT(`location`," - ",`cabang`," [",`serial_number`,"]") AS `text`')
-			)
-			->get()->all();
-	}
+//	public function getSwitchId(Request $req){
+//		return TicketingSwitch::select(
+//				'id',
+//				DB::raw('CONCAT(`location`," - ",`cabang`," [",`serial_number`,"]") AS `text`')
+//			)
+//			->get()->all();
+//	}
 
 	public function getDetailAsset(Request $request)
     {
@@ -1450,35 +1450,35 @@ class TicketingController extends Controller
         return $getData;
     }
 
-	public function getAtmDetail(Request $request){
-		return TicketingATM::where('id',$request->id_atm)->first();
-	}
+//	public function getAtmDetail(Request $request){
+//		return TicketingATM::where('id',$request->id_atm)->first();
+//	}
 
-	public function getAbsenDetail(Request $request){
-		return TicketingAbsen::where('id',$request->id_absen)->first();
-	}
+//	public function getAbsenDetail(Request $request){
+//		return TicketingAbsen::where('id',$request->id_absen)->first();
+//	}
 
-	public function getSwitchDetail(Request $request){
-		return TicketingSwitch::where('id',$request->id_switch)->first();
-	}
+//	public function getSwitchDetail(Request $request){
+//		return TicketingSwitch::where('id',$request->id_switch)->first();
+//	}
 
-	public function getAtmPeripheralDetail(Request $request){
-		if($request->type == "CCTV"){
-			$result = TicketingATMPeripheral::with('atm')
-				->where('id_atm',TicketingATM::where('id',$request->id_atm)->first()->id)
-				->where('type',$request->type)
-				->first();
-			$result->serial_number = "DVR : " . $result->cctv_dvr_sn . "<br>" . "CCTV Eksternal : " . $result->cctv_besar_sn . "<br>" . "CCTV Internal : " . $result->cctv_kecil_sn . "<br>";
-			$result->machine_type = "DVR : " . $result->cctv_dvr_type . "<br>" . "CCTV Eksternal : " . $result->cctv_besar_type . "<br>" . "CCTV Internal : " . $result->cctv_kecil_type . "<br>";
-			
-			return $result;
-		} else {
-			return TicketingATMPeripheral::with('atm')
-				->where('id_atm',TicketingATM::where('id',$request->id_atm)->first()->id)
-				->where('type',$request->type)
-				->first();
-		}
-	}
+//	public function getAtmPeripheralDetail(Request $request){
+//		if($request->type == "CCTV"){
+//			$result = TicketingATMPeripheral::with('atm')
+//				->where('id_atm',TicketingATM::where('id',$request->id_atm)->first()->id)
+//				->where('type',$request->type)
+//				->first();
+//			$result->serial_number = "DVR : " . $result->cctv_dvr_sn . "<br>" . "CCTV Eksternal : " . $result->cctv_besar_sn . "<br>" . "CCTV Internal : " . $result->cctv_kecil_sn . "<br>";
+//			$result->machine_type = "DVR : " . $result->cctv_dvr_type . "<br>" . "CCTV Eksternal : " . $result->cctv_besar_type . "<br>" . "CCTV Internal : " . $result->cctv_kecil_type . "<br>";
+//
+//			return $result;
+//		} else {
+//			return TicketingATMPeripheral::with('atm')
+//				->where('id_atm',TicketingATM::where('id',$request->id_atm)->first()->id)
+//				->where('type',$request->type)
+//				->first();
+//		}
+//	}
 
 	public function getClient(Request $request)
     {
@@ -2833,12 +2833,12 @@ class TicketingController extends Controller
 			])
 			->first();
 
-		if(Ticketing::where('id',$idTicket)->first()->id_client == "29"){
-			$result->machine_absen = TicketingAbsen::find($result->id_atm);
+//		if(Ticketing::where('id',$idTicket)->first()->id_client == "29"){
+//			$result->machine_absen = TicketingAbsen::find($result->id_atm);
+//			return $result;
+//		} else {
 			return $result;
-		} else {
-			return $result;
-		}
+//		}
 	}
 
 	// New Function for SLM
@@ -4668,19 +4668,19 @@ class TicketingController extends Controller
 		
 	}
 
-	public function getAllAtmSetting(){
-		return array('data' => TicketingATM::join('ticketing__client','ticketing__atm.owner','=','ticketing__client.id')
-			->select(
-				'ticketing__atm.id',
-				DB::raw('`ticketing__client`.`client_acronym` AS `owner`'),
-				'ticketing__atm.atm_id',
-				'ticketing__atm.serial_number',
-				'ticketing__atm.location',
-				'ticketing__atm.activation'
-			)
-			->orderBy('ticketing__atm.id','DESC')
-			->get());
-	}
+//	public function getAllAtmSetting(){
+//		return array('data' => TicketingATM::join('ticketing__client','ticketing__atm.owner','=','ticketing__client.id')
+//			->select(
+//				'ticketing__atm.id',
+//				DB::raw('`ticketing__client`.`client_acronym` AS `owner`'),
+//				'ticketing__atm.atm_id',
+//				'ticketing__atm.serial_number',
+//				'ticketing__atm.location',
+//				'ticketing__atm.activation'
+//			)
+//			->orderBy('ticketing__atm.id','DESC')
+//			->get());
+//	}
 
 	public function getParameterAddAtm(){
 		return TicketingClient::select('id','client_acronym','client_name')
@@ -4688,261 +4688,261 @@ class TicketingController extends Controller
 			->get();
 	}
 
-	public function newAtm(Request $request){
-		$newAtm = new TicketingATM();
+//	public function newAtm(Request $request){
+//		$newAtm = new TicketingATM();
+//
+//        $messages = [
+//		    'atmID.unique' => 'The ATM ID has already been taken!',
+//		    'atmSerial.unique' => 'The Serial Number has already been taken!',
+//		    'atmSerial.required' => 'You must fill serial number of ATM',
+//		    'atmOwner.required' => 'You must select ATM Owner!',
+//		    'atmLocation.required' => 'You must set ATM Location!',
+//		    'atmAddress.required' => 'You must select ATM Address!',
+//		    'atmActivation.required' => 'You must set ATM Activation date!',
+//		];
+//
+//    	$validator = Validator::make($request->all(), [
+//			'atmID' => 'unique:ticketing__atm,atm_id',
+//			'atmSerial' => 'unique:ticketing__atm,serial_number',
+//			'atmSerial' => 'required',
+//			'atmOwner' => 'required',
+//			'atmLocation' => 'required',
+//			'atmAddress' => 'required',
+//			'atmActivation' => 'required',
+//        ],$messages);
+//
+//        if (!$validator->passes()) {
+//			return response()->json(['error'=>$validator->errors()->all()]);
+//        }
+//
+//		$newAtm->fill([
+//				"owner" => $request->atmOwner,
+//				"atm_id" => $request->atmID,
+//				"serial_number" => $request->atmSerial,
+//				"location" => $request->atmLocation,
+//				"address" => $request->atmAddress,
+//				"activation" => $request->atmActivation == "" ? "1970-01-01" : Carbon::createFromFormat('d/m/Y',$request->atmActivation)->formatLocalized('%Y-%m-%d'),
+//				"note" => $request->atmNote,
+//				"machine_type" => $request->atmType,
+//				"os_atm" => $request->atmOS,
+//				"versi_atm" => $request->atmVersion,
+//				"engineer_atm" => $request->atmEngineer
+//			]);
+//
+//		$newAtm->save();
+//
+//	}
 
-        $messages = [
-		    'atmID.unique' => 'The ATM ID has already been taken!',
-		    'atmSerial.unique' => 'The Serial Number has already been taken!',
-		    'atmSerial.required' => 'You must fill serial number of ATM',
-		    'atmOwner.required' => 'You must select ATM Owner!',
-		    'atmLocation.required' => 'You must set ATM Location!',
-		    'atmAddress.required' => 'You must select ATM Address!',
-		    'atmActivation.required' => 'You must set ATM Activation date!',
-		];
+//	public function newAtmPeripheral(Request $request){
+//		if(strpos(TicketingClient::find($request->atmOwner)->client_name,"CCTV")){
+//			$request->peripheralType = "CCTV";
+//		} else if (strpos(TicketingClient::find($request->atmOwner)->client_name,"UPS")){
+//			$request->peripheralType = "UPS";
+//		}
+//
+//		// return $request->peripheralType;
+//		$newAtmPeripheral = new TicketingATMPeripheral();
+//		$newAtmPeripheral->id_atm = TicketingATM::where('atm_id',$request->atmID)->first()->id;
+//		$newAtmPeripheral->id_peripheral = $request->peripheralID;
+//		$newAtmPeripheral->type = $request->peripheralType;
+//		$newAtmPeripheral->serial_number = (isset($request->peripheralSerial) ? $request->peripheralSerial : "-");
+//		$newAtmPeripheral->machine_type = (isset($request->peripheralMachineType) ? $request->peripheralMachineType : "-");
+//
+//		$newAtmPeripheral->cctv_dvr_sn = (isset($request->peripheral_cctv_dvr_sn) ? $request->peripheral_cctv_dvr_sn : "-");
+//		$newAtmPeripheral->cctv_dvr_type = (isset($request->peripheral_cctv_dvr_type) ? $request->peripheral_cctv_dvr_type : "-");
+//		$newAtmPeripheral->cctv_besar_sn = (isset($request->peripheral_cctv_besar_sn) ? $request->peripheral_cctv_besar_sn : "-");
+//		$newAtmPeripheral->cctv_besar_type = (isset($request->peripheral_cctv_besar_type) ? $request->peripheral_cctv_besar_type : "-");
+//		$newAtmPeripheral->cctv_kecil_sn = (isset($request->peripheral_cctv_kecil_sn) ? $request->peripheral_cctv_kecil_sn : "-");
+//		$newAtmPeripheral->cctv_kecil_type = (isset($request->peripheral_cctv_kecil_type) ? $request->peripheral_cctv_kecil_type : "-");
+//
+//		$newAtmPeripheral->save();
+//		return $newAtmPeripheral;
+//	}
 
-    	$validator = Validator::make($request->all(), [
-			'atmID' => 'unique:ticketing__atm,atm_id',
-			'atmSerial' => 'unique:ticketing__atm,serial_number',
-			'atmSerial' => 'required',
-			'atmOwner' => 'required',
-			'atmLocation' => 'required',
-			'atmAddress' => 'required',
-			'atmActivation' => 'required',
-        ],$messages);
+//	public function getDetailAtm(Request $request){
+//		$atm = TicketingATM::with('peripheral')->where('id',$request->id_atm)->first();
+//
+//		$client = TicketingClient::select('id','client_acronym','client_name')
+//			->where('banking','=',1)
+//			->get();
+//
+//		return array(
+//			'atm' => $atm,
+//			'client' => $client
+//		);
+//	}
 
-        if (!$validator->passes()) {
-			return response()->json(['error'=>$validator->errors()->all()]);
-        }
+//	public function setAtm(Request $request){
+//		$setAtm = TicketingATM::where('id','=',$request->idAtm)->first();
+//		 $messages = [
+//		    'atmID.unique' => 'The ATM ID has already been taken!',
+//		    'atmSerial.unique' => 'The Serial Number has already been taken!',
+//		];
+//
+//    	$validator = Validator::make($request->all(), [
+//			'atmID' => Rule::unique('ticketing__atm','atm_id')->ignore($setAtm->id),
+//			'atmSerial' => Rule::unique('ticketing__atm','serial_number')->ignore($setAtm->id),
+//        ],$messages);
+//
+//        if (!$validator->passes()) {
+//			return response()->json(['error'=>$validator->errors()->all()]);
+//        }
+//
+//		$setAtm->fill([
+//				"owner" => $request->atmOwner,
+//				"atm_id" => $request->atmID,
+//				"serial_number" => $request->atmSerial,
+//				"location" => $request->atmLocation,
+//				"address" => $request->atmAddress,
+//				"activation" =>  Carbon::createFromFormat('d/m/Y',$request->atmActivation)->formatLocalized('%Y-%m-%d'),
+//				"note" => $request->atmNote,
+//				"machine_type" => $request->atmType,
+//				"os_atm" => $request->atmOS,
+//				"versi_atm" => $request->atmVersion,
+//				"engineer_atm" => $request->atmEngineer
+//			]);
+//
+//		$setAtm->save();
+//
+//	}
 
-		$newAtm->fill([
-				"owner" => $request->atmOwner,
-				"atm_id" => $request->atmID, 
-				"serial_number" => $request->atmSerial,
-				"location" => $request->atmLocation,
-				"address" => $request->atmAddress,
-				"activation" => $request->atmActivation == "" ? "1970-01-01" : Carbon::createFromFormat('d/m/Y',$request->atmActivation)->formatLocalized('%Y-%m-%d'),
-				"note" => $request->atmNote,
-				"machine_type" => $request->atmType,
-				"os_atm" => $request->atmOS,
-				"versi_atm" => $request->atmVersion,
-				"engineer_atm" => $request->atmEngineer
-			]);
+//	public function deleteAtm(Request $request){
+//		TicketingATM::where('id','=',$request->idAtm)->first()->delete();
+//	}
 
-		$newAtm->save();
+//	public function editAtmPeripheral(Request $request){
+//		$peripheral = TicketingATMPeripheral::find($request->id);
+//
+//		if($peripheral->type == "CCTV"){
+//			if($request->type == "1"){
+//				$peripheral->cctv_dvr_type = $request->typeEdit;
+//				$peripheral->cctv_dvr_sn = $request->serialEdit;
+//				$peripheral->save();
+//			} else if ($request->type == "2") {
+//				$peripheral->cctv_besar_type = $request->typeEdit;
+//				$peripheral->cctv_besar_sn = $request->serialEdit;
+//				$peripheral->save();
+//			} else {
+//				$peripheral->cctv_kecil_type = $request->typeEdit;
+//				$peripheral->cctv_kecil_sn = $request->serialEdit;
+//				$peripheral->save();
+//			}
+//		} else {
+//			$peripheral->machine_type = $request->typeEdit;
+//			$peripheral->serial_number = $request->serialEdit;
+//			$peripheral->save();
+//		}
+//		return $peripheral;
+//	}
 
-	}
+//	public function deleteAtmPeripheral(Request $request){
+//		$peripheral = TicketingATMPeripheral::find($request->id);
+//
+//		if($peripheral->type == "CCTV"){
+//			if($request->type == "1"){
+//				$peripheral->cctv_dvr_type = "";
+//				$peripheral->cctv_dvr_sn = "";
+//				$peripheral->save();
+//			} else if ($request->type == "2") {
+//				$peripheral->cctv_besar_type = "";
+//				$peripheral->cctv_besar_sn = "";
+//				$peripheral->save();
+//			} else {
+//				$peripheral->cctv_kecil_type = "";
+//				$peripheral->cctv_kecil_sn = "";
+//				$peripheral->save();
+//			}
+//			if($peripheral->cctv_dvr_type == "" && $peripheral->cctv_besar_type == "" && $peripheral->cctv_kecil_type == ""){
+//				$peripheral->delete();
+//			}
+//		} else {
+//			$peripheral->delete();
+//		}
+//		return $peripheral;
+//	}
 
-	public function newAtmPeripheral(Request $request){
-		if(strpos(TicketingClient::find($request->atmOwner)->client_name,"CCTV")){
-			$request->peripheralType = "CCTV";
-		} else if (strpos(TicketingClient::find($request->atmOwner)->client_name,"UPS")){
-			$request->peripheralType = "UPS";
-		}
+//	public function getAllAbsenSetting(){
+//		return array('data' => TicketingAbsen::get());
+//	}
 
-		// return $request->peripheralType;
-		$newAtmPeripheral = new TicketingATMPeripheral();
-		$newAtmPeripheral->id_atm = TicketingATM::where('atm_id',$request->atmID)->first()->id;
-		$newAtmPeripheral->id_peripheral = $request->peripheralID;
-		$newAtmPeripheral->type = $request->peripheralType;
-		$newAtmPeripheral->serial_number = (isset($request->peripheralSerial) ? $request->peripheralSerial : "-");
-		$newAtmPeripheral->machine_type = (isset($request->peripheralMachineType) ? $request->peripheralMachineType : "-");
+//	public function newAbsen(Request $request){
+//		$newAbsen = new TicketingAbsen();
+//
+//		$newAbsen->nama_cabang = $request->absenAddNamaCabang;
+//		$newAbsen->nama_kantor = $request->absenAddNamaKantor;
+//		$newAbsen->type_machine = $request->absenAddMachineType;
+//		$newAbsen->ip_machine = $request->absenAddIPMachine;
+//		$newAbsen->ip_server = $request->absenAddIPServer;
+//
+//        $newAbsen->save();
 
-		$newAtmPeripheral->cctv_dvr_sn = (isset($request->peripheral_cctv_dvr_sn) ? $request->peripheral_cctv_dvr_sn : "-");
-		$newAtmPeripheral->cctv_dvr_type = (isset($request->peripheral_cctv_dvr_type) ? $request->peripheral_cctv_dvr_type : "-");
-		$newAtmPeripheral->cctv_besar_sn = (isset($request->peripheral_cctv_besar_sn) ? $request->peripheral_cctv_besar_sn : "-");
-		$newAtmPeripheral->cctv_besar_type = (isset($request->peripheral_cctv_besar_type) ? $request->peripheral_cctv_besar_type : "-");
-		$newAtmPeripheral->cctv_kecil_sn = (isset($request->peripheral_cctv_kecil_sn) ? $request->peripheral_cctv_kecil_sn : "-");
-		$newAtmPeripheral->cctv_kecil_type = (isset($request->peripheral_cctv_kecil_type) ? $request->peripheral_cctv_kecil_type : "-");
+//	}
 
-		$newAtmPeripheral->save();
-		return $newAtmPeripheral;
-	}
+//	public function getDetailAbsen(Request $request){
+//		return array(
+//			'absen' => TicketingAbsen::where('id',$request->id_absen)->first()
+//		);
+//	}
 
-	public function getDetailAtm(Request $request){
-		$atm = TicketingATM::with('peripheral')->where('id',$request->id_atm)->first();
+//	public function setAbsen(Request $request){
+//		$setAbsen = TicketingAbsen::where('id','=',$request->idAbsen)->first();
+//
+//		$setAbsen->nama_cabang = $request->absenEditNamaCabang;
+//		$setAbsen->nama_kantor = $request->absenEditNamaKantor;
+//		$setAbsen->type_machine = $request->absenEditMachineType;
+//		$setAbsen->ip_machine = $request->absenEditIPMachine;
+//		$setAbsen->ip_server = $request->absenEditIPServer;
+//
+//		$setAbsen->save();
+//
+//	}
 
-		$client = TicketingClient::select('id','client_acronym','client_name')
-			->where('banking','=',1)
-			->get();
+//	public function deleteAbsen(Request $request){
+//		TicketingAbsen::where('id','=',$request->idAbsen)->first()->delete();
+//	}
 
-		return array(
-			'atm' => $atm,
-			'client' => $client
-		);
-	}
-
-	public function setAtm(Request $request){
-		$setAtm = TicketingATM::where('id','=',$request->idAtm)->first();
-		 $messages = [
-		    'atmID.unique' => 'The ATM ID has already been taken!',
-		    'atmSerial.unique' => 'The Serial Number has already been taken!',
-		];
-
-    	$validator = Validator::make($request->all(), [
-			'atmID' => Rule::unique('ticketing__atm','atm_id')->ignore($setAtm->id),
-			'atmSerial' => Rule::unique('ticketing__atm','serial_number')->ignore($setAtm->id),
-        ],$messages);
-
-        if (!$validator->passes()) {
-			return response()->json(['error'=>$validator->errors()->all()]);
-        }
-
-		$setAtm->fill([
-				"owner" => $request->atmOwner,
-				"atm_id" => $request->atmID, 
-				"serial_number" => $request->atmSerial,
-				"location" => $request->atmLocation,
-				"address" => $request->atmAddress,
-				"activation" =>  Carbon::createFromFormat('d/m/Y',$request->atmActivation)->formatLocalized('%Y-%m-%d'),
-				"note" => $request->atmNote,
-				"machine_type" => $request->atmType,
-				"os_atm" => $request->atmOS,
-				"versi_atm" => $request->atmVersion,
-				"engineer_atm" => $request->atmEngineer
-			]);
-
-		$setAtm->save();
-
-	}
-
-	public function deleteAtm(Request $request){
-		TicketingATM::where('id','=',$request->idAtm)->first()->delete();
-	}
-
-	public function editAtmPeripheral(Request $request){
-		$peripheral = TicketingATMPeripheral::find($request->id);
-
-		if($peripheral->type == "CCTV"){
-			if($request->type == "1"){
-				$peripheral->cctv_dvr_type = $request->typeEdit;
-				$peripheral->cctv_dvr_sn = $request->serialEdit;
-				$peripheral->save();
-			} else if ($request->type == "2") {
-				$peripheral->cctv_besar_type = $request->typeEdit;
-				$peripheral->cctv_besar_sn = $request->serialEdit;
-				$peripheral->save();
-			} else {
-				$peripheral->cctv_kecil_type = $request->typeEdit;
-				$peripheral->cctv_kecil_sn = $request->serialEdit;
-				$peripheral->save();
-			}
-		} else {
-			$peripheral->machine_type = $request->typeEdit;
-			$peripheral->serial_number = $request->serialEdit;
-			$peripheral->save();
-		}
-		return $peripheral;
-	}
-
-	public function deleteAtmPeripheral(Request $request){
-		$peripheral = TicketingATMPeripheral::find($request->id);
-
-		if($peripheral->type == "CCTV"){
-			if($request->type == "1"){
-				$peripheral->cctv_dvr_type = "";
-				$peripheral->cctv_dvr_sn = "";
-				$peripheral->save();
-			} else if ($request->type == "2") {
-				$peripheral->cctv_besar_type = "";
-				$peripheral->cctv_besar_sn = "";
-				$peripheral->save();
-			} else {
-				$peripheral->cctv_kecil_type = "";
-				$peripheral->cctv_kecil_sn = "";
-				$peripheral->save();
-			}
-			if($peripheral->cctv_dvr_type == "" && $peripheral->cctv_besar_type == "" && $peripheral->cctv_kecil_type == ""){
-				$peripheral->delete();
-			}
-		} else {
-			$peripheral->delete();
-		}
-		return $peripheral;
-	}
-
-	public function getAllAbsenSetting(){
-		return array('data' => TicketingAbsen::get());
-	}
-
-	public function newAbsen(Request $request){
-		$newAbsen = new TicketingAbsen();
-
-		$newAbsen->nama_cabang = $request->absenAddNamaCabang;
-		$newAbsen->nama_kantor = $request->absenAddNamaKantor;
-		$newAbsen->type_machine = $request->absenAddMachineType;
-		$newAbsen->ip_machine = $request->absenAddIPMachine;
-		$newAbsen->ip_server = $request->absenAddIPServer;
-
-        $newAbsen->save();
-
-	}
-
-	public function getDetailAbsen(Request $request){
-		return array(
-			'absen' => TicketingAbsen::where('id',$request->id_absen)->first()
-		);
-	}
-
-	public function setAbsen(Request $request){
-		$setAbsen = TicketingAbsen::where('id','=',$request->idAbsen)->first();
-
-		$setAbsen->nama_cabang = $request->absenEditNamaCabang;
-		$setAbsen->nama_kantor = $request->absenEditNamaKantor;
-		$setAbsen->type_machine = $request->absenEditMachineType;
-		$setAbsen->ip_machine = $request->absenEditIPMachine;
-		$setAbsen->ip_server = $request->absenEditIPServer;
-
-		$setAbsen->save();
-
-	}
-
-	public function deleteAbsen(Request $request){
-		TicketingAbsen::where('id','=',$request->idAbsen)->first()->delete();
-	}
-
-	public function getAllSwitchSetting(){
-		return array('data' => TicketingSwitch::get());
-	}
-
-	public function newSwitch(Request $request){
-		$newSwitch = new TicketingSwitch();
-
-		$newSwitch->type = $request->switchAddType;
-		$newSwitch->port = $request->switchAddPort;
-		$newSwitch->serial_number = $request->switchAddSerialNumber;
-		$newSwitch->ip_management = $request->switchAddIPManagement;
-		$newSwitch->location = $request->switchAddLocation;
-		$newSwitch->cabang = $request->switchAddCabang;
-		$newSwitch->note = $request->switchAddNote;
-
-        $newSwitch->save();
-	}
-
-	public function getDetailSwitch(Request $request){
-		return array(
-			'switch' => TicketingSwitch::where('id',$request->id_switch)->first()
-		);
-	}
-
-	public function setSwitch(Request $request){
-		$setSwitch = TicketingSwitch::where('id','=',$request->idSwitch)->first();
-
-		$setSwitch->type = $request->switchEditType;
-		$setSwitch->port = $request->switchEditPort;
-		$setSwitch->serial_number = $request->switchEditSerialNumber;;
-		$setSwitch->ip_management = $request->switchEditIPManagement;;
-		$setSwitch->location = $request->switchEditLocation;;
-		$setSwitch->cabang = $request->switchEditCabang;;
-		$setSwitch->note = $request->switchEditNote;
-
-		$setSwitch->save();
-
-	}
-
-	public function deleteSwitch(Request $request){
-		TicketingSwitch::where('id','=',$request->idSwitch)->first()->delete();
-	}
+//	public function getAllSwitchSetting(){
+//		return array('data' => TicketingSwitch::get());
+//	}
+//
+//	public function newSwitch(Request $request){
+//		$newSwitch = new TicketingSwitch();
+//
+//		$newSwitch->type = $request->switchAddType;
+//		$newSwitch->port = $request->switchAddPort;
+//		$newSwitch->serial_number = $request->switchAddSerialNumber;
+//		$newSwitch->ip_management = $request->switchAddIPManagement;
+//		$newSwitch->location = $request->switchAddLocation;
+//		$newSwitch->cabang = $request->switchAddCabang;
+//		$newSwitch->note = $request->switchAddNote;
+//
+//        $newSwitch->save();
+//	}
+//
+//	public function getDetailSwitch(Request $request){
+//		return array(
+//			'switch' => TicketingSwitch::where('id',$request->id_switch)->first()
+//		);
+//	}
+//
+//	public function setSwitch(Request $request){
+//		$setSwitch = TicketingSwitch::where('id','=',$request->idSwitch)->first();
+//
+//		$setSwitch->type = $request->switchEditType;
+//		$setSwitch->port = $request->switchEditPort;
+//		$setSwitch->serial_number = $request->switchEditSerialNumber;;
+//		$setSwitch->ip_management = $request->switchEditIPManagement;;
+//		$setSwitch->location = $request->switchEditLocation;;
+//		$setSwitch->cabang = $request->switchEditCabang;;
+//		$setSwitch->note = $request->switchEditNote;
+//
+//		$setSwitch->save();
+//
+//	}
+//
+//	public function deleteSwitch(Request $request){
+//		TicketingSwitch::where('id','=',$request->idSwitch)->first()->delete();
+//	}
 
 	public function getReportParameter(){
 		return array(
@@ -8003,29 +8003,29 @@ class TicketingController extends Controller
     	return $data;
     }
 
-    public function getIdAtm(Request $request)
-    {
-    	$data = TicketingATM::select(DB::raw('`id` AS `id`,`atm_id` AS `text`'))->where('atm_id','like','%'.request('q').'%')->where('engineer_atm',null)->get();
-    	return response()->json($data);
-    }
+//    public function getIdAtm(Request $request)
+//    {
+//    	$data = TicketingATM::select(DB::raw('`id` AS `id`,`atm_id` AS `text`'))->where('atm_id','like','%'.request('q').'%')->where('engineer_atm',null)->get();
+//    	return response()->json($data);
+//    }
 
     public function getEngineer(Request $request)
     {
     	return $data = User::select(DB::raw('`name` AS `id`,`name` AS `text`'))->where('id_division','MSM')->where('status_karyawan','!=','dummy')->where('name','like','%'.request('q').'%')->get();
     }
 
-    public function assignEngineer(Request $request)
-    {
-    	$data = json_decode($request->arrListEngineerAssign,true);
-
-    	foreach ($data as $value) {
-    		foreach ($value['atm_id'] as $values) {
-    			$update = TicketingATM::where('id',$values)->first();
-    			$update->engineer_atm = $value['engineer'];
-    			$update->update();
-    		}
-    	}
-    }
+//    public function assignEngineer(Request $request)
+//    {
+//    	$data = json_decode($request->arrListEngineerAssign,true);
+//
+//    	foreach ($data as $value) {
+//    		foreach ($value['atm_id'] as $values) {
+//    			$update = TicketingATM::where('id',$values)->first();
+//    			$update->engineer_atm = $value['engineer'];
+//    			$update->update();
+//    		}
+//    	}
+//    }
 
     public function setUpdateSeverity(Request $request){
     	$updateDetail = TicketingDetail::where('id_ticket',$request->id_ticket)->first();

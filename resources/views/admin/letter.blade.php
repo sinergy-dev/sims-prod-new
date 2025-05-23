@@ -179,7 +179,7 @@
               @csrf
             <div class="form-group">
               <label for="">Position</label>
-              <select type="text" class="form-control" placeholder="Select Position" name="position" id="position" required>
+              <select type="text" class="custom-form-control-select w-100" placeholder="Select Position" name="position" id="position" required>
                   <option value="PMO">PMO</option>
                   <option value="TEC">TEC</option>
                   <option value="MSM">MSM</option>
@@ -191,7 +191,7 @@
             </div>
             <div class="form-group">
               <label for="">Type of Letter</label>
-              <select type="text" class="form-control" placeholder="Select Type of Letter" name="type" id="type" required>
+              <select type="text" class="custom-form-control-select w-100" placeholder="Select Type of Letter" name="type" id="type" required>
                   <option value="LTR">LTR (Surat Umum)</option>
                   <option value="PKS">PKS (Perjanjian Kerja Sama)</option>
                   <option value="BST">BST (Berita Acara Serah Terima)</option>

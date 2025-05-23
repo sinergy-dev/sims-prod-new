@@ -703,7 +703,7 @@ Ticketing
 									<div class="row">
 										<label class="col-sm-2 control-label">Type*</label>
 											<div class="col-sm-4">
-												<select class="form-control" id="inputTypeTicket">
+												<select class="custom-form-control-select w-100" id="inputTypeTicket">
 													<option selected="selected" value="">Choose Type</option>
 													<option value="Trouble Ticket">Trouble Ticket</option>
 													<option value="Preventive Maintenance">Preventive Maintenance Ticket</option>
@@ -790,7 +790,7 @@ Ticketing
 									<div class="row">
 										<label for="inputCreator" class="col-sm-2 control-label">Category</label>
 										<div class="col-sm-10">
-											<select class="form-control" id="inputCategory" required>
+											<select class="custom-form-control-select w-100" id="inputCategory" required>
 												<option selected="selected">Choose problem category</option>
 												<option value="Aktivasi">Aktivasi</option>
 												<option value="Cash Handler Fatal">Cash Handler Fatal</option>
@@ -1309,7 +1309,7 @@ Ticketing
 								<div class="box-body">
 									<div class="form-group mt-2">
 										<label>Assign</label>
-										<select id="assignFilter" name="assignFilter" class="form-control select2" style="width: 100%!important;" onchange="assignFilter(this.value)">
+										<select id="assignFilter" name="assignFilter" class="custom-form-control-select w-100 select2" style="width: 100%!important;" onchange="assignFilter(this.value)">
 											<option value="user">User</option>
 											<option value="site">Site</option>
 										</select>
@@ -1396,7 +1396,7 @@ Ticketing
 						<div class="col-md-2">
 							<div class="form-group">
 								<label>Select Type</label>
-								<select id="selectReportingType" class="form-control">
+								<select id="selectReportingType" class="custom-form-control-select w-100">
 									<option>Choose One</option>
 									<option value="finishReport">Finish Report</option>
 									<option value="finishReportPid">Finish Report PID</option>
@@ -1425,7 +1425,7 @@ Ticketing
 						<div class="col-md-2 divTypeTicket" style="display:none;">
 							<div class="form-group">
 								<label>Select Type Ticket</label>
-								<select class="form-control" id="selectTypeTicket">
+								<select class="custom-form-control-select w-100" id="selectTypeTicket">
 									<option selected="selected" value="none">Choose Type</option>
 									<option value="TT">Trouble Ticket</option>
 									<option value="PM">Preventive Maintenance Ticket</option>

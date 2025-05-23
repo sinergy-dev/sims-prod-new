@@ -887,7 +887,6 @@ class AssetHRController extends Controller
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position;
 
-        $notifClaim = '';
 
         if ($ter != null) {
             $notif = DB::table('sales_lead_register')
@@ -908,23 +907,6 @@ class AssetHRController extends Controller
             ->where('result','OPEN')
             ->orderBy('created_at','desc')
             ->get();
-        }
-
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
         }
 
         if ($div == 'TECHNICAL PRESALES' && $pos == 'MANAGER') {
@@ -1061,7 +1043,7 @@ class AssetHRController extends Controller
 
         $sidebar_collapse = true;
 
-        return view('HR.detail_asset_peminjaman',compact('asset','detailAsset','total_pinjam','notif','notifOpen','notifsd','notiftp','notifc', 'notifClaim','sidebar_collapse'))->with(['initView'=>$this->initMenuBase()]);
+        return view('HR.detail_asset_peminjaman',compact('asset','detailAsset','total_pinjam','notif','notifOpen','notifsd','notiftp','notifc','sidebar_collapse'))->with(['initView'=>$this->initMenuBase()]);
     }
 
     public function peminjaman(Request $request)

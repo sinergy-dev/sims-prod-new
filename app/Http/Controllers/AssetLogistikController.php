@@ -34,7 +34,6 @@ class AssetLogistikController extends Controller
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position;
 
-        $notifClaim = '';
 
 		if ($ter != null) {
             $notif = DB::table('sales_lead_register')
@@ -61,23 +60,6 @@ class AssetLogistikController extends Controller
             ->get();
 
             $notifc = count($notif);
-        }
-
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
         }
 
 
@@ -253,7 +235,7 @@ class AssetLogistikController extends Controller
 
         $cek = AssetLogistik::join('tb_asset_logistik_transaction', 'tb_asset_logistik_transaction.id_barang', '=', 'tb_asset_logistik.id_barang', 'left')->select('tb_asset_logistik_transaction.id_barang')->get();
 
-    	return view('HR/asset_logistik',compact('notif', 'notifc', 'notifsd', 'notiftp', 'notifOpen', 'notifClaim', 'asset', 'assetsd', 'pinjaman', 'logistik', 'cek', 'pr_request', 'pr_request2', 'unit_assets', 'request', 'request2', 'month', 'month_formatted','sidebar_collapse'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('asset_logistik')]);
+    	return view('HR/asset_logistik',compact('notif', 'notifc', 'notifsd', 'notiftp', 'notifOpen', 'asset', 'assetsd', 'pinjaman', 'logistik', 'cek', 'pr_request', 'pr_request2', 'unit_assets', 'request', 'request2', 'month', 'month_formatted','sidebar_collapse'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('asset_logistik')]);
     }
 
     public function getLogistik(Request $request){
@@ -270,8 +252,6 @@ class AssetLogistikController extends Controller
         $div = $division->id_division;
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position;
-
-        $notifClaim = '';
 
         if ($ter != null) {
             $notif = DB::table('sales_lead_register')
@@ -298,23 +278,6 @@ class AssetLogistikController extends Controller
             ->get();
 
             $notifc = count($notif);
-        }
-
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
         }
 
 
@@ -435,7 +398,7 @@ class AssetLogistikController extends Controller
 
         $data = AssetLogistik::select('qty','unit','nama_barang')->where('id_barang',$id_barang)->first();
 
-        return view('HR/detail_asset_logistik',compact('notif', 'notifc', 'notifsd', 'notiftp', 'notifOpen', 'notifClaim', 'asset', 'data', 'last_update'))->with(['initView'=> $this->initMenuBase()]);
+        return view('HR/detail_asset_logistik',compact('notif', 'notifc', 'notifsd', 'notiftp', 'notifOpen', 'asset', 'data', 'last_update'))->with(['initView'=> $this->initMenuBase()]);
     }
 
     public function getSaldoLogistik(Request $request)

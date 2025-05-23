@@ -269,7 +269,7 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="">Type*</label>
-                    <select type="text" class="form-control" name="type" placeholder="ex. Internal Purchase Request" onchange="fillInput('selectType')" id="selectType" required >
+                    <select type="text" class="custom-form-control-select w-100" name="type" placeholder="ex. Internal Purchase Request" onchange="fillInput('selectType')" id="selectType" required >
                         <option selected value="">Select Type</option>
                         <option value="IPR">IPR (Internal Purchase Request)</option>
                         <option value="EPR">EPR (Eksternal Purchase Request)</option>
@@ -289,7 +289,7 @@
 
               <div class="form-group">
                 <label for="">Category</label>
-                <select type="text" class="form-control select2" name="selectCategory" id="selectCategory" style="width: 100%" onchange="fillInput('selectCategory')">
+                <select type="text" class="custom-form-control-select w-100" name="selectCategory" id="selectCategory" style="width: 100%" onchange="fillInput('selectCategory')">
                     <option value="">Select Category</option>
                     <option value="Barang dan Jasa">Barang dan Jasa</option>
                         <option value="Barang">Barang</option>
@@ -355,7 +355,7 @@
 
               <div class="form-group">
                 <label for="">Request Methode*</label>
-                <select type="text" class="form-control" placeholder="ex. Purchase Order" name="type" id="selectMethode" required >
+                <select type="text" class="custom-form-control-select w-100" placeholder="ex. Purchase Order" name="type" id="selectMethode" required >
                     <option selected value="">Select Methode</option>
                     <option value="purchase_order">Purchase Order</option>
                     <option value="payment">Payment</option>
@@ -434,7 +434,7 @@
                       <label>Type*</label>
                       <i class="bx bx-warning" title="If type is undefined, Please contact developer team!" style="display:inline"></i>
                       <select style="width:100%;display:inline;" class="form-control" id="selectTypeProduct" placeholder="ex. Unit" onchange="fillInput('type_product')">
-                        <option>                  
+                        <option></option>                  
                       </select>
                       <span class="invalid-feedback" style="display:none;">Please fill Unit!</span>
                     </div>
@@ -501,14 +501,14 @@
                     <div class="col-md-6">
                       <label>Lead Register*</label>
                       <select id="selectLeadId" style="width:100%" class="select2 form-control" onchange="fillInput('selectLeadId')">
-                        <option>
+                        <option></option>
                       </select>
                       <span class="invalid-feedback" style="display:none;">Please fill Lead Register!</span>
                     </div>
                     <div class="col-md-6">
                       <label>PID*</label>
                       <select id="selectPid" style="width: 100%;" class="select2 form-control" onchange="fillInput('selectPID')">
-                        <option>
+                        <option></option>
                       </select>
                       <span class="invalid-feedback" style="display:none;">Please fill PID!</span>
                       <span id="makeId" style="cursor: pointer;">other?</span>
@@ -554,7 +554,7 @@
                     <div class="col-md-6">
                       <label>Quote Number*</label>
                       <select name="selectQuoteNumber" class="select2 form-control" id="selectQuoteNumber" >
-                        <option>
+                        <option></option>
                       </select>
                       <span class="invalid-feedback" style="display:none;">Please fill Quote Number!</span>
                     </div>
@@ -681,7 +681,7 @@
 <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.js" integrity="sha512-FbWDiO6LEOsPMMxeEvwrJPNzc0cinzzC0cB/+I2NFlfBPFlZJ3JHSYJBtdK7PhMn0VQlCY1qxflEG+rplMwGUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js' type='text/javascript'></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js" integrity="sha512-mh+AjlD3nxImTUGisMpHXW03gE6F4WdQyvuFRkjecwuWLwD2yCijw4tKA3NsEFpA1C3neiKhGXPSIGSfCYPMlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

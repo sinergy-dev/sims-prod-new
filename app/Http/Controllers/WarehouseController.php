@@ -180,24 +180,8 @@ class WarehouseController extends Controller
                         ->where('detail_inventory_produk.status','PROJECT')
                         ->get();
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
 
-        return view('report/inventory', compact('lead', 'total_ter','notif','notifOpen','notifsd','notiftp','datas','datam', 'notifClaim'));
+        return view('report/inventory', compact('lead', 'total_ter','notif','notifOpen','notifsd','notiftp','datas','datam'));
     }
     
     public function category_index()
@@ -420,9 +404,9 @@ class WarehouseController extends Controller
 
         $po = POAsset::join('tb_pr','tb_pr.no','=','tb_po_asset.no_pr')
             ->join('tb_po','tb_po.no','=','tb_po_asset.no_po')
-            ->join('dvg_pam','dvg_pam.no_pr','=','tb_pr.no')
-            ->select('tb_po.no','tb_po.no_po','dvg_pam.id_pam')
-            ->select('tb_po.no','tb_po.no_po','dvg_pam.id_pam')
+//            ->join('dvg_pam','dvg_pam.no_pr','=','tb_pr.no')
+//            ->select('tb_po.no','tb_po.no_po','dvg_pam.id_pam')
+            ->select('tb_po.no','tb_po.no_po')
             ->where('tb_po_asset.status_po','PENDING')
             ->orWhere('tb_po_asset.status_po','FINANCE')->get();
 
@@ -608,24 +592,8 @@ class WarehouseController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
 
-        return view('gudang/gudang', compact('notifClaim','notif','notifOpen','notifsd','notiftp','data','notifc','notifem','category','type','po','datas'));
+        return view('gudang/gudang', compact('notif','notifOpen','notifsd','notiftp','data','notifc','notifem','category','type','po','datas'));
     }
 
     public function inventory_msp()
@@ -1421,23 +1389,6 @@ class WarehouseController extends Controller
         }
 
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         $sum = DB::table('tb_pam_msp')
             ->select('id_pam')
             ->sum('id_pam');
@@ -1466,7 +1417,7 @@ class WarehouseController extends Controller
                     ->select('kode_barang')
                     ->get();
 
-        return view('gudang/gudang2',compact('notif','notifOpen','notifsd','notiftp','notifClaim','pam','produks','pams','sum','id_pam','count_product','total_amount','no_pr','$total_amount','from', 'project_id', 'msp_code'));
+        return view('gudang/gudang2',compact('notif','notifOpen','notifsd','notiftp','pam','produks','pams','sum','id_pam','count_product','total_amount','no_pr','$total_amount','from', 'project_id', 'msp_code'));
     }
 
    
@@ -1508,29 +1459,29 @@ class WarehouseController extends Controller
 
         $cek_po  = POAsset::select('status_po')->where('id_pr_asset',$request->product)->first();
 
-        if ($cek_po->status_po == 'FINANCE') {
-            return array(DB::table('dvg_pam')
-            ->join('dvg_pr_product','dvg_pr_product.id_pam','=','dvg_pam.id_pam')
-            ->join('tb_po_asset', 'tb_po_asset.id_pr_asset', '=', 'dvg_pam.id_pam')
-            ->join('tb_pr', 'tb_pr.no', '=', 'dvg_pam.no_pr')
-            ->join('tb_po', 'tb_po.no', '=', 'tb_pr.no_po')/*
-            ->join('inventory_produk','inventory_produk.id_product','=','dvg_pr_product.id_product')*/
-            ->select('dvg_pr_product.name_product','dvg_pr_product.qty','dvg_pr_product.id_pam','dvg_pr_product.total_nominal','dvg_pr_product.nominal','dvg_pr_product.total_nominal', 'dvg_pr_product.description','tb_po.no_po','dvg_pr_product.id_product','tb_po_asset.id_po_asset','tb_po_asset.status_po')
-            ->where('dvg_pr_product.id_pam',$request->product)
-            ->where('dvg_pr_product.qty','!=',0)
-            ->get(),$request->product);
-        }else if ($cek_po->status_po == 'PENDING'){
-            return array(DB::table('dvg_pam')
-            ->join('dvg_pr_product','dvg_pr_product.id_pam','=','dvg_pam.id_pam')
-            ->join('tb_po_asset', 'tb_po_asset.id_pr_asset', '=', 'dvg_pam.id_pam')
-            ->join('tb_pr', 'tb_pr.no', '=', 'dvg_pam.no_pr')
-            ->join('tb_po', 'tb_po.no', '=', 'tb_pr.no_po')
-            ->join('inventory_produk','inventory_produk.id_product','=','dvg_pr_product.id_product')
-            ->select('dvg_pr_product.name_product','dvg_pr_product.qty','dvg_pr_product.id_pam','dvg_pr_product.total_nominal','dvg_pr_product.nominal','dvg_pr_product.total_nominal', 'dvg_pr_product.description','tb_po.no_po','dvg_pr_product.id_product','tb_po_asset.id_po_asset','tb_po_asset.status_po','inventory_produk.kategori','inventory_produk.tipe','inventory_produk.qty as qty_katalog')
-            ->where('dvg_pr_product.id_pam',$request->product)
-            ->where('dvg_pr_product.qty','!=',0)
-            ->get(),$request->product);
-        }
+//        if ($cek_po->status_po == 'FINANCE') {
+//            return array(DB::table('dvg_pam')
+//            ->join('dvg_pr_product','dvg_pr_product.id_pam','=','dvg_pam.id_pam')
+//            ->join('tb_po_asset', 'tb_po_asset.id_pr_asset', '=', 'dvg_pam.id_pam')
+//            ->join('tb_pr', 'tb_pr.no', '=', 'dvg_pam.no_pr')
+//            ->join('tb_po', 'tb_po.no', '=', 'tb_pr.no_po')/*
+//            ->join('inventory_produk','inventory_produk.id_product','=','dvg_pr_product.id_product')*/
+//            ->select('dvg_pr_product.name_product','dvg_pr_product.qty','dvg_pr_product.id_pam','dvg_pr_product.total_nominal','dvg_pr_product.nominal','dvg_pr_product.total_nominal', 'dvg_pr_product.description','tb_po.no_po','dvg_pr_product.id_product','tb_po_asset.id_po_asset','tb_po_asset.status_po')
+//            ->where('dvg_pr_product.id_pam',$request->product)
+//            ->where('dvg_pr_product.qty','!=',0)
+//            ->get(),$request->product);
+//        }else if ($cek_po->status_po == 'PENDING'){
+//            return array(DB::table('dvg_pam')
+//            ->join('dvg_pr_product','dvg_pr_product.id_pam','=','dvg_pam.id_pam')
+//            ->join('tb_po_asset', 'tb_po_asset.id_pr_asset', '=', 'dvg_pam.id_pam')
+//            ->join('tb_pr', 'tb_pr.no', '=', 'dvg_pam.no_pr')
+//            ->join('tb_po', 'tb_po.no', '=', 'tb_pr.no_po')
+//            ->join('inventory_produk','inventory_produk.id_product','=','dvg_pr_product.id_product')
+//            ->select('dvg_pr_product.name_product','dvg_pr_product.qty','dvg_pr_product.id_pam','dvg_pr_product.total_nominal','dvg_pr_product.nominal','dvg_pr_product.total_nominal', 'dvg_pr_product.description','tb_po.no_po','dvg_pr_product.id_product','tb_po_asset.id_po_asset','tb_po_asset.status_po','inventory_produk.kategori','inventory_produk.tipe','inventory_produk.qty as qty_katalog')
+//            ->where('dvg_pr_product.id_pam',$request->product)
+//            ->where('dvg_pr_product.qty','!=',0)
+//            ->get(),$request->product);
+//        }
 
         
 

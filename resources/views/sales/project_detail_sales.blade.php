@@ -928,10 +928,13 @@ Lead Register
 			$(".money").mask('#.##0,00', {
 			  reverse: true
 			});
+<<<<<<< Updated upstream
 
 			$(".moneyNormal").mask('#.##0',{
 			  reverse: true
 			})
+=======
+>>>>>>> Stashed changes
 		}
 
 		function textAreaAdjust(element) {

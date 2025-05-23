@@ -133,7 +133,7 @@ Admin (HR)
           <div class="modal-body">            
               <div class="form-group">
                 <label for="">Type of Letter</label>
-                <select type="text" class="form-control" placeholder="Select Type of Letter" name="type" id="type" required>
+                <select type="text" class="custom-form-control-select w-100" placeholder="Select Type of Letter" name="type" id="type" required>
                     <option value="PKWT">PKWT</option>
                     <option value="PKWTT">PKWTT</option>
                     <option value="SK">SK</option>
@@ -146,7 +146,7 @@ Admin (HR)
               </div>
               <div class="form-group">
                 <label for="">Company</label>
-                <select type="text" class="form-control" placeholder="Select PT" name="pt" id="pt" required>
+                <select type="text" class="custom-form-control-select w-100" placeholder="Select PT" name="pt" id="pt" required>
                     <option>SIP</option>
                     <option>MSP</option>
                 </select>
@@ -182,7 +182,7 @@ Admin (HR)
               </div>
               <div class="form-group">
                 <label for="">Division</label>
-                <select type="text" class="form-control" placeholder="Select Division" name="division" id="division" required>
+                <select type="text" class="custom-form-control-select w-100" placeholder="Select Division" name="division" id="division" required>
                     <option>PPM</option>
                     <option>SSM</option>
                     <option>SPM</option>
@@ -221,7 +221,7 @@ Admin (HR)
             <input type="text" hidden placeholder="Enter No PR" name="edit_no_letter" id="edit_no_letter">
             <div class="form-group">
               <label for="">Type of Letter</label>
-              <select type="text" class="form-control" placeholder="Select Type of Letter" name="edit_type" id="edit_type" required>
+              <select type="text" class="custom-form-control-select w-100" placeholder="Select Type of Letter" name="edit_type" id="edit_type" required>
                   <option value="PKWT">PKWT</option>
                   <option value="PKWTT">PKWTT</option>
                   <option value="SK">SK</option>
@@ -234,7 +234,7 @@ Admin (HR)
             </div>
             <div class="form-group">
               <label for="">Company</label>
-              <select type="text" class="form-control" placeholder="Select PT" name="edit_company" id="edit_company" required>
+              <select type="text" class="custom-form-control-select w-100" placeholder="Select PT" name="edit_company" id="edit_company" required>
                   <option>SIP</option>
                   <option>MSP</option>
               </select>

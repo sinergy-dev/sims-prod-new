@@ -28,7 +28,7 @@ class DASHBOARDController extends Controller
 
     public function index()
     {
-        $pos = '';$div = '';$results = '';$idps = '';$counts = '';$opens = '';$sds = '';$tps = '';$notiftp = '';$notifsd = '';$notifOpen = '';$wins = '';$loses = '';$notif = '';$notifClaim = '';$win1 = '';$win2 = '';$lose1 = '';$lose2 = '';$ba = '';$co = '';$lead_win = '';$top_win_sip = '';$top_win_msp = '';$loop_year = '';$year_now = '';$countmsp = '';$losemsp = '';$top_win_sip_ter;
+        $pos = '';$div = '';$results = '';$idps = '';$counts = '';$opens = '';$sds = '';$tps = '';$notiftp = '';$notifsd = '';$notifOpen = '';$wins = '';$loses = '';$notif = '';$win1 = '';$win2 = '';$lose1 = '';$lose2 = '';$ba = '';$co = '';$lead_win = '';$top_win_sip = '';$top_win_msp = '';$loop_year = '';$year_now = '';$countmsp = '';$losemsp = '';$top_win_sip_ter;
         $nik = Auth::User()->nik;
         $territory = DB::table('users')->select('id_territory')->where('nik', $nik)->first();
         $ter = $territory->id_territory;
@@ -189,15 +189,15 @@ class DASHBOARDController extends Controller
             $counts = count($count);
         
         } elseif ($pos == 'ADMIN') {
-            $count = DB::table('dvg_esm')
-                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
-                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
-                    ->where('status', 'ADMIN')
-                    ->where('nik_admin', $nik)
-                    ->where('id_company', '1')
-                    ->whereYear('dvg_esm.created_at',$year_now)
-                    ->get();
-            $counts = count($count);
+//            $count = DB::table('dvg_esm')
+//                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
+//                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
+//                    ->where('status', 'ADMIN')
+//                    ->where('nik_admin', $nik)
+//                    ->where('id_company', '1')
+//                    ->whereYear('dvg_esm.created_at',$year_now)
+//                    ->get();
+//            $counts = count($count);
 
         } elseif ($div == 'FINANCE') {
             $count = DB::table('sales_lead_register')
@@ -602,13 +602,13 @@ class DASHBOARDController extends Controller
                 ->get();
             $win2 = count($winss);
         } elseif ($div == 'FINANCE') {
-            $win = DB::table('dvg_esm')
-                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
-                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
-                    ->where('status', 'FINANCE')
-                    ->whereYear('dvg_esm.created_at',$year_now)
-                    ->get();
-            $wins = count($win);
+//            $win = DB::table('dvg_esm')
+//                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
+//                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
+//                    ->where('status', 'FINANCE')
+//                    ->whereYear('dvg_esm.created_at',$year_now)
+//                    ->get();
+//            $wins = count($win);
 
             $winss = DB::table('sales_lead_register')
                 ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
@@ -620,14 +620,14 @@ class DASHBOARDController extends Controller
                 ->get();
             $win2 = count($winss);
         } elseif ($div == 'HR') {
-            $win = DB::table('dvg_esm')
-                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
-                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
-                    ->where('status', 'HRD')
-                    ->whereYear('dvg_esm.created_at',$year_now)
-                    ->get();
-
-            $wins = count($win);
+//            $win = DB::table('dvg_esm')
+//                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
+//                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
+//                    ->where('status', 'HRD')
+//                    ->whereYear('dvg_esm.created_at',$year_now)
+//                    ->get();
+//
+//            $wins = count($win);
 
             $winss = DB::table('sales_lead_register')
                 ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
@@ -751,12 +751,12 @@ class DASHBOARDController extends Controller
                 ->get();
             $lose2 = count($losess);
         } elseif ($div == 'FINANCE') {
-            $lose = DB::table('dvg_esm')
-                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
-                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
-                    ->where('status', 'TRANSFER')
-                    ->get();
-            $loses = count($lose);
+//            $lose = DB::table('dvg_esm')
+//                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
+//                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
+//                    ->where('status', 'TRANSFER')
+//                    ->get();
+//            $loses = count($lose);
 
             $losess = DB::table('sales_lead_register')
                 ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
@@ -768,12 +768,12 @@ class DASHBOARDController extends Controller
                 ->get();
             $lose2 = count($losess);
         } elseif ($div == 'HR') {
-            $lose = DB::table('dvg_esm')
-                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
-                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
-                    ->where('status', 'TRANSFER')
-                    ->get();
-            $loses = count($lose);
+//            $lose = DB::table('dvg_esm')
+//                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
+//                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status')
+//                    ->where('status', 'TRANSFER')
+//                    ->get();
+//            $loses = count($lose);
 
             $losess = DB::table('sales_lead_register')
                 ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
@@ -971,27 +971,10 @@ class DASHBOARDController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         // return $this->RoleDynamic('asset_atk');
         // return $top_win_sip_ter;
 
-        return view('dashboard/dashboard', compact('pos','div','results','idps', 'counts','opens', 'sds', 'tps', 'notiftp', 'notifsd', 'notifOpen', 'wins', 'loses', 'notif', 'notifClaim','win1','win2','lose1','lose2','ba','co', 'lead_win', 'top_win_sip','top_win_sip_ter','top_win_msp','loop_year','year_now', 'countmsp', 'losemsp'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('Dashboard')]);
+        return view('dashboard/dashboard', compact('pos','div','results','idps', 'counts','opens', 'sds', 'tps', 'notiftp', 'notifsd', 'notifOpen', 'wins', 'loses', 'notif','win1','win2','lose1','lose2','ba','co', 'lead_win', 'top_win_sip','top_win_sip_ter','top_win_msp','loop_year','year_now', 'countmsp', 'losemsp'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('Dashboard')]);
 
     }
 
@@ -1150,22 +1133,22 @@ class DASHBOARDController extends Controller
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position;
 
-        if($pos == 'ADMIN'){
-            $chart = DB::table('dvg_esm')
-                    ->orderBy('month')
-                    ->where('year',$year)
-                    ->get();
-        }if($pos == 'HR MANAGER'){
-            $chart = DB::table('dvg_esm')
-                    ->orderBy('month')
-                    ->where('year',$year)
-                    ->get();
-        }if($div == 'FINANCE'){
-            $chart = DB::table('dvg_esm')
-                    ->orderBy('month')
-                    ->where('year',$year)
-                    ->get();
-        }
+//        if($pos == 'ADMIN'){
+//            $chart = DB::table('dvg_esm')
+//                    ->orderBy('month')
+//                    ->where('year',$year)
+//                    ->get();
+//        }if($pos == 'HR MANAGER'){
+//            $chart = DB::table('dvg_esm')
+//                    ->orderBy('month')
+//                    ->where('year',$year)
+//                    ->get();
+//        }if($div == 'FINANCE'){
+//            $chart = DB::table('dvg_esm')
+//                    ->orderBy('month')
+//                    ->where('year',$year)
+//                    ->get();
+//        }
 
         $first = $chart[0]->month;
         $hasil = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -1243,48 +1226,48 @@ class DASHBOARDController extends Controller
         return $hasil2;
     }
 
-    public function getPieChartAFH()
-    {
-        $nik = Auth::User()->nik;
-        $territory = DB::table('users')->select('id_territory')->where('nik', $nik)->first();
-        $ter = $territory->id_territory;
-        $division = DB::table('users')->select('id_division')->where('nik', $nik)->first();
-        $div = $division->id_division;
-        $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
-        $pos = $position->id_position;
-
-        $pie = 0;
-
-        $year = date('Y');
-
-        if($pos == 'ADMIN' || $div == 'FINANCE' || $pos == 'HR MANAGER'){
-            $status = DB::table('dvg_esm')
-                    ->join('users', 'dvg_esm.nik_admin', '=', 'users.nik')
-                    ->orderBy('status')
-                    ->where('year',$year)
-                    ->get();
-        }
-
-        $first = $status[0]->status;
-        $hasil = [0,0,0,0];
-        $bulan_angka = ['ADMIN', 'HRD', 'FINANCE', 'TRANSFER'];
-
-        foreach ($bulan_angka as $key => $value2) {
-            foreach ($status as $value) {
-                    if ($value->status == $value2) {
-                        $hasil[$key]++;
-                        $pie++;
-                    }
-                }
-        }
-
-        $hasil2 = [0,0,0,0];
-        foreach ($hasil as $key => $value) {
-            $hasil2[$key] = ($value/$pie)*100;
-        }
-
-        return $hasil2;
-    }
+//    public function getPieChartAFH()
+//    {
+//        $nik = Auth::User()->nik;
+//        $territory = DB::table('users')->select('id_territory')->where('nik', $nik)->first();
+//        $ter = $territory->id_territory;
+//        $division = DB::table('users')->select('id_division')->where('nik', $nik)->first();
+//        $div = $division->id_division;
+//        $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
+//        $pos = $position->id_position;
+//
+//        $pie = 0;
+//
+//        $year = date('Y');
+//
+//        if($pos == 'ADMIN' || $div == 'FINANCE' || $pos == 'HR MANAGER'){
+////            $status = DB::table('dvg_esm')
+////                    ->join('users', 'dvg_esm.nik_admin', '=', 'users.nik')
+////                    ->orderBy('status')
+////                    ->where('year',$year)
+////                    ->get();
+//        }
+//
+////        $first = $status[0]->status;
+//        $hasil = [0,0,0,0];
+//        $bulan_angka = ['ADMIN', 'HRD', 'FINANCE', 'TRANSFER'];
+//
+//        foreach ($bulan_angka as $key => $value2) {
+//            foreach ($status as $value) {
+//                    if ($value->status == $value2) {
+//                        $hasil[$key]++;
+//                        $pie++;
+//                    }
+//                }
+//        }
+//
+//        $hasil2 = [0,0,0,0];
+//        foreach ($hasil as $key => $value) {
+//            $hasil2[$key] = ($value/$pie)*100;
+//        }
+//
+//        return $hasil2;
+//    }
 
     public function getAreaChart()
     {   
@@ -1413,22 +1396,22 @@ class DASHBOARDController extends Controller
 
         $year = date('Y');
 
-        if($pos == 'ADMIN'){
-            $chart = DB::table('dvg_esm')
-                    ->orderBy('amount')
-                    ->where('year',$year)
-                    ->get();
-        }elseif($pos == 'HR MANAGER'){
-            $chart = DB::table('dvg_esm')
-                    ->orderBy('amount')
-                    ->where('year',$year)
-                    ->get();
-        }elseif($div == 'FINANCE'){
-            $chart = DB::table('dvg_esm')
-                    ->orderBy('amount')
-                    ->where('year',$year)
-                    ->get();
-        }
+//        if($pos == 'ADMIN'){
+//            $chart = DB::table('dvg_esm')
+//                    ->orderBy('amount')
+//                    ->where('year',$year)
+//                    ->get();
+//        }elseif($pos == 'HR MANAGER'){
+//            $chart = DB::table('dvg_esm')
+//                    ->orderBy('amount')
+//                    ->where('year',$year)
+//                    ->get();
+//        }elseif($div == 'FINANCE'){
+//            $chart = DB::table('dvg_esm')
+//                    ->orderBy('amount')
+//                    ->where('year',$year)
+//                    ->get();
+//        }
 
         $first = $chart[0]->month;
         $hasil = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -1523,10 +1506,10 @@ class DASHBOARDController extends Controller
 
         $year = date('Y');
 
-        $status = DB::table('dvg_esm')
-                ->orderBy('status')
-                ->where('year',$year)
-                ->get();
+//        $status = DB::table('dvg_esm')
+//                ->orderBy('status')
+//                ->where('year',$year)
+//                ->get();
 
 
         // $status = DB::table('sales_lead_register')

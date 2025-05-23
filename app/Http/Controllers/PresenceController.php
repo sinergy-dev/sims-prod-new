@@ -172,31 +172,11 @@ class PresenceController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else {
-            $notifClaim = false;
-        }
-
         return collect([
             "notif" => $notif,
             "notifOpen" => $notifOpen,
             "notifsd" => $notifsd,
             "notiftp" => $notiftp,
-            "notifClaim" => $notifClaim
         ]);
     }
 
@@ -208,7 +188,7 @@ class PresenceController extends Controller
         $notifOpen = $notifAll["notifOpen"];
         $notifsd = $notifAll["notifsd"];
         $notiftp = $notifAll["notiftp"];
-        $notifClaim = $notifAll["notifClaim"];
+        
 
         $presenceStatus = PresenceHistory::where('nik',Auth::User()->nik)
             ->orderBy('presence_actual','DESC');
@@ -270,7 +250,7 @@ class PresenceController extends Controller
             
         // }
 
-        return view('presence.presence', compact('presenceStatus','presenceStatusDetail','notif','notifOpen','notifsd','notiftp', 'notifClaim'))->with(['initView'=>$this->initMenuBase()]);
+        return view('presence.presence', compact('presenceStatus','presenceStatusDetail','notif','notifOpen','notifsd','notiftp'))->with(['initView'=>$this->initMenuBase()]);
     }
 
     public function personalHistory() {
@@ -280,7 +260,7 @@ class PresenceController extends Controller
         $notifOpen = $notifAll["notifOpen"];
         $notifsd = $notifAll["notifsd"];
         $notiftp = $notifAll["notiftp"];
-        $notifClaim = $notifAll["notifClaim"];
+        
 
         $presenceHistoryTemp = PresenceHistory::select(
             DB::raw("*"),
@@ -312,7 +292,7 @@ class PresenceController extends Controller
         // return $presenceHistoryCounted->sortBy('count');
 
 
-        return view('presence.personal_history', compact('presenceHistoryDetail','presenceHistoryCounted','notif','notifOpen','notifsd','notiftp', 'notifClaim'))->with(['initView'=>$this->initMenuBase()]);
+        return view('presence.personal_history', compact('presenceHistoryDetail','presenceHistoryCounted','notif','notifOpen','notifsd','notiftp'))->with(['initView'=>$this->initMenuBase()]);
     }
 
     public function personalHistoryMsp(Request $req){
@@ -363,9 +343,9 @@ class PresenceController extends Controller
         $notifOpen = $notifAll["notifOpen"];
         $notifsd = $notifAll["notifsd"];
         $notiftp = $notifAll["notiftp"];
-        $notifClaim = $notifAll["notifClaim"];
+        
 
-        return view('presence.team_history', compact('notif','notifOpen','notifsd','notiftp', 'notifClaim'));
+        return view('presence.team_history', compact('notif','notifOpen','notifsd','notiftp'));
     }
 
     public function presenceReport() {
@@ -375,11 +355,11 @@ class PresenceController extends Controller
         $notifOpen = $notifAll["notifOpen"];
         $notifsd = $notifAll["notifsd"];
         $notiftp = $notifAll["notiftp"];
-        $notifClaim = $notifAll["notifClaim"];
+        
 
         $sidebar_collapse = true;
         
-        return view('presence.reporting', compact('notif','notifOpen','notifsd','notiftp', 'notifClaim', 'sidebar_collapse'))->with(['initView'=>$this->initMenuBase()]);
+        return view('presence.reporting', compact('notif','notifOpen','notifsd','notiftp', 'sidebar_collapse'))->with(['initView'=>$this->initMenuBase()]);
     }
 
     public function getAllUser()
@@ -425,9 +405,9 @@ class PresenceController extends Controller
         $notifOpen = $notifAll["notifOpen"];
         $notifsd = $notifAll["notifsd"];
         $notiftp = $notifAll["notiftp"];
-        $notifClaim = $notifAll["notifClaim"];
+        
 
-        return view('presence.setting', compact('notif','notifOpen','notifsd','notiftp', 'notifClaim'))->with(['initView'=>$this->initMenuBase()]);
+        return view('presence.setting', compact('notif','notifOpen','notifsd','notiftp'))->with(['initView'=>$this->initMenuBase()]);
     }
 
     public function presenceSettingGetListUser(){
@@ -782,11 +762,11 @@ class PresenceController extends Controller
         $notifOpen = $notifAll["notifOpen"];
         $notifsd = $notifAll["notifsd"];
         $notiftp = $notifAll["notiftp"];
-        $notifClaim = $notifAll["notifClaim"];
+        
 
         // return $this->getOptionGrouped();
         
-        return view('presence.shifting', compact('notif','notifOpen','notifsd','notiftp', 'notifClaim'))
+        return view('presence.shifting', compact('notif','notifOpen','notifsd','notiftp'))
             ->with([
                 'initView'=>$this->initMenuBase(),
                 'sidebar_collapse' => 'True',

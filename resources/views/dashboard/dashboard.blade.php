@@ -564,7 +564,7 @@ Dashboard | &nbsp<small><b id="waktu"></b></small>
 </div>
 @endsection
 @section('scriptImport')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script></script>
 <script src="{{asset('assets/vendor/libs/sweetalert2/sweetalert2.js')}}"></script>
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script> -->
 <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>

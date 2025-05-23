@@ -86,7 +86,7 @@
               <div class="card-body">
                 <div class="form-group">
                   <label>Lock Duration*</label>
-                  <select class="form-control select2" id="selectLock" name="selectLock" placeholder="Select Lock Duration">
+                  <select class="custom-form-control-select w-100 select2" id="selectLock" name="selectLock" placeholder="Select Lock Duration">
                     <!-- <option value="1">1 Week</option>
                     <option value="2">2 Week</option>
                     <option value="3">3 Week</option>
@@ -127,7 +127,7 @@
               <div class="card-body">
                 <div class="form-group">
                   <label>Assign For*</label>
-                  <select class="form-control select2" id="selectAssignFor" name="selectAssignFor" onchange="validateInput(this)">
+                  <select class="custom-form-control-select w-100 select2" id="selectAssignFor" name="selectAssignFor" onchange="validateInput(this)">
                     <option></option>
                     <option value="All">All</option>
                     <option value="Pid">Pic</option>
@@ -236,7 +236,7 @@
   <script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('assets/js/jquery.mask.js')}}"></script>
     {{--  Calendar  --}}
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.js" integrity="sha512-FbWDiO6LEOsPMMxeEvwrJPNzc0cinzzC0cB/+I2NFlfBPFlZJ3JHSYJBtdK7PhMn0VQlCY1qxflEG+rplMwGUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @endsection
 @section('script')

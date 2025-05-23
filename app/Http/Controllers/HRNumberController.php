@@ -161,29 +161,7 @@ class HRNumberController extends Controller
             ->get();
         }
 
-        
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
 
         $sidebar_collapse = true;
 
@@ -193,7 +171,7 @@ class HRNumberController extends Controller
 
         $tahun = HRNumber::select('created_at')->whereYear('created_at', $year)->groupBy('created_at')->get();
 
-        return view('admin/hr_number', compact('notif','notifOpen','notifsd','notiftp', 'notifClaim','pops', 'sidebar_collapse', 'tahun','year','year_before'))->with(['initView'=> $this->initMenuBase()]);
+        return view('admin/hr_number', compact('notif','notifOpen','notifsd','notiftp','pops', 'sidebar_collapse', 'tahun','year','year_before'))->with(['initView'=> $this->initMenuBase()]);
     }
 
 

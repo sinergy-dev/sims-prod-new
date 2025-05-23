@@ -1862,7 +1862,7 @@ Employees
 		                   		<label for="company" class="col-md-4 control-label">{{ __('Company') }}</label>
 
 			                    <div class="col-md-8">
-			                        <select id="company" class="form-control{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" onkeyup="copytextbox();" required autofocus>
+			                        <select id="company" class="custom-form-control-select w-100{{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" onkeyup="copytextbox();" required autofocus>
 			                            <option value="">-- Select Company --</option>
 			                            <option value="1" data-target="sip" id="1">SIP</option>
 			                            <option value="2" data-target="msp" id="2">MSP</option>
@@ -1881,7 +1881,7 @@ Employees
 			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Division') }}</label>
 
 			                    <div class="col-md-8 mb-4">
-			                        <select id="division" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="division_sip" value="{{ old('division') }}" autofocus>
+			                        <select id="division" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="division_sip" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select division --</option>
 			                            <option value="FINANCE" data-target="finance" id="finance">FINANCE and ACCOUNTING</option>
 			                            <option value="HR" data-target="hr" id="hr">HUMAN CAPITAL</option>
@@ -1957,7 +1957,7 @@ Employees
 			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
 			                    <div class="col-md-8 mb-4">
-			                        <select id="subdivision-tech" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_tech" value="{{ old('division') }}" autofocus>
+			                        <select id="subdivision-tech" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_tech" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Sub Division --</option>
 			                            <option value="DPG" data-target="dvg" id="dvg">IMPLEMENTATION</option>
 			                            <option value="PRESALES" data-target="dpg" id="dpg">PRESALES</option>
@@ -2004,7 +2004,7 @@ Employees
 			                    <label for="position" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
 
 			                    <div class="col-md-8 margin-top">
-			                        <select id="position-sales" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_sales" value="{{ old('division') }}" autofocus>
+			                        <select id="position-sales" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_sales" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Position --</option>
 			                            <option value="MANAGER">MANAGER</option>
 			                            <option value="STAFF">STAFF</option>
@@ -2023,7 +2023,7 @@ Employees
 			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
 			                    <div class="col-md-8 mb-4">
-			                        <select id="subdivision-finance" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_finance" value="{{ old('division') }}" autofocus>
+			                        <select id="subdivision-finance" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_finance" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Sub Division --</option>
 			                            <option value="FINANCE" data-target="dvg" id="dvg">FINANCE</option>
 			                            <option value="ACC" data-target="dpg" id="dpg">ACCOUNTING</option>
@@ -2038,7 +2038,7 @@ Employees
 			                    <label for="division" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
 
 			                    <div class="col-md-8 margin-top">
-			                        <select id="position-finance" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_finance" value="{{ old('division') }}" autofocus>
+			                        <select id="position-finance" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_finance" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Position --</option>
 			                        </select>
 			                        @if ($errors->has('division'))
@@ -2083,7 +2083,7 @@ Employees
 
 			                    <label for="position" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
 			                    <div class="col-md-8 margin-top">
-			                        <select id="position-operation" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_operation" autofocus>
+			                        <select id="position-operation" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_operation" autofocus>
 			                          <option value="">-- Select position --</option>
 			                        </select>
 			                        @if ($errors->has('division'))
@@ -2099,7 +2099,7 @@ Employees
 			                    <label for="division" class="col-md-4 control-label margin-bottom" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
 			                    <div class="col-md-8 margin-bottom mb-4">
-			                        <select id="subdivision-hr" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_hr" value="{{ old('division') }}" autofocus>
+			                        <select id="subdivision-hr" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_hr" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Sub Division --</option>
 			                            <option value="HCM">HCM</option>
 			                            <option value="POS">POS</option>
@@ -2112,12 +2112,12 @@ Employees
 			                        @endif
 			                    </div>
 
-			                    <label for="division" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
+			                    <label for="position" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
 			                    <div class="col-md-8 margin-top">
-			                        <select id="position-hr" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_hr" autofocus>
+			                        <select id="position-hc" class="custom-form-control-select w-100" name="pos_hr" autofocus>
 			                          <option value="">-- Select position --</option>
 			                        </select>
-			                        @if ($errors->has('division'))
+			                        @if ($errors->has('position'))
 			                            <span class="invalid-feedback">
 			                                <strong>{{ $errors->first('division') }}</strong>
 			                            </span>
@@ -2131,7 +2131,7 @@ Employees
 			                    <label for="division-msp" class="col-md-4 control-label" style="margin-bottom: 15px;">{{ __('Division') }}</label>
 
 			                    <div class="col-md-8">
-			                        <select id="division-msp" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="division_msp" value="{{ old('division') }}" autofocus>
+			                        <select id="division-msp" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="division_msp" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Division --</option>
 			                            <option value="SALES_MSP" data-target="sales_msp" id="sales_msp">SALES</option>
 			                            <option value="TECHNICAL" data-target="TECHNICAL_MSP" id="TECHNICAL_MSP">TECHNICAL</option>
@@ -2152,7 +2152,7 @@ Employees
 			                  <label for="position" class="col-md-4 control-label" style="margin-bottom: 15px;">{{ __('Position') }}</label>
 
 			                    <div class="col-md-8">
-			                        <select id="position-sales-msp" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_sales_msp" value="{{ old('division') }}" autofocus>
+			                        <select id="position-sales-msp" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_sales_msp" value="{{ old('division') }}" autofocus>
 			                        </select>
 			                        @if ($errors->has('division'))
 			                            <span class="invalid-feedback">
@@ -2166,7 +2166,7 @@ Employees
 			                    <label for="division" class="col-md-4 control-label" style="margin-bottom: 15px;">{{ __('Sub Division') }}</label>
 
 			                    <div class="col-md-8 mb-4">
-			                        <select id="subdivision-tech-msp" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_tech_msp" value="{{ old('division') }}" autofocus>
+			                        <select id="subdivision-tech-msp" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="id_sub_division_tech_msp" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Sub Division --</option>
 			                            <option value="PRESALES" data-target="dpg" id="dpg">PRESALES</option>
 			                            <option value="NONE_MSP" data-target="dpg" id="dpg">NONE</option>
@@ -2181,7 +2181,7 @@ Employees
 			                    <label for="position" class="col-md-4 control-label margin-top">{{ __('Position') }}</label>
 
 			                    <div class="col-md-8 margin-top">
-			                        <select id="position-tech-msp" class="form-control{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_tech_msp" value="{{ old('division') }}" autofocus>
+			                        <select id="position-tech-msp" class="custom-form-control-select w-100{{ $errors->has('division') ? ' is-invalid' : '' }}" name="pos_tech_msp" value="{{ old('division') }}" autofocus>
 			                            <option value="">-- Select Position --</option>
 			                        </select>
 			                        @if ($errors->has('division'))
@@ -2212,7 +2212,7 @@ Employees
 			                    <label for="status_karyawan" class="col-md-4 control-label">{{ __('Employee Status') }}</label>
 
 			                    <div class="col-md-8">
-			                        <select id="status_kerja" class="form-control" name="status_kerja" onchange="statusSelect(this)">
+			                        <select id="status_kerja" class="custom-form-control-select w-100" name="status_kerja" onchange="statusSelect(this)">
 			                            <option value="">-- Select Status --</option>
 			                            <option value="Tetap">Karyawan Tetap</option>
 			                            <option value="Kontrak">Karyawan Kontrak</option>
@@ -2906,14 +2906,23 @@ Employees
    	})
 
    	function showTabAdd(n){
+<<<<<<< Updated upstream
    		$('#modalAdd').find('input, select').each(function() {
 		    if ($(this).is('input')) {
+=======
+   		$('#modalAdd').find('input, select, textarea').each(function() {
+		    if ($(this).is('input') || $(this).is('textarea')) {
+>>>>>>> Stashed changes
 		        $(this).val('');
 		    } else if ($(this).is('select')) {
 		        $(this).val('').trigger('change'); // trigger 'change' for Select2
 		    }
 		});
+<<<<<<< Updated upstream
 		
+=======
+
+>>>>>>> Stashed changes
 		var x = document.getElementsByClassName("tab-add");
 		x[n].style.display = "inline";
 
@@ -3159,6 +3168,7 @@ Employees
 					   	}
 
 				   		localStorage.setItem("name_update", $("#name_update").val())
+<<<<<<< Updated upstream
 				   	}
 
 				   	if (!localStorage.getItem("email_update") == true) {
@@ -3176,6 +3186,25 @@ Employees
 				   		localStorage.setItem("email_update", $("#email_update").val())
 				   	}
 
+=======
+				   	}
+
+				   	if (!localStorage.getItem("email_update") == true) {
+					   	if (value.email != null) {
+		               		$("#email_update").val(value.email);
+					   	}
+					   	localStorage.setItem("email_update", $("#email_update").val())
+					}else{
+						if (value.email != null) {
+		               		$("#email_update").val(value.email);
+					   	}else{
+		               		$("#email_update").val($("#email_update").val());
+					   	}
+
+				   		localStorage.setItem("email_update", $("#email_update").val())
+				   	}
+
+>>>>>>> Stashed changes
 				   	if (!localStorage.getItem("email_personal_update") == true) {
 					   	if (value.email_pribadi != null) {
 		               		$("#email_personal_update").val(value.email_pribadi);
@@ -3431,7 +3460,11 @@ Employees
 
 				   		localStorage.setItem("hubungan_ec_update", $("#hubungan_ec_update").val())
 				    }
+<<<<<<< Updated upstream
 				   	
+=======
+
+>>>>>>> Stashed changes
 
 	               if (value.status_kerja == 'Tetap') {
 	               	$("#status_karyawan_update").val("Karyawan Tetap");
@@ -4066,14 +4099,14 @@ Employees
             id_assign:this.value,
           },
           success: function(result){
-            $('#position-hr').html(append)
+            $('#position-hc').html(append)
             var append = "<option > -- Select Position -- </option>";
 
             $.each(result[0], function(key, value){
               append = append + "<option>" + value.name_position + "</option>";
             });
 
-            $('#position-hr').html(append);
+            $('#position-hc').html(append);
           },
       });
   	});
@@ -4146,25 +4179,25 @@ Employees
       	});
   	});
 
-  	$('#division-hr').change(function(){
-        $.ajax({
-          type:"GET",
-          url:'/dropdownTech',
-          data:{
-            id_assign:this.value,
-          },
-          success: function(result){
-            $('#position-hr').html(append)
-            var append = "<option > -- Select Position -- </option>";
+  	// $('#division-hr').change(function(){
+    //     $.ajax({
+    //       type:"GET",
+    //       url:'/dropdownTech',
+    //       data:{
+    //         id_assign:this.value,
+    //       },
+    //       success: function(result){
+    //         $('#position-hc').html(append)
+    //         var append = "<option > -- Select Position -- </option>";
 
-            $.each(result[0], function(key, value){
-              append = append + "<option>" + value.name_position + "</option>";
-            });
+    //         $.each(result[0], function(key, value){
+    //           append = append + "<option>" + value.name_position + "</option>";
+    //         });
 
-            $('#position-hr').html(append);
-          },
-      	});
-  	});
+    //         $('#position-hc').html(append);
+    //       },
+    //   	});
+  	// });
 
 
   	$('#division-msp').change(function(){
@@ -4418,7 +4451,7 @@ Employees
             id_assign:this.value,
           },
           success: function(result){
-            $('#position-hr-update').html(append)
+            $('#position-hc-update').html(append)
             var append = "<option > </option>";
 
             if (result[1] == 'HR') {
@@ -4427,7 +4460,7 @@ Employees
             });
             }
 
-            $('#position-hr-update').html(append);
+            $('#position-hc-update').html(append);
           },
         });
     });

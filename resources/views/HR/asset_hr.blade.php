@@ -564,7 +564,7 @@ General Affair - Asset Request
                     <div class="col-md-12">
                       <div class="col-md-6 form-group">
                         <label for="sow">Company</label>
-                        <select class="form-control" id="company_asset" name="company_asset" required>
+                        <select class="custom-form-control-select w-100" id="company_asset" name="company_asset" required>
                           <option value="">Select Company</option>
                           <option value="SIP">PT. SIP</option>
                           <option value="MSP">PT. MSP</option>

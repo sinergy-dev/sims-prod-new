@@ -23,7 +23,6 @@ class BGaransiController extends Controller
         $notifsd = "";
         $notif = "";
         $notifOpen = "";
-        $notifClaim = "";
 
    		$nik = Auth::User()->nik;
         $territory = DB::table('users')->select('id_territory')->where('nik', $nik)->first();
@@ -181,25 +180,8 @@ class BGaransiController extends Controller
             ->orderBy('sales_lead_register.created_at','desc')
             ->get();
         }
-
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
-   		return view('HR/bgaransi', compact('datas', 'notiftp', 'notifsd', 'notif', 'notifOpen', 'notifClaim'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('bgaransi')]);
+       
+   		return view('HR/bgaransi', compact('datas', 'notiftp', 'notifsd', 'notif', 'notifOpen'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('bgaransi')]);
    	}
 
    	public function add_bgaransi()
@@ -212,7 +194,6 @@ class BGaransiController extends Controller
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position; 
 
-        $notifClaim = '';
 
    		if ($ter != null) {
             $notif = DB::table('sales_lead_register')
@@ -339,26 +320,11 @@ class BGaransiController extends Controller
             ->orderBy('sales_lead_register.created_at','desc')
             ->get();
         }
-
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
+        
 
 
-   		return view('HR/add_bgaransi', compact('notiftp', 'notifsd', 'notif', 'notifOpen', 'notifClaim'))->with(['initView'=> $this->initMenuBase()]);
+
+   		return view('HR/add_bgaransi', compact('notiftp', 'notifsd', 'notif', 'notifOpen'))->with(['initView'=> $this->initMenuBase()]);
    	}
 
    	public function edit_bg($id_bank_garansi)
@@ -519,30 +485,9 @@ class BGaransiController extends Controller
             ->orderBy('sales_lead_register.created_at','desc')
             ->get();
         }
+         else{
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else{
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
-   		return view('HR/edit_bgaransi', compact('datas', 'notiftp', 'notifsd', 'notif', 'notifOpen', 'notifClaim'))->with(['initView'=> $this->initMenuBase()]);
+   		return view('HR/edit_bgaransi', compact('datas', 'notiftp', 'notifsd', 'notif', 'notifOpen'))->with(['initView'=> $this->initMenuBase()]);
    	}
 
    	public function store(Request $request)

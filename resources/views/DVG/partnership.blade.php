@@ -375,7 +375,7 @@ Partnership
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Type<span style="color:red">*</span></label>
-                      <select class="form-control" id="type" name="type" onchange="checkType()">
+                      <select class="custom-form-control-select w-100" id="type" name="type" onchange="checkType()">
                           <option value="">Select Type</option>
                           <option value="Distributor">Distributor</option>
                           <option value="Principal">Principal</option>
@@ -541,7 +541,7 @@ Partnership
 
             <div class="form-group">
                 <label>Type</label>
-                <select class="form-control" id="edit_type" name="edit_type" required>
+                <select class="custom-form-control-select w-100" id="edit_type" name="edit_type" required>
                       <option value="Distributor">Distributor</option>
                       <option value="Principal">Principal</option>
                       <!-- <option value="Other">Other</option> -->

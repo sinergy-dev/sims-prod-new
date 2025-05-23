@@ -491,7 +491,7 @@
     <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.8/sweetalert2.min.js" integrity="sha512-FbWDiO6LEOsPMMxeEvwrJPNzc0cinzzC0cB/+I2NFlfBPFlZJ3JHSYJBtdK7PhMn0VQlCY1qxflEG+rplMwGUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js' type='text/javascript'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js" integrity="sha512-mh+AjlD3nxImTUGisMpHXW03gE6F4WdQyvuFRkjecwuWLwD2yCijw4tKA3NsEFpA1C3neiKhGXPSIGSfCYPMlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -1250,18 +1250,24 @@
                     appendBottom = appendBottom + '          <input disabled="" style="text-align:right" type="text" class="form-control inputFinalPageTotalPriceData" id="inputFinalPageTotalPriceData" data-value="'+i+'">'
                     appendBottom = appendBottom + '        </div>'
                     appendBottom = appendBottom + '      </div>'
+
                     appendBottom = appendBottom + '    </form>'
                     appendBottom = appendBottom + '  </div>'
                     appendBottom = appendBottom + '</div>'
                     appendBottom = appendBottom + '<hr>'
+
                     appendBottom = appendBottom + '<div class="card">'
-                    appendBottom = appendBottom + '<div class="card-header with-border">'
-                    appendBottom = appendBottom + '<h6 class="card-title">Terms & Condition</h6>'
-                    appendBottom = appendBottom + '</div>'
-                    appendBottom = appendBottom + '<div class="card-body p-4" id="bodyCollapse" data-value="draft">'
-                    appendBottom = appendBottom + '<div class="form-control" id="termPreview" style="padding:10px;width: 100%; height: 200px; font-size: 12px; line-height: 18px; border: 1px solid rgb(221, 221);overflow:auto"></div>'
-                    appendBottom = appendBottom + '</div>'
-                    appendBottom = appendBottom + '</div>'
+                        appendBottom = appendBottom + '<div class="card-header with-border">'
+                            appendBottom = appendBottom + '<h6 class="card-title" style="margin-top:15px">Terms & Condition</h6>'
+                            appendBottom = appendBottom + '<div class="card-tools pull-right">'
+                                appendBottom = appendBottom + '<button type="button" class="btn btn-sm btn-card-tool mt-1" data-value="draft"><span class="bx bx-lg bx-chevron-right"></span>'
+                                appendBottom = appendBottom + '</button>'
+                            appendBottom = appendBottom + '</div>'
+                        appendBottom = appendBottom + '</div>'
+                        appendBottom = appendBottom + '<div class="card-body p-4" id="" data-value="draft">'
+                            appendBottom = appendBottom + '<div class="form-control" id="termPreview" style="padding:10px;width: 100%; height: 200px; font-size: 12px; line-height: 18px; border: 1px solid rgb(221, 221);overflow:auto"></div>'
+                            appendBottom = appendBottom + '</div>'
+                        appendBottom = appendBottom + '</div>'
 
                     $("#bottomPreview").append(appendBottom)
 
@@ -3782,5 +3788,6 @@
         function changeValueGrandTotal(grandTotal){
             $("#inputGrandTotalProductFinal").val(formatter.format(grandTotal))
         }
+
     </script>
 @endsection

@@ -169,34 +169,11 @@ class HRController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else{
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         return collect([
             "notif" => $notif,
             "notifOpen" => $notifOpen,
             "notifsd" => $notifsd,
-            "notiftp" => $notiftp,
-            "notifClaim" => $notifClaim
+            "notiftp" => $notiftp
         ]);
     }
     
@@ -210,7 +187,6 @@ class HRController extends Controller
         $notifOpen = $notifAll["notifOpen"];
         $notifsd = $notifAll["notifsd"];
         $notiftp = $notifAll["notiftp"]; 
-        $notifClaim = $notifAll["notifClaim"];    
 
         $hr = DB::table('users')
                 ->join('tb_company', 'tb_company.id_company', '=', 'users.id_company')
@@ -275,7 +251,7 @@ class HRController extends Controller
 
         $sidebar_collapse = true;   
 
-        return view('HR/human_resource', compact('hr','hr_msp','notif','notifOpen','notifsd','notiftp','notifClaim', 'data_resign', 'roles', 'data_resign_msp','sidebar_collapse','group'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('employee')]);
+        return view('HR/human_resource', compact('hr','hr_msp','notif','notifOpen','notifsd','notiftp', 'data_resign', 'roles', 'data_resign_msp','sidebar_collapse','group'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('employee')]);
     }
 
     public function getemps(Request $request)
@@ -995,7 +971,7 @@ class HRController extends Controller
 
     public function user_profile()
     {
-        $notif = '';$notifOpen = '';$notifsd = '';$notiftp = '';$ter = '';$user_profile = '';$notifClaim = '';
+        $notif = '';$notifOpen = '';$notifsd = '';$notiftp = '';$ter = '';$user_profile = '';
         $nik = Auth::User()->nik;
         $territory = DB::table('users')->select('id_territory')->where('nik', $nik)->first();
         $ter = $territory->id_territory;
@@ -1216,25 +1192,8 @@ class HRController extends Controller
             ->orderBy('sales_lead_register.created_at','desc')
             ->get();
         }
-
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
          
-        return view('HR/profile', compact('notif','notifOpen','notifsd','notiftp','ter','user_profile', 'notifClaim'))->with(['initView'=> $this->initMenuBase()]);
+        return view('HR/profile', compact('notif','notifOpen','notifsd','notiftp','ter','user_profile'))->with(['initView'=> $this->initMenuBase()]);
     }
 
     public function update_profile(Request $req){
@@ -1884,11 +1843,10 @@ class HRController extends Controller
         $notifOpen = $notifAll["notifOpen"];
         $notifsd = $notifAll["notifsd"];
         $notiftp = $notifAll["notiftp"]; 
-        $notifClaim = $notifAll["notifClaim"];    
 
         $data = GuideLine::select('id','description','link_url','title','efective_date')->get();
 
-        return view('HR/guideLines',compact('data','notif','notifOpen','notifsd','notiftp','notifClaim'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('bookmark')]);
+        return view('HR/guideLines',compact('data','notif','notifOpen','notifsd','notiftp'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('bookmark')]);
 
     }
 

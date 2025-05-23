@@ -488,7 +488,7 @@ class ReportController extends Controller
 
         $year = date('Y');
 
-        $notifClaim = null;
+       
 
 
         // count semua lead
@@ -718,24 +718,8 @@ class ReportController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
 
-        return view('report/lead', compact('lead','notif', 'notifOpen', 'notifsd', 'notiftp', 'notifClaim'));
+        return view('report/lead', compact('lead','notif', 'notifOpen', 'notifsd', 'notiftp'));
     }
 
     public function view_open()
@@ -1090,26 +1074,8 @@ class ReportController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else {
-            $notifClaim = NULL;
-        }
 
-        return view('report/open_status', compact('open','sd','tp','notif', 'notifOpen', 'notifsd', 'notiftp','notifClaim'));
+        return view('report/open_status', compact('open','sd','tp','notif', 'notifOpen', 'notifsd', 'notiftp'));
     }
 
     public function view_win()
@@ -1178,13 +1144,7 @@ class ReportController extends Controller
                     ->get();
             }
         }elseif ($div == 'FINANCE') {
-            $win = DB::table('dvg_esm')
-                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
-                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status', 'sales_lead_register.deal_price')
-                    ->where('status', 'FINANCE')
-                    ->orderBy('sales_lead_register.created_at','DESC')                   
 
-                    ->get();
         } else {
             $win = DB::table('sales_lead_register')
                 ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
@@ -1323,26 +1283,7 @@ class ReportController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else {
-            $notifClaim = NULL;
-        }
-
-        return view('report/win_status', compact('win', 'notif', 'notifOpen', 'notifsd', 'notiftp','notifClaim'));
+        return view('report/win_status', compact('win', 'notif', 'notifOpen', 'notifsd', 'notiftp'));
     }
 
     public function view_lose()
@@ -1435,11 +1376,6 @@ class ReportController extends Controller
             }
             
         }elseif ($div == 'FINANCE') {
-            $lose = DB::table('dvg_esm')
-                    ->join('users', 'users.nik', '=', 'dvg_esm.personnel')
-                    ->select('no','date','users.name', 'type', 'description', 'amount', 'id_project', 'remarks', 'status', 'sales_lead_register.deal_price')
-                    ->where('status', 'TRANSFER')
-                    ->get();
         } else {
             $lose = DB::table('sales_lead_register')
                 ->join('users', 'users.nik', '=', 'sales_lead_register.nik')
@@ -1577,26 +1513,8 @@ class ReportController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else {
-            $notifClaim = null;
-        }
 
-        return view('report/lose_status', compact('lose', 'notif', 'notifOpen', 'notifsd', 'notiftp','notifClaim'));
+        return view('report/lose_status', compact('lose', 'notif', 'notifOpen', 'notifsd', 'notiftp'));
     }
 
     public function downloadPdflead()
@@ -3957,7 +3875,7 @@ class ReportController extends Controller
             // ->orWhere('id_territory','=','OPERATION')
             ->get();
 
-        $notifClaim = '';
+        
 
 
         if ($ter != null) {
@@ -4073,23 +3991,7 @@ class ReportController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-        return view('report/report_territory', compact('notif', 'notifOpen', 'notifsd', 'notiftp', 'notifClaim' ,'territory_loop'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('report_territory')]);
+        return view('report/report_territory', compact('notif', 'notifOpen', 'notifsd', 'notiftp' ,'territory_loop'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('report_territory')]);
     
     }
 
@@ -4165,7 +4067,7 @@ class ReportController extends Controller
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position;
 
-        $notifClaim = '';
+        
 
         if ($ter != null) {
             $notif = DB::table('sales_lead_register')
@@ -4280,23 +4182,7 @@ class ReportController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-        return view('report/report_product_technology', compact('notif', 'notifOpen', 'notifsd', 'notiftp', 'notifClaim'))->with(['initView'=> $this->initMenuBase()]);
+        return view('report/report_product_technology', compact('notif', 'notifOpen', 'notifsd', 'notiftp'))->with(['initView'=> $this->initMenuBase()]);
     
     }
 
@@ -5808,7 +5694,7 @@ class ReportController extends Controller
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position;
 
-        $notifClaim = '';
+        
         
         if ($ter != null) {
             $notif = DB::table('sales_lead_register')
@@ -5935,24 +5821,8 @@ class ReportController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
 
-        return view('report/record_authentication', compact('notif', 'notifOpen', 'notifsd', 'notiftp', 'notifClaim'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('record_log_history')]);
+        return view('report/record_authentication', compact('notif', 'notifOpen', 'notifsd', 'notiftp'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('record_log_history')]);
     
     }
 

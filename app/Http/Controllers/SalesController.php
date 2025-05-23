@@ -86,7 +86,7 @@ class SalesController extends Controller{
         $company = DB::table('users')->select('id_company')->where('nik',$nik)->first();
         $com = $company->id_company;
 
-        $notifClaim = '';
+        
 
         $datas = '';
 
@@ -1183,30 +1183,15 @@ class SalesController extends Controller{
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
+        
 
         $year_now = date('Y');
         // return $leadsnow;
         
         if (Auth::User()->id_division == 'FINANCE') {            
-            return view('sales/lead_id_project', compact('lead','leads','notif','notifOpen','notifsd','notiftp','notifClaim'))->with(['initView'=> $this->initMenuBase()]);
+            return view('sales/lead_id_project', compact('lead','leads','notif','notifOpen','notifsd','notiftp'))->with(['initView'=> $this->initMenuBase()]);
         }else{
-            return view('sales/sales', compact('lead','leads','notif','notifOpen','notifsd','notiftp','users','owner_by_lead','total_lead','total_open','total_sd','total_tp','total_win','total_lose', 'notifClaim','cek_note','datas','rk','gp','st','rz','jh','leadspre','year','year_now','year_dif','leadsprenow','leadsnow','leadnow','tag_product','tag_technology'))->with(['initView'=> $this->initMenuBase()]);
+            return view('sales/sales', compact('lead','leads','notif','notifOpen','notifsd','notiftp','users','owner_by_lead','total_lead','total_open','total_sd','total_tp','total_win','total_lose','cek_note','datas','rk','gp','st','rz','jh','leadspre','year','year_now','year_dif','leadsprenow','leadsnow','leadnow','tag_product','tag_technology'))->with(['initView'=> $this->initMenuBase()]);
         }
     }
 
@@ -2100,7 +2085,7 @@ class SalesController extends Controller{
 
         $pre_cont = '';
 
-        $notifClaim = '';
+        
 
         if ($div == 'SALES') {
             try {
@@ -2466,24 +2451,9 @@ class SalesController extends Controller{
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
+        
 
-        return view('sales/detail_sales',compact('pre_cont','lead','tampilkan','tampilkans','tampilkan_com', 'tampilkana', 'tampilkanc','notif','notifOpen','notifsd','notiftp','tampilkan_progress','engineer_id','current_eng','tampilkan_progress_engineer','engineer_contribute','q_num','sd_id', 'get_quote_number', 'q_num2', 'change_log','notifClaim','tampilkan_po','productTag','technologyTag','productTech'))->with(['initView'=> $this->initMenuBase()]);
+        return view('sales/detail_sales',compact('pre_cont','lead','tampilkan','tampilkans','tampilkan_com', 'tampilkana', 'tampilkanc','notif','notifOpen','notifsd','notiftp','tampilkan_progress','engineer_id','current_eng','tampilkan_progress_engineer','engineer_contribute','q_num','sd_id', 'get_quote_number', 'q_num2', 'change_log','tampilkan_po','productTag','technologyTag','productTech'))->with(['initView'=> $this->initMenuBase()]);
     
     }
 
@@ -3920,7 +3890,7 @@ class SalesController extends Controller{
         $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
         $pos = $position->id_position;
 
-        $notifClaim = null;
+        
 
         if ($ter != null) {
             $notif = DB::table('sales_lead_register')
@@ -4048,22 +4018,7 @@ class SalesController extends Controller{
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
+        
 
         $data = TB_Contact::select('code')->get()->pluck('code');  
 
@@ -4080,7 +4035,7 @@ class SalesController extends Controller{
                 ->where('roles.id',42)
                 ->first();
 
-        return view('sales/customer',compact('data', 'notif','notifOpen','notifsd','notiftp','notifClaim', 'count_request','roles'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('customer')]);
+        return view('sales/customer',compact('data', 'notif','notifOpen','notifsd','notiftp', 'count_request','roles'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('customer')]);
     }
 
     public function getCustomerData()
@@ -4228,7 +4183,7 @@ class SalesController extends Controller{
 
         $pops = SalesProject::select('id_project')->orderBy('created_at','desc')->first();
 
-        $notifClaim = '';
+        
 
         if ($div == 'SALES' && $pos != 'ADMIN') {
             $salessp = DB::table('tb_id_project')
@@ -4539,22 +4494,7 @@ class SalesController extends Controller{
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
+        
 
         $hitung_msp = DB::table('tb_id_project')
                     ->join('sales_lead_register','sales_lead_register.lead_id','=','tb_id_project.lead_id')
@@ -4610,7 +4550,7 @@ class SalesController extends Controller{
 
         $year_now = date('Y');
 
-      return view('sales/sales_project',compact('hitung_msp','salessp','salesmsp','lead_sp','lead_msp','notif','notifOpen','notifsd','notiftp', 'notifClaim','pops','pid_request','pid_request_done','pid_request_lead','pid_request_lead_done','year_now','year_before'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('idProject')]);
+      return view('sales/sales_project',compact('hitung_msp','salessp','salesmsp','lead_sp','lead_msp','notif','notifOpen','notifsd','notiftp','pops','pid_request','pid_request_done','pid_request_lead','pid_request_lead_done','year_now','year_before'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('idProject')]);
     }
 
     public function getPIDIndex(Request $request){
@@ -5843,24 +5783,9 @@ class SalesController extends Controller{
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
+        
 
-        return view('sales/detail_sales_project',compact('notif','notifOpen','notifsd','notiftp','notifClaim','detail_salessp','induk','pops'));
+        return view('sales/detail_sales_project',compact('notif','notifOpen','notifsd','notiftp','detail_salessp','induk','pops'));
     }
 
     public function getDatalead(Request $request)

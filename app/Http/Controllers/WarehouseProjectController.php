@@ -170,24 +170,9 @@ class WarehouseProjectController extends Controller
                         ->select('no','no_do','type_of_letter', 'month', 'date', 'to', 'attention', 'title', 'project', 'description','project_id')
                         ->get();
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
 
-        return view('report/do', compact('lead', 'total_ter','notif','notifOpen','notifsd','notiftp','datas', 'notifClaim'));
+
+        return view('report/do', compact('lead', 'total_ter','notif','notifOpen','notifsd','notiftp','datas'));
     }
     
     public function index(Request $request)

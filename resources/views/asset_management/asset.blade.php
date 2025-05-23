@@ -836,7 +836,7 @@
   <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
   <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
   <script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('assets/js/jquery.mask.js')}}"></script>
@@ -1886,7 +1886,7 @@
               let select = $('<select>', {
                   id: 'inputSpesifikasi_' + item.name,
                   name: 'inputSpesifikasi_' + item.name,
-                  class: 'form-control',
+                  class: 'custom-form-control-select w-100',
                   'data-spec-id': item.id,
                   'data-spec-name': item.name,
                   change: function () {
@@ -2413,7 +2413,7 @@
         let selectLicense = $('<select>', {
             id: 'inputLicense',
             name: 'inputLicense',
-            class: 'form-control',
+            class: 'custom-form-control-select w-100',
             onchange: function() {
               fillInput('inputLicense');
             }

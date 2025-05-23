@@ -51,6 +51,10 @@
 				white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display: block;max-width: 18ch;
 			}
 
+            .swal2-container {
+                z-index: 9999 !important;
+            }
+
 			/* Show the elements on larger screens */
 			@media (min-width: 768px) {
 			    .user-name-header{
@@ -84,6 +88,10 @@
 			  border: var(--bs-border-width) solid <?= $borderColor ?>;
 			  border-radius: var(--bs-border-radius);
 			}
+<<<<<<< Updated upstream
+=======
+			
+>>>>>>> Stashed changes
 		</style>
     <link rel="icon" type="image/x-icon" href="{{url('img/siplogooke.webp')}}" />
 
@@ -101,6 +109,7 @@
     <link rel="stylesheet" href="{{asset('assets/vendor/fonts/flag-icons.css')}}" />
 
     <!-- Core CSS -->
+    <!-- <link rel="stylesheet" href="{{asset('assets/vendor/css/core.css')}}" /> -->
     <link rel="stylesheet" href="{{asset('assets/vendor/css/rtl/core.css')}}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{asset('assets/vendor/css/rtl/theme-default.css')}}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{asset('assets/css/demo.css')}}" />

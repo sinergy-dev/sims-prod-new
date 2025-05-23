@@ -150,7 +150,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Project Phase</label>
+<<<<<<< Updated upstream
                                             <select name="projectPhase" id="projectPhase"  class="custom-form-control-select w-100" onchange="fillInput('projectPhase')" disabled>
+=======
+                                            <select name="projectPhase" id="projectPhase" class="custom-form-control-select w-100" style="width: 100%;" onchange="fillInput('projectPhase')" disabled>
+>>>>>>> Stashed changes
                                                 <option value="">--Choose Project Phase--</option>
                                                 <option value="Opportunity">Opportunity</option>
                                                 <option value="Tender Submission">Tender Submission</option>
@@ -193,7 +197,11 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="">Status Renewal</label>
+<<<<<<< Updated upstream
                                             <select name="renewal" id="renewal" class="custom-form-control-select w-100" onchange="fillInput('renewal')">
+=======
+                                            <select name="renewal" id="renewal" class="custom-form-control-select w-100" style="width: 100%" onchange="fillInput('renewal')">
+>>>>>>> Stashed changes
                                                 <option value="">--Choose Status Renewal--</option>
                                                 <option value="1">Renewal ke-1</option>
                                                 <option value="2">Renewal ke-2</option>

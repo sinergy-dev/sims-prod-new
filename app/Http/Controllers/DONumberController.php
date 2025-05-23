@@ -33,7 +33,6 @@ class DONumberController extends Controller
         $pops = DONumber::select('no_do')->orderBy('created_at','desc')->first();
 
         $notif = '';
-        $notifClaim = '';
         $notifOpen = '';
 
         if ($ter != null) {
@@ -165,23 +164,6 @@ class DONumberController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         $id_project = SalesProject::join('sales_lead_register','sales_lead_register.lead_id','=','tb_id_project.lead_id')
                         ->join('users','users.nik','=','sales_lead_register.nik')
                         ->select('id_project', 'tb_id_project.id_pro')
@@ -194,7 +176,7 @@ class DONumberController extends Controller
 
         $year_before = DONumber::select(DB::raw('YEAR(created_at) year'))->orderBy('year','desc')->groupBy('year')->get();
 
-        return view('admin/do', compact('notif','notifOpen','notifsd','notiftp', 'notifClaim', 'notifc', 'id_project', 'pops', 'no_po', 'tahun', 'year_before'))->with(['initView'=> $this->initMenuBase()]);
+        return view('admin/do', compact('notif','notifOpen','notifsd','notiftp', 'notifc', 'id_project', 'pops', 'no_po', 'tahun', 'year_before'))->with(['initView'=> $this->initMenuBase()]);
     }
 
     public function getfilteryear(Request $request)

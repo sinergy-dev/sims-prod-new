@@ -159,24 +159,8 @@ class WarehouseAssetController extends Controller
                 ->select('nama','kategori','tipe','qty','note')
                         ->get();
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
 
-        return view('report/asset', compact('lead', 'total_ter','notif','notifOpen','notifsd','notiftp','datas','notifClaim'));
+        return view('report/asset', compact('lead', 'total_ter','notif','notifOpen','notifsd','notiftp','datas'));
     }
 
 

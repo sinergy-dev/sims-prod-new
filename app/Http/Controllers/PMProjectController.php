@@ -1462,6 +1462,8 @@ class PMProjectController extends Controller
                     array_push($parentID,$parent_id);
                     $pdf_name = explode(".",$pdf_name)[0] . "." . explode(".",$pdf_name)[1];
 
+                    // return $this->googleDriveUploadCustom($pdf_name,$directory . $pdf_name,$parentID);
+
                     $update_tor->document_location = "PMO/" . $pdf_name;
                     $update_tor->link_drive = $this->googleDriveUploadCustom($pdf_name,$directory . $pdf_name,$parentID);
                     $update_tor->save();

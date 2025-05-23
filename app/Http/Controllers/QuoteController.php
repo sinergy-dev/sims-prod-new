@@ -190,28 +190,6 @@ class QuoteController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         $lead = DB::table('sales_lead_register')->whereRaw("(`result` = 'OPEN' OR `result` = 'SD' OR `result` = 'TP')");
 
         if ($role->name == 'VP Solutions & Partnership Management'){
@@ -229,7 +207,7 @@ class QuoteController extends Controller
 
         $pid = SalesProject::join('sales_lead_register', 'sales_lead_register.lead_id', '=', 'tb_id_project.lead_id')->join('users', 'users.nik', '=', 'sales_lead_register.nik')->select('id_project')->where('id_company', '1')->get();
 
-        return view('quote/quote',compact('notif','datas','notifOpen','notifsd','notiftp', 'notifClaim', 'counts', 'count','pops', 'pops2', 'backdate_num', 'sidebar_collapse', 'customer', 'status_quote','tahun','year_before', 'pid','leadId'))->with(['initView'=> $this->initMenuBase()]);
+        return view('quote/quote',compact('notif','datas','notifOpen','notifsd','notiftp', 'counts', 'count','pops', 'pops2', 'backdate_num', 'sidebar_collapse', 'customer', 'status_quote','tahun','year_before', 'pid','leadId'))->with(['initView'=> $this->initMenuBase()]);
 	}
 
 	public function quoteList()
@@ -393,27 +371,6 @@ class QuoteController extends Controller
                 ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                ->select('nik_admin', 'personnel', 'type')
-                ->where('status', 'ADMIN')
-                ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                ->select('nik_admin', 'personnel', 'type')
-                ->where('status', 'HRD')
-                ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                ->select('nik_admin', 'personnel', 'type')
-                ->where('status', 'FINANCE')
-                ->get();
-        } else {
-            $notifClaim = DB::table('dvg_esm')
-                ->select('nik_admin', 'personnel', 'type')
-                ->where('status', 'FINANCE')
-                ->get();
-        }
 
         $lead = DB::table('sales_lead_register')->whereRaw("(`result` = 'INITIAL' OR `result` = '' OR  `result` = 'SD' OR `result` = 'TP')");
 
@@ -434,7 +391,7 @@ class QuoteController extends Controller
 
         $pid = SalesProject::join('sales_lead_register', 'sales_lead_register.lead_id', '=', 'tb_id_project.lead_id')->join('users', 'users.nik', '=', 'sales_lead_register.nik')->select('id_project')->where('id_company', '1')->get();
 
-        return view('sales/quote_list',compact('notif','datas','notifOpen','notifsd','notiftp', 'notifClaim', 'counts', 'count','pops', 'pops2', 'backdate_num', 'sidebar_collapse', 'customer', 'status_quote','tahun','year_before', 'pid','leadId', 'role', 'quoteStatus'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('quotation_list')]);
+        return view('sales/quote_list',compact('notif','datas','notifOpen','notifsd','notiftp', 'counts', 'count','pops', 'pops2', 'backdate_num', 'sidebar_collapse', 'customer', 'status_quote','tahun','year_before', 'pid','leadId', 'role', 'quoteStatus'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('quotation_list')]);
     }
 
 	public function create()
@@ -2298,24 +2255,7 @@ class QuoteController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-        
-        return view('report/quote',compact('notif','datas','notifOpen','notifsd','notiftp', 'notifClaim'));
+        return view('report/quote',compact('notif','datas','notifOpen','notifsd','notiftp'));
     }
 
     public function donwloadExcelQuote(Request $request)

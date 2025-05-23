@@ -175,33 +175,11 @@ class PONumberController extends Controller
 
         $no_pr = DB::table('tb_pr')->select('no_pr', 'to', 'no')->where('date','like',$tahun."%")->where('result', '!=', 'used')->orderBy('created_at', 'desc')->get();
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        } else {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         $sidebar_collapse = true;
 
         $year_before = PONumber::select(DB::raw('YEAR(created_at) year'))->orderBy('year','desc')->groupBy('year')->get();
 
-        return view('admin/po', compact('notif','notifOpen','notifsd','notiftp', 'datas', 'notifClaim','pops', 'sidebar_collapse', 'no_pr','tahun','year_before'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('po')]);
+        return view('admin/po', compact('notif','notifOpen','notifsd','notiftp', 'datas','pops', 'sidebar_collapse', 'no_pr','tahun','year_before'))->with(['initView'=> $this->initMenuBase(),'feature_item'=>$this->RoleDynamic('po')]);
     }
 
     public function getPRNumber(){

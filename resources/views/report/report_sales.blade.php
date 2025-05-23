@@ -292,7 +292,7 @@ Report Sales
 @section('scriptImport')
 <script src="{{asset('assets/vendor/libs/select2/select2.js')}}"></script>
 <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script></script>
 <script type="text/javascript" src="{{asset('assets/js/jquery.mask.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/jquery.mask.js')}}"></script>
 <!-- bootstrap flatpickr -->

@@ -336,7 +336,7 @@ input[type=number]::-webkit-outer-spin-button {
             <tr>
               <td style="margin-bottom: 50px">
                 <br>
-                <select class="form-control" name="jenis" id="jenis">
+                <select class="custom-form-control-select w-100" name="jenis" id="jenis">
                   <option>Select Jenis</option>
                   <option value="Jaminan Penawaran">Jaminan Penawaran</option>
                   <option value="Jaminan Pelaksanaan (Standard)">Jaminan Pelaksanaan(Standard)</option>
@@ -348,7 +348,7 @@ input[type=number]::-webkit-outer-spin-button {
               </td>
               <td style="margin-bottom: 50px;">
                 <br>
-                <select class="form-control" name="penerbit" id="penerbit">
+                <select class="custom-form-control-select w-100" name="penerbit" id="penerbit">
                   <option>Select Penerbit</option>
                   <option value="Bank">Bank</option>
                   <option value="Asuransi">Asuransi</option>
@@ -391,7 +391,7 @@ input[type=number]::-webkit-outer-spin-button {
               </td>
               <td style="margin-bottom: 50px">
                 <br>
-                <select class="form-control" name="dokumen" id="dokumen" style="padding-left: 35px">
+                <select class="custom-form-control-select w-100" name="dokumen" id="dokumen" style="padding-left: 35px">
                   <option >Select Dokumen</option>
                   <option value="Pengumuman">Pengumuman</option>
                   <option value="PO/SPK">PO/SPK</option>
@@ -415,7 +415,7 @@ input[type=number]::-webkit-outer-spin-button {
               </td>
               <td style="margin-bottom: 50px">
                 <br>
-                <select class="form-control" name="valuta" id="valuta">
+                <select class="custom-form-control-select w-100" name="valuta" id="valuta">
                   <option>Select Valuta</option>
                   <option value="USD">USD</option>
                   <option value="IDR">IDR</option>
