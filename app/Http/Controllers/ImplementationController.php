@@ -169,23 +169,6 @@ class ImplementationController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         $count_d = Imp::where('current_phase', 'Design')
                         ->count();
 
@@ -223,7 +206,7 @@ class ImplementationController extends Controller
                             ->where('id_position', 'ENGINEER MANAGER')
                             ->first();
         
-        return view('implementation.index', compact('notifClaim', 'notif', 'notifOpen', 'notifsd', 'notiftp', 'count_d', 'count_s', 'count_i', 'count_m', 'count_t', 'count_done', 'lead_win', 'data', 'engineer_staff', 'engineer_manager'));
+        return view('implementation.index', compact( 'notif', 'notifOpen', 'notifsd', 'notiftp', 'count_d', 'count_s', 'count_i', 'count_m', 'count_t', 'count_done', 'lead_win', 'data', 'engineer_staff', 'engineer_manager'));
 
     }
 
@@ -591,22 +574,6 @@ class ImplementationController extends Controller
             ->get();
         }
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
 
         // Untuk seleksi siapa saja yang absen dan yang belum
         $current_engineer = DB::table('tb_imp_engineer_assign')
@@ -704,7 +671,7 @@ class ImplementationController extends Controller
                                 
         $gantt = GanttTask::select('id')->where('id_imp', $imp_id)->get();
 
-        return view('implementation.detail', compact('gantt', 'coba','list_engineer', 'notifClaim', 'notif', 'notifOpen', 'notifsd', 'notiftp', 'imp_id', 'current_engineer', 'detail', 'detail_id_engineer', 'detail_id_phase', 'engineer_problem', 'engineer_progress', 'project_leader', 'member', 'engineer_staff', 'engineer_manager', 'current_engineer_manager', 'phase', 'detail_problem', 'change_log'));
+        return view('implementation.detail', compact('gantt', 'coba','list_engineer', 'notif', 'notifOpen', 'notifsd', 'notiftp', 'imp_id', 'current_engineer', 'detail', 'detail_id_engineer', 'detail_id_phase', 'engineer_problem', 'engineer_progress', 'project_leader', 'member', 'engineer_staff', 'engineer_manager', 'current_engineer_manager', 'phase', 'detail_problem', 'change_log'));
 
     }
 

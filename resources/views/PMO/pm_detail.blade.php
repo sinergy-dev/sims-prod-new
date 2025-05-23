@@ -1323,59 +1323,59 @@ Detail Project
 	                    "</div>";;
 	        },
 	        set_value: (node, value, task, section) => {
-	            const datepickerConfig = { 
-	                format: 'yyyy-mm-dd',
-	                autoclose: true,
-	                container: gantt.$container
-	            };
-	            const startPicker = startDatepicker(node).flatpickr(datepickerConfig);
-				startPicker.setDate(value ? value.start_date : task.start_date);
+            const datepickerConfig = { 
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                container: gantt.$container
+            };
+            const startPicker = startDatepicker(node).flatpickr(datepickerConfig);
+						startPicker.setDate(value ? value.start_date : task.start_date);
 
-				const endPicker = endDateInput(node).flatpickr(datepickerConfig);
-				endPicker.setDate(value ? value.end_date : task.end_date);
+						const endPicker = endDateInput(node).flatpickr(datepickerConfig);
+						endPicker.setDate(value ? value.end_date : task.end_date);
 
-				startPicker.config.onChange.push(function(selectedDates) {
-				    const startValue = selectedDates[0];
-				    const endValue = endPicker.selectedDates[0];
+						startPicker.config.onChange.push(function(selectedDates) {
+					    const startValue = selectedDates[0];
+					    const endValue = endPicker.selectedDates[0];
 
-				    if (startValue && endValue && endValue.valueOf() <= startValue.valueOf()) {
-				        endPicker.setDate(
-				            gantt.calculateEndDate({
-				                start_date: startValue,
-				                duration: 1,
-				                task: task
-				            })
-				        );
-				    }
-				});
+					    if (startValue && endValue && endValue.valueOf() <= startValue.valueOf()) {
+					        endPicker.setDate(
+					            gantt.calculateEndDate({
+					                start_date: startValue,
+					                duration: 1,
+					                task: task
+					            })
+					        );
+					    }
+						});
 	        },
 	        get_value: (node, task, section) => {
-	            const startPicker = startDatepicker(node).flatpickr();
-				const endPicker = endDateInput(node).flatpickr();
+	          const startPicker = startDatepicker(node).flatpickr();
+						const endPicker = endDateInput(node).flatpickr();
 
-				const start = startPicker.selectedDates[0]; 
-				let end = endPicker.selectedDates[0]; 
+						const start = startPicker.selectedDates[0]; 
+						let end = endPicker.selectedDates[0]; 
 
-				if (start && end && end.valueOf() <= start.valueOf()) {
-				    end = gantt.calculateEndDate({
-				        start_date: start,
-				        duration: 1,
-				        task: task
-				    });
-				}
+						if (start && end && end.valueOf() <= start.valueOf()) {
+						    end = gantt.calculateEndDate({
+						        start_date: start,
+						        duration: 1,
+						        task: task
+						    });
+						}
 
-				if (task.start_date && task.end_date) {
-				    task.start_date = start;
-				    task.end_date = end;                 
-				}
+						if (task.start_date && task.end_date) {
+						    task.start_date = start;
+						    task.end_date = end;                 
+						}
 
-				task.duration = gantt.calculateDuration(task);
+						task.duration = gantt.calculateDuration(task);
 
-				return {
-				    start_date: start,
-				    end_date: end,
-				    duration: task.duration
-				};
+						return {
+						    start_date: start,
+						    end_date: end,
+						    duration: task.duration
+						};
 
 	        },
 	        focus: (node) => {
@@ -2696,7 +2696,17 @@ Detail Project
 
     			$("input[name='startDateMilestone'],input[name='finishDateMilestone']").flatpickr({
 					autoclose: true,
-					orientation: "bottom"
+					orientation: "bottom",
+					allowInput:true,
+					dateFormat: "Y-m-d",
+					onClose: function(selectedDates, dateStr, instance) {
+		        // Check if dateStr is in valid format (Y-m-d)
+		        const isValid = /^\d{4}-\d{2}-\d{2}$/.test(dateStr);
+		        
+		        if (!isValid) {
+		            instance.clear(); // Clear the input
+		        }
+			    }
 				});
 
     			$.each(result,function(index,value){
@@ -2747,7 +2757,17 @@ Detail Project
 
 						$("input[name='startDateMilestone'],input[name='finishDateMilestone']").flatpickr({
 							autoclose: true,
-							orientation: "bottom"
+							orientation: "bottom",
+							allowInput:true,
+							dateFormat: "Y-m-d",
+							onClose: function(selectedDates, dateStr, instance) {
+				        // Check if dateStr is in valid format (Y-m-d)
+				        const isValid = /^\d{4}-\d{2}-\d{2}$/.test(dateStr);
+				        
+				        if (!isValid) {
+				            instance.clear(); // Clear the input
+				        }
+					    } 
 						});
 
 						validationDate(incStartMil)
@@ -2882,9 +2902,19 @@ Detail Project
  				        });
 
  				        $("input[name='startDateMilestone'],input[name='finishDateMilestone']").flatpickr({
-							autoclose: true,
-							orientation: "bottom"
-						});
+									autoclose: true,
+									orientation: "bottom",
+									allowInput:true,
+									dateFormat: "Y-m-d",
+									onClose: function(selectedDates, dateStr, instance) {
+						        // Check if dateStr is in valid format (Y-m-d)
+						        const isValid = /^\d{4}-\d{2}-\d{2}$/.test(dateStr);
+						        
+						        if (!isValid) {
+						            instance.clear(); // Clear the input
+						        }
+							    }
+								});
 
 						$.each($(".form_Executing"),function(idx,item){
 				        	$(item).find("input[name='startDateMilestone'],input[name='finishDateMilestone']").each(function(idx,itemData){
@@ -3004,9 +3034,19 @@ Detail Project
 						        $(".form_Executing").closest(".card-body").find(".form_Executing:last").before("<hr>")
 
 						        $("input[name='startDateMilestone'],input[name='finishDateMilestone']").flatpickr({
-									autoclose: true,
-									orientation: "bottom"
-								});
+											autoclose: true,
+											orientation: "bottom",
+											allowInput:true,
+											dateFormat: "Y-m-d",
+											onClose: function(selectedDates, dateStr, instance) {
+								        // Check if dateStr is in valid format (Y-m-d)
+								        const isValid = /^\d{4}-\d{2}-\d{2}$/.test(dateStr);
+								        
+								        if (!isValid) {
+								            instance.clear(); // Clear the input
+								        }
+										  }
+										});
 
 								$.each($(".form_Executing"),function(idx,item){
 						        	$(item).find("input[name='startDateMilestone'],input[name='finishDateMilestone']").each(function(idx,itemData){
@@ -3945,7 +3985,17 @@ Detail Project
 
 				$("input[name='startDateMilestone'],input[name='finishDateMilestone']").flatpickr({
 					autoclose: true,
-					orientation: "bottom"
+					orientation: "bottom",
+					allowInput: true,
+					dateFormat: "Y-m-d",
+					onClose: function(selectedDates, dateStr, instance) {
+		        // Check if dateStr is in valid format (Y-m-d)
+		        const isValid = /^\d{4}-\d{2}-\d{2}$/.test(dateStr);
+		        
+		        if (!isValid) {
+		            instance.clear(); // Clear the input
+		        }
+			    }
 				});
 				
     		}

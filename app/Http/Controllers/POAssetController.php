@@ -168,23 +168,6 @@ class POAssetController extends Controller
         }
 
 
-        if (Auth::User()->id_position == 'ADMIN') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'ADMIN')
-                            ->get();
-        } elseif (Auth::User()->id_position == 'HR MANAGER') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'HRD')
-                            ->get();
-        } elseif (Auth::User()->id_division == 'FINANCE') {
-            $notifClaim = DB::table('dvg_esm')
-                            ->select('nik_admin', 'personnel', 'type')
-                            ->where('status', 'FINANCE')
-                            ->get();
-        }
-
         // $sum = DB::table('dvg_pam')
         //     ->select('id_pam')
         //     ->sum('id_pam');
@@ -202,7 +185,7 @@ class POAssetController extends Controller
                 ->where('id_company', '2')
                 ->get();
 
-        return view('DVG/po_asset/po_asset',compact('notif','notifOpen','notifsd','notiftp','notifClaim','pam','produks','pams','sum','id_pam','count_product','total_amount','no_pr','$total_amount','from'));
+        return view('DVG/po_asset/po_asset',compact('notif','notifOpen','notifsd','notiftp','pam','sum','id_pam','count_product','total_amount','no_pr','$total_amount','from'));
     }
 
     public function update(Request $request)
@@ -219,51 +202,51 @@ class POAssetController extends Controller
         //
     }
 
-    public function downloadPDF2($id_po_asset)
-    {
-        $nik = Auth::User()->nik;
-        $territory = DB::table('users')->select('id_territory')->where('nik', $nik)->first();
-        $ter = $territory->id_territory;
-        $division = DB::table('users')->select('id_division')->where('nik', $nik)->first();
-        $div = $division->id_division;
-        $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
-        $pos = $position->id_position;
-
-        $datas = DB::table('tb_po_asset')
-                ->join('users', 'users.nik', '=', 'tb_po_asset.nik_admin')
-                ->join('tb_po', 'tb_po_asset.no_po', '=', 'tb_po.no')
-                ->join('tb_pr', 'tb_pr.no', '=', 'tb_po_asset.no_pr')
-                ->join('dvg_pam', 'dvg_pam.id_pam', '=', 'tb_po_asset.id_pr_asset')
-                ->select('dvg_pam.date','tb_pr.no_pr','dvg_pam.ket_pr','dvg_pam.note_pr','tb_po_asset.to_agen','dvg_pam.status','tb_po_asset.status_po','users.name','tb_po_asset.subject', 'tb_pr.no', 'tb_pr.date', 'tb_po_asset.attention', 'tb_po_asset.project', 'tb_po_asset.project_id', 'ppn', 'tb_po_asset.term', 'tb_po.no_po', 'tb_po_asset.project_id', 'tb_po_asset.id_po_asset', 'ppn', 'tb_po_asset.term', 'tb_po_asset.address', 'tb_po_asset.telp', 'tb_po_asset.fax', 'tb_po_asset.email')
-                ->where('tb_po_asset.id_po_asset', $id_po_asset)
-                ->first();
-
-        $produks = DB::table('dvg_pam')
-            ->join('dvg_pr_product','dvg_pr_product.id_pam','=','dvg_pam.id_pam')
-            ->join('tb_po_asset', 'tb_po_asset.id_pr_asset', '=', 'dvg_pam.id_pam')
-            ->select('dvg_pr_product.name_product','dvg_pr_product.qty','dvg_pr_product.id_pam','dvg_pr_product.nominal','dvg_pr_product.total_nominal', 'dvg_pr_product.description')
-            ->where('tb_po_asset.id_po_asset',$id_po_asset)
-            ->where('dvg_pr_product.name_product', '!=', '')
-            ->get();
-
-    	$total_amounts = DB::table('dvg_pam')
-            ->join('dvg_pr_product','dvg_pr_product.id_pam','=','dvg_pam.id_pam')
-            ->join('tb_po_asset', 'tb_po_asset.id_pr_asset', '=', 'dvg_pam.id_pam')
-            ->select('total_nominal')
-            ->where('tb_po_asset.id_po_asset', $id_po_asset)
-            ->sum('total_nominal');
-
-        $total_amount = "Rp " . number_format($total_amounts,0,'','.');
-
-        $ppns = $total_amounts * (10/100);
-
-        $ppn   = "Rp " . number_format($ppns,0,'','.');
-
-        $grand_total = $total_amounts + $ppns;
-
-        $grand_total2 =  "Rp " . number_format($grand_total,0,'','.');
-
-        return view('DVG.po_asset.po_pdf', compact('datas','produks','total_amount', 'nominal', 'ppn', 'grand_total2'));
-        // return $pdf->download('Purchase Order '.$datas->no_po.' '.'.pdf');
-    }
+//    public function downloadPDF2($id_po_asset)
+//    {
+//        $nik = Auth::User()->nik;
+//        $territory = DB::table('users')->select('id_territory')->where('nik', $nik)->first();
+//        $ter = $territory->id_territory;
+//        $division = DB::table('users')->select('id_division')->where('nik', $nik)->first();
+//        $div = $division->id_division;
+//        $position = DB::table('users')->select('id_position')->where('nik', $nik)->first();
+//        $pos = $position->id_position;
+//
+//        $datas = DB::table('tb_po_asset')
+//                ->join('users', 'users.nik', '=', 'tb_po_asset.nik_admin')
+//                ->join('tb_po', 'tb_po_asset.no_po', '=', 'tb_po.no')
+//                ->join('tb_pr', 'tb_pr.no', '=', 'tb_po_asset.no_pr')
+//                ->join('dvg_pam', 'dvg_pam.id_pam', '=', 'tb_po_asset.id_pr_asset')
+//                ->select('dvg_pam.date','tb_pr.no_pr','dvg_pam.ket_pr','dvg_pam.note_pr','tb_po_asset.to_agen','dvg_pam.status','tb_po_asset.status_po','users.name','tb_po_asset.subject', 'tb_pr.no', 'tb_pr.date', 'tb_po_asset.attention', 'tb_po_asset.project', 'tb_po_asset.project_id', 'ppn', 'tb_po_asset.term', 'tb_po.no_po', 'tb_po_asset.project_id', 'tb_po_asset.id_po_asset', 'ppn', 'tb_po_asset.term', 'tb_po_asset.address', 'tb_po_asset.telp', 'tb_po_asset.fax', 'tb_po_asset.email')
+//                ->where('tb_po_asset.id_po_asset', $id_po_asset)
+//                ->first();
+//
+//        $produks = DB::table('dvg_pam')
+//            ->join('dvg_pr_product','dvg_pr_product.id_pam','=','dvg_pam.id_pam')
+//            ->join('tb_po_asset', 'tb_po_asset.id_pr_asset', '=', 'dvg_pam.id_pam')
+//            ->select('dvg_pr_product.name_product','dvg_pr_product.qty','dvg_pr_product.id_pam','dvg_pr_product.nominal','dvg_pr_product.total_nominal', 'dvg_pr_product.description')
+//            ->where('tb_po_asset.id_po_asset',$id_po_asset)
+//            ->where('dvg_pr_product.name_product', '!=', '')
+//            ->get();
+//
+//    	$total_amounts = DB::table('dvg_pam')
+//            ->join('dvg_pr_product','dvg_pr_product.id_pam','=','dvg_pam.id_pam')
+//            ->join('tb_po_asset', 'tb_po_asset.id_pr_asset', '=', 'dvg_pam.id_pam')
+//            ->select('total_nominal')
+//            ->where('tb_po_asset.id_po_asset', $id_po_asset)
+//            ->sum('total_nominal');
+//
+//        $total_amount = "Rp " . number_format($total_amounts,0,'','.');
+//
+//        $ppns = $total_amounts * (10/100);
+//
+//        $ppn   = "Rp " . number_format($ppns,0,'','.');
+//
+//        $grand_total = $total_amounts + $ppns;
+//
+//        $grand_total2 =  "Rp " . number_format($grand_total,0,'','.');
+//
+//        return view('DVG.po_asset.po_pdf', compact('datas','produks','total_amount', 'nominal', 'ppn', 'grand_total2'));
+//        // return $pdf->download('Purchase Order '.$datas->no_po.' '.'.pdf');
+//    }
 }
