@@ -752,7 +752,7 @@ class AssetHRController extends Controller
                 ->join('roles','roles.id','=','role_user.role_id')
                 ->where('users.status_karyawan','<>','dummy')
                 ->where('roles.name','like','%Manager%')
-                ->orwhere('roles.name','<>','Delivery Project Manager')
+                ->where('roles.name','<>','Delivery Project Manager')
                 ->where('roles.mini_group','like','%'. $cek_role->mini_group .'%')->first();
         }
 

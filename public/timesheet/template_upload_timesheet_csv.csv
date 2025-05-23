@@ -1,8 +1,3 @@
 no;schedule;start_date;type;pid;level;activity;duration(menit);status;end_date;task;phase
-1;Unplanned;05/15/2025;Project;097/BKES/SIP/XI/2024;D;Pengecekan jaringan di lantai 2 gedung brataranuh ;110;Done;05/15/2025;Priventive;[MSM] Project
-2;Unplanned;05/15/2025;Project;097/BKES/SIP/XI/2024;D;Pengecekan switch Kepwil 11 bali karena selalu reset booting;110;Done;05/15/2025;Priventive;[MSM] Project
-3;Unplanned;05/16/2025;Project;097/BKES/SIP/XI/2024;D;Setting dan pengetesan switch cisco 1200 di lantai 2 brataranuh;180;Done;05/16/2025;Priventive;[MSM] Project
-4;Unplanned;05/17/2025;Project;097/BKES/SIP/XI/2024;D;Standby Onsite;480;Done;05/17/2025;Priventive;[MSM] Project
-5;Unplanned;05/18/2025;Project;097/BKES/SIP/XI/2024;D;Standby Onsite;480;Done;05/18/2025;Priventive;[MSM] Project
-6;Unplanned;05/19/2025;Project;097/BKES/SIP/XI/2024;D;Konfigurasi vlan untuk KC Jaksel karena vlan belum terkonfigurasi;30;Done;05/18/2025;Priventive;[MSM] Project
-7;Unplanned;05/19/2025;Project;097/BKES/SIP/XI/2024;D;Stansby Monitoring Lantai 2 Brataranuh untuk keperluan vicon dengan Word Bank;180;Done;05/18/2025;Priventive;[MSM] Project
+1;Unplanned;05/21/2025;Internal;-;-;Develop Crud Career;200;Done;05/21/2025;-;[Application Development] Development
+1;Unplanned;05/21/2025;Internal;-;-;Testing Crud Career;60;Done;05/21/2025;-;[Application Development] Testing

@@ -314,8 +314,7 @@
                         <option value="Kesehatan">Kesehatan</option>
                         <option value="Olahraga">Olahraga</option>
                         <option value="Karangan Bunga">Karangan Bunga</option>
-                        <option value="Listrik">Listrik</option>
-                        <option value="Telfon">Telfon</option>
+                        <option value="Utilitas">Utilitas</option>
                         <option value="Other">Other</option>
                 </select>
                 <span class="invalid-feedback" style="display:none;">Please fill Category!</span>

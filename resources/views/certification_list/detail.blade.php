@@ -728,7 +728,7 @@
                 },
             ];
 
-            if (userRole.toLowerCase().includes("manager") && (userRole !== 'People Operations & Services Manager' && userRole !== 'Delivery Project Manager') ) {
+            if (userRole.toLowerCase().includes("manager") && (userRole !== 'People Operations & Services Manager' && userRole !== 'Delivery Project Manager') || userRole.toLowerCase().includes("vp")  ) {
                 columns.unshift({
                     title: "",
                     data: null,
