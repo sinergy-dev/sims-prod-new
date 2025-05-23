@@ -513,7 +513,7 @@ Customer
               Swal.fire("Code name has been already, please change!");
             }else{
               var url = "{{url('/customer/acceptRequest')}}"
-              var status = "Request Aceoted!"
+              var status = "Request Accepted!"
 
               fd.append('_token',"{{csrf_token()}}")
               fd.append("id_customer",$('#id_contact').val());
